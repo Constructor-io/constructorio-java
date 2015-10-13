@@ -1,4 +1,5 @@
 package com.constructor.client;
+import com.mashape.unirest;
 
 /**
  * Hello world!
@@ -6,8 +7,9 @@ package com.constructor.client;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
+
+	public static void things () {
+	}
+
+	public static void main (String[] args) { }
 }

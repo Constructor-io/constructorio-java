@@ -1,6 +1,7 @@
 package com.constructor.client;
-import com.mashape.unirest;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Constructor.io Client
@@ -8,7 +9,7 @@ import java.net.URLEncoder;
  */
 
 // these all should throw that exception
-public class ConstructorIOClient 
+public class ConstructorIO
 {
 
 	public String apiToken;
@@ -16,7 +17,7 @@ public class ConstructorIOClient
 	public String protocol;
 	public String host;
 
-	public ConstructorIOClient (String apiToken, String autocompleteKey, boolean isHTTPS, String host) {
+	public ConstructorIO (String apiToken, String autocompleteKey, boolean isHTTPS, String host) {
 		this.apiToken = apiToken;
 		this.autocompleteKey = autocompleteKey;
 		this.protocol = protocol;
@@ -27,39 +28,27 @@ public class ConstructorIOClient
 		}
 	}
 
-	public ConstructorIOClient (String apiToken, String autocompleteKey, boolean isHTTPS) {
-		ConstructorIOClient(apiToken, autocompleteKey, isHTTPS, "ac.cnstrc.com");
-	}
-	
-	public ConstructorIOClient (String apiToken, String autocompleteKey, String host) {
-		ConstructorIOClient(apiToken, autocompleteKey, true, host);
-	}
-	
-	public ConstructorIOClient (String apiToken, String autocompleteKey) {
-		ConstructorIOClient(apiToken, autocompleteKey, true, "ac.cnstrc.com");
-	}
-
-	public static String serializeParams(HashMap<String, String> params) {
+	public static String serializeParams(HashMap<String, String> params) throws UnsupportedEncodingException {
 		String urlString = "";
-		for (HashMap.Entry<String, String> entry : params.entrySet()) {
+		for (String key: params.keySet()) {
 			urlString += "&";
-			urlString += URLEncoder.encode(entry.getKey(), "UTF-8"); // some shit here
+			urlString += URLEncoder.encode(key, "UTF-8"); // some shit here
 			urlString += "=";
-			urlString += URLEncoder.encode(entry.getValue(), "UTF-8"); // some shit here
+			urlString += URLEncoder.encode(params.get(key), "UTF-8"); // some shit here
 		}
 		return urlString.substring(1); // get rid of initial &
 	}
 
-	public static String makeUrl(String endpoint) {
-		makeUrl(endpoint, new HashMap<String, String>());
+	public String makeUrl(String endpoint) throws UnsupportedEncodingException {
+		return makeUrl(endpoint, new HashMap<String, String>());
 	}
 
-	public static String makeUrl(String endpoint, HashMap<String, String> params) {
-		params.set("autocomplete_key", this.autocompleteKey);
+	public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
+		params.put("autocomplete_key", this.autocompleteKey);
 		return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
 	}
 
-	public void query(String queryStr) throws ConstructorException {
+	public void query(String queryStr) throws ConstructorException, UnsupportedEncodingException {
 		String url = this.makeUrl("autocomplete/" + queryStr);
 		//HTTPResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
 

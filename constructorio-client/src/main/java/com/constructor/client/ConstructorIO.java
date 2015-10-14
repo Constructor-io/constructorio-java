@@ -1,5 +1,6 @@
 package com.constructor.client;
 import com.mashape.unirest;
+import java.net.URLEncoder;
 
 /**
  * Constructor.io Client
@@ -15,35 +16,53 @@ public class ConstructorIOClient
 	public String protocol;
 	public String host;
 
-	public ConstructorIOClient (String apiToken, String autocompleteKey, String protocol, String host) {
+	public ConstructorIOClient (String apiToken, String autocompleteKey, boolean isHTTPS, String host) {
 		this.apiToken = apiToken;
 		this.autocompleteKey = autocompleteKey;
 		this.protocol = protocol;
-		this.host = host;
+		if (isHTTPS) {
+			this.host = "https";
+		} else {
+			this.host = "http";
+		}
 	}
 
-	//apitoken, ackey, protocol
-	//apitoken, ackey, host
-	//apitoken, ackey
-
-	//ackey, protocol, host
-	//ackey, protocol
-	//ackey, host
-	//ackey
-
-	public static String serializeParams(something params) {
-		return URLEncoder.encode(params, "UTF-8")
+	public ConstructorIOClient (String apiToken, String autocompleteKey, boolean isHTTPS) {
+		ConstructorIOClient(apiToken, autocompleteKey, isHTTPS, "ac.cnstrc.com");
+	}
+	
+	public ConstructorIOClient (String apiToken, String autocompleteKey, String host) {
+		ConstructorIOClient(apiToken, autocompleteKey, true, host);
+	}
+	
+	public ConstructorIOClient (String apiToken, String autocompleteKey) {
+		ConstructorIOClient(apiToken, autocompleteKey, true, "ac.cnstrc.com");
 	}
 
-	public String makeUrl(endpoint, param) {
-        //if not params:
-        //    params = {}
-        //params["autocomplete_key"] = self._autocomplete_key
-        //return "{0}://{1}/{2}?{3}".format(self._protocol, self._host, endpoint, self._serialize_params(params))
+	public static String serializeParams(HashMap<String, String> params) {
+		String urlString = "";
+		for (HashMap.Entry<String, String> entry : params.entrySet()) {
+			urlString += "&";
+			urlString += URLEncoder.encode(entry.getKey(), "UTF-8"); // some shit here
+			urlString += "=";
+			urlString += URLEncoder.encode(entry.getValue(), "UTF-8"); // some shit here
+		}
+		return urlString.substring(1); // get rid of initial &
 	}
 
-	public boolean query(queryStr) throws ConstructorException {
-        //url = self._make_url("autocomplete/" + query_str)
+	public static String makeUrl(String endpoint) {
+		makeUrl(endpoint, new HashMap<String, String>());
+	}
+
+	public static String makeUrl(String endpoint, HashMap<String, String> params) {
+		params.set("autocomplete_key", this.autocompleteKey);
+		return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
+	}
+
+	public void query(String queryStr) throws ConstructorException {
+		String url = this.makeUrl("autocomplete/" + queryStr);
+		//HTTPResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
+
         //resp = requests.get(url)
         //if resp.status_code != 200:
         //    raise ConstructorError(resp.text)
@@ -53,6 +72,7 @@ public class ConstructorIOClient
 	}
 
 	public boolean verify() throws ConstructorException {
+		return false;
         //url = self._make_url("v1/verify")
         //resp = requests.get(
         //    url,
@@ -65,6 +85,7 @@ public class ConstructorIOClient
 	}
 
 	public boolean add() throws ConstructorException {
+		return false;
 		////////////////
         //params = {"item_name": item_name, "autocomplete_section": autocomplete_section}
         //if "suggested_score" in kwargs:
@@ -92,6 +113,7 @@ public class ConstructorIOClient
 	}
 
 	public boolean remove() throws ConstructorException {
+		return false;
         //params = {"item_name": item_name, "autocomplete_section": autocomplete_section}
         //if "suggested_score" in kwargs:
         //    params["suggested_score"] = kwargs["suggested_score"]
@@ -114,6 +136,7 @@ public class ConstructorIOClient
 	}
 	
 	public boolean modify() throws ConstructorException {
+		return false;
         //params = {"item_name": item_name, "autocomplete_section": autocomplete_section}
         //if "suggested_score" in kwargs:
         //    params["suggested_score"] = kwargs["suggested_score"]
@@ -138,6 +161,7 @@ public class ConstructorIOClient
 	}
 	
 	public boolean trackConversion() throws ConstructorException {
+		return false;
         //params = {
         //    "term": term,
         //    "autocomplete_section": autocomplete_section,
@@ -159,6 +183,7 @@ public class ConstructorIOClient
 	}
 	
 	public boolean trackClickThrough() throws ConstructorException {
+		return false;
         //params = {
         //    "term": term,
         //    "autocomplete_section": autocomplete_section,
@@ -182,6 +207,7 @@ public class ConstructorIOClient
 	}
 	
 	public boolean trackSearch() throws ConstructorException {
+		return false;
         //params = {
         //    "term": term
         //}

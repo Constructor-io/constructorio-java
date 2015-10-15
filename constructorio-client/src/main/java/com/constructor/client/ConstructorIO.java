@@ -67,17 +67,22 @@ public class ConstructorIO
 		}
 	}
 
-	public boolean verify() throws ConstructorException {
-		return false;
-        //url = self._make_url("v1/verify")
-        //resp = requests.get(
-        //    url,
-        //    auth=(self._api_token, "")
-        //)
-        //if resp.status_code != 200:
-        //    raise ConstructorError(resp.text)
-        //else:
-        //    return resp.json()
+	public JsonNode verify() throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/verify/");
+			HttpResponse<JsonNode> jsonRes = Unirest.get(url)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			if (jsonRes.getStatus() != 200) {
+				throw new ConstructorException(jsonRes.getBody().toString());
+			} else {
+				return jsonRes.getBody();
+			}
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
 	}
 
 	public boolean add() throws ConstructorException {

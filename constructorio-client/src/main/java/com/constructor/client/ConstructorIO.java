@@ -51,16 +51,20 @@ public class ConstructorIO
 		return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
 	}
 
-	public void query(String queryStr) throws ConstructorException, UnsupportedEncodingException {
-		String url = this.makeUrl("autocomplete/" + queryStr);
-		HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
-
-        //resp = requests.get(url)
-        //if resp.status_code != 200:
-        //    raise ConstructorError(resp.text)
-        //else:
-        //    return resp.json()
-		////////////////
+	public JsonNode query(String queryStr) throws ConstructorException {
+		try {
+			String url = this.makeUrl("autocomplete/" + queryStr);
+			HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
+			if (jsonRes.getStatus() != 200) {
+				throw new ConstructorException("Request to autocomplete failed: status code " + Integer.toString(jsonRes.getStatus()));
+			} else {
+				return jsonRes.getBody();
+			}
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
 	}
 
 	public boolean verify() throws ConstructorException {

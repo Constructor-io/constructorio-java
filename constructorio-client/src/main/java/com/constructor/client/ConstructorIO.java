@@ -1,6 +1,7 @@
 package com.constructor.client;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Map;
 import java.io.UnsupportedEncodingException;
 
 import com.mashape.unirest.http.*;
@@ -46,6 +47,44 @@ public class ConstructorIO
 		return makeUrl(endpoint, new HashMap<String, String>());
 	}
 
+	private static HashMap<String, Object> createItemParams(String itemName, String autocompleteSection) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("item_name", itemName);
+		params.put("autocomplete_section", autocompleteSection);
+		return params;
+	}
+	
+	private static HashMap<String, Object> createItemParams(String itemName, String autocompleteSection, Map<String, Object> otherJsonParams) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("item_name", itemName);
+		params.put("autocomplete_section", autocompleteSection);
+		params.putAll(otherJsonParams);
+		return params;
+	}
+
+	private static HashMap<String, Object> createTrackingParams(String term, String autocompleteSection) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("term", term);
+		params.put("autocomplete_section", autocompleteSection);
+		return params;
+	}
+	
+	private static HashMap<String, Object> createTrackingParams(String term, String autocompleteSection, Map<String, Object> otherJsonParams) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("term", term);
+		params.put("autocomplete_section", autocompleteSection);
+		params.putAll(otherJsonParams);
+		return params;
+	}
+
+	private static boolean checkResponse(HttpResponse<JsonNode> resp, int expectedStatus) throws ConstructorException {
+		if (resp.getStatus() != expectedStatus) {
+			throw new ConstructorException(resp.getBody().toString());
+		} else {
+			return true;
+		}
+	}
+
 	public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
 		params.put("autocomplete_key", this.autocompleteKey);
 		return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
@@ -55,11 +94,10 @@ public class ConstructorIO
 		try {
 			String url = this.makeUrl("autocomplete/" + queryStr);
 			HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
-			if (jsonRes.getStatus() != 200) {
-				throw new ConstructorException("Request to autocomplete failed: status code " + Integer.toString(jsonRes.getStatus()));
-			} else {
+			if (checkResponse(jsonRes, 200)) {
 				return jsonRes.getBody();
 			}
+			return null; // this should not get back here
 		} catch (UnsupportedEncodingException encException) {
 			throw new ConstructorException(encException);
 		} catch (UnirestException uniException) {
@@ -69,15 +107,14 @@ public class ConstructorIO
 
 	public JsonNode verify() throws ConstructorException {
 		try {
-			String url = this.makeUrl("v1/verify/");
+			String url = this.makeUrl("v1/verify");
 			HttpResponse<JsonNode> jsonRes = Unirest.get(url)
 																							.basicAuth(this.apiToken, "")
 																							.asJson();
-			if (jsonRes.getStatus() != 200) {
-				throw new ConstructorException(jsonRes.getBody().toString());
-			} else {
+			if (checkResponse(jsonRes, 200)) {
 				return jsonRes.getBody();
 			}
+			return null; // this should not get back here
 		} catch (UnsupportedEncodingException encException) {
 			throw new ConstructorException(encException);
 		} catch (UnirestException uniException) {
@@ -85,147 +122,198 @@ public class ConstructorIO
 		}
 	}
 
-	public boolean add() throws ConstructorException {
-		return false;
-		////////////////
-        //params = {"item_name": item_name, "autocomplete_section": autocomplete_section}
-        //if "suggested_score" in kwargs:
-        //    params["suggested_score"] = kwargs["suggested_score"]
-        //if "keywords" in kwargs:
-        //    params["keywords"] = kwargs["keywords"]
-        //if "description" in kwargs:
-        //    params["description"] = kwargs["description"]
-        //if "url" in kwargs:
-        //    params["url"] = kwargs["url"]
-        //if "image_url" in kwargs:
-        //    params["image_url"] = kwargs["image_url"]
-        //url = self._make_url("v1/item")
-        //if not self._api_token:
-        //    raise IOError("You must have an API token to use the Add method!")
-        //resp = requests.post(
-        //    url,
-        //    json=params,
-        //    auth=(self._api_token, "")
-        //)
-        //if resp.status_code != 204:
-        //    raise ConstructorError(resp.text)
-        //else:
-        //    return True
+	public boolean add (String itemName, String autocompleteSection) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/item");
+			HashMap<String, Object> params = ConstructorIO.createItemParams(itemName, autocompleteSection);
+			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
 	}
 
-	public boolean remove() throws ConstructorException {
-		return false;
-        //params = {"item_name": item_name, "autocomplete_section": autocomplete_section}
-        //if "suggested_score" in kwargs:
-        //    params["suggested_score"] = kwargs["suggested_score"]
-        //if "keywords" in kwargs:
-        //    params["keywords"] = kwargs["keywords"]
-        //if "url" in kwargs:
-        //    params["url"] = kwargs["url"]
-        //url = self._make_url("v1/item")
-        //if not self._api_token:
-        //    raise IOError("You must have an API token to use the Remove method!")
-        //resp = requests.delete(
-        //    url,
-        //    json=params,
-        //    auth=(self._api_token, "")
-        //)
-        //if resp.status_code != 204:
-        //    raise ConstructorError(resp.text)
-        //else:
-        //    return True
-	}
-	
-	public boolean modify() throws ConstructorException {
-		return false;
-        //params = {"item_name": item_name, "autocomplete_section": autocomplete_section}
-        //if "suggested_score" in kwargs:
-        //    params["suggested_score"] = kwargs["suggested_score"]
-        //if "keywords" in kwargs:
-        //    params["keywords"] = kwargs["keywords"]
-        //if "url" in kwargs:
-        //    params["url"] = kwargs["url"]
-        //if "new_item_name" in kwargs:
-        //    params["new_item_name"] = kwargs["new_item_name"]
-        //url = self._make_url("v1/item")
-        //if not self._api_token:
-        //    raise IOError("You must have an API token to use the Modify method!")
-        //resp = requests.put(
-        //    url,
-        //    json=params,
-        //    auth=(self._api_token, "")
-        //)
-        //if resp.status_code != 204:
-        //    raise ConstructorError(resp.text)
-        //else:
-        //    return True
-	}
-	
-	public boolean trackConversion() throws ConstructorException {
-		return false;
-        //params = {
-        //    "term": term,
-        //    "autocomplete_section": autocomplete_section,
-        //}
-        //if "item" in kwargs:
-        //    params["item"] = kwargs["item"]
-        //url = self._make_url("v1/conversion")
-        //if not self._api_token:
-        //    raise IOError("You must have an API token to track conversions!")
-        //resp = requests.post(
-        //    url,
-        //    json=params,
-        //    auth=(self._api_token, "")
-        //)
-        //if resp.status_code != 204:
-        //    raise ConstructorError(resp.text)
-        //else:
-        //    return True
-	}
-	
-	public boolean trackClickThrough() throws ConstructorException {
-		return false;
-        //params = {
-        //    "term": term,
-        //    "autocomplete_section": autocomplete_section,
-        //}
-        //if "item" in kwargs:
-        //    params["item"] = kwargs["item"]
-        //if "revenue" in kwargs:
-        //    params["revenue"] = kwargs["revenue"]
-        //url = self._make_url("v1/click_through")
-        //if not self._api_token:
-        //    raise IOError("You must have an API token to track click throughs!")
-        //resp = requests.post(
-        //    url,
-        //    json=params,
-        //    auth=(self._api_token, "")
-        //)
-        //if resp.status_code != 204:
-        //    raise ConstructorError(resp.text)
-        //else:
-        //    return True
-	}
-	
-	public boolean trackSearch() throws ConstructorException {
-		return false;
-        //params = {
-        //    "term": term
-        //}
-        //if "num_results" in kwargs:
-        //    params["num_results"] = kwargs["num_results"]
-        //url = self._make_url("v1/search")
-        //if not self._api_token:
-        //    raise IOError("You must have an API token to track searches!")
-        //resp = requests.post(
-        //    url,
-        //    json=params,
-        //    auth=(self._api_token, "")
-        //)
-        //if resp.status_code != 204:
-        //    raise ConstructorError(resp.text)
-        //else:
-        //    return True
+	public boolean add (String itemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/item");
+			HashMap<String, Object> params = ConstructorIO.createItemParams(itemName, autocompleteSection, jsonParams);
+			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
 	}
 
+	public boolean remove(String itemName, String autocompleteSection) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/item");
+			HashMap<String, Object> params = ConstructorIO.createItemParams(itemName, autocompleteSection);
+			HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+	
+	public boolean remove(String itemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/item");
+			HashMap<String, Object> params = ConstructorIO.createItemParams(itemName, autocompleteSection, jsonParams);
+			HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+	
+	public boolean modify(String itemName, String newItemName, String autocompleteSection) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/item");
+			HashMap<String, Object> newItem = new HashMap<String, Object>();
+			newItem.put("new_item_name", newItemName);
+			HashMap<String, Object> params = ConstructorIO.createItemParams(itemName, autocompleteSection, newItem);
+			HttpResponse<JsonNode> jsonRes = Unirest.put(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+	
+	public boolean modify(String itemName, String newItemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/item");
+			jsonParams.put("new_item_name", newItemName);
+			HashMap<String, Object> params = ConstructorIO.createItemParams(itemName, autocompleteSection, jsonParams);
+			HttpResponse<JsonNode> jsonRes = Unirest.put(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+	
+	public boolean trackConversion(String term, String autocompleteSection) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/conversion");
+			HashMap<String, Object> params = ConstructorIO.createTrackingParams(term, autocompleteSection);
+			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+
+	public boolean trackConversion(String term, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/conversion");
+			HashMap<String, Object> params = ConstructorIO.createTrackingParams(term, autocompleteSection, jsonParams);
+			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+	
+	public boolean trackClickThrough(String term, String autocompleteSection) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/click_through");
+			HashMap<String, Object> params = ConstructorIO.createTrackingParams(term, autocompleteSection);
+			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+	
+	public boolean trackClickThrough(String term, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/click_through");
+			HashMap<String, Object> params = ConstructorIO.createTrackingParams(term, autocompleteSection, jsonParams);
+			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+	
+	public boolean trackSearch(String term, String autocompleteSection) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/search");
+			HashMap<String, Object> params = ConstructorIO.createTrackingParams(term, autocompleteSection);
+			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+	
+	public boolean trackSearch(String term, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/search");
+			HashMap<String, Object> params = ConstructorIO.createTrackingParams(term, autocompleteSection, jsonParams);
+			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+																							.fields(params)
+																							.basicAuth(this.apiToken, "")
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
 }

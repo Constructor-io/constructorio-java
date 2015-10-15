@@ -3,6 +3,9 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.io.UnsupportedEncodingException;
 
+import com.mashape.unirest.http.*;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 /**
  * Constructor.io Client
  * Go to Constructor.io for our awesome services to go help your site go do wibbley-wobbley awesome things!
@@ -50,7 +53,7 @@ public class ConstructorIO
 
 	public void query(String queryStr) throws ConstructorException, UnsupportedEncodingException {
 		String url = this.makeUrl("autocomplete/" + queryStr);
-		//HTTPResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
+		HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
 
         //resp = requests.get(url)
         //if resp.status_code != 200:

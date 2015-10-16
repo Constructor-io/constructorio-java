@@ -1,74 +1,105 @@
 package com.constructor.client;
 
 import static org.junit.Assert.assertEquals;
+import java.util.*;
 
 import org.junit.Test;
 
-public class MyTests {
+public class ConstructorTest {
 
-	// test encodes params
-	// test creates urls correctly
-	// test api token is set
-	// test ac key is set
-	// test ac query
-	// test add
-	// test add w/ params
-	// test remove
-	// test remove w/ params
-	// test modify
-	// test modify w/ params
-	// test conversion
-	// test conversion w/ params
-	// test search
-	// test search w/ params
-	// test clickthrough
-	// test clickthrough w/ params
-
-  @Test
-  public void multiplicationOfZeroIntegersShouldReturnZero() {
-
-    // MyClass is tested
-    MyClass tester = new MyClass();
-
-    // assert statements
-    assertEquals("10 x 0 must be 0", 0, tester.multiply(10, 0));
-    assertEquals("0 x 10 must be 0", 0, tester.multiply(0, 10));
-    assertEquals("0 x 0 must be 0", 0, tester.multiply(0, 0));
-  }
+	@Test
+	public void encodesParamsShouldEncodeParams() {
+		ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
+		HashMap<String, Object> innerParams = new HashMap<String, Object>();
+		ArrayList<String> innerArray = new ArrayList<String>();
+		innerArray.add("a");
+		innerArray.add("b");
+		innerParams.put("baz", innerArray);
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("foo", arr);
+		params.put("bar", innerParams);
+		String serializedParams = constructor.serializeParams(params);
+		assertEquals("serializes params correctly", serializedParams, "foo%5B0%5D=1&foo%5B1%5D=2&bar%5Bbaz%5D%5B0%5D=a&bar%5Bbaz%5D%5B1%5D=b");
+	}
+	
+	@Test
+	public void urlsShouldBeCreated() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void apiTokenShouldBeSet() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void acKeyShouldBeSet() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void acQueryShouldReturn() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void addShouldReturnNoParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void addShouldReturnParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void removeShouldReturnNoParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void removeShouldReturnParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void modifyShouldReturnNoParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void modifyShouldReturnParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void conversionShouldReturnNoParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void conversionShouldReturnParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void searchShouldReturnNoParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void searchShouldReturnParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void clickThroughShouldReturnNoParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
+	
+	@Test
+	public void clickThroughShouldReturnParams() {
+		assertEquals("not implemented yet", 1, 1);
+	}
 
 } 
-
-
-//import junit.framework.Test;
-//import junit.framework.TestCase;
-//import junit.framework.TestSuite;
-//
-///**
-// * Unit test for simple App.
-// */
-//public class ConstructorTest 
-//    extends TestCase
-//{
-//    /**
-//     * Create the test case
-//     *
-//     * @param testName name of the test case
-//     */
-//    public ConstructorTest( String testName )
-//    {
-//        super( testName );
-//    }
-//
-//    /**
-//     * @return the suite of tests being tested
-//     */
-//    public static Test suite()
-//    {
-//        return new TestSuite( AppTest.class );
-//    }
-//
-//    public void testApp()
-//    {
-//        assertTrue( true );
-//    }
-//}

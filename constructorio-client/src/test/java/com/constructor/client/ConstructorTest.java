@@ -65,67 +65,67 @@ public class ConstructorTest {
 	@Test
 	public void addWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 	
 	@Test
 	public void removeNoParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 	
 	@Test
 	public void removeWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 	
 	@Test
 	public void modifyNoParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 	
 	@Test
 	public void modifyWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 	
 	@Test
 	public void conversionNoParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 	
 	@Test
 	public void conversionWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 	
 	@Test
 	public void searchNoParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 	
 	@Test
 	public void searchWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 	
 	@Test
 	public void clickThroughNoParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 	
 	@Test
 	public void clickThroughWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 1);
+		assertEquals("not implemented yet", 1, 0);
 	}
 
 } 

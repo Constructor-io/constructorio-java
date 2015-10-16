@@ -38,7 +38,7 @@ public class ConstructorIO
 			this.protocol = "http";
 		}
 		this.encoder = new URLEncodedUtils();
-		Unirest.setDefaultHeader("accept", "application/json");
+		Unirest.setDefaultHeader("Content-Type", "application/json");
 	}
 
 	/**
@@ -149,7 +149,6 @@ public class ConstructorIO
 		try {
 			String url = this.makeUrl("v1/item");
 			String params = ConstructorIO.createItemParams(itemName, autocompleteSection);
-			System.out.println(params);
 			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
 																							.basicAuth(this.apiToken, "")
 																							.body(params)

@@ -83,6 +83,13 @@ public class ConstructorIO
 		return gson.toJson(params);
 	}
 
+	private static String createTrackingParams(String term) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("term", term);
+		Gson gson = new Gson();
+		return gson.toJson(params);
+	}
+
 	private static String createTrackingParams(String term, String autocompleteSection) {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("term", term);
@@ -95,6 +102,14 @@ public class ConstructorIO
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("term", term);
 		params.put("autocomplete_section", autocompleteSection);
+		params.putAll(otherJsonParams);
+		Gson gson = new Gson();
+		return gson.toJson(params);
+	}
+
+	private static String createTrackingParams(String term, Map<String, Object> otherJsonParams) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("term", term);
 		params.putAll(otherJsonParams);
 		Gson gson = new Gson();
 		return gson.toJson(params);
@@ -308,10 +323,10 @@ public class ConstructorIO
 		}
 	}
 	
-	public boolean trackSearch(String term, String autocompleteSection) throws ConstructorException {
+	public boolean trackSearch(String term) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/search");
-			String params = ConstructorIO.createTrackingParams(term, autocompleteSection);
+			String params = ConstructorIO.createTrackingParams(term);
 			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
 																							.basicAuth(this.apiToken, "")
 																							.body(params)
@@ -324,10 +339,10 @@ public class ConstructorIO
 		}
 	}
 	
-	public boolean trackSearch(String term, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
+	public boolean trackSearch(String term, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/search");
-			String params = ConstructorIO.createTrackingParams(term, autocompleteSection, jsonParams);
+			String params = ConstructorIO.createTrackingParams(term, jsonParams);
 			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
 																							.basicAuth(this.apiToken, "")
 																							.body(params)

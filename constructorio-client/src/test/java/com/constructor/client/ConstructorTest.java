@@ -94,38 +94,49 @@ public class ConstructorTest {
 	@Test
 	public void conversionNoParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertTrue("conversion without params returns alright", constructor.trackConversion("Stanley_Steamer", "Search Suggestions");
+		assertTrue("conversion without params returns alright", constructor.trackConversion("Stanley_Steamer", "Search Suggestions"));
 	}
-	
+
 	@Test
 	public void conversionWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		////// add the optional
-		assertTrue("conversion without params returns alright", constructor.trackConversion("Stanley_Steamer", "Search Suggestions");
+		String randStr = this.getRandString();
+		constructor.add(randStr, "Search Suggestions");
+		Thread.sleep(2000);
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("item", randStr);
+		assertTrue("conversion with params returns alright", constructor.trackConversion("Stanley_Steamer", "Search Suggestions", params));
 	}
 	
 	@Test
 	public void searchNoParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
+		assertTrue("search without params returns alright", constructor.trackSearch("Stanley_Steamer"));
 	}
 	
 	@Test
 	public void searchWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("num_results", 1337);
+		assertTrue("search with params returns alright", constructor.trackSearch("Stanley_Steamer", params));
 	}
 	
 	@Test
 	public void clickThroughNoParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
+		assertTrue("search without params returns alright", constructor.trackClickThrough("Stanley_Steamer", "Search Suggestions"));
 	}
 	
 	@Test
 	public void clickThroughWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
+		String randStr = this.getRandString();
+		constructor.add(randStr, "Search Suggestions");
+		Thread.sleep(2000);
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("item", randStr);
+		assertTrue("click-through with params returns alright", constructor.trackClickThrough("Stanley_Steamer", "Search Suggestions", params));
 	}
 
 } 

@@ -47,13 +47,17 @@ public class ConstructorIO
 	 */
 	public static String serializeParams(HashMap<String, String> params) throws UnsupportedEncodingException {
 		String urlString = "";
+		boolean isFirst = true;
 		for (String key: params.keySet()) {
-			urlString += "&";
-			urlString += URLEncoder.encode(key, "UTF-8"); // some shit here
+			if (!isFirst) {
+				urlString += "&";
+			}
+			urlString += URLEncoder.encode(key, "UTF-8");
 			urlString += "=";
-			urlString += URLEncoder.encode(params.get(key), "UTF-8"); // some shit here
+			urlString += URLEncoder.encode(params.get(key), "UTF-8");
+			isFirst = false;
 		}
-		return urlString.substring(1); // get rid of initial &
+		return urlString;
 	}
 
 	public String makeUrl(String endpoint) throws UnsupportedEncodingException {

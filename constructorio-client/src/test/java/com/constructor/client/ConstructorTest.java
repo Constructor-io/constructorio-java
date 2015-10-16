@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.*;
 
 import org.junit.Test;
+import com.mashape.unirest.http.*;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 public class ConstructorTest {
 
@@ -45,66 +47,66 @@ public class ConstructorTest {
 	public void acQueryShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
 		JsonNode res = constructor.query("S");
-		assertEquals("ac query should return something", 1, 1);
+		assertEquals("ac query should return something", res.toString(), "{\"suggestions\":[]}");
 	}
 	
 	@Test
-	public void addShouldReturnNoParams() throws Exception {
+	public void addNoParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void addShouldReturnParams() throws Exception {
+	public void addWithParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void removeShouldReturnNoParams() throws Exception {
+	public void removeNoParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void removeShouldReturnParams() throws Exception {
+	public void removeWithParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void modifyShouldReturnNoParams() throws Exception {
+	public void modifyNoParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void modifyShouldReturnParams() throws Exception {
+	public void modifyWithParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void conversionShouldReturnNoParams() throws Exception {
+	public void conversionNoParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void conversionShouldReturnParams() throws Exception {
+	public void conversionWithParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void searchShouldReturnNoParams() throws Exception {
+	public void searchNoParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void searchShouldReturnParams() throws Exception {
+	public void searchWithParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void clickThroughShouldReturnNoParams() throws Exception {
+	public void clickThroughNoParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 	
 	@Test
-	public void clickThroughShouldReturnParams() throws Exception {
+	public void clickThroughWithParamsShouldReturn() throws Exception {
 		assertEquals("not implemented yet", 1, 1);
 	}
 

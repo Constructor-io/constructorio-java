@@ -7,6 +7,8 @@ import java.io.UnsupportedEncodingException;
 import com.mashape.unirest.http.*;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import org.apache.http.client.utils.URLEncodedUtils;
+
 /**
  * Constructor.io Client
  * Go to Constructor.io for our awesome services to go help your site go do wibbley-wobbley awesome things!
@@ -20,6 +22,7 @@ public class ConstructorIO
 	public String autocompleteKey;
 	public String protocol;
 	public String host;
+	protected URLEncodedUtils encoder;
 
 	public ConstructorIO (String apiToken, String autocompleteKey, boolean isHTTPS, String host) {
 		this.apiToken = apiToken;
@@ -33,8 +36,15 @@ public class ConstructorIO
 		} else {
 			this.protocol = "http";
 		}
+		this.encoder = new URLEncodedUtils();
 	}
 
+	/**
+	 * serializeParams
+	 *
+	 * unlike in the other clients, this one only takes in hashmaps
+	 * and you must write other helper methods to serialize other things
+	 */
 	public static String serializeParams(HashMap<String, String> params) throws UnsupportedEncodingException {
 		String urlString = "";
 		for (String key: params.keySet()) {

@@ -8,18 +8,23 @@ import org.junit.Test;
 public class ConstructorTest {
 
 	@Test
-	public void encodesParamsShouldEncodeParams() {
+	public void encodesParamsShouldEncodeParams() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
-		HashMap<String, Object> innerParams = new HashMap<String, Object>();
-		ArrayList<String> innerArray = new ArrayList<String>();
-		innerArray.add("a");
-		innerArray.add("b");
-		innerParams.put("baz", innerArray);
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("foo", arr);
-		params.put("bar", innerParams);
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("foo", "bar");
+		params.put("bar", "baz");
 		String serializedParams = constructor.serializeParams(params);
-		assertEquals("serializes params correctly", serializedParams, "foo%5B0%5D=1&foo%5B1%5D=2&bar%5Bbaz%5D%5B0%5D=a&bar%5Bbaz%5D%5B1%5D=b");
+		assertEquals("serializes params correctly", serializedParams, "foo=bar&bar=baz");
+	}
+
+	@Test
+	public void encodesComplexParamsShouldEncodeParams() throws Exception {
+		ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("foo", "bar");
+		params.put("bar", "baz");
+		String serializedParams = constructor.serializeParams(params);
+		assertEquals("serializes params correctly", serializedParams, "foo=bar&bar=baz");
 	}
 	
 	@Test

@@ -24,11 +24,14 @@ public class ConstructorIO
 	public ConstructorIO (String apiToken, String autocompleteKey, boolean isHTTPS, String host) {
 		this.apiToken = apiToken;
 		this.autocompleteKey = autocompleteKey;
-		this.protocol = protocol;
+		this.host = host;
+		if (host == null) {
+			this.host = "ac.cnstrc.com";
+		}
 		if (isHTTPS) {
-			this.host = "https";
+			this.protocol = "https";
 		} else {
-			this.host = "http";
+			this.protocol = "http";
 		}
 	}
 

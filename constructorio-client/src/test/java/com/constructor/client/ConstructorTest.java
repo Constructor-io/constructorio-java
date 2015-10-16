@@ -65,43 +65,43 @@ public class ConstructorTest {
 	@Test
 	public void addWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
+		String randStr = this.getRandString();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("suggested_score", 1337);
+		assertTrue("addition with params returns alright", constructor.add(randStr, "Search Suggestions", params));
 	}
 	
 	@Test
-	public void removeNoParamsShouldReturn() throws Exception {
+	public void removeShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
+		String randStr = this.getRandString();
+		constructor.add(randStr, "Search Suggestions");
+		Thread.sleep(2000);
+		assertTrue("remove returns alright", constructor.remove(randStr, "Search Suggestions"));
 	}
 	
 	@Test
-	public void removeWithParamsShouldReturn() throws Exception {
+	public void modifyShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
-	}
-	
-	@Test
-	public void modifyNoParamsShouldReturn() throws Exception {
-		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
-	}
-	
-	@Test
-	public void modifyWithParamsShouldReturn() throws Exception {
-		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
+		String randStr = this.getRandString();
+		constructor.add(randStr, "Search Suggestions");
+		Thread.sleep(2000);
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("suggested_score", 1337);
+		assertTrue("modify returns alright", constructor.modify(randStr, randStr, "Search Suggestions", params));
 	}
 	
 	@Test
 	public void conversionNoParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
+		assertTrue("conversion without params returns alright", constructor.trackConversion("Stanley_Steamer", "Search Suggestions");
 	}
 	
 	@Test
 	public void conversionWithParamsShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertEquals("not implemented yet", 1, 0);
+		////// add the optional
+		assertTrue("conversion without params returns alright", constructor.trackConversion("Stanley_Steamer", "Search Suggestions");
 	}
 	
 	@Test

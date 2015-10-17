@@ -1,10 +1,13 @@
 package com.constructor.example
 
-class ConstructorExample {
-	public ConstructorExample() {
-	}
+import com.constructor.client.ConstructorIO;
 
-	public main() {
-		System.out.println("walla");
+class ConstructorExample {
+	public main(String[] args) {
+		ConstructorIO constructor = new ConstructorIO("some code", "some code", true, null);
+		for (String s: args) {
+			constructor.query(s);
+		}
+		// just do standard english autocomplete
 	}
 }

@@ -1,6 +1,4 @@
-package com.constructor.example
-
-import com.constructor.client.ConstructorIO;
+package com.constructor.client
 
 class ConstructorExample {
 	public main(String[] args) {
@@ -10,7 +8,9 @@ class ConstructorExample {
 				ConstructorIO constructor = new ConstructorIO("-", "P03bVBcmyYjSG1ZQyD4V", true, null);
 				for (int i = 1; i < args.length; i++) {
 					JsonNode res = constructor.query(s);
-					System.out.prinln(res.toString());
+					System.out.println(res.toString());
 				}
+			default:
+				System.out.println("Usage: constructor (query | add | remove | modify | trackSearch | trackConversion | trackClickThrough) args...");
 		}
 	}

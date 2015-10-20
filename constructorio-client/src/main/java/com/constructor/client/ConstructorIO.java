@@ -2,6 +2,8 @@ package com.constructor.client;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import org.json.JSONArray;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.Gson;
@@ -204,7 +206,7 @@ public class ConstructorIO
 			if (checkResponse(jsonRes, 200)) {
 				return true;
 			}
-			return null; // this should not get back here
+			return false; // this should not get back here
 		} catch (UnsupportedEncodingException encException) {
 			throw new ConstructorException(encException);
 		} catch (UnirestException uniException) {

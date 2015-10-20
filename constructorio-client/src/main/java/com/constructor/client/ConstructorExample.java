@@ -1,6 +1,7 @@
 package com.constructor.client;
 
 import com.mashape.unirest.http.*;
+import java.util.ArrayList;
 
 class ConstructorExample {
 	public static void main(String[] args) {
@@ -14,7 +15,7 @@ class ConstructorExample {
 			if (firstArg.equals("query")) {
 				ConstructorIO constructor = new ConstructorIO("-", "P03bVBcmyYjSG1ZQyD4V", true, null);
 				for (int i = 1; i < args.length; i++) {
-					JsonNode res = constructor.query(args[i]);
+					ArrayList<String> res = constructor.query(args[i]);
 					System.out.println(res.toString());
 				}
 			} else 
@@ -33,7 +34,7 @@ class ConstructorExample {
 					String itemName = args[3];
 					String newItemName = args[4];
 					String autocompleteSection = args[5];
-					res = constructor.modify(itemName, newItemName, autocopmleteSection);
+					res = constructor.modify(itemName, newItemName, autocompleteSection);
 				} else if (firstArg.equals("trackSearch")) {
 					String termName = args[3];
 					res = constructor.trackSearch(termName);

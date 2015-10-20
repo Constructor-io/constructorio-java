@@ -51,8 +51,8 @@ public class ConstructorTest {
 	@Test
 	public void acQueryShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		JsonNode res = constructor.query("S");
-		assertEquals("ac query should return something", res.toString(), "{\"suggestions\":[]}");
+		ArrayList<String> res = constructor.query("S");
+		assertEquals("ac query should return something", "[]", res.toString());
 	}
 	
 	@Test

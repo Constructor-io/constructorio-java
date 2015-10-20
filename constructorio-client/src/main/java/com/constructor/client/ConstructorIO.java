@@ -232,7 +232,7 @@ public class ConstructorIO
 	 *
 	 * @param itemName the item that you're adding.
 	 * @param autocompleteSection the section of the autocomplete that you're adding the item to.
-	 * @param params a map of optional parameters. Optional parameters are in the <a href="https://constructor.io/docs">API documentation</a>
+	 * @param jsonParams a map of optional parameters. Optional parameters are in the <a href="https://constructor.io/docs/#add-an-item">API documentation</a>
 	 * @return true if working
 	 * @exception ConstructorException if the request is invalid.
 	 */
@@ -277,6 +277,13 @@ public class ConstructorIO
 	}
 	
 	/**
+	 * Modifies an item from your autocomplete.
+	 *
+	 * @param itemName the item that you're modifying.
+	 * @param newItemName the new item name of the item you're modifying. If you don't wnat to change it, just put in the old itemName.
+	 * @param autocompleteSection the section of the autocomplete that you're modifying the item from.
+	 * @return true if successfully modified
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean modify(String itemName, String newItemName, String autocompleteSection) throws ConstructorException {
 		try {
@@ -297,6 +304,14 @@ public class ConstructorIO
 	}
 	
 	/**
+	 * Modifies an item from your autocomplete.
+	 *
+	 * @param itemName the item that you're modifying.
+	 * @param newItemName the new item name of the item you're modifying. If you don't wnat to change it, just put in the old itemName.
+	 * @param autocompleteSection the section of the autocomplete that you're modifying the item from.
+	 * @param jsonParams a map of optional parameters. Optional parameters are in the <a href="https://constructor.io/docs/#modify-an-item">API documentation</a>
+	 * @return true if successfully modified
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean modify(String itemName, String newItemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
@@ -316,6 +331,12 @@ public class ConstructorIO
 	}
 	
 	/**
+	 * Tracks the fact that someone converted on your site.
+	 * Can be for any definition of conversion, whether someone buys a product or signs up or does something important to your site.
+	 * @param term the term that someone converted from.
+	 * @param autocompleteSection the autocomplete section that they converted from.
+	 * @return true if successfully tracked.
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean trackConversion(String term, String autocompleteSection) throws ConstructorException {
 		try {
@@ -334,6 +355,13 @@ public class ConstructorIO
 	}
 
 	/**
+	 * Tracks the fact that someone converted on your site.
+	 * Can be for any definition of conversion, whether someone buys a product or signs up or does something important to your site.
+	 * @param term the term that someone converted from.
+	 * @param autocompleteSection the autocomplete section that they converted from.
+	 * @return true if successfully tracked.
+	 * @param jsonParams a map of optional parameters. Optional parameters are in the <a href="https://constructor.io/docs/#track-a-conversion">API documentation</a>
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean trackConversion(String term, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
@@ -352,6 +380,11 @@ public class ConstructorIO
 	}
 	
 	/**
+	 * Tracks the fact that someone clicked through a search result on the site.
+	 * @param term the term that someone clicked.
+	 * @param autocompleteSection the autocomplete section of the term that they clicked.
+	 * @return true if successfully tracked.
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean trackClickThrough(String term, String autocompleteSection) throws ConstructorException {
 		try {
@@ -370,6 +403,12 @@ public class ConstructorIO
 	}
 	
 	/**
+	 * Tracks the fact that someone clicked through a search result on the site.
+	 * @param term the term that someone clicked.
+	 * @param autocompleteSection the autocomplete section of the term that they clicked.
+	 * @return true if successfully tracked.
+	 * @param jsonParams a map of optional parameters. Optional parameters are in the <a href="https://constructor.io/docs/#track-a-click-through">API documentation</a>
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean trackClickThrough(String term, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
@@ -388,6 +427,11 @@ public class ConstructorIO
 	}
 	
 	/**
+	 * Tracks the fact that someone searched on your site.
+	 * There's no autocompleteSection parameter because if you're searching, you aren't using an autocomplete.
+	 * @param term the term that someone searched.
+	 * @return true if successfully tracked.
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean trackSearch(String term) throws ConstructorException {
 		try {
@@ -406,6 +450,12 @@ public class ConstructorIO
 	}
 	
 	/**
+	 * Tracks the fact that someone searched on your site.
+	 * There's no autocompleteSection parameter because if you're searching, you aren't using an autocomplete.
+	 * @param term the term that someone searched.
+	 * @return true if successfully tracked.
+	 * @param jsonParams a map of optional parameters. Optional parameters are in the <a href="https://constructor.io/docs/#track-a-search">API documentation</a>
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean trackSearch(String term, Map<String, Object> jsonParams) throws ConstructorException {
 		try {

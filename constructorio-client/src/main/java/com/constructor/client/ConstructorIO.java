@@ -17,7 +17,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
  * @author Howon Lee <howon@constructor.io>
  * @version 0.0.1
  * @since Oct 19 2015
- * Go to Constructor.io for our awesome services to go help your site go do wibbley-wobbley awesome things!
+ * Go to Constructor.io for really profitable autocomplete-as-a-service.
  */
 public class ConstructorIO
 {
@@ -28,6 +28,15 @@ public class ConstructorIO
 	public String host;
 	protected URLEncodedUtils encoder;
 
+	/**
+	 * Creates a constructor.io client.
+	 * Unlike in the other Constructor.io clients, this one only takes in hashmaps,
+	 * and you must write other helper methods to serialize other things.
+	 * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+	 * @param autocompleteKey Autocomplete key, used publically in your in-site javascript client.
+	 * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
+	 * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+	 */
 	public ConstructorIO (String apiToken, String autocompleteKey, boolean isHTTPS, String host) {
 		this.apiToken = apiToken;
 		this.autocompleteKey = autocompleteKey;

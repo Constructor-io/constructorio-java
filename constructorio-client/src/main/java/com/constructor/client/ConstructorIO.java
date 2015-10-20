@@ -5,6 +5,8 @@ import java.util.Map;
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.Gson;
+// inconsistent capitalization: Unirest guys use Json, Crockford lib uses JSON
+// Gson is just camelcaps, so Crockford is odd one out
 import com.mashape.unirest.http.*;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -12,10 +14,11 @@ import org.apache.http.client.utils.URLEncodedUtils;
 
 /**
  * Constructor.io Client
+ * @author Howon Lee <howon@constructor.io>
+ * @version 0.0.1
+ * @since Oct 19 2015
  * Go to Constructor.io for our awesome services to go help your site go do wibbley-wobbley awesome things!
  */
-
-// these all should throw that exception
 public class ConstructorIO
 {
 
@@ -42,10 +45,12 @@ public class ConstructorIO
 	}
 
 	/**
-	 * serializeParams
+	 * Serializes url params in a rudimentary way.
 	 *
-	 * unlike in the other clients, this one only takes in hashmaps
-	 * and you must write other helper methods to serialize other things
+	 * Unlike in the other Constructor.io clients, this one only takes in hashmaps,
+	 * and you must write other helper methods to serialize other things.
+	 * @param params HashMap of the parameters to encode.
+	 * @return The encoded parameters, as a String.
 	 */
 	public static String serializeParams(HashMap<String, String> params) throws UnsupportedEncodingException {
 		String urlString = "";
@@ -62,8 +67,28 @@ public class ConstructorIO
 		return urlString;
 	}
 
+	/**
+	 * Makes a URL to issue the requests to.
+	 *
+	 * Note that the URL will automagically have the autocompleteKey embedded.
+	 * @param endpoint Endpoint of the autocomplete service.
+	 * @return The created URL. Now you can use it to issue requests and things!
+	 */
 	public String makeUrl(String endpoint) throws UnsupportedEncodingException {
 		return makeUrl(endpoint, new HashMap<String, String>());
+	}
+
+	/**
+	 * Makes a URL to issue the requests to.
+	 *
+	 * Note that the URL will automagically have the autocompleteKey embedded.
+	 * @param endpoint Endpoint of the autocomplete service you are giving requests to
+	 * @param params HashMap of the parameters you're encoding in the URL
+	 * @return The created URL. Now you can use it to issue requests and things!
+	 */
+	public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
+		params.put("autocomplete_key", this.autocompleteKey);
+		return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
 	}
 
 	private static String createItemParams(String itemName, String autocompleteSection) {
@@ -123,17 +148,29 @@ public class ConstructorIO
 		}
 	}
 
-	public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
-		params.put("autocomplete_key", this.autocompleteKey);
-		return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
-	}
-
-	public JsonNode query(String queryStr) throws ConstructorException {
+	/**
+	 * Queries an autocomplete service.
+	 *
+	 * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!
+	 * That's important. That will be a solid latency difference.
+	 * @param queryStr The string that you will be autocompleting.
+	 * @return An ArrayList of suggestions for querying
+	 */
+	public ArrayList<String> query(String queryStr) throws ConstructorException {
 		try {
 			String url = this.makeUrl("autocomplete/" + queryStr);
 			HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
 			if (checkResponse(jsonRes, 200)) {
-				return jsonRes.getBody();
+				JSONArray arr = jsonRes.getBody()
+															 .getObject()
+															 .getJSONArray("suggestions");
+				ArrayList<String> res = new ArrayList<String>();
+				if (arr != null) {
+					for (int i = 0; i < arr.length(); i++) {
+						res.add(arr.get(i).toString());
+					}
+				}
+				return res;
 			}
 			return null; // this should not get back here
 		} catch (UnsupportedEncodingException encException) {
@@ -143,14 +180,20 @@ public class ConstructorIO
 		}
 	}
 
-	public JsonNode verify() throws ConstructorException {
+	/**
+	 * Verifies that an autocomplete service is working.
+	 *
+	 * @exception ConstructorException if the service is not working
+	 * @return true if working.
+	 */
+	public boolean verify() throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/verify");
 			HttpResponse<JsonNode> jsonRes = Unirest.get(url)
 																							.basicAuth(this.apiToken, "")
 																							.asJson();
 			if (checkResponse(jsonRes, 200)) {
-				return jsonRes.getBody();
+				return true;
 			}
 			return null; // this should not get back here
 		} catch (UnsupportedEncodingException encException) {
@@ -160,6 +203,8 @@ public class ConstructorIO
 		}
 	}
 
+	/**
+	 */
 	public boolean add (String itemName, String autocompleteSection) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/item");
@@ -176,6 +221,8 @@ public class ConstructorIO
 		}
 	}
 
+	/**
+	 */
 	public boolean add (String itemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/item");
@@ -192,6 +239,8 @@ public class ConstructorIO
 		}
 	}
 
+	/**
+	 */
 	public boolean remove(String itemName, String autocompleteSection) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/item");
@@ -208,6 +257,8 @@ public class ConstructorIO
 		}
 	}
 	
+	/**
+	 */
 	public boolean remove(String itemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/item");
@@ -224,6 +275,8 @@ public class ConstructorIO
 		}
 	}
 	
+	/**
+	 */
 	public boolean modify(String itemName, String newItemName, String autocompleteSection) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/item");
@@ -242,6 +295,8 @@ public class ConstructorIO
 		}
 	}
 	
+	/**
+	 */
 	public boolean modify(String itemName, String newItemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/item");
@@ -259,6 +314,8 @@ public class ConstructorIO
 		}
 	}
 	
+	/**
+	 */
 	public boolean trackConversion(String term, String autocompleteSection) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/conversion");
@@ -275,6 +332,8 @@ public class ConstructorIO
 		}
 	}
 
+	/**
+	 */
 	public boolean trackConversion(String term, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/conversion");
@@ -291,6 +350,8 @@ public class ConstructorIO
 		}
 	}
 	
+	/**
+	 */
 	public boolean trackClickThrough(String term, String autocompleteSection) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/click_through");
@@ -307,6 +368,8 @@ public class ConstructorIO
 		}
 	}
 	
+	/**
+	 */
 	public boolean trackClickThrough(String term, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/click_through");
@@ -323,6 +386,8 @@ public class ConstructorIO
 		}
 	}
 	
+	/**
+	 */
 	public boolean trackSearch(String term) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/search");
@@ -339,6 +404,8 @@ public class ConstructorIO
 		}
 	}
 	
+	/**
+	 */
 	public boolean trackSearch(String term, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/search");

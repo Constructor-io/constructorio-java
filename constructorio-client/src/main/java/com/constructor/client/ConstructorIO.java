@@ -204,6 +204,12 @@ public class ConstructorIO
 	}
 
 	/**
+	 * Adds an item to your autocomplete.
+	 *
+	 * @param itemName the item that you're adding.
+	 * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+	 * @return true if working
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean add (String itemName, String autocompleteSection) throws ConstructorException {
 		try {
@@ -222,6 +228,13 @@ public class ConstructorIO
 	}
 
 	/**
+	 * Adds an item to your autocomplete.
+	 *
+	 * @param itemName the item that you're adding.
+	 * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+	 * @param params a map of optional parameters. Optional parameters are in the <a href="https://constructor.io/docs">API documentation</a>
+	 * @return true if working
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean add (String itemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
@@ -240,29 +253,17 @@ public class ConstructorIO
 	}
 
 	/**
+	 * Removes an item from your autocomplete.
+	 *
+	 * @param itemName the item that you're removing.
+	 * @param autocompleteSection the section of the autocomplete that you're removing the item from.
+	 * @return true if successfully removed
+	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean remove(String itemName, String autocompleteSection) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/item");
 			String params = ConstructorIO.createItemParams(itemName, autocompleteSection);
-			HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
-																							.basicAuth(this.apiToken, "")
-																							.body(params)
-																							.asJson();
-			return checkResponse(jsonRes, 204);
-		} catch (UnsupportedEncodingException encException) {
-			throw new ConstructorException(encException);
-		} catch (UnirestException uniException) {
-			throw new ConstructorException(uniException);
-		}
-	}
-	
-	/**
-	 */
-	public boolean remove(String itemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
-		try {
-			String url = this.makeUrl("v1/item");
-			String params = ConstructorIO.createItemParams(itemName, autocompleteSection, jsonParams);
 			HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
 																							.basicAuth(this.apiToken, "")
 																							.body(params)

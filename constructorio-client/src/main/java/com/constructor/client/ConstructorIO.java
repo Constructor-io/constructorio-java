@@ -273,7 +273,7 @@ public class ConstructorIO
 	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean addOrUpdate(ConstructorItem item, String autocompleteSection) throws ConstructorException {
-		return add(item.getItemName(), autocompleteSection, item.toJsonParams());
+		return addOrUpdate(item.getItemName(), autocompleteSection, item.toJsonParams());
 	}
 
 	/**
@@ -285,7 +285,7 @@ public class ConstructorIO
 	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean addOrUpdate(String itemName, String autocompleteSection) throws ConstructorException {
-		return add(itemName, autocompleteSection, null);
+		return addOrUpdate(itemName, autocompleteSection, null);
 	}
 
 	/**
@@ -328,7 +328,7 @@ public class ConstructorIO
 	public boolean addBatch(String autocompleteSection, String... items) throws ConstructorException {
 		ConstructorItem[] citems = new ConstructorItem[items.length];
 		for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
-		return addOrUpdateBatch(autocompleteSection, citems);
+		return addBatch(autocompleteSection, citems);
 	}
 	
 	/**

@@ -213,6 +213,17 @@ public class ConstructorIO
 			throw new ConstructorException(uniException);
 		}
 	}
+	
+	/**
+	 * Adds an item to your autocomplete.
+	 *
+	 * @param item the item that you're adding.
+	 * @return true if working
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean add (ConstructorItem item) throws ConstructorException {
+		return add(item.getItemName(), item.getAutocompleteSection(), item.toJsonParams());
+	}
 
 	/**
 	 * Adds an item to your autocomplete.

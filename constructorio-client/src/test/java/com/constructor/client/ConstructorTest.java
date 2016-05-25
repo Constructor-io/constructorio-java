@@ -2,6 +2,7 @@ package com.constructor.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import java.util.*;
 
 import org.junit.Test;
@@ -69,6 +70,70 @@ public class ConstructorTest {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("suggested_score", 1337);
 		assertTrue("addition with params returns alright", constructor.add(randStr, "Search Suggestions", params));
+	}
+	
+	@Test
+	public void addConstructorItemShouldReturn() throws Exception {
+		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+		String randStr = this.getRandString();
+		assertTrue("addition of a constructor item returns alright", constructor.add(new ConstructorItem(randStr), "Search Suggestions"));
+	}
+	
+	@Test
+	public void addConstructorItemWithHashMapParamsShouldReturn() throws Exception {
+		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+		String randStr = this.getRandString();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("suggested_score", 1337);
+		assertTrue("addition of a constructor item with params as a HashMap returns alright", constructor.add(new ConstructorItem(randStr, params), "Search Suggestions"));
+	}
+	
+	@Test
+	public void addConstructorItemWithFunctionParamsShouldReturn() throws Exception {
+		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+		String randStr = this.getRandString();
+		assertTrue("addition of a constructor item with params set using the functions provided returns alright", constructor.add(new ConstructorItem(randStr).setSuggestedScore(100), "Search Suggestions"));
+	}
+	
+	@Test
+	public void addConstructorItemWithEdgeCasesShouldReturn() throws Exception {
+		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+		String randStr = this.getRandString();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("id", "test");
+		assertTrue("addition of a constructor item with some edge cases returns alright", constructor.add(new ConstructorItem("")
+			.setSuggestedScore(1009)
+			.setSuggestedScore(0)
+			.setSuggestedScore(100)
+			.setKeywords("hello", "world")
+			.put("keywords", null)
+			.put("item_name", randStr)
+		, "Search Suggestions"));
+	}
+	
+	@Test
+	public void constructorItem() throws Exception {
+		String randStr = this.getRandString();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("id", "test");
+		assertEquals("ConstructorItem handles a missing suggested_score correctly", new ConstructorItem(randStr, params)
+			.setSuggestedScore(1009)
+			.setSuggestedScore(0)
+			.get("suggested_score"), null);
+		assertEquals("ConstructorItem handles constructor params correctly", new ConstructorItem(randStr, params)
+			.get("id"), "test");
+		assertEquals("ConstructorItem handles keywords correctly", new ConstructorItem(randStr, params)
+			.setKeywords("hello", "world")
+			.getKeywords()[1], "world");
+		assertEquals("ConstructorItem handles item removal by setting the value to null correctly", new ConstructorItem(randStr, params)
+			.setKeywords(null)
+			.getKeywords(), null);
+		try {
+			new ConstructorItem(randStr, params)
+				.setItemName(null)
+				.getKeywords();
+			fail("ConstructorItem requires an item name to be set");
+		} catch (Exception e) {}
 	}
 	
 	@Test

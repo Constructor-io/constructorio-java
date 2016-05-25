@@ -221,8 +221,8 @@ public class ConstructorIO
 	 * @return true if working
 	 * @exception ConstructorException if the request is invalid.
 	 */
-	public boolean add (ConstructorItem item) throws ConstructorException {
-		return add(item.getItemName(), item.getAutocompleteSection(), item.toJsonParams());
+	public boolean add (ConstructorItem item, String autocompleteSection) throws ConstructorException {
+		return add(item.getItemName(), autocompleteSection, item.toJsonParams());
 	}
 
 	/**

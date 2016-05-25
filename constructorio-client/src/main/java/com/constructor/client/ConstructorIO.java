@@ -277,6 +277,18 @@ public class ConstructorIO
 	/**
 	 * Removes an item from your autocomplete.
 	 *
+	 * @param item the item that you're removing.
+	 * @param autocompleteSection the section of the autocomplete that you're removing the item from.
+	 * @return true if successfully removed
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean remove(ConstructorItem item, String autocompleteSection) throws ConstructorException {
+		remove(item.getItemName(), autocompleteSection);
+	}
+
+	/**
+	 * Removes an item from your autocomplete.
+	 *
 	 * @param itemName the item that you're removing.
 	 * @param autocompleteSection the section of the autocomplete that you're removing the item from.
 	 * @return true if successfully removed
@@ -287,6 +299,58 @@ public class ConstructorIO
 			String url = this.makeUrl("v1/item");
 			String params = ConstructorIO.createItemParams(itemName, autocompleteSection);
 			HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
+																							.basicAuth(this.apiToken, "")
+																							.body(params)
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+	
+	/**
+	 * Modifies an item from your autocomplete.
+	 *
+	 * @param oldItem the item that you're modifying.
+	 * @param autocompleteSection the section of the autocomplete that you're modifying the item from.
+	 * @param newItem the new item you want to replace the old one with.
+	 * @return true if successfully modified
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean modify(ConstructorItem oldItem, String autocompleteSection, ConstructorItem newItem) throws ConstructorException {
+		return modify(oldItem.getItemName(), autocompleteSection, newItem);
+	}
+	
+	/**
+	 * Modifies an item from your autocomplete, without renaming it.
+	 *
+	 * @param newItem the item that you're modifying, containing the updated values.
+	 * @param autocompleteSection the section of the autocomplete that you're modifying the item from.
+	 * @return true if successfully modified
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean modify(ConstructorItem newItem, String autocompleteSection) throws ConstructorException {
+		return modify(newItem.getItemName(), autocompleteSection, newItem);
+	}
+	
+	/**
+	 * Modifies an item from your autocomplete.
+	 *
+	 * @param itemName the item that you're modifying.
+	 * @param autocompleteSection the section of the autocomplete that you're modifying the item from.
+	 * @param newItem the new item you want to replace the old one with.
+	 * @return true if successfully modified
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean modify(String itemName, String autocompleteSection, ConstructorItem newItem) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/item");
+			newItem.put("new_item_name", newItem.getItemName());
+			newItem.setItemName(itemName);
+			String params = newItem.toJson();
+			HttpResponse<JsonNode> jsonRes = Unirest.put(url)
 																							.basicAuth(this.apiToken, "")
 																							.body(params)
 																							.asJson();

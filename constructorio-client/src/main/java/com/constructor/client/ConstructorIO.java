@@ -234,7 +234,7 @@ public class ConstructorIO
 	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean add (String itemName, String autocompleteSection) throws ConstructorException {
-		add(itemName, autocompleteSection, null);
+		return add(itemName, autocompleteSection, null);
 	}
 
 	/**
@@ -285,7 +285,7 @@ public class ConstructorIO
 	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean addOrUpdate(String itemName, String autocompleteSection) throws ConstructorException {
-		add(itemName, autocompleteSection, null);
+		return add(itemName, autocompleteSection, null);
 	}
 
 	/**
@@ -326,7 +326,7 @@ public class ConstructorIO
 	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean remove(ConstructorItem item, String autocompleteSection) throws ConstructorException {
-		remove(item.getItemName(), autocompleteSection);
+		return remove(item.getItemName(), autocompleteSection);
 	}
 
 	/**

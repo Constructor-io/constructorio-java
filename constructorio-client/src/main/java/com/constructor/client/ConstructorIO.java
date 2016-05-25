@@ -234,19 +234,7 @@ public class ConstructorIO
 	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean add (String itemName, String autocompleteSection) throws ConstructorException {
-		try {
-			String url = this.makeUrl("v1/item");
-			String params = ConstructorIO.createItemParams(itemName, autocompleteSection);
-			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
-																							.basicAuth(this.apiToken, "")
-																							.body(params)
-																							.asJson();
-			return checkResponse(jsonRes, 204);
-		} catch (UnsupportedEncodingException encException) {
-			throw new ConstructorException(encException);
-		} catch (UnirestException uniException) {
-			throw new ConstructorException(uniException);
-		}
+		add(itemName, autocompleteSection, null);
 	}
 
 	/**
@@ -261,8 +249,63 @@ public class ConstructorIO
 	public boolean add (String itemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/item");
-			String params = ConstructorIO.createItemParams(itemName, autocompleteSection, jsonParams);
+			String params = (jsonParams == null ?
+											ConstructorIO.createItemParams(itemName, autocompleteSection) :
+											ConstructorIO.createItemParams(itemName, autocompleteSection, jsonParams));
 			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+																							.basicAuth(this.apiToken, "")
+																							.body(params)
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+
+	
+	/**
+	 * Adds an item to your autocomplete or updates it if it already exists.
+	 *
+	 * @param item the item that you're adding.
+	 * @return true if working
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean addOrUpdate(ConstructorItem item, String autocompleteSection) throws ConstructorException {
+		return add(item.getItemName(), autocompleteSection, item.toJsonParams());
+	}
+
+	/**
+	 * Adds an item to your autocomplete or updates it if it already exists.
+	 *
+	 * @param itemName the item that you're adding.
+	 * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+	 * @return true if working
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean addOrUpdate(String itemName, String autocompleteSection) throws ConstructorException {
+		add(itemName, autocompleteSection, null);
+	}
+
+	/**
+	 * Adds an item to your autocomplete or updates it if it already exists.
+	 *
+	 * @param itemName the item that you're adding.
+	 * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+	 * @param jsonParams a map of optional parameters. Optional parameters are in the <a href="https://constructor.io/docs/#add-an-item">API documentation</a>
+	 * @return true if working
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean addOrUpdate(String itemName, String autocompleteSection, Map<String, Object> jsonParams) throws ConstructorException {
+		try {
+			HashMap<String, String> force = new HashMap<String, String>(2);
+			force.put("force", "1");
+			String url = this.makeUrl("v1/item", force);
+			String params = (jsonParams == null ?
+											ConstructorIO.createItemParams(itemName, autocompleteSection) :
+											ConstructorIO.createItemParams(itemName, autocompleteSection, jsonParams));
+			HttpResponse<JsonNode> jsonRes = Unirest.put(url)
 																							.basicAuth(this.apiToken, "")
 																							.body(params)
 																							.asJson();

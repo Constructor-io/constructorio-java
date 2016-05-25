@@ -76,9 +76,7 @@ public class ConstructorTest {
 	public void addOrUpdateShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
 		String randStr = this.getRandString();
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("suggested_score", 1337);
-		assertTrue("addition with params returns alright", constructor.addOrUpdate(randStr, "Search Suggestions", params));
+		assertTrue("upsert returns alright", constructor.addOrUpdate(randStr, "Search Suggestions"));
 	}
 	
 	@Test
@@ -86,6 +84,18 @@ public class ConstructorTest {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
 		String randStr = this.getRandString();
 		assertTrue("addition of a constructor item returns alright", constructor.add(new ConstructorItem(randStr), "Search Suggestions"));
+	}
+	
+	@Test
+	public void addBatchShouldReturn() throws Exception {
+		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+		assertTrue("batch addition returns alright", constructor.addBatch("Search Suggestions", new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())));
+	}
+	
+	@Test
+	public void addOrUpdateBatchShouldReturn() throws Exception {
+		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+		assertTrue("batch upsert returns alright", constructor.addOrUpdateBatch("Search Suggestions", new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())));
 	}
 	
 	@Test

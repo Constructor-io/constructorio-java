@@ -316,6 +316,98 @@ public class ConstructorIO
 			throw new ConstructorException(uniException);
 		}
 	}
+	
+	/**
+	 * Adds multiple items to your autocomplete.
+	 *
+	 * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+	 * @param items the items you want to add.
+	 * @return true if working
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean addBatch(String autocompleteSection, String... items) throws ConstructorException {
+		ConstructorItem[] citems = new ConstructorItem[items.length];
+		for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
+		return addOrUpdateBatch(autocompleteSection, citems);
+	}
+	
+	/**
+	 * Adds multiple items to your autocomplete.
+	 *
+	 * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+	 * @param items the items you want to add.
+	 * @return true if working
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean addBatch(String autocompleteSection, ConstructorItem... items) throws ConstructorException {
+		try {
+			String url = this.makeUrl("v1/batch_items");
+			
+			// Build JSON
+			HashMap<String, Object> data = new HashMap<String, Object>();
+			data.put("items", items);
+			data.put("autocomplete_section", autocompleteSection);
+			Gson gson = new Gson();
+			String params = gson.toJson(data);
+			
+			HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+																							.basicAuth(this.apiToken, "")
+																							.body(params)
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
+	
+	/**
+	 * Adds multiple items to your autocomplete whilst updating existing ones.
+	 *
+	 * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+	 * @param items the items you want to add.
+	 * @return true if working
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean addOrUpdateBatch(String autocompleteSection, String... items) throws ConstructorException {
+		ConstructorItem[] citems = new ConstructorItem[items.length];
+		for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
+		return addOrUpdateBatch(autocompleteSection, citems);
+	}
+	
+	/**
+	 * Adds multiple items to your autocomplete whilst updating existing ones.
+	 *
+	 * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+	 * @param items the items you want to add.
+	 * @return true if working
+	 * @exception ConstructorException if the request is invalid.
+	 */
+	public boolean addOrUpdateBatch(String autocompleteSection, ConstructorItem... items) throws ConstructorException {
+		try {
+			HashMap<String, String> force = new HashMap<String, String>(2);
+			force.put("force", "1");
+			String url = this.makeUrl("v1/batch_items", force);
+			
+			// Build JSON
+			HashMap<String, Object> data = new HashMap<String, Object>();
+			data.put("items", items);
+			data.put("autocomplete_section", autocompleteSection);
+			Gson gson = new Gson();
+			String params = gson.toJson(data);
+			
+			HttpResponse<JsonNode> jsonRes = Unirest.put(url)
+																							.basicAuth(this.apiToken, "")
+																							.body(params)
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
+	}
 
 	/**
 	 * Removes an item from your autocomplete.

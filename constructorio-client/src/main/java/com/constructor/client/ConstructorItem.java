@@ -25,14 +25,14 @@ public class ConstructorItem extends HashMap<String, Object> {
 	}
 	
 	/**
-     * Associates the specified value with the specified key in this map.
-     * If the map previously contained a mapping for the key, the old
-     * value is replaced. If the value is null, the field will be removed.
-     *
-     * @param key key with which the specified value is to be associated
-     * @param value value to be associated with the specified key
-     * @return the ConstructorItem itself for chained syntax.
-     */
+	 * Associates the specified value with the specified key in this map.
+	 * If the map previously contained a mapping for the key, the old
+	 * value is replaced. If the value is null, the field will be removed.
+	 *
+	 * @param key key with which the specified value is to be associated
+	 * @param value value to be associated with the specified key
+	 * @return the ConstructorItem itself for chained syntax.
+	 */
 	public ConstructorItem put(String name, Object value) throws IllegalArgumentException {
 		// Check type for known parameters
 		if ((name == "item_name") && value == null) {
@@ -62,11 +62,11 @@ public class ConstructorItem extends HashMap<String, Object> {
 	}
 	
 	/**
-     * Removes the mapping for the specified key from this map if present.
-     *
-     * @param  key key whose mapping is to be removed from the map
-     * @return the ConstructorItem itself for chained syntax.
-     */
+	 * Removes the mapping for the specified key from this map if present.
+	 *
+	 * @param  key key whose mapping is to be removed from the map
+	 * @return the ConstructorItem itself for chained syntax.
+	 */
 	public ConstructorItem remove(String name) throws IllegalArgumentException {
 		if (name == "item_name") {
 			throw new IllegalArgumentException("The field " + name + " cannot be null");

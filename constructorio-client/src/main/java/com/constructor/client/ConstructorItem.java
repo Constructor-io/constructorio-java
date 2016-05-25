@@ -88,29 +88,31 @@ public class ConstructorItem extends HashMap<String, Object> {
 	
 	
 	
-	public ConstructorItem setItemName(String v) { this.put("item_name", v); return this; }
-	public          String getItemName()  { return (String) this.get("item_name"); }
+	public ConstructorItem setItemName(String v) {         this.put("item_name", v); return this; }
+	public          String getItemName() { return (String) this.get("item_name"); }
 	
 	public ConstructorItem setSuggestedScore(int v) {
 		if (v > 0) super.put("suggested_score", v);
-		else super.remove("suggested_score");
+		else    super.remove("suggested_score");
 		return this;
 	}
-	public             int getSuggestedScore()  { return this.containsKey("suggested_score") ? ((Number) this.get("suggested_score")).intValue() : 0; }
+	public             int getSuggestedScore()  {
+		return this.containsKey("suggested_score") ? ((Number) this.get("suggested_score")).intValue() : 0;
+	}
 	
-	public ConstructorItem setKeywords(String... v) { this.put("keywords", v); return this; }
+	public ConstructorItem setKeywords(String... v) {         this.put("keywords", v); return this; }
 	public        String[] getKeywords()  { return (String[]) this.get("keywords"); }
 	
-	public ConstructorItem setUrl(String v) { this.put("url", v); return this; }
+	public ConstructorItem setUrl(String v) {          this.put("url", v); return this; }
 	public          String getUrl()  { return (String) this.get("url"); }
 	
-	public ConstructorItem setImageUrl(String v) { this.put("image_url", v); return this; }
+	public ConstructorItem setImageUrl(String v) {          this.put("image_url", v); return this; }
 	public          String getImageUrl()  { return (String) this.get("image_url"); }
 	
-	public ConstructorItem setDescription(String v) { this.put("description", v); return this; }
+	public ConstructorItem setDescription(String v) {          this.put("description", v); return this; }
 	public          String getDescription()  { return (String) this.get("description"); }
 	
-	public ConstructorItem setId(String v) { this.put("id", v); return this; }
+	public ConstructorItem setId(String v) {          this.put("id", v); return this; }
 	public          String getId()  { return (String) this.get("id"); }
 	
 }

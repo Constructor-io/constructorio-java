@@ -46,14 +46,14 @@ public class ConstructorTest {
 	@Test
 	public void acKeyShouldBeSet() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
-		assertEquals("ac key should be set properly", constructor.autocompleteKey, "doinka");
+		assertEquals("autocomplete key should be set properly", constructor.autocompleteKey, "doinka");
 	}
 	
 	@Test
 	public void acQueryShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
 		ArrayList<String> res = constructor.query("S");
-		assertEquals("ac query should return something", "[]", res.toString());
+		assertEquals("autocomplete query should return something", "[]", res.toString());
 	}
 	
 	@Test

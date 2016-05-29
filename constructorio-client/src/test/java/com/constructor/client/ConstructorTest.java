@@ -89,13 +89,15 @@ public class ConstructorTest {
 	@Test
 	public void addBatchShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertTrue("batch addition succeeds", constructor.addBatch("Search Suggestions", new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())));
+		ConstructorItem[] items = {new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())};
+		assertTrue("batch addition succeeds", constructor.addBatch(items, "Search Suggestions"));
 	}
 	
 	@Test
 	public void addOrUpdateBatchShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertTrue("batch upsert succeeds", constructor.addOrUpdateBatch("Search Suggestions", new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())));
+		ConstructorItem[] items = {new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())};
+		assertTrue("batch upsert succeeds", constructor.addOrUpdateBatch(items, "Search Suggestions"));
 	}
 	
 	@Test

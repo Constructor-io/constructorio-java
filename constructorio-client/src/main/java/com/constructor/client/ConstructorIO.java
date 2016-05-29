@@ -328,7 +328,7 @@ public class ConstructorIO
 	public boolean addBatch(String autocompleteSection, String... items) throws ConstructorException {
 		ConstructorItem[] citems = new ConstructorItem[items.length];
 		for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
-		return addBatch(autocompleteSection, citems);
+		return addBatch(citems, autocompleteSection);
 	}
 	
 	/**
@@ -339,7 +339,7 @@ public class ConstructorIO
 	 * @return true if working
 	 * @exception ConstructorException if the request is invalid.
 	 */
-	public boolean addBatch(String autocompleteSection, ConstructorItem... items) throws ConstructorException {
+	public boolean addBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
 		try {
 			String url = this.makeUrl("v1/batch_items");
 			
@@ -373,7 +373,7 @@ public class ConstructorIO
 	public boolean addOrUpdateBatch(String autocompleteSection, String... items) throws ConstructorException {
 		ConstructorItem[] citems = new ConstructorItem[items.length];
 		for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
-		return addOrUpdateBatch(autocompleteSection, citems);
+		return addOrUpdateBatch(citems, autocompleteSection);
 	}
 	
 	/**
@@ -384,7 +384,7 @@ public class ConstructorIO
 	 * @return true if working
 	 * @exception ConstructorException if the request is invalid.
 	 */
-	public boolean addOrUpdateBatch(String autocompleteSection, ConstructorItem... items) throws ConstructorException {
+	public boolean addOrUpdateBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
 		try {
 			HashMap<String, String> force = new HashMap<String, String>(2);
 			force.put("force", "1");

@@ -418,7 +418,20 @@ public class ConstructorIO
 	 * @exception ConstructorException if the request is invalid.
 	 */
 	public boolean remove(ConstructorItem item, String autocompleteSection) throws ConstructorException {
-		return remove(item.getItemName(), autocompleteSection);
+		try {
+			String url = this.makeUrl("v1/item");
+			item.put("autocomplete_section", autocompleteSection);
+			String params = item.toJson();
+			HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
+																							.basicAuth(this.apiToken, "")
+																							.body(params)
+																							.asJson();
+			return checkResponse(jsonRes, 204);
+		} catch (UnsupportedEncodingException encException) {
+			throw new ConstructorException(encException);
+		} catch (UnirestException uniException) {
+			throw new ConstructorException(uniException);
+		}
 	}
 
 	/**
@@ -483,6 +496,7 @@ public class ConstructorIO
 		try {
 			String url = this.makeUrl("v1/item");
 			newItem.put("new_item_name", newItem.getItemName());
+			newItem.put("autocomplete_section", autocompleteSection);
 			newItem.setItemName(itemName);
 			String params = newItem.toJson();
 			HttpResponse<JsonNode> jsonRes = Unirest.put(url)

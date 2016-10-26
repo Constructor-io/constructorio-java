@@ -33,19 +33,19 @@ public class ConstructorItem extends HashMap<String, Object> {
      * If the map previously contained a mapping for the key, the old
      * value is replaced. If the value is null, the field will be removed.
      *
-     * @param key   key with which the specified value is to be associated
+     * @param name  key with which the specified value is to be associated
      * @param value value to be associated with the specified key
      * @return the ConstructorItem itself for chained syntax.
      */
     public ConstructorItem put(String name, Object value) throws IllegalArgumentException {
         // Check type for known parameters
-        if ((name == "item_name") && value == null) {
+        if ((name.equals("item_name")) && value == null) {
             throw new IllegalArgumentException("The field " + name + " cannot be null");
         }
-        if ((name == "item_name" || name == "url" || name == "image_url" || name == "description" || name == "id") && !(value instanceof String) && value != null) {
+        if ((name.equals("item_name") || name.equals("url") || name.equals("image_url") || name.equals("description") || name.equals("id")) && !(value instanceof String) && value != null) {
             throw new IllegalArgumentException("The field " + name + " has to be a String");
         }
-        if (name == "suggested_score") {
+        if (name.equals("suggested_score")) {
             if (!(value instanceof Number) && value != null) {
                 throw new IllegalArgumentException("The field " + name + " has to be a Number");
             }
@@ -53,7 +53,7 @@ public class ConstructorItem extends HashMap<String, Object> {
             // Let setSuggestedScore handle the rest...
             return setSuggestedScore(((Number) value).intValue());
         }
-        if ((name == "keywords") && !(value instanceof String[]) && value != null) {
+        if ((name.equals("keywords") && !(value instanceof String[]) && value != null)) {
             throw new IllegalArgumentException("The field " + name + " has to be a String[]");
         }
 
@@ -68,11 +68,11 @@ public class ConstructorItem extends HashMap<String, Object> {
     /**
      * Removes the mapping for the specified key from this map if present.
      *
-     * @param key key whose mapping is to be removed from the map
+     * @param name key whose mapping is to be removed from the map
      * @return the ConstructorItem itself for chained syntax.
      */
     public ConstructorItem remove(String name) throws IllegalArgumentException {
-        if (name == "item_name") {
+        if (name.equals("item_name")) {
             throw new IllegalArgumentException("The field " + name + " cannot be null");
         }
         super.remove(name);

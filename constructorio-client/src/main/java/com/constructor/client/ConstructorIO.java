@@ -35,6 +35,7 @@ public class ConstructorIO {
 
     /**
      * Creates a constructor.io client.
+     *
      * Unlike in the other Constructor.io clients, this one only takes in hashmaps,
      * and you must write other helper methods to serialize other things.
      *
@@ -61,7 +62,7 @@ public class ConstructorIO {
 
     /**
      * Serializes url params in a rudimentary way.
-     * <p>
+     *
      * Unlike in the other Constructor.io clients, this one only takes in hashmaps,
      * and you must write other helper methods to serialize other things.
      *
@@ -85,7 +86,7 @@ public class ConstructorIO {
 
     /**
      * Makes a URL to issue the requests to.
-     * <p>
+     *
      * Note that the URL will automagically have the autocompleteKey embedded.
      *
      * @param endpoint Endpoint of the autocomplete service.
@@ -97,7 +98,7 @@ public class ConstructorIO {
 
     /**
      * Makes a URL to issue the requests to.
-     * <p>
+     *
      * Note that the URL will automagically have the autocompleteKey embedded.
      *
      * @param endpoint Endpoint of the autocomplete service you are giving requests to
@@ -168,7 +169,7 @@ public class ConstructorIO {
 
     /**
      * Queries an autocomplete service.
-     * <p>
+     *
      * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
@@ -561,6 +562,7 @@ public class ConstructorIO {
 
     /**
      * Tracks the fact that someone converted on your site.
+     *
      * Can be for any definition of conversion, whether someone buys a product or signs up or does something important to your site.
      *
      * @param term                the term that someone converted from.
@@ -586,6 +588,7 @@ public class ConstructorIO {
 
     /**
      * Tracks the fact that someone converted on your site.
+     *
      * Can be for any definition of conversion, whether someone buys a product or signs up or does something important to your site.
      *
      * @param term                the term that someone converted from.
@@ -661,6 +664,7 @@ public class ConstructorIO {
 
     /**
      * Tracks the fact that someone searched on your site.
+     *
      * There's no autocompleteSection parameter because if you're searching, you aren't using an autocomplete.
      *
      * @param term the term that someone searched.
@@ -685,6 +689,7 @@ public class ConstructorIO {
 
     /**
      * Tracks the fact that someone searched on your site.
+     *
      * There's no autocompleteSection parameter because if you're searching, you aren't using an autocomplete.
      *
      * @param term       the term that someone searched.

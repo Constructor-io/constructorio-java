@@ -163,7 +163,13 @@ public class ConstructorTest {
 		Thread.sleep(2000);
 		assertTrue("remove succeeds", constructor.remove(randStr, "Search Suggestions"));
 	}
-	
+
+    @Test
+	public void removeBatchShouldReturn() throws Exception {
+		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        assertTrue("batch removal succeeds", constructor.removeBatch("Search Suggestions", new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())));
+	}
+
 	@Test
 	public void modifyShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);

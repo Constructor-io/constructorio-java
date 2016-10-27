@@ -456,6 +456,41 @@ public class ConstructorIO {
     }
 
     /**
+     * Removes multiple items from your autocomplete
+     *
+     * @param autocompleteSection the section of the autocomplete that you're removing the item from.
+     * @param items               the items that you are removing
+     * @return true if successfully removed
+     * @throws ConstructorException if the request is invalid
+     */
+    public boolean removeBatch(String autocompleteSection, String... items) throws ConstructorException {
+        ConstructorItem[] citems = new ConstructorItem[items.length];
+        for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
+        return removeBatch(autocompleteSection, citems);
+    }
+
+    public boolean removeBatch(String autocompleteSection, ConstructorItem... items) throws ConstructorException {
+        try {
+            String url = this.makeUrl("v1/batch_items");
+
+            // Build JSON
+            HashMap<String, Object> data = new HashMap<String, Object>();
+            data.put("items", items);
+            data.put("autocomplete_section", autocompleteSection);
+            Gson gson = new Gson();
+            String params = gson.toJson(data);
+
+            HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
+                    .basicAuth(this.apiToken, "")
+                    .body(params)
+                    .asJson();
+            return checkResponse(jsonRes, 204);
+        } catch (UnsupportedEncodingException | UnirestException e) {
+            throw new ConstructorException(e);
+        }
+    }
+
+    /**
      * Modifies an item from your autocomplete.
      *
      * @param oldItem             the item that you're modifying.

@@ -336,7 +336,7 @@ public class ConstructorIO {
     public boolean addBatch(String autocompleteSection, String... items) throws ConstructorException {
         ConstructorItem[] citems = new ConstructorItem[items.length];
         for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
-        return addBatch(autocompleteSection, citems);
+        return addBatch(citems, autocompleteSection);
     }
 
     /**
@@ -347,7 +347,7 @@ public class ConstructorIO {
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addBatch(String autocompleteSection, ConstructorItem... items) throws ConstructorException {
+    public boolean addBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/batch_items");
 
@@ -381,7 +381,7 @@ public class ConstructorIO {
     public boolean addOrUpdateBatch(String autocompleteSection, String... items) throws ConstructorException {
         ConstructorItem[] citems = new ConstructorItem[items.length];
         for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
-        return addOrUpdateBatch(autocompleteSection, citems);
+        return addOrUpdateBatch(citems, autocompleteSection);
     }
 
     /**
@@ -392,7 +392,7 @@ public class ConstructorIO {
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateBatch(String autocompleteSection, ConstructorItem... items) throws ConstructorException {
+    public boolean addOrUpdateBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             HashMap<String, String> force = new HashMap<String, String>(2);
             force.put("force", "1");
@@ -426,7 +426,20 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public boolean remove(ConstructorItem item, String autocompleteSection) throws ConstructorException {
-        return remove(item.getItemName(), autocompleteSection);
+        try {
+            String url = this.makeUrl("v1/item");
+            item.put("autocomplete_section", autocompleteSection);
+            String params = item.toJson();
+            HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
+                    .basicAuth(this.apiToken, "")
+                    .body(params)
+                    .asJson();
+            return checkResponse(jsonRes, 204);
+        } catch (UnsupportedEncodingException encException) {
+            throw new ConstructorException(encException);
+        } catch (UnirestException uniException) {
+            throw new ConstructorException(uniException);
+        }
     }
 
     /**
@@ -491,6 +504,7 @@ public class ConstructorIO {
         try {
             String url = this.makeUrl("v1/item");
             newItem.put("new_item_name", newItem.getItemName());
+            newItem.put("autocomplete_section", autocompleteSection);
             newItem.setItemName(itemName);
             String params = newItem.toJson();
             HttpResponse<JsonNode> jsonRes = Unirest.put(url)

@@ -89,13 +89,15 @@ public class ConstructorTest {
 	@Test
 	public void addBatchShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertTrue("batch addition succeeds", constructor.addBatch("Search Suggestions", new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())));
+		ConstructorItem[] items = {new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())};
+		assertTrue("batch addition succeeds", constructor.addBatch(items, "Search Suggestions"));
 	}
 	
 	@Test
 	public void addOrUpdateBatchShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-		assertTrue("batch upsert succeeds", constructor.addOrUpdateBatch("Search Suggestions", new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())));
+		ConstructorItem[] items = {new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())};
+		assertTrue("batch upsert succeeds", constructor.addOrUpdateBatch(items, "Search Suggestions"));
 	}
 	
 	@Test
@@ -147,12 +149,6 @@ public class ConstructorTest {
 		assertEquals("ConstructorItem handles item removal by setting the value to null correctly", new ConstructorItem(randStr, params)
 			.setKeywords(null)
 			.getKeywords(), null);
-		try {
-			new ConstructorItem(randStr, params)
-				.setItemName(null)
-				.getKeywords();
-			fail("ConstructorItem requires an item name to be set");
-		} catch (Exception e) {}
 	}
 	
 	@Test
@@ -165,6 +161,15 @@ public class ConstructorTest {
 	}
 	
 	@Test
+	public void removeConstructorItemShouldReturn() throws Exception {
+		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+		String randStr = this.getRandString();
+		constructor.add(new ConstructorItem(randStr), "Search Suggestions");
+		Thread.sleep(2000);
+		assertTrue("remove w/ ConstructorItem succeeds", constructor.remove(new ConstructorItem(randStr), "Search Suggestions"));
+	}
+	
+	@Test
 	public void modifyShouldReturn() throws Exception {
 		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
 		String randStr = this.getRandString();
@@ -173,6 +178,17 @@ public class ConstructorTest {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("suggested_score", 1337);
 		assertTrue("modify succeeds", constructor.modify(randStr, randStr, "Search Suggestions", params));
+	}
+	
+	@Test
+	public void modifyWithNullNameShouldReturn() throws Exception {
+		ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+		String randStr = this.getRandString();
+		ConstructorItem item = new ConstructorItem(randStr);
+		item.setId(randStr).setUrl("https://google.org/");
+		constructor.add(item, "Products");
+		Thread.sleep(2000);
+		assertTrue("modify w/o item_name succeeds", constructor.modify(((ConstructorItem) item.clone()).setItemName(null), "Products", ((ConstructorItem) item.clone()).setUrl("https://google.com/") ));
 	}
 	
 	@Test

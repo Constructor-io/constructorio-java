@@ -35,9 +35,6 @@ public class ConstructorItem extends HashMap<String, Object> {
 	 */
 	public ConstructorItem put(String name, Object value) throws IllegalArgumentException {
 		// Check type for known parameters
-		if ((name == "item_name") && value == null) {
-			throw new IllegalArgumentException("The field " + name + " cannot be null");
-		}
 		if ((name == "item_name" || name == "url" || name == "image_url" || name == "description" || name == "id") && !(value instanceof String) && value != null) {
 			throw new IllegalArgumentException("The field " + name + " has to be a String");
 		}

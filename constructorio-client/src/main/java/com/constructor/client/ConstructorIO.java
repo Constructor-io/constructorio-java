@@ -338,7 +338,7 @@ public class ConstructorIO {
     public boolean addBatch(String autocompleteSection, String... items) throws ConstructorException {
         ConstructorItem[] citems = new ConstructorItem[items.length];
         for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
-        return addBatch(autocompleteSection, citems);
+        return addBatch(citems, autocompleteSection);
     }
 
     /**
@@ -349,7 +349,7 @@ public class ConstructorIO {
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addBatch(String autocompleteSection, ConstructorItem... items) throws ConstructorException {
+    public boolean addBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/batch_items");
 
@@ -383,7 +383,7 @@ public class ConstructorIO {
     public boolean addOrUpdateBatch(String autocompleteSection, String... items) throws ConstructorException {
         ConstructorItem[] citems = new ConstructorItem[items.length];
         for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
-        return addOrUpdateBatch(autocompleteSection, citems);
+        return addOrUpdateBatch(citems, autocompleteSection);
     }
 
     /**
@@ -394,7 +394,7 @@ public class ConstructorIO {
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateBatch(String autocompleteSection, ConstructorItem... items) throws ConstructorException {
+    public boolean addOrUpdateBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             HashMap<String, String> force = new HashMap<String, String>(2);
             force.put("force", "1");
@@ -422,18 +422,6 @@ public class ConstructorIO {
     /**
      * Removes an item from your autocomplete.
      *
-     * @param item                the item that you're removing.
-     * @param autocompleteSection the section of the autocomplete that you're removing the item from.
-     * @return true if successfully removed
-     * @throws ConstructorException if the request is invalid.
-     */
-    public boolean remove(ConstructorItem item, String autocompleteSection) throws ConstructorException {
-        return remove(item.getItemName(), autocompleteSection);
-    }
-
-    /**
-     * Removes an item from your autocomplete.
-     *
      * @param itemName            the item that you're removing.
      * @param autocompleteSection the section of the autocomplete that you're removing the item from.
      * @return true if successfully removed
@@ -443,6 +431,31 @@ public class ConstructorIO {
         try {
             String url = this.makeUrl("v1/item");
             String params = ConstructorIO.createItemParams(itemName, autocompleteSection);
+            HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
+                    .basicAuth(this.apiToken, "")
+                    .body(params)
+                    .asJson();
+            return checkResponse(jsonRes, 204);
+        } catch (UnsupportedEncodingException encException) {
+            throw new ConstructorException(encException);
+        } catch (UnirestException uniException) {
+            throw new ConstructorException(uniException);
+        }
+    }
+
+        /**
+     * Removes an item from your autocomplete.
+     *
+     * @param item                the item that you're removing.
+     * @param autocompleteSection the section of the autocomplete that you're removing the item from.
+     * @return true if successfully removed
+     * @throws ConstructorException if the request is invalid.
+     */
+    public boolean remove(ConstructorItem item, String autocompleteSection) throws ConstructorException {
+        try {
+            String url = this.makeUrl("v1/item");
+            item.put("autocomplete_section", autocompleteSection);
+            String params = item.toJson();
             HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
                     .basicAuth(this.apiToken, "")
                     .body(params)
@@ -466,10 +479,10 @@ public class ConstructorIO {
     public boolean removeBatch(String autocompleteSection, String... items) throws ConstructorException {
         ConstructorItem[] citems = new ConstructorItem[items.length];
         for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
-        return removeBatch(autocompleteSection, citems);
+        return removeBatch(citems, autocompleteSection);
     }
 
-    public boolean removeBatch(String autocompleteSection, ConstructorItem... items) throws ConstructorException {
+    public boolean removeBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/batch_items");
 
@@ -528,6 +541,7 @@ public class ConstructorIO {
         try {
             String url = this.makeUrl("v1/item");
             newItem.put("new_item_name", newItem.getItemName());
+            newItem.put("autocomplete_section", autocompleteSection);
             newItem.setItemName(itemName);
             String params = newItem.toJson();
             HttpResponse<JsonNode> jsonRes = Unirest.put(url)

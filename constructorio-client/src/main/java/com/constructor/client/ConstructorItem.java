@@ -5,7 +5,6 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 
 public class ConstructorItem extends HashMap<String, Object> {
-
     /**
      * Creates a constructor.io autocomplete item, which is basically a HashMap with additional abstraction.
      *
@@ -153,7 +152,6 @@ public class ConstructorItem extends HashMap<String, Object> {
     }
 
     public String getId() {
-        return (String) this.get("id");
+        return this.get("id").toString();
     }
-
 }

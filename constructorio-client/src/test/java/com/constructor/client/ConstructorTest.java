@@ -5,7 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.*;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 
 public class ConstructorTest {
@@ -18,6 +20,9 @@ public class ConstructorTest {
     public String getRandString() {
         return UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
     }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void encodesParamsShouldEncodeParams() throws Exception {
@@ -83,6 +88,13 @@ public class ConstructorTest {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         String randStr = this.getRandString();
         assertTrue("addition of a constructor item succeeds", constructor.add(new ConstructorItem(randStr), "Search Suggestions"));
+    }
+
+    @Test
+    public void creatingConstructorItemWithNullNameShouldFail() throws Exception {
+        thrown.expect(IllegalArgumentException.class);
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        ConstructorItem item = new ConstructorItem(null, params);
     }
 
     @Test

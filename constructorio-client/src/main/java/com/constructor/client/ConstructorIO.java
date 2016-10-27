@@ -183,7 +183,8 @@ public class ConstructorIO {
             if (checkResponse(jsonRes, 200)) {
                 JSONArray arr = jsonRes.getBody()
                         .getObject()
-                        .getJSONArray("suggestions");
+                        .getJSONObject("sections")
+                        .getJSONArray("Search Suggestions");
                 ArrayList<String> res = new ArrayList<String>();
                 if (arr != null) {
                     for (int i = 0; i < arr.length(); i++) {

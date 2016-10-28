@@ -174,7 +174,7 @@ public class ConstructorTest {
     @Test
     public void removeBatchShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        assertTrue("batch removal succeeds", constructor.removeBatch("Search Suggestions", this.getRandString(), this.getRandString(), this.getRandString()));
+        assertTrue("batch removal succeeds", constructor.removeBatch(new String[]{this.getRandString(), this.getRandString(), this.getRandString()}, "Search Suggestions"));
     }
 
     @Test

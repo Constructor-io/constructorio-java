@@ -330,12 +330,12 @@ public class ConstructorIO {
     /**
      * Adds multiple items to your autocomplete.
      *
-     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
      * @param items               the items you want to add.
+     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addBatch(String autocompleteSection, String... items) throws ConstructorException {
+    public boolean addBatch(String[] items, String autocompleteSection) throws ConstructorException {
         ConstructorItem[] citems = new ConstructorItem[items.length];
         for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
         return addBatch(citems, autocompleteSection);
@@ -375,12 +375,12 @@ public class ConstructorIO {
     /**
      * Adds multiple items to your autocomplete whilst updating existing ones.
      *
-     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
      * @param items               the items you want to add.
+     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateBatch(String autocompleteSection, String... items) throws ConstructorException {
+    public boolean addOrUpdateBatch(String[] items, String autocompleteSection) throws ConstructorException {
         ConstructorItem[] citems = new ConstructorItem[items.length];
         for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
         return addOrUpdateBatch(citems, autocompleteSection);
@@ -471,12 +471,12 @@ public class ConstructorIO {
     /**
      * Removes multiple items from your autocomplete
      *
-     * @param autocompleteSection the section of the autocomplete that you're removing the item from.
      * @param items               the items that you are removing
+     * @param autocompleteSection the section of the autocomplete that you're removing the item from.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    public boolean removeBatch(String autocompleteSection, String... items) throws ConstructorException {
+    public boolean removeBatch(String[] items, String autocompleteSection) throws ConstructorException {
         ConstructorItem[] citems = new ConstructorItem[items.length];
         for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
         return removeBatch(citems, autocompleteSection);
@@ -507,13 +507,13 @@ public class ConstructorIO {
      * Modifies an item from your autocomplete.
      *
      * @param oldItem             the item that you're modifying.
-     * @param autocompleteSection the section of the autocomplete that you're modifying the item from.
      * @param newItem             the new item you want to replace the old one with.
+     * @param autocompleteSection the section of the autocomplete that you're modifying the item from.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modify(ConstructorItem oldItem, String autocompleteSection, ConstructorItem newItem) throws ConstructorException {
-        return modify(oldItem.getItemName(), autocompleteSection, newItem);
+    public boolean modify(ConstructorItem oldItem, ConstructorItem newItem, String autocompleteSection) throws ConstructorException {
+        return modify(oldItem.getItemName(), newItem, autocompleteSection);
     }
 
     /**
@@ -525,19 +525,19 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public boolean modify(ConstructorItem newItem, String autocompleteSection) throws ConstructorException {
-        return modify(newItem.getItemName(), autocompleteSection, newItem);
+        return modify(newItem.getItemName(), newItem, autocompleteSection);
     }
 
     /**
      * Modifies an item from your autocomplete.
      *
      * @param itemName            the item that you're modifying.
-     * @param autocompleteSection the section of the autocomplete that you're modifying the item from.
      * @param newItem             the new item you want to replace the old one with.
+     * @param autocompleteSection the section of the autocomplete that you're modifying the item from.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modify(String itemName, String autocompleteSection, ConstructorItem newItem) throws ConstructorException {
+    public boolean modify(String itemName, ConstructorItem newItem, String autocompleteSection) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/item");
             newItem.put("new_item_name", newItem.getItemName());

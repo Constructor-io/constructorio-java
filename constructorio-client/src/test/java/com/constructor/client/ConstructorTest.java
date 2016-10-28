@@ -1,6 +1,7 @@
 package com.constructor.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.*;
@@ -157,9 +158,9 @@ public class ConstructorTest {
         assertEquals("ConstructorItem handles keywords correctly", new ConstructorItem(randStr, params)
                 .setKeywords("hello", "world")
                 .getKeywords()[1], "world");
-        assertEquals("ConstructorItem handles item removal by setting the value to null correctly", new ConstructorItem(randStr, params)
+        assertNull("ConstructorItem handles item removal by setting the value to null correctly", new ConstructorItem(randStr, params)
                 .setKeywords(null)
-                .getKeywords(), null);
+                .getKeywords());
     }
 
     @Test

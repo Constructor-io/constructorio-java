@@ -30,8 +30,9 @@ public class ConstructorTest {
         ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("foo", "bar");
+        params.put("bar", "baz");
         String serializedParams = constructor.serializeParams(params);
-        assertEquals("serializes params correctly", serializedParams, "foo=bar");
+        assertTrue("serializes params correctly", serializedParams.equals("foo=bar&bar=baz") || serializedParams.equals("bar=baz&foo=bar"));
     }
 
     @Test

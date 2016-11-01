@@ -97,10 +97,25 @@ public class ConstructorTest {
         ConstructorItem item = new ConstructorItem(null, params);
     }
 
+    /***
+     * Tests addBatch(ConstructorItem[] items, String autocompleteSection)
+     *
+     */
     @Test
     public void addBatchShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem[] items = {new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString()), new ConstructorItem(this.getRandString())};
+        assertTrue("batch addition succeeds", constructor.addBatch(items, "Search Suggestions"));
+    }
+
+    /***
+     * Tests addBatch(String[] items, String autocompleteSection)
+     *
+     */
+    @Test
+    public void addBatchStringItemsShouldReturn() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        String[] items = {this.getRandString(), this.getRandString(), this.getRandString()};
         assertTrue("batch addition succeeds", constructor.addBatch(items, "Search Suggestions"));
     }
 

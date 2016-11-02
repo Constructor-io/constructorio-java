@@ -68,9 +68,9 @@ public class ConstructorIO {
      *
      * @param params HashMap of the parameters to encode.
      * @return The encoded parameters, as a String.
-     * @throws UnsupportedEncodingException if the request is invalid.
+     * @throws ConstructorException if the request is invalid.
      */
-    public static String serializeParams(HashMap<String, String> params) throws UnsupportedEncodingException {
+    public static String serializeParams(HashMap<String, String> params) throws ConstructorException {
         try {
             String urlString = "";
             boolean isFirst = true;
@@ -96,9 +96,9 @@ public class ConstructorIO {
      *
      * @param endpoint Endpoint of the autocomplete service.
      * @return The created URL. Now you can use it to issue requests and things!
-     * @throws UnsupportedEncodingException if the request is invalid.
+     * @throws ConstructorException if the request is invalid.
      */
-    public String makeUrl(String endpoint) throws UnsupportedEncodingException {
+    public String makeUrl(String endpoint) throws ConstructorException {
         try {
             return makeUrl(endpoint, new HashMap<String, String>());
         } catch (UnsupportedEncodingException encException) {
@@ -114,9 +114,9 @@ public class ConstructorIO {
      * @param endpoint Endpoint of the autocomplete service you are giving requests to
      * @param params   HashMap of the parameters you're encoding in the URL
      * @return The created URL. Now you can use it to issue requests and things!
-     * @throws UnsupportedEncodingException if the request is invalid.
+     * @throws ConstructorException if the request is invalid.
      */
-    public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
+    public String makeUrl(String endpoint, HashMap<String, String> params) throws ConstructorException {
         try {
             params.put("autocomplete_key", this.autocompleteKey);
             return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));

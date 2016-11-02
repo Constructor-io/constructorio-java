@@ -68,21 +68,25 @@ public class ConstructorIO {
      *
      * @param params HashMap of the parameters to encode.
      * @return The encoded parameters, as a String.
-     * @throws ConstructorException if the request is invalid.
+     * @throws UnsupportedEncodingException if the request is invalid.
      */
     public static String serializeParams(HashMap<String, String> params) throws UnsupportedEncodingException {
-        String urlString = "";
-        boolean isFirst = true;
-        for (String key : params.keySet()) {
-            if (!isFirst) {
-                urlString += "&";
+        try {
+            String urlString = "";
+            boolean isFirst = true;
+            for (String key : params.keySet()) {
+                if (!isFirst) {
+                    urlString += "&";
+                }
+                urlString += URLEncoder.encode(key, "UTF-8");
+                urlString += "=";
+                urlString += URLEncoder.encode(params.get(key), "UTF-8");
+                isFirst = false;
             }
-            urlString += URLEncoder.encode(key, "UTF-8");
-            urlString += "=";
-            urlString += URLEncoder.encode(params.get(key), "UTF-8");
-            isFirst = false;
+            return urlString;
+        } catch (UnsupportedEncodingException encException) {
+            throw new ConstructorException(encException);
         }
-        return urlString;
     }
 
     /**
@@ -92,10 +96,14 @@ public class ConstructorIO {
      *
      * @param endpoint Endpoint of the autocomplete service.
      * @return The created URL. Now you can use it to issue requests and things!
-     * @throws ConstructorException if the request is invalid.
+     * @throws UnsupportedEncodingException if the request is invalid.
      */
     public String makeUrl(String endpoint) throws UnsupportedEncodingException {
-        return makeUrl(endpoint, new HashMap<String, String>());
+        try {
+            return makeUrl(endpoint, new HashMap<String, String>());
+        } catch (UnsupportedEncodingException encException) {
+            throw new ConstructorException(encException);
+        }
     }
 
     /**
@@ -106,11 +114,15 @@ public class ConstructorIO {
      * @param endpoint Endpoint of the autocomplete service you are giving requests to
      * @param params   HashMap of the parameters you're encoding in the URL
      * @return The created URL. Now you can use it to issue requests and things!
-     * @throws ConstructorException if the request is invalid.
+     * @throws UnsupportedEncodingException if the request is invalid.
      */
     public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
-        params.put("autocomplete_key", this.autocompleteKey);
-        return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
+        try {
+            params.put("autocomplete_key", this.autocompleteKey);
+            return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
+        } catch (UnsupportedEncodingException encException) {
+            throw new ConstructorException(encException);
+        }
     }
 
     private static String createItemParams(String itemName, String autocompleteSection) {

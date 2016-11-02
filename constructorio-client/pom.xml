@@ -3,7 +3,7 @@
     <groupId>com.constructor.client</groupId>
     <artifactId>constructorio-client</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>constructorio-client</name>
     <description>A client for the Constructor.io REST api</description>
@@ -11,7 +11,7 @@
 
     <scm>
         <developerConnection>scm:git:https://github.com/Constructor-io/constructorio-java.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>constructorio-client-1.0.0</tag>
   </scm>
 
     <dependencies>

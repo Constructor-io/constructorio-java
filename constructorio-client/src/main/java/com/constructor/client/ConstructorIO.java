@@ -20,7 +20,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 /**
  * Constructor.io Client
  *
- * @author Howon Lee <howon@constructor.io>
+ * @author Howon Lee `howon@constructor.io`
  * @version 0.0.1
  * @since Oct 19 2015
  * Go to Constructor.io for really profitable autocomplete-as-a-service.
@@ -68,6 +68,7 @@ public class ConstructorIO {
      *
      * @param params HashMap of the parameters to encode.
      * @return The encoded parameters, as a String.
+     * @throws ConstructorException if the request is invalid.
      */
     public static String serializeParams(HashMap<String, String> params) throws UnsupportedEncodingException {
         String urlString = "";
@@ -91,6 +92,7 @@ public class ConstructorIO {
      *
      * @param endpoint Endpoint of the autocomplete service.
      * @return The created URL. Now you can use it to issue requests and things!
+     * @throws ConstructorException if the request is invalid.
      */
     public String makeUrl(String endpoint) throws UnsupportedEncodingException {
         return makeUrl(endpoint, new HashMap<String, String>());
@@ -104,6 +106,7 @@ public class ConstructorIO {
      * @param endpoint Endpoint of the autocomplete service you are giving requests to
      * @param params   HashMap of the parameters you're encoding in the URL
      * @return The created URL. Now you can use it to issue requests and things!
+     * @throws ConstructorException if the request is invalid.
      */
     public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
         params.put("autocomplete_key", this.autocompleteKey);
@@ -175,6 +178,7 @@ public class ConstructorIO {
      *
      * @param queryStr The string that you will be autocompleting.
      * @return An ArrayList of suggestions for querying
+     * @throws ConstructorException if the request is invalid.
      */
     public ArrayList<String> query(String queryStr) throws ConstructorException {
         try {
@@ -227,7 +231,8 @@ public class ConstructorIO {
     /**
      * Adds an item to your autocomplete.
      *
-     * @param item the item that you're adding.
+     * @param item the item that you're adding
+     * @param autocompleteSection the section that you are adding the item to
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
@@ -279,6 +284,7 @@ public class ConstructorIO {
      * Adds an item to your autocomplete or updates it if it already exists.
      *
      * @param item the item that you're adding.
+     * @param autocompleteSection the section that you are adding the item to
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */

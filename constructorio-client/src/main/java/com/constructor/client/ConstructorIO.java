@@ -68,25 +68,20 @@ public class ConstructorIO {
      *
      * @param params HashMap of the parameters to encode.
      * @return The encoded parameters, as a String.
-     * @throws ConstructorException if the request is invalid.
      */
-    public static String serializeParams(HashMap<String, String> params) throws ConstructorException {
-        try {
-            String urlString = "";
-            boolean isFirst = true;
-            for (String key : params.keySet()) {
-                if (!isFirst) {
-                    urlString += "&";
-                }
-                urlString += URLEncoder.encode(key, "UTF-8");
-                urlString += "=";
-                urlString += URLEncoder.encode(params.get(key), "UTF-8");
-                isFirst = false;
+    public static String serializeParams(HashMap<String, String> params) throws UnsupportedEncodingException {
+        String urlString = "";
+        boolean isFirst = true;
+        for (String key : params.keySet()) {
+            if (!isFirst) {
+                urlString += "&";
             }
-            return urlString;
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
+            urlString += URLEncoder.encode(key, "UTF-8");
+            urlString += "=";
+            urlString += URLEncoder.encode(params.get(key), "UTF-8");
+            isFirst = false;
         }
+        return urlString;
     }
 
     /**
@@ -96,14 +91,9 @@ public class ConstructorIO {
      *
      * @param endpoint Endpoint of the autocomplete service.
      * @return The created URL. Now you can use it to issue requests and things!
-     * @throws ConstructorException if the request is invalid.
      */
-    public String makeUrl(String endpoint) throws ConstructorException {
-        try {
-            return makeUrl(endpoint, new HashMap<String, String>());
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        }
+    public String makeUrl(String endpoint) throws UnsupportedEncodingException {
+        return makeUrl(endpoint, new HashMap<String, String>());
     }
 
     /**
@@ -114,15 +104,10 @@ public class ConstructorIO {
      * @param endpoint Endpoint of the autocomplete service you are giving requests to
      * @param params   HashMap of the parameters you're encoding in the URL
      * @return The created URL. Now you can use it to issue requests and things!
-     * @throws ConstructorException if the request is invalid.
      */
-    public String makeUrl(String endpoint, HashMap<String, String> params) throws ConstructorException {
-        try {
-            params.put("autocomplete_key", this.autocompleteKey);
-            return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        }
+    public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
+        params.put("autocomplete_key", this.autocompleteKey);
+        return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
     }
 
     private static String createItemParams(String itemName, String autocompleteSection) {
@@ -190,7 +175,6 @@ public class ConstructorIO {
      *
      * @param queryStr The string that you will be autocompleting.
      * @return An ArrayList of suggestions for querying
-     * @throws ConstructorException if the request is invalid.
      */
     public ArrayList<String> query(String queryStr) throws ConstructorException {
         try {
@@ -243,8 +227,7 @@ public class ConstructorIO {
     /**
      * Adds an item to your autocomplete.
      *
-     * @param item the item that you're adding
-     * @param autocompleteSection the section that you are adding the item to
+     * @param item the item that you're adding.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
@@ -296,7 +279,6 @@ public class ConstructorIO {
      * Adds an item to your autocomplete or updates it if it already exists.
      *
      * @param item the item that you're adding.
-     * @param autocompleteSection the section that you are adding the item to
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */

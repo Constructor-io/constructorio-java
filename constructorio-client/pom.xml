@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.constructor.client</groupId>
     <artifactId>constructorio-client</artifactId>
@@ -9,10 +10,26 @@
     <description>A client for the Constructor.io REST api</description>
     <url>http://constructor.io</url>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Ming Xuan Chai</name>
+            <email>chai@constructor.com</email>
+            <organization>Constructor.io</organization>
+            <organizationUrl>http://www.constructor.io</organizationUrl>
+        </developer>
+    </developers>
+
     <scm>
-        <developerConnection>scm:git:https://github.com/Constructor-io/constructorio-java.git</developerConnection>
-      <tag>constructorio-client-1.0.0</tag>
-  </scm>
+        <connection>scm:git:https://github.com/Constructor-io/constructorio-java.git</connection>
+        <tag>constructorio-client-1.0.0</tag>
+    </scm>
 
     <dependencies>
         <dependency>

@@ -78,6 +78,17 @@ public class ConstructorTest {
     }
 
     @Test
+    public void addWithParamsAndMetadataShouldReturn() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        String randStr = this.getRandString();
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        HashMap<String, Object> metadata = new HashMap<String, Object>();
+        params.put("suggested_score", 1337);
+        metadata.put("hello", "world");
+        assertTrue("addition with params succeeds", constructor.add(randStr, "Search Suggestions", params));
+    }
+
+    @Test
     public void addOrUpdateShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         String randStr = this.getRandString();

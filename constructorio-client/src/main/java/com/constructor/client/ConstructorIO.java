@@ -127,6 +127,17 @@ public class ConstructorIO {
         return gson.toJson(params);
     }
 
+    private static String createItemParams(String itemName, String autocompleteSection, Map<String, Object> otherJsonParams, Map<String, Object> metadataParams) {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("item_name", itemName);
+        params.put("autocomplete_section", autocompleteSection);
+        params.put("test", "test test");
+        params.putAll(otherJsonParams);
+        params.putAll(metadataParams);
+        Gson gson = new Gson();
+        return gson.toJson(params);
+    }
+
     private static String createTrackingParams(String term) {
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put("term", term);
@@ -274,6 +285,24 @@ public class ConstructorIO {
         }
     }
 
+    public boolean add(String itemName, String autocompleteSection, Map<String, Object> jsonParams, Map<String, Object> metadata) throws ConstructorException {
+        try {
+            String url = this.makeUrl("v1/item");
+            assert jsonParams != null;
+            assert metadata != null;
+
+            String params = ConstructorIO.createItemParams(itemName, autocompleteSection, jsonParams, metadata);
+            HttpResponse<JsonNode> jsonRes = Unirest.post(url)
+                    .basicAuth(this.apiToken, "")
+                    .body(params)
+                    .asJson();
+            return checkResponse(jsonRes, 204);
+        } catch (UnsupportedEncodingException encException) {
+            throw new ConstructorException(encException);
+        } catch (UnirestException uniException) {
+            throw new ConstructorException(uniException);
+        }
+    }
 
     /**
      * Adds an item to your autocomplete or updates it if it already exists.

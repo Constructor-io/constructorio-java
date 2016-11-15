@@ -4,7 +4,7 @@
 	<groupId>com.constructor.client</groupId>
 	<artifactId>constructorio-client</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>constructorio-client</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>

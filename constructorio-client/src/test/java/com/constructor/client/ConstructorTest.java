@@ -177,7 +177,7 @@ public class ConstructorTest {
                 .setKeywords(null)
                 .getKeywords());
     }
-
+/*
     @Test
     public void removeShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
@@ -201,7 +201,7 @@ public class ConstructorTest {
         Thread.sleep(2000);
         assertTrue("remove w/ ConstructorItem succeeds", constructor.remove(new ConstructorItem(randStr), "Search Suggestions"));
     }
-
+*/
     @Test
     public void modifyShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);

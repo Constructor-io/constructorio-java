@@ -1,6 +1,5 @@
 package com.constructor.client;
 
-import com.mashape.unirest.http.*;
 import java.util.ArrayList;
 
 class ConstructorExample {

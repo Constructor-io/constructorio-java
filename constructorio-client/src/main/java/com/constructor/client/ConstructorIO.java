@@ -107,7 +107,7 @@ public class ConstructorIO {
      */
     public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
         params.put("autocomplete_key", this.autocompleteKey);
-        return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
+        return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, ConstructorIO.serializeParams(params));
     }
 
     private static String createItemParams(String itemName, String autocompleteSection) {

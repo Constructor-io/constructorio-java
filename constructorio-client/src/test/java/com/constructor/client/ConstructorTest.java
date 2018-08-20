@@ -31,7 +31,7 @@ public class ConstructorTest {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("foo", "bar");
         params.put("bar", "baz");
-        String serializedParams = constructor.serializeParams(params);
+        String serializedParams = ConstructorIO.serializeParams(params);
         assertTrue("serializes params correctly", serializedParams.equals("foo=bar&bar=baz") || serializedParams.equals("bar=baz&foo=bar"));
     }
 
@@ -177,7 +177,7 @@ public class ConstructorTest {
                 .setKeywords(null)
                 .getKeywords());
     }
-/*
+
     @Test
     public void removeShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
@@ -187,7 +187,7 @@ public class ConstructorTest {
         assertTrue("remove succeeds", constructor.remove(randStr, "Search Suggestions"));
     }
 
-    @Test
+   @Test
     public void removeBatchShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertTrue("batch removal succeeds", constructor.removeBatch(new String[]{this.getRandString(), this.getRandString(), this.getRandString()}, "Search Suggestions"));
@@ -201,7 +201,7 @@ public class ConstructorTest {
         Thread.sleep(2000);
         assertTrue("remove w/ ConstructorItem succeeds", constructor.remove(new ConstructorItem(randStr), "Search Suggestions"));
     }
-*/
+
     @Test
     public void modifyShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);

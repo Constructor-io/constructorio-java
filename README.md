@@ -12,12 +12,15 @@ A Java REST client for the Constructor.io API. [Constructor.io](http://construct
 
 * [Maven](https://github.com/apache/maven)
 * [JUnit4](https://github.com/junit-team/junit4)
-* [Wiremock](https://github.com/tomakehurst/wiremock)
 
 # Building and Test
 
+> NOTE: Maven commands run from ./constructorio-client/
+
 ```bash
-cd constructorio-client && mvn test
+mvn clean               # clean target directory
+mvn test                # run tests
+mvn jacoco:report       # post tests, write coverage to ./target/site/jacoco
 ```
 
 # Documentation

@@ -1,4 +1,4 @@
-package com.constructor.client;
+package io.constructor.client;
 
 class ConstructorException extends Exception {
 	public ConstructorException(String msg) {

@@ -1,4 +1,4 @@
-package com.constructor.client;
+package io.constructor.client;
 
 import java.util.ArrayList;
 

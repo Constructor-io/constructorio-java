@@ -1,7 +1,7 @@
 [![Release](https://jitpack.io/v/Constructor-io/constructorio-java.svg)](https://jitpack.io/#Constructor-io/constructorio-java)
 
-# Contructor-IO Java Client
-A Java REST client for the [Constructor.io API](https://docs.constructor.io/rest-api.html?java). 
+# Constructor-IO Java Client
+A Java REST client for the [Constructor.io API](https://docs.constructor.io/rest-api.html?java).
 
 [Constructor.io](http://constructor.io/) provides search as a service that optimizes results using artificial intelligence (including natural language processing, re-ranking to optimize for conversions, and user personalization).
 

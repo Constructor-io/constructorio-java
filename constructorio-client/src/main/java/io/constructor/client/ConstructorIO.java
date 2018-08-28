@@ -1,4 +1,4 @@
-package com.constructor.client;
+package io.constructor.client;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -107,7 +107,7 @@ public class ConstructorIO {
      */
     public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
         params.put("autocomplete_key", this.autocompleteKey);
-        return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, this.serializeParams(params));
+        return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, ConstructorIO.serializeParams(params));
     }
 
     private static String createItemParams(String itemName, String autocompleteSection) {
@@ -492,7 +492,6 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             Gson gson = new Gson();
             String params = gson.toJson(data);
-
             HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
                     .basicAuth(this.apiToken, "")
                     .body(params)

@@ -3,15 +3,10 @@ package io.constructor.client;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ArrayList;
-
-import org.json.JSONArray;
 
 import java.io.UnsupportedEncodingException;
 
 import com.google.gson.Gson;
-// inconsistent capitalization: Unirest guys use Json, Crockford lib uses JSON
-// Gson is just camelcaps, so Crockford is odd one out
 import com.mashape.unirest.http.*;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -19,11 +14,6 @@ import org.apache.http.client.utils.URLEncodedUtils;
 
 /**
  * Constructor.io Client
- *
- * @author Howon Lee <howon@constructor.io>
- * @version 0.0.1
- * @since Oct 19 2015
- * Go to Constructor.io for really profitable autocomplete-as-a-service.
  */
 public class ConstructorIO {
 
@@ -35,9 +25,6 @@ public class ConstructorIO {
 
     /**
      * Creates a constructor.io client.
-     *
-     * Unlike in the other Constructor.io clients, this one only takes in hashmaps,
-     * and you must write other helper methods to serialize other things.
      *
      * @param apiToken        API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
      * @param apiKey          API Key, used publically in your in-site javascript client.
@@ -164,40 +151,6 @@ public class ConstructorIO {
             throw new ConstructorException(resp.getBody().toString());
         } else {
             return true;
-        }
-    }
-
-    /**
-     * Queries an autocomplete service.
-     *
-     * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
-     *
-     * @param queryStr The string that you will be autocompleting.
-     * @return An ArrayList of suggestions for querying
-     */
-    public ArrayList<String> query(String queryStr) throws ConstructorException {
-        try {
-            String url = this.makeUrl("autocomplete/" + queryStr);
-            HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
-            if (checkResponse(jsonRes, 200)) {
-                JSONArray arr = jsonRes.getBody()
-                        .getObject()
-                        .getJSONObject("sections")
-                        .getJSONArray("Search Suggestions");
-                ArrayList<String> res = new ArrayList<String>();
-                if (arr != null) {
-                    for (int i = 0; i < arr.length(); i++) {
-                        res.add(arr.get(i).toString());
-                    }
-                }
-                return res;
-            }
-            return null; // this should not get back here
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
         }
     }
 

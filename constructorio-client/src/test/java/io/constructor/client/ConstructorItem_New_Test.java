@@ -9,7 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class ConstructorItemTest {
+public class ConstructorItem_New_Test {
 
     public String getRandString() {
         return UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");

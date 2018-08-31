@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class NewTest {
+public class ConstructorIO_New_Test {
 
     @Test
     public void newShouldSetApiToken() throws Exception {

@@ -15,7 +15,7 @@ public class ConstructorTest {
 
     /**
      * The official fake account apiToken is YSOxV00F0Kk2R0KnPQN8
-     * The official fake account acKey is ZqXaOfXuBWD4s3XzCI1q
+     * The official fake account apiKey is ZqXaOfXuBWD4s3XzCI1q
      */
 
     public String getRandString() {
@@ -27,7 +27,6 @@ public class ConstructorTest {
 
     @Test
     public void encodesParamsShouldEncodeParams() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("foo", "bar");
         params.put("bar", "baz");
@@ -43,19 +42,7 @@ public class ConstructorTest {
     }
 
     @Test
-    public void apiTokenShouldBeSet() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
-        assertEquals("api token should be set properly", constructor.apiToken, "boinka");
-    }
-
-    @Test
-    public void acKeyShouldBeSet() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
-        assertEquals("autocomplete key should be set properly", constructor.autocompleteKey, "doinka");
-    }
-
-    @Test
-    public void acQueryShouldReturn() throws Exception {
+    public void queryShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ArrayList<String> res = constructor.query("S");
         assertEquals("autocomplete query should return something", "[]", res.toString());
@@ -95,7 +82,7 @@ public class ConstructorTest {
     public void creatingConstructorItemWithNullNameShouldFail() throws Exception {
         thrown.expect(IllegalArgumentException.class);
         HashMap<String, Object> params = new HashMap<String, Object>();
-        ConstructorItem item = new ConstructorItem(null, params);
+        new ConstructorItem(null, params);
     }
 
     /***

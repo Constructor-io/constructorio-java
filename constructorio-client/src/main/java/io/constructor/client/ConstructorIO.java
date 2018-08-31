@@ -28,7 +28,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 public class ConstructorIO {
 
     public String apiToken;
-    public String autocompleteKey;
+    public String apiKey;
     public String protocol;
     public String host;
     protected URLEncodedUtils encoder;
@@ -40,13 +40,13 @@ public class ConstructorIO {
      * and you must write other helper methods to serialize other things.
      *
      * @param apiToken        API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-     * @param autocompleteKey Autocomplete key, used publically in your in-site javascript client.
+     * @param apiKey          API Key, used publically in your in-site javascript client.
      * @param isHTTPS         true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
      * @param host            The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
      */
-    public ConstructorIO(String apiToken, String autocompleteKey, boolean isHTTPS, String host) {
+    public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host) {
         this.apiToken = apiToken;
-        this.autocompleteKey = autocompleteKey;
+        this.apiKey = apiKey;
         this.host = host;
         if (host == null) {
             this.host = "ac.cnstrc.com";
@@ -87,7 +87,7 @@ public class ConstructorIO {
     /**
      * Makes a URL to issue the requests to.
      *
-     * Note that the URL will automagically have the autocompleteKey embedded.
+     * Note that the URL will automagically have the apiKey embedded.
      *
      * @param endpoint Endpoint of the autocomplete service.
      * @return The created URL. Now you can use it to issue requests and things!
@@ -99,14 +99,14 @@ public class ConstructorIO {
     /**
      * Makes a URL to issue the requests to.
      *
-     * Note that the URL will automagically have the autocompleteKey embedded.
+     * Note that the URL will automagically have the apiKey embedded.
      *
      * @param endpoint Endpoint of the autocomplete service you are giving requests to
      * @param params   HashMap of the parameters you're encoding in the URL
      * @return The created URL. Now you can use it to issue requests and things!
      */
     public String makeUrl(String endpoint, HashMap<String, String> params) throws UnsupportedEncodingException {
-        params.put("autocomplete_key", this.autocompleteKey);
+        params.put("autocomplete_key", this.apiKey);
         return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, ConstructorIO.serializeParams(params));
     }
 

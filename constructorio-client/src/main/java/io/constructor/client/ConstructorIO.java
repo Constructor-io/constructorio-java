@@ -290,7 +290,7 @@ public class ConstructorIO {
      */
     public boolean addBatch(String[] items, String autocompleteSection) throws ConstructorException {
         ConstructorItem[] citems = new ConstructorItem[items.length];
-        for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
+        for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i], autocompleteSection);
         return addBatch(citems, autocompleteSection);
     }
 
@@ -335,7 +335,7 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateBatch(String[] items, String autocompleteSection) throws ConstructorException {
         ConstructorItem[] citems = new ConstructorItem[items.length];
-        for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i]);
+        for (int i = 0; i < items.length; i++) citems[i] = new ConstructorItem(items[i], autocompleteSection);
         return addOrUpdateBatch(citems, autocompleteSection);
     }
 

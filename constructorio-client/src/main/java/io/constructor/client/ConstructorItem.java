@@ -1,157 +1,78 @@
 package io.constructor.client;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
-public class ConstructorItem extends HashMap<String, Object> {
-    /**
-     * Creates a constructor.io autocomplete item, which is basically a HashMap with additional abstraction.
-     *
-     * @param itemName   the item that you're adding.
-     * @param jsonParams a map of optional parameters. Optional parameters are in the <a href="https://constructor.io/docs/#add-an-item">API documentation</a>
-     */
-    public ConstructorItem(String itemName, HashMap<String, Object> jsonParams) {
-        super();
-        this.put("item_name", itemName);
-        this.putAll(jsonParams);
-    }
+public class ConstructorItem {
+
+    public String itemName;
+    public String autocompleteSection;
+    public Integer suggestedScore;
+    public ArrayList<String> keywords;
+    public String url;
+    public String imageUrl;
+    public String id;
+    public String description;
+    public HashMap <String, String> facets;
+    public HashMap <String, String> metadata;
+    public ArrayList<String> groupIds;
 
     /**
-     * Creates a constructor.io autocomplete item, which is basically a HashMap with additional abstraction.
+     * Creates an autocomplete item.  Optional public fields are in the <a href="https://constructor.io/docs/#add-an-item">API documentation</a>
      *
      * @param itemName the item that you're adding.
+     * @param autocompleteSection  the autocomplete section you are adding the item to
      */
-    public ConstructorItem(String itemName) {
+    public ConstructorItem(String itemName, String autocompleteSection) throws IllegalArgumentException {
         super();
-        this.put("item_name", itemName);
+
+        if (itemName == null) {
+            throw new IllegalArgumentException("itemName is required");
+        }
+        if (autocompleteSection == null) {
+            throw new IllegalArgumentException("autocompleteSection is required");
+        }
+
+        this.itemName = itemName;
+        this.autocompleteSection = autocompleteSection;
+        this.suggestedScore = 0;
+        this.keywords = new ArrayList<String>();
+        this.url = "";
+        this.imageUrl = "";
+        this.description = "";
+        this.id = "";
+        this.facets = new HashMap <String, String>();
+        this.metadata = new HashMap <String, String>();
+        this.groupIds = new ArrayList<String>();
     }
 
     /**
-     * Associates the specified value with the specified key in this map.
-     * If the map previously contained a mapping for the key, the old
-     * value is replaced. If the value is null, the field will be removed.
-     *
-     * @param name  key with which the specified value is to be associated
-     * @param value value to be associated with the specified key
-     * @return the ConstructorItem itself for chained syntax.
+     * Returns the JSON form of an autocomplete item
      */
-    public ConstructorItem put(String name, Object value) throws IllegalArgumentException {
-        // Check type for known parameters
-        if ((name.equals("item_name")) && value == null) {
-            throw new IllegalArgumentException("The field " + name + " cannot be null");
-        }
-        if ((name.equals("item_name") || name.equals("url") || name.equals("image_url") || name.equals("description") || name.equals("id")) && !(value instanceof String) && value != null) {
-            throw new IllegalArgumentException("The field " + name + " has to be a String");
-        }
-        if (name.equals("suggested_score")) {
-            if (!(value instanceof Number) && value != null) {
-                throw new IllegalArgumentException("The field " + name + " has to be a Number");
-            }
-            if (value == null) value = 0;
-            // Let setSuggestedScore handle the rest...
-            return setSuggestedScore(((Number) value).intValue());
-        }
-        if ((name.equals("keywords") && !(value instanceof String[]) && value != null)) {
-            throw new IllegalArgumentException("The field " + name + " has to be a String[]");
-        }
-
-        if (value == null) { // Don't allow null values
-            super.remove(name);
-        } else {
-            super.put(name, value);
-        }
-        return this; // Make it chainable
-    }
-
-    /**
-     * Removes the mapping for the specified key from this map if present.
-     *
-     * @param name key whose mapping is to be removed from the map
-     * @return the ConstructorItem itself for chained syntax.
-     */
-    public ConstructorItem remove(String name) throws IllegalArgumentException {
-        if (name.equals("item_name")) {
-            throw new IllegalArgumentException("The field " + name + " cannot be null");
-        }
-        super.remove(name);
-        return this; // Make it chainable
-    }
-
-    String toJson() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
-    }
-
-    HashMap<String, Object> toJsonParams() {
+    public String toJson() {
         HashMap<String, Object> params = new HashMap<String, Object>();
-        params.putAll(this);
-        params.remove("item_name");
-        return params;
-    }
 
+        if (itemName == null) {
+            throw new IllegalArgumentException("itemName is required");
+        }
+        if (autocompleteSection == null) {
+            throw new IllegalArgumentException("autocompleteSection is required");
+        }
 
-    public ConstructorItem setItemName(String v) {
-        this.put("item_name", v);
-        return this;
-    }
-
-    public String getItemName() {
-        return (String) this.get("item_name");
-    }
-
-    public ConstructorItem setSuggestedScore(int v) {
-        if (v > 0) super.put("suggested_score", v);
-        else super.remove("suggested_score");
-        return this;
-    }
-
-    public int getSuggestedScore() {
-        return this.containsKey("suggested_score") ? ((Number) this.get("suggested_score")).intValue() : 0;
-    }
-
-    public ConstructorItem setKeywords(String... v) {
-        this.put("keywords", v);
-        return this;
-    }
-
-    public String[] getKeywords() {
-        return (String[]) this.get("keywords");
-    }
-
-    public ConstructorItem setUrl(String v) {
-        this.put("url", v);
-        return this;
-    }
-
-    public String getUrl() {
-        return (String) this.get("url");
-    }
-
-    public ConstructorItem setImageUrl(String v) {
-        this.put("image_url", v);
-        return this;
-    }
-
-    public String getImageUrl() {
-        return (String) this.get("image_url");
-    }
-
-    public ConstructorItem setDescription(String v) {
-        this.put("description", v);
-        return this;
-    }
-
-    public String getDescription() {
-        return (String) this.get("description");
-    }
-
-    public ConstructorItem setId(String v) {
-        this.put("id", v);
-        return this;
-    }
-
-    public String getId() {
-        return this.get("id").toString();
+        params.put("item_name", this.itemName);
+        params.put("autocomplete_section", this.autocompleteSection);
+        params.put("suggested_score", this.suggestedScore);
+        params.put("keywords", this.keywords);
+        params.put("url", this.url);
+        params.put("image_url", this.imageUrl);
+        params.put("description", this.description);
+        params.put("id", this.id);
+        params.put("facets", this.facets);
+        params.put("metadata", this.metadata);
+        params.put("group_ids", this.groupIds);
+        Gson gson = new Gson();
+        return gson.toJson(params);
     }
 }

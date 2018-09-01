@@ -9,7 +9,7 @@ public class ConstructorItem {
 
     private String itemName;
     private String autocompleteSection;
-    private int suggestedScore;
+    private Integer suggestedScore;
     private ArrayList<String> keywords;
     private String url;
     private String imageUrl;
@@ -22,7 +22,7 @@ public class ConstructorItem {
     /**
      * Creates an autocomplete item.  Optional public fields are in the <a href="https://constructor.io/docs/#add-an-item">API documentation</a>
      *
-     * @param itemName the item that you're adding.
+     * @param itemName the item that you are adding.
      * @param autocompleteSection  the autocomplete section you are adding the item to
      */
     public ConstructorItem(String itemName, String autocompleteSection) throws IllegalArgumentException {
@@ -37,15 +37,43 @@ public class ConstructorItem {
 
         this.itemName = itemName;
         this.autocompleteSection = autocompleteSection;
-        this.suggestedScore = 0;
-        this.keywords = new ArrayList<String>();
-        this.url = "";
-        this.imageUrl = "";
-        this.description = "";
-        this.id = "";
-        this.facets = new HashMap <String, String>();
-        this.metadata = new HashMap <String, String>();
-        this.groupIds = new ArrayList<String>();
+        this.suggestedScore = null;
+        this.keywords = null;
+        this.url = null;
+        this.imageUrl = null;
+        this.description = null;
+        this.id = null;
+        this.facets = null;
+        this.metadata = null;
+        this.groupIds = null;
+    }
+
+    /**
+     * Returns the HashMap form of an autocomplete item
+     */
+    public  HashMap<String, Object> toHashMap() {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+
+        if (itemName == null) {
+            throw new IllegalArgumentException("itemName is required");
+        }
+        if (autocompleteSection == null) {
+            throw new IllegalArgumentException("autocompleteSection is required");
+        }
+
+        params.put("item_name", this.itemName);
+        params.put("autocomplete_section", this.autocompleteSection);
+        params.put("suggested_score", this.suggestedScore);
+        params.put("keywords", this.keywords);
+        params.put("url", this.url);
+        params.put("image_url", this.imageUrl);
+        params.put("description", this.description);
+        params.put("id", this.id);
+        params.put("facets", this.facets);
+        params.put("metadata", this.metadata);
+        params.put("group_ids", this.groupIds);
+       
+        return params;
     }
 
     /**
@@ -72,6 +100,25 @@ public class ConstructorItem {
         params.put("facets", this.facets);
         params.put("metadata", this.metadata);
         params.put("group_ids", this.groupIds);
+        Gson gson = new Gson();
+        return gson.toJson(params);
+    }
+
+     /**
+     * Returns the JSON form of an autocomplete item
+     */
+    public String toJsonForRemove() {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+
+        if (itemName == null) {
+            throw new IllegalArgumentException("itemName is required");
+        }
+        if (autocompleteSection == null) {
+            throw new IllegalArgumentException("autocompleteSection is required");
+        }
+
+        params.put("item_name", this.itemName);
+        params.put("autocomplete_section", this.autocompleteSection);
         Gson gson = new Gson();
         return gson.toJson(params);
     }
@@ -107,14 +154,14 @@ public class ConstructorItem {
     /**
      * @return the suggestedScore
      */
-    public int getSuggestedScore() {
+    public Integer getSuggestedScore() {
         return suggestedScore;
     }
 
     /**
      * @param suggestedScore the suggestedScore to set
      */
-    public void setSuggestedScore(int suggestedScore) {
+    public void setSuggestedScore(Integer suggestedScore) {
         this.suggestedScore = suggestedScore;
     }
 

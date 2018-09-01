@@ -21,18 +21,9 @@ public class ConstructorIO_Remove_Test {
     @Test
     public void removeShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        String randStr = this.getRandString();
-        constructor.add(randStr, "Search Suggestions");
+        ConstructorItem item = new ConstructorItem(this.getRandString(), "Search Suggestions");
+        constructor.addItem(item);
         Thread.sleep(2000);
-        assertTrue("remove succeeds", constructor.remove(randStr, "Search Suggestions"));
-    }
-
-    @Test
-    public void removeConstructorItemShouldReturn() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        String randStr = this.getRandString();
-        constructor.add(new ConstructorItem(randStr), "Search Suggestions");
-        Thread.sleep(2000);
-        assertTrue("remove w/ ConstructorItem succeeds", constructor.remove(new ConstructorItem(randStr), "Search Suggestions"));
+        assertTrue("remove succeeds", constructor.removeItem(item));
     }
 } 

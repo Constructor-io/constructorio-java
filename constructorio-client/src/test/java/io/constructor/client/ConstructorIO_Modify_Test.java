@@ -21,11 +21,12 @@ public class ConstructorIO_Modify_Test {
     @Test
     public void modifyShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        String randStr = this.getRandString();
-        constructor.add(randStr, "Search Suggestions");
+        String itemName = this.getRandString();
+        ConstructorItem itemOld = new ConstructorItem(itemName, "Search Suggestions");
+        ConstructorItem itemNew = new ConstructorItem(itemName, "Search Suggestions");
+        itemNew.setSuggestedScore(1337);
+        constructor.addItem(itemOld);
         Thread.sleep(2000);
-        HashMap<String, Object> params = new HashMap<String, Object>();
-        params.put("suggested_score", 1337);
-        assertTrue("modify succeeds", constructor.modify(randStr, randStr, "Search Suggestions", params));
+        assertTrue("modify succeeds", constructor.modifyItem(itemOld, itemNew));
     }
 } 

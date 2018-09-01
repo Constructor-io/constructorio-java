@@ -20,7 +20,7 @@ public class ConstructorIO_Utils_Test {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void serializedParamsShouldEncodeParams() throws Exception {
+    public void serializeParamsShouldEncodeParams() throws Exception {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("foo", "bar");
         params.put("bar", "baz");
@@ -32,7 +32,7 @@ public class ConstructorIO_Utils_Test {
     public void makeUrlShouldReturnUrl() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
         String generatedUrl = constructor.makeUrl("v1/test");
-        assertEquals("creates url correctly", generatedUrl, "https://ac.cnstrc.com/v1/test?autocomplete_key=doinka");
+        assertEquals("creates url correctly", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka");
     }
 
     @Test

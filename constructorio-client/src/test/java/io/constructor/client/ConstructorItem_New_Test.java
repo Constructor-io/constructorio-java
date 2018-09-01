@@ -45,15 +45,15 @@ public class ConstructorItem_New_Test {
         ConstructorItem item = new ConstructorItem(itemName, autocompleteSection);
         assertEquals(item.getItemName(), itemName);
         assertEquals(item.getAutocompleteSection(), autocompleteSection);
-        assertEquals(item.getSuggestedScore(), 0);
-        assertEquals(item.getKeywords().size(), 0);
-        assertEquals(item.getUrl(), "");
-        assertEquals(item.getImageUrl(), "");
-        assertEquals(item.getDescription(), "");
-        assertEquals(item.getId(), "");
-        assertEquals(item.getFacets().size(), 0);
-        assertEquals(item.getFacets().size(), 0);
-        assertEquals(item.getGroupIds().size(), 0);
+        assertEquals(item.getSuggestedScore(), null);
+        assertEquals(item.getKeywords(), null);
+        assertEquals(item.getUrl(), null);
+        assertEquals(item.getImageUrl(), null);
+        assertEquals(item.getDescription(), null);
+        assertEquals(item.getId(), null);
+        assertEquals(item.getFacets(), null);
+        assertEquals(item.getFacets(), null);
+        assertEquals(item.getGroupIds(), null);
     }
 
     @Test
@@ -74,14 +74,14 @@ public class ConstructorItem_New_Test {
 
         assertEquals(item.getItemName(), "airline tickets");
         assertEquals(item.getAutocompleteSection(), "sectional airlines");
-        assertEquals(item.getSuggestedScore(), 100000);
+        assertEquals(item.getSuggestedScore(), Integer.valueOf(100000));
         assertEquals(item.getKeywords().size(), 3);
         assertEquals(item.getUrl(), "https://constructor.io/test");
         assertEquals(item.getImageUrl(), "https://constructor.io/test.png");
         assertEquals(item.getDescription(), "See the world!");
         assertEquals(item.getId(), "lucky ticket 7");
-        assertEquals(item.getFacets().size(), 0);
-        assertEquals(item.getMetadata().size(), 0);
+        assertEquals(item.getFacets(), null);
+        assertEquals(item.getMetadata(), null);
         assertEquals(item.getGroupIds().size(), 3);
     }
 } 

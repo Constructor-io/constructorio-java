@@ -277,8 +277,7 @@ public class ConstructorIO {
             }
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
-            Gson gson = new Gson();
-            String params = gson.toJson(data);
+            String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
                     .basicAuth(this.apiToken, "")
                     .body(params)

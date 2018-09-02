@@ -3,12 +3,9 @@ package io.constructor.client;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-import com.google.gson.Gson;
-
 public class ConstructorItem {
 
     private String itemName;
-    private String autocompleteSection;
     private Integer suggestedScore;
     private ArrayList<String> keywords;
     private String url;
@@ -22,21 +19,16 @@ public class ConstructorItem {
     /**
      * Creates an autocomplete item.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
      *
-     * @param itemName the item that you are adding.
-     * @param autocompleteSection  the autocomplete section you are adding the item to
+     * @param itemName the name of the item that you are adding.
      */
-    public ConstructorItem(String itemName, String autocompleteSection) throws IllegalArgumentException {
+    public ConstructorItem(String itemName) throws IllegalArgumentException {
         super();
 
         if (itemName == null) {
             throw new IllegalArgumentException("itemName is required");
         }
-        if (autocompleteSection == null) {
-            throw new IllegalArgumentException("autocompleteSection is required");
-        }
 
         this.itemName = itemName;
-        this.autocompleteSection = autocompleteSection;
         this.suggestedScore = null;
         this.keywords = null;
         this.url = null;
@@ -49,20 +41,16 @@ public class ConstructorItem {
     }
 
     /**
-     * Returns the HashMap form of an autocomplete item
+     * Returns the HashMap form of an autocomplete item for converting to JSON
      */
-    public  HashMap<String, Object> toHashMap() {
+    public  HashMap<String, Object> toParams() {
         HashMap<String, Object> params = new HashMap<String, Object>();
 
         if (itemName == null) {
             throw new IllegalArgumentException("itemName is required");
         }
-        if (autocompleteSection == null) {
-            throw new IllegalArgumentException("autocompleteSection is required");
-        }
 
         params.put("item_name", this.itemName);
-        params.put("autocomplete_section", this.autocompleteSection);
         params.put("suggested_score", this.suggestedScore);
         params.put("keywords", this.keywords);
         params.put("url", this.url);
@@ -77,53 +65,6 @@ public class ConstructorItem {
     }
 
     /**
-     * Returns the JSON form of an autocomplete item
-     */
-    public String toJson() {
-        HashMap<String, Object> params = new HashMap<String, Object>();
-
-        if (itemName == null) {
-            throw new IllegalArgumentException("itemName is required");
-        }
-        if (autocompleteSection == null) {
-            throw new IllegalArgumentException("autocompleteSection is required");
-        }
-
-        params.put("item_name", this.itemName);
-        params.put("autocomplete_section", this.autocompleteSection);
-        params.put("suggested_score", this.suggestedScore);
-        params.put("keywords", this.keywords);
-        params.put("url", this.url);
-        params.put("image_url", this.imageUrl);
-        params.put("description", this.description);
-        params.put("id", this.id);
-        params.put("facets", this.facets);
-        params.put("metadata", this.metadata);
-        params.put("group_ids", this.groupIds);
-        Gson gson = new Gson();
-        return gson.toJson(params);
-    }
-
-     /**
-     * Returns the JSON form of an autocomplete item
-     */
-    public String toJsonForIdentification() {
-        HashMap<String, Object> params = new HashMap<String, Object>();
-
-        if (itemName == null) {
-            throw new IllegalArgumentException("itemName is required");
-        }
-        if (autocompleteSection == null) {
-            throw new IllegalArgumentException("autocompleteSection is required");
-        }
-
-        params.put("item_name", this.itemName);
-        params.put("autocomplete_section", this.autocompleteSection);
-        Gson gson = new Gson();
-        return gson.toJson(params);
-    }
-
-    /**
      * @return the itemName
      */
     public String getItemName() {
@@ -135,20 +76,6 @@ public class ConstructorItem {
      */
     public void setItemName(String itemName) {
         this.itemName = itemName;
-    }
-
-    /**
-     * @return the autocompleteSection
-     */
-    public String getAutocompleteSection() {
-        return autocompleteSection;
-    }
-
-    /**
-     * @param autocompleteSection the autocompleteSection to set
-     */
-    public void setAutocompleteSection(String autocompleteSection) {
-        this.autocompleteSection = autocompleteSection;
     }
     
     /**

@@ -12,20 +12,10 @@ import org.junit.rules.ExpectedException;
 
 public class ConstructorIOTest {
 
-    public String getRandomProductName() {
-        return "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
-    }
-
-    public String getProductSection() {
-        return "Products";
-    }
-
     public ConstructorItem getProductItem() {
-      String name = this.getRandomProductName();
-      String section = this.getProductSection();
+      String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
       String url = "https://constructor.io/products/" + name;
-
-      ConstructorItem item = new ConstructorItem(name, section);
+      ConstructorItem item = new ConstructorItem(name);
       item.setUrl(url);
       return item;
     }
@@ -36,10 +26,10 @@ public class ConstructorIOTest {
     @BeforeClass
     public static void setup() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      ConstructorItem item = new ConstructorItem("Stanley_Steamer", "Products");
+      ConstructorItem item = new ConstructorItem("Stanley_Steamer");
       item.setId("Stanley1");
       item.setUrl("https://constructor.io/products/Stanley1");
-      constructor.addOrUpdateItem(item);
+      constructor.addOrUpdateItem(item, "Products");
       Thread.sleep(2000);
     }
 
@@ -99,14 +89,14 @@ public class ConstructorIOTest {
     public void addItemShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       ConstructorItem item = this.getProductItem();
-      assertTrue("addition succeeds", constructor.addItem(item));
+      assertTrue("addition succeeds", constructor.addItem(item, "Products"));
     }
 
     @Test
     public void addOrUpdateItemShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem item = this.getProductItem();
-        assertTrue("upsert succeeds", constructor.addOrUpdateItem(item));
+        assertTrue("upsert succeeds", constructor.addOrUpdateItem(item, "Products"));
     }
 
     @Test
@@ -117,7 +107,7 @@ public class ConstructorIOTest {
             this.getProductItem(),
             this.getProductItem()
         };
-        assertTrue("batch addition succeeds", constructor.addItemBatch(items, this.getProductSection()));
+        assertTrue("batch addition succeeds", constructor.addItemBatch(items, "Products"));
     }
   
     @Test
@@ -128,32 +118,33 @@ public class ConstructorIOTest {
         this.getProductItem(),
         this.getProductItem()
       };
-      assertTrue("batch upsert succeeds", constructor.addOrUpdateItemBatch(items, this.getProductSection()));
+      assertTrue("batch upsert succeeds", constructor.addOrUpdateItemBatch(items, "Products"));
     }
 
     @Test
     public void modifyShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem itemOld = this.getProductItem();
-        constructor.addItem(itemOld);
+        constructor.addItem(itemOld, "Products");
         Thread.sleep(2000);
         
-        ConstructorItem itemNew = new ConstructorItem(itemOld.getItemName(), itemOld.getAutocompleteSection());
+        ConstructorItem itemNew = new ConstructorItem(itemOld.getItemName());
         itemNew.setUrl(itemOld.getUrl());
         itemNew.setSuggestedScore(1337);
-        assertTrue("modify succeeds", constructor.modifyItem(itemOld, itemNew));
+        assertTrue("modify succeeds", constructor.modifyItem(itemOld, "Products", itemOld.getItemName()));
     }
 
     @Test
     public void removeShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem item = this.getProductItem();
-        constructor.addItem(item);
+        constructor.addItem(item, "Products");
         Thread.sleep(2000);
 
-        assertTrue("remove succeeds", constructor.removeItem(item));
+        assertTrue("remove succeeds", constructor.removeItem(item, "Products"));
     }
 
+    @Test
     public void removeBatchShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       ConstructorItem[] items = {
@@ -161,13 +152,13 @@ public class ConstructorIOTest {
         this.getProductItem(),
         this.getProductItem()
       };
-      assertTrue("batch removal succeeds", constructor.removeItemBatch(items, this.getProductSection()));
+      assertTrue("batch removal succeeds", constructor.removeItemBatch(items, "Products"));
     }
   
     @Test
     public void trackConversionNoParamsShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        assertTrue("conversion without params succeeds", constructor.trackConversion("Stanley_Steamer", this.getProductSection(), "Stanley1", "$1.99"));
+        assertTrue("conversion without params succeeds", constructor.trackConversion("Stanley_Steamer", "Products", "Stanley1", "$1.99"));
     }
   
     @Test
@@ -179,6 +170,6 @@ public class ConstructorIOTest {
     @Test
     public void trackClickThroughNoParamsShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", this.getProductSection(), "Stanley1"));
+        assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", "Products", "Stanley1"));
     }
 } 

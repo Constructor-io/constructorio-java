@@ -14,41 +14,27 @@ public class ConstructorItemTest {
         return "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
     }
 
-    public String getProductSection() {
-        return "Products";
-    }
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void newWithNullItemNameShouldFail() throws Exception {
         thrown.expect(IllegalArgumentException.class);
-        new ConstructorItem(null, this.getProductSection());
-    }
-
-    @Test
-    public void newWithNullSectionNameShouldFail() throws Exception {
-        thrown.expect(IllegalArgumentException.class);
-        new ConstructorItem(this.getRandomProductName(), null);
+        new ConstructorItem(null);
     }
 
     @Test
     public void newShouldReturnConstructorItem() throws Exception {
         String itemName = this.getRandomProductName();
-        String autocompleteSection = this.getProductSection();
-        ConstructorItem item = new ConstructorItem(itemName, autocompleteSection);
+        ConstructorItem item = new ConstructorItem(itemName);
         assertEquals(item.getItemName(), itemName);
-        assertEquals(item.getAutocompleteSection(), autocompleteSection);
     }
 
     @Test
     public void newShouldReturnDefaultProperties() throws Exception {
         String itemName = this.getRandomProductName();
-        String autocompleteSection = this.getProductSection();
-        ConstructorItem item = new ConstructorItem(itemName, autocompleteSection);
+        ConstructorItem item = new ConstructorItem(itemName);
         assertEquals(item.getItemName(), itemName);
-        assertEquals(item.getAutocompleteSection(), autocompleteSection);
         assertEquals(item.getSuggestedScore(), null);
         assertEquals(item.getKeywords(), null);
         assertEquals(item.getUrl(), null);
@@ -63,11 +49,9 @@ public class ConstructorItemTest {
     @Test
     public void settersShouldSet() throws Exception {
         String itemName = this.getRandomProductName();
-        String autocompleteSection = this.getProductSection();
-        ConstructorItem item = new ConstructorItem(itemName, autocompleteSection);
+        ConstructorItem item = new ConstructorItem(itemName);
 
         item.setItemName("airline tickets");
-        item.setAutocompleteSection("grand prizes");
         item.setSuggestedScore(100000);
         item.setKeywords(new ArrayList<>(Arrays.asList("London", "Tokyo", "New ")));
         item.setUrl("https://constructor.io/test");
@@ -77,7 +61,6 @@ public class ConstructorItemTest {
         item.setGroupIds(new ArrayList<>(Arrays.asList("Lucky Tickets", "Special Tickets", "Fancy Tickets")));
 
         assertEquals(item.getItemName(), "airline tickets");
-        assertEquals(item.getAutocompleteSection(), "grand prizes");
         assertEquals(item.getSuggestedScore(), Integer.valueOf(100000));
         assertEquals(item.getKeywords().size(), 3);
         assertEquals(item.getUrl(), "https://constructor.io/test");

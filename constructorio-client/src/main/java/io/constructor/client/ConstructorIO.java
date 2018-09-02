@@ -121,13 +121,16 @@ public class ConstructorIO {
      * Adds an item to your autocomplete.
      *
      * @param item the item that you're adding.
+     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addItem(ConstructorItem item) throws ConstructorException {
+    public boolean addItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/item");
-            String params = item.toJson();
+            HashMap<String, Object> data = item.toParams();
+            data.put("autocomplete_section", autocompleteSection);
+            String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
                     .body(params)
@@ -145,14 +148,16 @@ public class ConstructorIO {
      * Adds an item to your autocomplete or updates it if it already exists.
      *
      * @param item the item that you're adding.
+     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateItem(ConstructorItem item) throws ConstructorException {
+    public boolean addOrUpdateItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/item");
-            url += "&force=1";
-            String params = item.toJson();
+            String url = this.makeUrl("v1/item") + "&force=1";
+            HashMap<String, Object> data = item.toParams();
+            data.put("autocomplete_section", autocompleteSection);
+            String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.put(url)
                     .basicAuth(this.apiToken, "")
                     .body(params)
@@ -169,7 +174,7 @@ public class ConstructorIO {
      * Adds multiple items to your autocomplete.
      *
      * @param items the items you want to add.
-     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+     * @param autocompleteSection the section of the autocomplete that you're adding the items to.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
@@ -177,14 +182,13 @@ public class ConstructorIO {
         try {
             String url = this.makeUrl("v1/batch_items");
             HashMap<String, Object> data = new HashMap<String, Object>();
-            ArrayList<String> itemsAsJSON = new ArrayList<String>();
+            ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toJson());
+                itemsAsJSON.add(item.toParams());
             }
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
-            Gson gson = new Gson();
-            String params = gson.toJson(data);
+            String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
                     .body(params)
@@ -201,23 +205,21 @@ public class ConstructorIO {
      * Adds multiple items to your autocomplete whilst updating existing ones.
      *
      * @param items the items you want to add.
-     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+     * @param autocompleteSection the section of the autocomplete that you're adding the items to.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
     public boolean addOrUpdateItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/batch_items");
-            url += "&force=1";
+            String url = this.makeUrl("v1/batch_items") + "&force=1";
             HashMap<String, Object> data = new HashMap<String, Object>();
-            ArrayList<String> itemsAsJSON = new ArrayList<String>();
+            ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toJson());
+                itemsAsJSON.add(item.toParams());
             }
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
-            Gson gson = new Gson();
-            String params = gson.toJson(data);
+            String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.put(url)
                     .basicAuth(this.apiToken, "")
                     .body(params)
@@ -234,13 +236,17 @@ public class ConstructorIO {
      * Removes an item from your autocomplete.
      *
      * @param item the item that you're removing.
+     * @param autocompleteSection the section of the autocomplete that you're removing the item from.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean removeItem(ConstructorItem item) throws ConstructorException {
+    public boolean removeItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/item");
-            String params = item.toJsonForIdentification();
+            HashMap<String, Object> data = new HashMap<String, Object>();
+            data.put("item_name", item.getItemName());
+            data.put("autocomplete_section", autocompleteSection);
+            String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
                     .basicAuth(this.apiToken, "")
                     .body(params)
@@ -257,7 +263,7 @@ public class ConstructorIO {
      * Removes multiple items from your autocomplete
      *
      * @param items the items that you are removing
-     * @param autocompleteSection the section of the autocomplete that you're removing the item from.
+     * @param autocompleteSection the section of the autocomplete that you're removing the items from.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
@@ -265,7 +271,11 @@ public class ConstructorIO {
         try {
             String url = this.makeUrl("v1/batch_items");
             HashMap<String, Object> data = new HashMap<String, Object>();
-            data.put("items", items);
+            ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
+            for (ConstructorItem item : items) {
+                itemsAsJSON.add(item.toParams());
+            }
+            data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
             Gson gson = new Gson();
             String params = gson.toJson(data);
@@ -282,18 +292,19 @@ public class ConstructorIO {
     /**
      * Modifies an item from your autocomplete.
      *
-     * @param oldItem the item that you're modifying.
-     * @param newItem the new item you want to replace the old one with.
+     * @param item the item that you're modifying.
+     * @param autocompleteSection the section of the autocomplete that you're modifying the item for.
+     * @param previousItemName the previous name of the item.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modifyItem(ConstructorItem oldItem, ConstructorItem newItem) throws ConstructorException {
+    public boolean modifyItem(ConstructorItem item, String autocompleteSection, String previousItemName) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/item");
-            HashMap<String, Object> data = newItem.toHashMap();
-            data.put("item_name", oldItem.getItemName());
-            data.put("autocomplete_section", oldItem.getAutocompleteSection());
-            data.put("new_item_name", newItem.getItemName());
+            HashMap<String, Object> data = item.toParams();
+            data.put("new_item_name", item.getItemName());
+            data.put("autocomplete_section", autocompleteSection);
+            data.put("item_name", previousItemName);
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.put(url)
                     .basicAuth(this.apiToken, "")

@@ -20,7 +20,7 @@ public class ConstructorItem {
     private ArrayList<String> groupIds;
 
     /**
-     * Creates an autocomplete item.  Optional public fields are in the <a href="https://constructor.io/docs/#add-an-item">API documentation</a>
+     * Creates an autocomplete item.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
      *
      * @param itemName the item that you are adding.
      * @param autocompleteSection  the autocomplete section you are adding the item to
@@ -107,7 +107,7 @@ public class ConstructorItem {
      /**
      * Returns the JSON form of an autocomplete item
      */
-    public String toJsonForRemove() {
+    public String toJsonForIdentification() {
         HashMap<String, Object> params = new HashMap<String, Object>();
 
         if (itemName == null) {

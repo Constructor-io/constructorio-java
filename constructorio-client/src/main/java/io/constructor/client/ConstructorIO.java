@@ -240,7 +240,7 @@ public class ConstructorIO {
     public boolean removeItem(ConstructorItem item) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/item");
-            String params = item.toJsonForRemove();
+            String params = item.toJsonForIdentification();
             HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
                     .basicAuth(this.apiToken, "")
                     .body(params)

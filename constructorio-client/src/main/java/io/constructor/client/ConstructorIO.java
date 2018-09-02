@@ -24,12 +24,12 @@ public class ConstructorIO {
     protected URLEncodedUtils encoder;
 
     /**
-     * Creates a constructor.io client.
+     * Creates a constructor.io Client.
      *
-     * @param apiToken        API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-     * @param apiKey          API Key, used publically in your in-site javascript client.
-     * @param isHTTPS         true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param host            The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
+     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
      */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host) {
         this.apiToken = apiToken;
@@ -83,6 +83,9 @@ public class ConstructorIO {
         return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, "key=" + this.apiKey);
     }
 
+    /**
+     * Checks the response from an endpoint.
+     */
     private static boolean checkResponse(HttpResponse<JsonNode> resp, int expectedStatus) throws ConstructorException {
         if (resp.getStatus() != expectedStatus) {
             throw new ConstructorException(resp.getBody().toString());
@@ -165,8 +168,8 @@ public class ConstructorIO {
     /**
      * Adds multiple items to your autocomplete.
      *
+     * @param items the items you want to add.
      * @param autocompleteSection the section of the autocomplete that you're adding the item to.
-     * @param items               the items you want to add.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
@@ -197,8 +200,8 @@ public class ConstructorIO {
     /**
      * Adds multiple items to your autocomplete whilst updating existing ones.
      *
+     * @param items the items you want to add.
      * @param autocompleteSection the section of the autocomplete that you're adding the item to.
-     * @param items               the items you want to add.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
@@ -230,8 +233,7 @@ public class ConstructorIO {
     /**
      * Removes an item from your autocomplete.
      *
-     * @param item                the item that you're removing.
-     * @param autocompleteSection the section of the autocomplete that you're removing the item from.
+     * @param item the item that you're removing.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid.
      */
@@ -254,7 +256,7 @@ public class ConstructorIO {
     /**
      * Removes multiple items from your autocomplete
      *
-     * @param items               the items that you are removing
+     * @param items the items that you are removing
      * @param autocompleteSection the section of the autocomplete that you're removing the item from.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
@@ -280,9 +282,8 @@ public class ConstructorIO {
     /**
      * Modifies an item from your autocomplete.
      *
-     * @param itemName            the item that you're modifying.
-     * @param newItem             the new item you want to replace the old one with.
-     * @param autocompleteSection the section of the autocomplete that you're modifying the item from.
+     * @param oldItem the item that you're modifying.
+     * @param newItem the new item you want to replace the old one with.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
@@ -311,10 +312,10 @@ public class ConstructorIO {
      *
      * Can be for any definition of conversion, whether someone buys a product or signs up or does something important to your site.
      *
-     * @param term                the term that someone converted from.
+     * @param term the term that someone converted from.
      * @param autocompleteSection the item autocomplete section
-     * @param itemID              the item id
-     * @param revenue             the item revenue
+     * @param itemID the item id
+     * @param revenue the item revenue
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
@@ -342,9 +343,9 @@ public class ConstructorIO {
     /**
      * Tracks the fact that someone clicked through a search result on the site.
      *
-     * @param term                the term that someone clicked.
+     * @param term the term that someone clicked.
      * @param autocompleteSection the item autocomplete section
-     * @param itemID              the item id
+     * @param itemID the item id
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
@@ -373,7 +374,7 @@ public class ConstructorIO {
      *
      * There's no autocompleteSection parameter because if you're searching, you aren't using an autocomplete.
      *
-     * @param term       the term that someone searched.
+     * @param term the term that someone searched.
      * @param numResults the number of results in the search
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.

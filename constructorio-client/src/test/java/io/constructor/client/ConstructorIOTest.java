@@ -3,7 +3,6 @@ package io.constructor.client;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
-import org.junit.AfterClass;
 
 import java.util.*;
 
@@ -13,8 +12,22 @@ import org.junit.rules.ExpectedException;
 
 public class ConstructorIOTest {
 
-    public String getRandString() {
-        return UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+    public String getRandomProductName() {
+        return "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+    }
+
+    public String getProductSection() {
+        return "Products";
+    }
+
+    public ConstructorItem getProductItem() {
+      String name = this.getRandomProductName();
+      String section = this.getProductSection();
+      String url = "https://constructor.io/products/" + name;
+
+      ConstructorItem item = new ConstructorItem(name, section);
+      item.setUrl(url);
+      return item;
     }
 
     @Rule
@@ -23,9 +36,10 @@ public class ConstructorIOTest {
     @BeforeClass
     public static void setup() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      ConstructorItem item = new ConstructorItem("Stanley_Steamer", "Search Suggestions");
+      ConstructorItem item = new ConstructorItem("Stanley_Steamer", "Products");
       item.setId("Stanley1");
-      constructor.removeItem(item);
+      item.setUrl("https://constructor.io/products/Stanley1");
+      constructor.addOrUpdateItem(item);
       Thread.sleep(2000);
     }
 
@@ -84,14 +98,14 @@ public class ConstructorIOTest {
     @Test
     public void addItemShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      ConstructorItem item = new ConstructorItem(this.getRandString(), "Search Suggestions");
+      ConstructorItem item = this.getProductItem();
       assertTrue("addition succeeds", constructor.addItem(item));
     }
 
     @Test
     public void addOrUpdateItemShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        ConstructorItem item = new ConstructorItem(this.getRandString(), "Search Suggestions");
+        ConstructorItem item = this.getProductItem();
         assertTrue("upsert succeeds", constructor.addOrUpdateItem(item));
     }
 
@@ -99,59 +113,61 @@ public class ConstructorIOTest {
     public void addBatchShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem[] items = {
-            new ConstructorItem(this.getRandString(), "Search Suggestions"),
-            new ConstructorItem(this.getRandString(), "Search Suggestions"),
-            new ConstructorItem(this.getRandString(), "Search Suggestions")
+            this.getProductItem(),
+            this.getProductItem(),
+            this.getProductItem()
         };
-        assertTrue("batch addition succeeds", constructor.addItemBatch(items, "Search Suggestions"));
+        assertTrue("batch addition succeeds", constructor.addItemBatch(items, this.getProductSection()));
     }
   
     @Test
     public void addOrUpdateBatchShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       ConstructorItem[] items = {
-          new ConstructorItem(this.getRandString(), "Search Suggestions"),
-          new ConstructorItem(this.getRandString(), "Search Suggestions"),
-          new ConstructorItem(this.getRandString(), "Search Suggestions")
+        this.getProductItem(),
+        this.getProductItem(),
+        this.getProductItem()
       };
-      assertTrue("batch upsert succeeds", constructor.addOrUpdateItemBatch(items, "Search Suggestions"));
+      assertTrue("batch upsert succeeds", constructor.addOrUpdateItemBatch(items, this.getProductSection()));
     }
 
     @Test
     public void modifyShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        String itemName = this.getRandString();
-        ConstructorItem itemOld = new ConstructorItem(itemName, "Search Suggestions");
-        ConstructorItem itemNew = new ConstructorItem(itemName, "Search Suggestions");
-        itemNew.setSuggestedScore(1337);
+        ConstructorItem itemOld = this.getProductItem();
         constructor.addItem(itemOld);
         Thread.sleep(2000);
+        
+        ConstructorItem itemNew = new ConstructorItem(itemOld.getItemName(), itemOld.getAutocompleteSection());
+        itemNew.setUrl(itemOld.getUrl());
+        itemNew.setSuggestedScore(1337);
         assertTrue("modify succeeds", constructor.modifyItem(itemOld, itemNew));
     }
 
     @Test
     public void removeShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        ConstructorItem item = new ConstructorItem(this.getRandString(), "Search Suggestions");
+        ConstructorItem item = this.getProductItem();
         constructor.addItem(item);
         Thread.sleep(2000);
+
         assertTrue("remove succeeds", constructor.removeItem(item));
     }
 
     public void removeBatchShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       ConstructorItem[] items = {
-          new ConstructorItem(this.getRandString(), "Search Suggestions"),
-          new ConstructorItem(this.getRandString(), "Search Suggestions"),
-          new ConstructorItem(this.getRandString(), "Search Suggestions")
+        this.getProductItem(),
+        this.getProductItem(),
+        this.getProductItem()
       };
-      assertTrue("batch removal succeeds", constructor.removeItemBatch(items, "Search Suggestions"));
+      assertTrue("batch removal succeeds", constructor.removeItemBatch(items, this.getProductSection()));
     }
   
     @Test
     public void trackConversionNoParamsShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        assertTrue("conversion without params succeeds", constructor.trackConversion("Stanley_Steamer", "Search Suggestions", "Stanley1", "$1.99"));
+        assertTrue("conversion without params succeeds", constructor.trackConversion("Stanley_Steamer", this.getProductSection(), "Stanley1", "$1.99"));
     }
   
     @Test
@@ -163,6 +179,6 @@ public class ConstructorIOTest {
     @Test
     public void trackClickThroughNoParamsShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", "Search Suggestions", "Stanley1"));
+        assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", this.getProductSection(), "Stanley1"));
     }
 } 

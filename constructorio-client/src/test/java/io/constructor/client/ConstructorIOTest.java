@@ -154,6 +154,13 @@ public class ConstructorIOTest {
       };
       assertTrue("batch removal succeeds", constructor.removeItemBatch(items, "Products"));
     }
+
+    @Test
+    public void autocompleteShouldReturnAResult() throws Exception {
+      ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+      AutocompleteResponse result = constructor.autocomplete("Stanley");
+      assertTrue("batch removal succeeds", result.getResultId() != null);
+    }
   
     @Test
     public void trackConversionNoParamsShouldReturn() throws Exception {

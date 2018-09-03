@@ -12,6 +12,9 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import org.apache.http.client.utils.URLEncodedUtils;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Constructor.io Client
  */
@@ -315,6 +318,47 @@ public class ConstructorIO {
         } catch (UnirestException uniException) {
             throw new ConstructorException(uniException);
         }
+    }
+
+    /**	
+     * Queries the autocomplete service.	
+     *	
+     * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!	
+     * That's important. That will be a solid latency difference.	
+     *	
+     * @param query The string that you will be autocompleting.	
+     * @return An autocomplete result	
+     */	
+    public AutocompleteResponse autocomplete(String query) throws ConstructorException {	
+        try {	
+            String url = this.makeUrl("autocomplete/" + query);
+            HttpResponse<JsonNode> jsonRes = Unirest.get(url)
+                .asJson();	
+            if (checkResponse(jsonRes, 200)) {
+                JSONObject bodyJSON = jsonRes.getBody().getObject();
+                JSONObject sectionsJSON = bodyJSON.getJSONObject("sections");
+                HashMap<String, ArrayList<AutocompleteSuggestion>> sections = new HashMap<String, ArrayList<AutocompleteSuggestion>>();
+
+                for(Object key : sectionsJSON.keySet()) {
+                    ArrayList<AutocompleteSuggestion> items = new ArrayList<AutocompleteSuggestion>();
+                    String sectionName = (String)key;
+                    JSONArray resultsJSON = sectionsJSON.getJSONArray(sectionName);
+                    for (int i = 0; i < resultsJSON.length(); i++) {
+                        JSONObject suggestionJSON = resultsJSON.getJSONObject(i);
+                        items.add(new AutocompleteSuggestion(suggestionJSON.getString("value"), new HashMap<String, Object>(), new ArrayList<String>()));
+                    }
+                    sections.put(sectionName, items);
+                }
+
+                String resultId = bodyJSON.getString("result_id");
+                return new AutocompleteResponse(resultId, sections);
+            }	
+            return null; // this should not get back here	
+        } catch (UnsupportedEncodingException encException) {	
+            throw new ConstructorException(encException);	
+        } catch (UnirestException uniException) {	
+            throw new ConstructorException(uniException);	
+        }	
     }
 
     /**

@@ -4,7 +4,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 
-import java.util.*;
+import java.util.UUID;
+import java.util.HashMap;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -109,7 +110,7 @@ public class ConstructorIOTest {
         };
         assertTrue("batch addition succeeds", constructor.addItemBatch(items, "Products"));
     }
-  
+
     @Test
     public void addOrUpdateBatchShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
@@ -127,7 +128,7 @@ public class ConstructorIOTest {
         ConstructorItem itemOld = this.getProductItem();
         constructor.addItem(itemOld, "Products");
         Thread.sleep(2000);
-        
+
         ConstructorItem itemNew = new ConstructorItem(itemOld.getItemName());
         itemNew.setUrl(itemOld.getUrl());
         itemNew.setSuggestedScore(1337);
@@ -159,24 +160,24 @@ public class ConstructorIOTest {
     public void autocompleteShouldReturnAResult() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       AutocompleteResponse result = constructor.autocomplete("Stanley");
-      assertTrue("batch removal succeeds", result.getResultId() != null);
+      assertTrue("autocomplete succeeds", result.getResultId() != null);
     }
-  
+
     @Test
     public void trackConversionNoParamsShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertTrue("conversion without params succeeds", constructor.trackConversion("Stanley_Steamer", "Products", "Stanley1", "$1.99"));
     }
-  
+
     @Test
     public void trackSearchNoParamsShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertTrue("search without params succeeds", constructor.trackSearch("Stanley_Steamer", 22));
     }
-  
+
     @Test
     public void trackClickThroughNoParamsShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", "Products", "Stanley1"));
     }
-} 
+}

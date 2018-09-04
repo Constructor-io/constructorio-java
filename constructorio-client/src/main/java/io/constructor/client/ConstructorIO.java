@@ -12,7 +12,6 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import org.apache.http.client.utils.URLEncodedUtils;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -336,22 +335,7 @@ public class ConstructorIO {
                 .asJson();	
             if (checkResponse(jsonRes, 200)) {
                 JSONObject bodyJSON = jsonRes.getBody().getObject();
-                JSONObject sectionsJSON = bodyJSON.getJSONObject("sections");
-                HashMap<String, ArrayList<AutocompleteSuggestion>> sections = new HashMap<String, ArrayList<AutocompleteSuggestion>>();
-
-                for(Object key : sectionsJSON.keySet()) {
-                    ArrayList<AutocompleteSuggestion> items = new ArrayList<AutocompleteSuggestion>();
-                    String sectionName = (String)key;
-                    JSONArray resultsJSON = sectionsJSON.getJSONArray(sectionName);
-                    for (int i = 0; i < resultsJSON.length(); i++) {
-                        JSONObject suggestionJSON = resultsJSON.getJSONObject(i);
-                        items.add(new AutocompleteSuggestion(suggestionJSON.getString("value"), new HashMap<String, Object>(), new ArrayList<String>()));
-                    }
-                    sections.put(sectionName, items);
-                }
-
-                String resultId = bodyJSON.getString("result_id");
-                return new AutocompleteResponse(resultId, sections);
+                return new AutocompleteResponse(bodyJSON);
             }	
             return null; // this should not get back here	
         } catch (UnsupportedEncodingException encException) {	

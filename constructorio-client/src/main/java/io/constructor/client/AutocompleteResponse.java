@@ -3,6 +3,12 @@ package io.constructor.client;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+/**
+ * Constructor.io Autocomplete Response
+ */
 public class AutocompleteResponse {
 
     private HashMap<String, ArrayList<AutocompleteSuggestion>> sections;
@@ -11,22 +17,30 @@ public class AutocompleteResponse {
     /**
      * Creates an autocomplete response
      *
-     * @param resultId the identifier of the result set
-     * @param sections the sections of the result set
+     * @param json the JSON object to create the response from
      */
-    public AutocompleteResponse(String resultId, HashMap<String, ArrayList<AutocompleteSuggestion>> sections) throws IllegalArgumentException {
+    public AutocompleteResponse(JSONObject json) throws IllegalArgumentException {
       super();
 
-      if (resultId == null) {
-          throw new IllegalArgumentException("resultId is required");
+      if (json == null) {
+          throw new IllegalArgumentException("json is required");
       }
 
-      if (sections == null) {
-        throw new IllegalArgumentException("sections is required");
-      }
+      this.resultId = json.getString("result_id");;
+      this.sections = new HashMap<String, ArrayList<AutocompleteSuggestion>>();
 
-      this.resultId = resultId;
-      this.sections = sections;
+      JSONObject sectionsJSON = json.getJSONObject("sections");
+      for(Object sectionKey : sectionsJSON.keySet()) {
+        String sectionName = (String)sectionKey;
+        ArrayList<AutocompleteSuggestion> items = new ArrayList<AutocompleteSuggestion>();
+        JSONArray resultsJSON = sectionsJSON.getJSONArray(sectionName);
+        for (int i = 0; i < resultsJSON.length(); i++) {
+            JSONObject suggestionJSON = resultsJSON.getJSONObject(i);
+            AutocompleteSuggestion suggestion = new AutocompleteSuggestion(suggestionJSON);
+            items.add(suggestion);
+        }
+        sections.put(sectionName, items);
+      }
     }
 
     /**

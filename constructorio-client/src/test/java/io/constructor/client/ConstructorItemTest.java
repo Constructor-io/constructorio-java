@@ -2,7 +2,9 @@ package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.*;
+import java.util.UUID;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -71,4 +73,4 @@ public class ConstructorItemTest {
         assertEquals(item.getMetadata(), null);
         assertEquals(item.getGroupIds().size(), 3);
     }
-} 
+}

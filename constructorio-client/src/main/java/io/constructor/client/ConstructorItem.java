@@ -22,8 +22,6 @@ public class ConstructorItem {
      * @param itemName the name of the item that you are adding.
      */
     public ConstructorItem(String itemName) throws IllegalArgumentException {
-        super();
-
         if (itemName == null) {
             throw new IllegalArgumentException("itemName is required");
         }
@@ -43,7 +41,7 @@ public class ConstructorItem {
     /**
      * Returns the HashMap form of an autocomplete item for converting to JSON
      */
-    public  HashMap<String, Object> toParams() {
+    public  HashMap<String, Object> toHashMap() {
         HashMap<String, Object> params = new HashMap<String, Object>();
 
         if (itemName == null) {

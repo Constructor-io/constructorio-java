@@ -20,8 +20,6 @@ public class AutocompleteResponse {
      * @param json the JSON object to create the response from
      */
     public AutocompleteResponse(JSONObject json) throws IllegalArgumentException {
-      super();
-
       if (json == null) {
           throw new IllegalArgumentException("json is required");
       }

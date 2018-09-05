@@ -130,7 +130,7 @@ public class ConstructorIO {
     public boolean addItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/item");
-            HashMap<String, Object> data = item.toParams();
+            HashMap<String, Object> data = item.toHashMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
@@ -157,7 +157,7 @@ public class ConstructorIO {
     public boolean addOrUpdateItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/item") + "&force=1";
-            HashMap<String, Object> data = item.toParams();
+            HashMap<String, Object> data = item.toHashMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.put(url)
@@ -186,7 +186,7 @@ public class ConstructorIO {
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toParams());
+                itemsAsJSON.add(item.toHashMap());
             }
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
@@ -217,7 +217,7 @@ public class ConstructorIO {
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toParams());
+                itemsAsJSON.add(item.toHashMap());
             }
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
@@ -275,7 +275,7 @@ public class ConstructorIO {
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toParams());
+                itemsAsJSON.add(item.toHashMap());
             }
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
@@ -302,7 +302,7 @@ public class ConstructorIO {
     public boolean modifyItem(ConstructorItem item, String autocompleteSection, String previousItemName) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/item");
-            HashMap<String, Object> data = item.toParams();
+            HashMap<String, Object> data = item.toHashMap();
             data.put("new_item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_name", previousItemName);

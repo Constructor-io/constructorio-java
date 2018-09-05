@@ -18,8 +18,6 @@ public class AutocompleteSuggestion {
      * @param json the JSON object to create the response from
      */
     public AutocompleteSuggestion(JSONObject json) throws IllegalArgumentException {
-      super();
-
       if (json == null) {
           throw new IllegalArgumentException("json is required");
       }

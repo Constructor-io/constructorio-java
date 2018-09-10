@@ -1,157 +1,204 @@
 package io.constructor.client;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 
-import com.google.gson.Gson;
+public class ConstructorItem {
 
-public class ConstructorItem extends HashMap<String, Object> {
-    /**
-     * Creates a constructor.io autocomplete item, which is basically a HashMap with additional abstraction.
-     *
-     * @param itemName   the item that you're adding.
-     * @param jsonParams a map of optional parameters. Optional parameters are in the <a href="https://constructor.io/docs/#add-an-item">API documentation</a>
-     */
-    public ConstructorItem(String itemName, HashMap<String, Object> jsonParams) {
-        super();
-        this.put("item_name", itemName);
-        this.putAll(jsonParams);
-    }
-
-    /**
-     * Creates a constructor.io autocomplete item, which is basically a HashMap with additional abstraction.
-     *
-     * @param itemName the item that you're adding.
-     */
-    public ConstructorItem(String itemName) {
-        super();
-        this.put("item_name", itemName);
-    }
+    private String itemName;
+    private Integer suggestedScore;
+    private ArrayList<String> keywords;
+    private String url;
+    private String imageUrl;
+    private String id;
+    private String description;
+    private HashMap <String, String> facets;
+    private HashMap <String, String> metadata;
+    private ArrayList<String> groupIds;
 
     /**
-     * Associates the specified value with the specified key in this map.
-     * If the map previously contained a mapping for the key, the old
-     * value is replaced. If the value is null, the field will be removed.
+     * Creates an autocomplete item.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
      *
-     * @param name  key with which the specified value is to be associated
-     * @param value value to be associated with the specified key
-     * @return the ConstructorItem itself for chained syntax.
+     * @param itemName the name of the item that you are adding.
      */
-    public ConstructorItem put(String name, Object value) throws IllegalArgumentException {
-        // Check type for known parameters
-        if ((name.equals("item_name")) && value == null) {
-            throw new IllegalArgumentException("The field " + name + " cannot be null");
-        }
-        if ((name.equals("item_name") || name.equals("url") || name.equals("image_url") || name.equals("description") || name.equals("id")) && !(value instanceof String) && value != null) {
-            throw new IllegalArgumentException("The field " + name + " has to be a String");
-        }
-        if (name.equals("suggested_score")) {
-            if (!(value instanceof Number) && value != null) {
-                throw new IllegalArgumentException("The field " + name + " has to be a Number");
-            }
-            if (value == null) value = 0;
-            // Let setSuggestedScore handle the rest...
-            return setSuggestedScore(((Number) value).intValue());
-        }
-        if ((name.equals("keywords") && !(value instanceof String[]) && value != null)) {
-            throw new IllegalArgumentException("The field " + name + " has to be a String[]");
+    public ConstructorItem(String itemName) throws IllegalArgumentException {
+        if (itemName == null) {
+            throw new IllegalArgumentException("itemName is required");
         }
 
-        if (value == null) { // Don't allow null values
-            super.remove(name);
-        } else {
-            super.put(name, value);
-        }
-        return this; // Make it chainable
+        this.itemName = itemName;
+        this.suggestedScore = null;
+        this.keywords = null;
+        this.url = null;
+        this.imageUrl = null;
+        this.description = null;
+        this.id = null;
+        this.facets = null;
+        this.metadata = null;
+        this.groupIds = null;
     }
 
     /**
-     * Removes the mapping for the specified key from this map if present.
-     *
-     * @param name key whose mapping is to be removed from the map
-     * @return the ConstructorItem itself for chained syntax.
+     * Returns the HashMap form of an autocomplete item for converting to JSON
      */
-    public ConstructorItem remove(String name) throws IllegalArgumentException {
-        if (name.equals("item_name")) {
-            throw new IllegalArgumentException("The field " + name + " cannot be null");
-        }
-        super.remove(name);
-        return this; // Make it chainable
-    }
-
-    String toJson() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
-    }
-
-    HashMap<String, Object> toJsonParams() {
+    public  HashMap<String, Object> toHashMap() {
         HashMap<String, Object> params = new HashMap<String, Object>();
-        params.putAll(this);
-        params.remove("item_name");
+
+        if (itemName == null) {
+            throw new IllegalArgumentException("itemName is required");
+        }
+
+        params.put("item_name", this.itemName);
+        params.put("suggested_score", this.suggestedScore);
+        params.put("keywords", this.keywords);
+        params.put("url", this.url);
+        params.put("image_url", this.imageUrl);
+        params.put("description", this.description);
+        params.put("id", this.id);
+        params.put("facets", this.facets);
+        params.put("metadata", this.metadata);
+        params.put("group_ids", this.groupIds);
+       
         return params;
     }
 
-
-    public ConstructorItem setItemName(String v) {
-        this.put("item_name", v);
-        return this;
-    }
-
+    /**
+     * @return the itemName
+     */
     public String getItemName() {
-        return (String) this.get("item_name");
+        return itemName;
+    }
+ 
+    /**
+     * @param itemName the itemName to set
+     */
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+    
+    /**
+     * @return the suggestedScore
+     */
+    public Integer getSuggestedScore() {
+        return suggestedScore;
     }
 
-    public ConstructorItem setSuggestedScore(int v) {
-        if (v > 0) super.put("suggested_score", v);
-        else super.remove("suggested_score");
-        return this;
+    /**
+     * @param suggestedScore the suggestedScore to set
+     */
+    public void setSuggestedScore(Integer suggestedScore) {
+        this.suggestedScore = suggestedScore;
     }
 
-    public int getSuggestedScore() {
-        return this.containsKey("suggested_score") ? ((Number) this.get("suggested_score")).intValue() : 0;
+    /**
+     * @return the keywords
+     */
+    public ArrayList<String> getKeywords() {
+        return keywords;
     }
 
-    public ConstructorItem setKeywords(String... v) {
-        this.put("keywords", v);
-        return this;
+    /**
+     * @param keywords the keywords to set
+     */
+    public void setKeywords(ArrayList<String> keywords) {
+        this.keywords = keywords;
     }
 
-    public String[] getKeywords() {
-        return (String[]) this.get("keywords");
-    }
-
-    public ConstructorItem setUrl(String v) {
-        this.put("url", v);
-        return this;
-    }
-
+    /**
+     * @return the url
+     */
     public String getUrl() {
-        return (String) this.get("url");
+        return url;
     }
 
-    public ConstructorItem setImageUrl(String v) {
-        this.put("image_url", v);
-        return this;
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 
+    /**
+     * @return the imageUrl
+     */
     public String getImageUrl() {
-        return (String) this.get("image_url");
+        return imageUrl;
     }
 
-    public ConstructorItem setDescription(String v) {
-        this.put("description", v);
-        return this;
+    /**
+     * @param imageUrl the imageUrl to set
+     */
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
+    /**
+     * @return the description
+     */
     public String getDescription() {
-        return (String) this.get("description");
+        return description;
     }
 
-    public ConstructorItem setId(String v) {
-        this.put("id", v);
-        return this;
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
+    /**
+     * @return the id
+     */
     public String getId() {
-        return this.get("id").toString();
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the facets
+     */
+    public HashMap<String, String> getFacets() {
+        return facets;
+    }
+    
+    /**
+     * @param facets the facets to set
+     */
+    public void setFacets(HashMap<String, String> facets) {
+        this.facets = facets;
+    }
+
+    /**
+     * @return the metadata
+     */
+    public HashMap<String, String> getMetadata() {
+        return metadata;
+    }
+    
+    /**
+     * @param metadata the metadata to set
+     */
+    public void setMetadata(HashMap<String, String> metadata) {
+        this.metadata = metadata;
+    }
+
+    /**
+     * @return the groupIds
+     */
+    public ArrayList<String> getGroupIds() {
+        return groupIds;
+    }
+
+    /**
+     * @param groupIds the groupIds to set
+     */
+    public void setGroupIds(ArrayList<String> groupIds) {
+        this.groupIds = groupIds;
     }
 }

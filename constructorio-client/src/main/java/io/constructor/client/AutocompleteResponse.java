@@ -13,6 +13,7 @@ public class AutocompleteResponse {
 
     private HashMap<String, ArrayList<AutocompleteSuggestion>> sections;
     private String resultId;
+    private String clientVersion;
 
     /**
      * Creates an autocomplete response
@@ -24,7 +25,7 @@ public class AutocompleteResponse {
           throw new IllegalArgumentException("json is required");
       }
 
-      this.resultId = json.getString("result_id");;
+      this.resultId = json.getString("result_id");
       this.sections = new HashMap<String, ArrayList<AutocompleteSuggestion>>();
 
       JSONObject sectionsJSON = json.getJSONObject("sections");

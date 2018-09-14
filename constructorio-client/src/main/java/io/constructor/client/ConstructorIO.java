@@ -1,17 +1,22 @@
 package io.constructor.client;
 
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.ArrayList;
-
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
-import com.mashape.unirest.http.*;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import org.apache.http.client.utils.URLEncodedUtils;
-
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.json.JSONObject;
 
 /**
@@ -328,11 +333,14 @@ public class ConstructorIO {
      * @param query The string that you will be autocompleting.	
      * @return An autocomplete result	
      */	
-    public AutocompleteResponse autocomplete(String query) throws ConstructorException {	
+    public AutocompleteResponse autocomplete(String query) throws ConstructorException, IOException, XmlPullParserException {	
         try {	
             String url = this.makeUrl("autocomplete/" + query);
+            HashMap<String, Object> data = new HashMap<String, Object>();
+            data.put("c", this.getVersionParamString());
             HttpResponse<JsonNode> jsonRes = Unirest.get(url)
-                .asJson();	
+                .queryString(data)
+                .asJson();
             if (checkResponse(jsonRes, 200)) {
                 JSONObject bodyJSON = jsonRes.getBody().getObject();
                 return new AutocompleteResponse(bodyJSON);
@@ -357,7 +365,7 @@ public class ConstructorIO {
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue) throws ConstructorException {
+    public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue) throws ConstructorException, IOException, XmlPullParserException {
         try {
             String url = this.makeUrl("v1/conversion");
             HashMap<String, Object> data = new HashMap<String, Object>();
@@ -365,6 +373,7 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
             data.put("revenue", revenue);
+            data.put("c", this.getVersionParamString());
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
@@ -387,13 +396,14 @@ public class ConstructorIO {
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean trackClickThrough(String term, String autocompleteSection, String itemId) throws ConstructorException {
+    public boolean trackClickThrough(String term, String autocompleteSection, String itemId) throws ConstructorException, IOException, XmlPullParserException {
         try {
             String url = this.makeUrl("v1/click_through");
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
+            data.put("c", this.getVersionParamString());
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
@@ -417,12 +427,13 @@ public class ConstructorIO {
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean trackSearch(String term, Integer numResults) throws ConstructorException {
+    public boolean trackSearch(String term, Integer numResults) throws ConstructorException, IOException, XmlPullParserException {
         try {
             String url = this.makeUrl("v1/search");
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("num_results", numResults);
+            data.put("c", this.getVersionParamString());
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
@@ -434,5 +445,18 @@ public class ConstructorIO {
         } catch (UnirestException uniException) {
             throw new ConstructorException(uniException);
         }
+    }
+
+    /**
+     * Grabs the version number from the pom.xml file.
+     *
+     * @return version number
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    protected String getVersionParamString() throws IOException, XmlPullParserException {
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        Model model = reader.read(new FileReader("pom.xml"));
+        return "ciojava-" + model.getVersion();
     }
 }

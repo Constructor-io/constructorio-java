@@ -333,7 +333,7 @@ public class ConstructorIO {
      * @param query The string that you will be autocompleting.	
      * @return An autocomplete result	
      */	
-    public AutocompleteResponse autocomplete(String query) throws ConstructorException, IOException, XmlPullParserException {	
+    public AutocompleteResponse autocomplete(String query) throws ConstructorException {
         try {	
             String url = this.makeUrl("autocomplete/" + query) + "&c=" + this.version;
             HashMap<String, Object> data = new HashMap<String, Object>();
@@ -362,7 +362,7 @@ public class ConstructorIO {
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue) throws ConstructorException, IOException, XmlPullParserException {
+    public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/conversion") + "&c=" + this.version;
             HashMap<String, Object> data = new HashMap<String, Object>();
@@ -392,7 +392,7 @@ public class ConstructorIO {
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean trackClickThrough(String term, String autocompleteSection, String itemId) throws ConstructorException, IOException, XmlPullParserException {
+    public boolean trackClickThrough(String term, String autocompleteSection, String itemId) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/click_through") + "&c=" + this.version;
             HashMap<String, Object> data = new HashMap<String, Object>();
@@ -422,7 +422,7 @@ public class ConstructorIO {
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean trackSearch(String term, Integer numResults) throws ConstructorException, IOException, XmlPullParserException {
+    public boolean trackSearch(String term, Integer numResults) throws ConstructorException {
         try {
             String url = this.makeUrl("v1/search") + "&c=" + this.version;
             HashMap<String, Object> data = new HashMap<String, Object>();

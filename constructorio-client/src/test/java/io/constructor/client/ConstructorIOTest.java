@@ -2,7 +2,6 @@ package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -184,10 +183,8 @@ public class ConstructorIOTest {
     }
 
     @Test
-    public void getVersionParamStringShouldReturnAppVersion() throws Exception {
+    public void getVersionShouldReturnClientVersion() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        Model mockedModel = mock(Model.class);
-        when(mockedModel.getVersion()).thenReturn("1.0.1.0.1");
-        assertEquals("grabs version from pom.xml", constructor.getVersionParamString(mockedModel), "ciojava-1.0.1.0.1");
+        assertEquals("grabs version from pom.xml", constructor.getVersion(), "ciojava-3.0.0");
     }
 }

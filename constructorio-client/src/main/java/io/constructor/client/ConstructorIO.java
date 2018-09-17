@@ -450,21 +450,10 @@ public class ConstructorIO {
         try {
             MavenXpp3Reader reader = new MavenXpp3Reader();
             Model model = reader.read(new FileReader("pom.xml"));
-            return getVersionParamString(model);
+            return "ciojava-" + model.getVersion();
         } catch (Exception e) {
             // Do nothing
         }
         return "ciojava-";
-    }
-
-    /**
-     * For Testing.
-     * Grabs the version number from the pom.xml file.
-     * 
-     * @return version number
-     * @param model Maven model used to get client version
-     */
-    protected String getVersionParamString(Model model) {
-        return "ciojava-" + model.getVersion();
     }
 }

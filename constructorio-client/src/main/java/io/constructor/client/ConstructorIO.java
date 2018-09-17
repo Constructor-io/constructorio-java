@@ -337,7 +337,7 @@ public class ConstructorIO {
         try {	
             String url = this.makeUrl("autocomplete/" + query);
             HashMap<String, Object> data = new HashMap<String, Object>();
-            data.put("c", this.getVersionParamString());
+            data.put("c", this.getVersion());
             HttpResponse<JsonNode> jsonRes = Unirest.get(url)
                 .queryString(data)
                 .asJson();
@@ -373,7 +373,7 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
             data.put("revenue", revenue);
-            data.put("c", this.getVersionParamString());
+            data.put("c", this.getVersion());
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
@@ -403,7 +403,7 @@ public class ConstructorIO {
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
-            data.put("c", this.getVersionParamString());
+            data.put("c", this.getVersion());
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
@@ -433,7 +433,7 @@ public class ConstructorIO {
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("num_results", numResults);
-            data.put("c", this.getVersionParamString());
+            data.put("c", this.getVersion());
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
@@ -454,9 +454,20 @@ public class ConstructorIO {
      * @throws IOException
      * @throws XmlPullParserException
      */
-    protected String getVersionParamString() throws IOException, XmlPullParserException {
+    protected String getVersion() throws IOException, XmlPullParserException {
         MavenXpp3Reader reader = new MavenXpp3Reader();
         Model model = reader.read(new FileReader("pom.xml"));
+        return getVersionParamString(model);
+    }
+
+    /**
+     * For Testing.
+     * Grabs the version number from the pom.xml file.
+     * 
+     * @return version number
+     * @param model Maven model used to get client version
+     */
+    protected String getVersionParamString(Model model) {
         return "ciojava-" + model.getVersion();
     }
 }

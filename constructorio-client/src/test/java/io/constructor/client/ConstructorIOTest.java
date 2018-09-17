@@ -1,12 +1,14 @@
 package io.constructor.client;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
-import org.junit.BeforeClass;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.*;
 
-import java.util.UUID;
 import java.util.HashMap;
+import java.util.UUID;
 
+import org.apache.maven.model.Model;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,11 +16,11 @@ import org.junit.rules.ExpectedException;
 public class ConstructorIOTest {
 
     public ConstructorItem getProductItem() {
-      String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
-      String url = "https://constructor.io/products/" + name;
-      ConstructorItem item = new ConstructorItem(name);
-      item.setUrl(url);
-      return item;
+        String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+        String url = "https://constructor.io/products/" + name;
+        ConstructorItem item = new ConstructorItem(name);
+        item.setUrl(url);
+        return item;
     }
 
     @Rule
@@ -26,12 +28,12 @@ public class ConstructorIOTest {
 
     @BeforeClass
     public static void setup() throws Exception {
-      ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      ConstructorItem item = new ConstructorItem("Stanley_Steamer");
-      item.setId("Stanley1");
-      item.setUrl("https://constructor.io/products/Stanley1");
-      constructor.addOrUpdateItem(item, "Products");
-      Thread.sleep(2000);
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorItem item = new ConstructorItem("Stanley_Steamer");
+        item.setId("Stanley1");
+        item.setUrl("https://constructor.io/products/Stanley1");
+        constructor.addOrUpdateItem(item, "Products");
+        Thread.sleep(2000);
     }
 
     @Test
@@ -179,5 +181,13 @@ public class ConstructorIOTest {
     public void trackClickThroughNoParamsShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", "Products", "Stanley1"));
+    }
+
+    @Test
+    public void getVersionParamStringShouldReturnAppVersion() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        Model mockedModel = mock(Model.class);
+        when(mockedModel.getVersion()).thenReturn("1.0.1.0.1");
+        assertEquals("grabs version from pom.xml", constructor.getVersionParamString(mockedModel), "ciojava-1.0.1.0.1");
     }
 }

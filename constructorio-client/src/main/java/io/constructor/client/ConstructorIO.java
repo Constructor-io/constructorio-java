@@ -1,7 +1,6 @@
 package io.constructor.client;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.json.JSONObject;
 
 /**
@@ -28,6 +26,7 @@ public class ConstructorIO {
     public String apiKey;
     public String protocol;
     public String host;
+    public String version;
     protected URLEncodedUtils encoder;
 
     /**
@@ -42,6 +41,7 @@ public class ConstructorIO {
         this.apiToken = apiToken;
         this.apiKey = apiKey;
         this.host = host;
+        this.version = this.getVersion();
         if (host == null) {
             this.host = "ac.cnstrc.com";
         }
@@ -335,12 +335,9 @@ public class ConstructorIO {
      */	
     public AutocompleteResponse autocomplete(String query) throws ConstructorException, IOException, XmlPullParserException {	
         try {	
-            String url = this.makeUrl("autocomplete/" + query);
+            String url = this.makeUrl("autocomplete/" + query) + "&c=" + this.version;
             HashMap<String, Object> data = new HashMap<String, Object>();
-            data.put("c", this.getVersion());
-            HttpResponse<JsonNode> jsonRes = Unirest.get(url)
-                .queryString(data)
-                .asJson();
+            HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
             if (checkResponse(jsonRes, 200)) {
                 JSONObject bodyJSON = jsonRes.getBody().getObject();
                 return new AutocompleteResponse(bodyJSON);
@@ -367,13 +364,12 @@ public class ConstructorIO {
      */
     public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue) throws ConstructorException, IOException, XmlPullParserException {
         try {
-            String url = this.makeUrl("v1/conversion");
+            String url = this.makeUrl("v1/conversion") + "&c=" + this.version;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
             data.put("revenue", revenue);
-            data.put("c", this.getVersion());
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
@@ -398,12 +394,11 @@ public class ConstructorIO {
      */
     public boolean trackClickThrough(String term, String autocompleteSection, String itemId) throws ConstructorException, IOException, XmlPullParserException {
         try {
-            String url = this.makeUrl("v1/click_through");
+            String url = this.makeUrl("v1/click_through") + "&c=" + this.version;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
-            data.put("c", this.getVersion());
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
@@ -429,11 +424,10 @@ public class ConstructorIO {
      */
     public boolean trackSearch(String term, Integer numResults) throws ConstructorException, IOException, XmlPullParserException {
         try {
-            String url = this.makeUrl("v1/search");
+            String url = this.makeUrl("v1/search") + "&c=" + this.version;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("num_results", numResults);
-            data.put("c", this.getVersion());
             String params = new Gson().toJson(data);
             HttpResponse<JsonNode> jsonRes = Unirest.post(url)
                     .basicAuth(this.apiToken, "")
@@ -451,13 +445,16 @@ public class ConstructorIO {
      * Grabs the version number from the pom.xml file.
      *
      * @return version number
-     * @throws IOException
-     * @throws XmlPullParserException
      */
-    protected String getVersion() throws IOException, XmlPullParserException {
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        Model model = reader.read(new FileReader("pom.xml"));
-        return getVersionParamString(model);
+    protected String getVersion() {
+        try {
+            MavenXpp3Reader reader = new MavenXpp3Reader();
+            Model model = reader.read(new FileReader("pom.xml"));
+            return getVersionParamString(model);
+        } catch (Exception e) {
+            // Do nothing
+        }
+        return "ciojava-";
     }
 
     /**

@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.apache.maven.model.Model;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -78,7 +77,7 @@ public class ConstructorIOTest {
     public void makeUrlShouldReturnUrl() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
         String generatedUrl = constructor.makeUrl("v1/test");
-        assertEquals("make url should make urls", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka");
+        assertEquals("make url should make urls", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka&c=ciojava-3.0.0");
     }
 
     @Test

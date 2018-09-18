@@ -13,7 +13,6 @@ public class AutocompleteResponse {
 
     private HashMap<String, ArrayList<AutocompleteSuggestion>> sections;
     private String resultId;
-    private String clientVersion;
 
     /**
      * Creates an autocomplete response

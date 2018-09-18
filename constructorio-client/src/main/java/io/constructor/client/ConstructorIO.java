@@ -87,7 +87,7 @@ public class ConstructorIO {
      * @return The created URL. Now you can use it to issue requests and things!
      */
     public String makeUrl(String endpoint) throws UnsupportedEncodingException {
-        return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, "key=" + this.apiKey);
+        return String.format("%s://%s/%s?%s&%s", this.protocol, this.host, endpoint, "key=" + this.apiKey, "c=" + this.version);
     }
 
     /**
@@ -335,7 +335,7 @@ public class ConstructorIO {
      */	
     public AutocompleteResponse autocomplete(String query) throws ConstructorException {
         try {	
-            String url = this.makeUrl("autocomplete/" + query) + "&c=" + this.version;
+            String url = this.makeUrl("autocomplete/" + query);
             HashMap<String, Object> data = new HashMap<String, Object>();
             HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
             if (checkResponse(jsonRes, 200)) {
@@ -364,7 +364,7 @@ public class ConstructorIO {
      */
     public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/conversion") + "&c=" + this.version;
+            String url = this.makeUrl("v1/conversion");
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
@@ -394,7 +394,7 @@ public class ConstructorIO {
      */
     public boolean trackClickThrough(String term, String autocompleteSection, String itemId) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/click_through") + "&c=" + this.version;
+            String url = this.makeUrl("v1/click_through");
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
@@ -424,7 +424,7 @@ public class ConstructorIO {
      */
     public boolean trackSearch(String term, Integer numResults) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/search") + "&c=" + this.version;
+            String url = this.makeUrl("v1/search");
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("num_results", numResults);

@@ -1,17 +1,20 @@
 package io.constructor.client;
 
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.ArrayList;
-
+import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
-import com.mashape.unirest.http.*;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import org.apache.http.client.utils.URLEncodedUtils;
-
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.json.JSONObject;
 
 /**
@@ -23,6 +26,7 @@ public class ConstructorIO {
     public String apiKey;
     public String protocol;
     public String host;
+    public String version;
     protected URLEncodedUtils encoder;
 
     /**
@@ -37,6 +41,7 @@ public class ConstructorIO {
         this.apiToken = apiToken;
         this.apiKey = apiKey;
         this.host = host;
+        this.version = this.getVersion();
         if (host == null) {
             this.host = "ac.cnstrc.com";
         }
@@ -82,7 +87,7 @@ public class ConstructorIO {
      * @return The created URL. Now you can use it to issue requests and things!
      */
     public String makeUrl(String endpoint) throws UnsupportedEncodingException {
-        return String.format("%s://%s/%s?%s", this.protocol, this.host, endpoint, "key=" + this.apiKey);
+        return String.format("%s://%s/%s?%s&%s", this.protocol, this.host, endpoint, "key=" + this.apiKey, "c=" + this.version);
     }
 
     /**
@@ -328,11 +333,11 @@ public class ConstructorIO {
      * @param query The string that you will be autocompleting.	
      * @return An autocomplete result	
      */	
-    public AutocompleteResponse autocomplete(String query) throws ConstructorException {	
+    public AutocompleteResponse autocomplete(String query) throws ConstructorException {
         try {	
             String url = this.makeUrl("autocomplete/" + query);
-            HttpResponse<JsonNode> jsonRes = Unirest.get(url)
-                .asJson();	
+            HashMap<String, Object> data = new HashMap<String, Object>();
+            HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
             if (checkResponse(jsonRes, 200)) {
                 JSONObject bodyJSON = jsonRes.getBody().getObject();
                 return new AutocompleteResponse(bodyJSON);
@@ -434,5 +439,21 @@ public class ConstructorIO {
         } catch (UnirestException uniException) {
             throw new ConstructorException(uniException);
         }
+    }
+
+    /**
+     * Grabs the version number from the pom.xml file.
+     *
+     * @return version number
+     */
+    protected String getVersion() {
+        try {
+            MavenXpp3Reader reader = new MavenXpp3Reader();
+            Model model = reader.read(new FileReader("pom.xml"));
+            return "ciojava-" + model.getVersion();
+        } catch (Exception e) {
+            // Do nothing
+        }
+        return "ciojava-";
     }
 }

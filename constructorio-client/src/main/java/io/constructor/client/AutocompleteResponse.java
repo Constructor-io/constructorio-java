@@ -24,7 +24,7 @@ public class AutocompleteResponse {
           throw new IllegalArgumentException("json is required");
       }
 
-      this.resultId = json.getString("result_id");;
+      this.resultId = json.getString("result_id");
       this.sections = new HashMap<String, ArrayList<AutocompleteSuggestion>>();
 
       JSONObject sectionsJSON = json.getJSONObject("sections");

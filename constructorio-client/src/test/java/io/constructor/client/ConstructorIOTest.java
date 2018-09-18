@@ -1,12 +1,12 @@
 package io.constructor.client;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
-import org.junit.BeforeClass;
+import static org.junit.Assert.assertTrue;
 
-import java.util.UUID;
 import java.util.HashMap;
+import java.util.UUID;
 
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,11 +14,11 @@ import org.junit.rules.ExpectedException;
 public class ConstructorIOTest {
 
     public ConstructorItem getProductItem() {
-      String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
-      String url = "https://constructor.io/products/" + name;
-      ConstructorItem item = new ConstructorItem(name);
-      item.setUrl(url);
-      return item;
+        String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+        String url = "https://constructor.io/products/" + name;
+        ConstructorItem item = new ConstructorItem(name);
+        item.setUrl(url);
+        return item;
     }
 
     @Rule
@@ -26,12 +26,12 @@ public class ConstructorIOTest {
 
     @BeforeClass
     public static void setup() throws Exception {
-      ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      ConstructorItem item = new ConstructorItem("Stanley_Steamer");
-      item.setId("Stanley1");
-      item.setUrl("https://constructor.io/products/Stanley1");
-      constructor.addOrUpdateItem(item, "Products");
-      Thread.sleep(2000);
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorItem item = new ConstructorItem("Stanley_Steamer");
+        item.setId("Stanley1");
+        item.setUrl("https://constructor.io/products/Stanley1");
+        constructor.addOrUpdateItem(item, "Products");
+        Thread.sleep(2000);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class ConstructorIOTest {
     public void makeUrlShouldReturnUrl() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
         String generatedUrl = constructor.makeUrl("v1/test");
-        assertEquals("make url should make urls", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka");
+        assertEquals("make url should make urls", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka&c=ciojava-3.0.0");
     }
 
     @Test
@@ -179,5 +179,11 @@ public class ConstructorIOTest {
     public void trackClickThroughNoParamsShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", "Products", "Stanley1"));
+    }
+
+    @Test
+    public void getVersionShouldReturnClientVersion() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        assertEquals("grabs version from pom.xml", constructor.getVersion(), "ciojava-3.0.0");
     }
 }

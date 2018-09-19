@@ -1,6 +1,7 @@
 package io.constructor.client;
 
 import java.io.FileReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -50,8 +51,20 @@ public class ConstructorIO {
         } else {
             this.protocol = "http";
         }
-        Interceptor interceptor = new ConstructorIOHttpInterceptor(this.version, this.apiKey, this.host, this.protocol);
+        Interceptor interceptor = new ConstructorIOHttpInterceptor();
         this.client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+    }
+
+    /**	
+     * Makes a URL to issue the requests to.	
+     *	
+     * Note that the URL will automagically have the apiKey embedded.	
+     *	
+     * @param endpoint Endpoint of the autocomplete service.	
+     * @return The created URL. Now you can use it to issue requests and things!	
+     */	
+    public String makeUrl(String endpoint) throws UnsupportedEncodingException {	
+        return String.format("%s://%s/%s?%s&%s", this.protocol, this.host, endpoint, "key=" + this.apiKey, "c=" + this.version);	
     }
 
     /**
@@ -73,8 +86,10 @@ public class ConstructorIO {
      */
     public boolean verify() throws ConstructorException {
         try {
+            String url = this.makeUrl("v1/verify");
+            
             Request request = new Request.Builder()
-                .url("v1/verify")
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .get()
                 .build();
@@ -96,12 +111,14 @@ public class ConstructorIO {
      */
     public boolean addItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
+            String url = this.makeUrl("v1/item");
+            
             HashMap<String, Object> data = item.toHashMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
-                .url("v1/item")
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
@@ -124,12 +141,14 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
+            String url = this.makeUrl("v1/item") + "&force=1";
+            
             HashMap<String, Object> data = item.toHashMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
-                .url("v1/item?force=1")
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
@@ -151,6 +170,8 @@ public class ConstructorIO {
      */
     public boolean addItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
+            String url = this.makeUrl("v1/batch_items");
+            
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -161,7 +182,7 @@ public class ConstructorIO {
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
-                .url("v1/batch_items")
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
@@ -183,6 +204,8 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
+            String url = this.makeUrl("v1/batch_items") + "&force=1";
+            
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -193,7 +216,7 @@ public class ConstructorIO {
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
-                .url("v1/batch_items?force=1")
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
@@ -215,13 +238,15 @@ public class ConstructorIO {
      */
     public boolean removeItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
+            String url = this.makeUrl("v1/item");
+            
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
-                .url("v1/item")
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .delete(body)
                 .build();
@@ -243,6 +268,8 @@ public class ConstructorIO {
      */
     public boolean removeItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
+            String url = this.makeUrl("v1/batch_items");
+            
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -253,7 +280,7 @@ public class ConstructorIO {
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
-                .url("v1/batch_items")
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .delete(body)
                 .build();
@@ -276,6 +303,8 @@ public class ConstructorIO {
      */
     public boolean modifyItem(ConstructorItem item, String autocompleteSection, String previousItemName) throws ConstructorException {
         try {
+            String url = this.makeUrl("v1/item");
+            
             HashMap<String, Object> data = item.toHashMap();
             data.put("new_item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
@@ -283,7 +312,7 @@ public class ConstructorIO {
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
-                .url("v1/item")
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .put(body)
                 .build();
@@ -307,8 +336,10 @@ public class ConstructorIO {
     public AutocompleteResponse autocomplete(String query, UserInfo userInfo) throws ConstructorException {
         try {	
             String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("autocomplete/" + query) + userInfoParam;
+            
             Request request = new Request.Builder()
-                .url("autocomplete/" + query + userInfoParam)
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .get()
                 .build();
@@ -336,16 +367,18 @@ public class ConstructorIO {
      */
     public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue, UserInfo userInfo) throws ConstructorException {
         try {
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("v1/conversion") + userInfoParam;
+            
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
             data.put("revenue", revenue);
             String params = new Gson().toJson(data);
-            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
-                .url("v1/conversion" + userInfoParam)
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
@@ -368,15 +401,17 @@ public class ConstructorIO {
      */
     public boolean trackClickThrough(String term, String autocompleteSection, String itemId, UserInfo userInfo) throws ConstructorException {
         try {
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("v1/click_through") + userInfoParam;
+            
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
             String params = new Gson().toJson(data);
-            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
-                .url("v1/click_through" + userInfoParam)
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
@@ -400,14 +435,13 @@ public class ConstructorIO {
      */
     public boolean trackSearch(String term, Integer numResults, UserInfo userInfo) throws ConstructorException {
         try {
-            HashMap<String, Object> data = new HashMap<String, Object>();
-            data.put("term", term);
-            data.put("num_results", numResults);
-            String params = new Gson().toJson(data);
             String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("v1/search") + userInfoParam;
+
+            String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
-                .url("v1/search" + userInfoParam)
+                .url(url)
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();

@@ -333,9 +333,10 @@ public class ConstructorIO {
      * @param query The string that you will be autocompleting.	
      * @return An autocomplete result	
      */	
-    public AutocompleteResponse autocomplete(String query) throws ConstructorException {
+    public AutocompleteResponse autocomplete(String query, UserInfo userInfo) throws ConstructorException {
         try {	
-            String url = this.makeUrl("autocomplete/" + query);
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("autocomplete/" + query) + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
             if (checkResponse(jsonRes, 200)) {
@@ -362,9 +363,10 @@ public class ConstructorIO {
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue) throws ConstructorException {
+    public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue, UserInfo userInfo) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/conversion");
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("v1/conversion") + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
@@ -392,9 +394,10 @@ public class ConstructorIO {
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean trackClickThrough(String term, String autocompleteSection, String itemId) throws ConstructorException {
+    public boolean trackClickThrough(String term, String autocompleteSection, String itemId, UserInfo userInfo) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/click_through");
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("v1/click_through") + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
@@ -422,9 +425,10 @@ public class ConstructorIO {
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean trackSearch(String term, Integer numResults) throws ConstructorException {
+    public boolean trackSearch(String term, Integer numResults, UserInfo userInfo) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/search");
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("v1/search") + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("num_results", numResults);
@@ -455,5 +459,14 @@ public class ConstructorIO {
             // Do nothing
         }
         return "ciojava-";
+    }
+
+    /**
+     * Serializes the User Info object into a query string
+     * 
+     * @return query param string
+     */
+    protected String serializeUserInfo(UserInfo userInfo) {
+        return "&s=" + userInfo.getSessionId() + "&i=" + userInfo.getClientId();
     }
 }

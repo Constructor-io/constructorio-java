@@ -159,31 +159,67 @@ public class ConstructorIOTest {
     @Test
     public void autocompleteShouldReturnAResult() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      AutocompleteResponse result = constructor.autocomplete("Stanley");
+      UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+      AutocompleteResponse result = constructor.autocomplete("Stanley", userInfo);
       assertTrue("autocomplete succeeds", result.getResultId() != null);
     }
 
     @Test
-    public void trackConversionNoParamsShouldReturn() throws Exception {
+    public void autocompleteShouldReturnAResultWithNullUserInfo() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        assertTrue("conversion without params succeeds", constructor.trackConversion("Stanley_Steamer", "Products", "Stanley1", "$1.99"));
+        AutocompleteResponse result = constructor.autocomplete("Stanley", null);
+        assertTrue("autocomplete succeeds", result.getResultId() != null);
     }
 
     @Test
-    public void trackSearchNoParamsShouldReturn() throws Exception {
+    public void trackConversionShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        assertTrue("search without params succeeds", constructor.trackSearch("Stanley_Steamer", 22));
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        assertTrue("conversion without params succeeds", constructor.trackConversion("Stanley_Steamer", "Products", "Stanley1", "$1.99", userInfo));
     }
 
     @Test
-    public void trackClickThroughNoParamsShouldReturn() throws Exception {
+    public void trackConversionShouldReturnTrueWithNullUserInfo() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", "Products", "Stanley1"));
+        assertTrue("conversion without params succeeds", constructor.trackConversion("Stanley_Steamer", "Products", "Stanley1", "$1.99", null));
+    }
+
+    @Test
+    public void trackSearchShouldReturnTrue() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        assertTrue("search without params succeeds", constructor.trackSearch("Stanley_Steamer", 22, userInfo));
+    }
+
+    @Test
+    public void trackSearchShouldReturnTrueWithNullUserInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        assertTrue("search without params succeeds", constructor.trackSearch("Stanley_Steamer", 22, null));
+    }
+
+    @Test
+    public void trackClickThroughShouldReturnTrue() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", "Products", "Stanley1", userInfo));
+    }
+
+    @Test
+    public void trackClickThroughShouldReturnTrueWithNullUserInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", "Products", "Stanley1", null));
     }
 
     @Test
     public void getVersionShouldReturnClientVersion() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertEquals("grabs version from pom.xml", constructor.getVersion(), "ciojava-3.1.0");
+    }
+
+    @Test
+    public void serializeUserInfoShouldReturnQueryString() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        assertEquals("serializes user info into query string", constructor.serializeUserInfo(userInfo), "&s=3&i=c62a-2a09-faie");
     }
 }

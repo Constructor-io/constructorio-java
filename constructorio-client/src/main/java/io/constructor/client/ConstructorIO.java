@@ -55,16 +55,16 @@ public class ConstructorIO {
         this.client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
     }
 
-    /**	
-     * Makes a URL to issue the requests to.	
-     *	
-     * Note that the URL will automagically have the apiKey embedded.	
-     *	
-     * @param endpoint Endpoint of the autocomplete service.	
-     * @return The created URL. Now you can use it to issue requests and things!	
-     */	
-    public String makeUrl(String endpoint) throws UnsupportedEncodingException {	
-        return String.format("%s://%s/%s?%s&%s", this.protocol, this.host, endpoint, "key=" + this.apiKey, "c=" + this.version);	
+    /**
+     * Makes a URL to issue the requests to.
+     *
+     * Note that the URL will automagically have the apiKey embedded.
+     *
+     * @param endpoint Endpoint of the autocomplete service.
+     * @return The created URL. Now you can use it to issue requests and things!
+     */
+    public String makeUrl(String endpoint) throws UnsupportedEncodingException {
+        return String.format("%s://%s/%s?%s&%s", this.protocol, this.host, endpoint, "key=" + this.apiKey, "c=" + this.version);
     }
 
     /**
@@ -92,7 +92,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .get()
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -110,7 +110,7 @@ public class ConstructorIO {
      */
     public boolean addItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/item"); 
+            String url = this.makeUrl("v1/item");
             HashMap<String, Object> data = item.toHashMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
@@ -120,7 +120,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -149,7 +149,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -182,7 +182,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -215,7 +215,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -244,7 +244,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .delete(body)
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -277,7 +277,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .delete(body)
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -308,7 +308,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .put(body)
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -316,17 +316,17 @@ public class ConstructorIO {
         }
     }
 
-    /**	
-     * Queries the autocomplete service.	
-     *	
-     * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!	
-     * That's important. That will be a solid latency difference.	
-     *	
-     * @param query The string that you will be autocompleting.	
-     * @return An autocomplete result	
-     */	
+    /**
+     * Queries the autocomplete service.
+     *
+     * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param query The string that you will be autocompleting.
+     * @return An autocomplete result
+     */
     public AutocompleteResponse autocomplete(String query, UserInfo userInfo) throws ConstructorException {
-        try {	
+        try {
             String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
             String url = this.makeUrl("autocomplete/" + query) + userInfoParam;
             Request request = new Request.Builder()
@@ -334,7 +334,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .get()
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             checkResponse(response);
             JSONObject bodyJSON = new JSONObject(response.body().string());
@@ -372,7 +372,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -404,7 +404,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -436,7 +436,7 @@ public class ConstructorIO {
                 .addHeader("Authorization", this.apiToken)
                 .post(body)
                 .build();
-            
+
             Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
@@ -462,7 +462,7 @@ public class ConstructorIO {
 
     /**
      * Serializes the User Info object into a query string
-     * 
+     *
      * @return query param string
      */
     protected String serializeUserInfo(UserInfo userInfo) {

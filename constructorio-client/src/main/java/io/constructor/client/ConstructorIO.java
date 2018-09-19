@@ -335,7 +335,8 @@ public class ConstructorIO {
      */	
     public AutocompleteResponse autocomplete(String query, UserInfo userInfo) throws ConstructorException {
         try {	
-            String url = this.makeUrl("autocomplete/" + query) + this.serializeUserInfo(userInfo);
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("autocomplete/" + query) + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
             if (checkResponse(jsonRes, 200)) {
@@ -364,7 +365,8 @@ public class ConstructorIO {
      */
     public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue, UserInfo userInfo) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/conversion") + this.serializeUserInfo(userInfo);
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("v1/conversion") + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
@@ -394,7 +396,8 @@ public class ConstructorIO {
      */
     public boolean trackClickThrough(String term, String autocompleteSection, String itemId, UserInfo userInfo) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/click_through") + this.serializeUserInfo(userInfo);
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("v1/click_through") + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
@@ -424,7 +427,8 @@ public class ConstructorIO {
      */
     public boolean trackSearch(String term, Integer numResults, UserInfo userInfo) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/search") + this.serializeUserInfo(userInfo);
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            String url = this.makeUrl("v1/search") + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("num_results", numResults);

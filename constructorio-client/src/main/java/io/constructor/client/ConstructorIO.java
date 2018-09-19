@@ -1,8 +1,6 @@
 package io.constructor.client;
 
 import java.io.FileReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,7 +10,6 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.json.JSONObject;
 
-import okhttp3.Call;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -218,20 +215,21 @@ public class ConstructorIO {
      */
     public boolean removeItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/item");
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
-            HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
-                    .basicAuth(this.apiToken, "")
-                    .body(params)
-                    .asJson();
-            return checkResponse(jsonRes, 204);
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url("v1/item")
+                .addHeader("Authorization", this.apiToken)
+                .delete(body)
+                .build();
+            
+            Response response = client.newCall(request).execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 
@@ -245,7 +243,6 @@ public class ConstructorIO {
      */
     public boolean removeItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/batch_items");
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -254,13 +251,17 @@ public class ConstructorIO {
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
-            HttpResponse<JsonNode> jsonRes = Unirest.delete(url)
-                    .basicAuth(this.apiToken, "")
-                    .body(params)
-                    .asJson();
-            return checkResponse(jsonRes, 204);
-        } catch (UnsupportedEncodingException | UnirestException e) {
-            throw new ConstructorException(e);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url("v1/batch_items")
+                .addHeader("Authorization", this.apiToken)
+                .delete(body)
+                .build();
+            
+            Response response = client.newCall(request).execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 
@@ -275,21 +276,22 @@ public class ConstructorIO {
      */
     public boolean modifyItem(ConstructorItem item, String autocompleteSection, String previousItemName) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/item");
             HashMap<String, Object> data = item.toHashMap();
             data.put("new_item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_name", previousItemName);
             String params = new Gson().toJson(data);
-            HttpResponse<JsonNode> jsonRes = Unirest.put(url)
-                    .basicAuth(this.apiToken, "")
-                    .body(params)
-                    .asJson();
-            return checkResponse(jsonRes, 204);
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url("v1/item")
+                .addHeader("Authorization", this.apiToken)
+                .put(body)
+                .build();
+            
+            Response response = client.newCall(request).execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 
@@ -305,19 +307,19 @@ public class ConstructorIO {
     public AutocompleteResponse autocomplete(String query, UserInfo userInfo) throws ConstructorException {
         try {	
             String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
-            String url = this.makeUrl("autocomplete/" + query) + userInfoParam;
-            HashMap<String, Object> data = new HashMap<String, Object>();
-            HttpResponse<JsonNode> jsonRes = Unirest.get(url).asJson();
-            if (checkResponse(jsonRes, 200)) {
-                JSONObject bodyJSON = jsonRes.getBody().getObject();
-                return new AutocompleteResponse(bodyJSON);
-            }	
-            return null; // this should not get back here	
-        } catch (UnsupportedEncodingException encException) {	
-            throw new ConstructorException(encException);	
-        } catch (UnirestException uniException) {	
-            throw new ConstructorException(uniException);	
-        }	
+            Request request = new Request.Builder()
+                .url("autocomplete/" + query + userInfoParam)
+                .addHeader("Authorization", this.apiToken)
+                .get()
+                .build();
+            
+            Response response = client.newCall(request).execute();
+            checkResponse(response);
+            JSONObject bodyJSON = new JSONObject(response.body().string());
+            return new AutocompleteResponse(bodyJSON);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
     }
 
     /**
@@ -334,23 +336,24 @@ public class ConstructorIO {
      */
     public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue, UserInfo userInfo) throws ConstructorException {
         try {
-            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
-            String url = this.makeUrl("v1/conversion") + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
             data.put("revenue", revenue);
             String params = new Gson().toJson(data);
-            HttpResponse<JsonNode> jsonRes = Unirest.post(url)
-                    .basicAuth(this.apiToken, "")
-                    .body(params)
-                    .asJson();
-            return checkResponse(jsonRes, 204);
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url("v1/conversion" + userInfoParam)
+                .addHeader("Authorization", this.apiToken)
+                .post(body)
+                .build();
+            
+            Response response = client.newCall(request).execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 
@@ -365,22 +368,23 @@ public class ConstructorIO {
      */
     public boolean trackClickThrough(String term, String autocompleteSection, String itemId, UserInfo userInfo) throws ConstructorException {
         try {
-            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
-            String url = this.makeUrl("v1/click_through") + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
             String params = new Gson().toJson(data);
-            HttpResponse<JsonNode> jsonRes = Unirest.post(url)
-                    .basicAuth(this.apiToken, "")
-                    .body(params)
-                    .asJson();
-            return checkResponse(jsonRes, 204);
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url("v1/click_through" + userInfoParam)
+                .addHeader("Authorization", this.apiToken)
+                .post(body)
+                .build();
+            
+            Response response = client.newCall(request).execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 
@@ -396,21 +400,22 @@ public class ConstructorIO {
      */
     public boolean trackSearch(String term, Integer numResults, UserInfo userInfo) throws ConstructorException {
         try {
-            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
-            String url = this.makeUrl("v1/search") + userInfoParam;
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("num_results", numResults);
             String params = new Gson().toJson(data);
-            HttpResponse<JsonNode> jsonRes = Unirest.post(url)
-                    .basicAuth(this.apiToken, "")
-                    .body(params)
-                    .asJson();
-            return checkResponse(jsonRes, 204);
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
+            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url("v1/search" + userInfoParam)
+                .addHeader("Authorization", this.apiToken)
+                .post(body)
+                .build();
+            
+            Response response = client.newCall(request).execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 

@@ -7,15 +7,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.json.JSONObject;
+
+import okhttp3.Call;
+import okhttp3.Interceptor;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Constructor.io Client
@@ -27,7 +30,7 @@ public class ConstructorIO {
     public String protocol;
     public String host;
     public String version;
-    protected URLEncodedUtils encoder;
+    private OkHttpClient client;
 
     /**
      * Creates a constructor.io Client.
@@ -50,54 +53,18 @@ public class ConstructorIO {
         } else {
             this.protocol = "http";
         }
-        this.encoder = new URLEncodedUtils();
-        Unirest.setDefaultHeader("Content-Type", "application/json");
-    }
-
-    /**
-     * Serializes url params in a rudimentary way.
-     *
-     * Unlike in the other Constructor.io clients, this one only takes in hashmaps,
-     * and you must write other helper methods to serialize other things.
-     *
-     * @param params HashMap of the parameters to encode.
-     * @return The encoded parameters, as a String.
-     */
-    public static String serializeParams(HashMap<String, String> params) throws UnsupportedEncodingException {
-        String urlString = "";
-        boolean isFirst = true;
-        for (String key : params.keySet()) {
-            if (!isFirst) {
-                urlString += "&";
-            }
-            urlString += URLEncoder.encode(key, "UTF-8");
-            urlString += "=";
-            urlString += URLEncoder.encode(params.get(key), "UTF-8");
-            isFirst = false;
-        }
-        return urlString;
-    }
-
-    /**
-     * Makes a URL to issue the requests to.
-     *
-     * Note that the URL will automagically have the apiKey embedded.
-     *
-     * @param endpoint Endpoint of the autocomplete service.
-     * @return The created URL. Now you can use it to issue requests and things!
-     */
-    public String makeUrl(String endpoint) throws UnsupportedEncodingException {
-        return String.format("%s://%s/%s?%s&%s", this.protocol, this.host, endpoint, "key=" + this.apiKey, "c=" + this.version);
+        Interceptor interceptor = new ConstructorIOHttpInterceptor(this.version, this.apiKey, this.host, this.protocol);
+        this.client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
     }
 
     /**
      * Checks the response from an endpoint.
      */
-    private static boolean checkResponse(HttpResponse<JsonNode> resp, int expectedStatus) throws ConstructorException {
-        if (resp.getStatus() != expectedStatus) {
-            throw new ConstructorException(resp.getBody().toString());
-        } else {
+    private static boolean checkResponse(Response resp) throws ConstructorException {
+        if (resp.isSuccessful()) {
             return true;
+        } else {
+            throw new ConstructorException(resp.body().toString());
         }
     }
 
@@ -109,18 +76,17 @@ public class ConstructorIO {
      */
     public boolean verify() throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/verify");
-            HttpResponse<JsonNode> jsonRes = Unirest.get(url)
-                    .basicAuth(this.apiToken, "")
-                    .asJson();
-            if (checkResponse(jsonRes, 200)) {
-                return true;
-            }
-            return false; // this should not get back here
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
+            Request request = new Request.Builder()
+                .url("v1/verify")
+                .addHeader("Authorization", this.apiToken)
+                .get()
+                .build();
+            
+            Call call = client.newCall(request);
+            Response response = call.execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 
@@ -134,19 +100,21 @@ public class ConstructorIO {
      */
     public boolean addItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/item");
             HashMap<String, Object> data = item.toHashMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
-            HttpResponse<JsonNode> jsonRes = Unirest.post(url)
-                    .basicAuth(this.apiToken, "")
-                    .body(params)
-                    .asJson();
-            return checkResponse(jsonRes, 204);
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url("v1/item")
+                .addHeader("Authorization", this.apiToken)
+                .post(body)
+                .build();
+            
+            Call call = client.newCall(request);
+            Response response = call.execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 
@@ -161,19 +129,21 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/item") + "&force=1";
             HashMap<String, Object> data = item.toHashMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
-            HttpResponse<JsonNode> jsonRes = Unirest.put(url)
-                    .basicAuth(this.apiToken, "")
-                    .body(params)
-                    .asJson();
-            return checkResponse(jsonRes, 204);
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url("v1/item?force=1")
+                .addHeader("Authorization", this.apiToken)
+                .post(body)
+                .build();
+            
+            Call call = client.newCall(request);
+            Response response = call.execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 
@@ -187,7 +157,6 @@ public class ConstructorIO {
      */
     public boolean addItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/batch_items");
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -196,15 +165,18 @@ public class ConstructorIO {
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
-            HttpResponse<JsonNode> jsonRes = Unirest.post(url)
-                    .basicAuth(this.apiToken, "")
-                    .body(params)
-                    .asJson();
-            return checkResponse(jsonRes, 204);
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url("v1/batch_items")
+                .addHeader("Authorization", this.apiToken)
+                .post(body)
+                .build();
+            
+            Call call = client.newCall(request);
+            Response response = call.execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 
@@ -218,7 +190,6 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/batch_items") + "&force=1";
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -227,15 +198,18 @@ public class ConstructorIO {
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
-            HttpResponse<JsonNode> jsonRes = Unirest.put(url)
-                    .basicAuth(this.apiToken, "")
-                    .body(params)
-                    .asJson();
-            return checkResponse(jsonRes, 204);
-        } catch (UnsupportedEncodingException encException) {
-            throw new ConstructorException(encException);
-        } catch (UnirestException uniException) {
-            throw new ConstructorException(uniException);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url("v1/batch_items?force=1")
+                .addHeader("Authorization", this.apiToken)
+                .post(body)
+                .build();
+            
+            Call call = client.newCall(request);
+            Response response = call.execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 

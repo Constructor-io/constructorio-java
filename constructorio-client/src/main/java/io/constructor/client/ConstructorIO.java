@@ -82,8 +82,7 @@ public class ConstructorIO {
                 .get()
                 .build();
             
-            Call call = client.newCall(request);
-            Response response = call.execute();
+            Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -110,8 +109,7 @@ public class ConstructorIO {
                 .post(body)
                 .build();
             
-            Call call = client.newCall(request);
-            Response response = call.execute();
+            Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -139,8 +137,7 @@ public class ConstructorIO {
                 .post(body)
                 .build();
             
-            Call call = client.newCall(request);
-            Response response = call.execute();
+            Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -172,8 +169,7 @@ public class ConstructorIO {
                 .post(body)
                 .build();
             
-            Call call = client.newCall(request);
-            Response response = call.execute();
+            Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -205,8 +201,7 @@ public class ConstructorIO {
                 .post(body)
                 .build();
             
-            Call call = client.newCall(request);
-            Response response = call.execute();
+            Response response = client.newCall(request).execute();
             return checkResponse(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);

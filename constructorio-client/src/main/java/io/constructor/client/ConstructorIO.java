@@ -23,7 +23,11 @@ import okhttp3.Response;
  */
 public class ConstructorIO {
 
-    private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new ConstructorIOHttpInterceptor()).build();
+    private static OkHttpClient client = new OkHttpClient.Builder()
+        .addInterceptor(new ConstructorIOHttpInterceptor())
+        .retryOnConnectionFailure(false)
+        .build();
+
     private String credentials;
 
     public String apiToken;

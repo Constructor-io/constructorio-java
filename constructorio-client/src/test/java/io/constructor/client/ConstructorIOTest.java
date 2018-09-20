@@ -63,6 +63,13 @@ public class ConstructorIOTest {
         assertEquals("host should be set to default", constructor.host, "ac.cnstrc.com");
     }
 
+    @Test	
+    public void makeUrlShouldReturnUrl() throws Exception {	
+        ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);	
+        String generatedUrl = constructor.makeUrl("v1/test");	
+        assertEquals("make url should make urls", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka&c=ciojava-3.2.0");	
+    }
+
     @Test
     public void verifyShouldReturnTrueWithValidKeyTokenPair() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);

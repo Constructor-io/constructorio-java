@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Base64;
 
 import com.google.gson.Gson;
 
@@ -16,23 +17,21 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.Credentials;
 
 /**
  * Constructor.io Client
  */
 public class ConstructorIO {
 
-    private static String base64NullRegex = "bnVsbA==$";
     private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new ConstructorIOHttpInterceptor()).build();
-    
+    private String credentials;
+
     public String apiToken;
     public String apiKey;
     public String protocol;
     public String host;
     public String version;
-    private String credentials;
-    
+
     /**
      * Creates a constructor.io Client.
      *
@@ -54,7 +53,7 @@ public class ConstructorIO {
         } else {
             this.protocol = "http";
         }
-        this.credentials = Credentials.basic(apiToken, null).replaceAll(base64NullRegex, "");
+        this.credentials = "Basic " + Base64.getEncoder().encodeToString((this.apiToken + ":").getBytes());
     }
 
     /**
@@ -133,7 +132,6 @@ public class ConstructorIO {
             throw new ConstructorException(exception);
         }
     }
-
 
     /**
      * Adds an item to your autocomplete or updates it if it already exists.

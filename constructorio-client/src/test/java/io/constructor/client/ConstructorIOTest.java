@@ -65,7 +65,7 @@ public class ConstructorIOTest {
 
     @Test
     public void verifyShouldReturnTrueWithValidKeyTokenPair() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", false, null);
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertEquals("verify should return true for testing key/pair", constructor.verify(), true);
     }
 

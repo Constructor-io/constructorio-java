@@ -11,7 +11,6 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.json.JSONObject;
 
-import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -30,10 +29,10 @@ public class ConstructorIO {
     public String host;
     public String version;
 
-    private String base64NullRegex = "bnVsbA==$";
+    private static String base64NullRegex = "bnVsbA==$";
+    private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new ConstructorIOHttpInterceptor()).build();
     private String credentials;
-    private OkHttpClient client;
-
+    
     /**
      * Creates a constructor.io Client.
      *
@@ -55,9 +54,7 @@ public class ConstructorIO {
         } else {
             this.protocol = "http";
         }
-        Interceptor interceptor = new ConstructorIOHttpInterceptor();
-        this.client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        this.credentials = Credentials.basic(apiToken, null).replaceAll(this.base64NullRegex, "");
+        this.credentials = Credentials.basic(apiToken, null).replaceAll(ConstructorIO.base64NullRegex, "");
     }
 
     /**

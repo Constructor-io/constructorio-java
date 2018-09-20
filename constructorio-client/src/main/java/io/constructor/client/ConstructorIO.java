@@ -54,7 +54,7 @@ public class ConstructorIO {
         } else {
             this.protocol = "http";
         }
-        this.credentials = Credentials.basic(apiToken, null).replaceAll(ConstructorIO.base64NullRegex, "");
+        this.credentials = Credentials.basic(apiToken, null).replaceAll(base64NullRegex, "");
     }
 
     /**

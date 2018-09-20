@@ -3,7 +3,6 @@ package io.constructor.client;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 import org.junit.BeforeClass;
@@ -64,25 +63,16 @@ public class ConstructorIOTest {
         assertEquals("host should be set to default", constructor.host, "ac.cnstrc.com");
     }
 
-    @Test
-    public void serializeParamsShouldEncodeParams() throws Exception {
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("foo", "bar");
-        params.put("bar", "baz");
-        String serializedParams = ConstructorIO.serializeParams(params);
-        assertTrue("serializes params should serialize params", serializedParams.equals("foo=bar&bar=baz") || serializedParams.equals("bar=baz&foo=bar"));
-    }
-
-    @Test
-    public void makeUrlShouldReturnUrl() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
-        String generatedUrl = constructor.makeUrl("v1/test");
-        assertEquals("make url should make urls", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka&c=ciojava-3.2.0");
+    @Test	
+    public void makeUrlShouldReturnUrl() throws Exception {	
+        ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);	
+        String generatedUrl = constructor.makeUrl("v1/test");	
+        assertEquals("make url should make urls", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka&c=ciojava-3.2.0");	
     }
 
     @Test
     public void verifyShouldReturnTrueWithValidKeyTokenPair() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", false, null);
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertEquals("verify should return true for testing key/pair", constructor.verify(), true);
     }
 

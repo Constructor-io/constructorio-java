@@ -23,14 +23,14 @@ import okhttp3.Credentials;
  */
 public class ConstructorIO {
 
+    private static String base64NullRegex = "bnVsbA==$";
+    private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new ConstructorIOHttpInterceptor()).build();
+    
     public String apiToken;
     public String apiKey;
     public String protocol;
     public String host;
     public String version;
-
-    private static String base64NullRegex = "bnVsbA==$";
-    private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new ConstructorIOHttpInterceptor()).build();
     private String credentials;
     
     /**

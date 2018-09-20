@@ -65,9 +65,9 @@ public class ConstructorIOTest {
 
     @Test	
     public void makeUrlShouldReturnUrl() throws Exception {	
-        ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);	
-        String generatedUrl = constructor.makeUrl("v1/test");	
-        assertEquals("make url should make urls", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka&c=ciojava-3.2.0");	
+        ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
+        String generatedUrl = constructor.makeUrl("v1/test");
+        assertEquals("make url should make urls", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka&c=ciojava-3.3.0");
     }
 
     @Test
@@ -203,7 +203,7 @@ public class ConstructorIOTest {
     @Test
     public void getVersionShouldReturnClientVersion() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        assertEquals("grabs version from pom.xml", constructor.getVersion(), "ciojava-3.2.0");
+        assertEquals("grabs version from pom.xml", constructor.getVersion(), "ciojava-3.3.0");
     }
 
     @Test

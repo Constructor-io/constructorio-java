@@ -17,6 +17,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.Credentials;
 
 /**
  * Constructor.io Client
@@ -28,6 +29,9 @@ public class ConstructorIO {
     public String protocol;
     public String host;
     public String version;
+
+    private String base64NullRegex = "bnVsbA==$";
+    private String credentials;
     private OkHttpClient client;
 
     /**
@@ -53,6 +57,7 @@ public class ConstructorIO {
         }
         Interceptor interceptor = new ConstructorIOHttpInterceptor();
         this.client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        this.credentials = Credentials.basic(apiToken, null).replaceAll(this.base64NullRegex, "");
     }
 
     /**
@@ -70,11 +75,15 @@ public class ConstructorIO {
     /**
      * Checks the response from an endpoint.
      */
-    private static boolean checkResponse(Response resp) throws ConstructorException {
-        if (resp.isSuccessful()) {
-            return true;
-        } else {
-            throw new ConstructorException(resp.body().toString());
+    private static boolean checkResponse(Response response) throws ConstructorException {
+        try {
+            if (response.isSuccessful()) {
+                return true;
+            } else {
+                throw new ConstructorException(response.body().string());
+            }
+        } catch (Exception e) {
+            throw new ConstructorException(e);
         }
     }
 
@@ -89,7 +98,7 @@ public class ConstructorIO {
             String url = this.makeUrl("v1/verify");
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
+                .addHeader("Authorization", this.credentials)
                 .get()
                 .build();
 
@@ -117,7 +126,7 @@ public class ConstructorIO {
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
+                .addHeader("Authorization", this.credentials)
                 .post(body)
                 .build();
 
@@ -146,8 +155,8 @@ public class ConstructorIO {
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
-                .post(body)
+                .addHeader("Authorization", this.credentials)
+                .put(body)
                 .build();
 
             Response response = client.newCall(request).execute();
@@ -179,7 +188,7 @@ public class ConstructorIO {
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
+                .addHeader("Authorization", this.credentials)
                 .post(body)
                 .build();
 
@@ -212,8 +221,8 @@ public class ConstructorIO {
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
-                .post(body)
+                .addHeader("Authorization", this.credentials)
+                .put(body)
                 .build();
 
             Response response = client.newCall(request).execute();
@@ -241,7 +250,7 @@ public class ConstructorIO {
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
+                .addHeader("Authorization", this.credentials)
                 .delete(body)
                 .build();
 
@@ -274,7 +283,7 @@ public class ConstructorIO {
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
+                .addHeader("Authorization", this.credentials)
                 .delete(body)
                 .build();
 
@@ -305,7 +314,7 @@ public class ConstructorIO {
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
+                .addHeader("Authorization", this.credentials)
                 .put(body)
                 .build();
 
@@ -331,7 +340,6 @@ public class ConstructorIO {
             String url = this.makeUrl("autocomplete/" + query) + userInfoParam;
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
                 .get()
                 .build();
 
@@ -369,7 +377,7 @@ public class ConstructorIO {
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
+                .addHeader("Authorization", this.credentials)
                 .post(body)
                 .build();
 
@@ -401,7 +409,7 @@ public class ConstructorIO {
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
+                .addHeader("Authorization", this.credentials)
                 .post(body)
                 .build();
 
@@ -433,7 +441,7 @@ public class ConstructorIO {
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization", this.apiToken)
+                .addHeader("Authorization", this.credentials)
                 .post(body)
                 .build();
 

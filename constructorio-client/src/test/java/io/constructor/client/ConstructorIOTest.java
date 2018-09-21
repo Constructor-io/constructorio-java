@@ -3,8 +3,6 @@ package io.constructor.client;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.UUID;
-
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,14 +13,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 
 public class ConstructorIOTest {
-
-    public ConstructorItem getProductItem() {
-        String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
-        String url = "https://constructor.io/products/" + name;
-        ConstructorItem item = new ConstructorItem(name);
-        item.setUrl(url);
-        return item;
-    }
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -92,14 +82,14 @@ public class ConstructorIOTest {
     @Test
     public void addItemShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      ConstructorItem item = this.getProductItem();
+      ConstructorItem item = Utils.createProductItem();
       assertTrue("addition succeeds", constructor.addItem(item, "Products"));
     }
 
     @Test
     public void addOrUpdateItemShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        ConstructorItem item = this.getProductItem();
+        ConstructorItem item = Utils.createProductItem();
         assertTrue("upsert succeeds", constructor.addOrUpdateItem(item, "Products"));
     }
 
@@ -107,9 +97,9 @@ public class ConstructorIOTest {
     public void addBatchShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem[] items = {
-            this.getProductItem(),
-            this.getProductItem(),
-            this.getProductItem()
+            Utils.createProductItem(),
+            Utils.createProductItem(),
+            Utils.createProductItem()
         };
         assertTrue("batch addition succeeds", constructor.addItemBatch(items, "Products"));
     }
@@ -118,9 +108,9 @@ public class ConstructorIOTest {
     public void addOrUpdateBatchShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       ConstructorItem[] items = {
-        this.getProductItem(),
-        this.getProductItem(),
-        this.getProductItem()
+        Utils.createProductItem(),
+        Utils.createProductItem(),
+        Utils.createProductItem()
       };
       assertTrue("batch upsert succeeds", constructor.addOrUpdateItemBatch(items, "Products"));
     }
@@ -128,7 +118,7 @@ public class ConstructorIOTest {
     @Test
     public void modifyShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        ConstructorItem itemOld = this.getProductItem();
+        ConstructorItem itemOld = Utils.createProductItem();
         constructor.addItem(itemOld, "Products");
         Thread.sleep(2000);
 
@@ -141,7 +131,7 @@ public class ConstructorIOTest {
     @Test
     public void removeShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        ConstructorItem item = this.getProductItem();
+        ConstructorItem item = Utils.createProductItem();
         constructor.addItem(item, "Products");
         Thread.sleep(2000);
 
@@ -152,9 +142,9 @@ public class ConstructorIOTest {
     public void removeBatchShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       ConstructorItem[] items = {
-        this.getProductItem(),
-        this.getProductItem(),
-        this.getProductItem()
+        Utils.createProductItem(),
+        Utils.createProductItem(),
+        Utils.createProductItem()
       };
       assertTrue("batch removal succeeds", constructor.removeItemBatch(items, "Products"));
     }

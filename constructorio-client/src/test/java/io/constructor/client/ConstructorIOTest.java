@@ -10,6 +10,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
+
 public class ConstructorIOTest {
 
     public ConstructorItem getProductItem() {
@@ -24,7 +28,16 @@ public class ConstructorIOTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
-    public static void setup() throws Exception {
+    public static void setupHTTPLogging() throws Exception {
+        HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
+        logger.setLevel(Level.BASIC);
+        OkHttpClient client = ConstructorIO.getClient();
+        OkHttpClient newClient = client.newBuilder().addInterceptor(logger).build();
+        ConstructorIO.setClient(newClient);
+    }
+
+    @BeforeClass
+    public static void setupItemToTrack() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem item = new ConstructorItem("Stanley_Steamer");
         item.setId("Stanley1");

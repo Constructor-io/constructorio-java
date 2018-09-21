@@ -30,7 +30,7 @@ public class ConstructorIOTest {
     @BeforeClass
     public static void setupHTTPLogging() throws Exception {
         HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
-        logger.setLevel(Level.BASIC);
+        logger.setLevel(Level.NONE);
         OkHttpClient client = ConstructorIO.getClient();
         OkHttpClient newClient = client.newBuilder().addInterceptor(logger).build();
         ConstructorIO.setClient(newClient);

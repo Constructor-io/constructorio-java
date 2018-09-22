@@ -7,10 +7,13 @@ import java.util.UUID;
 
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 
 /**
  * Static functions to help with testing
@@ -50,6 +53,7 @@ public class Utils {
           .protocol(Protocol.HTTP_1_1)
           .code(statusCode)
           .body(body)
+          .message("")
           .build();
 
       return response;
@@ -64,5 +68,16 @@ public class Utils {
         byte[] bytes = Files.readAllBytes(path);
         String string = new String(bytes, "UTF-8");
         return string;
+    }
+
+    /**
+     * Enable http logging for all requests
+     */
+    public static void enableHTTPLogging() {
+        HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
+        logger.setLevel(Level.NONE);
+        OkHttpClient client = ConstructorIO.getClient();
+        OkHttpClient newClient = client.newBuilder().addInterceptor(logger).build();
+        ConstructorIO.setClient(newClient);
     }
 }

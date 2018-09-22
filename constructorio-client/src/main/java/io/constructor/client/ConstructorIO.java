@@ -23,13 +23,29 @@ import okhttp3.Response;
  */
 public class ConstructorIO {
 
+    /**
+     * the HTTP client used by all instances
+     */
     private static OkHttpClient client = new OkHttpClient.Builder()
-        .addInterceptor(new ConstructorIOHttpInterceptor())
+        .addInterceptor(new ConstructorInterceptor())
         .retryOnConnectionFailure(false)
         .build();
 
-    private String credentials;
+    /**
+     * @param newClient the HTTP client to use by all instances
+     */
+    protected static void setClient(OkHttpClient newClient) {
+        client = newClient;
+    }
 
+    /**
+     * @return the HTTP client used by all instances
+     */
+    protected static OkHttpClient getClient() {
+        return client;
+    }
+
+    private String credentials;
     public String apiToken;
     public String apiKey;
     public String protocol;
@@ -58,33 +74,6 @@ public class ConstructorIO {
             this.protocol = "http";
         }
         this.credentials = "Basic " + Base64.getEncoder().encodeToString((this.apiToken + ":").getBytes());
-    }
-
-    /**
-     * Makes a URL to issue the requests to.
-     *
-     * Note that the URL will automagically have the apiKey embedded.
-     *
-     * @param endpoint Endpoint of the autocomplete service.
-     * @return The created URL. Now you can use it to issue requests and things!
-     */
-    public String makeUrl(String endpoint) throws UnsupportedEncodingException {
-        return String.format("%s://%s/%s?%s&%s", this.protocol, this.host, endpoint, "key=" + this.apiKey, "c=" + this.version);
-    }
-
-    /**
-     * Checks the response from an endpoint.
-     */
-    private static boolean checkResponse(Response response) throws ConstructorException {
-        try {
-            if (response.isSuccessful()) {
-                return true;
-            } else {
-                throw new ConstructorException(response.body().string());
-            }
-        } catch (Exception e) {
-            throw new ConstructorException(e);
-        }
     }
 
     /**
@@ -166,7 +155,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds multiple items to your autocomplete.
+     * Adds multiple items to your autocomplete (limit of 1000 items)
      *
      * @param items the items you want to add.
      * @param autocompleteSection the section of the autocomplete that you're adding the items to.
@@ -199,7 +188,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds multiple items to your autocomplete whilst updating existing ones.
+     * Adds multiple items to your autocomplete whilst updating existing ones (limit of 1000 items)
      *
      * @param items the items you want to add.
      * @param autocompleteSection the section of the autocomplete that you're adding the items to.
@@ -261,7 +250,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Removes multiple items from your autocomplete
+     * Removes multiple items from your autocomplete (limit of 1000 items)
      *
      * @param items the items that you are removing
      * @param autocompleteSection the section of the autocomplete that you're removing the items from.
@@ -448,6 +437,33 @@ public class ConstructorIO {
             return checkResponse(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
+     *
+     * @param endpoint Endpoint of the autocomplete service.
+     * @return The created URL. Now you can use it to issue requests and things!
+     */
+    protected String makeUrl(String endpoint) throws UnsupportedEncodingException {
+        return String.format("%s://%s/%s?%s&%s", this.protocol, this.host, endpoint, "key=" + this.apiKey, "c=" + this.version);
+    }
+
+    /**
+     * Checks the response from an endpoint and throws an exception if an error occurred
+     * 
+     * @return whether the request was successful
+     */
+    protected static boolean checkResponse(Response response) throws ConstructorException {
+        try {
+            if (response.isSuccessful()) {
+                return true;
+            } else {
+                throw new ConstructorException(response.body().string());
+            }
+        } catch (Exception e) {
+            throw new ConstructorException(e);
         }
     }
 

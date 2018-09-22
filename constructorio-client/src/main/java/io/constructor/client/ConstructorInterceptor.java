@@ -9,7 +9,7 @@ import okhttp3.Response;
 /**
  * Constructor.io Http Interceptor
  */
-public class ConstructorIOHttpInterceptor implements Interceptor {
+public class ConstructorInterceptor implements Interceptor {
      
   /**
    * Build a new request with common headers and parameters

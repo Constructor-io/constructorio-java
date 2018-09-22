@@ -25,7 +25,7 @@ public class AutocompleteResponseTest {
 
     @Test
     public void newWithJSONShouldReturnResponse() throws Exception {
-      Path path = Paths.get("src/test/java/io/constructor/client/response.autocomplete.peanut.json");
+      Path path = Paths.get("src/test/resources/response.autocomplete.peanut.json");
       byte[] bytes = Files.readAllBytes(path);
       String string = new String(bytes, "UTF-8");
       JSONObject json = new JSONObject(string);

@@ -462,25 +462,24 @@ public class ConstructorIO {
                 // Success!
                 return true;
 
-            } else if (response.body().string() != "") {
-
-                // Get the error message from the JSON response
-                JSONObject bodyJSON = new JSONObject(response.body().string());
-                String msg = "Server error : " + response.code() + " : "  + bodyJSON.getString("message");
-                throw new ConstructorException(msg);
-
-            } else if (response.message() != "") {
-
-                // Get the response from the HTTP message
-                String msg = "Server error : " + response.code() + " : "  + response.message();
-                throw new ConstructorException(msg);
-
             } else {
+                
+                // Error! 
+                String body = response.body().string();
+                if (body.length() > 0) {
 
-                // Just use the response code
-                String msg = "Server error " + response.code();
-                throw new ConstructorException(msg);
+                    // Get the error message from the JSON response
+                    JSONObject bodyJSON = new JSONObject(body);
+                    String msg = "Server error (" + response.code() + ") "  + bodyJSON.getString("message");
+                    throw new ConstructorException(msg);
 
+                } else {
+
+                    // Just use the response code and live to fight another day
+                    String msg = "Server error (" + response.code() + ")";
+                    throw new ConstructorException(msg);
+
+                }
             }
         } catch (Exception e) {
             throw new ConstructorException(e);

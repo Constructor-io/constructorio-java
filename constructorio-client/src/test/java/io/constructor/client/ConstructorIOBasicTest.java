@@ -78,11 +78,28 @@ public class ConstructorIOBasicTest {
     }
 
     @Test
+    public void checkResponseShouldReturnExceptionOn418TeapotWithNoBody() throws Exception {
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("io.constructor.client.ConstructorException: Server error (418)");
+        Response response = Utils.createResponse(418, "");
+        assertTrue("response checks true ", ConstructorIO.checkResponse(response));
+    }
+
+    @Test
     public void checkResponseShouldReturnExceptionOn401() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("Employee ID is null");
+        thrown.expectMessage("io.constructor.client.ConstructorException: Server error (401) Invalid auth_token. If you've forgotten your token, you can generate a new one at constructor.io/dashboard");
         String string = Utils.getResource("response.401.json");
         Response response = Utils.createResponse(401, string);
+        ConstructorIO.checkResponse(response);
+    }
+
+    @Test
+    public void checkResponseShouldReturnExceptionOn404() throws Exception {
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("io.constructor.client.ConstructorException: Server error (404) You're trying to access an invalid endpoint. Please check documentation for allowed endpoints.");
+        String string = Utils.getResource("response.404.json");
+        Response response = Utils.createResponse(404, string);
         ConstructorIO.checkResponse(response);
     }
 }

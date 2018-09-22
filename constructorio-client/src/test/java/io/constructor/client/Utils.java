@@ -20,6 +20,8 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
  */
 public class Utils {
 
+    private static MediaType bodyType = MediaType.parse("application/json");
+
     /**
      * @return a ConstructorItem
      */
@@ -46,8 +48,8 @@ public class Utils {
           .url(url)
           .build();
 
-      ResponseBody body = ResponseBody.create(MediaType.get("application/json"), bodyText);
-      
+      ResponseBody body = ResponseBody.create(bodyType, bodyText);
+
       Response response = new Response.Builder()
           .request(request)
           .protocol(Protocol.HTTP_1_1)

@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
-import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
@@ -39,33 +38,24 @@ public class Utils {
      * @return an HTTP response
      */
     public static Response createResponse(int statusCode, String bodyText) {
-      HttpUrl url = new HttpUrl.Builder()
-          .scheme("https")
-          .host("example.com")
-          .build();
+        Request request = new Request.Builder().url("https://example.com").build();
+        ResponseBody body = ResponseBody.create(bodyType, bodyText);
+        Response response = new Response.Builder()
+            .request(request)
+            .protocol(Protocol.HTTP_1_1)
+            .code(statusCode)
+            .body(body)
+            .message("")
+            .build();
 
-      Request request = new Request.Builder()
-          .url(url)
-          .build();
-
-      ResponseBody body = ResponseBody.create(bodyType, bodyText);
-
-      Response response = new Response.Builder()
-          .request(request)
-          .protocol(Protocol.HTTP_1_1)
-          .code(statusCode)
-          .body(body)
-          .message("")
-          .build();
-
-      return response;
+        return response;
     }
 
     /**
      * @param filename the name of the file under resources
      * @return JSON from a file as a string
      */
-    public static String getResource(String filename) throws Exception {
+    public static String getTestResource(String filename) throws Exception {
         Path path = Paths.get("src/test/resources/" + filename);
         byte[] bytes = Files.readAllBytes(path);
         String string = new String(bytes, "UTF-8");

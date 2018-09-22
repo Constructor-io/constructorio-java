@@ -21,7 +21,7 @@ public class AutocompleteResponseTest {
 
     @Test
     public void newWithJSONShouldReturnResponse() throws Exception {
-      String string = Utils.getResource("response.autocomplete.peanut.json");
+      String string = Utils.getTestResource("response.autocomplete.peanut.json");
       JSONObject json = new JSONObject(string);
       AutocompleteResponse response = new AutocompleteResponse(json);
       assertTrue("new succeeds", response.getResultId() != null);

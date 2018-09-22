@@ -78,7 +78,7 @@ public class ConstructorIOBasicTest {
     }
 
     @Test
-    public void checkResponseShouldReturnExceptionOn418TeapotWithNoBody() throws Exception {
+    public void checkResponseShouldReturnExceptionWithNoResponseBody() throws Exception {
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("io.constructor.client.ConstructorException: Server error (418)");
         Response response = Utils.createResponse(418, "");

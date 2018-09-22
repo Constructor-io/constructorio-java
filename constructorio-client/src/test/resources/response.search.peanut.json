@@ -1,0 +1,2565 @@
+{
+  "response": {
+    "facets": [
+      {
+        "name": "Brand",
+        "options": [
+          {
+            "count": 5,
+            "value": ""
+          },
+          {
+            "count": 3,
+            "value": "18 Rabbits"
+          },
+          {
+            "count": 6,
+            "value": "Adirondack Creamery"
+          },
+          {
+            "count": 1,
+            "value": "Back to Nature"
+          },
+          {
+            "count": 1,
+            "value": "Barbara's"
+          },
+          {
+            "count": 2,
+            "value": "Barkthins"
+          },
+          {
+            "count": 1,
+            "value": "Barnana"
+          },
+          {
+            "count": 1,
+            "value": "Bear Naked"
+          },
+          {
+            "count": 7,
+            "value": "Ben & Jerry's"
+          },
+          {
+            "count": 3,
+            "value": "Big Gay Ice Cream"
+          },
+          {
+            "count": 2,
+            "value": "Blue Marble"
+          },
+          {
+            "count": 4,
+            "value": "Blue Marble Ice Cream"
+          },
+          {
+            "count": 2,
+            "value": "Bocce's Bakery"
+          },
+          {
+            "count": 2,
+            "value": "Breyers"
+          },
+          {
+            "count": 1,
+            "value": "Cascadian Farm Organic"
+          },
+          {
+            "count": 3,
+            "value": "Chobani"
+          },
+          {
+            "count": 12,
+            "value": "Clif"
+          },
+          {
+            "count": 2,
+            "value": "Clif Crunch"
+          },
+          {
+            "count": 7,
+            "value": "Coolhaus"
+          },
+          {
+            "count": 1,
+            "value": "Dannon"
+          },
+          {
+            "count": 1,
+            "value": "Dr. McDougall's"
+          },
+          {
+            "count": 1,
+            "value": "Early Bird"
+          },
+          {
+            "count": 7,
+            "value": "Edy's"
+          },
+          {
+            "count": 7,
+            "value": "Enlightened"
+          },
+          {
+            "count": 2,
+            "value": "Gelarto"
+          },
+          {
+            "count": 2,
+            "value": "GoMacro"
+          },
+          {
+            "count": 1,
+            "value": "Good Health"
+          },
+          {
+            "count": 1,
+            "value": "Greenies"
+          },
+          {
+            "count": 8,
+            "value": "Halo Top"
+          },
+          {
+            "count": 1,
+            "value": "Haven's Kitchen"
+          },
+          {
+            "count": 1,
+            "value": "Health Warrior"
+          },
+          {
+            "count": 3,
+            "value": "Hershey's"
+          },
+          {
+            "count": 1,
+            "value": "Hormel"
+          },
+          {
+            "count": 14,
+            "value": "H\u00e4agen-Dazs"
+          },
+          {
+            "count": 1,
+            "value": "International Delight"
+          },
+          {
+            "count": 5,
+            "value": "Jif"
+          },
+          {
+            "count": 4,
+            "value": "Justin's"
+          },
+          {
+            "count": 3,
+            "value": "KIND"
+          },
+          {
+            "count": 1,
+            "value": "Kashi"
+          },
+          {
+            "count": 1,
+            "value": "Klondike"
+          },
+          {
+            "count": 2,
+            "value": "Luna"
+          },
+          {
+            "count": 3,
+            "value": "L\u00e4rabar"
+          },
+          {
+            "count": 3,
+            "value": "M&M's"
+          },
+          {
+            "count": 2,
+            "value": "Nature Valley"
+          },
+          {
+            "count": 1,
+            "value": "Noosa"
+          },
+          {
+            "count": 3,
+            "value": "NuGo"
+          },
+          {
+            "count": 2,
+            "value": "PB2"
+          },
+          {
+            "count": 6,
+            "value": "Peanut Butter & Co."
+          },
+          {
+            "count": 4,
+            "value": "Perfect Bar"
+          },
+          {
+            "count": 1,
+            "value": "Perry's Ice Cream"
+          },
+          {
+            "count": 1,
+            "value": "Plum Organics"
+          },
+          {
+            "count": 1,
+            "value": "Quest"
+          },
+          {
+            "count": 5,
+            "value": "RXBAR"
+          },
+          {
+            "count": 2,
+            "value": "Skinny Cow"
+          },
+          {
+            "count": 4,
+            "value": "Skippy"
+          },
+          {
+            "count": 3,
+            "value": "Smucker's"
+          },
+          {
+            "count": 1,
+            "value": "Snickers"
+          },
+          {
+            "count": 1,
+            "value": "Square Organics"
+          },
+          {
+            "count": 7,
+            "value": "Talenti"
+          },
+          {
+            "count": 4,
+            "value": "Van Leeuwen"
+          },
+          {
+            "count": 1,
+            "value": "Vega"
+          },
+          {
+            "count": 4,
+            "value": "Weight Watchers"
+          },
+          {
+            "count": 1,
+            "value": "Wellness"
+          },
+          {
+            "count": 2,
+            "value": "Wild Harvest"
+          },
+          {
+            "count": 3,
+            "value": "thinkThin"
+          }
+        ]
+      },
+      {
+        "name": "Claims",
+        "options": [
+          {
+            "count": 42,
+            "value": "All Natural"
+          },
+          {
+            "count": 7,
+            "value": "Cholesterol Free"
+          },
+          {
+            "count": 6,
+            "value": "Dairy Free"
+          },
+          {
+            "count": 3,
+            "value": "Fair Trade"
+          },
+          {
+            "count": 1,
+            "value": "Fat Free"
+          },
+          {
+            "count": 50,
+            "value": "GMO Free"
+          },
+          {
+            "count": 58,
+            "value": "Gluten Free"
+          },
+          {
+            "count": 1,
+            "value": "Grass-Fed"
+          },
+          {
+            "count": 7,
+            "value": "High Fiber"
+          },
+          {
+            "count": 14,
+            "value": "Hormone Free"
+          },
+          {
+            "count": 8,
+            "value": "Low Carbohydrate"
+          },
+          {
+            "count": 22,
+            "value": "Low Fat"
+          },
+          {
+            "count": 3,
+            "value": "Low Sodium"
+          },
+          {
+            "count": 16,
+            "value": "Made with Organic Ingredients"
+          },
+          {
+            "count": 15,
+            "value": "No Artificial Color"
+          },
+          {
+            "count": 7,
+            "value": "No Artificial Ingredients"
+          },
+          {
+            "count": 14,
+            "value": "No High Fructose Corn Syrup"
+          },
+          {
+            "count": 10,
+            "value": "No Hydrogenated Oils"
+          },
+          {
+            "count": 7,
+            "value": "No Preservatives"
+          },
+          {
+            "count": 2,
+            "value": "No Sugar Added"
+          },
+          {
+            "count": 22,
+            "value": "Organic"
+          },
+          {
+            "count": 25,
+            "value": "RBST Free"
+          },
+          {
+            "count": 1,
+            "value": "Raised Without Antibiotics"
+          },
+          {
+            "count": 2,
+            "value": "Reduced Fat"
+          },
+          {
+            "count": 4,
+            "value": "Soy Free"
+          },
+          {
+            "count": 1,
+            "value": "Sugar Free"
+          },
+          {
+            "count": 14,
+            "value": "Trans Fat Free"
+          },
+          {
+            "count": 12,
+            "value": "Vegan"
+          },
+          {
+            "count": 16,
+            "value": "Vegetarian"
+          },
+          {
+            "count": 1,
+            "value": "Wheat Free"
+          },
+          {
+            "count": 2,
+            "value": "Whole Grains"
+          }
+        ]
+      }
+    ],
+    "groups": [
+      {
+        "children": [
+          {
+            "children": [],
+            "count": 1,
+            "display_name": "Cream & Creamers",
+            "group_id": "264",
+            "parents": [
+              {
+                "display_name": "Dairy",
+                "group_id": "281"
+              }
+            ]
+          },
+          {
+            "children": [],
+            "count": 1,
+            "display_name": "Dressing & Condiments",
+            "group_id": "314",
+            "parents": [
+              {
+                "display_name": "Dairy",
+                "group_id": "281"
+              }
+            ]
+          },
+          {
+            "children": [],
+            "count": 5,
+            "display_name": "Yogurt",
+            "group_id": "993",
+            "parents": [
+              {
+                "display_name": "Dairy",
+                "group_id": "281"
+              }
+            ]
+          }
+        ],
+        "count": 7,
+        "display_name": "Dairy",
+        "group_id": "281",
+        "parents": []
+      },
+      {
+        "children": [
+          {
+            "children": [],
+            "count": 89,
+            "display_name": "Ice Cream & Treats",
+            "group_id": "466",
+            "parents": [
+              {
+                "display_name": "Frozen",
+                "group_id": "391"
+              }
+            ]
+          }
+        ],
+        "count": 89,
+        "display_name": "Frozen",
+        "group_id": "391",
+        "parents": []
+      },
+      {
+        "children": [
+          {
+            "children": [],
+            "count": 60,
+            "display_name": "Baby",
+            "group_id": "46",
+            "parents": [
+              {
+                "display_name": "Grocery",
+                "group_id": "431"
+              }
+            ]
+          },
+          {
+            "children": [],
+            "count": 7,
+            "display_name": "Beverages",
+            "group_id": "86",
+            "parents": [
+              {
+                "display_name": "Grocery",
+                "group_id": "431"
+              }
+            ]
+          },
+          {
+            "children": [],
+            "count": 109,
+            "display_name": "Pantry",
+            "group_id": "625",
+            "parents": [
+              {
+                "display_name": "Grocery",
+                "group_id": "431"
+              }
+            ]
+          },
+          {
+            "children": [],
+            "count": 4,
+            "display_name": "Pet",
+            "group_id": "656",
+            "parents": [
+              {
+                "display_name": "Grocery",
+                "group_id": "431"
+              }
+            ]
+          }
+        ],
+        "count": 129,
+        "display_name": "Grocery",
+        "group_id": "431",
+        "parents": []
+      }
+    ],
+    "results": [
+      {
+        "data": {
+          "description": "The same great Jif taste in a convenient snack size that's perfect for dipping!",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Jif"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "No High Fructose Corn Syrup"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "Cases",
+              "group_id": "162",
+              "path": "/431/46",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Baby",
+                  "id": "46"
+                }
+              ]
+            },
+            {
+              "display_name": "Snacks",
+              "group_id": "830",
+              "path": "/431/46",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Baby",
+                  "id": "46"
+                }
+              ]
+            }
+          ],
+          "id": "gro_pid_4220124",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4220124.png",
+          "price": "$15.99",
+          "quantity": "1cs",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4220124.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Jif Creamy Peanut Butter To Go Cups, Case"
+      },
+      {
+        "data": {
+          "description": "Craving peanutty taste that packs a crunch? Look no further than Skippy Super Chunk Peanut Butter. Every jar is blended with loads of real peanut pieces so you get the fun flavor of Skippy Peanut Butter, plus crazy-good crunchiness.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Skippy"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "No High Fructose Corn Syrup",
+                "Vegan"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_skippy_super_ch_01",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_super_ch_01.png",
+          "price": "$2.79",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_super_ch_01.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Skippy Super Chunk Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "Fill your panty with Wild Harvest Organic Creamy Peanut Butter that can turn boring meals into better meals, instantly. You can always count on convenience with Wild Harvest.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Wild Harvest"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "Gluten Free",
+                "No Artificial Ingredients",
+                "No High Fructose Corn Syrup",
+                "No Hydrogenated Oils",
+                "Organic"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_whrvsto_pb_01",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_whrvsto_pb_01.png",
+          "price": "$5.29",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_whrvsto_pb_01.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Wild Harvest Organic Creamy Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "Jif Reduced Fat peanut Butter has fresh-roasted peanut taste with 25% less fat than regular Jif Peanut Butter.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Jif"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "No Preservatives",
+                "Reduced Fat"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_jif_rf_crm_pb_01",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_rf_crm_pb_01.png",
+          "price": "$3.29",
+          "quantity": "1lb",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_rf_crm_pb_01.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Jif Reduced Fat Creamy Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "Smucker's Creamy Natural Peanut Butter is made with two simple ingredients: fresh-roasted peanuts and a dash of salt. It's perfect for pairing with Smucker's famous jams and jellies for a great PB & J. Also enjoy as a snack with fruits or crackers, or use in recipes.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Smucker's"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "No High Fructose Corn Syrup"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_smuck_crm_pb_01",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_smuck_crm_pb_01.png",
+          "price": "$2.59",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_smuck_crm_pb_01.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Smucker's Creamy Natural Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "Spread on the smiles with smooth, creamy peanut buttery perfection. Skippy Creamy Peanut Butter adds more yum and fun to just about anything. It's nothing but smooth snacking with this creamy classic.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Skippy"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "No High Fructose Corn Syrup",
+                "Vegan"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_skippy_regular_01",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_regular_01.png",
+          "price": "$2.79",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_regular_01.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Skippy Creamy Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "Stir up something special with Smucker's Chunky Natural Peanut Butter, made with two simple ingredients: fresh-roasted peanuts and a dash of salt. It's great for sandwiches and snacks, and also adds just the right crunch to recipes, dips, and dressings.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Smucker's"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "All Natural",
+                "No High Fructose Corn Syrup",
+                "Trans Fat Free",
+                "Vegan"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_smuckers_natural_01",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_smuckers_natural_01.png",
+          "price": "$2.59",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_smuckers_natural_01.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Smucker's Chunky Natural Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "The same great Jif taste in a convenient snack size that's perfect for dipping!",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Jif"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "No High Fructose Corn Syrup"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_jif_crmytogo",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_crmytogo.png",
+          "price": "$2.99",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_crmytogo.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Jif Creamy Peanut Butter To Go Cups"
+      },
+      {
+        "data": {
+          "description": "Spread on the yippee with smooth, creamy peanut buttery perfection. Skippy Creamy Peanut Butter Spread adds more yum and fun to just about anything. And with 25% less fat, Skippy Reduced Fat Creamy Peanut Butter Spread gives you even more to smile for.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Skippy"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "No High Fructose Corn Syrup",
+                "Reduced Fat",
+                "Trans Fat Free",
+                "Vegan"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_skippy_regular_03",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_regular_03.png",
+          "price": "$2.79",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_regular_03.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Skippy Reduced Fat Creamy Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "Jif Peanut Butter has that perfect combination of creamy texture with the fresh-roasted peanut taste you love.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Jif"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "No High Fructose Corn Syrup"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_jif_creamy_pb_03",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_creamy_pb_03.png",
+          "price": "$3.29",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_creamy_pb_03.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Jif Creamy Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "Craving peanutty taste that packs a crunch? Look no further than Skippy Super Chunk Peanut Butter. Every jar is blended with loads of real peanut pieces so you get the fun flavor of Skippy Peanut Butter, plus crazy-good crunchiness.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Skippy"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "Trans Fat Free"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_skippy_super_ch_02",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_super_ch_02.png",
+          "price": "$4.49",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_super_ch_02.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Skippy Super Chunk Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "In 1933, Joseph Rosenfield had the nutty idea to change the formula for peanut butter. He created Skippy peanut butter, which was less sticky and longer-lasting. Peanut butter lovers fell in love, and spread the fun to their families and friends. Fifty years after Joseph Rosenfield\u0092s innovation,...",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Hormel"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "Gluten Free",
+                "Trans Fat Free"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_skippy_hnyroast",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_hnyroast.png",
+          "price": "$2.79",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_hnyroast.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Skippy Roasted Honey Nut Creamy Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "thinkThin High Protein Bars contain a balanced mix of quality ingredients covered in decadent chocolate, providing an indulgent taste with none of the guilt.Every bite of our Creamy Peanut Butter bar is packed with the delicious combination of creamy peanut butter and luscious milk chocolate.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "thinkThin"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "Gluten Free"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "Snacks",
+              "group_id": "830",
+              "path": "/431/46",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Baby",
+                  "id": "46"
+                }
+              ]
+            },
+            {
+              "display_name": "Bars",
+              "group_id": "71",
+              "path": "/431/625/830",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "Snacks",
+                  "id": "830"
+                }
+              ]
+            },
+            {
+              "display_name": "Energy & Protein",
+              "group_id": "339",
+              "path": "/431/625/830/71",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "Snacks",
+                  "id": "830"
+                },
+                {
+                  "display_name": "Bars",
+                  "id": "71"
+                }
+              ]
+            }
+          ],
+          "id": "gro_pid_4010959",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010959.png",
+          "price": "$17.99",
+          "quantity": "1cs",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010959.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "thinkThin High Protein Bars, Creamy Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "thinkThin High Protein Bars contain a balanced mix of quality ingredients covered in decadent chocolate, providing an indulgent taste with none of the guilt.Every bite of our Chunky Peanut Butter bar is chock full of wholesome roasted peanuts covered in delicious milk chocolate.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "thinkThin"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "Gluten Free"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "Snacks",
+              "group_id": "830",
+              "path": "/431/46",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Baby",
+                  "id": "46"
+                }
+              ]
+            },
+            {
+              "display_name": "Bars",
+              "group_id": "71",
+              "path": "/431/625/830",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "Snacks",
+                  "id": "830"
+                }
+              ]
+            },
+            {
+              "display_name": "Energy & Protein",
+              "group_id": "339",
+              "path": "/431/625/830/71",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "Snacks",
+                  "id": "830"
+                },
+                {
+                  "display_name": "Bars",
+                  "id": "71"
+                }
+              ]
+            }
+          ],
+          "id": "gro_pid_4010960",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010960.png",
+          "price": "$17.99",
+          "quantity": "1cs",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010960.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "thinkThin High Protein Bars, Chunky Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "Banana yoghurt with Guittard dark chocolate, banana chips, and peanuts.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Noosa"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "Gluten Free"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Dairy",
+              "group_id": "281",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Yogurt",
+              "group_id": "993",
+              "path": "/431/46/376",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Baby",
+                  "id": "46"
+                },
+                {
+                  "display_name": "Food",
+                  "id": "376"
+                }
+              ]
+            },
+            {
+              "display_name": "Indulgent",
+              "group_id": "473",
+              "path": "/281/993",
+              "path_list": [
+                {
+                  "display_name": "Dairy",
+                  "id": "281"
+                },
+                {
+                  "display_name": "Yogurt",
+                  "id": "993"
+                }
+              ]
+            }
+          ],
+          "id": "dai_pid_2003736",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/dai_pid_2003736.png",
+          "price": "$2.49",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/dai_pid_2003736.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Noosa Mates Finest Yoghurt and Crunchies, Banana Chocolate Peanut"
+      },
+      {
+        "data": {
+          "description": "Picture rich, delicious peanut butter creme sandwiched between two tasty cookies with a tantalizing crunch. It's a smooth, crisp combination you won't be able to resist. That's our Peanut Butter Creme Cookie.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Back to Nature"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "No Artificial Color",
+                "No Artificial Ingredients",
+                "No High Fructose Corn Syrup",
+                "No Preservatives"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "Cookies, Cakes & Pastry",
+              "group_id": "243",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Cookies",
+              "group_id": "241",
+              "path": "/431/625/243",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "Cookies, Cakes & Pastry",
+                  "id": "243"
+                }
+              ]
+            },
+            {
+              "display_name": "Sandwich",
+              "group_id": "768",
+              "path": "/431/625/243/241",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "Cookies, Cakes & Pastry",
+                  "id": "243"
+                },
+                {
+                  "display_name": "Cookies",
+                  "id": "241"
+                }
+              ]
+            }
+          ],
+          "id": "gro_pid_4011296",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4011296.png",
+          "price": "$4.49",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4011296.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Back to Nature Peanut Butter Creme Cookies"
+      },
+      {
+        "data": {
+          "description": "With true REESE'S Peanut Butter taste, these chips are perfect for brownies, chocolate cookies and fudge.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Hershey's"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": []
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "Baking Needs",
+              "group_id": "61",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Baking Chocolate",
+              "group_id": "60",
+              "path": "/431/625/61",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "Baking Needs",
+                  "id": "61"
+                }
+              ]
+            }
+          ],
+          "id": "gro_pid_4009829",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4009829.png",
+          "price": "$3.69",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4009829.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Reese's Peanut Butter Chips"
+      },
+      {
+        "data": {
+          "description": "PB2 has the same consistency as full fat peanut butter with all of the natural roasted peanut flavor, but with nearly 85% less fat calories. PB2 is made with high quality peanuts that are slow-roasted to our specifications and pressed to remove the oil. All-natural with no artificial flavors, sw...",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "PB2"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "All Natural",
+                "No Artificial Ingredients"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_pid_4008604",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4008604.png",
+          "price": "$5.79",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4008604.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "PB2 Powdered Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "I like peanut butter so much I dedicated years of my life to creating an entirely new, one-of-a-kind way to make it. I know what you're thinking: how many ways can there be to make peanut butter? Well, there are at least two: what everyone else does and what we do. And I guarantee once you try o...",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Justin's"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "All Natural",
+                "Dairy Free",
+                "Gluten Free",
+                "No Hydrogenated Oils",
+                "Vegan"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_jstns_pntbttr",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jstns_pntbttr.png",
+          "price": "$6.99",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jstns_pntbttr.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Justin's All-Natural Classic Peanut Butter"
+      },
+      {
+        "data": {
+          "description": "Peanut Butter & Co. Dark Chocolate Dreams is peanut butter that is blended with rich dark chocolate for a delicious spread that is great on bananas, perfect with pretzels, or tasty on toast.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Peanut Butter & Co."
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "All Natural",
+                "Cholesterol Free",
+                "GMO Free",
+                "Gluten Free",
+                "No Hydrogenated Oils",
+                "Trans Fat Free",
+                "Vegetarian"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "spe_pbco_choc",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/spe_pbco_choc.png",
+          "price": "$5.59",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/spe_pbco_choc.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Peanut Butter & Co. Dark Chocolate Dreams"
+      },
+      {
+        "data": {
+          "description": "Everybody loves a delicious, satisfying snack. Paired with pretzels, apples, and carrots, our Dipping Cups make snacking a breeze. They're a terrific snacking choice for energy! Peanut Butter & Co. Dark Chocolate Dreams Dipping Cups are perfect for snacking on the go! Pop them in your lunchbox, ...",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Peanut Butter & Co."
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "Cholesterol Free",
+                "GMO Free",
+                "No High Fructose Corn Syrup",
+                "No Hydrogenated Oils"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_pid_4012592",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4012592.png",
+          "price": "$4.99",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4012592.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Peanut Butter & Co. Dipping Cups, Dark Chocolate Dreams"
+      },
+      {
+        "data": {
+          "description": "I like peanut butter so much I dedicated years of my life to creating an entirely new, one-of-a-kind way to make it. I know what you're thinking, how many ways can there be to make peanut butter? Well, there are at least two. What everyone else does and what we do. And I guarantee once you try o...",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Justin's"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "All Natural",
+                "Gluten Free",
+                "Vegan"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_pid_4010728",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010728.png",
+          "price": "$6.99",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010728.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Justin's All-Natural Classic Peanut Butter Squeeze Packs"
+      },
+      {
+        "data": {
+          "description": "Peanut Butter & Co. Cinnamon Raisin Swirl is peanut butter blended with cinnamon and raisins. It's like spreading your peanut butter on cinnamon raisin bread without the bread. It's delicious on apples, bagels, or straight from the jar.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Peanut Butter & Co."
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "All Natural",
+                "Cholesterol Free",
+                "GMO Free",
+                "Gluten Free",
+                "No Hydrogenated Oils",
+                "Trans Fat Free",
+                "Vegetarian"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "spe_pbco_cinn",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/spe_pbco_cinn.png",
+          "price": "$5.59",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/spe_pbco_cinn.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Peanut Butter & Co. Cinnamon Raisin Swirl"
+      },
+      {
+        "data": {
+          "description": "Fill your panty with Wild Harvest Organic Cruncy Peanut Butter that can turn boring meals into better meals, instantly. You can always count on convenience with Wild Harvest.",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Wild Harvest"
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": [
+                "Gluten Free",
+                "No Artificial Ingredients",
+                "No High Fructose Corn Syrup",
+                "No Hydrogenated Oils",
+                "Organic"
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "PB & J",
+              "group_id": "614",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut Butter",
+              "group_id": "646",
+              "path": "/431/625/614",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "PB & J",
+                  "id": "614"
+                }
+              ]
+            }
+          ],
+          "id": "gro_whrvsto_pb_02",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_whrvsto_pb_02.png",
+          "price": "$5.29",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_whrvsto_pb_02.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Wild Harvest Organic Crunchy Peanut Butter"
+      }
+    ],
+    "total_num_results": 198
+  },
+  "result_id": "420058c2-0a53-4131-9b25-77a36a65e896"
+}

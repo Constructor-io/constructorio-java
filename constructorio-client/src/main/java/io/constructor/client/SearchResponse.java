@@ -10,7 +10,7 @@ public class SearchResponse {
     private String resultId;
 
     /**
-     * Creates an autocomplete response
+     * Creates a search response
      *
      * @param json the JSON object to create the response from
      */

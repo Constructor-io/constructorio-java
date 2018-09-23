@@ -470,13 +470,13 @@ public class ConstructorIO {
 
                     // Get the error message from the JSON response
                     JSONObject bodyJSON = new JSONObject(body);
-                    String msg = "Server error (" + response.code() + ") "  + bodyJSON.getString("message");
+                    String msg = "[HTTP " + response.code() + "] "  + bodyJSON.getString("message");
                     throw new ConstructorException(msg);
 
                 } else {
 
                     // Just use the response code and live to fight another day
-                    String msg = "Server error (" + response.code() + ")";
+                    String msg = "[HTTP " + response.code() + "]";
                     throw new ConstructorException(msg);
 
                 }

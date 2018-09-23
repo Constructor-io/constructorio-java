@@ -80,26 +80,27 @@ public class ConstructorIOBasicTest {
     @Test
     public void checkResponseShouldReturnExceptionWithNoResponseBody() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("io.constructor.client.ConstructorException: Server error (418)");
-        Response response = Utils.createResponse(418, "");
-        assertTrue("response checks true ", ConstructorIO.checkResponse(response));
+        thrown.expectMessage("io.constructor.client.ConstructorException: [HTTP 418]");
+        String body = "";
+        Response response = Utils.createResponse(418, body);
+        ConstructorIO.checkResponse(response);
     }
 
     @Test
     public void checkResponseShouldReturnExceptionOn401() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("io.constructor.client.ConstructorException: Server error (401) Invalid auth_token. If you've forgotten your token, you can generate a new one at constructor.io/dashboard");
-        String string = Utils.getTestResource("response.401.json");
-        Response response = Utils.createResponse(401, string);
+        thrown.expectMessage("io.constructor.client.ConstructorException: [HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at constructor.io/dashboard");
+        String body = Utils.getTestResource("response.401.json");
+        Response response = Utils.createResponse(401, body);
         ConstructorIO.checkResponse(response);
     }
 
     @Test
     public void checkResponseShouldReturnExceptionOn404() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("io.constructor.client.ConstructorException: Server error (404) You're trying to access an invalid endpoint. Please check documentation for allowed endpoints.");
-        String string = Utils.getTestResource("response.404.json");
-        Response response = Utils.createResponse(404, string);
+        thrown.expectMessage("io.constructor.client.ConstructorException: [HTTP 404] You're trying to access an invalid endpoint. Please check documentation for allowed endpoints.");
+        String body = Utils.getTestResource("response.404.json");
+        Response response = Utils.createResponse(404, body);
         ConstructorIO.checkResponse(response);
     }
 }

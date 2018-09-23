@@ -320,8 +320,9 @@ public class ConstructorIO {
      * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
-     * @param query The string that you will be autocompleting.
-     * @return An autocomplete response
+     * @param req the autocomplete request
+     * @param userInfo optional information about the user
+     * @return an autocomplete response
      * @throws ConstructorException if the request is invalid.
      */
     public AutocompleteResponse autocomplete(AutocompleteRequest req, UserInfo userInfo) throws ConstructorException {
@@ -348,8 +349,9 @@ public class ConstructorIO {
      * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
-     * @param query The string that you will be search for.
-     * @return An search response
+     * @param req the search request
+     * @param userInfo optional information about the user
+     * @return a search response
      * @throws ConstructorException if the request is invalid.
      */
     public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
@@ -380,6 +382,7 @@ public class ConstructorIO {
      * @param autocompleteSection the item autocomplete section
      * @param itemID the item id
      * @param revenue the item revenue
+     * @param userInfo optional information about the user
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
@@ -413,6 +416,7 @@ public class ConstructorIO {
      * @param term the term that someone clicked.
      * @param autocompleteSection the item autocomplete section
      * @param itemID the item id
+     * @param userInfo optional information about the user
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
@@ -446,6 +450,7 @@ public class ConstructorIO {
      *
      * @param term the term that someone searched.
      * @param numResults the number of results in the search
+     * @param userInfo optional information about the user
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
@@ -474,8 +479,8 @@ public class ConstructorIO {
     /**
      * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
      *
-     * @param path Endpoint of the autocomplete service.
-     * @return The created URL. Now you can use it to issue requests and things!
+     * @param path endpoint of the autocomplete service.
+     * @return the created URL. Now you can use it to issue requests and things!
      */
     protected HttpUrl makeUrl(String path) throws UnsupportedEncodingException {
         HttpUrl url = new HttpUrl.Builder()
@@ -492,8 +497,8 @@ public class ConstructorIO {
     /**
      * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
      *
-     * @param path Endpoint of the autocomplete service.
-     * @return The created URL. Now you can use it to issue requests and things!
+     * @param path endpoint of the autocomplete service.
+     * @return the created URL. Now you can use it to issue requests and things!
      */
     protected HttpUrl makeUrl(String path, UserInfo info) throws UnsupportedEncodingException {
         HttpUrl url = new HttpUrl.Builder()

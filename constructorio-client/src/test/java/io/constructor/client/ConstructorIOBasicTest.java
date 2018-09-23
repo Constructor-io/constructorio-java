@@ -7,6 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import okhttp3.HttpUrl;
 import okhttp3.Response;
 
 public class ConstructorIOBasicTest {
@@ -44,11 +45,28 @@ public class ConstructorIOBasicTest {
         assertEquals("host should be set to default", constructor.host, "ac.cnstrc.com");
     }
 
-    @Test	
-    public void makeUrlShouldReturnUrl() throws Exception {	
-        ConstructorIO constructor = new ConstructorIO("boinka", "doinka", true, null);
-        String generatedUrl = constructor.makeUrl("v1/test");
-        assertEquals("make url should make urls", generatedUrl, "https://ac.cnstrc.com/v1/test?key=doinka&c=ciojava-3.4.0");
+    @Test
+    public void makeUrlShouldReturnAUrl() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
+        HttpUrl url = constructor.makeUrl("getitUuuurl");
+        assertEquals("host is set", url.host(), "ac.cnstrc.com");
+        assertEquals("protocol is set", url.scheme(), "https");
+        assertEquals("version is set", url.queryParameter("c"), "ciojava-3.4.0");
+        assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
+    }
+
+
+    @Test
+    public void makeUrlShouldReturnAUrlWithUserInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
+        UserInfo info = new UserInfo(2, "sideshow bob");
+        HttpUrl url = constructor.makeUrl("getitUuuurl", info);
+        assertEquals("host is set", url.host(), "ac.cnstrc.com");
+        assertEquals("protocol is set", url.scheme(), "https");
+        assertEquals("version is set", url.queryParameter("c"), "ciojava-3.4.0");
+        assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
+        assertEquals("session id is set", url.queryParameter("s"), "2");
+        assertEquals("user id is set", url.queryParameter("i"), "sideshow bob");
     }
 
     @Test
@@ -64,13 +82,6 @@ public class ConstructorIOBasicTest {
     }
 
     @Test
-    public void serializeUserInfoShouldReturnQueryString() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        assertEquals("serializes user info into query string", constructor.serializeUserInfo(userInfo), "&s=3&i=c62a-2a09-faie");
-    }
-
-    @Test
     public void checkResponseShouldReturnTrue() throws Exception {
         String string = Utils.getTestResource("response.204.json");
         Response response = Utils.createResponse(204, string);
@@ -80,7 +91,7 @@ public class ConstructorIOBasicTest {
     @Test
     public void checkResponseShouldReturnExceptionWithNoResponseBody() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("io.constructor.client.ConstructorException: [HTTP 418]");
+        thrown.expectMessage("[HTTP 418]");
         String body = "";
         Response response = Utils.createResponse(418, body);
         ConstructorIO.checkResponse(response);
@@ -89,7 +100,7 @@ public class ConstructorIOBasicTest {
     @Test
     public void checkResponseShouldReturnExceptionOn401() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("io.constructor.client.ConstructorException: [HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at constructor.io/dashboard");
+        thrown.expectMessage("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at constructor.io/dashboard");
         String body = Utils.getTestResource("response.401.json");
         Response response = Utils.createResponse(401, body);
         ConstructorIO.checkResponse(response);
@@ -98,7 +109,7 @@ public class ConstructorIOBasicTest {
     @Test
     public void checkResponseShouldReturnExceptionOn404() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("io.constructor.client.ConstructorException: [HTTP 404] You're trying to access an invalid endpoint. Please check documentation for allowed endpoints.");
+        thrown.expectMessage("[HTTP 404] You're trying to access an invalid endpoint. Please check documentation for allowed endpoints.");
         String body = Utils.getTestResource("response.404.json");
         Response response = Utils.createResponse(404, body);
         ConstructorIO.checkResponse(response);

@@ -8,7 +8,7 @@ import org.junit.rules.ExpectedException;
 
 import org.json.JSONObject;
 
-public class AutocompleteResponseTest {
+public class SearchResponseTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -16,14 +16,14 @@ public class AutocompleteResponseTest {
     @Test
     public void newWithNullShouldFail() throws Exception {
         thrown.expect(IllegalArgumentException.class);
-        new AutocompleteResponse(null);
+        new SearchResponse(null);
     }
 
     @Test
     public void newWithJSONShouldReturnResponse() throws Exception {
-        String string = Utils.getTestResource("response.autocomplete.peanut.json");
+        String string = Utils.getTestResource("response.search.peanut.json");
         JSONObject json = new JSONObject(string);
-        AutocompleteResponse response = new AutocompleteResponse(json);
+        SearchResponse response = new SearchResponse(json);
         assertTrue("new succeeds", response.getResultId() != null);
     }
 }

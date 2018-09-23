@@ -12,6 +12,7 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.json.JSONObject;
 
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -84,7 +85,7 @@ public class ConstructorIO {
      */
     public boolean verify() throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/verify");
+            HttpUrl url = this.makeUrl("v1/verify");
             Request request = new Request.Builder()
                 .url(url)
                 .addHeader("Authorization", this.credentials)
@@ -108,7 +109,7 @@ public class ConstructorIO {
      */
     public boolean addItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/item");
+            HttpUrl url = this.makeUrl("v1/item");
             HashMap<String, Object> data = item.toHashMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
@@ -136,7 +137,7 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/item") + "&force=1";
+            HttpUrl url = this.makeUrl("v1/item").newBuilder().addQueryParameter("force", "1").build();
             HashMap<String, Object> data = item.toHashMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
@@ -164,7 +165,7 @@ public class ConstructorIO {
      */
     public boolean addItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/batch_items");
+            HttpUrl url= this.makeUrl("v1/batch_items");
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -197,7 +198,7 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/batch_items") + "&force=1";
+            HttpUrl url = this.makeUrl("v1/batch_items").newBuilder().addQueryParameter("force", "1").build();
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -230,7 +231,7 @@ public class ConstructorIO {
      */
     public boolean removeItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/item");
+            HttpUrl url = this.makeUrl("v1/item");
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
@@ -259,7 +260,7 @@ public class ConstructorIO {
      */
     public boolean removeItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/batch_items");
+            HttpUrl url = this.makeUrl("v1/batch_items");
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -293,7 +294,7 @@ public class ConstructorIO {
      */
     public boolean modifyItem(ConstructorItem item, String autocompleteSection, String previousItemName) throws ConstructorException {
         try {
-            String url = this.makeUrl("v1/item");
+            HttpUrl url = this.makeUrl("v1/item");
             HashMap<String, Object> data = item.toHashMap();
             data.put("new_item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
@@ -324,8 +325,8 @@ public class ConstructorIO {
      */
     public AutocompleteResponse autocomplete(String query, UserInfo userInfo) throws ConstructorException {
         try {
-            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
-            String url = this.makeUrl("autocomplete/" + query) + userInfoParam;
+            String path = "autocomplete/" + query;
+            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
             Request request = new Request.Builder()
                 .url(url)
                 .get()
@@ -335,6 +336,33 @@ public class ConstructorIO {
             checkResponse(response);
             JSONObject bodyJSON = new JSONObject(response.body().string());
             return new AutocompleteResponse(bodyJSON);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the search service.
+     *
+     * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param query The string that you will be autocompleting.
+     * @return An autocomplete result
+     */
+    public SearchResponse search(String query, UserInfo userInfo) throws ConstructorException {
+        try {
+            String path = "search/" + query;
+            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+            Response response = client.newCall(request).execute();
+            checkResponse(response);
+            JSONObject bodyJSON = new JSONObject(response.body().string());
+            return new SearchResponse(bodyJSON);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -354,8 +382,8 @@ public class ConstructorIO {
      */
     public boolean trackConversion(String term, String autocompleteSection, String itemId, String revenue, UserInfo userInfo) throws ConstructorException {
         try {
-            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
-            String url = this.makeUrl("v1/conversion") + userInfoParam;
+            String path = "v1/conversion";
+            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
@@ -387,8 +415,8 @@ public class ConstructorIO {
      */
     public boolean trackClickThrough(String term, String autocompleteSection, String itemId, UserInfo userInfo) throws ConstructorException {
         try {
-            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
-            String url = this.makeUrl("v1/click_through") + userInfoParam;
+            String path = "v1/click_through";
+            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
@@ -420,8 +448,8 @@ public class ConstructorIO {
      */
     public boolean trackSearch(String term, Integer numResults, UserInfo userInfo) throws ConstructorException {
         try {
-            String userInfoParam = userInfo == null ? "" : this.serializeUserInfo(userInfo);
-            String url = this.makeUrl("v1/search") + userInfoParam;
+            String path = "v1/search";
+            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
             HashMap<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("num_results", numResults);
@@ -443,11 +471,39 @@ public class ConstructorIO {
     /**
      * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
      *
-     * @param endpoint Endpoint of the autocomplete service.
+     * @param path Endpoint of the autocomplete service.
      * @return The created URL. Now you can use it to issue requests and things!
      */
-    protected String makeUrl(String endpoint) throws UnsupportedEncodingException {
-        return String.format("%s://%s/%s?%s&%s", this.protocol, this.host, endpoint, "key=" + this.apiKey, "c=" + this.version);
+    protected HttpUrl makeUrl(String path) throws UnsupportedEncodingException {
+        HttpUrl url = new HttpUrl.Builder()
+            .scheme(this.protocol)
+            .addPathSegment(path)
+            .addQueryParameter("key", this.apiKey)
+            .addQueryParameter("c", this.version)
+            .host(this.host)
+            .build();
+        
+        return url;
+    }
+
+    /**
+     * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
+     *
+     * @param path Endpoint of the autocomplete service.
+     * @return The created URL. Now you can use it to issue requests and things!
+     */
+    protected HttpUrl makeUrl(String path, UserInfo info) throws UnsupportedEncodingException {
+        HttpUrl url = new HttpUrl.Builder()
+            .scheme(this.protocol)
+            .addPathSegment(path)
+            .addQueryParameter("key", this.apiKey)
+            .addQueryParameter("c", this.version)
+            .addQueryParameter("s", String.valueOf(info.getSessionId()))
+            .addQueryParameter("1", info.getClientId())
+            .host(this.host)
+            .build();
+        
+        return url;
     }
 
     /**
@@ -456,33 +512,18 @@ public class ConstructorIO {
      * @return whether the request was successful
      */
     protected static boolean checkResponse(Response response) throws ConstructorException {
-        try {
-            if (response.isSuccessful()) {
-
-                // Success!
-                return true;
-
-            } else {
-                
-                // Error! 
+        if (response.isSuccessful()) {  
+            return true;
+        } else {
+            String errorMessage = "Unknown error";
+            try {
                 String body = response.body().string();
-                if (body.length() > 0) {
-
-                    // Get the error message from the JSON response
-                    JSONObject bodyJSON = new JSONObject(body);
-                    String msg = "[HTTP " + response.code() + "] "  + bodyJSON.getString("message");
-                    throw new ConstructorException(msg);
-
-                } else {
-
-                    // Just use the response code and live to fight another day
-                    String msg = "[HTTP " + response.code() + "]";
-                    throw new ConstructorException(msg);
-
-                }
+                JSONObject bodyJSON = new JSONObject(body);
+                errorMessage = "[HTTP " + response.code() + "] " + bodyJSON.getString("message");
+            } catch (Exception e) {
+                errorMessage = "[HTTP " + response.code() + "]";
             }
-        } catch (Exception e) {
-            throw new ConstructorException(e);
+            throw new ConstructorException(errorMessage);
         }
     }
 
@@ -500,14 +541,5 @@ public class ConstructorIO {
             // Do nothing
         }
         return "ciojava-";
-    }
-
-    /**
-     * Serializes the User Info object into a query string
-     *
-     * @return query param string
-     */
-    protected String serializeUserInfo(UserInfo userInfo) {
-        return "&s=" + userInfo.getSessionId() + "&i=" + userInfo.getClientId();
     }
 }

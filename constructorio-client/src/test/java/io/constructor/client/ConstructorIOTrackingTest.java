@@ -12,7 +12,6 @@ public class ConstructorIOTrackingTest {
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
-
   @BeforeClass
   public static void setupItemToTrack() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);

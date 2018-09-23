@@ -13,11 +13,11 @@ public class ConstructorIOAutocompleteTest {
 
     @Test
     public void autocompleteShouldReturnAResult() throws Exception {
-      ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-      AutocompleteRequest request = new AutocompleteRequest("Stanley");
-      AutocompleteResponse result = constructor.autocomplete(request, userInfo);
-      assertTrue("autocomplete succeeds", result.getResultId() != null);
+        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        AutocompleteRequest request = new AutocompleteRequest("Stanley");
+        AutocompleteResponse result = constructor.autocomplete(request, userInfo);
+        assertTrue("autocomplete succeeds", result.getResultId() != null);
     }
 
     @Test

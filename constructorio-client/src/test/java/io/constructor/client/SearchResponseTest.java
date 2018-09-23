@@ -21,9 +21,9 @@ public class SearchResponseTest {
 
     @Test
     public void newWithJSONShouldReturnResponse() throws Exception {
-      String string = Utils.getTestResource("response.search.peanut.json");
-      JSONObject json = new JSONObject(string);
-      SearchResponse response = new SearchResponse(json);
-      assertTrue("new succeeds", response.getResultId() != null);
+        String string = Utils.getTestResource("response.search.peanut.json");
+        JSONObject json = new JSONObject(string);
+        SearchResponse response = new SearchResponse(json);
+        assertTrue("new succeeds", response.getResultId() != null);
     }
 }

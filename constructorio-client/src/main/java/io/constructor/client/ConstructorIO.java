@@ -458,9 +458,28 @@ public class ConstructorIO {
     protected static boolean checkResponse(Response response) throws ConstructorException {
         try {
             if (response.isSuccessful()) {
+
+                // Success!
                 return true;
+
             } else {
-                throw new ConstructorException(response.body().string());
+                
+                // Error! 
+                String body = response.body().string();
+                if (body.length() > 0) {
+
+                    // Get the error message from the JSON response
+                    JSONObject bodyJSON = new JSONObject(body);
+                    String msg = "[HTTP " + response.code() + "] "  + bodyJSON.getString("message");
+                    throw new ConstructorException(msg);
+
+                } else {
+
+                    // Just use the response code and live to fight another day
+                    String msg = "[HTTP " + response.code() + "]";
+                    throw new ConstructorException(msg);
+
+                }
             }
         } catch (Exception e) {
             throw new ConstructorException(e);

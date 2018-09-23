@@ -321,11 +321,12 @@ public class ConstructorIO {
      * That's important. That will be a solid latency difference.
      *
      * @param query The string that you will be autocompleting.
-     * @return An autocomplete result
+     * @return An autocomplete response
+     * @throws ConstructorException if the request is invalid.
      */
-    public AutocompleteResponse autocomplete(String query, UserInfo userInfo) throws ConstructorException {
+    public AutocompleteResponse autocomplete(AutocompleteRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String path = "autocomplete/" + query;
+            String path = "autocomplete/" + req.getQuery();
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
             Request request = new Request.Builder()
                 .url(url)
@@ -347,12 +348,14 @@ public class ConstructorIO {
      * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
-     * @param query The string that you will be autocompleting.
-     * @return An autocomplete result
+     * @param query The string that you will be search for.
+     * @return An search response
+     * @throws ConstructorException if the request is invalid.
      */
-    public SearchResponse search(String query, UserInfo userInfo) throws ConstructorException {
+    public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String path = "search/" + query;
+            String path = "search/" + req.getQuery();
+
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
             Request request = new Request.Builder()
                 .url(url)
@@ -499,7 +502,7 @@ public class ConstructorIO {
             .addQueryParameter("key", this.apiKey)
             .addQueryParameter("c", this.version)
             .addQueryParameter("s", String.valueOf(info.getSessionId()))
-            .addQueryParameter("1", info.getClientId())
+            .addQueryParameter("i", info.getClientId())
             .host(this.host)
             .build();
         

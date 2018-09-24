@@ -11,9 +11,10 @@ import org.json.JSONObject;
 public class SearchResponse {
 
     private String resultId;
-    private int totalNumberOfResults;
-    private ArrayList<SearchResult> results;
     private ArrayList<SearchFacet> facets;
+    private ArrayList<SearchGroup> groups;
+    private ArrayList<SearchResult> results;
+    private int totalNumberOfResults;
 
     /**
      * Creates a search response
@@ -26,11 +27,25 @@ public class SearchResponse {
       }
 
       this.resultId = json.getString("result_id");
-      this.results = new ArrayList<SearchResult>();
       this.facets = new ArrayList<SearchFacet>();
+      this.groups = new ArrayList<SearchGroup>();
+      this.results = new ArrayList<SearchResult>();
 
       JSONObject responseJSON = json.getJSONObject("response");
-      this.totalNumberOfResults = responseJSON.getInt("total_num_results");
+
+      JSONArray facetsJSON = responseJSON.getJSONArray("facets");
+      for (int i = 0; i < facetsJSON.length(); i++) {
+          JSONObject facetJSON = facetsJSON.getJSONObject(i);
+          SearchFacet facet = new SearchFacet(facetJSON);
+          this.facets.add(facet);
+      }
+
+      JSONArray groupsJSON = responseJSON.getJSONArray("groups");
+      for (int i = 0; i < groupsJSON.length(); i++) {
+          JSONObject groupJSON = groupsJSON.getJSONObject(i);
+          SearchGroup group = new SearchGroup(groupJSON);
+          this.groups.add(group);
+      }
 
       JSONArray resultsJSON = responseJSON.getJSONArray("results");
       for (int i = 0; i < resultsJSON.length(); i++) {
@@ -39,12 +54,7 @@ public class SearchResponse {
           this.results.add(result);
       }
 
-      JSONArray facetsJSON = responseJSON.getJSONArray("facets");
-      for (int i = 0; i < facetsJSON.length(); i++) {
-          JSONObject facetJSON = facetsJSON.getJSONObject(i);
-          SearchFacet facet = new SearchFacet(facetJSON);
-          this.facets.add(facet);
-      }
+      this.totalNumberOfResults = responseJSON.getInt("total_num_results");
     }
 
     /**
@@ -55,17 +65,24 @@ public class SearchResponse {
     }
 
     /**
-     * @return the results
-     */
-    public ArrayList<SearchResult> getResults() {
-      return results;
-    }
-
-    /**
      * @return the facets
      */
     public ArrayList<SearchFacet> getFacets() {
       return facets;
+    }
+
+    /**
+     * @return the groups
+     */
+    public ArrayList<SearchGroup> getGroups() {
+      return groups;
+    }
+
+    /**
+     * @return the results
+     */
+    public ArrayList<SearchResult> getResults() {
+      return results;
     }
 
     /**

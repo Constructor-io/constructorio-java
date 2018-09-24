@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.json.JSONObject;
 
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
@@ -349,8 +348,7 @@ public class ConstructorIO {
 
             Response response = client.newCall(request).execute();
             checkResponse(response);
-            JSONObject bodyJSON = new JSONObject(response.body().string());
-            return new AutocompleteResponse(bodyJSON);
+            return new Gson().fromJson(response.body().string(), AutocompleteResponse.class);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -398,8 +396,8 @@ public class ConstructorIO {
 
             Response response = client.newCall(request).execute();
             checkResponse(response);
-            JSONObject bodyJSON = new JSONObject(response.body().string());
-            return new SearchResponse(bodyJSON);
+            return new Gson().fromJson(response.body().string(), SearchResponse.class);
+
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -557,9 +555,8 @@ public class ConstructorIO {
         } else {
             String errorMessage = "Unknown error";
             try {
-                String body = response.body().string();
-                JSONObject bodyJSON = new JSONObject(body);
-                errorMessage = "[HTTP " + response.code() + "] " + bodyJSON.getString("message");
+                ServerError error = new Gson().fromJson(response.body().string(), ServerError.class);
+                errorMessage = "[HTTP " + response.code() + "] " + error.getMessage();
             } catch (Exception e) {
                 errorMessage = "[HTTP " + response.code() + "]";
             }

@@ -1,68 +1,42 @@
 package io.constructor.client;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Search Result
+ * Constructor.io Search Result ... uses Gson/Reflection to load data in
  */
 public class SearchResult {
 
-    private String value;
-    private Map<String, Object> data;
-    private List<String> matchedTerms;
+  @SerializedName("value")
+  private String value;
 
-    /**
-     * Creates a search response result
-     *
-     * @param json the JSON object to create the result from
-     */
-    public SearchResult(JSONObject json) throws IllegalArgumentException {
-      if (json == null) {
-          throw new IllegalArgumentException("json is required");
-      }
+  @SerializedName("data")
+  private Map<String, Object> data;
 
-      this.value = json.getString("value");
-      this.data = new HashMap<String, Object>();
-      this.matchedTerms = new ArrayList<String>();
+  @SerializedName("matched_terms")
+  private List<String> matchedTerms;
 
-      JSONArray matchedTermsJSON = json.getJSONArray("matched_terms");
-      for (int i = 0; i < matchedTermsJSON.length(); i++) {
-        String matchedValue = matchedTermsJSON.getString(i);
-        matchedTerms.add(matchedValue);
-      }
+  /**
+   * @return the value
+   */
+  public String getValue() {
+    return value;
+  }
 
-      JSONObject dataJSON = json.getJSONObject("data");
-      for(Object dataKey : dataJSON.keySet()) {
-        String dataName = (String)dataKey;
-        Object dataValue = dataJSON.get(dataName);
-        this.data.put(dataName, dataValue);
-      }
-    }
+  /**
+   * @return the data
+   */
+  public Map<String, Object> getData() {
+    return data;
+  }
 
-    /**
-     * @return the value
-     */
-    public String getValue() {
-      return value;
-    }
-
-    /**
-     * @return the data
-     */
-    public Map<String, Object> getData() {
-      return data;
-    }
-
-    /**
-     * @return the matchedTerms
-     */
-    public List<String> getMatchedTerms() {
-      return matchedTerms;
-    }
+  /**
+   * @return the matchedTerms
+   */
+  public List<String> getMatchedTerms() {
+    return matchedTerms;
+  }
 }

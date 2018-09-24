@@ -7,7 +7,7 @@
 For the most up-to-date documentation for this library, please visit our [API Documentation](https://docs.constructor.io/rest-api.html?java).
 
 # Installation
-Please follow the directions at [Jitpack.io](https://jitpack.io/#Constructor-io/constructorio-java/v4.2.0) to add the client to your project.
+Please follow the directions at [Jitpack.io](https://jitpack.io/#Constructor-io/constructorio-java/v4.3.0) to add the client to your project.
 
 # Testing
 Download the repository and run the following commands from `./constructorio-client`

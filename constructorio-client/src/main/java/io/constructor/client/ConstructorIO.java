@@ -137,7 +137,8 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl("v1/item").newBuilder().addQueryParameter("force", "1").build();
+            HttpUrl url = this.makeUrl("v1/item");
+            url = url.newBuilder().addQueryParameter("force", "1").build();
             HashMap<String, Object> data = item.toHashMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
@@ -198,7 +199,8 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl("v1/batch_items").newBuilder().addQueryParameter("force", "1").build();
+            HttpUrl url = this.makeUrl("v1/batch_items");
+            url = url.newBuilder().addQueryParameter("force", "1").build();
             HashMap<String, Object> data = new HashMap<String, Object>();
             ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -357,8 +359,19 @@ public class ConstructorIO {
     public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             String path = "search/" + req.getQuery();
-
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            url = url.newBuilder()
+                .addQueryParameter("section", req.getSection())
+                .addQueryParameter("page", String.valueOf(req.getPage()))
+                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                .build();
+
+            if (req.getGroupId() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("group_id", req.getGroupId())
+                    .build();
+            }
+
             Request request = new Request.Builder()
                 .url(url)
                 .get()

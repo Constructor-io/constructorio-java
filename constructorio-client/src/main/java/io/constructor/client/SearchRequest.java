@@ -6,7 +6,11 @@ package io.constructor.client;
 public class SearchRequest {
 
     private String query;
-
+    private String section = "Products";
+    private int page = 1;
+    private int resultsPerPage = 30;
+    private String groupId;
+    
     /**
      * Creates a search request
      *
@@ -32,5 +36,61 @@ public class SearchRequest {
      */
     public String getQuery() {
       return query;
+    }
+
+    /**
+     * @return the section
+     */
+    public String getSection() {
+      return section;
+    }
+
+    /**
+     * @param section the section to set
+     */
+    public void setSection(String section) {
+      this.section = section;
+    }
+
+    /**
+     * @return the page
+     */
+    public int getPage() {
+      return page;
+    }
+
+    /**
+     * @param page the page to set
+     */
+    public void setPage(int page) {
+      this.page = page;
+    }
+
+    /**
+     * @return the resultsPerPage
+     */
+    public int getResultsPerPage() {
+      return resultsPerPage;
+    }
+
+    /**
+     * @param resultsPerPage the resultsPerPage to set
+     */
+    public void setResultsPerPage(int resultsPerPage) {
+      this.resultsPerPage = resultsPerPage;
+    }
+
+    /**
+     * @return the groupId
+     */
+    public String getGroupId() {
+      return groupId;
+    }
+
+    /**
+     * @param groupId the groupId to set
+     */
+    public void setGroupId(String groupId) {
+      this.groupId = groupId;
     }
 }

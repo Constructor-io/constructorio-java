@@ -1,26 +1,17 @@
 package io.constructor.client;
 
-import org.json.JSONObject;
+import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Search Facet Option
+ * Constructor.io Search Facet Option ... uses Gson/Reflection to load data in
  */
 public class SearchFacetOption {
 
+  @SerializedName("count")
   private int count;
-  private String value;
-  
-  /**
-   * Creates a search facet option
-   */
-  SearchFacetOption(JSONObject json) throws IllegalArgumentException {
-    if (json == null) {
-        throw new IllegalArgumentException("json is required");
-    }
 
-    this.count = json.getInt("count");
-    this.value = json.getString("value");
-  }
+  @SerializedName("value")
+  private String value;
 
   /**
    * @return the count

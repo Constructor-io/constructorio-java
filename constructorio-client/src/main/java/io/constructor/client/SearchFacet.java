@@ -1,37 +1,19 @@
 package io.constructor.client;
 
 import java.util.List;
-import java.util.ArrayList;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Search Facet
+ * Constructor.io Search Facet ... uses Gson/Reflection to load data in
  */
 public class SearchFacet {
 
+  @SerializedName("name")
   private String name;
+
+  @SerializedName("options")
   private List<SearchFacetOption> options;
-
-  /**
-   * Creates a search facet
-   */
-  SearchFacet(JSONObject json) throws IllegalArgumentException {
-    if (json == null) {
-        throw new IllegalArgumentException("json is required");
-    }
-
-    this.name = json.getString("name");
-    this.options = new ArrayList<SearchFacetOption>();
-
-    JSONArray optionsJSON = json.getJSONArray("options");
-    for (int i = 0; i < optionsJSON.length(); i++) {
-        JSONObject optionJSON = optionsJSON.getJSONObject(i);
-        SearchFacetOption option = new SearchFacetOption(optionJSON);
-        this.options.add(option);
-    }
-  }
 
   /**
    * @return the name

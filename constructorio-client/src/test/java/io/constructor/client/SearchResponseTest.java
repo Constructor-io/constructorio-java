@@ -1,14 +1,14 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
+import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import org.json.JSONObject;
-
-public class SearchResponseTest {
+public class SearchResponseTest { 
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -24,6 +24,7 @@ public class SearchResponseTest {
         String string = Utils.getTestResource("response.search.peanut.json");
         JSONObject json = new JSONObject(string);
         SearchResponse response = new SearchResponse(json);
-        assertTrue("new succeeds", response.getResultId() != null);
+        assertEquals("search results exist", response.getSearchResults().size(), 24);
+        assertTrue("result id exists", response.getResultId() != null);
     }
 }

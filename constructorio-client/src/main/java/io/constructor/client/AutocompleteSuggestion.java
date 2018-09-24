@@ -6,6 +6,9 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * Constructor.io Autocomplete Suggestion
+ */
 public class AutocompleteSuggestion {
 
     private String value;

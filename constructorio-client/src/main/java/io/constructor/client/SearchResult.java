@@ -6,6 +6,9 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * Constructor.io Search Result
+ */
 public class SearchResult {
 
     private String value;

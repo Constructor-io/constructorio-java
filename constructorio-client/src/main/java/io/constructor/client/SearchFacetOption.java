@@ -3,7 +3,7 @@ package io.constructor.client;
 import org.json.JSONObject;
 
 /**
- * Constructor.io Search Facet
+ * Constructor.io Search Facet Option
  */
 public class SearchFacetOption {
 

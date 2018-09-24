@@ -11,7 +11,8 @@ import org.json.JSONObject;
 public class SearchResponse {
 
     private String resultId;
-    private ArrayList<SearchResult> searchResults;
+    private ArrayList<SearchResult> results;
+    private ArrayList<SearchFacet> facets;
 
     /**
      * Creates a search response
@@ -24,14 +25,22 @@ public class SearchResponse {
       }
 
       this.resultId = json.getString("result_id");
-      this.searchResults = new ArrayList<SearchResult>();
+      this.results = new ArrayList<SearchResult>();
+      this.facets = new ArrayList<SearchFacet>();
 
       JSONObject responseJSON = json.getJSONObject("response");
       JSONArray resultsJSON = responseJSON.getJSONArray("results");
       for (int i = 0; i < resultsJSON.length(); i++) {
           JSONObject resultJSON = resultsJSON.getJSONObject(i);
-          SearchResult searchResult = new SearchResult(resultJSON);
-          this.searchResults.add(searchResult);
+          SearchResult result = new SearchResult(resultJSON);
+          this.results.add(result);
+      }
+
+      JSONArray facetsJSON = responseJSON.getJSONArray("facets");
+      for (int i = 0; i < facetsJSON.length(); i++) {
+          JSONObject facetJSON = facetsJSON.getJSONObject(i);
+          SearchFacet facet = new SearchFacet(facetJSON);
+          this.facets.add(facet);
       }
     }
 
@@ -43,9 +52,16 @@ public class SearchResponse {
     }
 
     /**
-     * @return the searchResults
+     * @return the results
      */
-    public ArrayList<SearchResult> getSearchResults() {
-      return searchResults;
+    public ArrayList<SearchResult> getResults() {
+      return results;
+    }
+
+    /**
+     * @return the facets
+     */
+    public ArrayList<SearchFacet> getFacets() {
+      return facets;
     }
 }

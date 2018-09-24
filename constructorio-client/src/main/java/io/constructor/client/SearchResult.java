@@ -13,9 +13,9 @@ public class SearchResult {
     private ArrayList<String> matchedTerms;
 
     /**
-     * Creates an autocomplete response suggestion
+     * Creates a search response result
      *
-     * @param json the JSON object to create the response from
+     * @param json the JSON object to create the result from
      */
     public SearchResult(JSONObject json) throws IllegalArgumentException {
       if (json == null) {

@@ -1,7 +1,9 @@
 package io.constructor.client;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,8 +14,8 @@ import org.json.JSONObject;
 public class AutocompleteSuggestion {
 
     private String value;
-    private HashMap<String, Object> data;
-    private ArrayList<String> matchedTerms;
+    private Map<String, Object> data;
+    private List<String> matchedTerms;
 
     /**
      * Creates an autocomplete response suggestion
@@ -53,14 +55,14 @@ public class AutocompleteSuggestion {
     /**
      * @return the data
      */
-    public HashMap<String, Object> getData() {
+    public Map<String, Object> getData() {
       return data;
     }
 
     /**
      * @return the matchedTerms
      */
-    public ArrayList<String> getMatchedTerms() {
+    public List<String> getMatchedTerms() {
       return matchedTerms;
     }
 }

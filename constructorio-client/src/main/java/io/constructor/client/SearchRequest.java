@@ -1,12 +1,21 @@
 package io.constructor.client;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Constructor.io Search Request
  */
 public class SearchRequest {
 
     private String query;
-
+    private String section;
+    private int page;
+    private int resultsPerPage;
+    private Map<String, List<String>>facets;
+    private String groupId;
+    
     /**
      * Creates a search request
      *
@@ -18,6 +27,10 @@ public class SearchRequest {
       }
 
       this.query = query;
+      this.section = "Products";
+      this.page = 1;
+      this.resultsPerPage = 30;
+      this.facets = new HashMap<String, List<String>>();
     }
 
     /**
@@ -32,5 +45,75 @@ public class SearchRequest {
      */
     public String getQuery() {
       return query;
+    }
+
+    /**
+     * @return the section
+     */
+    public String getSection() {
+      return section;
+    }
+
+    /**
+     * @param section the section to set
+     */
+    public void setSection(String section) {
+      this.section = section;
+    }
+
+    /**
+     * @return the page
+     */
+    public int getPage() {
+      return page;
+    }
+
+    /**
+     * @param page the page to set
+     */
+    public void setPage(int page) {
+      this.page = page;
+    }
+
+    /**
+     * @return the resultsPerPage
+     */
+    public int getResultsPerPage() {
+      return resultsPerPage;
+    }
+
+    /**
+     * @param resultsPerPage the resultsPerPage to set
+     */
+    public void setResultsPerPage(int resultsPerPage) {
+      this.resultsPerPage = resultsPerPage;
+    }
+
+    /**
+     * @return the groupId
+     */
+    public String getGroupId() {
+      return groupId;
+    }
+
+    /**
+     * @param groupId the groupId to set
+     */
+    public void setGroupId(String groupId) {
+      this.groupId = groupId;
+    }
+
+    /**
+     * @param facets the facets to set
+     */
+    public void setFacets(Map<String, List<String>> facets) {
+      this.facets = facets;
+    }
+
+    /**
+     * @return the facets
+     */
+    public Map<String, List<String>> getFacets() {
+      return facets;
     }
 }

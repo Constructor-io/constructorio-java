@@ -3,7 +3,6 @@ package io.constructor.client;
 import static org.junit.Assert.assertEquals;
 
 import java.util.UUID;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Rule;
@@ -55,12 +54,12 @@ public class ConstructorItemTest {
 
         item.setItemName("airline tickets");
         item.setSuggestedScore(100000);
-        item.setKeywords(new ArrayList<>(Arrays.asList("London", "Tokyo", "New ")));
+        item.setKeywords(Arrays.asList("London", "Tokyo", "New "));
         item.setUrl("https://constructor.io/test");
         item.setImageUrl("https://constructor.io/test.png");
         item.setDescription("See the world!");
         item.setId("TICK-007");
-        item.setGroupIds(new ArrayList<>(Arrays.asList("Lucky Tickets", "Special Tickets", "Fancy Tickets")));
+        item.setGroupIds(Arrays.asList("Lucky Tickets", "Special Tickets", "Fancy Tickets"));
 
         assertEquals(item.getItemName(), "airline tickets");
         assertEquals(item.getSuggestedScore(), Integer.valueOf(100000));

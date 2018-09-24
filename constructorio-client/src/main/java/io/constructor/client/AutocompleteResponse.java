@@ -1,7 +1,9 @@
 package io.constructor.client;
 
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,7 +13,7 @@ import org.json.JSONObject;
  */
 public class AutocompleteResponse {
 
-    private HashMap<String, ArrayList<AutocompleteSuggestion>> sections;
+    private Map<String, List<AutocompleteSuggestion>> sections;
     private String resultId;
 
     /**
@@ -25,12 +27,12 @@ public class AutocompleteResponse {
       }
 
       this.resultId = json.getString("result_id");
-      this.sections = new HashMap<String, ArrayList<AutocompleteSuggestion>>();
+      this.sections = new HashMap<String, List<AutocompleteSuggestion>>();
 
       JSONObject sectionsJSON = json.getJSONObject("sections");
       for(Object sectionKey : sectionsJSON.keySet()) {
         String sectionName = (String)sectionKey;
-        ArrayList<AutocompleteSuggestion> items = new ArrayList<AutocompleteSuggestion>();
+        List<AutocompleteSuggestion> items = new ArrayList<AutocompleteSuggestion>();
         JSONArray resultsJSON = sectionsJSON.getJSONArray(sectionName);
         for (int i = 0; i < resultsJSON.length(); i++) {
             JSONObject suggestionJSON = resultsJSON.getJSONObject(i);
@@ -51,7 +53,7 @@ public class AutocompleteResponse {
     /**
      * @return the sections
      */
-    public HashMap<String, ArrayList<AutocompleteSuggestion>> getSections() {
+    public Map<String, List<AutocompleteSuggestion>> getSections() {
       return sections;
     }
 }

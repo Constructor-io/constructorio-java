@@ -1,7 +1,8 @@
 package io.constructor.client;
 
+import java.util.List;
 import java.util.HashMap;
-import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Constructor.io Item
@@ -10,14 +11,14 @@ public class ConstructorItem {
 
     private String itemName;
     private Integer suggestedScore;
-    private ArrayList<String> keywords;
+    private List<String> keywords;
     private String url;
     private String imageUrl;
     private String id;
     private String description;
-    private HashMap <String, String> facets;
-    private HashMap <String, String> metadata;
-    private ArrayList<String> groupIds;
+    private Map<String, String> facets;
+    private Map<String, String> metadata;
+    private List<String> groupIds;
 
     /**
      * Creates an autocomplete item.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
@@ -44,8 +45,8 @@ public class ConstructorItem {
     /**
      * Returns the HashMap form of an autocomplete item for converting to JSON
      */
-    public  HashMap<String, Object> toHashMap() {
-        HashMap<String, Object> params = new HashMap<String, Object>();
+    public Map<String, Object> toMap() {
+        Map<String, Object> params = new HashMap<String, Object>();
 
         if (itemName == null) {
             throw new IllegalArgumentException("itemName is required");
@@ -96,14 +97,14 @@ public class ConstructorItem {
     /**
      * @return the keywords
      */
-    public ArrayList<String> getKeywords() {
+    public List<String> getKeywords() {
         return keywords;
     }
 
     /**
      * @param keywords the keywords to set
      */
-    public void setKeywords(ArrayList<String> keywords) {
+    public void setKeywords(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -166,42 +167,42 @@ public class ConstructorItem {
     /**
      * @return the facets
      */
-    public HashMap<String, String> getFacets() {
+    public Map<String, String> getFacets() {
         return facets;
     }
     
     /**
      * @param facets the facets to set
      */
-    public void setFacets(HashMap<String, String> facets) {
+    public void setFacets(Map<String, String> facets) {
         this.facets = facets;
     }
 
     /**
      * @return the metadata
      */
-    public HashMap<String, String> getMetadata() {
+    public Map<String, String> getMetadata() {
         return metadata;
     }
     
     /**
      * @param metadata the metadata to set
      */
-    public void setMetadata(HashMap<String, String> metadata) {
+    public void setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
     }
 
     /**
      * @return the groupIds
      */
-    public ArrayList<String> getGroupIds() {
+    public List<String> getGroupIds() {
         return groupIds;
     }
 
     /**
      * @param groupIds the groupIds to set
      */
-    public void setGroupIds(ArrayList<String> groupIds) {
+    public void setGroupIds(List<String> groupIds) {
         this.groupIds = groupIds;
     }
 }

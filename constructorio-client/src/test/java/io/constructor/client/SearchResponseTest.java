@@ -33,6 +33,6 @@ public class SearchResponseTest {
         assertEquals("search group [Dairy] children exist", response.getGroups().get(0).getChildren().size(), 3);
         assertEquals("search results exist", response.getResults().size(), 24);
         assertEquals("total number of results", response.getTotalNumberOfResults(), 198);
-        assertTrue("result id exists", response.getResultId() != null);
+        assertTrue("search result id exists", response.getResultId() != null);
     }
 }

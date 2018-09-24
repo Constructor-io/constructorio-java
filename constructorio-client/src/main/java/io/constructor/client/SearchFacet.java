@@ -1,5 +1,6 @@
 package io.constructor.client;
 
+import java.util.List;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -11,7 +12,7 @@ import org.json.JSONObject;
 public class SearchFacet {
 
   private String name;
-  private ArrayList<SearchFacetOption> options;
+  private List<SearchFacetOption> options;
 
   /**
    * Creates a search facet
@@ -42,7 +43,7 @@ public class SearchFacet {
   /**
    * @return the options
    */
-  public ArrayList<SearchFacetOption> getOptions() {
+  public List<SearchFacetOption> getOptions() {
     return options;
   }
 }

@@ -3,6 +3,9 @@ package io.constructor.client;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+/**
+ * Constructor.io Item
+ */
 public class ConstructorItem {
 
     private String itemName;

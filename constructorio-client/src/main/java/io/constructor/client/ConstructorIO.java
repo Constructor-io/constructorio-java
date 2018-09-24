@@ -454,7 +454,7 @@ public class ConstructorIO {
      * @return true if successfully tracked.
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean trackSearch(String term, Integer numResults, UserInfo userInfo) throws ConstructorException {
+    public boolean trackSearch(String term, int numResults, UserInfo userInfo) throws ConstructorException {
         try {
             String path = "v1/search";
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);

@@ -1,6 +1,7 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,6 +25,8 @@ public class AutocompleteResponseTest {
         String string = Utils.getTestResource("response.autocomplete.peanut.json");
         JSONObject json = new JSONObject(string);
         AutocompleteResponse response = new AutocompleteResponse(json);
-        assertTrue("new succeeds", response.getResultId() != null);
+        assertEquals("search suggestions exist", response.getSections().get("Search Suggestions").size(), 8);
+        assertEquals("product suggestions exist", response.getSections().get("Products").size(), 6);
+        assertTrue("result id exists", response.getResultId() != null);
     }
 }

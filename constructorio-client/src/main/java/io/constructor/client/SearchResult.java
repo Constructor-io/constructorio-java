@@ -7,20 +7,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Constructor.io Autocomplete Suggestion
+ * Constructor.io Search Result
  */
-public class AutocompleteSuggestion {
+public class SearchResult {
 
     private String value;
     private HashMap<String, Object> data;
     private ArrayList<String> matchedTerms;
 
     /**
-     * Creates an autocomplete response suggestion
+     * Creates a search response result
      *
-     * @param json the JSON object to create the response from
+     * @param json the JSON object to create the result from
      */
-    public AutocompleteSuggestion(JSONObject json) throws IllegalArgumentException {
+    public SearchResult(JSONObject json) throws IllegalArgumentException {
       if (json == null) {
           throw new IllegalArgumentException("json is required");
       }

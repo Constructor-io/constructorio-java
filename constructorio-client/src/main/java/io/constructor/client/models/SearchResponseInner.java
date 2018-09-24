@@ -1,4 +1,4 @@
-package io.constructor.client;
+package io.constructor.client.models;
 
 import java.util.List;
 

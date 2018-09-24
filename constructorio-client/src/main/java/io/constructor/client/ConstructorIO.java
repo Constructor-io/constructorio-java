@@ -13,6 +13,9 @@ import com.google.gson.Gson;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 
+import io.constructor.client.models.AutocompleteResponse;
+import io.constructor.client.models.SearchResponse;
+import io.constructor.client.models.ServerError;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;

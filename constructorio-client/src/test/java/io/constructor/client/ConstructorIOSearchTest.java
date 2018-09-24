@@ -9,6 +9,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import io.constructor.client.models.SearchResponse;
+
 public class ConstructorIOSearchTest {
 
     @Rule

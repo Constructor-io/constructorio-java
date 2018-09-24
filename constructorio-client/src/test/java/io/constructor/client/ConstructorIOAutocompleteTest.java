@@ -7,6 +7,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import io.constructor.client.models.AutocompleteResponse;
+
 public class ConstructorIOAutocompleteTest {
 
     @Rule

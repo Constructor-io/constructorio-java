@@ -11,6 +11,7 @@ import org.json.JSONObject;
 public class SearchResponse {
 
     private String resultId;
+    private int totalNumberOfResults;
     private ArrayList<SearchResult> results;
     private ArrayList<SearchFacet> facets;
 
@@ -29,6 +30,8 @@ public class SearchResponse {
       this.facets = new ArrayList<SearchFacet>();
 
       JSONObject responseJSON = json.getJSONObject("response");
+      this.totalNumberOfResults = responseJSON.getInt("total_num_results");
+
       JSONArray resultsJSON = responseJSON.getJSONArray("results");
       for (int i = 0; i < resultsJSON.length(); i++) {
           JSONObject resultJSON = resultsJSON.getJSONObject(i);
@@ -63,5 +66,12 @@ public class SearchResponse {
      */
     public ArrayList<SearchFacet> getFacets() {
       return facets;
+    }
+
+    /**
+     * @return the totalNumberOfResults
+     */
+    public int getTotalNumberOfResults() {
+      return totalNumberOfResults;
     }
 }

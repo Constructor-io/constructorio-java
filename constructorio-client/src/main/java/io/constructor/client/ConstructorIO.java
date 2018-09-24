@@ -4,8 +4,8 @@ import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -333,6 +333,15 @@ public class ConstructorIO {
         try {
             String path = "autocomplete/" + req.getQuery();
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+
+            for (Map.Entry<String, Integer> entry : req.getResultsPerSection().entrySet()) {
+                String section = entry.getKey();
+                String count = String.valueOf(entry.getValue());
+                url = url.newBuilder()
+                    .addQueryParameter("num_results_" + section, count)
+                    .build();
+            }
+
             Request request = new Request.Builder()
                 .url(url)
                 .get()

@@ -1,11 +1,15 @@
 package io.constructor.client;
 
+import java.util.Map;
+import java.util.HashMap;
+
 /**
  * Constructor.io Autocomplete Request
  */
 public class AutocompleteRequest {
 
     private String query;
+    private Map<String, Integer> resultsPerSection;
 
     /**
      * Creates an autocomplete request
@@ -18,6 +22,7 @@ public class AutocompleteRequest {
       }
 
       this.query = query;
+      this.resultsPerSection = new HashMap<String, Integer>();
     }
 
     /**
@@ -32,5 +37,19 @@ public class AutocompleteRequest {
      */
     public String getQuery() {
       return query;
+    }
+
+    /**
+     * @param resultsPerSection the resultsPerSection to set
+     */
+    public void setResultsPerSection(Map<String, Integer> resultsPerSection) {
+      this.resultsPerSection = resultsPerSection;
+    }
+
+    /**
+     * @return the resultsPerSection
+     */
+    public Map<String, Integer> getResultsPerSection() {
+      return resultsPerSection;
     }
 }

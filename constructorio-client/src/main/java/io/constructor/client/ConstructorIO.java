@@ -368,7 +368,7 @@ public class ConstructorIO {
 
             if (req.getGroupId() != null) {
                 url = url.newBuilder()
-                    .addQueryParameter("group_id", req.getGroupId())
+                    .addQueryParameter("filters[group_id]", req.getGroupId())
                     .build();
             }
 

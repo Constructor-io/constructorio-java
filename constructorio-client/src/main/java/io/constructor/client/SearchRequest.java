@@ -1,14 +1,19 @@
 package io.constructor.client;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Constructor.io Search Request
  */
 public class SearchRequest {
 
     private String query;
-    private String section = "Products";
-    private int page = 1;
-    private int resultsPerPage = 30;
+    private String section;
+    private int page;
+    private int resultsPerPage;
+    private Map<String, List<String>>facets;
     private String groupId;
     
     /**
@@ -22,6 +27,10 @@ public class SearchRequest {
       }
 
       this.query = query;
+      this.section = "Products";
+      this.page = 1;
+      this.resultsPerPage = 30;
+      this.facets = new HashMap<String, List<String>>();
     }
 
     /**
@@ -92,5 +101,19 @@ public class SearchRequest {
      */
     public void setGroupId(String groupId) {
       this.groupId = groupId;
+    }
+
+    /**
+     * @param facets the facets to set
+     */
+    public void setFacets(Map<String, List<String>> facets) {
+      this.facets = facets;
+    }
+
+    /**
+     * @return the facets
+     */
+    public Map<String, List<String>> getFacets() {
+      return facets;
     }
 }

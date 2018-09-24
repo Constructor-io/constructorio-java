@@ -3,8 +3,10 @@ package io.constructor.client;
 import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Base64;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gson.Gson;
 
@@ -110,7 +112,7 @@ public class ConstructorIO {
     public boolean addItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl("v1/item");
-            HashMap<String, Object> data = item.toHashMap();
+            Map<String, Object> data = item.toMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
@@ -139,7 +141,7 @@ public class ConstructorIO {
         try {
             HttpUrl url = this.makeUrl("v1/item");
             url = url.newBuilder().addQueryParameter("force", "1").build();
-            HashMap<String, Object> data = item.toHashMap();
+            Map<String, Object> data = item.toMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
@@ -167,10 +169,10 @@ public class ConstructorIO {
     public boolean addItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             HttpUrl url= this.makeUrl("v1/batch_items");
-            HashMap<String, Object> data = new HashMap<String, Object>();
-            ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toHashMap());
+                itemsAsJSON.add(item.toMap());
             }
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
@@ -201,10 +203,10 @@ public class ConstructorIO {
         try {
             HttpUrl url = this.makeUrl("v1/batch_items");
             url = url.newBuilder().addQueryParameter("force", "1").build();
-            HashMap<String, Object> data = new HashMap<String, Object>();
-            ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toHashMap());
+                itemsAsJSON.add(item.toMap());
             }
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
@@ -234,7 +236,7 @@ public class ConstructorIO {
     public boolean removeItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl("v1/item");
-            HashMap<String, Object> data = new HashMap<String, Object>();
+            Map<String, Object> data = new HashMap<String, Object>();
             data.put("item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
@@ -263,10 +265,10 @@ public class ConstructorIO {
     public boolean removeItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl("v1/batch_items");
-            HashMap<String, Object> data = new HashMap<String, Object>();
-            ArrayList<Object> itemsAsJSON = new ArrayList<Object>();
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toHashMap());
+                itemsAsJSON.add(item.toMap());
             }
             data.put("items", itemsAsJSON);
             data.put("autocomplete_section", autocompleteSection);
@@ -297,7 +299,7 @@ public class ConstructorIO {
     public boolean modifyItem(ConstructorItem item, String autocompleteSection, String previousItemName) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl("v1/item");
-            HashMap<String, Object> data = item.toHashMap();
+            Map<String, Object> data = item.toMap();
             data.put("new_item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_name", previousItemName);
@@ -403,7 +405,7 @@ public class ConstructorIO {
         try {
             String path = "v1/conversion";
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
-            HashMap<String, Object> data = new HashMap<String, Object>();
+            Map<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
@@ -437,7 +439,7 @@ public class ConstructorIO {
         try {
             String path = "v1/click_through";
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
-            HashMap<String, Object> data = new HashMap<String, Object>();
+            Map<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("autocomplete_section", autocompleteSection);
             data.put("item_id", itemId);
@@ -471,7 +473,7 @@ public class ConstructorIO {
         try {
             String path = "v1/search";
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
-            HashMap<String, Object> data = new HashMap<String, Object>();
+            Map<String, Object> data = new HashMap<String, Object>();
             data.put("term", term);
             data.put("num_results", numResults);
             String params = new Gson().toJson(data);

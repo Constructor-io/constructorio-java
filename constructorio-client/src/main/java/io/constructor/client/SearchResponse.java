@@ -1,5 +1,6 @@
 package io.constructor.client;
 
+import java.util.List;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -11,9 +12,9 @@ import org.json.JSONObject;
 public class SearchResponse {
 
     private String resultId;
-    private ArrayList<SearchFacet> facets;
-    private ArrayList<SearchGroup> groups;
-    private ArrayList<SearchResult> results;
+    private List<SearchFacet> facets;
+    private List<SearchGroup> groups;
+    private List<SearchResult> results;
     private int totalNumberOfResults;
 
     /**
@@ -67,21 +68,21 @@ public class SearchResponse {
     /**
      * @return the facets
      */
-    public ArrayList<SearchFacet> getFacets() {
+    public List<SearchFacet> getFacets() {
       return facets;
     }
 
     /**
      * @return the groups
      */
-    public ArrayList<SearchGroup> getGroups() {
+    public List<SearchGroup> getGroups() {
       return groups;
     }
 
     /**
      * @return the results
      */
-    public ArrayList<SearchResult> getResults() {
+    public List<SearchResult> getResults() {
       return results;
     }
 

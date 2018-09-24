@@ -1,5 +1,6 @@
 package io.constructor.client;
 
+import java.util.List;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -10,7 +11,7 @@ import org.json.JSONObject;
  */
 public class SearchGroup {
 
-    private ArrayList<SearchGroup> children;
+    private List<SearchGroup> children;
     private int count;
     private String displayName;
     private String groupId;
@@ -41,7 +42,7 @@ public class SearchGroup {
     /**
      * @return the children
      */
-    public ArrayList<SearchGroup> getChildren() {
+    public List<SearchGroup> getChildren() {
       return children;
     }
 

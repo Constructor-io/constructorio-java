@@ -374,6 +374,14 @@ public class ConstructorIO {
                     .build();
             }
 
+            for (String facetName : req.getFacets().keySet()) {
+                for (String facetValue : req.getFacets().get(facetName)) {
+                    url = url.newBuilder()
+                        .addQueryParameter("filters[" + facetName + "]", facetValue)
+                        .build();
+                }
+            }
+
             Request request = new Request.Builder()
                 .url(url)
                 .get()

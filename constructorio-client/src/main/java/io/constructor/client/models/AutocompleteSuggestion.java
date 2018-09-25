@@ -1,7 +1,6 @@
 package io.constructor.client.models;
 
 import java.util.List;
-import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -14,7 +13,7 @@ public class AutocompleteSuggestion {
     private String value;
 
     @SerializedName("data")
-    private Map<String, Object> data;
+    private ItemData data;
 
     @SerializedName("matched_terms")
     private List<String> matchedTerms;
@@ -29,7 +28,7 @@ public class AutocompleteSuggestion {
     /**
      * @return the data
      */
-    public Map<String, Object> getData() {
+    public ItemData getData() {
       return data;
     }
 

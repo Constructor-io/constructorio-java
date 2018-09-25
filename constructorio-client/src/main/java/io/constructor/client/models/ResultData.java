@@ -1,13 +1,15 @@
 package io.constructor.client.models;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Constructor.io Result Data ... uses Gson/Reflection to load data in
  */
-
 public class ResultData {
 
   @SerializedName("description")
@@ -27,6 +29,9 @@ public class ResultData {
 
   @SerializedName("facets")
   private List<ResultFacet> facets;
+
+  // All the other metadata
+  protected Map<String, Object> metadata = new HashMap<String, Object>();
 
   /**
    * @return the description

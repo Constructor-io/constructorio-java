@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 public class AutocompleteResponse {
 
     @SerializedName("sections")
-    private Map<String, List<AutocompleteSuggestion>> sections;
+    private Map<String, List<Result>> sections;
 
     @SerializedName("result_id")
     private String resultId;
@@ -26,7 +26,7 @@ public class AutocompleteResponse {
     /**
      * @return the sections
      */
-    public Map<String, List<AutocompleteSuggestion>> getSections() {
+    public Map<String, List<Result>> getSections() {
       return sections;
     }
 }

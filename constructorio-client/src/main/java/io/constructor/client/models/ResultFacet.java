@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * Constructor.io Item Facet ... uses Gson/Reflection to load data in
  */
 
-public class ItemFacet {
+public class ResultFacet {
 
   @SerializedName("name")
   private String name;

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Constructor.io Item Group ... uses Gson/Reflection to load data in
  */
 
-public class ItemGroup {
+public class ResultGroup {
 
   @SerializedName("display_name")
   private String displayName;

@@ -5,10 +5,10 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Item Data ... uses Gson/Reflection to load data in
+ * Constructor.io Result Data ... uses Gson/Reflection to load data in
  */
 
-public class ItemData {
+public class ResultData {
 
   @SerializedName("description")
   private String description;
@@ -23,10 +23,10 @@ public class ItemData {
   private String imageUrl;
 
   @SerializedName("groups")
-  private List<ItemGroup> groups;
+  private List<ResultGroup> groups;
 
   @SerializedName("facets")
-  private List<ItemFacet> facets;
+  private List<ResultFacet> facets;
 
   /**
    * @return the description
@@ -59,14 +59,14 @@ public class ItemData {
   /**
    * @return the groups
    */
-  public List<ItemGroup> getGroups() {
+  public List<ResultGroup> getGroups() {
     return groups;
   }
 
   /**
    * @return the facets
    */
-  public List<ItemFacet> getFacets() {
+  public List<ResultFacet> getFacets() {
     return facets;
   }
 }

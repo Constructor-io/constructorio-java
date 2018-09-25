@@ -12,6 +12,9 @@ public class SearchGroup {
     @SerializedName("children")
     private List<SearchGroup> children;
 
+    @SerializedName("parents")
+    private List<SearchGroup> parents;
+
     @SerializedName("count")
     private int count;
 

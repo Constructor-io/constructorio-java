@@ -30,8 +30,8 @@ public class ResultData {
   @SerializedName("facets")
   private List<ResultFacet> facets;
 
-  // All the other metadata
-  protected Map<String, Object> metadata = new HashMap<String, Object>();
+  @SerializedName("metadata")
+  private Map<String, Object> metadata = new HashMap<String, Object>();
 
   /**
    * @return the description

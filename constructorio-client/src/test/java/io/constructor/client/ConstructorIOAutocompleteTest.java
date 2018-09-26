@@ -15,6 +15,15 @@ public class ConstructorIOAutocompleteTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
+    public void createAutocompleteResponseShouldReturnAResult() throws Exception {
+        String string = Utils.getTestResource("response.autocomplete.peanut.json");
+        AutocompleteResponse response = ConstructorIO.createAutocompleteResponse(string);
+        assertEquals("search suggestions exist", response.getSections().get("Search Suggestions").size(), 8);
+        assertEquals("product suggestions exist", response.getSections().get("Products").size(), 6);
+        assertTrue("result id exists", response.getResultId() != null);
+    }
+
+    @Test
     public void autocompleteShouldReturnAResult() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");

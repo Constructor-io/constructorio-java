@@ -73,4 +73,11 @@ public class ResultData {
   public List<ResultFacet> getFacets() {
     return facets;
   }
+
+  /**
+   * @return the metadata
+   */
+  public Map<String, Object> getMetadata() {
+    return metadata;
+  }
 }

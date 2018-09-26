@@ -12,7 +12,12 @@ import com.google.gson.Gson;
 
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import io.constructor.client.models.AutocompleteResponse;
+import io.constructor.client.models.SearchResponse;
+import io.constructor.client.models.ServerError;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -348,7 +353,7 @@ public class ConstructorIO {
 
             Response response = client.newCall(request).execute();
             checkResponse(response);
-            return new Gson().fromJson(response.body().string(), AutocompleteResponse.class);
+            return createAutocompleteResponse(response.body().string());
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -396,8 +401,7 @@ public class ConstructorIO {
 
             Response response = client.newCall(request).execute();
             checkResponse(response);
-            return new Gson().fromJson(response.body().string(), SearchResponse.class);
-
+            return createSearchResponse(response.body().string());
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -578,5 +582,66 @@ public class ConstructorIO {
             // Do nothing
         }
         return "ciojava-";
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an autocomplete response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static AutocompleteResponse createAutocompleteResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        JSONObject sections = json.getJSONObject("sections");
+        for (Object sectionKey : sections.keySet()) {
+            String sectionName = (String)sectionKey;
+            JSONArray results = sections.getJSONArray(sectionName);
+            moveMetadataOutOfResultData(results);
+        }
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, AutocompleteResponse.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an search response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static SearchResponse createSearchResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        JSONObject response = json.getJSONObject("response");
+        JSONArray results = response.getJSONArray("results");
+        moveMetadataOutOfResultData(results);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, SearchResponse.class);
+    }
+
+    /**
+     * Moves metadata out of the result data for an array of results 
+     * @param results A JSON array of results
+     */
+    protected static void moveMetadataOutOfResultData(JSONArray results) {
+        for (int i = 0; i < results.length(); i++) {
+
+            JSONObject result = results.getJSONObject(i);
+            JSONObject resultData = result.getJSONObject("data");
+            JSONObject metadata = new JSONObject();
+            
+            // Move unspecified properties in result data object to metadata object
+            for (Object propertyKey : resultData.keySet()) {
+                String propertyName = (String)propertyKey;
+                if (!propertyName.matches("(description|id|url|image_url|groups|facets)")) {
+                    metadata.put(propertyName, resultData.get(propertyName));
+                }
+            }
+
+            // Remove unspecified properties from result data object
+            for (Object propertyKey : metadata.keySet()) {
+                String propertyName = (String)propertyKey;
+                resultData.remove(propertyName);
+            }
+
+            // Add metadata to result data object
+            resultData.put("metadata", metadata);
+        }
     }
 }

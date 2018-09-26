@@ -1,4 +1,4 @@
-package io.constructor.client;
+package io.constructor.client.models;
 
 import java.util.List;
 
@@ -11,6 +11,9 @@ public class SearchGroup {
 
     @SerializedName("children")
     private List<SearchGroup> children;
+
+    @SerializedName("parents")
+    private List<SearchGroup> parents;
 
     @SerializedName("count")
     private int count;
@@ -26,6 +29,13 @@ public class SearchGroup {
      */
     public List<SearchGroup> getChildren() {
       return children;
+    }
+
+    /**
+     * @return the parents
+     */
+    public List<SearchGroup> getParents() {
+      return parents;
     }
 
     /**

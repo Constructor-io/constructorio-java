@@ -1,20 +1,19 @@
-package io.constructor.client;
+package io.constructor.client.models;
 
 import java.util.List;
-import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Search Result ... uses Gson/Reflection to load data in
+ * Constructor.io Result (Autocomplete or Search) ... uses Gson/Reflection to load data in
  */
-public class SearchResult {
+public class Result {
 
   @SerializedName("value")
   private String value;
 
   @SerializedName("data")
-  private Map<String, Object> data;
+  private ResultData data;
 
   @SerializedName("matched_terms")
   private List<String> matchedTerms;
@@ -29,7 +28,7 @@ public class SearchResult {
   /**
    * @return the data
    */
-  public Map<String, Object> getData() {
+  public ResultData getData() {
     return data;
   }
 

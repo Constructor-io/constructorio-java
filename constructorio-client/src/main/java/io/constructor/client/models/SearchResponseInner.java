@@ -1,4 +1,4 @@
-package io.constructor.client;
+package io.constructor.client.models;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class SearchResponseInner {
     private List<SearchGroup> groups;
 
     @SerializedName("results")
-    private List<SearchResult> results;
+    private List<Result> results;
 
     @SerializedName("total_num_results")
     private int totalNumberOfResults;
@@ -38,7 +38,7 @@ public class SearchResponseInner {
     /**
      * @return the results
      */
-    public List<SearchResult> getResults() {
+    public List<Result> getResults() {
       return results;
     }
 

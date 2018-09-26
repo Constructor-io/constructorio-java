@@ -32,6 +32,13 @@ public class SearchGroup {
     }
 
     /**
+     * @return the parents
+     */
+    public List<SearchGroup> getParents() {
+      return parents;
+    }
+
+    /**
      * @return the count
      */
     public int getCount() {

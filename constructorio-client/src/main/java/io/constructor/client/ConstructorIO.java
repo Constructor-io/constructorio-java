@@ -595,7 +595,7 @@ public class ConstructorIO {
         for (Object sectionKey : sections.keySet()) {
             String sectionName = (String)sectionKey;
             JSONArray results = sections.getJSONArray(sectionName);
-            transformResultData(results);
+            moveMetadataOutOfResultData(results);
         }
         String transformed = json.toString();
         return new Gson().fromJson(transformed, AutocompleteResponse.class);
@@ -610,16 +610,16 @@ public class ConstructorIO {
         JSONObject json = new JSONObject(string);
         JSONObject response = json.getJSONObject("response");
         JSONArray results = response.getJSONArray("results");
-        transformResultData(results);
+        moveMetadataOutOfResultData(results);
         String transformed = json.toString();
         return new Gson().fromJson(transformed, SearchResponse.class);
     }
 
     /**
-     * Shifts metadata out of the result data for an array of results 
+     * Moves metadata out of the result data for an array of results 
      * @param results A JSON array of results
      */
-    protected static void transformResultData(JSONArray results) {
+    protected static void moveMetadataOutOfResultData(JSONArray results) {
         for (int i = 0; i < results.length(); i++) {
 
             JSONObject result = results.getJSONObject(i);

@@ -17,4 +17,24 @@ public class ResultGroup {
   @SerializedName("path")
   private String path;
 
+  /**
+   * @return the displayName
+   */
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  /**
+   * @return the groupId
+   */
+  public String getGroupId() {
+    return groupId;
+  }
+
+  /**
+   * @return the path
+   */
+  public String getPath() {
+    return path;
+  }
 }

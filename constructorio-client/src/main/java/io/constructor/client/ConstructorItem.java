@@ -167,7 +167,7 @@ public class ConstructorItem {
     /**
      * @return the facets
      */
-    public Map<String, String> getFacets() {
+    public Map<String, Object> getFacets() {
         return facets;
     }
     

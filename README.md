@@ -14,13 +14,86 @@ For the most up-to-date documentation for this library, please visit our [API Do
 ConstructorIO constructor = new ConstructorIO("apitoken", "apikey", true, null);
 ```
 
-# Usage
-Searching for peanut butter
+# Creating and Modifying Items
+A `ConstructorItem` contains all the information about a product or search suggestion. To add or update an individual item, you will need to provide a `ConstructorItem` and the relevant `Autocomplete Section` it belongs to.
+
 ```java
+// Create an item
+ConstructorItem item = new ConstructorItem("ROTCURTSNOC Rainy Day Coat");
+item.setUrl("https://constructor.io/pdp/893092");
+item.setImageUrl("https://constructor.io/images/893092.jpg");
+item.setId("893092");
+item.setSuggestedScore(Integer.valueOf(5000));
+item.setDescription("Keep yourself dry and cozy on rainy days.");
+item.setKeywords(Arrays.asList("coat", "rain", "jacket"));
+
+// Add an item to the Products section
+constructor.addItem(item, "Products");
+
+// Add or update an item in the Products section
+constructor.addOrUpdateItem(item, "Products");
+```
+
+Similarly with adding or updating a batch of items, you will need to provide an array of `ConstructorItem`'s and their relevant `Autocomplete Section`.
+```java
+// Create an array of items
+ConstructorItem[] items = new ConstructorItem[20];
+items[0] = new ConstructorItem("YBGID Plaid Shirt");
+items[1] = new ConstructorItem("YBGID Striped Shirt");
+...
+items[19] = new ConstructorItem("YBGID Polka Dot Shirt");
+
+// Add items to the Products section
+constructor.addItemBatch(items, "Products");
+
+// Add or update items in the Products section
+constructor.addOrUpdateItemBatch(items, "Products");
+```
+
+# Retrieving Results
+
+To retrieve autocomplete results, you will need to create an `AutocompleteRequest`. You can specify the number of results you want per `Autocomplete Section`.
+
+```java
+// Create an AutocompleteRequest with the term to request results for
+AutocompleteRequest request = new AutocompleteRequest("rain coat");
+
+// Define the number of results to show per section
+Map<String, Integer> resultsPerSection = new HashMap<String, Integer>();
+resultsPerSection.put("Products", Integer.valueOf(6));
+resultsPerSection.put("Search Suggestions", Integer.valueOf(8));
+request.setResultsPerSection(resultsPerSection);
+
+// Identify the user session and user id to show results for (optional)
+UserInfo userInfo = new UserInfo(5, "user-id-1123123");
+
+// Request results as an object
+AutocompleteResponse response = constructor.autocomplete(request, userInfo);
+
+// Request results as a JSON string
+AutocompleteResponse response = constructor.autocompleteAsJSON(request, userInfo);
+```
+
+To retrieve search results, you will need to create a `SearchRequest`. In the `SearchRequest` you can specify the number of results you want per page, the page you want, and also filter the search by category or facets. 
+
+```java
+// Create a SearchRequest with the term to request results for
 SearchRequest request = new SearchRequest("peanut butter");
+
+// Add in additional parameters
 request.setResultsPerPage(5);
+request.setPage(1);
+request.setGroupId("625");
 request.getFacets().put("Brand", Arrays.asList("Jif"))
-SearchResponse response = constructor.search(request, null);
+
+// Identify the user session and user id to show results for (optional)
+UserInfo userInfo = new UserInfo(5, "user-id-1123123");
+
+// Request results as an object
+SearchResponse response = constructor.search(request, userInfo);
+
+// Request results as a JSON string
+SearchResponse response = constructor.searchAsJSON(request, userInfo);
 ```
 
 # Testing

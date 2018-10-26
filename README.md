@@ -67,8 +67,11 @@ request.setResultsPerSection(resultsPerSection);
 // Identify the user session and user id to show results for (optional)
 UserInfo userInfo = new UserInfo(5, "user-id-1123123");
 
-// Request results
+// Request results as an object
 AutocompleteResponse response = constructor.autocomplete(request, userInfo);
+
+// Request results as a JSON string
+AutocompleteResponse response = constructor.autocompleteAsJSON(request, userInfo);
 ```
 
 To retrieve search results, you will need to create a `SearchRequest`. In the `SearchRequest` you can specify the number of results you want per page, the page you want, and also filter the search by category or facets. 
@@ -86,8 +89,11 @@ request.getFacets().put("Brand", Arrays.asList("Jif"))
 // Identify the user session and user id to show results for (optional)
 UserInfo userInfo = new UserInfo(5, "user-id-1123123");
 
-// Request results
+// Request results as an object
 SearchResponse response = constructor.search(request, userInfo);
+
+// Request results as a JSON string
+SearchResponse response = constructor.searchAsJSON(request, userInfo);
 ```
 
 # Testing

@@ -335,6 +335,26 @@ public class ConstructorIO {
      */
     public AutocompleteResponse autocomplete(AutocompleteRequest req, UserInfo userInfo) throws ConstructorException {
         try {
+            String json = autocompleteAsJSON(req, userInfo);
+            return createAutocompleteResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the autocomplete service.
+     *
+     * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the autocomplete request
+     * @param userInfo optional information about the user
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String autocompleteAsJSON(AutocompleteRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
             String path = "autocomplete/" + req.getQuery();
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
 
@@ -352,8 +372,7 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            checkResponse(response);
-            return createAutocompleteResponse(response.body().string());
+            return response.body().string();
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -371,6 +390,26 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            String json = searchAsJSON(req, userInfo);
+            return createSearchResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the search service.
+     *
+     * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the search request
+     * @param userInfo optional information about the user
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String searchAsJSON(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             String path = "search/" + req.getQuery();
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
@@ -401,7 +440,7 @@ public class ConstructorIO {
 
             Response response = client.newCall(request).execute();
             checkResponse(response);
-            return createSearchResponse(response.body().string());
+            return response.body().string();
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }

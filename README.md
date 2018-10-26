@@ -14,11 +14,20 @@ For the most up-to-date documentation for this library, please visit our [API Do
 ConstructorIO constructor = new ConstructorIO("apitoken", "apikey", true, null);
 ```
 
-# Simple Example
+# Usage
 Searching for peanut butter
 ```java
 SearchRequest request = new SearchRequest("peanut butter");
 request.setResultsPerPage(5);
 request.getFacets().put("Brand", Arrays.asList("Jif"))
 SearchResponse response = constructor.search(request, null);
+```
+
+# Testing
+Download the repository and run the following commands from `./constructorio-client`
+
+```bash
+mvn clean               # clean target directory
+mvn test                # run tests
+mvn jacoco:report       # post tests, write coverage to ./target/site/jacoco
 ```

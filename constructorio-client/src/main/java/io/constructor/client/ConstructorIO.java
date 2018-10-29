@@ -325,6 +325,76 @@ public class ConstructorIO {
     }
 
     /**
+     * Retrieves all items for the given autocomplete section, paginated by numResultsPerPage
+     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @param numResultsPerPage the number of results you want to return (defaults to 20)
+     * @param page the page to return (defaults to 1)
+     * @return an items response
+     * @throws ConstructorException if the request is invalid
+     */
+    public ItemsResponse getItems(String autocompleteSection, int numResultsPerPage, int page) throws ConstructorException {
+        try {
+            String json = getItemsAsJSON(autocompleteSection, numResultsPerPage, page);
+            return createItemsResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Retrieves all items for the given autocomplete section, paginated by numResultsPerPage (default 20) for a given page (default 1)
+     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @return an items response
+     * @throws ConstructorException if the request is invalid
+     */
+    public ItemsResponse getItems(String autocompleteSection) throws ConstructorException {
+        return getItems(autocompleteSection, 20, 1);
+    }
+
+    /**
+     * Retrieves all items for the given autocomplete section, paginated by numResultsPerPage
+     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @param numResultsPerPage the number of results you want to return (defaults to 20)
+     * @param page the page to return (defaults to 1)
+     * @return a JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String getItemsAsJSON(String autocompleteSection, int numResultsPerPage, int page) throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl("v1/item");
+            url = url.newBuilder()
+                .addQueryParameter("section", autocompleteSection)
+                .addQueryParameter("num_results_per_page", String.valueOf(numResultsPerPage))
+                .addQueryParameter("page", String.valueOf(page))
+                .build();
+
+            Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Authorization", this.credentials)
+                .get()
+                .build();
+
+            Response response = client.newCall(request).execute();
+            checkResponse(response);
+            return response.body().string();
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Retrieves all items for the given autocomplete section, paginated by numResultsPerPage
+     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @param numResultsPerPage the number of results you want to return (defaults to 20)
+     * @param page the page to return (defaults to 1)
+     * @return a JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String getItemsAsJSON(String autocompleteSection) throws ConstructorException {
+        return getItemsAsJSON(autocompleteSection, 20, 1);
+    }
+
+    /**
      * Gets the item with the specified item name from your autocomplete
      * @param itemId the id of the item you'd like to retrieve
      * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
@@ -334,7 +404,7 @@ public class ConstructorIO {
     public Item getItem(String itemId, String autocompleteSection) throws ConstructorException {
         try {
             String json = getItemAsJSON(itemId, autocompleteSection);
-            return createConstructorItemResponse(json);
+            return createItem(json);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -704,9 +774,17 @@ public class ConstructorIO {
     /**
      * Parses the JSON string with Gson. 
      */
-    protected static Item createConstructorItemResponse(String string) {
+    protected static Item createItem(String string) {
         return new Gson().fromJson(string, Item.class);
     }
+
+    /**
+     * Parses the JSON string with Gson. 
+     */
+    protected static ItemsResponse createItemsResponse(String string) {
+        return new Gson().fromJson(string, ItemsResponse.class);
+    }
+
 
     /**
      * Moves metadata out of the result data for an array of results 

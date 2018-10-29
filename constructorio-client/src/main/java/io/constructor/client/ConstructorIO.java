@@ -17,6 +17,8 @@ import org.json.JSONObject;
 
 import io.constructor.client.models.AutocompleteResponse;
 import io.constructor.client.models.SearchResponse;
+import io.constructor.client.models.ItemsResponse;
+import io.constructor.client.models.Item;
 import io.constructor.client.models.ServerError;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
@@ -339,6 +341,51 @@ public class ConstructorIO {
     }
 
     /**
+     * Gets the item with the specified item name from your autocomplete
+     * @param itemId the id of the item you'd like to retrieve
+     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @return a Constructor Item
+     * @throws ConstructorException if the request is invalid
+     */
+    public Item getItem(String itemId, String autocompleteSection) throws ConstructorException {
+        try {
+            String json = getItemAsJSON(itemId, autocompleteSection);
+            return createConstructorItemResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Gets the item with the specified item name from your autocomplete
+     * @param itemId the id of the item you'd like to retrieve
+     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid
+     */
+    public String getItemAsJSON(String itemId, String autocompleteSection) throws ConstructorException {
+        try {
+            String path = "v1/item/" + itemId;
+            HttpUrl url = this.makeUrl(path);
+            url = url.newBuilder()
+                .addQueryParameter("section", autocompleteSection)
+                .build();
+
+            Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Authorization", this.credentials)
+                .get()
+                .build();
+
+            Response response = client.newCall(request).execute();
+            checkResponse(response);
+            return response.body().string();
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
      * Queries the autocomplete service.
      *
      * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!
@@ -642,6 +689,13 @@ public class ConstructorIO {
         moveMetadataOutOfResultData(results);
         String transformed = json.toString();
         return new Gson().fromJson(transformed, SearchResponse.class);
+    }
+
+    /**
+     * Parses the JSON string with Gson. 
+     */
+    protected static Item createConstructorItemResponse(String string) {
+        return new Gson().fromJson(string, Item.class);
     }
 
     /**

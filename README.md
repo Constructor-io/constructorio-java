@@ -71,7 +71,7 @@ UserInfo userInfo = new UserInfo(5, "user-id-1123123");
 AutocompleteResponse response = constructor.autocomplete(request, userInfo);
 
 // Request results as a JSON string
-AutocompleteResponse response = constructor.autocompleteAsJSON(request, userInfo);
+String response = constructor.autocompleteAsJSON(request, userInfo);
 ```
 
 To retrieve search results, you will need to create a `SearchRequest`. In the `SearchRequest` you can specify the number of results you want per page, the page you want, and also filter the search by category or facets. 
@@ -93,7 +93,7 @@ UserInfo userInfo = new UserInfo(5, "user-id-1123123");
 SearchResponse response = constructor.search(request, userInfo);
 
 // Request results as a JSON string
-SearchResponse response = constructor.searchAsJSON(request, userInfo);
+String response = constructor.searchAsJSON(request, userInfo);
 ```
 
 # Testing

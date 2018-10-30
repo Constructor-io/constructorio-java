@@ -581,6 +581,7 @@ public class ConstructorIO {
             .addQueryParameter("c", this.version)
             .addQueryParameter("s", String.valueOf(info.getSessionId()))
             .addQueryParameter("i", info.getClientId())
+            .addQueryParameter("ui", String.valueOf(info.getUserId()))
             .host(this.host)
             .build();
         

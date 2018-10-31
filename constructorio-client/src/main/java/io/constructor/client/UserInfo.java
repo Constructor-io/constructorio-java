@@ -79,7 +79,7 @@ public class UserInfo {
    * @param userId the user's id
    */
   private void setUserId(String userId) throws IllegalArgumentException {
-    if (userId.trim().isEmpty()) {
+    if (userId != null && userId.trim().isEmpty()) {
       throw new IllegalArgumentException("User ID cannot be an empty string.");
     } else {
       this.userId = userId;

@@ -18,13 +18,13 @@ public class UserInfoTest {
   }
 
   @Test
-  public void newWithInvalidSessionIdShouldFail() throws Exception {
+  public void newWithNegativeSessionIdShouldFail() throws Exception {
     thrown.expect(IllegalArgumentException.class);
     new UserInfo(-1, "c62a-2a09-faie", "user-id-123");
   }
 
   @Test
-  public void newWithBadUserIdShouldFail() throws Exception {
+  public void newWithEmptyUserIdShouldFail() throws Exception {
     thrown.expect(IllegalArgumentException.class);
     new UserInfo(3, "c62a-2a09-faie", "");
   }
@@ -38,6 +38,16 @@ public class UserInfoTest {
     assertEquals(userInfo.getSessionId(), sessionId);
     assertEquals(userInfo.getClientId(), clientId);
     assertEquals(userInfo.getUserId(), userId);
+  }
+
+  @Test
+  public void newWithNullUserIdShouldReturnUserInfo() throws Exception {
+    String clientId = "c62a-2a09-faie";
+    int sessionId = 3;
+    UserInfo userInfo = new UserInfo(sessionId, clientId, null);
+    assertEquals(userInfo.getSessionId(), sessionId);
+    assertEquals(userInfo.getClientId(), clientId);
+    assertEquals(userInfo.getUserId(), null);
   }
 
   @Test

@@ -574,16 +574,31 @@ public class ConstructorIO {
      * @return the created URL. Now you can use it to issue requests and things!
      */
     protected HttpUrl makeUrl(String path, UserInfo info) throws UnsupportedEncodingException {
-        HttpUrl url = new HttpUrl.Builder()
-            .scheme(this.protocol)
-            .addPathSegment(path)
-            .addQueryParameter("key", this.apiKey)
-            .addQueryParameter("c", this.version)
-            .addQueryParameter("s", String.valueOf(info.getSessionId()))
-            .addQueryParameter("i", info.getClientId())
-            .host(this.host)
-            .build();
+        HttpUrl url;
         
+        if (info.getUserId() != null) {
+            url = new HttpUrl.Builder()
+                .scheme(this.protocol)
+                .addPathSegment(path)
+                .addQueryParameter("key", this.apiKey)
+                .addQueryParameter("c", this.version)
+                .addQueryParameter("s", String.valueOf(info.getSessionId()))
+                .addQueryParameter("i", info.getClientId())
+                .addQueryParameter("ui", String.valueOf(info.getUserId()))
+                .host(this.host)
+                .build();
+        } else {
+            url = new HttpUrl.Builder()
+                .scheme(this.protocol)
+                .addPathSegment(path)
+                .addQueryParameter("key", this.apiKey)
+                .addQueryParameter("c", this.version)
+                .addQueryParameter("s", String.valueOf(info.getSessionId()))
+                .addQueryParameter("i", info.getClientId())
+                .host(this.host)
+                .build();
+        }
+
         return url;
     }
 

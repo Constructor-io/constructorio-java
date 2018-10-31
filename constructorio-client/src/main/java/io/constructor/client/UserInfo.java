@@ -7,9 +7,23 @@ public class UserInfo {
 
   private int sessionId;
   private String clientId;
+  private String userId;
 
   /**
-   * Creates a User Info
+   * Creates a User Info object
+   * 
+   * @param sessionId the user's Session ID
+   * @param clientId the user's Client ID
+   * @param userId the user id according to the API consumer (for logged in users)
+   */
+  public UserInfo(int sessionId, String clientId, String userId) {
+    this.setSessionId(sessionId);
+    this.setClientId(clientId);
+    this.setUserId(userId);
+  }
+
+  /**
+   * Creates a User Info object
    * 
    * @param sessionId the user's Session ID
    * @param clientId the user's Client ID
@@ -31,6 +45,13 @@ public class UserInfo {
    */
   public int getSessionId() {
     return this.sessionId;
+  }
+
+  /**
+   * @return User ID
+   */
+  public String getUserId() {
+    return this.userId;
   }
 
   /**
@@ -56,6 +77,19 @@ public class UserInfo {
       throw new IllegalArgumentException("Client ID cannot be null or an empty string.");
     } else {
       this.clientId = clientId;
+    }
+  }
+
+  /**
+   * Validates and sets the the user id according to the API consumer (for logged in users)
+   *
+   * @param userId the user's id
+   */
+  private void setUserId(String userId) throws IllegalArgumentException {
+    if (userId != null && userId.trim().isEmpty()) {
+      throw new IllegalArgumentException("User ID cannot be an empty string.");
+    } else {
+      this.userId = userId;
     }
   }
 }

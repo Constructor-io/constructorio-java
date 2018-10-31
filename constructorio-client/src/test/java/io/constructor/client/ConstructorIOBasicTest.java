@@ -59,6 +59,20 @@ public class ConstructorIOBasicTest {
     @Test
     public void makeUrlShouldReturnAUrlWithUserInfo() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
+        UserInfo info = new UserInfo(2, "sideshow bob", "bob-id-123");
+        HttpUrl url = constructor.makeUrl("getitUuuurl", info);
+        assertEquals("host is set", url.host(), "ac.cnstrc.com");
+        assertEquals("protocol is set", url.scheme(), "https");
+        assertEquals("version is set", url.queryParameter("c"), "ciojava-4.6.0");
+        assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
+        assertEquals("session id is set", url.queryParameter("s"), "2");
+        assertEquals("client id is set", url.queryParameter("i"), "sideshow bob");
+        assertEquals("user id is set", url.queryParameter("ui"), "bob-id-123");
+    }
+
+    @Test
+    public void makeUrlWithoutUserIdShouldReturnAUrlWithUserInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         UserInfo info = new UserInfo(2, "sideshow bob");
         HttpUrl url = constructor.makeUrl("getitUuuurl", info);
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
@@ -66,7 +80,8 @@ public class ConstructorIOBasicTest {
         assertEquals("version is set", url.queryParameter("c"), "ciojava-4.6.0");
         assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
         assertEquals("session id is set", url.queryParameter("s"), "2");
-        assertEquals("user id is set", url.queryParameter("i"), "sideshow bob");
+        assertEquals("client id is set", url.queryParameter("i"), "sideshow bob");
+        assertEquals("user id is not set", url.queryParameter("ui"), null);
     }
 
     @Test

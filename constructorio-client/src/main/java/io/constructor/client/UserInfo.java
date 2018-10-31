@@ -21,6 +21,11 @@ public class UserInfo {
     this.setUserId(userId);
   }
 
+  public UserInfo(int sessionId, String clientId) {
+    this.setSessionId(sessionId);
+    this.setClientId(clientId);
+  }
+
   /**
    * @return Client ID
    */
@@ -74,8 +79,8 @@ public class UserInfo {
    * @param userId the user's id
    */
   private void setUserId(String userId) throws IllegalArgumentException {
-    if (userId == null || userId.trim().isEmpty()) {
-      throw new IllegalArgumentException("User ID cannot be null or an empty string.");
+    if (userId.trim().isEmpty()) {
+      throw new IllegalArgumentException("User ID cannot be an empty string.");
     } else {
       this.userId = userId;
     }

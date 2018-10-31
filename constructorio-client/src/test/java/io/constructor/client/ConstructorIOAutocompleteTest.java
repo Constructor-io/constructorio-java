@@ -26,7 +26,7 @@ public class ConstructorIOAutocompleteTest {
     @Test
     public void autocompleteShouldReturnAResult() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie", "user-id-123123");
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         AutocompleteRequest request = new AutocompleteRequest("Stanley");
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
         assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 1);

@@ -24,9 +24,9 @@ public class UserInfoTest {
   }
 
   @Test
-  public void newWittNullUserIdShouldFail() throws Exception {
+  public void newWithBadUserIdShouldFail() throws Exception {
     thrown.expect(IllegalArgumentException.class);
-    new UserInfo(3, "c62a-2a09-faie", null);
+    new UserInfo(3, "c62a-2a09-faie", "");
   }
 
   @Test
@@ -38,5 +38,15 @@ public class UserInfoTest {
     assertEquals(userInfo.getSessionId(), sessionId);
     assertEquals(userInfo.getClientId(), clientId);
     assertEquals(userInfo.getUserId(), userId);
+  }
+
+  @Test
+  public void newWithoutUserIdShouldReturnUserInfo() throws Exception {
+    String clientId = "c62a-2a09-faie";
+    int sessionId = 3;
+    UserInfo userInfo = new UserInfo(sessionId, clientId);
+    assertEquals(userInfo.getSessionId(), sessionId);
+    assertEquals(userInfo.getClientId(), clientId);
+    assertEquals(userInfo.getUserId(), null);
   }
 }

@@ -25,7 +25,7 @@ public class ConstructorIOTrackingTest {
   @Test
   public void trackConversionShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie", "user-id-123");
+      UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
       assertTrue("conversion without params succeeds", constructor.trackConversion("Stanley_Steamer", "Products", "Stanley1", "$1.99", userInfo));
   }
 
@@ -38,7 +38,7 @@ public class ConstructorIOTrackingTest {
   @Test
   public void trackSearchShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie", "user-id-123");
+      UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
       assertTrue("search without params succeeds", constructor.trackSearch("Stanley_Steamer", 22, userInfo));
   }
 
@@ -51,7 +51,7 @@ public class ConstructorIOTrackingTest {
   @Test
   public void trackClickThroughShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-      UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie", "user-id-123");
+      UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
       assertTrue("search without params succeeds", constructor.trackClickThrough("Stanley_Steamer", "Products", "Stanley1", userInfo));
   }
 

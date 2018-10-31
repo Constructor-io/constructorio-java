@@ -64,8 +64,8 @@ resultsPerSection.put("Products", Integer.valueOf(6));
 resultsPerSection.put("Search Suggestions", Integer.valueOf(8));
 request.setResultsPerSection(resultsPerSection);
 
-// Identify the user session, client id, and user id to show results for (optional)
-UserInfo userInfo = new UserInfo(5, "client-id-14021", "user-id-41230");
+// Identify the user session and user id to show results for (optional)
+UserInfo userInfo = new UserInfo(5, "user-id-1123123");
 
 // Request results as an object
 AutocompleteResponse response = constructor.autocomplete(request, userInfo);
@@ -86,8 +86,8 @@ request.setPage(1);
 request.setGroupId("625");
 request.getFacets().put("Brand", Arrays.asList("Jif"))
 
-// Identify the user session, client id, and user id to show results for (optional)
-UserInfo userInfo = new UserInfo(5, "client-id-14021", "user-id-41230");
+// Identify the user session and user id to show results for (optional)
+UserInfo userInfo = new UserInfo(5, "user-id-1123123");
 
 // Request results as an object
 SearchResponse response = constructor.search(request, userInfo);

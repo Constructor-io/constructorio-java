@@ -81,7 +81,7 @@ public class ConstructorIOBasicTest {
         assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
         assertEquals("session id is set", url.queryParameter("s"), "2");
         assertEquals("client id is set", url.queryParameter("i"), "sideshow bob");
-        assertEquals("user id is set", url.queryParameter("ui"), null);
+        assertEquals("user id is not set", url.queryParameter("ui"), null);
     }
 
     @Test

@@ -10,10 +10,11 @@ public class UserInfo {
   private String userId;
 
   /**
-   * Creates a User Info
+   * Creates a User Info object
    * 
    * @param sessionId the user's Session ID
    * @param clientId the user's Client ID
+   * @param userId the user id according to the API consumer (for logged in users)
    */
   public UserInfo(int sessionId, String clientId, String userId) {
     this.setSessionId(sessionId);
@@ -21,6 +22,12 @@ public class UserInfo {
     this.setUserId(userId);
   }
 
+  /**
+   * Creates a User Info object
+   * 
+   * @param sessionId the user's Session ID
+   * @param clientId the user's Client ID
+   */
   public UserInfo(int sessionId, String clientId) {
     this.setSessionId(sessionId);
     this.setClientId(clientId);
@@ -41,7 +48,7 @@ public class UserInfo {
   }
 
   /**
-   * @return Session ID
+   * @return User ID
    */
   public String getUserId() {
     return this.userId;
@@ -74,7 +81,7 @@ public class UserInfo {
   }
 
   /**
-   * Validates and sets the user id
+   * Validates and sets the the user id according to the API consumer (for logged in users)
    *
    * @param userId the user's id
    */

@@ -1,6 +1,6 @@
 package io.constructor.client;
 
-class ConstructorException extends Exception {
+public class ConstructorException extends Exception {
 	public ConstructorException(String msg) {
 		super(msg);
 	}

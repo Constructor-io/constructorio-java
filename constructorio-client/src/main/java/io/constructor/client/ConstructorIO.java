@@ -99,7 +99,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -127,7 +128,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -156,7 +158,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -189,7 +192,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -223,7 +227,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -252,7 +257,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -285,7 +291,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -316,7 +323,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -372,7 +380,7 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return response.body().string();
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -439,8 +447,7 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            checkResponse(response);
-            return response.body().string();
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -477,7 +484,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -510,7 +518,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -543,7 +552,8 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            return checkResponse(response);
+            getResponseBody(response);
+            return true;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -607,19 +617,22 @@ public class ConstructorIO {
      * 
      * @return whether the request was successful
      */
-    protected static boolean checkResponse(Response response) throws ConstructorException {
-        if (response.isSuccessful()) {  
-            return true;
-        } else {
-            String errorMessage = "Unknown error";
-            try {
-                ServerError error = new Gson().fromJson(response.body().string(), ServerError.class);
+    protected static String getResponseBody(Response response) throws ConstructorException {
+        String errorMessage = "Unknown error";
+        try {
+            String body = response.body().string();
+            if (response.isSuccessful()) {
+                return body;
+            } else {
+                ServerError error = new Gson().fromJson(body, ServerError.class);
                 errorMessage = "[HTTP " + response.code() + "] " + error.getMessage();
-            } catch (Exception e) {
-                errorMessage = "[HTTP " + response.code() + "]";
             }
-            throw new ConstructorException(errorMessage);
+        } catch (Exception e) {
+            errorMessage = "[HTTP " + response.code() + "]";
+        } finally {
+            response.close();
         }
+        throw new ConstructorException(errorMessage);
     }
 
     /**

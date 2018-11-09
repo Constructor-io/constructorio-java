@@ -1,7 +1,6 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -97,36 +96,36 @@ public class ConstructorIOBasicTest {
     }
 
     @Test
-    public void checkResponseShouldReturnTrue() throws Exception {
+    public void getResponseBodyShouldReturnString() throws Exception {
         String string = Utils.getTestResource("response.204.json");
         Response response = Utils.createResponse(204, string);
-        assertTrue("response checks true ", ConstructorIO.checkResponse(response));
+        assertEquals("response is response", ConstructorIO.getResponseBody(response), "");
     }
 
     @Test
-    public void checkResponseShouldReturnExceptionWithNoResponseBody() throws Exception {
+    public void getResponseBodyShouldReturnExceptionWithNoResponseBody() throws Exception {
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 418]");
         String body = "";
         Response response = Utils.createResponse(418, body);
-        ConstructorIO.checkResponse(response);
+        ConstructorIO.getResponseBody(response);
     }
 
     @Test
-    public void checkResponseShouldReturnExceptionOn401() throws Exception {
+    public void getResponseBodyShouldReturnExceptionOn401() throws Exception {
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at constructor.io/dashboard");
         String body = Utils.getTestResource("response.401.json");
         Response response = Utils.createResponse(401, body);
-        ConstructorIO.checkResponse(response);
+        ConstructorIO.getResponseBody(response);
     }
 
     @Test
-    public void checkResponseShouldReturnExceptionOn404() throws Exception {
+    public void getResponseBodyShouldReturnExceptionOn404() throws Exception {
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 404] You're trying to access an invalid endpoint. Please check documentation for allowed endpoints.");
         String body = Utils.getTestResource("response.404.json");
         Response response = Utils.createResponse(404, body);
-        ConstructorIO.checkResponse(response);
+        ConstructorIO.getResponseBody(response);
     }
 }

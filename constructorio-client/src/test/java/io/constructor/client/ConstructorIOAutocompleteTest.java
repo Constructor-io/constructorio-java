@@ -37,6 +37,7 @@ public class ConstructorIOAutocompleteTest {
         String string = Utils.getTestResource("response.autocomplete.nosections.json");
         AutocompleteResponse response = ConstructorIO.createAutocompleteResponse(string);
         assertEquals(response.getSections().size(), 0);
+        assertTrue("result id exists", response.getResultId() != null);
     }
 
     @Test

@@ -19,7 +19,7 @@ public class SearchResponseInner {
     private List<Result> results;
 
     @SerializedName("total_num_results")
-    private int totalNumberOfResults;
+    private Integer totalNumberOfResults;
 
     /**
      * @return the facets
@@ -45,7 +45,7 @@ public class SearchResponseInner {
     /**
      * @return the totalNumberOfResults
      */
-    public int getTotalNumberOfResults() {
+    public Integer getTotalNumberOfResults() {
       return totalNumberOfResults;
     }
 }

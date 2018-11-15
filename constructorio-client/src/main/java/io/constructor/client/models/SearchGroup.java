@@ -16,7 +16,7 @@ public class SearchGroup {
     private List<SearchGroup> parents;
 
     @SerializedName("count")
-    private int count;
+    private Integer count;
 
     @SerializedName("display_name")
     private String displayName;
@@ -41,7 +41,7 @@ public class SearchGroup {
     /**
      * @return the count
      */
-    public int getCount() {
+    public Integer getCount() {
       return count;
     }
 

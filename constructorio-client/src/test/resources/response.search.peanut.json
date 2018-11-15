@@ -2,398 +2,621 @@
   "response": {
     "facets": [
       {
+        "display_name": "Brand",
         "name": "Brand",
         "options": [
           {
             "count": 5,
-            "value": ""
-          },
-          {
-            "count": 3,
-            "value": "18 Rabbits"
-          },
-          {
-            "count": 6,
-            "value": "Adirondack Creamery"
-          },
-          {
-            "count": 1,
-            "value": "Back to Nature"
-          },
-          {
-            "count": 1,
-            "value": "Barbara's"
-          },
-          {
-            "count": 2,
-            "value": "Barkthins"
-          },
-          {
-            "count": 1,
-            "value": "Barnana"
-          },
-          {
-            "count": 1,
-            "value": "Bear Naked"
-          },
-          {
-            "count": 7,
-            "value": "Ben & Jerry's"
-          },
-          {
-            "count": 3,
-            "value": "Big Gay Ice Cream"
-          },
-          {
-            "count": 2,
-            "value": "Blue Marble"
-          },
-          {
-            "count": 4,
-            "value": "Blue Marble Ice Cream"
-          },
-          {
-            "count": 2,
-            "value": "Bocce's Bakery"
-          },
-          {
-            "count": 2,
-            "value": "Breyers"
-          },
-          {
-            "count": 1,
-            "value": "Cascadian Farm Organic"
-          },
-          {
-            "count": 3,
-            "value": "Chobani"
-          },
-          {
-            "count": 12,
-            "value": "Clif"
-          },
-          {
-            "count": 2,
-            "value": "Clif Crunch"
-          },
-          {
-            "count": 7,
-            "value": "Coolhaus"
-          },
-          {
-            "count": 1,
-            "value": "Dannon"
-          },
-          {
-            "count": 1,
-            "value": "Dr. McDougall's"
-          },
-          {
-            "count": 1,
-            "value": "Early Bird"
-          },
-          {
-            "count": 7,
-            "value": "Edy's"
-          },
-          {
-            "count": 7,
-            "value": "Enlightened"
-          },
-          {
-            "count": 2,
-            "value": "Gelarto"
-          },
-          {
-            "count": 2,
-            "value": "GoMacro"
-          },
-          {
-            "count": 1,
-            "value": "Good Health"
-          },
-          {
-            "count": 1,
-            "value": "Greenies"
-          },
-          {
-            "count": 8,
-            "value": "Halo Top"
-          },
-          {
-            "count": 1,
-            "value": "Haven's Kitchen"
-          },
-          {
-            "count": 1,
-            "value": "Health Warrior"
-          },
-          {
-            "count": 3,
-            "value": "Hershey's"
-          },
-          {
-            "count": 1,
-            "value": "Hormel"
-          },
-          {
-            "count": 14,
-            "value": "H\u00e4agen-Dazs"
-          },
-          {
-            "count": 1,
-            "value": "International Delight"
-          },
-          {
-            "count": 5,
+            "data": {},
+            "display_name": "Jif",
+            "status": "",
             "value": "Jif"
           },
           {
             "count": 4,
-            "value": "Justin's"
+            "data": {},
+            "display_name": "Skippy",
+            "status": "",
+            "value": "Skippy"
+          },
+          {
+            "count": 4,
+            "data": {},
+            "display_name": "",
+            "status": "",
+            "value": ""
           },
           {
             "count": 3,
-            "value": "KIND"
-          },
-          {
-            "count": 1,
-            "value": "Kashi"
-          },
-          {
-            "count": 1,
-            "value": "Klondike"
+            "data": {},
+            "display_name": "Smucker's",
+            "status": "",
+            "value": "Smucker's"
           },
           {
             "count": 2,
-            "value": "Luna"
-          },
-          {
-            "count": 3,
-            "value": "L\u00e4rabar"
-          },
-          {
-            "count": 3,
-            "value": "M&M's"
+            "data": {},
+            "display_name": "thinkThin",
+            "status": "",
+            "value": "thinkThin"
           },
           {
             "count": 2,
-            "value": "Nature Valley"
+            "data": {},
+            "display_name": "Wild Harvest",
+            "status": "",
+            "value": "Wild Harvest"
           },
           {
             "count": 1,
-            "value": "Noosa"
+            "data": {},
+            "display_name": "Hormel",
+            "status": "",
+            "value": "Hormel"
           },
           {
-            "count": 3,
-            "value": "NuGo"
-          },
-          {
-            "count": 2,
-            "value": "PB2"
+            "count": 10,
+            "data": {},
+            "display_name": "Clif",
+            "status": "",
+            "value": "Clif"
           },
           {
             "count": 6,
+            "data": {},
+            "display_name": "Peanut Butter & Co.",
+            "status": "",
             "value": "Peanut Butter & Co."
           },
           {
             "count": 4,
+            "data": {},
+            "display_name": "Perfect Bar",
+            "status": "",
             "value": "Perfect Bar"
           },
           {
-            "count": 1,
-            "value": "Perry's Ice Cream"
+            "count": 4,
+            "data": {},
+            "display_name": "Justin's",
+            "status": "",
+            "value": "Justin's"
           },
           {
-            "count": 1,
-            "value": "Plum Organics"
+            "count": 3,
+            "data": {},
+            "display_name": "NuGo",
+            "status": "",
+            "value": "NuGo"
           },
           {
-            "count": 1,
-            "value": "Quest"
+            "count": 3,
+            "data": {},
+            "display_name": "M&M's",
+            "status": "",
+            "value": "M&M's"
           },
           {
-            "count": 5,
+            "count": 3,
+            "data": {},
+            "display_name": "L\u00e4rabar",
+            "status": "",
+            "value": "L\u00e4rabar"
+          },
+          {
+            "count": 3,
+            "data": {},
+            "display_name": "KIND",
+            "status": "",
+            "value": "KIND"
+          },
+          {
+            "count": 3,
+            "data": {},
+            "display_name": "Hershey's",
+            "status": "",
+            "value": "Hershey's"
+          },
+          {
+            "count": 3,
+            "data": {},
+            "display_name": "Chobani",
+            "status": "",
+            "value": "Chobani"
+          },
+          {
+            "count": 2,
+            "data": {},
+            "display_name": "RXBAR",
+            "status": "",
             "value": "RXBAR"
           },
           {
             "count": 2,
-            "value": "Skinny Cow"
+            "data": {},
+            "display_name": "PB2",
+            "status": "",
+            "value": "PB2"
           },
           {
-            "count": 4,
-            "value": "Skippy"
+            "count": 2,
+            "data": {},
+            "display_name": "Nature Valley",
+            "status": "",
+            "value": "Nature Valley"
           },
           {
-            "count": 3,
-            "value": "Smucker's"
+            "count": 2,
+            "data": {},
+            "display_name": "Luna",
+            "status": "",
+            "value": "Luna"
+          },
+          {
+            "count": 2,
+            "data": {},
+            "display_name": "GoMacro",
+            "status": "",
+            "value": "GoMacro"
+          },
+          {
+            "count": 2,
+            "data": {},
+            "display_name": "Bocce's Bakery",
+            "status": "",
+            "value": "Bocce's Bakery"
+          },
+          {
+            "count": 2,
+            "data": {},
+            "display_name": "Barkthins",
+            "status": "",
+            "value": "Barkthins"
           },
           {
             "count": 1,
-            "value": "Snickers"
+            "data": {},
+            "display_name": "Wellness",
+            "status": "",
+            "value": "Wellness"
           },
           {
             "count": 1,
-            "value": "Square Organics"
-          },
-          {
-            "count": 7,
-            "value": "Talenti"
-          },
-          {
-            "count": 4,
-            "value": "Van Leeuwen"
-          },
-          {
-            "count": 1,
+            "data": {},
+            "display_name": "Vega",
+            "status": "",
             "value": "Vega"
           },
           {
-            "count": 4,
+            "count": 1,
+            "data": {},
+            "display_name": "Square Organics",
+            "status": "",
+            "value": "Square Organics"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Quest",
+            "status": "",
+            "value": "Quest"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Plum Organics",
+            "status": "",
+            "value": "Plum Organics"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Noosa",
+            "status": "",
+            "value": "Noosa"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Kashi",
+            "status": "",
+            "value": "Kashi"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "International Delight",
+            "status": "",
+            "value": "International Delight"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Health Warrior",
+            "status": "",
+            "value": "Health Warrior"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Haven's Kitchen",
+            "status": "",
+            "value": "Haven's Kitchen"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Greenies",
+            "status": "",
+            "value": "Greenies"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Good Health",
+            "status": "",
+            "value": "Good Health"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Dr. McDougall's",
+            "status": "",
+            "value": "Dr. McDougall's"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Dannon",
+            "status": "",
+            "value": "Dannon"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Cascadian Farm Organic",
+            "status": "",
+            "value": "Cascadian Farm Organic"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Bear Naked",
+            "status": "",
+            "value": "Bear Naked"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Barnana",
+            "status": "",
+            "value": "Barnana"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Barbara's",
+            "status": "",
+            "value": "Barbara's"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Back to Nature",
+            "status": "",
+            "value": "Back to Nature"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Weight Watchers",
+            "status": "",
             "value": "Weight Watchers"
           },
           {
             "count": 1,
-            "value": "Wellness"
+            "data": {},
+            "display_name": "Van Leeuwen",
+            "status": "",
+            "value": "Van Leeuwen"
           },
           {
-            "count": 2,
-            "value": "Wild Harvest"
+            "count": 1,
+            "data": {},
+            "display_name": "Talenti",
+            "status": "",
+            "value": "Talenti"
           },
           {
-            "count": 3,
-            "value": "thinkThin"
+            "count": 1,
+            "data": {},
+            "display_name": "Halo Top",
+            "status": "",
+            "value": "Halo Top"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Enlightened",
+            "status": "",
+            "value": "Enlightened"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Early Bird",
+            "status": "",
+            "value": "Early Bird"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Coolhaus",
+            "status": "",
+            "value": "Coolhaus"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Adirondack Creamery",
+            "status": "",
+            "value": "Adirondack Creamery"
           }
-        ]
+        ],
+        "type": "multiple"
       },
       {
+        "display_name": "Claims",
         "name": "Claims",
         "options": [
           {
-            "count": 42,
+            "count": 37,
+            "data": {},
+            "display_name": "Gluten Free",
+            "status": "",
+            "value": "Gluten Free"
+          },
+          {
+            "count": 21,
+            "data": {},
+            "display_name": "All Natural",
+            "status": "",
             "value": "All Natural"
           },
           {
+            "count": 13,
+            "data": {},
+            "display_name": "Organic",
+            "status": "",
+            "value": "Organic"
+          },
+          {
+            "count": 13,
+            "data": {},
+            "display_name": "No High Fructose Corn Syrup",
+            "status": "",
+            "value": "No High Fructose Corn Syrup"
+          },
+          {
+            "count": 12,
+            "data": {},
+            "display_name": "Vegan",
+            "status": "",
+            "value": "Vegan"
+          },
+          {
+            "count": 12,
+            "data": {},
+            "display_name": "Trans Fat Free",
+            "status": "",
+            "value": "Trans Fat Free"
+          },
+          {
+            "count": 10,
+            "data": {},
+            "display_name": "No Hydrogenated Oils",
+            "status": "",
+            "value": "No Hydrogenated Oils"
+          },
+          {
+            "count": 6,
+            "data": {},
+            "display_name": "No Preservatives",
+            "status": "",
+            "value": "No Preservatives"
+          },
+          {
+            "count": 6,
+            "data": {},
+            "display_name": "No Artificial Ingredients",
+            "status": "",
+            "value": "No Artificial Ingredients"
+          },
+          {
+            "count": 2,
+            "data": {},
+            "display_name": "Reduced Fat",
+            "status": "",
+            "value": "Reduced Fat"
+          },
+          {
+            "count": 39,
+            "data": {},
+            "display_name": "GMO Free",
+            "status": "",
+            "value": "GMO Free"
+          },
+          {
+            "count": 11,
+            "data": {},
+            "display_name": "Made with Organic Ingredients",
+            "status": "",
+            "value": "Made with Organic Ingredients"
+          },
+          {
             "count": 7,
+            "data": {},
+            "display_name": "Vegetarian",
+            "status": "",
+            "value": "Vegetarian"
+          },
+          {
+            "count": 7,
+            "data": {},
+            "display_name": "Low Fat",
+            "status": "",
+            "value": "Low Fat"
+          },
+          {
+            "count": 7,
+            "data": {},
+            "display_name": "Cholesterol Free",
+            "status": "",
             "value": "Cholesterol Free"
           },
           {
             "count": 6,
+            "data": {},
+            "display_name": "Dairy Free",
+            "status": "",
             "value": "Dairy Free"
           },
           {
-            "count": 3,
-            "value": "Fair Trade"
-          },
-          {
-            "count": 1,
-            "value": "Fat Free"
-          },
-          {
-            "count": 50,
-            "value": "GMO Free"
-          },
-          {
-            "count": 58,
-            "value": "Gluten Free"
-          },
-          {
-            "count": 1,
-            "value": "Grass-Fed"
-          },
-          {
-            "count": 7,
-            "value": "High Fiber"
-          },
-          {
-            "count": 14,
-            "value": "Hormone Free"
-          },
-          {
-            "count": 8,
-            "value": "Low Carbohydrate"
-          },
-          {
-            "count": 22,
-            "value": "Low Fat"
-          },
-          {
-            "count": 3,
-            "value": "Low Sodium"
-          },
-          {
-            "count": 16,
-            "value": "Made with Organic Ingredients"
-          },
-          {
-            "count": 15,
-            "value": "No Artificial Color"
-          },
-          {
-            "count": 7,
-            "value": "No Artificial Ingredients"
-          },
-          {
-            "count": 14,
-            "value": "No High Fructose Corn Syrup"
-          },
-          {
-            "count": 10,
-            "value": "No Hydrogenated Oils"
-          },
-          {
-            "count": 7,
-            "value": "No Preservatives"
-          },
-          {
-            "count": 2,
-            "value": "No Sugar Added"
-          },
-          {
-            "count": 22,
-            "value": "Organic"
-          },
-          {
-            "count": 25,
-            "value": "RBST Free"
-          },
-          {
-            "count": 1,
-            "value": "Raised Without Antibiotics"
-          },
-          {
-            "count": 2,
-            "value": "Reduced Fat"
-          },
-          {
             "count": 4,
+            "data": {},
+            "display_name": "Soy Free",
+            "status": "",
             "value": "Soy Free"
           },
           {
-            "count": 1,
-            "value": "Sugar Free"
+            "count": 4,
+            "data": {},
+            "display_name": "No Artificial Color",
+            "status": "",
+            "value": "No Artificial Color"
           },
           {
-            "count": 14,
-            "value": "Trans Fat Free"
+            "count": 3,
+            "data": {},
+            "display_name": "RBST Free",
+            "status": "",
+            "value": "RBST Free"
           },
           {
-            "count": 12,
-            "value": "Vegan"
+            "count": 3,
+            "data": {},
+            "display_name": "Low Sodium",
+            "status": "",
+            "value": "Low Sodium"
           },
           {
-            "count": 16,
-            "value": "Vegetarian"
+            "count": 3,
+            "data": {},
+            "display_name": "High Fiber",
+            "status": "",
+            "value": "High Fiber"
           },
           {
-            "count": 1,
-            "value": "Wheat Free"
+            "count": 3,
+            "data": {},
+            "display_name": "Fair Trade",
+            "status": "",
+            "value": "Fair Trade"
           },
           {
             "count": 2,
+            "data": {},
+            "display_name": "Whole Grains",
+            "status": "",
             "value": "Whole Grains"
+          },
+          {
+            "count": 2,
+            "data": {},
+            "display_name": "No Sugar Added",
+            "status": "",
+            "value": "No Sugar Added"
+          },
+          {
+            "count": 2,
+            "data": {},
+            "display_name": "Low Carbohydrate",
+            "status": "",
+            "value": "Low Carbohydrate"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Wheat Free",
+            "status": "",
+            "value": "Wheat Free"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Sugar Free",
+            "status": "",
+            "value": "Sugar Free"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Fat Free",
+            "status": "",
+            "value": "Fat Free"
+          },
+          {
+            "count": 1,
+            "data": {},
+            "display_name": "Hormone Free",
+            "status": "",
+            "value": "Hormone Free"
           }
-        ]
+        ],
+        "type": "multiple"
+      },
+      {
+        "display_name": "Price",
+        "max": 429,
+        "min": 0,
+        "name": "Price",
+        "status": { },
+        "type": "range"
+      },
+      {
+        "display_name": "Rating",
+        "name": "Rating",
+        "options": [
+          {
+            "count": 313,
+            "data": { },
+            "display_name": "4 and more",
+            "status": "",
+            "value": "4-inf"
+          },
+          {
+            "count": 533,
+            "data": { },
+            "display_name": "3 and more",
+            "status": "",
+            "value": "3-inf"
+          },
+          {
+            "count": 544,
+            "data": { },
+            "display_name": "2 and more",
+            "status": "",
+            "value": "2-inf"
+          },
+          {
+            "count": 548,
+            "data": { },
+            "display_name": "1 and more",
+            "status": "",
+            "value": "1-inf"
+          }
+        ],
+        "type": "single"
       }
     ],
     "groups": [
@@ -445,7 +668,7 @@
         "children": [
           {
             "children": [],
-            "count": 89,
+            "count": 7,
             "display_name": "Ice Cream & Treats",
             "group_id": "466",
             "parents": [
@@ -456,7 +679,7 @@
             ]
           }
         ],
-        "count": 89,
+        "count": 7,
         "display_name": "Frozen",
         "group_id": "391",
         "parents": []
@@ -465,7 +688,7 @@
         "children": [
           {
             "children": [],
-            "count": 60,
+            "count": 48,
             "display_name": "Baby",
             "group_id": "46",
             "parents": [
@@ -477,19 +700,7 @@
           },
           {
             "children": [],
-            "count": 7,
-            "display_name": "Beverages",
-            "group_id": "86",
-            "parents": [
-              {
-                "display_name": "Grocery",
-                "group_id": "431"
-              }
-            ]
-          },
-          {
-            "children": [],
-            "count": 109,
+            "count": 85,
             "display_name": "Pantry",
             "group_id": "625",
             "parents": [
@@ -512,7 +723,7 @@
             ]
           }
         ],
-        "count": 129,
+        "count": 95,
         "display_name": "Grocery",
         "group_id": "431",
         "parents": []
@@ -1711,6 +1922,107 @@
       },
       {
         "data": {
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                ""
+              ]
+            },
+            {
+              "name": "Claims",
+              "values": []
+            }
+          ],
+          "groups": [
+            {
+              "display_name": "Grocery",
+              "group_id": "431",
+              "path": null,
+              "path_list": []
+            },
+            {
+              "display_name": "Pantry",
+              "group_id": "625",
+              "path": "/431",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                }
+              ]
+            },
+            {
+              "display_name": "Oil & Vinegar",
+              "group_id": "593",
+              "path": "/431/625",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                }
+              ]
+            },
+            {
+              "display_name": "Vegetable & Nut Oil",
+              "group_id": "943",
+              "path": "/431/625/593",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "Oil & Vinegar",
+                  "id": "593"
+                }
+              ]
+            },
+            {
+              "display_name": "Peanut",
+              "group_id": "645",
+              "path": "/431/625/593/943",
+              "path_list": [
+                {
+                  "display_name": "Grocery",
+                  "id": "431"
+                },
+                {
+                  "display_name": "Pantry",
+                  "id": "625"
+                },
+                {
+                  "display_name": "Oil & Vinegar",
+                  "id": "593"
+                },
+                {
+                  "display_name": "Vegetable & Nut Oil",
+                  "id": "943"
+                }
+              ]
+            }
+          ],
+          "id": "gro_planters_peanut_o_01",
+          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_planters_peanut_o_01.png",
+          "price": "$5.69",
+          "quantity": "1ea",
+          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_planters_peanut_o_01.png"
+        },
+        "matched_terms": [
+          "peanut"
+        ],
+        "value": "Planters Peanut Oil"
+      },
+      {
+        "data": {
           "description": "Banana yoghurt with Guittard dark chocolate, banana chips, and peanuts.",
           "facets": [
             {
@@ -2472,94 +2784,9 @@
           "peanut"
         ],
         "value": "Peanut Butter & Co. Cinnamon Raisin Swirl"
-      },
-      {
-        "data": {
-          "description": "Fill your panty with Wild Harvest Organic Cruncy Peanut Butter that can turn boring meals into better meals, instantly. You can always count on convenience with Wild Harvest.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Wild Harvest"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "Gluten Free",
-                "No Artificial Ingredients",
-                "No High Fructose Corn Syrup",
-                "No Hydrogenated Oils",
-                "Organic"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_whrvsto_pb_02",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_whrvsto_pb_02.png",
-          "price": "$5.29",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_whrvsto_pb_02.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Wild Harvest Organic Crunchy Peanut Butter"
       }
     ],
-    "total_num_results": 198
+    "total_num_results": 104
   },
-  "result_id": "420058c2-0a53-4131-9b25-77a36a65e896"
+  "result_id": "63312bf4-46ab-446f-848a-e0eac97fcf58"
 }

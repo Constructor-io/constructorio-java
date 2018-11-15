@@ -20,14 +20,16 @@ public class ConstructorIOSearchTest {
     public void createSearchResponseShouldReturnAResult() throws Exception {
         String string = Utils.getTestResource("response.search.peanut.json");
         SearchResponse response = ConstructorIO.createSearchResponse(string);
-        assertEquals("search facets exist", response.getResponse().getFacets().size(), 2);
+        assertEquals("search facets exist", response.getResponse().getFacets().size(), 4);
         assertEquals("search facet [Brand] exists", response.getResponse().getFacets().get(0).getName(), "Brand");
         assertEquals("search facet [Claims] exists", response.getResponse().getFacets().get(1).getName(), "Claims");
+        assertEquals("search facet [Price] exists", response.getResponse().getFacets().get(2).getName(), "Price");
+        assertEquals("search facet [Rating] exists", response.getResponse().getFacets().get(3).getName(), "Rating");
         assertEquals("search groups exist", response.getResponse().getGroups().size(), 3);
         assertEquals("search group [Dairy] exists", response.getResponse().getGroups().get(0).getDisplayName(), "Dairy");
         assertEquals("search group [Dairy] children exist", response.getResponse().getGroups().get(0).getChildren().size(), 3);
         assertEquals("search results exist", response.getResponse().getResults().size(), 24);
-        assertEquals("total number of results", response.getResponse().getTotalNumberOfResults(), 198);
+        assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 104);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -38,7 +40,7 @@ public class ConstructorIOSearchTest {
         SearchRequest request = new SearchRequest("peanut");
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search results count as expected", response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -50,7 +52,7 @@ public class ConstructorIOSearchTest {
         request.setResultsPerPage(5);
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 5);
-        assertEquals("search results count as expected", response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -62,7 +64,7 @@ public class ConstructorIOSearchTest {
         request.setPage(4);
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 14);
-        assertEquals("search results count as expected", response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -74,7 +76,7 @@ public class ConstructorIOSearchTest {
         request.setSection("Search Suggestions");
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 17);
-        assertEquals("search results count as expected", response.getResponse().getTotalNumberOfResults(), 17);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 17);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -86,7 +88,7 @@ public class ConstructorIOSearchTest {
         request.setGroupId("431");
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search results count as expected", response.getResponse().getTotalNumberOfResults(), 95);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 95);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -98,7 +100,7 @@ public class ConstructorIOSearchTest {
         request.getFacets().put("Brand", Arrays.asList("Back to Nature", "Barbara's"));
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 2);
-        assertEquals("search results count as expected", response.getResponse().getTotalNumberOfResults(), 2);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 2);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -108,7 +110,7 @@ public class ConstructorIOSearchTest {
         SearchRequest request = new SearchRequest("peanut");
         SearchResponse response = constructor.search(request, null);
         assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search results count as expected", response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 

@@ -9,11 +9,30 @@ import com.google.gson.annotations.SerializedName;
  */
 public class SearchFacet {
 
+  @SerializedName("display_name")
+  private String displayName;
+
   @SerializedName("name")
   private String name;
 
+  @SerializedName("max")
+  private Integer max;
+
+  @SerializedName("min")
+  private Integer min;
+
   @SerializedName("options")
   private List<SearchFacetOption> options;
+
+  @SerializedName("type")
+  private String type;
+
+  /**
+   * @return the displayName
+   */
+  public String getDisplayName() {
+    return displayName;
+  }
 
   /**
    * @return the name
@@ -23,9 +42,30 @@ public class SearchFacet {
   }
 
   /**
+   * @return the max
+   */
+  public Integer getMax() {
+    return max;
+  }
+
+  /**
+   * @return the min
+   */
+  public Integer getMin() {
+    return min;
+  }
+
+  /**
    * @return the options
    */
   public List<SearchFacetOption> getOptions() {
     return options;
+  }
+
+  /**
+   * @return the type
+   */
+  public String getType() {
+    return type;
   }
 }

@@ -1,5 +1,8 @@
 package io.constructor.client.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -8,16 +11,46 @@ import com.google.gson.annotations.SerializedName;
 public class SearchFacetOption {
 
   @SerializedName("count")
-  private int count;
+  private Integer count;
+
+  @SerializedName("data")
+  private Map<String, Object> data = new HashMap<String, Object>();
+
+  @SerializedName("display_name")
+  private String displayName;
+
+  @SerializedName("status")
+  private String status;
 
   @SerializedName("value")
   private String value;
 
   /**
-   * @return the count
+   * @return the counts
    */
-  public int getCount() {
+  public Integer getCount() {
     return count;
+  }
+
+  /**
+   * @return the data
+   */
+  public Map<String, Object> getData() {
+    return data;
+  }
+
+  /**
+   * @return the displayName
+   */
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  /**
+   * @return the status
+   */
+  public String getStatus() {
+    return status;
   }
 
   /**

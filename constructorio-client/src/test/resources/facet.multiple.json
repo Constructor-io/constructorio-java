@@ -1,0 +1,35 @@
+{
+  "display_name": "Brand",
+  "name": "Brand",
+  "options": [
+    {
+      "count": 5,
+      "data": {},
+      "display_name": "Jif",
+      "status": "",
+      "value": "Jif"
+    },
+    {
+      "count": 4,
+      "data": {},
+      "display_name": "Skippy",
+      "status": "",
+      "value": "Skippy"
+    },
+    {
+      "count": 4,
+      "data": {},
+      "display_name": "",
+      "status": "",
+      "value": ""
+    },
+    {
+      "count": 3,
+      "data": {},
+      "display_name": "Smucker's",
+      "status": "",
+      "value": "Smucker's"
+    }
+  ],
+  "type": "multiple"
+}

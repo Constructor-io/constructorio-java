@@ -1,0 +1,8 @@
+{
+  "display_name": "Price",
+  "max": 429,
+  "min": 0,
+  "name": "Price",
+  "status": { },
+  "type": "range"
+}

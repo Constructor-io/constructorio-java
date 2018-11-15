@@ -1,0 +1,35 @@
+{
+  "display_name": "Rating",
+  "name": "Rating",
+  "options": [
+    {
+      "count": 313,
+      "data": { },
+      "display_name": "4 and more",
+      "status": "",
+      "value": "4-inf"
+    },
+    {
+      "count": 533,
+      "data": { },
+      "display_name": "3 and more",
+      "status": "",
+      "value": "3-inf"
+    },
+    {
+      "count": 544,
+      "data": { },
+      "display_name": "2 and more",
+      "status": "",
+      "value": "2-inf"
+    },
+    {
+      "count": 548,
+      "data": { },
+      "display_name": "1 and more",
+      "status": "",
+      "value": "1-inf"
+    }
+  ],
+  "type": "single"
+}

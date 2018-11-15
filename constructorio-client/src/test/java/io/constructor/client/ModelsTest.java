@@ -27,6 +27,7 @@ public class ModelsTest {
     assertEquals(facet.getType(), "multiple");
     assertNull(facet.getMax());
     assertNull(facet.getMin());
+    assertNull(facet.getStatus());
   }
 
   @Test
@@ -39,6 +40,7 @@ public class ModelsTest {
     assertEquals(facet.getType(), "single");
     assertNull(facet.getMax());
     assertNull(facet.getMin());
+    assertNull(facet.getStatus());
   }
 
   @Test
@@ -51,6 +53,20 @@ public class ModelsTest {
     assertEquals(facet.getType(), "range");
     assertEquals((int)facet.getMax(), 429);
     assertEquals((int)facet.getMin(), 0);
+    assertEquals(facet.getStatus().size(), 0);
+  }
+
+  @Test
+  public void rangeFacetSelected() throws Exception {
+    String string = Utils.getTestResource("facet.range.selected.json");
+    SearchFacet facet = new Gson().fromJson(string, SearchFacet.class);
+    assertEquals(facet.getDisplayName(), "Price");
+    assertEquals(facet.getName(), "Price");
+    assertNull(facet.getOptions());
+    assertEquals(facet.getType(), "range");
+    assertEquals((int)facet.getMax(), 429);
+    assertEquals((int)facet.getMin(), 0);
+    assertEquals(facet.getStatus().size(), 2);
   }
 
   @Test

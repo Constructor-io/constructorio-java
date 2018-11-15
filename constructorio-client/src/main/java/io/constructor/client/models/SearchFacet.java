@@ -1,6 +1,8 @@
 package io.constructor.client.models;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -14,6 +16,9 @@ public class SearchFacet {
 
   @SerializedName("name")
   private String name;
+
+  @SerializedName("status")
+  private Map<String, Object> status;
 
   @SerializedName("max")
   private Integer max;
@@ -39,6 +44,13 @@ public class SearchFacet {
    */
   public String getName() {
     return name;
+  }
+
+  /**
+   * @return the status
+   */
+  public Map<String, Object> getStatus() {
+    return status;
   }
 
   /**

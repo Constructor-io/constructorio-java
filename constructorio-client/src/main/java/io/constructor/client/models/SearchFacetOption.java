@@ -1,6 +1,5 @@
 package io.constructor.client.models;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
@@ -14,7 +13,7 @@ public class SearchFacetOption {
   private Integer count;
 
   @SerializedName("data")
-  private Map<String, Object> data = new HashMap<String, Object>();
+  private Map<String, Object> data;
 
   @SerializedName("display_name")
   private String displayName;

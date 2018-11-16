@@ -454,12 +454,12 @@ public class ConstructorIO {
     }
 
     /**
-     * Queries the search service.
+     * Queries the search service with speech to text.
      *
-     * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * Note that if you're making a search service on a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
-     * @param req the search request
+     * @param req the voice search request
      * @param userInfo optional information about the user
      * @return a search response
      * @throws ConstructorException if the request is invalid.
@@ -474,12 +474,12 @@ public class ConstructorIO {
     }
 
     /**
-     * Queries the search service.
+     * Queries the search service with speech to text.
      *
-     * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * Note that if you're making a search service on a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
-     * @param req the search request
+     * @param req the voice search request
      * @param userInfo optional information about the user
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.

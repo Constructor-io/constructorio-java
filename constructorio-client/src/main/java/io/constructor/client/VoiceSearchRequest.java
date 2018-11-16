@@ -11,9 +11,9 @@ public class VoiceSearchRequest {
   private int resultsPerPage;
 
   /**
-   * Creates a search request
+   * Creates a voice search request
    *
-   * @param query the term to return search results for
+   * @param query the term to return voice search results for
    */
   public VoiceSearchRequest(String query) throws IllegalArgumentException {
     if (query == null) {

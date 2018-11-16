@@ -114,4 +114,48 @@ public class ConstructorIOSearchTest {
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
+    @Test
+    public void VoiceSearchShouldReturnAResult() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        VoiceSearchRequest request = new VoiceSearchRequest("show me peanuts");
+        SearchResponse response = constructor.voiceSearch(request, userInfo);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 30);
+        assertEquals("search results count as expected", (int) response.getResponse().getTotalNumberOfResults(), 104);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void VoiceSearchShouldReturnAResultWithFivePerPage() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        VoiceSearchRequest request = new VoiceSearchRequest("show me peanuts");
+        request.setResultsPerPage(5);
+        SearchResponse response = constructor.voiceSearch(request, userInfo);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 5);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void VoiceSearchShouldReturnAResultWithLastPage() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        VoiceSearchRequest request = new VoiceSearchRequest("show me peanuts");
+        request.setPage(4);
+        SearchResponse response = constructor.voiceSearch(request, userInfo);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 14);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void VoiceSearchShouldReturnAResultWithNullUserInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        VoiceSearchRequest request = new VoiceSearchRequest("show me peanuts");
+        SearchResponse response = constructor.voiceSearch(request, null);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 30);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
 }

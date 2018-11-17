@@ -638,29 +638,28 @@ public class ConstructorIO {
      * @return the created URL. Now you can use it to issue requests and things!
      */
     protected HttpUrl makeUrl(String path, UserInfo info) throws UnsupportedEncodingException {
-        HttpUrl url;
-        
+        HttpUrl url = new HttpUrl.Builder()
+            .scheme(this.protocol)
+            .addPathSegment(path)
+            .addQueryParameter("key", this.apiKey)
+            .addQueryParameter("c", this.version)
+            .addQueryParameter("s", String.valueOf(info.getSessionId()))
+            .addQueryParameter("i", info.getClientId())
+            .host(this.host)
+            .build();
+
         if (info.getUserId() != null) {
-            url = new HttpUrl.Builder()
-                .scheme(this.protocol)
-                .addPathSegment(path)
-                .addQueryParameter("key", this.apiKey)
-                .addQueryParameter("c", this.version)
-                .addQueryParameter("s", String.valueOf(info.getSessionId()))
-                .addQueryParameter("i", info.getClientId())
+            url = url.newBuilder()
                 .addQueryParameter("ui", String.valueOf(info.getUserId()))
-                .host(this.host)
-                .build();
-        } else {
-            url = new HttpUrl.Builder()
-                .scheme(this.protocol)
-                .addPathSegment(path)
-                .addQueryParameter("key", this.apiKey)
-                .addQueryParameter("c", this.version)
-                .addQueryParameter("s", String.valueOf(info.getSessionId()))
-                .addQueryParameter("i", info.getClientId())
-                .host(this.host)
-                .build();
+                .build();            
+        }
+
+        if (info.getUserSegments() != null) {
+            for (String userSegment : info.getUserSegments()) {
+                url = url.newBuilder()
+                    .addQueryParameter("us",  userSegment)
+                    .build();
+            }
         }
 
         return url;

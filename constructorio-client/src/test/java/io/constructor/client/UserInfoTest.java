@@ -2,6 +2,8 @@ package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,49 +16,62 @@ public class UserInfoTest {
   @Test
   public void newWithNullClientIdShouldFail() throws Exception {
     thrown.expect(IllegalArgumentException.class);
-    new UserInfo(3, null, "user-id-123");
+    new UserInfo(3, null);
+  }
+
+  @Test
+  public void newWithEmptyClientIdShouldFail() throws Exception {
+    thrown.expect(IllegalArgumentException.class);
+    new UserInfo(3, "");
   }
 
   @Test
   public void newWithNegativeSessionIdShouldFail() throws Exception {
     thrown.expect(IllegalArgumentException.class);
-    new UserInfo(-1, "c62a-2a09-faie", "user-id-123");
-  }
-
-  @Test
-  public void newWithEmptyUserIdShouldFail() throws Exception {
-    thrown.expect(IllegalArgumentException.class);
-    new UserInfo(3, "c62a-2a09-faie", "");
+    new UserInfo(-1, "c62a-2a09-faie");
   }
 
   @Test
   public void newShouldReturnUserInfo() throws Exception {
     String clientId = "c62a-2a09-faie";
     int sessionId = 3;
-    String userId = "user-id-123";
-    UserInfo userInfo = new UserInfo(sessionId, clientId, userId);
-    assertEquals(userInfo.getSessionId(), sessionId);
-    assertEquals(userInfo.getClientId(), clientId);
-    assertEquals(userInfo.getUserId(), userId);
-  }
-
-  @Test
-  public void newWithNullUserIdShouldReturnUserInfo() throws Exception {
-    String clientId = "c62a-2a09-faie";
-    int sessionId = 3;
-    UserInfo userInfo = new UserInfo(sessionId, clientId, null);
-    assertEquals(userInfo.getSessionId(), sessionId);
-    assertEquals(userInfo.getClientId(), clientId);
-    assertEquals(userInfo.getUserId(), null);
-  }
-
-  @Test
-  public void newWithoutUserIdShouldReturnUserInfo() throws Exception {
-    String clientId = "c62a-2a09-faie";
-    int sessionId = 3;
     UserInfo userInfo = new UserInfo(sessionId, clientId);
     assertEquals(userInfo.getSessionId(), sessionId);
     assertEquals(userInfo.getClientId(), clientId);
-    assertEquals(userInfo.getUserId(), null);
+  }
+
+  @Test
+  public void settingNullUserIdShouldFail() throws Exception {
+    thrown.expect(IllegalArgumentException.class);
+    UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+    userInfo.setUserId(null);
+  }
+
+  @Test
+  public void settingEmptyUserIdShouldFail() throws Exception {
+    thrown.expect(IllegalArgumentException.class);
+    UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+    userInfo.setUserId("");
+  }
+
+  @Test
+  public void settingUserIdShouldSucceed() throws Exception {
+    UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+    userInfo.setUserId("Bumblebee Autobot");
+    assertEquals(userInfo.getUserId(), "Bumblebee Autobot");
+  }
+
+  @Test
+  public void settingUserSegmentNullShouldFail() throws Exception {
+    thrown.expect(IllegalArgumentException.class);
+    UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+    userInfo.setUserSegments(null);
+  }
+
+  @Test
+  public void settingUserSegmentsShouldSucceed() throws Exception {
+    UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+    userInfo.setUserSegments(Arrays.asList("Influencers", "Goths", "Hipsters", "Bobos"));
+    assertEquals(userInfo.getUserSegments().size(), 4);
   }
 }

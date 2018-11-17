@@ -1,5 +1,7 @@
 package io.constructor.client;
 
+import java.util.List;
+
 /**
  * Constructor.io User Info
  */
@@ -8,19 +10,7 @@ public class UserInfo {
   private int sessionId;
   private String clientId;
   private String userId;
-
-  /**
-   * Creates a User Info object
-   * 
-   * @param sessionId the user's Session ID
-   * @param clientId the user's Client ID
-   * @param userId the user id according to the API consumer (for logged in users)
-   */
-  public UserInfo(int sessionId, String clientId, String userId) {
-    this.setSessionId(sessionId);
-    this.setClientId(clientId);
-    this.setUserId(userId);
-  }
+  private List<String> userSegments;
 
   /**
    * Creates a User Info object
@@ -55,11 +45,18 @@ public class UserInfo {
   }
 
   /**
+   * @return the userSegments
+   */
+  public List<String> getUserSegments() {
+    return userSegments;
+  }
+
+  /**
    * Validates and sets the session id
    *
    * @param sessionId the user's session id
    */
-  private void setSessionId(int sessionId) throws IllegalArgumentException {
+  public void setSessionId(int sessionId) throws IllegalArgumentException {
     if (sessionId <= 0) {
       throw new IllegalArgumentException("Session ID cannot be less than or equal to 0.");
     } else {
@@ -72,7 +69,7 @@ public class UserInfo {
    *
    * @param clientId the user's client id
    */
-  private void setClientId(String clientId) throws IllegalArgumentException {
+  public void setClientId(String clientId) throws IllegalArgumentException {
     if (clientId == null || clientId.trim().isEmpty()) {
       throw new IllegalArgumentException("Client ID cannot be null or an empty string.");
     } else {
@@ -85,11 +82,24 @@ public class UserInfo {
    *
    * @param userId the user's id
    */
-  private void setUserId(String userId) throws IllegalArgumentException {
-    if (userId != null && userId.trim().isEmpty()) {
+  public void setUserId(String userId) throws IllegalArgumentException {
+    if (userId == null || userId.trim().isEmpty()) {
       throw new IllegalArgumentException("User ID cannot be an empty string.");
     } else {
       this.userId = userId;
+    }
+  }
+
+  /**
+   * Validates and sets the the user segments according to the API consumer
+   * 
+   * @param userSegments the userSegments to set
+   */
+  public void setUserSegments(List<String> userSegments) {
+    if (userSegments == null) {
+      throw new IllegalArgumentException("User segments cannot be null.");
+    } else {
+      this.userSegments = userSegments;
     }
   }
 }

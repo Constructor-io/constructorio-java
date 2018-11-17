@@ -15,6 +15,8 @@ public class SearchRequest {
     private int resultsPerPage;
     private Map<String, List<String>>facets;
     private String groupId;
+    private String sortBy;
+    private boolean sortAscending;
     
     /**
      * Creates a search request
@@ -31,6 +33,7 @@ public class SearchRequest {
       this.page = 1;
       this.resultsPerPage = 30;
       this.facets = new HashMap<String, List<String>>();
+      this.sortAscending = true;
     }
 
     /**
@@ -116,4 +119,33 @@ public class SearchRequest {
     public Map<String, List<String>> getFacets() {
       return facets;
     }
+
+    /**
+     * @param sortBy the sortBy to set
+     */
+    public void setSortBy(String sortBy) {
+      this.sortBy = sortBy;
+    }
+
+    /**
+     * @return the sortBy
+     */
+    public String getSortBy() {
+      return sortBy;
+    }
+
+    /**
+     * @param sortAscending the sortAscending to set
+     */
+    public void setSortAscending(boolean sortAscending) {
+      this.sortAscending = sortAscending;
+    }
+
+    /**
+     * @return the sortAscending
+     */
+    public boolean getSortAscending() {
+      return sortAscending;
+    }
+
 }

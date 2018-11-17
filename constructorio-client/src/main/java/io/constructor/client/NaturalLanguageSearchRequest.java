@@ -1,9 +1,9 @@
 package io.constructor.client;
 
 /**
- * Constructor.io Voice Search Request
+ * Constructor.io Natural Language Search Request
  */
-public class VoiceSearchRequest {
+public class NaturalLanguageSearchRequest {
 
   private String query;
   private String section;
@@ -11,11 +11,11 @@ public class VoiceSearchRequest {
   private int resultsPerPage;
 
   /**
-   * Creates a voice search request
+   * Creates a natural language search request
    *
-   * @param query the term to return voice search results for
+   * @param query the term to return natural language search results for
    */
-  public VoiceSearchRequest(String query) throws IllegalArgumentException {
+  public NaturalLanguageSearchRequest(String query) throws IllegalArgumentException {
     if (query == null) {
       throw new IllegalArgumentException("query is required");
     }

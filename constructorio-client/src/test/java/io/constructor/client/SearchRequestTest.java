@@ -1,11 +1,13 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,6 +40,8 @@ public class SearchRequestTest {
         assertEquals(request.getResultsPerPage(), 30);
         assertEquals(request.getGroupId(), null);
         assertEquals(request.getFacets().size(), 0);
+        assertNull(request.getSortBy());
+        assertTrue(request.getSortAscending());
     }
 
     @Test
@@ -53,6 +57,8 @@ public class SearchRequestTest {
         request.setResultsPerPage(50);
         request.setGroupId("gr-1337");
         request.setFacets(facets);
+        request.setSortBy("smooth-to-chunky");
+        request.setSortAscending(false);
 
         assertEquals(request.getQuery(), "airline tickets");
         assertEquals(request.getSection(), "Search Suggestions");
@@ -60,5 +66,7 @@ public class SearchRequestTest {
         assertEquals(request.getResultsPerPage(), 50);
         assertEquals(request.getGroupId(), "gr-1337");
         assertEquals(request.getFacets(), facets);
+        assertEquals(request.getSortBy(), "smooth-to-chunky");
+        assertEquals(request.getSortAscending(), false);
     }
 }

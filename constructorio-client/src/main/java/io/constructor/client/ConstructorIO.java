@@ -441,6 +441,13 @@ public class ConstructorIO {
                 }
             }
 
+            if (req.getSortBy() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("sort_by", req.getSortBy())
+                    .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
+                    .build();
+            }
+
             Request request = new Request.Builder()
                 .url(url)
                 .get()

@@ -39,6 +39,14 @@ public class ConstructorIO {
         .build();
 
     /**
+     * the HTTP client used by all instances (with retry, only for idempotent requests like GET)
+     */
+    private static OkHttpClient clientWithRetry = new OkHttpClient.Builder()
+        .addInterceptor(new ConstructorInterceptor())
+        .retryOnConnectionFailure(true)
+        .build();
+
+    /**
      * @param newClient the HTTP client to use by all instances
      */
     protected static void setClient(OkHttpClient newClient) {
@@ -98,7 +106,7 @@ public class ConstructorIO {
                 .get()
                 .build();
 
-            Response response = client.newCall(request).execute();
+            Response response = clientWithRetry.newCall(request).execute();
             getResponseBody(response);
             return true;
         } catch (Exception exception) {
@@ -379,7 +387,7 @@ public class ConstructorIO {
                 .get()
                 .build();
 
-            Response response = client.newCall(request).execute();
+            Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -453,7 +461,7 @@ public class ConstructorIO {
                 .get()
                 .build();
 
-            Response response = client.newCall(request).execute();
+            Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -507,7 +515,7 @@ public class ConstructorIO {
                 .get()
                 .build();
 
-            Response response = client.newCall(request).execute();
+            Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);

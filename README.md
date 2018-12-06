@@ -96,6 +96,27 @@ SearchResponse response = constructor.search(request, userInfo);
 String response = constructor.searchAsJSON(request, userInfo);
 ```
 
+To retrieve search results by natural language, you will need to create a `NaturalLanguageSearchRequest`. In the `NaturalLanguageSearchRequest`. just like `SearchRequest`, you can specify the number of results you want per page and the page you want.
+
+```java
+// Create a NaturalLanguageSearchRequest with the term to request results for
+NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest('cheese');
+
+// Add in additional parameters
+request.setResultsPerPage(5);
+request.setPage(1);
+
+// Identify the user session and user id to show results for (optional)
+UserInfo userInfo = new UserInfo(5, "user-id-1123123");
+
+// Request results by natural language as an object
+SearchResponse response = constructor.naturalLanguageSearch(request, userInfo);
+
+// Request results by natural language as a JSON string
+String response = constructor.naturalLanguageSearchAsJSON(request, userInfo);
+
+```
+
 # Testing
 Download the repository and run the following commands from `./constructorio-client`
 

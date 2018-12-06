@@ -637,7 +637,7 @@ public class ConstructorIO {
     protected HttpUrl makeUrl(String path) throws UnsupportedEncodingException {
         HttpUrl url = new HttpUrl.Builder()
             .scheme(this.protocol)
-            .addPathSegment(path)
+            .addPathSegments(path)
             .addQueryParameter("key", this.apiKey)
             .addQueryParameter("c", this.version)
             .host(this.host)
@@ -655,7 +655,7 @@ public class ConstructorIO {
     protected HttpUrl makeUrl(String path, UserInfo info) throws UnsupportedEncodingException {
         HttpUrl url = new HttpUrl.Builder()
             .scheme(this.protocol)
-            .addPathSegment(path)
+            .addPathSegments(path)
             .addQueryParameter("key", this.apiKey)
             .addQueryParameter("c", this.version)
             .addQueryParameter("s", String.valueOf(info.getSessionId()))

@@ -50,9 +50,9 @@ constructor.addItemBatch(items, "Products");
 constructor.addOrUpdateItemBatch(items, "Products");
 ```
 
-# Retrieving Results
+# Retrieving Autocomplete Results
 
-To retrieve autocomplete results, you will need to create an `AutocompleteRequest`. You can specify the number of results you want per `Autocomplete Section`.
+To retrieve autocomplete results, you will need to create an `AutocompleteRequest`. In this request you can specify the number of results you want per autocomplete section.  If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
 ```java
 // Create an AutocompleteRequest with the term to request results for
@@ -64,8 +64,9 @@ resultsPerSection.put("Products", Integer.valueOf(6));
 resultsPerSection.put("Search Suggestions", Integer.valueOf(8));
 request.setResultsPerSection(resultsPerSection);
 
-// Identify the user session and user id to show results for (optional)
-UserInfo userInfo = new UserInfo(5, "user-id-1123123");
+// Create a UserInfo object with the session and unique device identifier (optional)
+UserInfo userInfo = new UserInfo(5, "device-id-1123123");
+userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
 
 // Request results as an object
 AutocompleteResponse response = constructor.autocomplete(request, userInfo);
@@ -74,7 +75,9 @@ AutocompleteResponse response = constructor.autocomplete(request, userInfo);
 String response = constructor.autocompleteAsJSON(request, userInfo);
 ```
 
-To retrieve search results, you will need to create a `SearchRequest`. In the `SearchRequest` you can specify the number of results you want per page, the page you want, and also filter the search by category or facets. 
+# Retrieving Search Results
+
+To retrieve search results, you will need to create a `SearchRequest`. In this request you can specify the number of results you want per page, the page you want, sorting instructions, and also filter the search by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
 ```java
 // Create a SearchRequest with the term to request results for
@@ -83,11 +86,14 @@ SearchRequest request = new SearchRequest("peanut butter");
 // Add in additional parameters
 request.setResultsPerPage(5);
 request.setPage(1);
-request.setGroupId("625");
+request.setGroupId("625");r
+request.setSortBy("Price");
+request.setSortAscending(true);
 request.getFacets().put("Brand", Arrays.asList("Jif"))
 
-// Identify the user session and user id to show results for (optional)
-UserInfo userInfo = new UserInfo(5, "user-id-1123123");
+// Create a UserInfo object with the session and unique device identifier (optional)
+UserInfo userInfo = new UserInfo(5, "device-id-1123123");
+userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
 
 // Request results as an object
 SearchResponse response = constructor.search(request, userInfo);
@@ -95,6 +101,30 @@ SearchResponse response = constructor.search(request, userInfo);
 // Request results as a JSON string
 String response = constructor.searchAsJSON(request, userInfo);
 ```
+
+# Retrieving Search Results for Speech
+
+To retrieve search results for text that originated from speech transcription rather than typing, you will need to create a `NaturalLanguageSearchRequest`. In this request you can specify the number of results you want per page and the page you want.  All other information is inferred from the text itself.  If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.  The response returned contains all of the same data as a standard search response.
+
+```
+// Create a SearchRequest with the term to request results for
+NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("peanut butter");
+
+// Add in additional parameters
+request.setResultsPerPage(5);
+request.setPage(1);
+
+// Create a UserInfo object with the session and unique device identifier (optional)
+UserInfo userInfo = new UserInfo(5, "device-id-1123123");
+userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
+
+// Request results as an object
+SearchResponse response = constructor.naturalLanguageSearch(request, userInfo);
+
+// Request results as a JSON string
+String response = constructor.naturalLanguageSearchAsJSON(request, userInfo);
+```
+
 
 # Testing
 Download the repository and run the following commands from `./constructorio-client`

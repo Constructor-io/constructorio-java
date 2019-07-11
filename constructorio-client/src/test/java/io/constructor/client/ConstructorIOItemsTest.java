@@ -99,14 +99,14 @@ public class ConstructorIOItemsTest {
         Map<String, String> actualMetadata = new HashMap<String, String>();
         actualMetadata.put("price", "$50.00");
 
-        assertEquals(item.getName(), "ROTRUCTSNOC Rainy Day Coat");
-        assertEquals(item.getId(), "893092");
-        assertEquals(item.getDescription(), "Keep yourself dry and cozy on rainy days with this stylish rain coat that can complement any outfit.");
-        assertEquals(item.getUrl(), "https://constructor.io/pdp/893092");
-        assertEquals(item.getImageUrl(), "https://constructor.io/images/893092.jpg");
-        assertEquals(item.getKeywords(), Arrays.asList("jacket", "coat", "rain"));
-        assertEquals(item.getFacets(), actualFacets);
-        assertEquals(item.getMetadata(), actualMetadata);
+        assertEquals("ROTRUCTSNOC Rainy Day Coat", item.getName());
+        assertEquals("893092", item.getId());
+        assertEquals("Keep yourself dry and cozy on rainy days with this stylish rain coat that can complement any outfit.", item.getDescription());
+        assertEquals("https://constructor.io/pdp/893092", item.getUrl());
+        assertEquals("https://constructor.io/images/893092.jpg", item.getImageUrl());
+        assertEquals(Arrays.asList("jacket", "coat", "rain"), item.getKeywords());
+        assertEquals(actualFacets, item.getFacets());
+        assertEquals(actualMetadata, item.getMetadata());
     }
 
     @Test
@@ -117,11 +117,16 @@ public class ConstructorIOItemsTest {
         Item item2 = items.getItems().get(1);
 
         assertEquals(items.getItems().size(), 2);
-        assertEquals(item1.getName(), "power_drill 1");
-        assertEquals(item1.getSuggestedScore(), Integer.valueOf(-1));
-        assertEquals(item1.getUrl(), "/condition/1");
-        assertEquals(item2.getName(), "power_drill 2");
-        assertEquals(item2.getSuggestedScore(), Integer.valueOf(-1));
-        assertEquals(item2.getUrl(), "/condition/2");
+        assertEquals("power_drill 1", item1.getName());
+        assertEquals("/condition/1", item1.getUrl());
+        assertEquals("value1", item1.getMetadata().get("key1"));
+        assertEquals("value2", item1.getMetadata().get("key2"));
+        assertEquals(Integer.valueOf(-1), item1.getSuggestedScore());
+        
+        assertEquals("power_drill 2", item2.getName());
+        assertEquals("/condition/2", item2.getUrl());
+        assertEquals("value3", item2.getMetadata().get("key3"));
+        assertEquals("value4", item2.getMetadata().get("key4"));
+        assertEquals(Integer.valueOf(-1), item2.getSuggestedScore());
     }
 }

@@ -328,7 +328,7 @@ public class ConstructorIO {
      * Retrieves all items for the given autocomplete section, paginated by 
      * numResultsPerPage (default 20) for a given page (default 1).
      * 
-     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @param autocompleteSection the section of the autocomplete that you're retrieving the items from
      * @return an items response
      * @throws ConstructorException if the request is invalid
      */
@@ -340,7 +340,7 @@ public class ConstructorIO {
      * Retrieves all items for the given autocomplete section, paginated by 
      * numResultsPerPage for a given page.
      * 
-     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @param autocompleteSection the section of the autocomplete that you're retrieving the items from
      * @param numResultsPerPage the number of results you want to return (defaults to 20)
      * @param page the page to return (defaults to 1)
      * @return an items response
@@ -359,7 +359,7 @@ public class ConstructorIO {
      * Retrieves all items for the given autocomplete section, paginated by
      * numResultsPerPage (default 20) for a given page (default 1).
      * 
-     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @param autocompleteSection the section of the autocomplete that you're retrieving the item from
      * @return a JSON string
      * @throws ConstructorException if the request is invalid
      */
@@ -371,7 +371,7 @@ public class ConstructorIO {
      * Retrieves all items for the given autocomplete section, 
      * paginated by numResultsPerPage for a given page.
      * 
-     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @param autocompleteSection the section of the autocomplete that you're retrieving the item from
      * @param numResultsPerPage the number of results you want to return (defaults to 20)
      * @param page the page to return (defaults to 1)
      * @return a JSON string
@@ -404,7 +404,7 @@ public class ConstructorIO {
      * Retrieves the item with the specified item id and autocomplete section.
      * 
      * @param itemId the id of the item you'd like to retrieve
-     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @param autocompleteSection the section of the autocomplete that you're retrieving the item from
      * @return a Constructor Item
      * @throws ConstructorException if the request is invalid
      */
@@ -421,7 +421,7 @@ public class ConstructorIO {
      * Retrieves the item with the specified item id and autocomplete section.
      * 
      * @param itemId the id of the item you'd like to retrieve
-     * @param autocompleteSection the section of the autocomplete that you're grabbing the item from
+     * @param autocompleteSection the section of the autocomplete that you're retrieving the item from
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid
      */

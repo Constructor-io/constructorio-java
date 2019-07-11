@@ -7,7 +7,7 @@ import java.util.Map;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Autocomplete Response ... uses Gson/Reflection to load data in
+ * Constructor.io Items Response ... uses Gson/Reflection to load data in
  */
 public class ItemsResponse {
 

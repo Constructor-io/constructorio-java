@@ -38,7 +38,7 @@ public class Item {
   private Map<String, Object> facets;
 
   @SerializedName("metadata")
-  private Map<String, String> metadata;
+  private Map<String, Object> metadata;
 
   /**
    * @return the id
@@ -106,7 +106,7 @@ public class Item {
   /**
    * @return the metadata
    */
-  public Map<String, String> getMetadata() {
+  public Map<String, Object> getMetadata() {
     return metadata;
   }
 }

@@ -16,7 +16,7 @@ public class ConstructorItem {
     private String imageUrl;
     private String id;
     private String description;
-    private Map<String, String> facets;
+    private Map<String, Object> facets;
     private Map<String, String> metadata;
     private List<String> groupIds;
 
@@ -167,14 +167,14 @@ public class ConstructorItem {
     /**
      * @return the facets
      */
-    public Map<String, String> getFacets() {
+    public Map<String, Object> getFacets() {
         return facets;
     }
     
     /**
      * @param facets the facets to set
      */
-    public void setFacets(Map<String, String> facets) {
+    public void setFacets(Map<String, Object> facets) {
         this.facets = facets;
     }
 

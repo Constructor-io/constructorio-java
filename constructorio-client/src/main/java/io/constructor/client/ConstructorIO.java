@@ -409,8 +409,7 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            checkResponse(response);
-            return response.body().string();
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -456,8 +455,7 @@ public class ConstructorIO {
                 .build();
 
             Response response = client.newCall(request).execute();
-            checkResponse(response);
-            return response.body().string();
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }

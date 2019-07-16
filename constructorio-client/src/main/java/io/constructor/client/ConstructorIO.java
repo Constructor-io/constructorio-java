@@ -245,6 +245,67 @@ public class ConstructorIO {
     }
 
     /**
+     * Patch an item in your autocomplete
+     * 
+     * @param item the item you want to patch
+     * @param autocompleteSection the section of the autocomplete that you're removing the item from
+     * @return true if successfully patched
+     * @throws ConstructorException if the request is invalid
+     */
+    public boolean patchItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl("v1/item");
+            Map<String, Object> data = item.toMap();
+            data.put("autocomplete_section", autocompleteSection);
+            String params = new Gson().toJson(data);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Authorization", this.credentials)
+                .patch(body)
+                .build();
+
+            Response response = client.newCall(request).execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Patch multiple items in your autocomplete (limit of 1000 items)
+     *
+     * @param items the items you want to patch.
+     * @param autocompleteSection the section of the autocomplete that you're patching the items.
+     * @return true if working
+     * @throws ConstructorException if the request is invalid.
+     */
+    public boolean patchItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
+        try {
+            HttpUrl url= this.makeUrl("v1/batch_items");
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> itemsAsJSON = new ArrayList<Object>();
+            for (ConstructorItem item : items) {
+                itemsAsJSON.add(item.toMap());
+            }
+            data.put("items", itemsAsJSON);
+            data.put("autocomplete_section", autocompleteSection);
+            String params = new Gson().toJson(data);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Authorization", this.credentials)
+                .patch(body)
+                .build();
+
+            Response response = client.newCall(request).execute();
+            return checkResponse(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
      * Removes an item from your autocomplete.
      *
      * @param item the item that you're removing.

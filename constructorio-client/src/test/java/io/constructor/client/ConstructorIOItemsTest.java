@@ -56,6 +56,79 @@ public class ConstructorIOItemsTest {
     }
 
     @Test
+    public void patchItemShouldUpdateItem() throws Exception {
+      ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+
+      // Add new item
+      ConstructorItem item = new ConstructorItem("Flex Fleece Pullover Hoodie");
+      item.setId("f498w");
+      item.setUrl("http://www.americanapparel.com/flex-fleece-pullover-hoodie_f498w");
+      item.setDescription("Iconic pullover Hoodie featuring a kangaroo pocket.");
+      Map<String, Object> facets = new HashMap<String, Object>();
+      facets.put("Color", Arrays.asList("green", "blue", "red"));
+      item.setFacets(facets);
+      Map<String, String> metadata = new HashMap<String, String>();
+      metadata.put("price", "38");
+      item.setMetadata(metadata);
+      constructor.addOrUpdateItem(item, "Products");
+      Thread.sleep(2000);
+
+      // Validate item
+      Item uploadedItem = constructor.getItem("f498w", "Products");
+      assertEquals("item uploaded correctly", "Iconic pullover Hoodie featuring a kangaroo pocket.", uploadedItem.getDescription());
+      assertEquals("item uploaded correctly", "38", uploadedItem.getMetadata().get("price"));
+
+      // Patch the item
+      item.setDescription("The best hoodies in the hood");
+      metadata.put("price", "25");
+      item.setMetadata(metadata);
+      
+      assertTrue("patch succeeds", constructor.patchItem(item, "Products"));
+      Thread.sleep(2000);
+
+      // Check if item have been patched
+      Item patchedItem = constructor.getItem("f498w", "Products");
+      assertEquals("description is patched", "The best hoodies in the hood", patchedItem.getDescription());
+      assertEquals("metadata is patched", "25", patchedItem.getMetadata().get("price"));
+    }
+
+    @Test
+    public void patchItemsShouldUpdateItems() throws Exception {
+      ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+
+      // Create new items
+      ConstructorItem item1 = new ConstructorItem("Flannel Lumberjack Shirt");
+      item1.setId("j908z");
+      item1.setDescription("Classic Flannel button down shirt. Our flannel fabric is a medium weight, ultra soft, and great for layering.");
+      item1.setUrl("https://www.americanapparel.com/en/flannel-lumberjack-shirt_rsact410sw");
+      ConstructorItem item2 = new ConstructorItem("The Slim Jean");
+      item2.setId("s829f");
+      item2.setDescription("The Slim Jean is a 5 pocket, classic slim leg, and features an invisible button fly.");
+      item2.setUrl("https://www.americanapparel.com/en/the-slim-jean_rsadm4327w2");
+      ConstructorItem[] items = { item1, item2 };
+      constructor.addOrUpdateItemBatch(items, "Products");
+      Thread.sleep(2000);
+
+      // Validate items
+      Item uploadedItem1 = constructor.getItem("j908z", "Products");
+      assertEquals("item1 uploaded correctly", "Classic Flannel button down shirt. Our flannel fabric is a medium weight, ultra soft, and great for layering.", uploadedItem1.getDescription());
+      Item uploadedItem2 = constructor.getItem("s829f", "Products");
+      assertEquals("item1 uploaded correctly", "The Slim Jean is a 5 pocket, classic slim leg, and features an invisible button fly.", uploadedItem2.getDescription());
+
+      // Patch the items
+      item1.setDescription("Kangaroo pockets ftw");
+      item2.setDescription("You can be a slim jim with these slim jeans");
+      assertTrue("patch succeeds", constructor.patchItemBatch(items, "Products"));
+      Thread.sleep(2000);
+
+      // Check if items have been patched
+      Item patchedItem1 = constructor.getItem("j908z", "Products");
+      assertEquals("description is patched", "Kangaroo pockets ftw", patchedItem1.getDescription());
+      Item patchedItem2 = constructor.getItem("s829f", "Products");
+      assertEquals("description is patched", "You can be a slim jim with these slim jeans", patchedItem2.getDescription());
+    }
+
+    @Test
     public void modifyShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem itemOld = Utils.createProductItem();

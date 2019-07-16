@@ -158,4 +158,14 @@ public class ConstructorIOSearchTest {
         assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
         assertTrue("search result id exists", response.getResultId() != null);
     }
+
+    @Test
+    public void SearchShouldNotReturnDeactivatedItems() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        SearchRequest request = new SearchRequest("deactivated item jielao");
+        SearchResponse response = constructor.search(request, null);
+        assertEquals("no search results", response.getResponse().getResults().size(), 0);
+        assertEquals("search results count as expected", (int) response.getResponse().getTotalNumberOfResults(), 0);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
 }

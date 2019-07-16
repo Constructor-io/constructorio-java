@@ -82,4 +82,14 @@ public class ConstructorIOAutocompleteTest {
         assertEquals("autocomplete search suggestions exist", response.getSections().get("Search Suggestions").size(), 1);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
+
+    @Test
+    public void autocompleteShouldNotReturnDeactivatedItems() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        AutocompleteRequest request = new AutocompleteRequest("deactivated item jielao");
+        AutocompleteResponse response = constructor.autocomplete(request, null);
+        assertEquals("autocomplete product suggestions are hidden", response.getSections().get("Products").size(), 0);
+        assertEquals("autocomplete search suggestions are hidden", (int) response.getSections().get("Search Suggestions").size(), 0);
+        assertTrue("autocomplete result id exists", response.getResultId() != null);
+    }
 }

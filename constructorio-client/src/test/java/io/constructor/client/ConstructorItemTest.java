@@ -45,6 +45,7 @@ public class ConstructorItemTest {
         assertEquals(item.getFacets(), null);
         assertEquals(item.getFacets(), null);
         assertEquals(item.getGroupIds(), null);
+        assertEquals(item.getDeactivated(), false);
     }
 
     @Test
@@ -60,6 +61,7 @@ public class ConstructorItemTest {
         item.setDescription("See the world!");
         item.setId("TICK-007");
         item.setGroupIds(Arrays.asList("Lucky Tickets", "Special Tickets", "Fancy Tickets"));
+        item.setDeactivated(true);
 
         assertEquals(item.getItemName(), "airline tickets");
         assertEquals(item.getSuggestedScore(), Integer.valueOf(100000));
@@ -71,5 +73,6 @@ public class ConstructorItemTest {
         assertEquals(item.getFacets(), null);
         assertEquals(item.getMetadata(), null);
         assertEquals(item.getGroupIds().size(), 3);
+        assertEquals(item.getDeactivated(), true);
     }
 }

@@ -19,6 +19,7 @@ public class ConstructorItem {
     private Map<String, Object> facets;
     private Map<String, String> metadata;
     private List<String> groupIds;
+    private Boolean deactivated;
 
     /**
      * Creates an autocomplete item.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
@@ -40,6 +41,7 @@ public class ConstructorItem {
         this.facets = null;
         this.metadata = null;
         this.groupIds = null;
+        this.deactivated = false;
     }
 
     /**
@@ -62,6 +64,7 @@ public class ConstructorItem {
         params.put("facets", this.facets);
         params.put("metadata", this.metadata);
         params.put("group_ids", this.groupIds);
+        params.put("deactivated", this.deactivated);
        
         return params;
     }
@@ -204,5 +207,19 @@ public class ConstructorItem {
      */
     public void setGroupIds(List<String> groupIds) {
         this.groupIds = groupIds;
+    }
+
+    /**
+     * @return true if the item is deactivated
+     */
+    public Boolean getDeactivated() {
+        return this.deactivated;
+    }
+
+    /**
+     * @param bool true if deactivated
+     */
+    public void setDeactivated(Boolean bool) {
+        this.deactivated = bool;
     }
 }

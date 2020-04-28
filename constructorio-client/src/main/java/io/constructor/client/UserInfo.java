@@ -11,6 +11,7 @@ public class UserInfo {
   private String clientId;
   private String userId;
   private List<String> userSegments;
+  private String forwardedFor;
 
   /**
    * Creates a User Info object
@@ -18,7 +19,7 @@ public class UserInfo {
    * @param sessionId the user's Session ID
    * @param clientId the user's Client ID
    */
-  public UserInfo(int sessionId, String clientId) {
+  public UserInfo(final int sessionId, final String clientId) {
     this.setSessionId(sessionId);
     this.setClientId(clientId);
   }
@@ -45,10 +46,17 @@ public class UserInfo {
   }
 
   /**
-   * @return the userSegments
+   * @return User Segments
    */
   public List<String> getUserSegments() {
     return userSegments;
+  }
+
+  /**
+   * @return Forwarding info for the end user's device if proxying requests
+   */
+  public String getForwardedFor() {
+    return this.forwardedFor;
   }
 
   /**
@@ -56,7 +64,7 @@ public class UserInfo {
    *
    * @param sessionId the user's session id
    */
-  public void setSessionId(int sessionId) throws IllegalArgumentException {
+  public void setSessionId(final int sessionId) throws IllegalArgumentException {
     if (sessionId <= 0) {
       throw new IllegalArgumentException("Session ID cannot be less than or equal to 0.");
     } else {
@@ -69,7 +77,7 @@ public class UserInfo {
    *
    * @param clientId the user's client id
    */
-  public void setClientId(String clientId) throws IllegalArgumentException {
+  public void setClientId(final String clientId) throws IllegalArgumentException {
     if (clientId == null || clientId.trim().isEmpty()) {
       throw new IllegalArgumentException("Client ID cannot be null or an empty string.");
     } else {
@@ -78,11 +86,12 @@ public class UserInfo {
   }
 
   /**
-   * Validates and sets the the user id according to the API consumer (for logged in users)
+   * Validates and sets the the user id according to the API consumer (for logged
+   * in users)
    *
    * @param userId the user's id
    */
-  public void setUserId(String userId) throws IllegalArgumentException {
+  public void setUserId(final String userId) throws IllegalArgumentException {
     if (userId == null || userId.trim().isEmpty()) {
       throw new IllegalArgumentException("User ID cannot be an empty string.");
     } else {
@@ -95,11 +104,24 @@ public class UserInfo {
    * 
    * @param userSegments the userSegments to set
    */
-  public void setUserSegments(List<String> userSegments) {
+  public void setUserSegments(final List<String> userSegments) {
     if (userSegments == null) {
       throw new IllegalArgumentException("User segments cannot be null.");
     } else {
       this.userSegments = userSegments;
+    }
+  }
+
+  /**
+   * Validates and sets forwarding info
+   *
+   * @param forwardedFor the user's forwarding info
+   */
+  public void setForwardedFor(final String forwardedFor) throws IllegalArgumentException {
+    if (forwardedFor == null || forwardedFor.trim().isEmpty()) {
+      throw new IllegalArgumentException("Forwarded for cannot be null or an empty string.");
+    } else {
+      this.forwardedFor = forwardedFor;
     }
   }
 }

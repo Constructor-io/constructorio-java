@@ -22,6 +22,7 @@ import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
@@ -66,6 +67,7 @@ public class ConstructorIO {
     public String protocol;
     public String host;
     public String version;
+    public String whitelistToken;
 
     /**
      * Creates a constructor.io Client.
@@ -74,8 +76,9 @@ public class ConstructorIO {
      * @param apiKey API Key, used publically in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
      * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param whitelistToken The token provided by Constructor to whitelist your company's traffic if proxying requests for results
      */
-    public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host) {
+    public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, String whitelistToken) {
         this.apiToken = apiToken;
         this.apiKey = apiKey;
         this.host = host;
@@ -88,7 +91,23 @@ public class ConstructorIO {
         } else {
             this.protocol = "http";
         }
+        if (whitelistToken != null) {
+          this.whitelistToken = whitelistToken;
+        }
+
         this.credentials = "Basic " + Base64.getEncoder().encodeToString((this.apiToken + ":").getBytes());
+    }
+
+    /**
+     * Creates a constructor.io Client.
+     * 
+     * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
+     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+    */
+    public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host) {
+      this(apiToken, apiKey, isHTTPS, host, null);
     }
 
     /**
@@ -100,9 +119,9 @@ public class ConstructorIO {
     public boolean verify() throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl("v1/verify");
-            Request request = new Request.Builder()
+            Builder builder = this.makeAuthorizedRequestBuilder();
+            Request request = builder
                 .url(url)
-                .addHeader("Authorization", this.credentials)
                 .get()
                 .build();
 
@@ -129,9 +148,9 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = new Request.Builder()
+            Builder builder = this.makeAuthorizedRequestBuilder();
+            Request request = builder
                 .url(url)
-                .addHeader("Authorization", this.credentials)
                 .post(body)
                 .build();
 
@@ -159,9 +178,9 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = new Request.Builder()
+            Builder builder = this.makeAuthorizedRequestBuilder();
+            Request request = builder
                 .url(url)
-                .addHeader("Authorization", this.credentials)
                 .put(body)
                 .build();
 
@@ -193,9 +212,9 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = new Request.Builder()
+            Builder builder = this.makeAuthorizedRequestBuilder();
+            Request request = builder
                 .url(url)
-                .addHeader("Authorization", this.credentials)
                 .post(body)
                 .build();
 
@@ -228,9 +247,9 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = new Request.Builder()
+            Builder builder = this.makeAuthorizedRequestBuilder();
+            Request request = builder
                 .url(url)
-                .addHeader("Authorization", this.credentials)
                 .put(body)
                 .build();
 
@@ -258,9 +277,9 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = new Request.Builder()
+            Builder builder = this.makeAuthorizedRequestBuilder();
+            Request request = builder
                 .url(url)
-                .addHeader("Authorization", this.credentials)
                 .delete(body)
                 .build();
 
@@ -292,9 +311,9 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = new Request.Builder()
+            Builder builder = this.makeAuthorizedRequestBuilder();
+            Request request = builder
                 .url(url)
-                .addHeader("Authorization", this.credentials)
                 .delete(body)
                 .build();
 
@@ -324,9 +343,9 @@ public class ConstructorIO {
             data.put("item_name", previousItemName);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = new Request.Builder()
+            Builder builder = this.makeAuthorizedRequestBuilder();
+            Request request = builder
                 .url(url)
-                .addHeader("Authorization", this.credentials)
                 .put(body)
                 .build();
 
@@ -382,7 +401,8 @@ public class ConstructorIO {
                     .build();
             }
 
-            Request request = new Request.Builder()
+            Builder builder = this.makeUserRequestBuilder(userInfo);
+            Request request = builder
                 .url(url)
                 .get()
                 .build();
@@ -456,7 +476,8 @@ public class ConstructorIO {
                     .build();
             }
 
-            Request request = new Request.Builder()
+            Builder builder = this.makeUserRequestBuilder(userInfo);
+            Request request = builder
                 .url(url)
                 .get()
                 .build();
@@ -510,7 +531,8 @@ public class ConstructorIO {
                 .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
                 .build();
 
-            Request request = new Request.Builder()
+            Builder builder = this.makeUserRequestBuilder(userInfo);
+            Request request = builder
                 .url(url)
                 .get()
                 .build();
@@ -573,6 +595,38 @@ public class ConstructorIO {
 
         return url;
     }
+
+    /**
+     * Creates a builder for a user request
+     * 
+     * @param info user information if available
+     * @return
+     */
+    protected Builder makeAuthorizedRequestBuilder() {
+        Builder builder = new Request.Builder();
+        builder.addHeader("Authorization", this.credentials);
+        return builder;
+    }
+
+    /**
+     * Creates a builder for an API request
+     * 
+     * @param useAuth whether to include authorization headers
+     * @param info user information if available
+     * @return
+     */
+    protected Builder makeUserRequestBuilder(UserInfo info) {
+      Builder builder = new Request.Builder();
+      if (info != null) {
+        if (this.whitelistToken != null) {
+          builder.addHeader("x-cnstrc-token", this.whitelistToken);
+        }
+        if (info.getForwardedFor() != null) {
+          builder.addHeader("x-forwarded-for", info.getForwardedFor());
+        }
+      }
+      return builder;
+  }
 
     /**
      * Checks the response from an endpoint and throws an exception if an error occurred

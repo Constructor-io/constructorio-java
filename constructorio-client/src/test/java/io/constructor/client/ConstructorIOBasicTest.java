@@ -1,6 +1,7 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
 
@@ -10,6 +11,8 @@ import org.junit.rules.ExpectedException;
 
 import okhttp3.HttpUrl;
 import okhttp3.Response;
+import okhttp3.Request;
+import okhttp3.Request.Builder;
 
 public class ConstructorIOBasicTest {
 
@@ -44,6 +47,43 @@ public class ConstructorIOBasicTest {
     public void newShouldSetHostnameDefault() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", false, null);
         assertEquals("host should be set to default", constructor.host, "ac.cnstrc.com");
+    }
+
+    @Test
+    public void makeAuthorizedRequestBuilderShouldSetAuthorizationHeader() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
+        Builder builder = constructor.makeAuthorizedRequestBuilder();
+        Request req = builder.url("https://ac.cnstrc.com").get().build();
+        assertEquals("authorization headers should be set", req.header("Authorization"), "Basic Ym9pbmthVG9rZW46");
+    }
+
+    @Test
+    public void makeUserRequestBuilderShouldNotSetAuthorizationHeader() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
+        UserInfo info = new UserInfo(2, "sideshow bob");
+        info.setForwardedFor("forwardedFor");
+        Builder builder = constructor.makeUserRequestBuilder(info);
+        Request req = builder.url("https://ac.cnstrc.com").get().build();
+        assertNull("authorization headers should not be set", req.header("Authorization"));
+    }
+    
+    @Test
+    public void makeUserRequestBuilderShouldSetConstructorTokenHeader() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
+        UserInfo info = new UserInfo(2, "sideshow bob");
+        Builder builder = constructor.makeUserRequestBuilder(info);
+        Request req = builder.url("https://ac.cnstrc.com").get().build();
+        assertEquals("constructor token should be set", req.header("x-cnstrc-token"), "whitestripes");
+    }
+
+    @Test
+    public void makeUserRequestBuilderShouldSetForwardedForHeader() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
+        UserInfo info = new UserInfo(2, "sideshow bob");
+        info.setForwardedFor("192.168.0.1");
+        Builder builder = constructor.makeUserRequestBuilder(info);
+        Request req = builder.url("https://ac.cnstrc.com").get().build();
+        assertEquals("constructor token should be set", req.header("x-forwarded-for"), "192.168.0.1");
     }
 
     @Test

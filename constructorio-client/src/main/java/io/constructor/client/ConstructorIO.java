@@ -67,7 +67,7 @@ public class ConstructorIO {
     public String protocol;
     public String host;
     public String version;
-    public String whitelistToken;
+    public String constructorToken;
 
     /**
      * Creates a constructor.io Client.
@@ -76,9 +76,9 @@ public class ConstructorIO {
      * @param apiKey API Key, used publically in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
      * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
-     * @param whitelistToken The token provided by Constructor to whitelist your company's traffic if proxying requests for results
+     * @param constructorToken The token provided by Constructor to whitelist your company's traffic if proxying requests for results
      */
-    public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, String whitelistToken) {
+    public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, String constructorToken) {
         this.apiToken = apiToken;
         this.apiKey = apiKey;
         this.host = host;
@@ -91,8 +91,8 @@ public class ConstructorIO {
         } else {
             this.protocol = "http";
         }
-        if (whitelistToken != null) {
-          this.whitelistToken = whitelistToken;
+        if (constructorToken != null) {
+          this.constructorToken = constructorToken;
         }
 
         this.credentials = "Basic " + Base64.getEncoder().encodeToString((this.apiToken + ":").getBytes());
@@ -616,8 +616,8 @@ public class ConstructorIO {
     protected Builder makeUserRequestBuilder(UserInfo info) {
       Builder builder = new Request.Builder();
       if (info != null) {
-        if (this.whitelistToken != null) {
-          builder.addHeader("x-cnstrc-token", this.whitelistToken);
+        if (this.constructorToken != null) {
+          builder.addHeader("x-cnstrc-token", this.constructorToken);
         }
         if (info.getForwardedFor() != null) {
           builder.addHeader("x-forwarded-for", info.getForwardedFor());

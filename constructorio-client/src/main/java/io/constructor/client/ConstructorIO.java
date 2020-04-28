@@ -76,7 +76,7 @@ public class ConstructorIO {
      * @param apiKey API Key, used publically in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
      * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
-     * @param constructorToken The token provided by Constructor to whitelist your company's traffic if proxying requests for results
+     * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
      */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, String constructorToken) {
         this.apiToken = apiToken;

@@ -19,7 +19,7 @@ public class UserInfo {
    * @param sessionId the user's Session ID
    * @param clientId the user's Client ID
    */
-  public UserInfo(final int sessionId, final String clientId) {
+  public UserInfo(int sessionId, String clientId) {
     this.setSessionId(sessionId);
     this.setClientId(clientId);
   }
@@ -64,7 +64,7 @@ public class UserInfo {
    *
    * @param sessionId the user's session id
    */
-  public void setSessionId(final int sessionId) throws IllegalArgumentException {
+  public void setSessionId(int sessionId) throws IllegalArgumentException {
     if (sessionId <= 0) {
       throw new IllegalArgumentException("Session ID cannot be less than or equal to 0.");
     } else {
@@ -77,7 +77,7 @@ public class UserInfo {
    *
    * @param clientId the user's client id
    */
-  public void setClientId(final String clientId) throws IllegalArgumentException {
+  public void setClientId(String clientId) throws IllegalArgumentException {
     if (clientId == null || clientId.trim().isEmpty()) {
       throw new IllegalArgumentException("Client ID cannot be null or an empty string.");
     } else {
@@ -91,7 +91,7 @@ public class UserInfo {
    *
    * @param userId the user's id
    */
-  public void setUserId(final String userId) throws IllegalArgumentException {
+  public void setUserId(String userId) throws IllegalArgumentException {
     if (userId == null || userId.trim().isEmpty()) {
       throw new IllegalArgumentException("User ID cannot be an empty string.");
     } else {
@@ -104,7 +104,7 @@ public class UserInfo {
    * 
    * @param userSegments the userSegments to set
    */
-  public void setUserSegments(final List<String> userSegments) {
+  public void setUserSegments(List<String> userSegments) {
     if (userSegments == null) {
       throw new IllegalArgumentException("User segments cannot be null.");
     } else {
@@ -117,7 +117,7 @@ public class UserInfo {
    *
    * @param forwardedFor the user's forwarding info
    */
-  public void setForwardedFor(final String forwardedFor) throws IllegalArgumentException {
+  public void setForwardedFor(String forwardedFor) throws IllegalArgumentException {
     if (forwardedFor == null || forwardedFor.trim().isEmpty()) {
       throw new IllegalArgumentException("Forwarded for cannot be null or an empty string.");
     } else {

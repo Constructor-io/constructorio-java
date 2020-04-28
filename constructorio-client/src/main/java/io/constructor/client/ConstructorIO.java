@@ -597,10 +597,9 @@ public class ConstructorIO {
     }
 
     /**
-     * Creates a builder for a user request
+     * Creates a builder for an authorized request
      * 
-     * @param info user information if available
-     * @return
+     * @return Request Builder
      */
     protected Builder makeAuthorizedRequestBuilder() {
         Builder builder = new Request.Builder();
@@ -609,11 +608,10 @@ public class ConstructorIO {
     }
 
     /**
-     * Creates a builder for an API request
+     * Creates a builder for an end user request
      * 
-     * @param useAuth whether to include authorization headers
      * @param info user information if available
-     * @return
+     * @return Request Builder
      */
     protected Builder makeUserRequestBuilder(UserInfo info) {
       Builder builder = new Request.Builder();

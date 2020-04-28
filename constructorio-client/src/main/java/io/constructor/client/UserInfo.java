@@ -86,8 +86,7 @@ public class UserInfo {
   }
 
   /**
-   * Validates and sets the the user id according to the API consumer (for logged
-   * in users)
+   * Validates and sets the the user id according to the API consumer (for logged in users)
    *
    * @param userId the user's id
    */
@@ -113,9 +112,9 @@ public class UserInfo {
   }
 
   /**
-   * Validates and sets forwarding info
+   * Validates and sets forwarding info for the end user's device if proxying requests
    *
-   * @param forwardedFor the user's forwarding info
+   * @param forwardedFor the end user's forwarding info
    */
   public void setForwardedFor(String forwardedFor) throws IllegalArgumentException {
     if (forwardedFor == null || forwardedFor.trim().isEmpty()) {

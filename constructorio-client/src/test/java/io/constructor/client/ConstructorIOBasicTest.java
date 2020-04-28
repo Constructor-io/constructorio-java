@@ -83,7 +83,7 @@ public class ConstructorIOBasicTest {
         info.setForwardedFor("192.168.0.1");
         Builder builder = constructor.makeUserRequestBuilder(info);
         Request req = builder.url("https://ac.cnstrc.com").get().build();
-        assertEquals("constructor token should be set", req.header("x-forwarded-for"), "192.168.0.1");
+        assertEquals("forwarded for should be set", req.header("x-forwarded-for"), "192.168.0.1");
     }
 
     @Test

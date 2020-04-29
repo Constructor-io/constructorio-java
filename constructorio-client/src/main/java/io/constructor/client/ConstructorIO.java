@@ -91,10 +91,7 @@ public class ConstructorIO {
         } else {
             this.protocol = "http";
         }
-        if (constructorToken != null) {
-          this.constructorToken = constructorToken;
-        }
-
+        this.constructorToken = constructorToken;
         this.credentials = "Basic " + Base64.getEncoder().encodeToString((this.apiToken + ":").getBytes());
     }
 
@@ -119,8 +116,7 @@ public class ConstructorIO {
     public boolean verify() throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl("v1/verify");
-            Builder builder = this.makeAuthorizedRequestBuilder();
-            Request request = builder
+            Request request = this.makeAuthorizedRequestBuilder()
                 .url(url)
                 .get()
                 .build();
@@ -148,8 +144,7 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Builder builder = this.makeAuthorizedRequestBuilder();
-            Request request = builder
+            Request request = this.makeAuthorizedRequestBuilder()
                 .url(url)
                 .post(body)
                 .build();
@@ -178,8 +173,7 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Builder builder = this.makeAuthorizedRequestBuilder();
-            Request request = builder
+            Request request = this.makeAuthorizedRequestBuilder()
                 .url(url)
                 .put(body)
                 .build();
@@ -212,8 +206,7 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Builder builder = this.makeAuthorizedRequestBuilder();
-            Request request = builder
+            Request request = this.makeAuthorizedRequestBuilder()
                 .url(url)
                 .post(body)
                 .build();
@@ -247,8 +240,7 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Builder builder = this.makeAuthorizedRequestBuilder();
-            Request request = builder
+            Request request = this.makeAuthorizedRequestBuilder()
                 .url(url)
                 .put(body)
                 .build();
@@ -277,8 +269,7 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Builder builder = this.makeAuthorizedRequestBuilder();
-            Request request = builder
+            Request request = this.makeAuthorizedRequestBuilder()
                 .url(url)
                 .delete(body)
                 .build();
@@ -311,8 +302,7 @@ public class ConstructorIO {
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Builder builder = this.makeAuthorizedRequestBuilder();
-            Request request = builder
+            Request request = this.makeAuthorizedRequestBuilder()
                 .url(url)
                 .delete(body)
                 .build();
@@ -343,8 +333,7 @@ public class ConstructorIO {
             data.put("item_name", previousItemName);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Builder builder = this.makeAuthorizedRequestBuilder();
-            Request request = builder
+            Request request = this.makeAuthorizedRequestBuilder()
                 .url(url)
                 .put(body)
                 .build();
@@ -401,8 +390,7 @@ public class ConstructorIO {
                     .build();
             }
 
-            Builder builder = this.makeUserRequestBuilder(userInfo);
-            Request request = builder
+            Request request = this.makeUserRequestBuilder(userInfo)
                 .url(url)
                 .get()
                 .build();
@@ -476,8 +464,7 @@ public class ConstructorIO {
                     .build();
             }
 
-            Builder builder = this.makeUserRequestBuilder(userInfo);
-            Request request = builder
+            Request request = this.makeUserRequestBuilder(userInfo)
                 .url(url)
                 .get()
                 .build();
@@ -531,8 +518,7 @@ public class ConstructorIO {
                 .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
                 .build();
 
-            Builder builder = this.makeUserRequestBuilder(userInfo);
-            Request request = builder
+            Request request = this.makeUserRequestBuilder(userInfo)
                 .url(url)
                 .get()
                 .build();
@@ -614,17 +600,15 @@ public class ConstructorIO {
      * @return Request Builder
      */
     protected Builder makeUserRequestBuilder(UserInfo info) {
-      Builder builder = new Request.Builder();
-      if (info != null) {
+        Builder builder = new Request.Builder();
         if (this.constructorToken != null) {
-          builder.addHeader("x-cnstrc-token", this.constructorToken);
+            builder.addHeader("x-cnstrc-token", this.constructorToken);
         }
-        if (info.getForwardedFor() != null) {
-          builder.addHeader("x-forwarded-for", info.getForwardedFor());
+        if (info != null && info.getForwardedFor() != null) {
+            builder.addHeader("x-forwarded-for", info.getForwardedFor());
         }
-      }
-      return builder;
-  }
+        return builder;
+    }
 
     /**
      * Checks the response from an endpoint and throws an exception if an error occurred

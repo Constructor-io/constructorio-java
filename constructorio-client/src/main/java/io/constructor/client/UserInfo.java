@@ -11,6 +11,7 @@ public class UserInfo {
   private String clientId;
   private String userId;
   private List<String> userSegments;
+  private String forwardedFor;
 
   /**
    * Creates a User Info object
@@ -45,10 +46,17 @@ public class UserInfo {
   }
 
   /**
-   * @return the userSegments
+   * @return User Segments
    */
   public List<String> getUserSegments() {
     return userSegments;
+  }
+
+  /**
+   * @return Forwarding info for the end user's device if proxying requests
+   */
+  public String getForwardedFor() {
+    return this.forwardedFor;
   }
 
   /**
@@ -100,6 +108,19 @@ public class UserInfo {
       throw new IllegalArgumentException("User segments cannot be null.");
     } else {
       this.userSegments = userSegments;
+    }
+  }
+
+  /**
+   * Validates and sets forwarding info for the end user's device if proxying requests
+   *
+   * @param forwardedFor the end user's forwarding info
+   */
+  public void setForwardedFor(String forwardedFor) throws IllegalArgumentException {
+    if (forwardedFor == null || forwardedFor.trim().isEmpty()) {
+      throw new IllegalArgumentException("Forwarded for cannot be null or an empty string.");
+    } else {
+      this.forwardedFor = forwardedFor;
     }
   }
 }

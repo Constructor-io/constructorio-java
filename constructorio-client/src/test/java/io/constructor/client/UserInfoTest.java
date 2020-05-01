@@ -62,7 +62,7 @@ public class UserInfoTest {
   }
 
   @Test
-  public void settingUserSegmentNullShouldFail() throws Exception {
+  public void settingUserSegmentsNullShouldFail() throws Exception {
     thrown.expect(IllegalArgumentException.class);
     UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
     userInfo.setUserSegments(null);
@@ -73,5 +73,19 @@ public class UserInfoTest {
     UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
     userInfo.setUserSegments(Arrays.asList("Influencers", "Goths", "Hipsters", "Bobos"));
     assertEquals(userInfo.getUserSegments().size(), 4);
+  }
+
+  @Test
+  public void settingForwardedForNullShouldFail() throws Exception {
+    thrown.expect(IllegalArgumentException.class);
+    UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+    userInfo.setForwardedFor(null);
+  }
+
+  @Test
+  public void settingForwardedForShouldSucceed() throws Exception {
+    UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+    userInfo.setForwardedFor("203.0.113.195, 70.41.3.18, 150.172.238.178");
+    assertEquals(userInfo.getForwardedFor(), "203.0.113.195, 70.41.3.18, 150.172.238.178");
   }
 }

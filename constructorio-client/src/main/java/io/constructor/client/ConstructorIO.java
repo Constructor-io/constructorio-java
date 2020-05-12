@@ -97,7 +97,7 @@ public class ConstructorIO {
 
     /**
      * Creates a constructor.io Client.
-     * 
+     *
      * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
      * @param apiKey API Key, used publically in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
@@ -531,6 +531,38 @@ public class ConstructorIO {
     }
 
     /**
+     * Queries the search service to retrieve recommendations.
+     *
+     * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the recommendations request
+     * @param userInfo optional information about the user
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String getRecommendations(RecommendationsRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            String path = "recommendations/v1/pods" + req.getPodId();
+            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            url = url.newBuilder()
+                .addQueryParameter("num_results", String.valueOf(req.getNumResults()))
+                .addQueryParameter("section", req.getSection())
+                .build();
+
+            Request request = this.makeUserRequestBuilder(userInfo)
+                .url(url)
+                .get()
+                .build();
+
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
      * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
      *
      * @param path endpoint of the autocomplete service.
@@ -544,7 +576,7 @@ public class ConstructorIO {
             .addQueryParameter("c", this.version)
             .host(this.host)
             .build();
-        
+
         return url;
     }
 
@@ -568,7 +600,7 @@ public class ConstructorIO {
         if (info.getUserId() != null) {
             url = url.newBuilder()
                 .addQueryParameter("ui", String.valueOf(info.getUserId()))
-                .build();            
+                .build();
         }
 
         if (info.getUserSegments() != null) {
@@ -584,7 +616,7 @@ public class ConstructorIO {
 
     /**
      * Creates a builder for an authorized request
-     * 
+     *
      * @return Request Builder
      */
     protected Builder makeAuthorizedRequestBuilder() {
@@ -595,7 +627,7 @@ public class ConstructorIO {
 
     /**
      * Creates a builder for an end user request
-     * 
+     *
      * @param info user information if available
      * @return Request Builder
      */
@@ -612,7 +644,7 @@ public class ConstructorIO {
 
     /**
      * Checks the response from an endpoint and throws an exception if an error occurred
-     * 
+     *
      * @return whether the request was successful
      */
     protected static String getResponseBody(Response response) throws ConstructorException {
@@ -681,7 +713,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Moves metadata out of the result data for an array of results 
+     * Moves metadata out of the result data for an array of results
      * @param results A JSON array of results
      */
     protected static void moveMetadataOutOfResultData(JSONArray results) {
@@ -690,7 +722,7 @@ public class ConstructorIO {
             JSONObject result = results.getJSONObject(i);
             JSONObject resultData = result.getJSONObject("data");
             JSONObject metadata = new JSONObject();
-            
+
             // Move unspecified properties in result data object to metadata object
             for (Object propertyKey : resultData.keySet()) {
                 String propertyName = (String)propertyKey;

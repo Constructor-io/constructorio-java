@@ -1,5 +1,7 @@
 package io.constructor.client;
 
+import java.util.List;
+
 /**
  * Constructor.io Recommendations Request
  */
@@ -7,14 +9,13 @@ public class RecommendationsRequest {
 
     private String podId;
     private int numResults;
+    private List<String> itemIds;
     private String section;
 
     /**
      * Creates a recommendations request
      *
      * @param podId the pod id to retrieve results from
-     * @param numResults the number of results to retrieve
-     * @param section the section to retrieve results from
      */
     public RecommendationsRequest(String podId) throws IllegalArgumentException {
       if (podId == null) {
@@ -23,6 +24,7 @@ public class RecommendationsRequest {
 
       this.podId = podId;
       this.numResults = 10;
+      this.itemIds = null;
       this.section = "Products";
     }
 
@@ -52,6 +54,20 @@ public class RecommendationsRequest {
      */
     public int getNumResults() {
       return numResults;
+    }
+
+    /**
+     * @param itemIds the item id's to set
+     */
+    public void setItemIds(List<String> itemIds) {
+      this.itemIds = itemIds;
+  }
+
+    /**
+     * @return the item id's
+     */
+    public List<String> getItemIds() {
+      return itemIds;
     }
 
     /**

@@ -1,6 +1,7 @@
 package io.constructor.client.models;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -15,6 +16,9 @@ public class RecommendationsResponseInner {
     @SerializedName("total_num_results")
     private Integer totalNumberOfResults;
 
+    @SerializedName("pod")
+    private ResultPod pod;
+
     /**
      * @return the results
      */
@@ -27,5 +31,12 @@ public class RecommendationsResponseInner {
      */
     public Integer getTotalNumberOfResults() {
       return totalNumberOfResults;
+    }
+
+    /**
+     * @return the pod
+     */
+    public ResultPod getPod() {
+      return pod;
     }
 }

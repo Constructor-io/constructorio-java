@@ -20,6 +20,9 @@ public class ConstructorIORecommendationsTest {
     public void createRecommendationsResponseShouldReturnAResult() throws Exception {
         String string = Utils.getTestResource("response.recommendations.home_page_1.json");
         RecommendationsResponse response = ConstructorIO.createRecommendationsResponse(string);
+
+        assertEquals("pod display name exists", response.getResponse().getPod().getDisplayName(), "You may also like");
+        assertEquals("pod display name exists", response.getResponse().getPod().getId(), "item_page_1");
         assertEquals("search results exist", response.getResponse().getResults().size(), 10);
         assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 10);
         assertTrue("search result id exists", response.getResultId() != null);

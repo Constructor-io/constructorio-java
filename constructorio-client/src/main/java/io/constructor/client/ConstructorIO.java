@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import io.constructor.client.models.AutocompleteResponse;
 import io.constructor.client.models.SearchResponse;
+import io.constructor.client.models.RecommendationsResponse;
 import io.constructor.client.models.ServerError;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
@@ -533,6 +534,26 @@ public class ConstructorIO {
     /**
      * Queries the search service to retrieve recommendations.
      *
+     * Note that if you're making a search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the natural language search request
+     * @param userInfo optional information about the user
+     * @return a search response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public RecommendationsResponse recommendations(RecommendationsRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            String json = recommendationsAsJSON(req, userInfo);
+            return createRecommendationsResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the search service to retrieve recommendations.
+     *
      * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
@@ -541,14 +562,22 @@ public class ConstructorIO {
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String getRecommendations(RecommendationsRequest req, UserInfo userInfo) throws ConstructorException {
+    public String recommendationsAsJSON(RecommendationsRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String path = "recommendations/v1/pods" + req.getPodId();
+            String path = "recommendations/v1/pods/" + req.getPodId();
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
             url = url.newBuilder()
                 .addQueryParameter("num_results", String.valueOf(req.getNumResults()))
                 .addQueryParameter("section", req.getSection())
                 .build();
+
+            if (req.getItemIds() != null) {
+                for (String itemId : req.getItemIds()) {
+                    url = url.newBuilder()
+                        .addQueryParameter("item_id", itemId)
+                        .build();
+                }
+            }
 
             Request request = this.makeUserRequestBuilder(userInfo)
                 .url(url)
@@ -710,6 +739,20 @@ public class ConstructorIO {
         moveMetadataOutOfResultData(results);
         String transformed = json.toString();
         return new Gson().fromJson(transformed, SearchResponse.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static RecommendationsResponse createRecommendationsResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        JSONObject response = json.getJSONObject("response");
+        JSONArray results = response.getJSONArray("results");
+        moveMetadataOutOfResultData(results);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, RecommendationsResponse.class);
     }
 
     /**

@@ -537,9 +537,9 @@ public class ConstructorIO {
      * Note that if you're making a search service on a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
-     * @param req the natural language search request
+     * @param req the recommendations request
      * @param userInfo optional information about the user
-     * @return a search response
+     * @return a recommendations response
      * @throws ConstructorException if the request is invalid.
      */
     public RecommendationsResponse recommendations(RecommendationsRequest req, UserInfo userInfo) throws ConstructorException {

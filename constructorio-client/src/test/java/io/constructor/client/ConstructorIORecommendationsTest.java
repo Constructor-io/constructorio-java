@@ -22,10 +22,10 @@ public class ConstructorIORecommendationsTest {
         RecommendationsResponse response = ConstructorIO.createRecommendationsResponse(string);
 
         assertEquals("pod display name exists", response.getResponse().getPod().getDisplayName(), "You may also like");
-        assertEquals("pod display name exists", response.getResponse().getPod().getId(), "item_page_1");
-        assertEquals("search results exist", response.getResponse().getResults().size(), 10);
+        assertEquals("pod display id exists", response.getResponse().getPod().getId(), "item_page_1");
+        assertEquals("recommendation results exist", response.getResponse().getResults().size(), 10);
         assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 10);
-        assertTrue("search result id exists", response.getResultId() != null);
+        assertTrue("recommendation result id exists", response.getResultId() != null);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ConstructorIORecommendationsTest {
         request.setItemIds(Arrays.asList("power_drill"));
         RecommendationsResponse response = constructor.recommendations(request, userInfo);
         assertEquals("recommendation results exist", response.getResponse().getResults().size(), 10);
-        assertTrue("search result id exists", response.getResultId() != null);
+        assertTrue("recommendation result id exists", response.getResultId() != null);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ConstructorIORecommendationsTest {
         request.setItemIds(Arrays.asList("power_drill", "drill"));
         RecommendationsResponse response = constructor.recommendations(request, userInfo);
         assertEquals("recommendation results exist", response.getResponse().getResults().size(), 10);
-        assertTrue("search result id exists", response.getResultId() != null);
+        assertTrue("recommendation result id exists", response.getResultId() != null);
     }
 
     @Test
@@ -59,6 +59,6 @@ public class ConstructorIORecommendationsTest {
         request.setNumResults(5);
         RecommendationsResponse response = constructor.recommendations(request, userInfo);
         assertEquals("recommendation results exist", response.getResponse().getResults().size(), 5);
-        assertTrue("search result id exists", response.getResultId() != null);
+        assertTrue("recommendation result id exists", response.getResultId() != null);
     }
 }

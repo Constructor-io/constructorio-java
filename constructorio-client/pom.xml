@@ -4,7 +4,7 @@
 	<groupId>io.constructor.client</groupId>
 	<artifactId>constructorio-client</artifactId>
 	<packaging>jar</packaging>
-	<version>4.11.0</version>
+	<version>4.12.0</version>
 	<name>constructorio-client</name>
 	<url>https://github.com/Constructor-io/constructorio-java</url>
 	<dependencies>

@@ -350,7 +350,7 @@ public class ConstructorIO {
     /**
      * Queries the autocomplete service.
      *
-     * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * Note that if you're making an autocomplete request for a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
      * @param req the autocomplete request
@@ -370,7 +370,7 @@ public class ConstructorIO {
     /**
      * Queries the autocomplete service.
      *
-     * Note that if you're making an autocomplete service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * Note that if you're making an autocomplete request for a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
      * @param req the autocomplete request
@@ -406,7 +406,7 @@ public class ConstructorIO {
     /**
      * Queries the search service.
      *
-     * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
      * @param req the search request
@@ -426,7 +426,7 @@ public class ConstructorIO {
     /**
      * Queries the search service.
      *
-     * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
      * @param req the search request
@@ -480,7 +480,7 @@ public class ConstructorIO {
     /**
      * Queries the search service with natural language processing.
      *
-     * Note that if you're making a search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
      * @param req the natural language search request
@@ -500,7 +500,7 @@ public class ConstructorIO {
     /**
      * Queries the search service with natural language processing.
      *
-     * Note that if you're making a search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
      * @param req the natural language search request
@@ -532,9 +532,9 @@ public class ConstructorIO {
     }
 
     /**
-     * Queries the search service to retrieve recommendations.
+     * Queries the recommendations service to retrieve results.
      *
-     * Note that if you're making a search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * Note that if you're making a recommendations request for a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
      * @param req the recommendations request
@@ -552,9 +552,9 @@ public class ConstructorIO {
     }
 
     /**
-     * Queries the search service to retrieve recommendations.
+     * Queries the recommendations service to retrieve results.
      *
-     * Note that if you're making an search service on a website, you should definitely use our javascript client instead of doing it server-side!
+     * Note that if you're making an recommendations request for a website, you should definitely use our javascript client instead of doing it server-side!
      * That's important. That will be a solid latency difference.
      *
      * @param req the recommendations request

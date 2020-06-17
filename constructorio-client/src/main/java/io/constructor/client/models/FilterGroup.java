@@ -5,15 +5,15 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Search Group ... uses Gson/Reflection to load data in
+ * Constructor.io Filter Group ... uses Gson/Reflection to load data in
  */
-public class SearchGroup {
+public class FilterGroup {
 
     @SerializedName("children")
-    private List<SearchGroup> children;
+    private List<FilterGroup> children;
 
     @SerializedName("parents")
-    private List<SearchGroup> parents;
+    private List<FilterGroup> parents;
 
     @SerializedName("count")
     private Integer count;
@@ -27,14 +27,14 @@ public class SearchGroup {
     /**
      * @return the children
      */
-    public List<SearchGroup> getChildren() {
+    public List<FilterGroup> getChildren() {
       return children;
     }
 
     /**
      * @return the parents
      */
-    public List<SearchGroup> getParents() {
+    public List<FilterGroup> getParents() {
       return parents;
     }
 

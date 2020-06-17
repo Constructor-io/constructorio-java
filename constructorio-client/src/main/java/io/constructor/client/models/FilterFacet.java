@@ -6,9 +6,9 @@ import java.util.Map;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Search Facet ... uses Gson/Reflection to load data in
+ * Constructor.io Filter Facet ... uses Gson/Reflection to load data in
  */
-public class SearchFacet {
+public class FilterFacet {
 
   @SerializedName("display_name")
   private String displayName;
@@ -26,7 +26,7 @@ public class SearchFacet {
   private Integer min;
 
   @SerializedName("options")
-  private List<SearchFacetOption> options;
+  private List<FilterFacetOption> options;
 
   @SerializedName("type")
   private String type;
@@ -69,7 +69,7 @@ public class SearchFacet {
   /**
    * @return the options
    */
-  public List<SearchFacetOption> getOptions() {
+  public List<FilterFacetOption> getOptions() {
     return options;
   }
 

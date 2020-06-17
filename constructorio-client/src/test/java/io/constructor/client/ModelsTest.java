@@ -9,8 +9,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import io.constructor.client.models.SearchFacet;
-import io.constructor.client.models.SearchFacetOption;
+import io.constructor.client.models.FilterFacet;
+import io.constructor.client.models.FilterFacetOption;
 
 public class ModelsTest {
 
@@ -20,7 +20,7 @@ public class ModelsTest {
   @Test
   public void multipleFacet() throws Exception {
     String string = Utils.getTestResource("facet.multiple.json");
-    SearchFacet facet = new Gson().fromJson(string, SearchFacet.class);
+    FilterFacet facet = new Gson().fromJson(string, FilterFacet.class);
     assertEquals(facet.getDisplayName(), "Brand");
     assertEquals(facet.getName(), "Brand");
     assertEquals(facet.getOptions().size(), 4);
@@ -33,7 +33,7 @@ public class ModelsTest {
   @Test
   public void singleFacet() throws Exception {
     String string = Utils.getTestResource("facet.single.json");
-    SearchFacet facet = new Gson().fromJson(string, SearchFacet.class);
+    FilterFacet facet = new Gson().fromJson(string, FilterFacet.class);
     assertEquals(facet.getDisplayName(), "Rating");
     assertEquals(facet.getName(), "Rating");
     assertEquals(facet.getOptions().size(), 4);
@@ -46,7 +46,7 @@ public class ModelsTest {
   @Test
   public void rangeFacet() throws Exception {
     String string = Utils.getTestResource("facet.range.json");
-    SearchFacet facet = new Gson().fromJson(string, SearchFacet.class);
+    FilterFacet facet = new Gson().fromJson(string, FilterFacet.class);
     assertEquals(facet.getDisplayName(), "Price");
     assertEquals(facet.getName(), "Price");
     assertNull(facet.getOptions());
@@ -59,7 +59,7 @@ public class ModelsTest {
   @Test
   public void rangeFacetSelected() throws Exception {
     String string = Utils.getTestResource("facet.range.selected.json");
-    SearchFacet facet = new Gson().fromJson(string, SearchFacet.class);
+    FilterFacet facet = new Gson().fromJson(string, FilterFacet.class);
     assertEquals(facet.getDisplayName(), "Price");
     assertEquals(facet.getName(), "Price");
     assertNull(facet.getOptions());
@@ -72,7 +72,7 @@ public class ModelsTest {
   @Test
   public void facetOption() throws Exception {
     String string = Utils.getTestResource("facetoption.json");
-    SearchFacetOption facet = new Gson().fromJson(string, SearchFacetOption.class);
+    FilterFacetOption facet = new Gson().fromJson(string, FilterFacetOption.class);
     assertEquals((int)facet.getCount(), 5);
     assertEquals(facet.getData().size(), 0);
     assertEquals(facet.getDisplayName(), "Jif");
@@ -83,7 +83,7 @@ public class ModelsTest {
   @Test
   public void facetOptionSelected() throws Exception {
     String string = Utils.getTestResource("facetoption.selected.json");
-    SearchFacetOption facet = new Gson().fromJson(string, SearchFacetOption.class);
+    FilterFacetOption facet = new Gson().fromJson(string, FilterFacetOption.class);
     assertEquals((int)facet.getCount(), 5);
     assertEquals(facet.getData().size(), 0);
     assertEquals(facet.getDisplayName(), "Jif");

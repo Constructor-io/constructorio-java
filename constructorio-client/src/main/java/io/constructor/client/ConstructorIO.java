@@ -72,6 +72,7 @@ public class ConstructorIO {
     public String apiKey;
     public String protocol;
     public String host;
+    public Integer port;
     public String version;
     public String constructorToken;
 
@@ -113,14 +114,28 @@ public class ConstructorIO {
       this(apiToken, apiKey, isHTTPS, host, null);
     }
 
+   /*
+     * Creates a constructor.io Client.
+     *
+     * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
+     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param port The port to connect to
+    */
+    public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, int port) {
+      this(apiToken, apiKey, isHTTPS, host, null);
+      this.port = port;
+    }
+
     /**
      * Sets apiKey
      */
     public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
+      this.apiKey = apiKey;
     }
 
-    /**
+   /**
      * Verifies that an autocomplete service is working.
      *
      * @return true if working.
@@ -800,15 +815,18 @@ public class ConstructorIO {
      * @return the created URL. Now you can use it to issue requests and things!
      */
     protected HttpUrl makeUrl(String path) throws UnsupportedEncodingException {
-        HttpUrl url = new HttpUrl.Builder()
+        okhttp3.HttpUrl.Builder builder = new HttpUrl.Builder()
             .scheme(this.protocol)
             .addPathSegments(path)
             .addQueryParameter("key", this.apiKey)
             .addQueryParameter("c", this.version)
-            .host(this.host)
-            .build();
+            .host(this.host);
 
-        return url;
+        if (this.port != null) {
+          builder.port(this.port);
+        }
+       
+        return builder.build();
     }
 
     /**

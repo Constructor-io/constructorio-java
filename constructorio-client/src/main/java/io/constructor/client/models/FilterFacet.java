@@ -20,10 +20,10 @@ public class FilterFacet {
   private Map<String, Object> status;
 
   @SerializedName("max")
-  private Integer max;
+  private Double max;
 
   @SerializedName("min")
-  private Integer min;
+  private Double min;
 
   @SerializedName("options")
   private List<FilterFacetOption> options;
@@ -55,14 +55,14 @@ public class FilterFacet {
   /**
    * @return the max
    */
-  public Integer getMax() {
+  public Double getMax() {
     return max;
   }
 
   /**
    * @return the min
    */
-  public Integer getMin() {
+  public Double getMin() {
     return min;
   }
 

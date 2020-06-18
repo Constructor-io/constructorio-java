@@ -51,8 +51,8 @@ public class ModelsTest {
     assertEquals(facet.getName(), "Price");
     assertNull(facet.getOptions());
     assertEquals(facet.getType(), "range");
-    assertEquals((int)facet.getMax(), 429);
-    assertEquals((int)facet.getMin(), 0);
+    assertEquals((double)facet.getMax(), 429, 0);
+    assertEquals((double)facet.getMin(), 0, 0);
     assertEquals(facet.getStatus().size(), 0);
   }
 
@@ -64,8 +64,8 @@ public class ModelsTest {
     assertEquals(facet.getName(), "Price");
     assertNull(facet.getOptions());
     assertEquals(facet.getType(), "range");
-    assertEquals((int)facet.getMax(), 429);
-    assertEquals((int)facet.getMin(), 0);
+    assertEquals((double)facet.getMax(), 429, 0);
+    assertEquals((double)facet.getMin(), 0, 0);
     assertEquals(facet.getStatus().size(), 2);
   }
 
@@ -73,7 +73,7 @@ public class ModelsTest {
   public void facetOption() throws Exception {
     String string = Utils.getTestResource("facetoption.json");
     FilterFacetOption facet = new Gson().fromJson(string, FilterFacetOption.class);
-    assertEquals((int)facet.getCount(), 5);
+    assertEquals((double)facet.getCount(), 5, 0);
     assertEquals(facet.getData().size(), 0);
     assertEquals(facet.getDisplayName(), "Jif");
     assertEquals(facet.getStatus(), "");
@@ -84,7 +84,7 @@ public class ModelsTest {
   public void facetOptionSelected() throws Exception {
     String string = Utils.getTestResource("facetoption.selected.json");
     FilterFacetOption facet = new Gson().fromJson(string, FilterFacetOption.class);
-    assertEquals((int)facet.getCount(), 5);
+    assertEquals((double)facet.getCount(), 5, 0);
     assertEquals(facet.getData().size(), 0);
     assertEquals(facet.getDisplayName(), "Jif");
     assertEquals(facet.getStatus(), "selected");

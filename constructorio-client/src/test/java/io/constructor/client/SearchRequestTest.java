@@ -42,6 +42,7 @@ public class SearchRequestTest {
         assertEquals(request.getFacets().size(), 0);
         assertNull(request.getSortBy());
         assertTrue(request.getSortAscending());
+        assertNull(request.getCollectionId());
     }
 
     @Test
@@ -59,6 +60,7 @@ public class SearchRequestTest {
         request.setFacets(facets);
         request.setSortBy("smooth-to-chunky");
         request.setSortAscending(false);
+        request.setCollectionId("last minute getaways");
 
         assertEquals(request.getQuery(), "airline tickets");
         assertEquals(request.getSection(), "Search Suggestions");
@@ -68,5 +70,6 @@ public class SearchRequestTest {
         assertEquals(request.getFacets(), facets);
         assertEquals(request.getSortBy(), "smooth-to-chunky");
         assertEquals(request.getSortAscending(), false);
+        assertEquals(request.getCollectionId(), "last minute getaways");
     }
 }

@@ -466,6 +466,12 @@ public class ConstructorIO {
                     .build();
             }
 
+            if (req.getCollectionId() != null) {
+                url = url.newBuilder()
+                  .addQueryParameter("collection_id", req.getCollectionId())
+                  .build();
+            }
+
             Request request = this.makeUserRequestBuilder(userInfo)
                 .url(url)
                 .get()

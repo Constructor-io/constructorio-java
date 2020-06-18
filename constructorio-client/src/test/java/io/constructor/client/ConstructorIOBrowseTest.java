@@ -101,4 +101,14 @@ public class ConstructorIOBrowseTest {
         assertEquals("browse results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 562);
         assertTrue("browse result id exists", response.getResultId() != null);
     }
+
+    @Test
+    public void BrowseShouldReturnAResultWithCollectionId() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_aXLmVpkVp4BX21Sw", true, "betaac.cnstrc.com");
+        BrowseRequest request = new BrowseRequest("collection_id", "fresh-deals");
+        BrowseResponse response = constructor.browse(request, null);
+        assertEquals("browse results exist", response.getResponse().getResults().size(), 30);
+        assertEquals("browse results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 999);
+        assertTrue("browse result id exists", response.getResultId() != null);
+    }
 }

@@ -17,6 +17,7 @@ public class SearchRequest {
     private String groupId;
     private String sortBy;
     private boolean sortAscending;
+    private String collectionId;
     
     /**
      * Creates a search request
@@ -148,4 +149,17 @@ public class SearchRequest {
       return sortAscending;
     }
 
+    /**
+     * @param collectionId the collectionId to set
+     */
+    public void setCollectionId(String collectionId) {
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * @return the collectionId
+     */
+    public String getCollectionId() {
+      return collectionId;
+    }
 }

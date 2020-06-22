@@ -5,9 +5,9 @@ import java.util.Map;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Search Facet Option ... uses Gson/Reflection to load data in
+ * Constructor.io Filter Facet Option ... uses Gson/Reflection to load data in
  */
-public class SearchFacetOption {
+public class FilterFacetOption {
 
   @SerializedName("count")
   private Integer count;

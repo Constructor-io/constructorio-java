@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Result (Autocomplete or Search) ... uses Gson/Reflection to load data in
+ * Constructor.io Result ... uses Gson/Reflection to load data in
  */
 public class Result {
 

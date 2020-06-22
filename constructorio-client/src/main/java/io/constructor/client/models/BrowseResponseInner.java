@@ -5,9 +5,15 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Recommendations Response Inner ... uses Gson/Reflection to load data in
+ * Constructor.io Browse Response Inner ... uses Gson/Reflection to load data in
  */
-public class RecommendationsResponseInner {
+public class BrowseResponseInner {
+
+    @SerializedName("facets")
+    List<FilterFacet> facets;
+
+    @SerializedName("groups")
+    private List<FilterGroup> groups;
 
     @SerializedName("results")
     private List<Result> results;
@@ -15,8 +21,19 @@ public class RecommendationsResponseInner {
     @SerializedName("total_num_results")
     private Integer totalNumberOfResults;
 
-    @SerializedName("pod")
-    private ResultPod pod;
+    /**
+     * @return the facets
+     */
+    public List<FilterFacet> getFacets() {
+      return facets;
+    }
+
+    /**
+     * @return the groups
+     */
+    public List<FilterGroup> getGroups() {
+      return groups;
+    }
 
     /**
      * @return the results
@@ -30,12 +47,5 @@ public class RecommendationsResponseInner {
      */
     public Integer getTotalNumberOfResults() {
       return totalNumberOfResults;
-    }
-
-    /**
-     * @return the pod
-     */
-    public ResultPod getPod() {
-      return pod;
     }
 }

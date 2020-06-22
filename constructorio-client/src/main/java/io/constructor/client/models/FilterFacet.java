@@ -6,9 +6,9 @@ import java.util.Map;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Search Facet ... uses Gson/Reflection to load data in
+ * Constructor.io Filter Facet ... uses Gson/Reflection to load data in
  */
-public class SearchFacet {
+public class FilterFacet {
 
   @SerializedName("display_name")
   private String displayName;
@@ -20,13 +20,13 @@ public class SearchFacet {
   private Map<String, Object> status;
 
   @SerializedName("max")
-  private Integer max;
+  private Double max;
 
   @SerializedName("min")
-  private Integer min;
+  private Double min;
 
   @SerializedName("options")
-  private List<SearchFacetOption> options;
+  private List<FilterFacetOption> options;
 
   @SerializedName("type")
   private String type;
@@ -55,21 +55,21 @@ public class SearchFacet {
   /**
    * @return the max
    */
-  public Integer getMax() {
+  public Double getMax() {
     return max;
   }
 
   /**
    * @return the min
    */
-  public Integer getMin() {
+  public Double getMin() {
     return min;
   }
 
   /**
    * @return the options
    */
-  public List<SearchFacetOption> getOptions() {
+  public List<FilterFacetOption> getOptions() {
     return options;
   }
 

@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Constructor.io Search Request
+ * Constructor.io Browse Request
  */
-public class SearchRequest {
+public class BrowseRequest {
 
-    private String query;
+    private String filterName;
+    private String filterValue;
     private String section;
     private int page;
     private int resultsPerPage;
@@ -17,19 +18,22 @@ public class SearchRequest {
     private String groupId;
     private String sortBy;
     private boolean sortAscending;
-    private String collectionId;
     
     /**
-     * Creates a search request
+     * Creates a browse request
      *
-     * @param query the term to return search results for
+     * @param query the term to return browse results for
      */
-    public SearchRequest(String query) throws IllegalArgumentException {
-      if (query == null) {
-          throw new IllegalArgumentException("query is required");
+    public BrowseRequest(String filterName, String filterValue) throws IllegalArgumentException {
+      if (filterName == null) {
+          throw new IllegalArgumentException("filterName is required");
       }
+      if (filterValue == null) {
+        throw new IllegalArgumentException("filterValue is required");
+    }
 
-      this.query = query;
+      this.filterName = filterName;
+      this.filterValue = filterValue;
       this.section = "Products";
       this.page = 1;
       this.resultsPerPage = 30;
@@ -38,17 +42,31 @@ public class SearchRequest {
     }
 
     /**
-     * @param query the query to set
+     * @param filterName the filterName to set
      */
-    public void setQuery(String query) {
-      this.query = query;
+    public void setFilterName(String filterName) {
+      this.filterName = filterName;
     }
 
     /**
-     * @return the query
+     * @return the filterName
      */
-    public String getQuery() {
-      return query;
+    public String getFilterName() {
+      return filterName;
+    }
+
+    /**
+     * @param filterValue the filterValue to set
+     */
+    public void setFilterValue(String filterValue) {
+      this.filterValue = filterValue;
+    }
+
+    /**
+     * @return the filterValue
+     */
+    public String getFilterValue() {
+      return filterValue;
     }
 
     /**
@@ -149,17 +167,4 @@ public class SearchRequest {
       return sortAscending;
     }
 
-    /**
-     * @param collectionId the collectionId to set
-     */
-    public void setCollectionId(String collectionId) {
-      this.collectionId = collectionId;
-    }
-
-    /**
-     * @return the collectionId
-     */
-    public String getCollectionId() {
-      return collectionId;
-    }
 }

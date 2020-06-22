@@ -1,0 +1,4179 @@
+{
+  "request": {
+    "browse_filter_name": "Color",
+    "browse_filter_value": "Blue",
+    "feature_variants": {
+      "auto_generated_refined_query_rules": "default_rules",
+      "filter_items": null,
+      "manual_searchandizing": null,
+      "personalization": null,
+      "query_items": "query_items_ctr_and_l2r"
+    },
+    "features": {
+      "auto_generated_refined_query_rules": true,
+      "filter_items": true,
+      "manual_searchandizing": true,
+      "personalization": true,
+      "query_items": true
+    },
+    "fmt_options": {
+      "groups_max_depth": 1,
+      "groups_start": "current"
+    },
+    "num_results_per_page": 5,
+    "page": 1,
+    "searchandized_items": {},
+    "section": "Products",
+    "sort_by": "relevance",
+    "sort_order": "descending",
+    "term": ""
+  },
+  "response": {
+    "facets": [{
+      "display_name": "Brand",
+      "name": "Brand",
+      "options": [{
+        "count": 12,
+        "data": {},
+        "display_name": "Aspesi",
+        "status": "",
+        "value": "Aspesi"
+      }, {
+        "count": 7,
+        "data": {},
+        "display_name": "Tods",
+        "status": "",
+        "value": "Tods"
+      }, {
+        "count": 42,
+        "data": {},
+        "display_name": "Michaelkors",
+        "status": "",
+        "value": "Michaelkors"
+      }, {
+        "count": 34,
+        "data": {},
+        "display_name": "Poloralphlauren",
+        "status": "",
+        "value": "Poloralphlauren"
+      }, {
+        "count": 29,
+        "data": {},
+        "display_name": "Sun 67",
+        "status": "",
+        "value": "Sun 67"
+      }, {
+        "count": 19,
+        "data": {},
+        "display_name": "Pinko",
+        "status": "",
+        "value": "Pinko"
+      }, {
+        "count": 19,
+        "data": {},
+        "display_name": "Altea",
+        "status": "",
+        "value": "Altea"
+      }, {
+        "count": 18,
+        "data": {},
+        "display_name": "Guess",
+        "status": "",
+        "value": "Guess"
+      }, {
+        "count": 18,
+        "data": {},
+        "display_name": "Gabs",
+        "status": "",
+        "value": "Gabs"
+      }, {
+        "count": 17,
+        "data": {},
+        "display_name": "Dondup",
+        "status": "",
+        "value": "Dondup"
+      }, {
+        "count": 16,
+        "data": {},
+        "display_name": "Moncler",
+        "status": "",
+        "value": "Moncler"
+      }, {
+        "count": 16,
+        "data": {},
+        "display_name": "Cycle",
+        "status": "",
+        "value": "Cycle"
+      }, {
+        "count": 13,
+        "data": {},
+        "display_name": "Siviglia",
+        "status": "",
+        "value": "Siviglia"
+      }, {
+        "count": 13,
+        "data": {},
+        "display_name": "Savetheduck",
+        "status": "",
+        "value": "Savetheduck"
+      }, {
+        "count": 12,
+        "data": {},
+        "display_name": "Jacobcohen",
+        "status": "",
+        "value": "Jacobcohen"
+      }, {
+        "count": 11,
+        "data": {},
+        "display_name": "Dkny",
+        "status": "",
+        "value": "Dkny"
+      }, {
+        "count": 10,
+        "data": {},
+        "display_name": "Truenyc",
+        "status": "",
+        "value": "Truenyc"
+      }, {
+        "count": 10,
+        "data": {},
+        "display_name": "Himons",
+        "status": "",
+        "value": "Himons"
+      }, {
+        "count": 9,
+        "data": {},
+        "display_name": "Mu",
+        "status": "",
+        "value": "Mu"
+      }, {
+        "count": 9,
+        "data": {},
+        "display_name": "Harriswharf",
+        "status": "",
+        "value": "Harriswharf"
+      }, {
+        "count": 9,
+        "data": {},
+        "display_name": "Closed",
+        "status": "",
+        "value": "Closed"
+      }, {
+        "count": 8,
+        "data": {},
+        "display_name": "Paolopecora",
+        "status": "",
+        "value": "Paolopecora"
+      }, {
+        "count": 8,
+        "data": {},
+        "display_name": "Kangra",
+        "status": "",
+        "value": "Kangra"
+      }, {
+        "count": 8,
+        "data": {},
+        "display_name": "Jucca",
+        "status": "",
+        "value": "Jucca"
+      }, {
+        "count": 8,
+        "data": {},
+        "display_name": "Danielealessandrini",
+        "status": "",
+        "value": "Danielealessandrini"
+      }, {
+        "count": 7,
+        "data": {},
+        "display_name": "Peuterey",
+        "status": "",
+        "value": "Peuterey"
+      }, {
+        "count": 7,
+        "data": {},
+        "display_name": "Moschinolove",
+        "status": "",
+        "value": "Moschinolove"
+      }, {
+        "count": 7,
+        "data": {},
+        "display_name": "Luistrenker",
+        "status": "",
+        "value": "Luistrenker"
+      }, {
+        "count": 7,
+        "data": {},
+        "display_name": "Invicta",
+        "status": "",
+        "value": "Invicta"
+      }, {
+        "count": 7,
+        "data": {},
+        "display_name": "Havaianas",
+        "status": "",
+        "value": "Havaianas"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "Whoareyou",
+        "status": "",
+        "value": "Whoareyou"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "Tagliatore",
+        "status": "",
+        "value": "Tagliatore"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "Stefanocalmonte",
+        "status": "",
+        "value": "Stefanocalmonte"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "Robertfriedman",
+        "status": "",
+        "value": "Robertfriedman"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "Philippemodel",
+        "status": "",
+        "value": "Philippemodel"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "Orciani",
+        "status": "",
+        "value": "Orciani"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "Newbalance",
+        "status": "",
+        "value": "Newbalance"
+      }, {
+        "count": 5,
+        "data": {},
+        "display_name": "Stoneisland",
+        "status": "",
+        "value": "Stoneisland"
+      }, {
+        "count": 4,
+        "data": {},
+        "display_name": "Twinset",
+        "status": "",
+        "value": "Twinset"
+      }, {
+        "count": 4,
+        "data": {},
+        "display_name": "Sartorialist",
+        "status": "",
+        "value": "Sartorialist"
+      }, {
+        "count": 4,
+        "data": {},
+        "display_name": "Mauro",
+        "status": "",
+        "value": "Mauro"
+      }, {
+        "count": 4,
+        "data": {},
+        "display_name": "Majesticfilatures",
+        "status": "",
+        "value": "Majesticfilatures"
+      }, {
+        "count": 4,
+        "data": {},
+        "display_name": "Maison",
+        "status": "",
+        "value": "Maison"
+      }, {
+        "count": 4,
+        "data": {},
+        "display_name": "Lerew",
+        "status": "",
+        "value": "Lerew"
+      }, {
+        "count": 4,
+        "data": {},
+        "display_name": "Kaos",
+        "status": "",
+        "value": "Kaos"
+      }, {
+        "count": 4,
+        "data": {},
+        "display_name": "Hogan",
+        "status": "",
+        "value": "Hogan"
+      }, {
+        "count": 4,
+        "data": {},
+        "display_name": "Circolo 1901",
+        "status": "",
+        "value": "Circolo 1901"
+      }, {
+        "count": 4,
+        "data": {},
+        "display_name": "7 Forallmankind",
+        "status": "",
+        "value": "7 Forallmankind"
+      }, {
+        "count": 3,
+        "data": {},
+        "display_name": "Zanellato",
+        "status": "",
+        "value": "Zanellato"
+      }, {
+        "count": 3,
+        "data": {},
+        "display_name": "Lotto",
+        "status": "",
+        "value": "Lotto"
+      }, {
+        "count": 3,
+        "data": {},
+        "display_name": "Jijil",
+        "status": "",
+        "value": "Jijil"
+      }, {
+        "count": 3,
+        "data": {},
+        "display_name": "Herno",
+        "status": "",
+        "value": "Herno"
+      }, {
+        "count": 3,
+        "data": {},
+        "display_name": "Gum",
+        "status": "",
+        "value": "Gum"
+      }, {
+        "count": 3,
+        "data": {},
+        "display_name": "Aereonautica",
+        "status": "",
+        "value": "Aereonautica"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Victoriabeckham",
+        "status": "",
+        "value": "Victoriabeckham"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Saucony",
+        "status": "",
+        "value": "Saucony"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Palomabarcelo",
+        "status": "",
+        "value": "Palomabarcelo"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Moorer",
+        "status": "",
+        "value": "Moorer"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Miabag",
+        "status": "",
+        "value": "Miabag"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Liebeskindberlin",
+        "status": "",
+        "value": "Liebeskindberlin"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Lemare",
+        "status": "",
+        "value": "Lemare"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Lardini",
+        "status": "",
+        "value": "Lardini"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Entreamis",
+        "status": "",
+        "value": "Entreamis"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Crossley",
+        "status": "",
+        "value": "Crossley"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Bully",
+        "status": "",
+        "value": "Bully"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Blauer",
+        "status": "",
+        "value": "Blauer"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Barba",
+        "status": "",
+        "value": "Barba"
+      }, {
+        "count": 2,
+        "data": {},
+        "display_name": "Acquarama",
+        "status": "",
+        "value": "Acquarama"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Uspolo",
+        "status": "",
+        "value": "Uspolo"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Serafini",
+        "status": "",
+        "value": "Serafini"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Refrigue",
+        "status": "",
+        "value": "Refrigue"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Rebel",
+        "status": "",
+        "value": "Rebel"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Nike",
+        "status": "",
+        "value": "Nike"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Lacarrie",
+        "status": "",
+        "value": "Lacarrie"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Jacob 100",
+        "status": "",
+        "value": "Jacob 100"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Freedomday",
+        "status": "",
+        "value": "Freedomday"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Frankie",
+        "status": "",
+        "value": "Frankie"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Elisabettafranchi",
+        "status": "",
+        "value": "Elisabettafranchi"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Duvetica",
+        "status": "",
+        "value": "Duvetica"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Cantarelli",
+        "status": "",
+        "value": "Cantarelli"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Betterrich",
+        "status": "",
+        "value": "Betterrich"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Annaeffe",
+        "status": "",
+        "value": "Annaeffe"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Ana",
+        "status": "",
+        "value": "Ana"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Amar",
+        "status": "",
+        "value": "Amar"
+      }, {
+        "count": 1,
+        "data": {},
+        "display_name": "Albertoguardiani",
+        "status": "",
+        "value": "Albertoguardiani"
+      }],
+      "type": "multiple"
+    }, {
+      "display_name": "Color",
+      "name": "Color",
+      "options": [{
+        "count": 562,
+        "data": {},
+        "display_name": "Blue",
+        "status": "",
+        "value": "Blue"
+      }],
+      "type": "multiple"
+    }, {
+      "display_name": "Gender",
+      "name": "Gender",
+      "options": [{
+        "count": 269,
+        "data": {},
+        "display_name": "Men",
+        "status": "",
+        "value": "Men"
+      }, {
+        "count": 293,
+        "data": {},
+        "display_name": "Women",
+        "status": "",
+        "value": "Women"
+      }],
+      "type": "multiple"
+    }, {
+      "display_name": "Made In Italy",
+      "name": "Made In Italy",
+      "options": [{
+        "count": 327,
+        "data": {},
+        "display_name": "No",
+        "status": "",
+        "value": "No"
+      }, {
+        "count": 221,
+        "data": {},
+        "display_name": "Yes",
+        "status": "",
+        "value": "Yes"
+      }],
+      "type": "multiple"
+    }, {
+      "display_name": "Price",
+      "max": 3112.5,
+      "min": 22.5,
+      "name": "Price",
+      "status": {},
+      "type": "range"
+    }, {
+      "display_name": "Size",
+      "name": "Common Size",
+      "options": [{
+        "count": 6,
+        "data": {},
+        "display_name": "70",
+        "status": "",
+        "value": "70"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "75",
+        "status": "",
+        "value": "75"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "80",
+        "status": "",
+        "value": "80"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "85",
+        "status": "",
+        "value": "85"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "90",
+        "status": "",
+        "value": "90"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "95",
+        "status": "",
+        "value": "95"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "100",
+        "status": "",
+        "value": "100"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "105",
+        "status": "",
+        "value": "105"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "110",
+        "status": "",
+        "value": "110"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "115",
+        "status": "",
+        "value": "115"
+      }, {
+        "count": 6,
+        "data": {},
+        "display_name": "120",
+        "status": "",
+        "value": "120"
+      }, {
+        "count": 114,
+        "data": {},
+        "display_name": "ONESIZE",
+        "status": "",
+        "value": "ONESIZE"
+      }, {
+        "count": 35,
+        "data": {},
+        "display_name": "34",
+        "status": "",
+        "value": "34"
+      }, {
+        "count": 35,
+        "data": {},
+        "display_name": "34.5",
+        "status": "",
+        "value": "34.5"
+      }, {
+        "count": 38,
+        "data": {},
+        "display_name": "35",
+        "status": "",
+        "value": "35"
+      }, {
+        "count": 38,
+        "data": {},
+        "display_name": "35.5",
+        "status": "",
+        "value": "35.5"
+      }, {
+        "count": 38,
+        "data": {},
+        "display_name": "36",
+        "status": "",
+        "value": "36"
+      }, {
+        "count": 38,
+        "data": {},
+        "display_name": "36.5",
+        "status": "",
+        "value": "36.5"
+      }, {
+        "count": 38,
+        "data": {},
+        "display_name": "37",
+        "status": "",
+        "value": "37"
+      }, {
+        "count": 38,
+        "data": {},
+        "display_name": "37.5",
+        "status": "",
+        "value": "37.5"
+      }, {
+        "count": 38,
+        "data": {},
+        "display_name": "38",
+        "status": "",
+        "value": "38"
+      }, {
+        "count": 38,
+        "data": {},
+        "display_name": "38.5",
+        "status": "",
+        "value": "38.5"
+      }, {
+        "count": 10,
+        "data": {},
+        "display_name": "46.5",
+        "status": "",
+        "value": "46.5"
+      }, {
+        "count": 10,
+        "data": {},
+        "display_name": "47",
+        "status": "",
+        "value": "47"
+      }, {
+        "count": 45,
+        "data": {},
+        "display_name": "42.5",
+        "status": "",
+        "value": "42.5"
+      }, {
+        "count": 45,
+        "data": {},
+        "display_name": "43",
+        "status": "",
+        "value": "43"
+      }, {
+        "count": 45,
+        "data": {},
+        "display_name": "43.5",
+        "status": "",
+        "value": "43.5"
+      }, {
+        "count": 45,
+        "data": {},
+        "display_name": "44",
+        "status": "",
+        "value": "44"
+      }, {
+        "count": 45,
+        "data": {},
+        "display_name": "44.5",
+        "status": "",
+        "value": "44.5"
+      }, {
+        "count": 45,
+        "data": {},
+        "display_name": "45",
+        "status": "",
+        "value": "45"
+      }, {
+        "count": 45,
+        "data": {},
+        "display_name": "45.5",
+        "status": "",
+        "value": "45.5"
+      }, {
+        "count": 45,
+        "data": {},
+        "display_name": "46",
+        "status": "",
+        "value": "46"
+      }, {
+        "count": 48,
+        "data": {},
+        "display_name": "39",
+        "status": "",
+        "value": "39"
+      }, {
+        "count": 48,
+        "data": {},
+        "display_name": "39.5",
+        "status": "",
+        "value": "39.5"
+      }, {
+        "count": 48,
+        "data": {},
+        "display_name": "40",
+        "status": "",
+        "value": "40"
+      }, {
+        "count": 48,
+        "data": {},
+        "display_name": "40.5",
+        "status": "",
+        "value": "40.5"
+      }, {
+        "count": 48,
+        "data": {},
+        "display_name": "41",
+        "status": "",
+        "value": "41"
+      }, {
+        "count": 48,
+        "data": {},
+        "display_name": "41.5",
+        "status": "",
+        "value": "41.5"
+      }, {
+        "count": 48,
+        "data": {},
+        "display_name": "42",
+        "status": "",
+        "value": "42"
+      }, {
+        "count": 244,
+        "data": {},
+        "display_name": "XXS",
+        "status": "",
+        "value": "XXS"
+      }, {
+        "count": 393,
+        "data": {},
+        "display_name": "XS",
+        "status": "",
+        "value": "XS"
+      }, {
+        "count": 394,
+        "data": {},
+        "display_name": "L",
+        "status": "",
+        "value": "L"
+      }, {
+        "count": 394,
+        "data": {},
+        "display_name": "M",
+        "status": "",
+        "value": "M"
+      }, {
+        "count": 394,
+        "data": {},
+        "display_name": "S",
+        "status": "",
+        "value": "S"
+      }, {
+        "count": 394,
+        "data": {},
+        "display_name": "XL",
+        "status": "",
+        "value": "XL"
+      }, {
+        "count": 394,
+        "data": {},
+        "display_name": "XXL",
+        "status": "",
+        "value": "XXL"
+      }, {
+        "count": 394,
+        "data": {},
+        "display_name": "XXXL",
+        "status": "",
+        "value": "XXXL"
+      }],
+      "type": "multiple"
+    }, {
+      "display_name": "Style",
+      "name": "Style",
+      "options": [{
+        "count": 79,
+        "data": {},
+        "display_name": "Business",
+        "status": "",
+        "value": "Business"
+      }, {
+        "count": 478,
+        "data": {},
+        "display_name": "Sporty",
+        "status": "",
+        "value": "Sporty"
+      }],
+      "type": "multiple"
+    }],
+    "features": [{
+      "display_name": "Affinity Engine",
+      "enabled": true,
+      "feature_name": "auto_generated_refined_query_rules",
+      "variant": {
+        "display_name": "Default weights",
+        "name": "default_rules"
+      }
+    }, {
+      "display_name": "Filter-item boosts",
+      "enabled": true,
+      "feature_name": "filter_items",
+      "variant": null
+    }, {
+      "display_name": "Searchandizing",
+      "enabled": true,
+      "feature_name": "manual_searchandizing",
+      "variant": null
+    }, {
+      "display_name": "Personalization",
+      "enabled": true,
+      "feature_name": "personalization",
+      "variant": null
+    }, {
+      "display_name": "Learn To Rank",
+      "enabled": true,
+      "feature_name": "query_items",
+      "variant": {
+        "display_name": "CTR & LTR",
+        "name": "query_items_ctr_and_l2r"
+      }
+    }],
+    "groups": [{
+      "children": [{
+        "children": [],
+        "count": 250,
+        "display_name": "Men",
+        "group_id": "men",
+        "parents": [{
+          "display_name": "All",
+          "group_id": "all"
+        }]
+      }, {
+        "children": [],
+        "count": 9,
+        "display_name": "New",
+        "group_id": "new",
+        "parents": [{
+          "display_name": "All",
+          "group_id": "all"
+        }]
+      }, {
+        "children": [],
+        "count": 321,
+        "display_name": "Sale",
+        "group_id": "sale",
+        "parents": [{
+          "display_name": "All",
+          "group_id": "all"
+        }]
+      }, {
+        "children": [],
+        "count": 276,
+        "display_name": "Women",
+        "group_id": "women",
+        "parents": [{
+          "display_name": "All",
+          "group_id": "all"
+        }]
+      }, {
+        "children": [],
+        "count": 31,
+        "display_name": "Accessories",
+        "group_id": "accessories",
+        "parents": [{
+          "display_name": "All",
+          "group_id": "all"
+        }]
+      }],
+      "count": 559,
+      "display_name": "All",
+      "group_id": "all",
+      "parents": []
+    }],
+    "results": [{
+      "data": {
+        "description": "Test",
+        "facets": [{
+          "name": "Brand",
+          "values": ["Aspesi"]
+        }, {
+          "name": "Color",
+          "values": ["Blue"]
+        }, {
+          "name": "Common Size",
+          "values": ["XXS"]
+        }, {
+          "name": "Gender",
+          "values": ["Men"]
+        }, {
+          "name": "Made In Italy",
+          "values": ["No"]
+        }, {
+          "name": "Price",
+          "values": [536.25]
+        }, {
+          "name": "Size",
+          "values": ["XXS"]
+        }, {
+          "name": "Style",
+          "values": ["Business"]
+        }],
+        "groups": [{
+          "display_name": "Jackets",
+          "group_id": "men|clothing|jackets",
+          "path": "/all/men/men|clothing",
+          "path_list": [{
+            "display_name": "All",
+            "id": "all"
+          }, {
+            "display_name": "Men",
+            "id": "men"
+          }, {
+            "display_name": "Clothing",
+            "id": "men|clothing"
+          }]
+        }, {
+          "display_name": "Jackets",
+          "group_id": "new|men|clothing|jackets",
+          "path": "/all/new/new|men/new|men|clothing",
+          "path_list": [{
+            "display_name": "All",
+            "id": "all"
+          }, {
+            "display_name": "New",
+            "id": "new"
+          }, {
+            "display_name": "Men",
+            "id": "new|men"
+          }, {
+            "display_name": "Clothing",
+            "id": "new|men|clothing"
+          }]
+        }],
+        "id": "aspesi-coat-I502997385098-blue",
+        "image_url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081200_1_large.jpg",
+        "price": 536.25,
+        "url": "https://demo.commercetools.com/en/aspesi-coat-I502997385098-blue.html",
+        "variation_id": "M0E20000000ECTT"
+      },
+      "is_slotted": false,
+      "matched_terms": [],
+      "value": "Coat Aspesi blue",
+      "variations": [{
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Aspesi"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["XXS"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["No"]
+          }, {
+            "name": "Price",
+            "values": [536.25]
+          }, {
+            "name": "Size",
+            "values": ["XXS"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/aspesi-coat-I502997385098-blue.html",
+          "variation_id": "M0E20000000ECTT"
+        },
+        "value": "Coat Aspesi blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Aspesi"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["XS"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["No"]
+          }, {
+            "name": "Price",
+            "values": [536.25]
+          }, {
+            "name": "Size",
+            "values": ["XS"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000ECTU"
+        },
+        "value": "Coat Aspesi blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Aspesi"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["S"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["No"]
+          }, {
+            "name": "Price",
+            "values": [536.25]
+          }, {
+            "name": "Size",
+            "values": ["S"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000ECTV"
+        },
+        "value": "Coat Aspesi blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Aspesi"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["M"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["No"]
+          }, {
+            "name": "Price",
+            "values": [536.25]
+          }, {
+            "name": "Size",
+            "values": ["M"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000ECTW"
+        },
+        "value": "Coat Aspesi blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Aspesi"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["L"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["No"]
+          }, {
+            "name": "Price",
+            "values": [536.25]
+          }, {
+            "name": "Size",
+            "values": ["L"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000ECTX"
+        },
+        "value": "Coat Aspesi blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Aspesi"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["XL"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["No"]
+          }, {
+            "name": "Price",
+            "values": [536.25]
+          }, {
+            "name": "Size",
+            "values": ["XL"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000ECTY"
+        },
+        "value": "Coat Aspesi blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Aspesi"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["XXL"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["No"]
+          }, {
+            "name": "Price",
+            "values": [536.25]
+          }, {
+            "name": "Size",
+            "values": ["XXL"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000ECTZ"
+        },
+        "value": "Coat Aspesi blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Aspesi"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["XXXL"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["No"]
+          }, {
+            "name": "Price",
+            "values": [536.25]
+          }, {
+            "name": "Size",
+            "values": ["XXXL"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000ECU0"
+        },
+        "value": "Coat Aspesi blue"
+      }]
+    }, {
+      "data": {
+        "facets": [{
+          "name": "Brand",
+          "values": ["Tods"]
+        }, {
+          "name": "Color",
+          "values": ["Blue"]
+        }, {
+          "name": "Common Size",
+          "values": ["39"]
+        }, {
+          "name": "Gender",
+          "values": ["Men"]
+        }, {
+          "name": "Made In Italy",
+          "values": ["Yes"]
+        }, {
+          "name": "Price",
+          "values": [462.5]
+        }, {
+          "name": "Size",
+          "values": ["5"]
+        }, {
+          "name": "Style",
+          "values": ["Business"]
+        }],
+        "groups": [{
+          "display_name": "Lace-up shoes",
+          "group_id": "men|shoes|lace-up-shoes",
+          "path": "/all/men/men|shoes",
+          "path_list": [{
+            "display_name": "All",
+            "id": "all"
+          }, {
+            "display_name": "Men",
+            "id": "men"
+          }, {
+            "display_name": "Shoes",
+            "id": "men|shoes"
+          }]
+        }, {
+          "display_name": "Lace-up shoes",
+          "group_id": "new|men|shoes|lace-up-shoes",
+          "path": "/all/new/new|men/new|men|shoes",
+          "path_list": [{
+            "display_name": "All",
+            "id": "all"
+          }, {
+            "display_name": "New",
+            "id": "new"
+          }, {
+            "display_name": "Men",
+            "id": "new|men"
+          }, {
+            "display_name": "Shoes",
+            "id": "new|men|shoes"
+          }]
+        }],
+        "id": "tods-laceupshoes-C20RE0U820-darkblue",
+        "image_url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079097_1_large.jpg",
+        "price": 462.5,
+        "url": "https://demo.commercetools.com/en/tods-laceupshoes-C20RE0U820-darkblue.html",
+        "variation_id": "M0E20000000DWXZ"
+      },
+      "is_slotted": false,
+      "matched_terms": [],
+      "value": "Lace up shoes Tods dark blue",
+      "variations": [{
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["39"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/tods-laceupshoes-C20RE0U820-darkblue.html",
+          "variation_id": "M0E20000000DWXZ"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["39.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["5.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWY0"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["40"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["6"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWY1"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["40.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["6.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWY2"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["41"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["7"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWY3"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["41.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["7.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWY4"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["42"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["8"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWY5"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["42.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["8.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWY6"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["43"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["9"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWY7"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["43.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["9.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWY8"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["44"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["10"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWY9"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["44.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["10.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWYA"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["45"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["11"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWYB"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["45.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["11.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWYC"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["46"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["12"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWYD"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["46.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["12.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWYE"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["47"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [462.5]
+          }, {
+            "name": "Size",
+            "values": ["13"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWYF"
+        },
+        "value": "Lace up shoes Tods dark blue"
+      }]
+    }, {
+      "data": {
+        "facets": [{
+          "name": "Brand",
+          "values": ["Tods"]
+        }, {
+          "name": "Color",
+          "values": ["Blue"]
+        }, {
+          "name": "Common Size",
+          "values": ["34"]
+        }, {
+          "name": "Gender",
+          "values": ["Women"]
+        }, {
+          "name": "Made In Italy",
+          "values": ["Yes"]
+        }, {
+          "name": "Price",
+          "values": [387.5]
+        }, {
+          "name": "Size",
+          "values": ["34"]
+        }, {
+          "name": "Style",
+          "values": ["Business"]
+        }],
+        "groups": [{
+          "display_name": "Shoes",
+          "group_id": "sale|women|shoes",
+          "path": "/all/sale/sale|women",
+          "path_list": [{
+            "display_name": "All",
+            "id": "all"
+          }, {
+            "display_name": "Sale",
+            "id": "sale"
+          }, {
+            "display_name": "Women",
+            "id": "sale|women"
+          }]
+        }, {
+          "display_name": "Loafers",
+          "group_id": "women|shoes|loafers",
+          "path": "/all/women/women|shoes",
+          "path_list": [{
+            "display_name": "All",
+            "id": "all"
+          }, {
+            "display_name": "Women",
+            "id": "women"
+          }, {
+            "display_name": "Shoes",
+            "id": "women|shoes"
+          }]
+        }],
+        "id": "tods-mokassins-307XAU200-blue",
+        "image_url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079081_1_medium.jpg",
+        "price": 387.5,
+        "url": "https://demo.commercetools.com/en/tods-mokassins-307XAU200-blue.html",
+        "variation_id": "M0E20000000DWN7"
+      },
+      "is_slotted": false,
+      "matched_terms": [],
+      "value": "Mokassins Tods blue",
+      "variations": [{
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["34"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["34"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/tods-mokassins-307XAU200-blue.html",
+          "variation_id": "M0E20000000DWN7"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["34.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["34.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWN8"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["35"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["35"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWN9"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["35.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["35.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNA"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["36"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["36"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNB"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["36.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["36.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNC"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["37"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["37"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWND"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["37.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["37.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNE"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["38"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["38"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNF"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["38.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["38.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNG"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["39"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["39"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNH"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["39.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["39.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNI"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["40"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["40"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNJ"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["40.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["40.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNK"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["41"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["41"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNL"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["41.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["41.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNM"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["42"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["42"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNN"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["42.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["42.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNO"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["43"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["43"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNP"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["43.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["43.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNQ"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["44"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["44"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNR"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["44.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["44.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNS"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["45"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["45"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNT"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["45.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["45.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNU"
+        },
+        "value": "Mokassins Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["46"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [387.5]
+          }, {
+            "name": "Size",
+            "values": ["46"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWNV"
+        },
+        "value": "Mokassins Tods blue"
+      }]
+    }, {
+      "data": {
+        "facets": [{
+          "name": "Brand",
+          "values": ["Tods"]
+        }, {
+          "name": "Color",
+          "values": ["Blue"]
+        }, {
+          "name": "Common Size",
+          "values": ["34"]
+        }, {
+          "name": "Gender",
+          "values": ["Women"]
+        }, {
+          "name": "Made In Italy",
+          "values": ["Yes"]
+        }, {
+          "name": "Price",
+          "values": [372.5]
+        }, {
+          "name": "Size",
+          "values": ["34"]
+        }, {
+          "name": "Style",
+          "values": ["Business"]
+        }],
+        "groups": [{
+          "display_name": "Shoes",
+          "group_id": "sale|women|shoes",
+          "path": "/all/sale/sale|women",
+          "path_list": [{
+            "display_name": "All",
+            "id": "all"
+          }, {
+            "display_name": "Sale",
+            "id": "sale"
+          }, {
+            "display_name": "Women",
+            "id": "sale|women"
+          }]
+        }, {
+          "display_name": "Loafers",
+          "group_id": "women|shoes|loafers",
+          "path": "/all/women/women|shoes",
+          "path_list": [{
+            "display_name": "All",
+            "id": "all"
+          }, {
+            "display_name": "Women",
+            "id": "women"
+          }, {
+            "display_name": "Shoes",
+            "id": "women|shoes"
+          }]
+        }],
+        "id": "tods-sliponshoes-70HR0U824-darkblue",
+        "image_url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079079_1_medium.jpg",
+        "price": 372.5,
+        "url": "https://demo.commercetools.com/en/tods-sliponshoes-70HR0U824-darkblue.html",
+        "variation_id": "M0E20000000DWLT"
+      },
+      "is_slotted": false,
+      "matched_terms": [],
+      "value": "Slip-On Shoes Tods dark blue",
+      "variations": [{
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["34"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["34"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/tods-sliponshoes-70HR0U824-darkblue.html",
+          "variation_id": "M0E20000000DWLT"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["34.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["34.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWLU"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["35"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["35"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWLV"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["35.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["35.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWLW"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["36"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["36"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWLX"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["36.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["36.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWLY"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["37"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["37"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWLZ"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["37.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["37.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWM0"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["38"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["38"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWM1"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["38.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["38.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWM2"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["39"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["39"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWM3"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["39.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["39.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWM4"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["40"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["40"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWM5"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["40.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["40.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWM6"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["41"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["41"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWM7"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["41.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["41.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWM8"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["42"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["42"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWM9"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["42.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["42.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWMA"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["43"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["43"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWMB"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["43.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["43.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWMC"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["44"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["44"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWMD"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["44.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["44.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWME"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["45"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["45"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWMF"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["45.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["45.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWMG"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["46"]
+          }, {
+            "name": "Gender",
+            "values": ["Women"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [372.5]
+          }, {
+            "name": "Size",
+            "values": ["46"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWMH"
+        },
+        "value": "Slip-On Shoes Tods dark blue"
+      }]
+    }, {
+      "data": {
+        "facets": [{
+          "name": "Brand",
+          "values": ["Tods"]
+        }, {
+          "name": "Color",
+          "values": ["Blue"]
+        }, {
+          "name": "Common Size",
+          "values": ["39"]
+        }, {
+          "name": "Gender",
+          "values": ["Men"]
+        }, {
+          "name": "Made In Italy",
+          "values": ["Yes"]
+        }, {
+          "name": "Price",
+          "values": [362.5]
+        }, {
+          "name": "Size",
+          "values": ["5"]
+        }, {
+          "name": "Style",
+          "values": ["Business"]
+        }],
+        "groups": [{
+          "display_name": "Lace-up shoes",
+          "group_id": "men|shoes|lace-up-shoes",
+          "path": "/all/men/men|shoes",
+          "path_list": [{
+            "display_name": "All",
+            "id": "all"
+          }, {
+            "display_name": "Men",
+            "id": "men"
+          }, {
+            "display_name": "Shoes",
+            "id": "men|shoes"
+          }]
+        }, {
+          "display_name": "Men",
+          "group_id": "sale|men",
+          "path": "/all/sale",
+          "path_list": [{
+            "display_name": "All",
+            "id": "all"
+          }, {
+            "display_name": "Sale",
+            "id": "sale"
+          }]
+        }],
+        "id": "tods-shoes-tf00d80re-blue",
+        "image_url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/079100_1_medium.jpg",
+        "price": 362.5,
+        "url": "https://demo.commercetools.com/en/tods-shoes-tf00d80re-blue.html",
+        "variation_id": "M0E20000000DWZE"
+      },
+      "is_slotted": false,
+      "matched_terms": [],
+      "value": "Lace up shoes Tods blue",
+      "variations": [{
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["39"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/tods-shoes-tf00d80re-blue.html",
+          "variation_id": "M0E20000000DWZE"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["39.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["5.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZF"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["40"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["6"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZG"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["40.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["6.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZH"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["41"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["7"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZI"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["41.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["7.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZJ"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["42"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["8"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZK"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["42.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["8.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZL"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["43"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["9"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZM"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["43.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["9.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZN"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["44"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["10"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZO"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["44.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["10.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZP"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["45"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["11"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZQ"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["45.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["11.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZR"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["46"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["12"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZS"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["46.5"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["12.5"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZT"
+        },
+        "value": "Lace up shoes Tods blue"
+      }, {
+        "data": {
+          "facets": [{
+            "name": "Brand",
+            "values": ["Tods"]
+          }, {
+            "name": "Color",
+            "values": ["Blue"]
+          }, {
+            "name": "Common Size",
+            "values": ["47"]
+          }, {
+            "name": "Gender",
+            "values": ["Men"]
+          }, {
+            "name": "Made In Italy",
+            "values": ["Yes"]
+          }, {
+            "name": "Price",
+            "values": [362.5]
+          }, {
+            "name": "Size",
+            "values": ["13"]
+          }, {
+            "name": "Style",
+            "values": ["Business"]
+          }],
+          "url": "https://demo.commercetools.com/en/.html",
+          "variation_id": "M0E20000000DWZU"
+        },
+        "value": "Lace up shoes Tods blue"
+      }]
+    }],
+    "sort_options": [],
+    "total_num_results": 562
+  },
+  "result_id": "99dec817-4807-48fb-a00f-4b6e464f540e"
+}

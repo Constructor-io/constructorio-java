@@ -10,10 +10,10 @@ import com.google.gson.annotations.SerializedName;
 public class SearchResponseInner {
 
     @SerializedName("facets")
-    List<SearchFacet> facets;
+    List<FilterFacet> facets;
 
     @SerializedName("groups")
-    private List<SearchGroup> groups;
+    private List<FilterGroup> groups;
 
     @SerializedName("results")
     private List<Result> results;
@@ -24,14 +24,14 @@ public class SearchResponseInner {
     /**
      * @return the facets
      */
-    public List<SearchFacet> getFacets() {
+    public List<FilterFacet> getFacets() {
       return facets;
     }
 
     /**
      * @return the groups
      */
-    public List<SearchGroup> getGroups() {
+    public List<FilterGroup> getGroups() {
       return groups;
     }
 

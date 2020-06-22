@@ -13,28 +13,32 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class SearchRequestTest {
+public class BrowseRequestTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void newWithNullQueryShouldFail() throws Exception {
         thrown.expect(IllegalArgumentException.class);
-        new SearchRequest(null);
+        new BrowseRequest(null, null);
     }
 
     @Test
-    public void newShouldReturnSearchRequest() throws Exception {
-        String query = "peanut";
-        SearchRequest request = new SearchRequest(query);
-        assertEquals(request.getQuery(), query);
+    public void newShouldReturnBrowseRequest() throws Exception {
+        String filterName = "SnackType";
+        String filterValue = "Nuts";
+        BrowseRequest request = new BrowseRequest(filterName, filterValue);
+        assertEquals(request.getFilterName(), filterName);
+        assertEquals(request.getFilterValue(), filterValue);
     }
 
     @Test
     public void newShouldReturnDefaultProperties() throws Exception {
-        String query = "peanut";
-        SearchRequest request = new SearchRequest(query);
-        assertEquals(request.getQuery(), query);
+        String filterName = "SnackType";
+        String filterValue = "Nuts";
+        BrowseRequest request = new BrowseRequest(filterName, filterValue);
+        assertEquals(request.getFilterName(), filterName);
+        assertEquals(request.getFilterValue(), filterValue);
         assertEquals(request.getSection(), "Products");
         assertEquals(request.getPage(), 1);
         assertEquals(request.getResultsPerPage(), 30);
@@ -42,34 +46,34 @@ public class SearchRequestTest {
         assertEquals(request.getFacets().size(), 0);
         assertNull(request.getSortBy());
         assertTrue(request.getSortAscending());
-        assertNull(request.getCollectionId());
     }
 
     @Test
     public void settersShouldSet() throws Exception {
-        String query = "peanut";
-        SearchRequest request = new SearchRequest(query);
+        String filterName = "SnackType";
+        String filterValue = "Nuts";
+        BrowseRequest request = new BrowseRequest(filterName, filterValue);
         Map<String, List<String>> facets = new HashMap<String, List<String>>();
         facets.put("Flavors", Arrays.asList("Honey Roasted", "Dry Roasted", "Unsalted"));
         
-        request.setQuery("airline tickets");
-        request.setSection("Search Suggestions");
+        request.setFilterName("VacationType");
+        request.setFilterValue("Air Travel");
+        request.setSection("Browse Suggestions");
         request.setPage(3);
         request.setResultsPerPage(50);
         request.setGroupId("gr-1337");
         request.setFacets(facets);
         request.setSortBy("smooth-to-chunky");
         request.setSortAscending(false);
-        request.setCollectionId("last minute getaways");
 
-        assertEquals(request.getQuery(), "airline tickets");
-        assertEquals(request.getSection(), "Search Suggestions");
+        assertEquals(request.getFilterName(), "VacationType");
+        assertEquals(request.getFilterValue(), "Air Travel");
+        assertEquals(request.getSection(), "Browse Suggestions");
         assertEquals(request.getPage(), 3);
         assertEquals(request.getResultsPerPage(), 50);
         assertEquals(request.getGroupId(), "gr-1337");
         assertEquals(request.getFacets(), facets);
         assertEquals(request.getSortBy(), "smooth-to-chunky");
         assertEquals(request.getSortAscending(), false);
-        assertEquals(request.getCollectionId(), "last minute getaways");
     }
 }

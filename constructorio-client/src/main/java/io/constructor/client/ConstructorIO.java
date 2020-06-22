@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import io.constructor.client.models.AutocompleteResponse;
+import io.constructor.client.models.BrowseResponse;
 import io.constructor.client.models.SearchResponse;
 import io.constructor.client.models.RecommendationsResponse;
 import io.constructor.client.models.ServerError;
@@ -465,6 +466,12 @@ public class ConstructorIO {
                     .build();
             }
 
+            if (req.getCollectionId() != null) {
+                url = url.newBuilder()
+                  .addQueryParameter("collection_id", req.getCollectionId())
+                  .build();
+            }
+
             Request request = this.makeUserRequestBuilder(userInfo)
                 .url(url)
                 .get()
@@ -475,6 +482,80 @@ public class ConstructorIO {
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
+    }
+
+    /**
+     * Queries the browse service.
+     *
+     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the browse request
+     * @param userInfo optional information about the user
+     * @return a browse response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public BrowseResponse browse(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
+      try {
+          String json = browseAsJSON(req, userInfo);
+          return createBrowseResponse(json);
+      } catch (Exception exception) {
+          throw new ConstructorException(exception);
+      }
+  }
+
+  /**
+   * Queries the browse service.
+   *
+   * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
+   * That's important. That will be a solid latency difference.
+   *
+   * @param req the browse request
+   * @param userInfo optional information about the user
+   * @return a string of JSON
+   * @throws ConstructorException if the request is invalid.
+   */
+  public String browseAsJSON(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
+      try {
+          String path = "browse/" + req.getFilterName() + "/" + req.getFilterValue();
+          HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+          url = url.newBuilder()
+              .addQueryParameter("section", req.getSection())
+              .addQueryParameter("page", String.valueOf(req.getPage()))
+              .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+              .build();
+
+          if (req.getGroupId() != null) {
+              url = url.newBuilder()
+                  .addQueryParameter("filters[group_id]", req.getGroupId())
+                  .build();
+          }
+
+          for (String facetName : req.getFacets().keySet()) {
+              for (String facetValue : req.getFacets().get(facetName)) {
+                  url = url.newBuilder()
+                      .addQueryParameter("filters[" + facetName + "]", facetValue)
+                      .build();
+              }
+          }
+
+          if (req.getSortBy() != null) {
+              url = url.newBuilder()
+                  .addQueryParameter("sort_by", req.getSortBy())
+                  .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
+                  .build();
+          }
+
+          Request request = this.makeUserRequestBuilder(userInfo)
+              .url(url)
+              .get()
+              .build();
+
+          Response response = clientWithRetry.newCall(request).execute();
+          return getResponseBody(response);
+      } catch (Exception exception) {
+          throw new ConstructorException(exception);
+      }
     }
 
     /**
@@ -740,6 +821,20 @@ public class ConstructorIO {
         String transformed = json.toString();
         return new Gson().fromJson(transformed, SearchResponse.class);
     }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an browse response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static BrowseResponse createBrowseResponse(String string) {
+      JSONObject json = new JSONObject(string);
+      JSONObject response = json.getJSONObject("response");
+      JSONArray results = response.getJSONArray("results");
+      moveMetadataOutOfResultData(results);
+      String transformed = json.toString();
+      return new Gson().fromJson(transformed, BrowseResponse.class);
+  }
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations response.

@@ -125,4 +125,16 @@ public class ConstructorIOSearchTest {
         assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 33);
         assertTrue("search result id exists", response.getResultId() != null);
     }
+
+    @Test
+    public void SearchShouldReturnAResultWithNewApiKeySet() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, "betaac.cnstrc.com");
+        constructor.setApiKey("key_aXLmVpkVp4BX21Sw");
+        SearchRequest request = new SearchRequest("bananas");
+        request.setCollectionId("fresh-deals");
+        SearchResponse response = constructor.search(request, null);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 30);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 33);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
 }

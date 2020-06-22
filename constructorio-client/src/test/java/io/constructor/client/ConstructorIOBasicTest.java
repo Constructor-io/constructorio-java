@@ -50,6 +50,14 @@ public class ConstructorIOBasicTest {
     }
 
     @Test
+    public void shouldSetNewApiKey() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", false, null);
+        assertEquals("key should be set to default", constructor.apiKey, "doinkaKey");
+        constructor.setApiKey("foobar");
+        assertEquals("key should be set to new value", constructor.apiKey, "foobar");
+    }
+
+    @Test
     public void makeAuthorizedRequestBuilderShouldSetAuthorizationHeader() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         Builder builder = constructor.makeAuthorizedRequestBuilder();

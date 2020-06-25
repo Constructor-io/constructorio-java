@@ -111,12 +111,9 @@ public class ConstructorIO {
 
     /**
      * Sets apiKey
-     *
-     * @return true
      */
-    public boolean setApiKey(String apiKey) {
+    public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
-        return true;
     }
 
     /**

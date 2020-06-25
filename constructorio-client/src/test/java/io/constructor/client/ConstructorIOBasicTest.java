@@ -50,6 +50,28 @@ public class ConstructorIOBasicTest {
     }
 
     @Test
+    public void shouldSetNewApiKey() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", false, null);
+        assertEquals("key should be set to default", constructor.apiKey, "doinkaKey");
+        constructor.setApiKey("foobar");
+        assertEquals("key should be set to new value", constructor.apiKey, "foobar");
+    }
+
+    @Test
+    public void shouldSetNewApiKeyMultipleInstances() throws Exception {
+        ConstructorIO constructorA = new ConstructorIO("boinkaToken", "foo", false, null);
+        ConstructorIO constructorB = new ConstructorIO("boinkaToken", "bar", false, null);
+        assertEquals("instance 1 key should be set to default", constructorA.apiKey, "foo");
+        assertEquals("instance 2 key should be set to default", constructorB.apiKey, "bar");
+        constructorA.setApiKey("newfoo");
+        assertEquals("instance 1 key should be set to new value", constructorA.apiKey, "newfoo");
+        assertEquals("instance 2 key should be set to default", constructorB.apiKey, "bar");
+        constructorB.setApiKey("newbar");
+        assertEquals("instance 1 key should be set to new value", constructorA.apiKey, "newfoo");
+        assertEquals("instance 2 key should be set to new value", constructorB.apiKey, "newbar");
+    }
+
+    @Test
     public void makeAuthorizedRequestBuilderShouldSetAuthorizationHeader() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         Builder builder = constructor.makeAuthorizedRequestBuilder();

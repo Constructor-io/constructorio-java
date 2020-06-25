@@ -111,4 +111,15 @@ public class ConstructorIOBrowseTest {
         assertEquals("browse results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 999);
         assertTrue("browse result id exists", response.getResultId() != null);
     }
+
+    @Test
+    public void BrowseShouldReturnAResultWithNewApiKeySet() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, "betaac.cnstrc.com");
+        constructor.setApiKey("key_aXLmVpkVp4BX21Sw");
+        BrowseRequest request = new BrowseRequest("collection_id", "fresh-deals");
+        BrowseResponse response = constructor.browse(request, null);
+        assertEquals("browse results exist", response.getResponse().getResults().size(), 30);
+        assertEquals("browse results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 999);
+        assertTrue("browse result id exists", response.getResultId() != null);
+    }
 }

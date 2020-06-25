@@ -110,6 +110,13 @@ public class ConstructorIO {
     }
 
     /**
+     * Sets apiKey
+     */
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    /**
      * Verifies that an autocomplete service is working.
      *
      * @return true if working.

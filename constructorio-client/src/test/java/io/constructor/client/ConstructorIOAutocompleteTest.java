@@ -82,4 +82,16 @@ public class ConstructorIOAutocompleteTest {
         assertEquals("autocomplete search suggestions exist", response.getSections().get("Search Suggestions").size(), 1);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
+
+    @Test
+    public void autocompleteShouldReturnAResultWithNewApiKeySet() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
+        constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
+        AutocompleteRequest request = new AutocompleteRequest("Stanley");
+        request.getResultsPerSection().put("Search Suggestions", 10);
+        AutocompleteResponse response = constructor.autocomplete(request, null);
+        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 0);
+        assertEquals("autocomplete search suggestions exist", response.getSections().get("Search Suggestions").size(), 1);
+        assertTrue("autocomplete result id exists", response.getResultId() != null);
+    }
 }

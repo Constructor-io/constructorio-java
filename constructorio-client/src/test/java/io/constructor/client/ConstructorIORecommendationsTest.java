@@ -61,4 +61,17 @@ public class ConstructorIORecommendationsTest {
         assertEquals("recommendation results exist", response.getResponse().getResults().size(), 5);
         assertTrue("recommendation result id exists", response.getResultId() != null);
     }
+
+    @Test
+    public void getRecommendationsShouldReturnAResultWithNewApiKeySet() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
+        constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        RecommendationsRequest request = new RecommendationsRequest("item_page_1");
+        request.setItemIds(Arrays.asList("power_drill", "drill"));
+        request.setNumResults(5);
+        RecommendationsResponse response = constructor.recommendations(request, userInfo);
+        assertEquals("recommendation results exist", response.getResponse().getResults().size(), 5);
+        assertTrue("recommendation result id exists", response.getResultId() != null);
+    }
 }

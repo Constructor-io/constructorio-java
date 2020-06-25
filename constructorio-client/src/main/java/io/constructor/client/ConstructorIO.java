@@ -113,15 +113,10 @@ public class ConstructorIO {
      * Sets apiKey
      *
      * @return true
-     * @throws ConstructorException
      */
-    public boolean setApiKey(String apiKey) throws ConstructorException {
-        try {
-            this.apiKey = apiKey;
-            return true;
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
+    public boolean setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+        return true;
     }
 
     /**

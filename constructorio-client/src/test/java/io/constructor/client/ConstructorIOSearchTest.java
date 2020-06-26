@@ -34,6 +34,37 @@ public class ConstructorIOSearchTest {
     }
 
     @Test
+    public void createSearchResponseShouldReturnAResultWithVariations() throws Exception {
+        String string = Utils.getTestResource("response.browse.color.blue.json");
+        SearchResponse response = ConstructorIO.createSearchResponse(string);
+        assertEquals("search facets exists", response.getResponse().getFacets().size(), 7);
+        assertEquals("search groups exists", response.getResponse().getGroups().size(), 1);
+        assertEquals("search results exists", response.getResponse().getResults().size(), 5);
+        assertEquals("search result [id] exists", response.getResponse().getResults().get(0).getData().getId(), "aspesi-coat-I502997385098-blue");
+        assertEquals("search result [variation id] exists", response.getResponse().getResults().get(0).getData().getVariationId(), "M0E20000000ECTT");
+        assertEquals("search result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 8);
+        assertEquals("search result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 8);
+        assertEquals("search result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "Coat Aspesi blue");
+        assertEquals("search result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "M0E20000000ECTT");
+        assertEquals("search result variation [image] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getImageUrl(), "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081200_1_large.jpg");
+        assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 562);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void createSearchResponseShouldReturnAResultWithSortOptions() throws Exception {
+        String string = Utils.getTestResource("response.browse.color.blue.json");
+        SearchResponse response = ConstructorIO.createSearchResponse(string);
+        assertEquals("search result [sort options] exists", response.getResponse().getSortOptions().size(), 4);
+        assertEquals("search result sort option [display name] exists", response.getResponse().getSortOptions().get(0).getDisplayName(), "Relevance");
+        assertEquals("search result sort option [sort by] exists", response.getResponse().getSortOptions().get(0).getSortBy(), "relevance");
+        assertEquals("search result sort option [sort order] exists", response.getResponse().getSortOptions().get(0).getSortOrder(), "descending");
+        assertEquals("search result sort option [status] exists", response.getResponse().getSortOptions().get(0).getStatus(), "selected");
+        assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 562);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
     public void SearchShouldReturnAResult() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
@@ -101,6 +132,37 @@ public class ConstructorIOSearchTest {
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 2);
         assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 2);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithVariations() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("jacket");
+        SearchResponse response = constructor.search(request, userInfo);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 30);
+        assertEquals("search result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 13);
+        assertEquals("search result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 8);
+        assertEquals("search result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "Bully – Leather Jacket");
+        assertEquals("search result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "M0E20000000FBLO");
+        assertEquals("search result variation [url] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getUrl(), "https://demo.commercetools.com/en/bully-leather-jacket-251-grey.html");
+        assertEquals("search results count as expected", (int) response.getResponse().getTotalNumberOfResults(), 261);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithSortOptions() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("jacket");
+        SearchResponse response = constructor.search(request, userInfo);
+        assertEquals("search result [sort options] exists", response.getResponse().getSortOptions().size(), 1);
+        assertEquals("search result sort option [display name] exists", response.getResponse().getSortOptions().get(0).getDisplayName(), "Relevance");
+        assertEquals("search result sort option [sort by] exists", response.getResponse().getSortOptions().get(0).getSortBy(), "relevance");
+        assertEquals("search result sort option [sort order] exists", response.getResponse().getSortOptions().get(0).getSortOrder(), "descending");
+        assertEquals("search result sort option [status] exists", response.getResponse().getSortOptions().get(0).getStatus(), "selected");
+        assertEquals("search results count as expected", (int) response.getResponse().getTotalNumberOfResults(), 261);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 

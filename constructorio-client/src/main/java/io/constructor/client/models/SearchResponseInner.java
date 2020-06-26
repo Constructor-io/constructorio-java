@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class SearchResponseInner {
 
     @SerializedName("facets")
-    List<FilterFacet> facets;
+    private List<FilterFacet> facets;
 
     @SerializedName("groups")
     private List<FilterGroup> groups;
@@ -20,6 +20,9 @@ public class SearchResponseInner {
 
     @SerializedName("total_num_results")
     private Integer totalNumberOfResults;
+
+    @SerializedName("sort_options")
+    private List<FilterSortOption> sortOptions;
 
     /**
      * @return the facets
@@ -47,5 +50,12 @@ public class SearchResponseInner {
      */
     public Integer getTotalNumberOfResults() {
       return totalNumberOfResults;
+    }
+
+    /**
+     * @return the sort options
+     */
+    public List<FilterSortOption> getSortOptions() {
+      return sortOptions;
     }
 }

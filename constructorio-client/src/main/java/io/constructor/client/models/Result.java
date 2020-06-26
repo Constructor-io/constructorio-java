@@ -18,6 +18,9 @@ public class Result {
   @SerializedName("matched_terms")
   private List<String> matchedTerms;
 
+  @SerializedName("variations")
+  private List<Result> variations;
+
   /**
    * @return the value
    */
@@ -37,5 +40,12 @@ public class Result {
    */
   public List<String> getMatchedTerms() {
     return matchedTerms;
+  }
+
+  /**
+   * @return the variations
+   */
+  public List<Result> getVariations() {
+    return variations;
   }
 }

@@ -28,6 +28,9 @@ public class ResultData {
   @SerializedName("facets")
   private List<ResultFacet> facets;
 
+  @SerializedName("variation_id")
+  private String variationId;
+
   @SerializedName("metadata")
   private Map<String, Object> metadata;
 
@@ -71,6 +74,13 @@ public class ResultData {
    */
   public List<ResultFacet> getFacets() {
     return facets;
+  }
+
+  /**
+   * @return the variation id
+   */
+  public String getVariationId() {
+    return variationId;
   }
 
   /**

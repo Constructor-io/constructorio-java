@@ -1083,7 +1083,9 @@
           }],
           "url": "https://demo.commercetools.com/en/aspesi-coat-I502997385098-blue.html",
           "image_url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081200_1_large.jpg",
-          "variation_id": "M0E20000000ECTT"
+          "variation_id": "M0E20000000ECTT",
+          "productType": "Outerwear",
+          "price": "536.25"
         },
         "value": "Coat Aspesi blue"
       }, {

@@ -867,11 +867,17 @@ public class ConstructorIO {
             JSONObject result = results.getJSONObject(i);
             JSONObject resultData = result.getJSONObject("data");
             JSONObject metadata = new JSONObject();
+            
+            // Recursive call to move unspecified properties in result variations to it's metadata object
+            if (!result.isNull("variations")) {
+                JSONArray variations = result.getJSONArray("variations");
+                moveMetadataOutOfResultData(variations);
+            }
 
             // Move unspecified properties in result data object to metadata object
             for (Object propertyKey : resultData.keySet()) {
                 String propertyName = (String)propertyKey;
-                if (!propertyName.matches("(description|id|url|image_url|groups|facets)")) {
+                if (!propertyName.matches("(description|id|url|image_url|groups|facets|variation_id)")) {
                     metadata.put(propertyName, resultData.get(propertyName));
                 }
             }

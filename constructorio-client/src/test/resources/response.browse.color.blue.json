@@ -1082,7 +1082,10 @@
             "values": ["Business"]
           }],
           "url": "https://demo.commercetools.com/en/aspesi-coat-I502997385098-blue.html",
-          "variation_id": "M0E20000000ECTT"
+          "image_url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081200_1_large.jpg",
+          "variation_id": "M0E20000000ECTT",
+          "productType": "Outerwear",
+          "price": "536.25"
         },
         "value": "Coat Aspesi blue"
       }, {
@@ -4172,7 +4175,30 @@
         "value": "Lace up shoes Tods blue"
       }]
     }],
-    "sort_options": [],
+    "sort_options": [{
+      "display_name": "Relevance",
+      "sort_by": "relevance",
+      "sort_order": "descending",
+      "status": "selected"
+    },
+    {
+      "display_name": "Lowest Price",
+      "sort_by": "salePrice",
+      "sort_order": "ascending",
+      "status": ""
+    },
+    {
+      "display_name": "Highest Price",
+      "sort_by": "salePrice",
+      "sort_order": "descending",
+      "status": ""
+    },
+    {
+      "display_name": "Percent Off",
+      "sort_by": "discountPercent",
+      "sort_order": "descending",
+      "status": ""
+    }],
     "total_num_results": 562
   },
   "result_id": "99dec817-4807-48fb-a00f-4b6e464f540e"

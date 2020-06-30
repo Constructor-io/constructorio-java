@@ -21,6 +21,9 @@ public class BrowseResponseInner {
     @SerializedName("total_num_results")
     private Integer totalNumberOfResults;
 
+    @SerializedName("sort_options")
+    private List<FilterSortOption> sortOptions;
+
     /**
      * @return the facets
      */
@@ -47,5 +50,12 @@ public class BrowseResponseInner {
      */
     public Integer getTotalNumberOfResults() {
       return totalNumberOfResults;
+    }
+
+    /**
+     * @return the sort options
+     */
+    public List<FilterSortOption> getSortOptions() {
+      return sortOptions;
     }
 }

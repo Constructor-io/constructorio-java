@@ -12,7 +12,7 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 
-public class ConstructorIOSearchUrlTest {
+public class ConstructorIOSearchUrlEncodingTest {
 
     private static MockWebServer mockServer;
 

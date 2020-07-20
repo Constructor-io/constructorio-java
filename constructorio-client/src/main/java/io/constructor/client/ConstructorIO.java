@@ -1,6 +1,7 @@
 package io.constructor.client;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -20,6 +21,8 @@ import io.constructor.client.models.BrowseResponse;
 import io.constructor.client.models.SearchResponse;
 import io.constructor.client.models.RecommendationsResponse;
 import io.constructor.client.models.ServerError;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -481,8 +484,45 @@ public class ConstructorIO {
      */
     public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String json = searchAsJSON(req, userInfo);
+            Request request = createSearchRequest(req, userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
             return createSearchResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the search service.
+     *
+     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the search request
+     * @param userInfo optional information about the user
+     * @return a search response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public void search(SearchRequest req, UserInfo userInfo, Callback callback) throws ConstructorException {
+        try {
+            Request request = createSearchRequest(req, userInfo);
+            clientWithRetry.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(Call call, final Response response) throws IOException {
+                    if (!response.isSuccessful()) {
+                        throw new IOException("Unexpected code " + response);
+                    } else {
+                        String json = getResponseBody(response);
+                        callback(json);
+                    }
+                }
+            });
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }

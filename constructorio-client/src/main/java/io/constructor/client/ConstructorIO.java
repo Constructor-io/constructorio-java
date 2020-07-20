@@ -504,22 +504,23 @@ public class ConstructorIO {
      * @return a search response
      * @throws ConstructorException if the request is invalid.
      */
-    public void search(SearchRequest req, UserInfo userInfo, Callback callback) throws ConstructorException {
+    public void search(SearchRequest req, UserInfo userInfo, final SearchCallback c) throws ConstructorException {
         try {
             Request request = createSearchRequest(req, userInfo);
             clientWithRetry.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    e.printStackTrace();
+                    c.onFailure(new ConstructorException(e));
                 }
 
                 @Override
                 public void onResponse(Call call, final Response response) throws IOException {
-                    if (!response.isSuccessful()) {
-                        throw new IOException("Unexpected code " + response);
-                    } else {
+                    try {
                         String json = getResponseBody(response);
-                        callback(json);
+                        SearchResponse res = createSearchResponse(json);
+                        c.onResponse(res);
+                    } catch (Exception e) {
+                        c.onFailure(new ConstructorException(e));
                     }
                 }
             });

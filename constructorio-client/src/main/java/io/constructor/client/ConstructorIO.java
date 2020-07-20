@@ -412,37 +412,15 @@ public class ConstructorIO {
     }
 
     /**
-     * Queries the search service.
-     *
-     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
-     *
+     * Creates a search OkHttp request
+     * 
      * @param req the search request
      * @param userInfo optional information about the user
-     * @return a search response
-     * @throws ConstructorException if the request is invalid.
+     * @return a search OkHttp request
+     * @return
+     * @throws ConstructorException
      */
-    public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
-        try {
-            String json = searchAsJSON(req, userInfo);
-            return createSearchResponse(json);
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
-    }
-
-    /**
-     * Queries the search service.
-     *
-     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
-     *
-     * @param req the search request
-     * @param userInfo optional information about the user
-     * @return a string of JSON
-     * @throws ConstructorException if the request is invalid.
-     */
-    public String searchAsJSON(SearchRequest req, UserInfo userInfo) throws ConstructorException {
+    protected Request createSearchRequest(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             String path = "search/" + req.getQuery();
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
@@ -475,8 +453,8 @@ public class ConstructorIO {
 
             if (req.getCollectionId() != null) {
                 url = url.newBuilder()
-                  .addQueryParameter("collection_id", req.getCollectionId())
-                  .build();
+                .addQueryParameter("collection_id", req.getCollectionId())
+                .build();
             }
 
             Request request = this.makeUserRequestBuilder(userInfo)
@@ -484,6 +462,46 @@ public class ConstructorIO {
                 .get()
                 .build();
 
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the search service.
+     *
+     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the search request
+     * @param userInfo optional information about the user
+     * @return a search response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            String json = searchAsJSON(req, userInfo);
+            return createSearchResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the search service.
+     *
+     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the search request
+     * @param userInfo optional information about the user
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String searchAsJSON(SearchRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createSearchRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
         } catch (Exception exception) {

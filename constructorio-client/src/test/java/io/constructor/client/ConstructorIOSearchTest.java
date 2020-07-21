@@ -151,7 +151,7 @@ public class ConstructorIOSearchTest {
         assertEquals("search result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "Bully – Leather Jacket");
         assertEquals("search result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "M0E20000000FBLO");
         assertEquals("search result variation [url] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getUrl(), "https://demo.commercetools.com/en/bully-leather-jacket-251-grey.html");
-        assertEquals("search results count as expected", (int) response.getResponse().getTotalNumberOfResults(), 261);
+        assertTrue("search total results count should be greater than 0", (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -166,7 +166,7 @@ public class ConstructorIOSearchTest {
         assertEquals("search result sort option [sort by] exists", response.getResponse().getSortOptions().get(0).getSortBy(), "relevance");
         assertEquals("search result sort option [sort order] exists", response.getResponse().getSortOptions().get(0).getSortOrder(), "descending");
         assertEquals("search result sort option [status] exists", response.getResponse().getSortOptions().get(0).getStatus(), "selected");
-        assertEquals("search results count as expected", (int) response.getResponse().getTotalNumberOfResults(), 261);
+        assertTrue("search total results count should be greater than 0", (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 

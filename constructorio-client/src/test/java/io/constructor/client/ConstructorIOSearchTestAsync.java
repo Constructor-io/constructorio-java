@@ -14,7 +14,7 @@ import static java.util.concurrent.TimeUnit.*;
 import io.constructor.client.models.SearchResponse;
 
 public class ConstructorIOSearchTestAsync {
-
+  
   private SearchResponse responseResolved;
 
   private Callable<Boolean> responseIsResolved() {
@@ -43,13 +43,34 @@ public class ConstructorIOSearchTestAsync {
         responseResolved = response;
       };
     });
-
     await().atMost(2, SECONDS).until(responseIsResolved());
     assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 30);
     assertEquals("search results count as expected", (int) responseResolved.getResponse().getTotalNumberOfResults(),
         104);
     assertTrue("search result id exists", responseResolved.getResultId() != null);
-
     responseResolved = null;
+  }
+
+  @Test
+  public void SearchShouldReturnAResultWithNewApiKeySet() throws Exception {
+      ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, "betaac.cnstrc.com");
+      constructor.setApiKey("key_aXLmVpkVp4BX21Sw");
+      SearchRequest request = new SearchRequest("bananas");
+      request.setCollectionId("fresh-deals");
+      constructor.search(request, null, new SearchCallback() {
+        @Override
+        public void onFailure(final ConstructorException exception) {
+        }
+  
+        @Override
+        public void onResponse(final SearchResponse response) throws ConstructorException {
+          responseResolved = response;
+        };
+      });
+      await().atMost(2, SECONDS).until(responseIsResolved());
+      assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 30);
+      assertEquals("search results count as expected", (int)responseResolved.getResponse().getTotalNumberOfResults(), 33);
+      assertTrue("search result id exists", responseResolved.getResultId() != null);
+      responseResolved = null;
   }
 }

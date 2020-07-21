@@ -551,6 +551,57 @@ public class ConstructorIO {
     }
 
     /**
+     * Creates a browse OkHttp request
+     * 
+     * @param req the browse request
+     * @param userInfo optional information about the user
+     * @return a browse OkHttp request
+     * @return
+     * @throws ConstructorException
+     */
+    protected Request createBrowseRequest(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            String path = "browse/" + req.getFilterName() + "/" + req.getFilterValue();
+            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            url = url.newBuilder()
+                .addQueryParameter("section", req.getSection())
+                .addQueryParameter("page", String.valueOf(req.getPage()))
+                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                .build();
+  
+            if (req.getGroupId() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("filters[group_id]", req.getGroupId())
+                    .build();
+            }
+  
+            for (String facetName : req.getFacets().keySet()) {
+                for (String facetValue : req.getFacets().get(facetName)) {
+                    url = url.newBuilder()
+                        .addQueryParameter("filters[" + facetName + "]", facetValue)
+                        .build();
+                }
+            }
+  
+            if (req.getSortBy() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("sort_by", req.getSortBy())
+                    .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
+                    .build();
+            }
+  
+            Request request = this.makeUserRequestBuilder(userInfo)
+                .url(url)
+                .get()
+                .build();
+  
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
      * Queries the browse service.
      *
      * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
@@ -563,12 +614,50 @@ public class ConstructorIO {
      */
     public BrowseResponse browse(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
       try {
-          String json = browseAsJSON(req, userInfo);
-          return createBrowseResponse(json);
+        Request request = createBrowseRequest(req, userInfo);
+        Response response = clientWithRetry.newCall(request).execute();
+        String json = getResponseBody(response);
+        return createBrowseResponse(json);
       } catch (Exception exception) {
           throw new ConstructorException(exception);
       }
   }
+
+    /**
+     * Queries the browse service.
+     *
+     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the browse request
+     * @param userInfo optional information about the user
+     * @return a search response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public void browse(BrowseRequest req, UserInfo userInfo, final BrowseCallback c) throws ConstructorException {
+        try {
+            Request request = createBrowseRequest(req, userInfo);
+            clientWithRetry.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    c.onFailure(new ConstructorException(e));
+                }
+
+                @Override
+                public void onResponse(Call call, final Response response) throws IOException {
+                    try {
+                        String json = getResponseBody(response);
+                        BrowseResponse res = createBrowseResponse(json);
+                        c.onResponse(res);
+                    } catch (Exception e) {
+                        c.onFailure(new ConstructorException(e));
+                    }
+                }
+            });
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
 
   /**
    * Queries the browse service.
@@ -583,42 +672,9 @@ public class ConstructorIO {
    */
   public String browseAsJSON(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
       try {
-          String path = "browse/" + req.getFilterName() + "/" + req.getFilterValue();
-          HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
-          url = url.newBuilder()
-              .addQueryParameter("section", req.getSection())
-              .addQueryParameter("page", String.valueOf(req.getPage()))
-              .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-              .build();
-
-          if (req.getGroupId() != null) {
-              url = url.newBuilder()
-                  .addQueryParameter("filters[group_id]", req.getGroupId())
-                  .build();
-          }
-
-          for (String facetName : req.getFacets().keySet()) {
-              for (String facetValue : req.getFacets().get(facetName)) {
-                  url = url.newBuilder()
-                      .addQueryParameter("filters[" + facetName + "]", facetValue)
-                      .build();
-              }
-          }
-
-          if (req.getSortBy() != null) {
-              url = url.newBuilder()
-                  .addQueryParameter("sort_by", req.getSortBy())
-                  .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
-                  .build();
-          }
-
-          Request request = this.makeUserRequestBuilder(userInfo)
-              .url(url)
-              .get()
-              .build();
-
-          Response response = clientWithRetry.newCall(request).execute();
-          return getResponseBody(response);
+        Request request = createBrowseRequest(req, userInfo);
+        Response response = clientWithRetry.newCall(request).execute();
+        return getResponseBody(response);
       } catch (Exception exception) {
           throw new ConstructorException(exception);
       }

@@ -19,7 +19,7 @@ public class ConstructorIOSearchTest {
     @Test
     public void createSearchResponseShouldReturnAResult() throws Exception {
         String string = Utils.getTestResource("response.search.peanut.json");
-        SearchResponse response = ConstructorIO.createSearchResponse(string);f
+        SearchResponse response = ConstructorIO.createSearchResponse(string);
         assertEquals("search facets exist", response.getResponse().getFacets().size(), 4);
         assertEquals("search facet [Brand] exists", response.getResponse().getFacets().get(0).getName(), "Brand");
         assertEquals("search facet [Claims] exists", response.getResponse().getFacets().get(1).getName(), "Claims");

@@ -12,7 +12,7 @@ import static java.util.concurrent.TimeUnit.*;
 
 import io.constructor.client.models.BrowseResponse;
 
-public class ConstructorIOBrowseTestAsync {
+public class ConstructorIOBrowseAsyncTest {
   
   private BrowseResponse responseResolved;
 

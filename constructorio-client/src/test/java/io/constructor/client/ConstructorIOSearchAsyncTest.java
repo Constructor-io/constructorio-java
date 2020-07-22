@@ -13,7 +13,7 @@ import static java.util.concurrent.TimeUnit.*;
 
 import io.constructor.client.models.SearchResponse;
 
-public class ConstructorIOSearchTestAsync {
+public class ConstructorIOSearchAsyncTest {
   
   private SearchResponse responseResolved;
 

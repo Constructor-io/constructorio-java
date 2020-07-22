@@ -420,7 +420,6 @@ public class ConstructorIO {
      * @param req the search request
      * @param userInfo optional information about the user
      * @return a search OkHttp request
-     * @return
      * @throws ConstructorException
      */
     protected Request createSearchRequest(SearchRequest req, UserInfo userInfo) throws ConstructorException {

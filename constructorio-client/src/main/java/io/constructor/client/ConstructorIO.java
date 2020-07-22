@@ -1,6 +1,7 @@
 package io.constructor.client;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -20,6 +21,8 @@ import io.constructor.client.models.BrowseResponse;
 import io.constructor.client.models.SearchResponse;
 import io.constructor.client.models.RecommendationsResponse;
 import io.constructor.client.models.ServerError;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -412,37 +415,14 @@ public class ConstructorIO {
     }
 
     /**
-     * Queries the search service.
-     *
-     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
-     *
+     * Creates a search OkHttp request
+     * 
      * @param req the search request
      * @param userInfo optional information about the user
-     * @return a search response
-     * @throws ConstructorException if the request is invalid.
+     * @return a search OkHttp request
+     * @throws ConstructorException
      */
-    public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
-        try {
-            String json = searchAsJSON(req, userInfo);
-            return createSearchResponse(json);
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
-    }
-
-    /**
-     * Queries the search service.
-     *
-     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
-     *
-     * @param req the search request
-     * @param userInfo optional information about the user
-     * @return a string of JSON
-     * @throws ConstructorException if the request is invalid.
-     */
-    public String searchAsJSON(SearchRequest req, UserInfo userInfo) throws ConstructorException {
+    protected Request createSearchRequest(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             String path = "search/" + req.getQuery();
             HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
@@ -475,8 +455,8 @@ public class ConstructorIO {
 
             if (req.getCollectionId() != null) {
                 url = url.newBuilder()
-                  .addQueryParameter("collection_id", req.getCollectionId())
-                  .build();
+                .addQueryParameter("collection_id", req.getCollectionId())
+                .build();
             }
 
             Request request = this.makeUserRequestBuilder(userInfo)
@@ -484,8 +464,136 @@ public class ConstructorIO {
                 .get()
                 .build();
 
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the search service.
+     *
+     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the search request
+     * @param userInfo optional information about the user
+     * @return a search response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createSearchRequest(req, userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createSearchResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the search service.
+     *
+     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the search request
+     * @param userInfo optional information about the user
+     * @param c a callback with success and failure conditions
+     * @throws ConstructorException if the request is invalid.
+     */
+    public void search(SearchRequest req, UserInfo userInfo, final SearchCallback c) throws ConstructorException {
+        try {
+            Request request = createSearchRequest(req, userInfo);
+            clientWithRetry.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    c.onFailure(new ConstructorException(e));
+                }
+
+                @Override
+                public void onResponse(Call call, final Response response) throws IOException {
+                    try {
+                        String json = getResponseBody(response);
+                        SearchResponse res = createSearchResponse(json);
+                        c.onResponse(res);
+                    } catch (Exception e) {
+                        c.onFailure(new ConstructorException(e));
+                    }
+                }
+            });
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the search service.
+     *
+     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the search request
+     * @param userInfo optional information about the user
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String searchAsJSON(SearchRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createSearchRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Creates a browse OkHttp request
+     * 
+     * @param req the browse request
+     * @param userInfo optional information about the user
+     * @return a browse OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createBrowseRequest(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            String path = "browse/" + req.getFilterName() + "/" + req.getFilterValue();
+            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            url = url.newBuilder()
+                .addQueryParameter("section", req.getSection())
+                .addQueryParameter("page", String.valueOf(req.getPage()))
+                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                .build();
+  
+            if (req.getGroupId() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("filters[group_id]", req.getGroupId())
+                    .build();
+            }
+  
+            for (String facetName : req.getFacets().keySet()) {
+                for (String facetValue : req.getFacets().get(facetName)) {
+                    url = url.newBuilder()
+                        .addQueryParameter("filters[" + facetName + "]", facetValue)
+                        .build();
+                }
+            }
+  
+            if (req.getSortBy() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("sort_by", req.getSortBy())
+                    .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
+                    .build();
+            }
+  
+            Request request = this.makeUserRequestBuilder(userInfo)
+                .url(url)
+                .get()
+                .build();
+  
+            return request;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -504,12 +612,50 @@ public class ConstructorIO {
      */
     public BrowseResponse browse(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
       try {
-          String json = browseAsJSON(req, userInfo);
+          Request request = createBrowseRequest(req, userInfo);
+          Response response = clientWithRetry.newCall(request).execute();
+          String json = getResponseBody(response);
           return createBrowseResponse(json);
-      } catch (Exception exception) {
-          throw new ConstructorException(exception);
-      }
-  }
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the browse service.
+     *
+     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the browse request
+     * @param userInfo optional information about the user
+     * @param c a callback with success and failure conditions
+     * @throws ConstructorException if the request is invalid.
+     */
+    public void browse(BrowseRequest req, UserInfo userInfo, final BrowseCallback c) throws ConstructorException {
+        try {
+            Request request = createBrowseRequest(req, userInfo);
+            clientWithRetry.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    c.onFailure(new ConstructorException(e));
+                }
+
+                @Override
+                public void onResponse(Call call, final Response response) throws IOException {
+                    try {
+                        String json = getResponseBody(response);
+                        BrowseResponse res = createBrowseResponse(json);
+                        c.onResponse(res);
+                    } catch (Exception e) {
+                        c.onFailure(new ConstructorException(e));
+                    }
+                }
+            });
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
 
   /**
    * Queries the browse service.
@@ -524,42 +670,9 @@ public class ConstructorIO {
    */
   public String browseAsJSON(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
       try {
-          String path = "browse/" + req.getFilterName() + "/" + req.getFilterValue();
-          HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
-          url = url.newBuilder()
-              .addQueryParameter("section", req.getSection())
-              .addQueryParameter("page", String.valueOf(req.getPage()))
-              .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-              .build();
-
-          if (req.getGroupId() != null) {
-              url = url.newBuilder()
-                  .addQueryParameter("filters[group_id]", req.getGroupId())
-                  .build();
-          }
-
-          for (String facetName : req.getFacets().keySet()) {
-              for (String facetValue : req.getFacets().get(facetName)) {
-                  url = url.newBuilder()
-                      .addQueryParameter("filters[" + facetName + "]", facetValue)
-                      .build();
-              }
-          }
-
-          if (req.getSortBy() != null) {
-              url = url.newBuilder()
-                  .addQueryParameter("sort_by", req.getSortBy())
-                  .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
-                  .build();
-          }
-
-          Request request = this.makeUserRequestBuilder(userInfo)
-              .url(url)
-              .get()
-              .build();
-
-          Response response = clientWithRetry.newCall(request).execute();
-          return getResponseBody(response);
+        Request request = createBrowseRequest(req, userInfo);
+        Response response = clientWithRetry.newCall(request).execute();
+        return getResponseBody(response);
       } catch (Exception exception) {
           throw new ConstructorException(exception);
       }

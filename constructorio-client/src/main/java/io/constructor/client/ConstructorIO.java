@@ -501,7 +501,7 @@ public class ConstructorIO {
      *
      * @param req the search request
      * @param userInfo optional information about the user
-     * @return a search response
+     * @param c a callback with success and failure conditions
      * @throws ConstructorException if the request is invalid.
      */
     public void search(SearchRequest req, UserInfo userInfo, final SearchCallback c) throws ConstructorException {
@@ -556,7 +556,6 @@ public class ConstructorIO {
      * @param req the browse request
      * @param userInfo optional information about the user
      * @return a browse OkHttp request
-     * @return
      * @throws ConstructorException
      */
     protected Request createBrowseRequest(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
@@ -614,14 +613,14 @@ public class ConstructorIO {
      */
     public BrowseResponse browse(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
       try {
-        Request request = createBrowseRequest(req, userInfo);
-        Response response = clientWithRetry.newCall(request).execute();
-        String json = getResponseBody(response);
-        return createBrowseResponse(json);
-      } catch (Exception exception) {
-          throw new ConstructorException(exception);
-      }
-  }
+          Request request = createBrowseRequest(req, userInfo);
+          Response response = clientWithRetry.newCall(request).execute();
+          String json = getResponseBody(response);
+          return createBrowseResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
 
     /**
      * Queries the browse service.
@@ -631,7 +630,7 @@ public class ConstructorIO {
      *
      * @param req the browse request
      * @param userInfo optional information about the user
-     * @return a search response
+     * @param c a callback with success and failure conditions
      * @throws ConstructorException if the request is invalid.
      */
     public void browse(BrowseRequest req, UserInfo userInfo, final BrowseCallback c) throws ConstructorException {

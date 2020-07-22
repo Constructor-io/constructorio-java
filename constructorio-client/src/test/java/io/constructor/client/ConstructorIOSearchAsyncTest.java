@@ -39,7 +39,7 @@ public class ConstructorIOSearchAsyncTest {
       }
 
       @Override
-      public void onResponse(final SearchResponse response) throws ConstructorException {
+      public void onResponse(final SearchResponse response) {
         responseResolved = response;
       };
     });
@@ -63,7 +63,7 @@ public class ConstructorIOSearchAsyncTest {
         }
   
         @Override
-        public void onResponse(final SearchResponse response) throws ConstructorException {
+        public void onResponse(final SearchResponse response) {
           responseResolved = response;
         };
       });

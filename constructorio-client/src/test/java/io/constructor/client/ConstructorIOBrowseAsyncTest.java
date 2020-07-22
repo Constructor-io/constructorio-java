@@ -38,7 +38,7 @@ public class ConstructorIOBrowseAsyncTest {
         }
   
         @Override
-        public void onResponse(final BrowseResponse response) throws ConstructorException {
+        public void onResponse(final BrowseResponse response) {
           responseResolved = response;
         };
       });
@@ -60,7 +60,7 @@ public class ConstructorIOBrowseAsyncTest {
         }
   
         @Override
-        public void onResponse(final BrowseResponse response) throws ConstructorException {
+        public void onResponse(final BrowseResponse response) {
           responseResolved = response;
         };
       });

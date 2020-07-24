@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.json.JSONArray;
@@ -446,7 +447,7 @@ public class ConstructorIO {
                 }
             }
 
-            if (req.getSortBy() != null) {
+            if (StringUtils.isNotBlank(req.getSortBy())) {
                 url = url.newBuilder()
                     .addQueryParameter("sort_by", req.getSortBy())
                     .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
@@ -581,7 +582,7 @@ public class ConstructorIO {
                 }
             }
   
-            if (req.getSortBy() != null) {
+            if (StringUtils.isNotBlank(req.getSortBy())) {
                 url = url.newBuilder()
                     .addQueryParameter("sort_by", req.getSortBy())
                     .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")

@@ -80,6 +80,15 @@ public class ConstructorIOSearchTest {
     }
 
     @Test
+    public void SearchAsJSONShouldReturnAResult() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("peanut");
+        String response = constructor.searchAsJSON(request, userInfo);
+        assertTrue("search results exist", response.length() > 1);
+    }
+
+    @Test
     public void SearchShouldReturnAResultWithFivePerPage() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");

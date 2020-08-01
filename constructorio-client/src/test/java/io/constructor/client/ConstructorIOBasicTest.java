@@ -111,7 +111,7 @@ public class ConstructorIOBasicTest {
     @Test
     public void makeUrlShouldReturnAUrl() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
-        HttpUrl url = constructor.makeUrl("getitUuuurl");
+        HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"));
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
         assertEquals("protocol is set", url.scheme(), "https");
         assertEquals("version is set", url.queryParameter("c"), "ciojava-5.3.1");
@@ -122,7 +122,7 @@ public class ConstructorIOBasicTest {
     public void makeUrlWithUserIdShouldReturnAUrl() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         UserInfo info = new UserInfo(2, "sideshow bob");
-        HttpUrl url = constructor.makeUrl("getitUuuurl", info);
+        HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"), info);
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
         assertEquals("protocol is set", url.scheme(), "https");
         assertEquals("version is set", url.queryParameter("c"), "ciojava-5.3.1");
@@ -137,7 +137,7 @@ public class ConstructorIOBasicTest {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         UserInfo info = new UserInfo(2, "sideshow bob");
         info.setUserId("bob-id-123");
-        HttpUrl url = constructor.makeUrl("getitUuuurl", info);
+        HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"), info);
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
         assertEquals("protocol is set", url.scheme(), "https");
         assertEquals("version is set", url.queryParameter("c"), "ciojava-5.3.1");
@@ -153,7 +153,7 @@ public class ConstructorIOBasicTest {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         UserInfo info = new UserInfo(2, "sideshow bob");
         info.setUserSegments(Arrays.asList("Jocks", "Theater kids"));
-        HttpUrl url = constructor.makeUrl("getitUuuurl", info);
+        HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"), info);
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
         assertEquals("protocol is set", url.scheme(), "https");
         assertEquals("version is set", url.queryParameter("c"), "ciojava-5.3.1");

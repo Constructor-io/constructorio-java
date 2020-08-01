@@ -80,6 +80,15 @@ public class ConstructorIOBrowseTest {
     }
 
     @Test
+    public void BrowseAsJSONShouldReturnAResult() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
+        String response = constructor.browseAsJSON(request, userInfo);
+        assertTrue("browse results exist", response.length() > 0);
+    }
+
+    @Test
     public void BrowseShouldReturnAResultWithFivePerPage() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");

@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -72,6 +73,7 @@ public class ConstructorIO {
     public String apiKey;
     public String protocol;
     public String host;
+    public Integer port;
     public String version;
     public String constructorToken;
 
@@ -113,14 +115,28 @@ public class ConstructorIO {
       this(apiToken, apiKey, isHTTPS, host, null);
     }
 
+   /*
+     * Creates a constructor.io Client.
+     *
+     * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
+     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param port The port to connect to
+    */
+    public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, int port) {
+      this(apiToken, apiKey, isHTTPS, host, null);
+      this.port = port;
+    }
+
     /**
      * Sets apiKey
      */
     public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
+      this.apiKey = apiKey;
     }
 
-    /**
+   /**
      * Verifies that an autocomplete service is working.
      *
      * @return true if working.
@@ -128,7 +144,7 @@ public class ConstructorIO {
      */
     public boolean verify() throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl("v1/verify");
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "verify"));
             Request request = this.makeAuthorizedRequestBuilder()
                 .url(url)
                 .get()
@@ -152,7 +168,7 @@ public class ConstructorIO {
      */
     public boolean addItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl("v1/item");
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
             Map<String, Object> data = item.toMap();
             data.put("autocomplete_section", autocompleteSection);
             String params = new Gson().toJson(data);
@@ -180,7 +196,7 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl("v1/item");
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
             url = url.newBuilder().addQueryParameter("force", "1").build();
             Map<String, Object> data = item.toMap();
             data.put("autocomplete_section", autocompleteSection);
@@ -209,7 +225,7 @@ public class ConstructorIO {
      */
     public boolean addItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            HttpUrl url= this.makeUrl("v1/batch_items");
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -242,7 +258,7 @@ public class ConstructorIO {
      */
     public boolean addOrUpdateItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl("v1/batch_items");
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
             url = url.newBuilder().addQueryParameter("force", "1").build();
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
@@ -276,7 +292,7 @@ public class ConstructorIO {
      */
     public boolean removeItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl("v1/item");
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
             Map<String, Object> data = new HashMap<String, Object>();
             data.put("item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
@@ -305,7 +321,7 @@ public class ConstructorIO {
      */
     public boolean removeItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl("v1/batch_items");
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -339,7 +355,7 @@ public class ConstructorIO {
      */
     public boolean modifyItem(ConstructorItem item, String autocompleteSection, String previousItemName) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl("v1/item");
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
             Map<String, Object> data = item.toMap();
             data.put("new_item_name", item.getItemName());
             data.put("autocomplete_section", autocompleteSection);
@@ -392,8 +408,8 @@ public class ConstructorIO {
      */
     public String autocompleteAsJSON(AutocompleteRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String path = "autocomplete/" + req.getQuery();
-            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            List<String> paths = Arrays.asList("autocomplete", req.getQuery());
+            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
 
             for (Map.Entry<String, Integer> entry : req.getResultsPerSection().entrySet()) {
                 String section = entry.getKey();
@@ -425,8 +441,8 @@ public class ConstructorIO {
      */
     protected Request createSearchRequest(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String path = "search/" + req.getQuery();
-            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            List<String> paths = Arrays.asList("search", req.getQuery());
+            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
             url = url.newBuilder()
                 .addQueryParameter("section", req.getSection())
                 .addQueryParameter("page", String.valueOf(req.getPage()))
@@ -548,8 +564,7 @@ public class ConstructorIO {
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
-    }
-
+    } 
     /**
      * Creates a browse OkHttp request
      * 
@@ -560,20 +575,20 @@ public class ConstructorIO {
      */
     protected Request createBrowseRequest(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String path = "browse/" + req.getFilterName() + "/" + req.getFilterValue();
-            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            List<String> paths = Arrays.asList("browse", req.getFilterName(), req.getFilterValue());
+            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
             url = url.newBuilder()
                 .addQueryParameter("section", req.getSection())
                 .addQueryParameter("page", String.valueOf(req.getPage()))
                 .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
                 .build();
-  
+
             if (req.getGroupId() != null) {
                 url = url.newBuilder()
                     .addQueryParameter("filters[group_id]", req.getGroupId())
                     .build();
             }
-  
+
             for (String facetName : req.getFacets().keySet()) {
                 for (String facetValue : req.getFacets().get(facetName)) {
                     url = url.newBuilder()
@@ -581,19 +596,19 @@ public class ConstructorIO {
                         .build();
                 }
             }
-  
+
             if (StringUtils.isNotBlank(req.getSortBy())) {
                 url = url.newBuilder()
                     .addQueryParameter("sort_by", req.getSortBy())
                     .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
                     .build();
             }
-  
+
             Request request = this.makeUserRequestBuilder(userInfo)
                 .url(url)
                 .get()
                 .build();
-  
+
             return request;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -712,8 +727,8 @@ public class ConstructorIO {
      */
     public String naturalLanguageSearchAsJSON(NaturalLanguageSearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String path = "search/natural_language/" + req.getQuery();
-            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            List<String> paths = Arrays.asList("search", "natural_language", req.getQuery());
+            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
 
             url = url.newBuilder()
                 .addQueryParameter("section", req.getSection())
@@ -766,8 +781,9 @@ public class ConstructorIO {
      */
     public String recommendationsAsJSON(RecommendationsRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String path = "recommendations/v1/pods/" + req.getPodId();
-            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            List<String> paths = Arrays.asList("recommendations", "v1", "pods", req.getPodId());
+            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
+
             url = url.newBuilder()
                 .addQueryParameter("num_results", String.valueOf(req.getNumResults()))
                 .addQueryParameter("section", req.getSection())
@@ -799,16 +815,24 @@ public class ConstructorIO {
      * @param path endpoint of the autocomplete service.
      * @return the created URL. Now you can use it to issue requests and things!
      */
-    protected HttpUrl makeUrl(String path) throws UnsupportedEncodingException {
-        HttpUrl url = new HttpUrl.Builder()
+    protected HttpUrl makeUrl(List<String> paths) throws UnsupportedEncodingException {
+        okhttp3.HttpUrl.Builder builder = new HttpUrl.Builder()
             .scheme(this.protocol)
-            .addPathSegments(path)
             .addQueryParameter("key", this.apiKey)
             .addQueryParameter("c", this.version)
-            .host(this.host)
-            .build();
+            .host(this.host);
 
-        return url;
+        for (String path : paths) {
+          String canonicalPath = OkHttpUrlBuilderUtils.canonicalize(path, 0, path.length(), 
+            OkHttpUrlBuilderUtils.PATH_SEGMENT_ENCODE_SET, false, true, true, true, null);
+          builder.addEncodedPathSegment(canonicalPath);
+        }
+
+        if (this.port != null) {
+          builder.port(this.port);
+        }
+       
+        return builder.build();
     }
 
     /**
@@ -817,32 +841,36 @@ public class ConstructorIO {
      * @param path endpoint of the autocomplete service.
      * @return the created URL. Now you can use it to issue requests and things!
      */
-    protected HttpUrl makeUrl(String path, UserInfo info) throws UnsupportedEncodingException {
-        HttpUrl url = new HttpUrl.Builder()
+    protected HttpUrl makeUrl(List<String> paths, UserInfo info) throws UnsupportedEncodingException {
+        okhttp3.HttpUrl.Builder builder = new HttpUrl.Builder()
             .scheme(this.protocol)
-            .addPathSegments(path)
             .addQueryParameter("key", this.apiKey)
             .addQueryParameter("c", this.version)
             .addQueryParameter("s", String.valueOf(info.getSessionId()))
             .addQueryParameter("i", info.getClientId())
-            .host(this.host)
-            .build();
+            .host(this.host);
+
+        for (String path : paths) {
+          String canonicalPath = OkHttpUrlBuilderUtils.canonicalize(path, 0, path.length(),
+            OkHttpUrlBuilderUtils.PATH_SEGMENT_ENCODE_SET, false, true, true, true, null);
+          builder.addEncodedPathSegment(canonicalPath);
+        }
 
         if (info.getUserId() != null) {
-            url = url.newBuilder()
-                .addQueryParameter("ui", String.valueOf(info.getUserId()))
-                .build();
+          builder.addQueryParameter("ui", String.valueOf(info.getUserId()));
         }
 
         if (info.getUserSegments() != null) {
             for (String userSegment : info.getUserSegments()) {
-                url = url.newBuilder()
-                    .addQueryParameter("us",  userSegment)
-                    .build();
+              builder.addQueryParameter("us",  userSegment);
             }
         }
 
-        return url;
+        if (this.port != null) {
+          builder.port(this.port);
+        }
+
+        return builder.build();
     }
 
     /**

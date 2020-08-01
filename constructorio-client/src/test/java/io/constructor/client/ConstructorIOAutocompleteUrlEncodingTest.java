@@ -79,7 +79,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
     }
 
     @Test
-    public void AutocompleteWithSingleQuoteShouldBeEncodedInUrl() throws Exception {
+    public void AutocompleteWithSingleQuoteShouldBeAllowedInUrl() throws Exception {
         String string = Utils.getTestResource("response.autocomplete.peanut.json");
         MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
         mockServer.enqueue(mockResponse);

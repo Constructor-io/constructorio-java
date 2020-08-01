@@ -557,46 +557,62 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public String searchAsJSON(SearchRequest req, UserInfo userInfo) throws ConstructorException {
-        try {
-            List<String> paths = Arrays.asList("search", req.getQuery());
-            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
+      try {
+          Request request = createSearchRequest(req, userInfo);
+          Response response = clientWithRetry.newCall(request).execute();
+          return getResponseBody(response);
+      } catch (Exception exception) {
+          throw new ConstructorException(exception);
+      }
+    } 
+    /**
+     * Creates a browse OkHttp request
+     * 
+     * @param req the browse request
+     * @param userInfo optional information about the user
+     * @return a browse OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createBrowseRequest(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
+      try {
+          String path = "browse/" + req.getFilterName() + "/" + req.getFilterValue();
+          HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+          url = url.newBuilder()
+              .addQueryParameter("section", req.getSection())
+              .addQueryParameter("page", String.valueOf(req.getPage()))
+              .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+              .build();
 
-            url = url.newBuilder()
-                .addQueryParameter("section", req.getSection())
-                .addQueryParameter("page", String.valueOf(req.getPage()))
-                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                .build();
-  
-            if (req.getGroupId() != null) {
-                url = url.newBuilder()
-                    .addQueryParameter("filters[group_id]", req.getGroupId())
-                    .build();
-            }
-  
-            for (String facetName : req.getFacets().keySet()) {
-                for (String facetValue : req.getFacets().get(facetName)) {
-                    url = url.newBuilder()
-                        .addQueryParameter("filters[" + facetName + "]", facetValue)
-                        .build();
-                }
-            }
-  
-            if (StringUtils.isNotBlank(req.getSortBy())) {
-                url = url.newBuilder()
-                    .addQueryParameter("sort_by", req.getSortBy())
-                    .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
-                    .build();
-            }
-  
-            Request request = this.makeUserRequestBuilder(userInfo)
-                .url(url)
-                .get()
-                .build();
-  
-            return request;
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
+          if (req.getGroupId() != null) {
+              url = url.newBuilder()
+                  .addQueryParameter("filters[group_id]", req.getGroupId())
+                  .build();
+          }
+
+          for (String facetName : req.getFacets().keySet()) {
+              for (String facetValue : req.getFacets().get(facetName)) {
+                  url = url.newBuilder()
+                      .addQueryParameter("filters[" + facetName + "]", facetValue)
+                      .build();
+              }
+          }
+
+          if (StringUtils.isNotBlank(req.getSortBy())) {
+              url = url.newBuilder()
+                  .addQueryParameter("sort_by", req.getSortBy())
+                  .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
+                  .build();
+          }
+
+          Request request = this.makeUserRequestBuilder(userInfo)
+              .url(url)
+              .get()
+              .build();
+
+          return request;
+      } catch (Exception exception) {
+          throw new ConstructorException(exception);
+      }
     }
 
     /**
@@ -657,56 +673,22 @@ public class ConstructorIO {
         }
     }
 
-  /**
-   * Queries the browse service.
-   *
-   * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
-   * That's important. That will be a solid latency difference.
-   *
-   * @param req the browse request
-   * @param userInfo optional information about the user
-   * @return a string of JSON
-   * @throws ConstructorException if the request is invalid.
-   */
-  public String browseAsJSON(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
+    /**
+     * Queries the browse service.
+     *
+     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the browse request
+     * @param userInfo optional information about the user
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String browseAsJSON(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
       try {
-          List<String> paths = Arrays.asList("browse", req.getFilterName(), req.getFilterValue());
-          HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
-
-          url = url.newBuilder()
-              .addQueryParameter("section", req.getSection())
-              .addQueryParameter("page", String.valueOf(req.getPage()))
-              .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-              .build();
-
-          if (req.getGroupId() != null) {
-              url = url.newBuilder()
-                  .addQueryParameter("filters[group_id]", req.getGroupId())
-                  .build();
-          }
-
-          for (String facetName : req.getFacets().keySet()) {
-              for (String facetValue : req.getFacets().get(facetName)) {
-                  url = url.newBuilder()
-                      .addQueryParameter("filters[" + facetName + "]", facetValue)
-                      .build();
-              }
-          }
-
-          if (req.getSortBy() != null) {
-              url = url.newBuilder()
-                  .addQueryParameter("sort_by", req.getSortBy())
-                  .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
-                  .build();
-          }
-
-          Request request = this.makeUserRequestBuilder(userInfo)
-              .url(url)
-              .get()
-              .build();
-
-          Response response = clientWithRetry.newCall(request).execute();
-          return getResponseBody(response);
+        Request request = createBrowseRequest(req, userInfo);
+        Response response = clientWithRetry.newCall(request).execute();
+        return getResponseBody(response);
       } catch (Exception exception) {
           throw new ConstructorException(exception);
       }

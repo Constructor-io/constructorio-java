@@ -79,7 +79,7 @@ public class ConstructorIOSearchUrlEncodingTest {
     }
 
     @Test
-    public void SearchWithSingleQuoteShouldBeAllowwedInUrl() throws Exception {
+    public void SearchWithSingleQuoteShouldBeAllowedInUrl() throws Exception {
         String string = Utils.getTestResource("response.search.peanut.json");
         MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
         mockServer.enqueue(mockResponse);

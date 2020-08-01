@@ -441,8 +441,8 @@ public class ConstructorIO {
      */
     protected Request createSearchRequest(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String path = "search/" + req.getQuery();
-            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            List<String> paths = Arrays.asList("search", req.getQuery());
+            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
             url = url.newBuilder()
                 .addQueryParameter("section", req.getSection())
                 .addQueryParameter("page", String.valueOf(req.getPage()))
@@ -575,8 +575,8 @@ public class ConstructorIO {
      */
     protected Request createBrowseRequest(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
         try {
-            String path = "browse/" + req.getFilterName() + "/" + req.getFilterValue();
-            HttpUrl url = (userInfo == null) ? this.makeUrl(path) : this.makeUrl(path, userInfo);
+            List<String> paths = Arrays.asList("browse", req.getFilterName(), req.getFilterValue());
+            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
             url = url.newBuilder()
                 .addQueryParameter("section", req.getSection())
                 .addQueryParameter("page", String.valueOf(req.getPage()))
@@ -864,6 +864,10 @@ public class ConstructorIO {
             for (String userSegment : info.getUserSegments()) {
               builder.addQueryParameter("us",  userSegment);
             }
+        }
+
+        if (this.port != null) {
+          builder.port(this.port);
         }
 
         return builder.build();

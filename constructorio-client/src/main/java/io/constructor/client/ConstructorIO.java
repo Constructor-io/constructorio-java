@@ -658,18 +658,18 @@ public class ConstructorIO {
         }
     }
 
-  /**
-   * Queries the browse service.
-   *
-   * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
-   * That's important. That will be a solid latency difference.
-   *
-   * @param req the browse request
-   * @param userInfo optional information about the user
-   * @return a string of JSON
-   * @throws ConstructorException if the request is invalid.
-   */
-  public String browseAsJSON(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
+    /**
+     * Queries the browse service.
+     *
+     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the browse request
+     * @param userInfo optional information about the user
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String browseAsJSON(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
       try {
         Request request = createBrowseRequest(req, userInfo);
         Response response = clientWithRetry.newCall(request).execute();

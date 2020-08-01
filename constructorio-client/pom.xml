@@ -79,6 +79,11 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.4</version>
+				<configuration>
+					<excludes>
+						<exclude>**/io/constructor/client/OkHttpUrlBuilderUtils.class</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>

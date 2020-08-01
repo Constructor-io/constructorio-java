@@ -41,7 +41,7 @@ public class ConstructorIOSearchUrlEncodingTest {
         constructor.search(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/search/r%2bco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.2.0&section=Products&page=1&num_results_per_page=30";
+        String expectedPath = "/search/r%2Bco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.2.0&section=Products&page=1&num_results_per_page=30";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }

@@ -41,7 +41,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/autocomplete/r%2bco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.2.0";
+        String expectedPath = "/autocomplete/r%2Bco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.2.0";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }

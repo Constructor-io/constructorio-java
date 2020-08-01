@@ -841,7 +841,9 @@ public class ConstructorIO {
             .host(this.host);
 
         for (String path : paths) {
-          builder.addPathSegment(path);
+          String canonicalPath = OkHttpUrlBuilderUtils.canonicalize(path, 0, path.length(), 
+            OkHttpUrlBuilderUtils.PATH_SEGMENT_ENCODE_SET, false, true, true, true, null);
+          builder.addEncodedPathSegment(canonicalPath);
         }
 
         if (this.port != null) {
@@ -867,7 +869,9 @@ public class ConstructorIO {
             .host(this.host);
 
         for (String path : paths) {
-          builder.addPathSegment(path);
+          String canonicalPath = OkHttpUrlBuilderUtils.canonicalize(path, 0, path.length(),
+            OkHttpUrlBuilderUtils.PATH_SEGMENT_ENCODE_SET, false, true, true, true, null);
+          builder.addEncodedPathSegment(canonicalPath);
         }
 
         if (info.getUserId() != null) {

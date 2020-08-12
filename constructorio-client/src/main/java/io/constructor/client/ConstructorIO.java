@@ -1,6 +1,5 @@
 package io.constructor.client;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -13,8 +12,6 @@ import java.util.Map;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -925,19 +922,12 @@ public class ConstructorIO {
     }
 
     /**
-     * Grabs the version number from the pom.xml file.
+     * Grabs the version number (hard coded ATM)
      *
      * @return version number
      */
     protected String getVersion() {
-        try {
-            MavenXpp3Reader reader = new MavenXpp3Reader();
-            Model model = reader.read(new FileReader("pom.xml"));
-            return "ciojava-" + model.getVersion();
-        } catch (Exception e) {
-            // Do nothing
-        }
-        return "ciojava-";
+      return "ciojava-5.3.2";
     }
 
     /**

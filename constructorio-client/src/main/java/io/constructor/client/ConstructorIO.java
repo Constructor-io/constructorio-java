@@ -73,6 +73,7 @@ public class ConstructorIO {
     public Integer port;
     public String version;
     public String constructorToken;
+    public String userAgent;
 
     /**
      * Creates a constructor.io Client.
@@ -82,6 +83,7 @@ public class ConstructorIO {
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
      * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
      * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
+     * @param userAgent The user agent of requesting client
      */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, String constructorToken) {
         this.apiToken = apiToken;
@@ -132,6 +134,13 @@ public class ConstructorIO {
     public void setApiKey(String apiKey) {
       this.apiKey = apiKey;
     }
+
+    /**
+     * Sets user agent
+     */
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+      }
 
    /**
      * Verifies that an autocomplete service is working.
@@ -891,6 +900,9 @@ public class ConstructorIO {
         Builder builder = new Request.Builder();
         if (this.constructorToken != null) {
             builder.addHeader("x-cnstrc-token", this.constructorToken);
+        }
+        if (this.userAgent != null) {
+            builder.addHeader("User-Agent", this.userAgent);
         }
         if (info != null && info.getForwardedFor() != null) {
             builder.addHeader("x-forwarded-for", info.getForwardedFor());

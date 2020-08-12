@@ -72,6 +72,25 @@ public class ConstructorIOBasicTest {
     }
 
     @Test
+    public void shouldSetNewUserAgent() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", false, null);
+        constructor.setUserAgent("foobar");
+        assertEquals("useragent should be set to new value", constructor.userAgent, "foobar");
+    }
+
+    @Test
+    public void shouldSetNewUserAgentMultipleInstances() throws Exception {
+        ConstructorIO constructorA = new ConstructorIO("boinkaToken", "foo", false, null);
+        ConstructorIO constructorB = new ConstructorIO("boinkaToken", "bar", false, null);
+        constructorA.setUserAgent("newfoo");
+        assertEquals("instance 1 useragent should be set to new value", constructorA.userAgent, "newfoo");
+        assertEquals("instance 2 useragent should be set to default", constructorB.userAgent, null);
+        constructorB.setUserAgent("newbar");
+        assertEquals("instance 1 useragent should be set to new value", constructorA.userAgent, "newfoo");
+        assertEquals("instance 2 useragent should be set to new value", constructorB.userAgent, "newbar");
+    }
+
+    @Test
     public void makeAuthorizedRequestBuilderShouldSetAuthorizationHeader() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         Builder builder = constructor.makeAuthorizedRequestBuilder();
@@ -96,6 +115,16 @@ public class ConstructorIOBasicTest {
         Builder builder = constructor.makeUserRequestBuilder(info);
         Request req = builder.url("https://ac.cnstrc.com").get().build();
         assertEquals("constructor token should be set", req.header("x-cnstrc-token"), "whitestripes");
+    }
+
+    @Test
+    public void makeUserRequestBuilderShouldSetUserAgentHeader() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
+        constructor.setUserAgent("foobar");
+        UserInfo info = new UserInfo(2, "sideshow bob");
+        Builder builder = constructor.makeUserRequestBuilder(info);
+        Request req = builder.url("https://ac.cnstrc.com").get().build();
+        assertEquals("useragent should be set", req.header("User-Agent"), "foobar");
     }
 
     @Test

@@ -109,6 +109,17 @@ public class ConstructorIOBasicTest {
     }
 
     @Test
+    public void makeUserRequestBuilderShouldSetUserAgentHeader() throws Exception {
+        String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36";
+        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
+        UserInfo info = new UserInfo(2, "sideshow bob");
+        info.setUserAgent(userAgent);
+        Builder builder = constructor.makeUserRequestBuilder(info);
+        Request req = builder.url("https://ac.cnstrc.com").get().build();
+        assertEquals("User-Agent should be set", req.header("User-Agent"), userAgent);
+    }
+
+    @Test
     public void makeUrlShouldReturnAUrl() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"));

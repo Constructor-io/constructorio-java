@@ -12,6 +12,7 @@ public class UserInfo {
   private String userId;
   private List<String> userSegments;
   private String forwardedFor;
+  private String userAgent;
 
   /**
    * Creates a User Info object
@@ -57,6 +58,13 @@ public class UserInfo {
    */
   public String getForwardedFor() {
     return this.forwardedFor;
+  }
+
+  /**
+   * @return Forwarding info for the end user's User-Agent if proxying requests
+   */
+  public String getUserAgent() {
+    return this.userAgent;
   }
 
   /**
@@ -121,6 +129,19 @@ public class UserInfo {
       throw new IllegalArgumentException("Forwarded for cannot be null or an empty string.");
     } else {
       this.forwardedFor = forwardedFor;
+    }
+  }
+
+  /**
+   * Validates and sets the end user's User-Agent
+   *
+   * @param userAgent the end user's User-Agent
+   */
+  public void setUserAgent(String userAgent) throws IllegalArgumentException {
+    if (userAgent == null) {
+      throw new IllegalArgumentException("User agent cannot be null.");
+    } else {
+      this.userAgent = userAgent;
     }
   }
 }

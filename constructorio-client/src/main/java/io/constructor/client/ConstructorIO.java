@@ -895,6 +895,9 @@ public class ConstructorIO {
         if (info != null && info.getForwardedFor() != null) {
             builder.addHeader("x-forwarded-for", info.getForwardedFor());
         }
+        if (info != null && info.getUserAgent() != null) {
+            builder.addHeader("User-Agent", info.getUserAgent());
+        }
         return builder;
     }
 

@@ -88,4 +88,19 @@ public class UserInfoTest {
     userInfo.setForwardedFor("203.0.113.195, 70.41.3.18, 150.172.238.178");
     assertEquals(userInfo.getForwardedFor(), "203.0.113.195, 70.41.3.18, 150.172.238.178");
   }
+
+  @Test
+  public void settingUserAgentNullShouldFail() throws Exception {
+    thrown.expect(IllegalArgumentException.class);
+    UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+    userInfo.setUserAgent(null);
+  }
+
+  @Test
+  public void settingUserAgentShouldSucceed() throws Exception {
+    String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36";
+    UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+    userInfo.setUserAgent(userAgent);
+    assertEquals(userInfo.getUserAgent(), userAgent);
+  }
 }

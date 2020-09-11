@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class SearchRequestTest {
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

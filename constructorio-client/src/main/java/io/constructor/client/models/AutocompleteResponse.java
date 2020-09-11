@@ -16,6 +16,9 @@ public class AutocompleteResponse {
     @SerializedName("result_id")
     private String resultId;
 
+    @SerializedName("request")
+    private Map<String, Object> metadata;
+
     /**
      * @return the resultId
      */

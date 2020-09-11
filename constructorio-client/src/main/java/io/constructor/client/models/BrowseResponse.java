@@ -1,5 +1,7 @@
 package io.constructor.client.models;
 
+import java.util.Map;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -12,7 +14,10 @@ public class BrowseResponse {
 
     @SerializedName("response")
     private BrowseResponseInner response;
-    
+
+    @SerializedName("request")
+    private Map<String, Object> metadata;
+
     /**
      * @return the resultId
      */

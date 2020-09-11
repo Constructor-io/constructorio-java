@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 import io.constructor.client.models.FilterFacet;
 import io.constructor.client.models.FilterFacetOption;
 
-public class ModelsTest {
+public class FiltersTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();

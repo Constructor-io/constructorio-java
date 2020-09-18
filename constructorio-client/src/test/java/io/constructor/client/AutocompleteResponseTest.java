@@ -9,7 +9,7 @@ import org.junit.rules.ExpectedException;
 
 import io.constructor.client.models.AutocompleteResponse;
 
-public class AutocompleteRequestTest {
+public class AutocompleteResponseTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

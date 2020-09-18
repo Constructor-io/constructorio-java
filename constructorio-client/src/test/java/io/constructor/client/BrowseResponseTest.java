@@ -29,6 +29,8 @@ public class BrowseResponseTest {
         assertEquals("browse results exist", response.getResponse().getResults().size(), 5);
         assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 562);
         assertTrue("browse result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertEquals("request filter value exists", response.getRequest().get("browse_filter_value"), "Blue");
     }
 
     @Test
@@ -51,6 +53,8 @@ public class BrowseResponseTest {
         assertEquals("browse result variation metadata [price] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getMetadata().get("price"), "536.25");
         assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 562);
         assertTrue("browse result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertEquals("request filter value exists", response.getRequest().get("browse_filter_value"), "Blue");
     }
 
     @Test
@@ -64,5 +68,7 @@ public class BrowseResponseTest {
         assertEquals("browse result sort option [status] exists", response.getResponse().getSortOptions().get(0).getStatus(), "selected");
         assertEquals("total number of results", (int) response.getResponse().getTotalNumberOfResults(), 562);
         assertTrue("browse result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertEquals("request filter value exists", response.getRequest().get("browse_filter_value"), "Blue");
     }
 }

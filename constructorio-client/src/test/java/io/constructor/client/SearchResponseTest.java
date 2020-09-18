@@ -27,11 +27,13 @@ public class SearchResponseTest {
         assertEquals("search results exist", response.getResponse().getResults().size(), 24);
         assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 301);
         assertTrue("search result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertEquals("request query exists", response.getRequest().get("term"), "peanut");
     }
 
     @Test
     public void createSearchResponseShouldReturnAResultWithVariations() throws Exception {
-        String string = Utils.getTestResource("response.search.shirt.json");
+        String string = Utils.getTestResource("response.search.jacket.json");
         SearchResponse response = ConstructorIO.createSearchResponse(string);
         assertEquals("search facets exists", response.getResponse().getFacets().size(), 7);
         assertEquals("search groups exists", response.getResponse().getGroups().size(), 1);
@@ -49,11 +51,13 @@ public class SearchResponseTest {
         assertEquals("search result variation metadata [price] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getMetadata().get("price"), "411.25");
         assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 261);
         assertTrue("search result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertEquals("request query exists", response.getRequest().get("term"), "jacket");
     }
 
     @Test
     public void createSearchResponseShouldReturnAResultWithSortOptions() throws Exception {
-        String string = Utils.getTestResource("response.search.shirt.json");
+        String string = Utils.getTestResource("response.search.jacket.json");
         SearchResponse response = ConstructorIO.createSearchResponse(string);
         assertEquals("search result [sort options] exists", response.getResponse().getSortOptions().size(), 1);
         assertEquals("search result sort option [display name] exists", response.getResponse().getSortOptions().get(0).getDisplayName(), "Relevance");
@@ -62,5 +66,7 @@ public class SearchResponseTest {
         assertEquals("search result sort option [status] exists", response.getResponse().getSortOptions().get(0).getStatus(), "selected");
         assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 261);
         assertTrue("search result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertEquals("request query exists", response.getRequest().get("term"), "jacket");
     }
 }

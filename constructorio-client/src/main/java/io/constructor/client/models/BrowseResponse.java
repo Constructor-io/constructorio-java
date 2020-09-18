@@ -16,7 +16,7 @@ public class BrowseResponse {
     private BrowseResponseInner response;
 
     @SerializedName("request")
-    private Map<String, Object> metadata;
+    private Map<String, Object> request;
 
     /**
      * @return the resultId
@@ -30,5 +30,12 @@ public class BrowseResponse {
      */
     public BrowseResponseInner getResponse() {
       return response;
+    }
+
+    /**
+     * @return the request as understood by the server
+     */
+    public Map<String, Object> getRequest() {
+      return request;
     }
 }

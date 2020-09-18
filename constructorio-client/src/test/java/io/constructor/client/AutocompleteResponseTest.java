@@ -21,6 +21,8 @@ public class AutocompleteResponseTest {
         assertEquals("search suggestions exist", response.getSections().get("Search Suggestions").size(), 8);
         assertEquals("product suggestions exist", response.getSections().get("Products").size(), 6);
         assertTrue("result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertEquals("request query exists", response.getRequest().get("query"), "peanut");
     }
 
     @Test
@@ -30,6 +32,8 @@ public class AutocompleteResponseTest {
         assertEquals("search suggestions exist", response.getSections().get("Search Suggestions").size(), 0);
         assertEquals("product suggestions exist", response.getSections().get("Products").size(), 0);
         assertTrue("result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertEquals("request query exists", response.getRequest().get("query"), "peanut");
     }
 
     @Test
@@ -38,5 +42,7 @@ public class AutocompleteResponseTest {
         AutocompleteResponse response = ConstructorIO.createAutocompleteResponse(string);
         assertEquals(response.getSections().size(), 0);
         assertTrue("result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertEquals("request query exists", response.getRequest().get("query"), "peanut");
     }
 }

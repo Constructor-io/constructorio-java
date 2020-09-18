@@ -17,7 +17,7 @@ public class AutocompleteResponse {
     private String resultId;
 
     @SerializedName("request")
-    private Map<String, Object> metadata;
+    private Map<String, Object> request;
 
     /**
      * @return the resultId
@@ -31,5 +31,12 @@ public class AutocompleteResponse {
      */
     public Map<String, List<Result>> getSections() {
       return sections;
+    }
+
+    /**
+     * @return the request as understood by the server
+     */
+    public Map<String, Object> getRequest() {
+      return request;
     }
 }

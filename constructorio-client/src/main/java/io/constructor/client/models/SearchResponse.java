@@ -1,5 +1,7 @@
 package io.constructor.client.models;
 
+import java.util.Map;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -12,7 +14,10 @@ public class SearchResponse {
 
     @SerializedName("response")
     private SearchResponseInner response;
-    
+
+    @SerializedName("request")
+    private Map<String, Object> request;
+
     /**
      * @return the resultId
      */
@@ -25,5 +30,12 @@ public class SearchResponse {
      */
     public SearchResponseInner getResponse() {
       return response;
+    }
+
+    /**
+     * @return the request as understood by the server
+     */
+    public Map<String, Object> getRequest() {
+      return request;
     }
 }

@@ -1,2792 +1,2568 @@
 {
-  "response": {
-    "facets": [
+  "request":{
+    "page":1,
+    "num_results_per_page":24,
+    "section":"Products",
+    "term":"peanut",
+    "fmt_options":{
+      "groups_start":"current",
+      "groups_max_depth":1
+    },
+    "sort_by":"relevance",
+    "sort_order":"descending",
+    "features":{
+      "query_items":true,
+      "auto_generated_refined_query_rules":true,
+      "personalization":true,
+      "manual_searchandizing":true,
+      "filter_items":true
+    },
+    "feature_variants":{
+      "query_items":null,
+      "auto_generated_refined_query_rules":null,
+      "personalization":null,
+      "manual_searchandizing":null,
+      "filter_items":null
+    },
+    "searchandized_items":{
+      
+    }
+  },
+  "response":{
+    "facets":[
       {
-        "display_name": "Brand",
-        "name": "Brand",
-        "options": [
+        "display_name":"Brand",
+        "name":"Brand",
+        "type":"multiple",
+        "options":[
           {
-            "count": 5,
-            "data": {},
-            "display_name": "Jif",
-            "status": "",
-            "value": "Jif"
+            "status":"",
+            "count":9,
+            "display_name":"Planters",
+            "value":"Planters",
+            "data":{
+              
+            }
           },
           {
-            "count": 4,
-            "data": {},
-            "display_name": "Skippy",
-            "status": "",
-            "value": "Skippy"
+            "status":"",
+            "count":2,
+            "display_name":"Signature Farms",
+            "value":"Signature Farms",
+            "data":{
+              
+            }
           },
           {
-            "count": 4,
-            "data": {},
-            "display_name": "",
-            "status": "",
-            "value": ""
+            "status":"",
+            "count":15,
+            "display_name":"Jif",
+            "value":"Jif",
+            "data":{
+              
+            }
           },
           {
-            "count": 3,
-            "data": {},
-            "display_name": "Smucker's",
-            "status": "",
-            "value": "Smucker's"
+            "status":"",
+            "count":8,
+            "display_name":"O Organics",
+            "value":"O Organics",
+            "data":{
+              
+            }
           },
           {
-            "count": 2,
-            "data": {},
-            "display_name": "thinkThin",
-            "status": "",
-            "value": "thinkThin"
+            "status":"",
+            "count":15,
+            "display_name":"Skippy",
+            "value":"Skippy",
+            "data":{
+              
+            }
           },
           {
-            "count": 2,
-            "data": {},
-            "display_name": "Wild Harvest",
-            "status": "",
-            "value": "Wild Harvest"
+            "status":"",
+            "count":2,
+            "display_name":"Keebler",
+            "value":"Keebler",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Hormel",
-            "status": "",
-            "value": "Hormel"
+            "status":"",
+            "count":1,
+            "display_name":"Frito-Lay, INC",
+            "value":"Frito-Lay, INC",
+            "data":{
+              
+            }
           },
           {
-            "count": 10,
-            "data": {},
-            "display_name": "Clif",
-            "status": "",
-            "value": "Clif"
+            "status":"",
+            "count":1,
+            "display_name":"Quaker Oats",
+            "value":"Quaker Oats",
+            "data":{
+              
+            }
           },
           {
-            "count": 6,
-            "data": {},
-            "display_name": "Peanut Butter & Co.",
-            "status": "",
-            "value": "Peanut Butter & Co."
+            "status":"",
+            "count":12,
+            "display_name":"General Mills",
+            "value":"General Mills",
+            "data":{
+              
+            }
           },
           {
-            "count": 4,
-            "data": {},
-            "display_name": "Perfect Bar",
-            "status": "",
-            "value": "Perfect Bar"
+            "status":"",
+            "count":11,
+            "display_name":"Signature Kitchens",
+            "value":"Signature Kitchens",
+            "data":{
+              
+            }
           },
           {
-            "count": 4,
-            "data": {},
-            "display_name": "Justin's",
-            "status": "",
-            "value": "Justin's"
+            "status":"",
+            "count":2,
+            "display_name":"Chobani",
+            "value":"Chobani",
+            "data":{
+              
+            }
           },
           {
-            "count": 3,
-            "data": {},
-            "display_name": "NuGo",
-            "status": "",
-            "value": "NuGo"
+            "status":"",
+            "count":17,
+            "display_name":"Mars North America",
+            "value":"Mars North America",
+            "data":{
+              
+            }
           },
           {
-            "count": 3,
-            "data": {},
-            "display_name": "M&M's",
-            "status": "",
-            "value": "M&M's"
+            "status":"",
+            "count":7,
+            "display_name":"Smuckers",
+            "value":"Smuckers",
+            "data":{
+              
+            }
           },
           {
-            "count": 3,
-            "data": {},
-            "display_name": "L\u00e4rabar",
-            "status": "",
-            "value": "L\u00e4rabar"
+            "status":"",
+            "count":4,
+            "display_name":"Quaker",
+            "value":"Quaker",
+            "data":{
+              
+            }
           },
           {
-            "count": 3,
-            "data": {},
-            "display_name": "KIND",
-            "status": "",
-            "value": "KIND"
+            "status":"",
+            "count":4,
+            "display_name":"Kind",
+            "value":"Kind",
+            "data":{
+              
+            }
           },
           {
-            "count": 3,
-            "data": {},
-            "display_name": "Hershey's",
-            "status": "",
-            "value": "Hershey's"
+            "status":"",
+            "count":9,
+            "display_name":"Mondelez",
+            "value":"Mondelez",
+            "data":{
+              
+            }
           },
           {
-            "count": 3,
-            "data": {},
-            "display_name": "Chobani",
-            "status": "",
-            "value": "Chobani"
+            "status":"",
+            "count":26,
+            "display_name":"Hershey Foods",
+            "value":"Hershey Foods",
+            "data":{
+              
+            }
           },
           {
-            "count": 2,
-            "data": {},
-            "display_name": "RXBAR",
-            "status": "",
-            "value": "RXBAR"
+            "status":"",
+            "count":2,
+            "display_name":"Ritz",
+            "value":"Ritz",
+            "data":{
+              
+            }
           },
           {
-            "count": 2,
-            "data": {},
-            "display_name": "PB2",
-            "status": "",
-            "value": "PB2"
+            "status":"",
+            "count":16,
+            "display_name":"Clif",
+            "value":"Clif",
+            "data":{
+              
+            }
           },
           {
-            "count": 2,
-            "data": {},
-            "display_name": "Nature Valley",
-            "status": "",
-            "value": "Nature Valley"
+            "status":"",
+            "count":2,
+            "display_name":"Safeway",
+            "value":"Safeway",
+            "data":{
+              
+            }
           },
           {
-            "count": 2,
-            "data": {},
-            "display_name": "Luna",
-            "status": "",
-            "value": "Luna"
+            "status":"",
+            "count":2,
+            "display_name":"Ben & Jerrys",
+            "value":"Ben & Jerrys",
+            "data":{
+              
+            }
           },
           {
-            "count": 2,
-            "data": {},
-            "display_name": "GoMacro",
-            "status": "",
-            "value": "GoMacro"
+            "status":"",
+            "count":1,
+            "display_name":"Eating Right",
+            "value":"Eating Right",
+            "data":{
+              
+            }
           },
           {
-            "count": 2,
-            "data": {},
-            "display_name": "Bocce's Bakery",
-            "status": "",
-            "value": "Bocce's Bakery"
+            "status":"",
+            "count":3,
+            "display_name":"Hershey",
+            "value":"Hershey",
+            "data":{
+              
+            }
           },
           {
-            "count": 2,
-            "data": {},
-            "display_name": "Barkthins",
-            "status": "",
-            "value": "Barkthins"
+            "status":"",
+            "count":2,
+            "display_name":"Snyders Lance",
+            "value":"Snyders Lance",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Wellness",
-            "status": "",
-            "value": "Wellness"
+            "status":"",
+            "count":2,
+            "display_name":"Signature Select",
+            "value":"Signature Select",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Vega",
-            "status": "",
-            "value": "Vega"
+            "status":"",
+            "count":4,
+            "display_name":"Carolina Nut",
+            "value":"Carolina Nut",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Square Organics",
-            "status": "",
-            "value": "Square Organics"
+            "status":"",
+            "count":3,
+            "display_name":"Betty Crocker",
+            "value":"Betty Crocker",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Quest",
-            "status": "",
-            "value": "Quest"
+            "status":"",
+            "count":3,
+            "display_name":"Small Planet Foods",
+            "value":"Small Planet Foods",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Plum Organics",
-            "status": "",
-            "value": "Plum Organics"
+            "status":"",
+            "count":1,
+            "display_name":"Sargento",
+            "value":"Sargento",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Noosa",
-            "status": "",
-            "value": "Noosa"
+            "status":"",
+            "count":1,
+            "display_name":"Haagen-Dazs",
+            "value":"Haagen-Dazs",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Kashi",
-            "status": "",
-            "value": "Kashi"
+            "status":"",
+            "count":2,
+            "display_name":"Oreo",
+            "value":"Oreo",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "International Delight",
-            "status": "",
-            "value": "International Delight"
+            "status":"",
+            "count":7,
+            "display_name":"Atkins",
+            "value":"Atkins",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Health Warrior",
-            "status": "",
-            "value": "Health Warrior"
+            "status":"",
+            "count":2,
+            "display_name":"Eden Creamery",
+            "value":"Eden Creamery",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Haven's Kitchen",
-            "status": "",
-            "value": "Haven's Kitchen"
+            "status":"",
+            "count":1,
+            "display_name":"Lean Cuisine",
+            "value":"Lean Cuisine",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Greenies",
-            "status": "",
-            "value": "Greenies"
+            "status":"",
+            "count":4,
+            "display_name":"Open Nature",
+            "value":"Open Nature",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Good Health",
-            "status": "",
-            "value": "Good Health"
+            "status":"",
+            "count":3,
+            "display_name":"Russell Stover",
+            "value":"Russell Stover",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Dr. McDougall's",
-            "status": "",
-            "value": "Dr. McDougall's"
+            "status":"",
+            "count":3,
+            "display_name":"JM Smucker",
+            "value":"JM Smucker",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Dannon",
-            "status": "",
-            "value": "Dannon"
+            "status":"",
+            "count":1,
+            "display_name":"Talenti",
+            "value":"Talenti",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Cascadian Farm Organic",
-            "status": "",
-            "value": "Cascadian Farm Organic"
+            "status":"",
+            "count":1,
+            "display_name":"Beyond Better Foods",
+            "value":"Beyond Better Foods",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Bear Naked",
-            "status": "",
-            "value": "Bear Naked"
+            "status":"",
+            "count":3,
+            "display_name":"Power Crunch",
+            "value":"Power Crunch",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Barnana",
-            "status": "",
-            "value": "Barnana"
+            "status":"",
+            "count":1,
+            "display_name":"Tillamook",
+            "value":"Tillamook",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Barbara's",
-            "status": "",
-            "value": "Barbara's"
+            "status":"",
+            "count":1,
+            "display_name":"Clif Bar",
+            "value":"Clif Bar",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Back to Nature",
-            "status": "",
-            "value": "Back to Nature"
+            "status":"",
+            "count":1,
+            "display_name":"J & J Snack Foods",
+            "value":"J & J Snack Foods",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Weight Watchers",
-            "status": "",
-            "value": "Weight Watchers"
+            "status":"",
+            "count":5,
+            "display_name":"Justins",
+            "value":"Justins",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Van Leeuwen",
-            "status": "",
-            "value": "Van Leeuwen"
+            "status":"",
+            "count":1,
+            "display_name":"Chicago Bar",
+            "value":"Chicago Bar",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Talenti",
-            "status": "",
-            "value": "Talenti"
+            "status":"",
+            "count":5,
+            "display_name":"ThinkThin",
+            "value":"ThinkThin",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Halo Top",
-            "status": "",
-            "value": "Halo Top"
+            "status":"",
+            "count":2,
+            "display_name":"Balance Bar",
+            "value":"Balance Bar",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Enlightened",
-            "status": "",
-            "value": "Enlightened"
+            "status":"",
+            "count":1,
+            "display_name":"Kashi",
+            "value":"Kashi",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Early Bird",
-            "status": "",
-            "value": "Early Bird"
+            "status":"",
+            "count":2,
+            "display_name":"Nestle",
+            "value":"Nestle",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Coolhaus",
-            "status": "",
-            "value": "Coolhaus"
+            "status":"",
+            "count":1,
+            "display_name":"Melting Pot Foods",
+            "value":"Melting Pot Foods",
+            "data":{
+              
+            }
           },
           {
-            "count": 1,
-            "data": {},
-            "display_name": "Adirondack Creamery",
-            "status": "",
-            "value": "Adirondack Creamery"
+            "status":"",
+            "count":1,
+            "display_name":"Breyers",
+            "value":"Breyers",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"McCormick",
+            "value":"McCormick",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":2,
+            "display_name":"Premier Nutrition",
+            "value":"Premier Nutrition",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Chips Ahoy!",
+            "value":"Chips Ahoy!",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":4,
+            "display_name":"Blue Bunny",
+            "value":"Blue Bunny",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Abbott Labs",
+            "value":"Abbott Labs",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Dreyers",
+            "value":"Dreyers",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"So Delicious",
+            "value":"So Delicious",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Lenny & Larrys",
+            "value":"Lenny & Larrys",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":3,
+            "display_name":"Kelloggs",
+            "value":"Kelloggs",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Weight Watchers",
+            "value":"Weight Watchers",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Bakery Barn",
+            "value":"Bakery Barn",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Tasty Baking",
+            "value":"Tasty Baking",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Gatorade",
+            "value":"Gatorade",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"ConAgra Foods",
+            "value":"ConAgra Foods",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Annie Chuns",
+            "value":"Annie Chuns",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Five Star Organics",
+            "value":"Five Star Organics",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"NuGo Nutrition",
+            "value":"NuGo Nutrition",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Edwards Pie",
+            "value":"Edwards Pie",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Lactaid",
+            "value":"Lactaid",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Spectrum Brands",
+            "value":"Spectrum Brands",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":3,
+            "display_name":"Moonshot Brands",
+            "value":"Moonshot Brands",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Popchips",
+            "value":"Popchips",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Health Warrior",
+            "value":"Health Warrior",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Universal Merchants",
+            "value":"Universal Merchants",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Voortman Cookies",
+            "value":"Voortman Cookies",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Real Pet Food",
+            "value":"Real Pet Food",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Probar",
+            "value":"Probar",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Post Foods",
+            "value":"Post Foods",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Curts Peanut Butter",
+            "value":"Curts Peanut Butter",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Bear Naked",
+            "value":"Bear Naked",
+            "data":{
+              
+            }
+          },
+          {
+            "status":"",
+            "count":1,
+            "display_name":"Andre Prost",
+            "value":"Andre Prost",
+            "data":{
+              
+            }
           }
         ],
-        "type": "multiple"
+        "data":{
+          
+        }
       },
       {
-        "display_name": "Claims",
-        "name": "Claims",
-        "options": [
+        "display_name":"Nutrition",
+        "name":"Nutrition",
+        "type":"multiple",
+        "options":[
           {
-            "count": 37,
-            "data": {},
-            "display_name": "Gluten Free",
-            "status": "",
-            "value": "Gluten Free"
+            "status":"",
+            "count":225,
+            "display_name":"Kosher",
+            "value":"Kosher",
+            "data":null
           },
           {
-            "count": 21,
-            "data": {},
-            "display_name": "All Natural",
-            "status": "",
-            "value": "All Natural"
+            "status":"",
+            "count":77,
+            "display_name":"Gluten Free",
+            "value":"Gluten Free",
+            "data":{
+              
+            }
           },
           {
-            "count": 13,
-            "data": {},
-            "display_name": "Organic",
-            "status": "",
-            "value": "Organic"
+            "status":"",
+            "count":25,
+            "display_name":"Organic",
+            "value":"Organic",
+            "data":{
+              
+            }
           },
           {
-            "count": 13,
-            "data": {},
-            "display_name": "No High Fructose Corn Syrup",
-            "status": "",
-            "value": "No High Fructose Corn Syrup"
+            "status":"",
+            "count":3,
+            "display_name":"Low Fat",
+            "value":"Low Fat",
+            "data":{
+              
+            }
           },
           {
-            "count": 12,
-            "data": {},
-            "display_name": "Vegan",
-            "status": "",
-            "value": "Vegan"
-          },
-          {
-            "count": 12,
-            "data": {},
-            "display_name": "Trans Fat Free",
-            "status": "",
-            "value": "Trans Fat Free"
-          },
-          {
-            "count": 10,
-            "data": {},
-            "display_name": "No Hydrogenated Oils",
-            "status": "",
-            "value": "No Hydrogenated Oils"
-          },
-          {
-            "count": 6,
-            "data": {},
-            "display_name": "No Preservatives",
-            "status": "",
-            "value": "No Preservatives"
-          },
-          {
-            "count": 6,
-            "data": {},
-            "display_name": "No Artificial Ingredients",
-            "status": "",
-            "value": "No Artificial Ingredients"
-          },
-          {
-            "count": 2,
-            "data": {},
-            "display_name": "Reduced Fat",
-            "status": "",
-            "value": "Reduced Fat"
-          },
-          {
-            "count": 39,
-            "data": {},
-            "display_name": "GMO Free",
-            "status": "",
-            "value": "GMO Free"
-          },
-          {
-            "count": 11,
-            "data": {},
-            "display_name": "Made with Organic Ingredients",
-            "status": "",
-            "value": "Made with Organic Ingredients"
-          },
-          {
-            "count": 7,
-            "data": {},
-            "display_name": "Vegetarian",
-            "status": "",
-            "value": "Vegetarian"
-          },
-          {
-            "count": 7,
-            "data": {},
-            "display_name": "Low Fat",
-            "status": "",
-            "value": "Low Fat"
-          },
-          {
-            "count": 7,
-            "data": {},
-            "display_name": "Cholesterol Free",
-            "status": "",
-            "value": "Cholesterol Free"
-          },
-          {
-            "count": 6,
-            "data": {},
-            "display_name": "Dairy Free",
-            "status": "",
-            "value": "Dairy Free"
-          },
-          {
-            "count": 4,
-            "data": {},
-            "display_name": "Soy Free",
-            "status": "",
-            "value": "Soy Free"
-          },
-          {
-            "count": 4,
-            "data": {},
-            "display_name": "No Artificial Color",
-            "status": "",
-            "value": "No Artificial Color"
-          },
-          {
-            "count": 3,
-            "data": {},
-            "display_name": "RBST Free",
-            "status": "",
-            "value": "RBST Free"
-          },
-          {
-            "count": 3,
-            "data": {},
-            "display_name": "Low Sodium",
-            "status": "",
-            "value": "Low Sodium"
-          },
-          {
-            "count": 3,
-            "data": {},
-            "display_name": "High Fiber",
-            "status": "",
-            "value": "High Fiber"
-          },
-          {
-            "count": 3,
-            "data": {},
-            "display_name": "Fair Trade",
-            "status": "",
-            "value": "Fair Trade"
-          },
-          {
-            "count": 2,
-            "data": {},
-            "display_name": "Whole Grains",
-            "status": "",
-            "value": "Whole Grains"
-          },
-          {
-            "count": 2,
-            "data": {},
-            "display_name": "No Sugar Added",
-            "status": "",
-            "value": "No Sugar Added"
-          },
-          {
-            "count": 2,
-            "data": {},
-            "display_name": "Low Carbohydrate",
-            "status": "",
-            "value": "Low Carbohydrate"
-          },
-          {
-            "count": 1,
-            "data": {},
-            "display_name": "Wheat Free",
-            "status": "",
-            "value": "Wheat Free"
-          },
-          {
-            "count": 1,
-            "data": {},
-            "display_name": "Sugar Free",
-            "status": "",
-            "value": "Sugar Free"
-          },
-          {
-            "count": 1,
-            "data": {},
-            "display_name": "Fat Free",
-            "status": "",
-            "value": "Fat Free"
-          },
-          {
-            "count": 1,
-            "data": {},
-            "display_name": "Hormone Free",
-            "status": "",
-            "value": "Hormone Free"
+            "status":"",
+            "count":5,
+            "display_name":"Sugar Free",
+            "value":"Sugar Free",
+            "data":{
+              
+            }
           }
         ],
-        "type": "multiple"
+        "data":{
+          
+        }
       },
       {
-        "display_name": "Price",
-        "max": 429,
-        "min": 0,
-        "name": "Price",
-        "status": { },
-        "type": "range"
-      },
-      {
-        "display_name": "Rating",
-        "name": "Rating",
-        "options": [
-          {
-            "count": 313,
-            "data": { },
-            "display_name": "4 and more",
-            "status": "",
-            "value": "4-inf"
-          },
-          {
-            "count": 533,
-            "data": { },
-            "display_name": "3 and more",
-            "status": "",
-            "value": "3-inf"
-          },
-          {
-            "count": 544,
-            "data": { },
-            "display_name": "2 and more",
-            "status": "",
-            "value": "2-inf"
-          },
-          {
-            "count": 548,
-            "data": { },
-            "display_name": "1 and more",
-            "status": "",
-            "value": "1-inf"
-          }
-        ],
-        "type": "single"
+        "min":0.79,
+        "max":19.19,
+        "display_name":"Price",
+        "name":"Price",
+        "data":{
+          
+        },
+        "type":"range",
+        "status":{
+          
+        }
       }
     ],
-    "groups": [
+    "groups":[
       {
-        "children": [
+        "group_id":"all",
+        "display_name":"All",
+        "count":301,
+        "children":[
           {
-            "children": [],
-            "count": 1,
-            "display_name": "Cream & Creamers",
-            "group_id": "264",
-            "parents": [
+            "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+            "display_name":"Cookies, Snacks & Candy",
+            "count":103,
+            "children":[
+              
+            ],
+            "parents":[
               {
-                "display_name": "Dairy",
-                "group_id": "281"
+                "display_name":"All",
+                "group_id":"all"
               }
             ]
           },
           {
-            "children": [],
-            "count": 1,
-            "display_name": "Dressing & Condiments",
-            "group_id": "314",
-            "parents": [
+            "group_id":"Fruits%20%26%20Vegetables",
+            "display_name":"Fruits & Vegetables",
+            "count":2,
+            "children":[
+              
+            ],
+            "parents":[
               {
-                "display_name": "Dairy",
-                "group_id": "281"
+                "display_name":"All",
+                "group_id":"all"
               }
             ]
           },
           {
-            "children": [],
-            "count": 5,
-            "display_name": "Yogurt",
-            "group_id": "993",
-            "parents": [
+            "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+            "display_name":"Condiments, Spice & Bake",
+            "count":62,
+            "children":[
+              
+            ],
+            "parents":[
               {
-                "display_name": "Dairy",
-                "group_id": "281"
+                "display_name":"All",
+                "group_id":"all"
+              }
+            ]
+          },
+          {
+            "group_id":"Breakfast%20%26%20Cereal",
+            "display_name":"Breakfast & Cereal",
+            "count":29,
+            "children":[
+              
+            ],
+            "parents":[
+              {
+                "display_name":"All",
+                "group_id":"all"
+              }
+            ]
+          },
+          {
+            "group_id":"Dairy%2C%20Eggs%20%26%20Cheese",
+            "display_name":"Dairy, Eggs & Cheese",
+            "count":3,
+            "children":[
+              
+            ],
+            "parents":[
+              {
+                "display_name":"All",
+                "group_id":"all"
+              }
+            ]
+          },
+          {
+            "group_id":"Frozen%20Foods",
+            "display_name":"Frozen Foods",
+            "count":28,
+            "children":[
+              
+            ],
+            "parents":[
+              {
+                "display_name":"All",
+                "group_id":"all"
+              }
+            ]
+          },
+          {
+            "group_id":"Personal%20Care%20%26%20Health",
+            "display_name":"Personal Care & Health",
+            "count":54,
+            "children":[
+              
+            ],
+            "parents":[
+              {
+                "display_name":"All",
+                "group_id":"all"
+              }
+            ]
+          },
+          {
+            "group_id":"Bread%20%26%20Bakery",
+            "display_name":"Bread & Bakery",
+            "count":10,
+            "children":[
+              
+            ],
+            "parents":[
+              {
+                "display_name":"All",
+                "group_id":"all"
+              }
+            ]
+          },
+          {
+            "group_id":"Pet%20Care",
+            "display_name":"Pet Care",
+            "count":5,
+            "children":[
+              
+            ],
+            "parents":[
+              {
+                "display_name":"All",
+                "group_id":"all"
+              }
+            ]
+          },
+          {
+            "group_id":"International%20Cuisine",
+            "display_name":"International Cuisine",
+            "count":4,
+            "children":[
+              
+            ],
+            "parents":[
+              {
+                "display_name":"All",
+                "group_id":"all"
+              }
+            ]
+          },
+          {
+            "group_id":"Wine%2C%20Beer%20%26%20Spirits",
+            "display_name":"Wine, Beer & Spirits",
+            "count":1,
+            "children":[
+              
+            ],
+            "parents":[
+              {
+                "display_name":"All",
+                "group_id":"all"
               }
             ]
           }
         ],
-        "count": 7,
-        "display_name": "Dairy",
-        "group_id": "281",
-        "parents": []
-      },
-      {
-        "children": [
-          {
-            "children": [],
-            "count": 7,
-            "display_name": "Ice Cream & Treats",
-            "group_id": "466",
-            "parents": [
-              {
-                "display_name": "Frozen",
-                "group_id": "391"
-              }
-            ]
-          }
-        ],
-        "count": 7,
-        "display_name": "Frozen",
-        "group_id": "391",
-        "parents": []
-      },
-      {
-        "children": [
-          {
-            "children": [],
-            "count": 48,
-            "display_name": "Baby",
-            "group_id": "46",
-            "parents": [
-              {
-                "display_name": "Grocery",
-                "group_id": "431"
-              }
-            ]
-          },
-          {
-            "children": [],
-            "count": 85,
-            "display_name": "Pantry",
-            "group_id": "625",
-            "parents": [
-              {
-                "display_name": "Grocery",
-                "group_id": "431"
-              }
-            ]
-          },
-          {
-            "children": [],
-            "count": 4,
-            "display_name": "Pet",
-            "group_id": "656",
-            "parents": [
-              {
-                "display_name": "Grocery",
-                "group_id": "431"
-              }
-            ]
-          }
-        ],
-        "count": 95,
-        "display_name": "Grocery",
-        "group_id": "431",
-        "parents": []
+        "parents":[
+          
+        ]
       }
     ],
-    "results": [
+    "results":[
       {
-        "data": {
-          "description": "The same great Jif taste in a convenient snack size that's perfect for dipping!",
-          "facets": [
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"109350015",
+          "url":"/",
+          "price":2.99,
+          "facets":[
             {
-              "name": "Brand",
-              "values": [
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                364
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.12
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.99
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109350015.png",
+          "description":"Heart Healthy: May reduce the risk of heart disease. Scientific evidence suggests but does not prove that eating 1.5 ounces per day of most nuts as part of a diet low in saturated fat and cholesterol and not resulting in increased caloric intake may reduce the risk of heart disease. See nutrition information for fat content (1.5 oz is about 58 pieces). Per 1 oz: 160 calories; 2 g sat fat (10% DV); 150 mg sodium (6% DV); 1 g sugars. Visit us at: planters.com. Please have package available. Please include code number on package in all correspondence. USA quality.",
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Dry Roasted - 16 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"109350016",
+          "url":"/",
+          "price":2.99,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                452
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.11
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.99
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109350016.png",
+          "description":"Per 1 oz: 170 calories; 2 g sat fat (10% DV); 5 mg sodium (0% DV); 1 g sugars. 50% less sodium than Planters Dry Roasted Peanuts. Heart Healthy: May reduce the risk of heart disease. Scientific evidence suggests but does not prove that eating 1.5 ounces per day of most nuts as part of a diet low in saturated fat and cholesterol and not resulting in increased caloric intake may reduce the risk of heart disease. See nutrition for fat content. (1.5 oz is about 58 pieces). Contains 75 mg sodium per serving compared to 150 mg in Planters Dry Roasted Peanuts. American Heart Association Certified: Meets criteria for heart-healthy food. Visit us at: planters.com. 1-877-677-3268. Please have package available. Please include code number on package in all correspondence. Quality USA.",
+          "weighted_keywords":{
+            "roast":2
+          },
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Dry Roasted Lightly Salted - 16 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"109350013",
+          "url":"/",
+          "price":2.99,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                72
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.05
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.99
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109350013.png",
+          "description":"Heart Healthy: May reduce the risk of heart disease. Scientific evidence suggests but does not prove that eating 1.5 ounces per day of most nuts as part of a diet low in saturated fat and cholesterol and not resulting in increased caloric intake may reduce the risk of heart disease. See nutrition information for fat content. (1.5 oz is about 53 pieces). Per 1 oz: 170 calories; 2 g sat fat (10% DV); 95 mg sodium (4% DV); 1 g sugars. Visit us at: planters.com. 1-877-677-3268 please have package available. Please include code number from bottom of can in all correspondence. American Heart Association Certified: Meets criteria for heart-healthy food. USA quality.",
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Cocktail - 16 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"109350041",
+          "url":"/",
+          "price":2.99,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                117
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.07
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.99
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109350041.png",
+          "description":"Per 1 oz: 160 calories; 2 g sat fat (10% DV); 105 mg sodium (4% DV); 4 g sugars. Partially produced with genetic engineering. Visit us at: planters.com. 1-877-677-3268. Please have package available. Please include code number on package in all correspondence. Quality USA.",
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Dry Roasted Honey Roasted - 16 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"109350098",
+          "url":"/",
+          "price":11.29,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                89
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.13
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                11.29
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109350098.png",
+          "description":"Per 1 oz: 160 calories; 2 g sat fat (10% DV); 150 mg sodium (6% DV); 1 g sugars. Heart Healthy: May reduce the risk of heart disease. Scientific evidence but does not prove that eating 1.5 ounces per day of most nuts as part of a diet low in saturated fat and cholesterol and not resulting in increased caloric intake may reduce the risk of heart disease. See nutrition for fat content. (1.5 oz is about 53 pieces). Visit Us at: planters.com or call us at: 1.877.677.3268.",
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Dry Roasted - 43.5 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"109450219",
+          "url":"/",
+          "price":13.59,
+          "facets":[
+            {
+              "name":"Inventory",
+              "values":[
+                227
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.07
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                13.59
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109450219.png",
+          "description":"Less than 50% peanuts. Peanuts, cashews, almonds, hazelnuts, pecans & brazil nuts. Per 3 tbsp: 170 calories; 2 g sat fat (10% DV); 95 mg sodium (4% DV); 1 g total sugars. Nutterly amazing. Quality & satisfaction guaranteed or your money back. Peanuts product of USA, Argentina; Pecans product of USA, Mexico.",
+          "weighted_keywords":{
+            "nuts":2,
+            "with":2
+          },
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"The Snack Artist Mixed Nuts With Peanuts - 28 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"109350289",
+          "url":"/",
+          "price":11.29,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                602
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.09
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                11.29
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109350289.png",
+          "description":"Per 1 oz: 160 calories; 2 g sat fat (10% DV); 105 mg sodium (4% DV); 4 g sugars. Visit us at: planters.com or call us at: 1-877-677-3268. Please include code number on package in all correspondence.",
+          "weighted_keywords":{
+            "peanuts":2
+          },
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Honey Roasted - 34.5 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"960071212",
+          "url":"/",
+          "price":2.5,
+          "facets":[
+            {
+              "name":"Inventory",
+              "values":[
+                835
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.09
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.5
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-960071212.png",
+          "description":"Per 1 oz: 160 calories; 2 g sat fat (11% DV); 0 mg sodium (0% DV); 1 g total sugars. See nutrition information for fat content. Our Signature is Our Promise: Signature Select is your assurance of great quality products at the best value everyday - from delicious frozen entrees and freshly baked French bread to home essentials. We wouldn't put our Signature on anything else. Quality guaranteed. Our Promise: Quality & satisfaction 100% guaranteed or your money back. www.betterlivingbrandsLLC.com. SmartLabel: Scan for more food information. Peanuts product of Argentina, Mexico, USA.",
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"The Snack Artist Peanuts Dry Roasted Unsalted - 16 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"960070502",
+          "url":"/",
+          "price":2.9,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Signature Farms"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                360
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.36
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.9
+              ]
+            }
+          ],
+          "keywords":[
+            "seeds",
+            "nuts",
+            "snacks"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-960070502.png",
+          "description":"Per 1 oz: 160 calories; 2 g sat fat (13% DV); 210 mg sodium (9% DV); 1 g sugars. Quality guaranteed. Our Promise: Quality & satisfaction 100% guaranteed or your money back. www.betterlivingbrandsLLC.com. Product of USA.",
+          "weighted_keywords":{
+            "roasted":2
+          },
+          "groups":[
+            {
+              "group_id":"Fruits%20%26%20Vegetables",
+              "display_name":"Fruits & Vegetables",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Signature Farms Peanuts Roasted & Salted - 16 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"960071213",
+          "url":"/",
+          "price":6.89,
+          "facets":[
+            {
+              "name":"Inventory",
+              "values":[
+                961
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.08
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                6.89
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-960071213.png",
+          "description":"Per 3 tbsp: 160 calories; 2 g sat fat (10% DV); 110 mg sodium (5% DV); 1 g sugars. Nutterly amazing. Quality & satisfaction guaranteed or your money back. Product of USA, Argentina.",
+          "weighted_keywords":{
+            "roasted":2
+          },
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"The Snack Artist Peanuts Roasted & Salted - 31 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"960115129",
+          "url":"/",
+          "price":2.89,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                344
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.14
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.89
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-960115129.png",
+          "description":"Per 1 oz: 170 calories; 2 g sat fat (10% DV); 95 mg sodium (4% DV); 1 g sugars. Visit Us at: planters.com. 1-877-677-3268 please have package available.",
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Classic - 6 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanuts"
+        ],
+        "data":{
+          "id":"960070503",
+          "url":"/",
+          "price":2.9,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Signature Farms"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                179
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.45
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.9
+              ]
+            }
+          ],
+          "keywords":[
+            "seeds",
+            "nuts",
+            "snacks"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-960070503.png",
+          "description":"Per 1 oz: 170 calories; 2.5 g sat fat (13% DV); 0 mg sodium (0% DV); 1 g sugars. Quality guaranteed. Our Promise: Quality & satisfaction 100% guaranteed or your money back. www.betterlivingbrandsLLC.com. Product of USA.",
+          "weighted_keywords":{
+            "roasted":2
+          },
+          "groups":[
+            {
+              "group_id":"Fruits%20%26%20Vegetables",
+              "display_name":"Fruits & Vegetables",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Signature Farms Peanuts Roasted & Unsalted - 16 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"204100011",
+          "url":"/",
+          "price":4.59,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
                 "Jif"
               ]
             },
             {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
+              "name":"Inventory",
+              "values":[
+                75
               ]
             },
             {
-              "display_name": "Cases",
-              "group_id": "162",
-              "path": "/431/46",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Baby",
-                  "id": "46"
-                }
+              "name":"Margin",
+              "values":[
+                0.07
               ]
             },
             {
-              "display_name": "Snacks",
-              "group_id": "830",
-              "path": "/431/46",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Baby",
-                  "id": "46"
-                }
-              ]
-            }
-          ],
-          "id": "gro_pid_4220124",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4220124.png",
-          "price": "$15.99",
-          "quantity": "1cs",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4220124.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Jif Creamy Peanut Butter To Go Cups, Case"
-      },
-      {
-        "data": {
-          "description": "Craving peanutty taste that packs a crunch? Look no further than Skippy Super Chunk Peanut Butter. Every jar is blended with loads of real peanut pieces so you get the fun flavor of Skippy Peanut Butter, plus crazy-good crunchiness.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Skippy"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup",
-                "Vegan"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_skippy_super_ch_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_super_ch_01.png",
-          "price": "$2.79",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_super_ch_01.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Skippy Super Chunk Peanut Butter"
-      },
-      {
-        "data": {
-          "description": "Fill your panty with Wild Harvest Organic Creamy Peanut Butter that can turn boring meals into better meals, instantly. You can always count on convenience with Wild Harvest.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Wild Harvest"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
+              "name":"Nutrition",
+              "values":[
                 "Gluten Free",
-                "No Artificial Ingredients",
-                "No High Fructose Corn Syrup",
-                "No Hydrogenated Oils",
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                4.59
+              ]
+            }
+          ],
+          "keywords":[
+            "butter",
+            "peanut",
+            "spreads"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-204100011.png",
+          "description":"7 g protein per serving. 190 calories per 2 tbsp. Non GMO (Not made with genetically modified ingredients. Trace amounts of genetically modified material may be present). Gluten free. No. 1 choice of choosy moms. Look for the flavor seal. Contains no preservatives. No refrigeration required. Visit us at jif.com. Questions? Comments? 1-800-283-8915. This package is recyclable. However, recycling programs for this package may not exist in your area. See nutrition information for fat and saturated fat content. Proud Sponsor: Boys & Girls Clubs of America.",
+          "groups":[
+            {
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Jif Peanut Butter Creamy - 16 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"104100063",
+          "url":"/",
+          "price":5.69,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "O Organics"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                700
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.37
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher",
                 "Organic"
               ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
             },
             {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
+              "name":"Price",
+              "values":[
+                5.69
               ]
             }
           ],
-          "id": "gro_whrvsto_pb_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_whrvsto_pb_01.png",
-          "price": "$5.29",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_whrvsto_pb_01.png"
+          "keywords":[
+            "butter",
+            "peanut",
+            "spreads"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-104100063.png",
+          "description":"Contains 90% peanuts. See nutrition information for fat and saturated fat content. 190 calories per 2 tbsp. USDA organic. Organic from the Source: Doesn't it feel good to know where your food comes from? At O Organics, we carefully select producers who meet organic farming standards and share our commitment to organic agriculture. That's our promise. SmartLabel. Scan for more food information. Certified organic by Quality Assurance International. Quality & satisfaction 100% guaranteed or your money back. Product of Canada.",
+          "weighted_keywords":{
+            "spread":2
+          },
+          "groups":[
+            {
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Wild Harvest Organic Creamy Peanut Butter"
+        "value":"O Organics Organic Peanut Butter Spread No Stir Creamy - 18 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "description": "Jif Reduced Fat peanut Butter has fresh-roasted peanut taste with 25% less fat than regular Jif Peanut Butter.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Jif"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "No Preservatives",
-                "Reduced Fat"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_jif_rf_crm_pb_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_rf_crm_pb_01.png",
-          "price": "$3.29",
-          "quantity": "1lb",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_rf_crm_pb_01.png"
-        },
-        "matched_terms": [
-          "peanut"
+        "matched_terms":[
+          "peanuts"
         ],
-        "value": "Jif Reduced Fat Creamy Peanut Butter"
+        "data":{
+          "id":"109350010",
+          "url":"/",
+          "price":2.5,
+          "facets":[
+            {
+              "name":"Inventory",
+              "values":[
+                462
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.05
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.5
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109350010.png",
+          "description":"160 calories per 3 tbsp. See nutrition information for fat content. Nutterly amazing. The story of Snack Artist: No one can predict where the Snack Artist will strike next. Drawn to the flavor of our tempting varieties of cashews, peanuts, almonds and more, this insatiable snacker leaves only a clever sketch behind. 100% money back guaranteed. Quality & satisfaction. www.betterlivingbrandsLLC.com. Product of USA, Argentina.",
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"The Snack Artist Peanuts Dry Roasted - 16 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "description": "Smucker's Creamy Natural Peanut Butter is made with two simple ingredients: fresh-roasted peanuts and a dash of salt. It's perfect for pairing with Smucker's famous jams and jellies for a great PB & J. Also enjoy as a snack with fruits or crackers, or use in recipes.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Smucker's"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_smuck_crm_pb_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_smuck_crm_pb_01.png",
-          "price": "$2.59",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_smuck_crm_pb_01.png"
-        },
-        "matched_terms": [
-          "peanut"
+        "matched_terms":[
+          "peanuts"
         ],
-        "value": "Smucker's Creamy Natural Peanut Butter"
+        "data":{
+          "id":"960004954",
+          "url":"/",
+          "price":2.5,
+          "facets":[
+            {
+              "name":"Inventory",
+              "values":[
+                96
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.08
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.5
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-960004954.png",
+          "description":"160 calories per 3 tbsp. See nutrition information for fat content. 50% less sodium than our regular dry roasted salted peanuts. Not a low sodium food. Sodium reduced from 170 mg to 85 mg per serving. Nutterly amazing. The story of Snack Artist. No one can predict where the Snack Artist will strike next. Drawn to the flavor of our tempting varieties of cashews, peanuts, almonds and more, this insatiable snacker leaves only a clever sketch behind. 100% money back guaranteed. Quality & satisfaction. www.betterlivingbrandsLLC.com. Product of USA, Argentina.",
+          "weighted_keywords":{
+            "artist":2
+          },
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"The Snack Artist Peanuts Dry Roasted Lightly Salted - 16 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "description": "Spread on the smiles with smooth, creamy peanut buttery perfection. Skippy Creamy Peanut Butter adds more yum and fun to just about anything. It's nothing but smooth snacking with this creamy classic.",
-          "facets": [
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"960110940",
+          "url":"/",
+          "price":4.59,
+          "facets":[
             {
-              "name": "Brand",
-              "values": [
+              "name":"Brand",
+              "values":[
                 "Skippy"
               ]
             },
             {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup",
-                "Vegan"
+              "name":"Inventory",
+              "values":[
+                938
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.14
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Gluten Free",
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                4.59
               ]
             }
           ],
-          "groups": [
+          "keywords":[
+            "butter",
+            "peanut",
+            "spreads"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-960110940.png",
+          "description":"Fuel the fun! Look for inner quality seal. No preservatives, artificial flavors, or colors (Similar to all peanut butters). Visit us at: peanutbutter.com. Did you know? When combine with foods like whole grain bread, fruit & low fat milk, Skippy Peanut Butter helps to make a nutritioous meal or snack delicious. Gluten free. May be produced with genetic engineering. Good source of Vitamin E.",
+          "weighted_keywords":{
+            "spread":2
+          },
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "gro_skippy_regular_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_regular_01.png",
-          "price": "$2.79",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_regular_01.png"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Skippy Creamy Peanut Butter"
+        "value":"SKIPPY Peanut Butter Spread Creamy - 16.3 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "description": "Stir up something special with Smucker's Chunky Natural Peanut Butter, made with two simple ingredients: fresh-roasted peanuts and a dash of salt. It's great for sandwiches and snacks, and also adds just the right crunch to recipes, dips, and dressings.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Smucker's"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "All Natural",
-                "No High Fructose Corn Syrup",
-                "Trans Fat Free",
-                "Vegan"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_smuckers_natural_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_smuckers_natural_01.png",
-          "price": "$2.59",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_smuckers_natural_01.png"
-        },
-        "matched_terms": [
+        "matched_terms":[
           "peanut"
         ],
-        "value": "Smucker's Chunky Natural Peanut Butter"
+        "data":{
+          "id":"104100133",
+          "url":"/",
+          "price":5.69,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "O Organics"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                45
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.47
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher",
+                "Organic"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                5.69
+              ]
+            }
+          ],
+          "keywords":[
+            "butter",
+            "peanut",
+            "spreads"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-104100133.png",
+          "description":"See nutrition information for fat content. 190 calories per 2 tbsp. USDA organic. Organic from the Source: Doesn't it feel good to know where your food comes from? At O Organics, we carefully select producers who meet organic farming standards and share our commitment to organic agriculture. That's our promise. SmartLabel. Scan for more food information. Certified organic by Quality Assurance International. Quality & satisfaction 100% guaranteed or your money back. Product of Canada.",
+          "groups":[
+            {
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"O Organics Organic Peanut Butter Spread Old Fashioned Creamy - 18 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "description": "The same great Jif taste in a convenient snack size that's perfect for dipping!",
-          "facets": [
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"104100051",
+          "url":"/",
+          "price":5.69,
+          "facets":[
             {
-              "name": "Brand",
-              "values": [
+              "name":"Brand",
+              "values":[
+                "O Organics"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                698
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.47
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher",
+                "Organic"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                5.69
+              ]
+            }
+          ],
+          "keywords":[
+            "butter",
+            "peanut",
+            "spreads"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-104100051.png",
+          "description":"Contains 90% peanuts. See nutrition information for fat and saturated fat content. 190 calories per 2 tbsp. USDA organic. Organic from the source. Doesn't it feel good to know where your food comes from? At O Organics, we carefully select producers who meet organic farming standards and share our commitment to organic agriculture. That's our promise. Certified organic by Quality Assurance International. Quality & satisfaction 100% guaranteed or your money back. Product of Canada.",
+          "weighted_keywords":{
+            "stir":2,
+            "spread":2
+          },
+          "groups":[
+            {
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"O Organics Organic Peanut Butter Spread No Stir Crunchy - 18 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"204100025",
+          "url":"/",
+          "price":5.99,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
                 "Jif"
               ]
             },
             {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup"
+              "name":"Inventory",
+              "values":[
+                602
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.05
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Gluten Free",
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                5.99
               ]
             }
           ],
-          "groups": [
+          "keywords":[
+            "butter",
+            "peanut",
+            "spreads"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-204100025.png",
+          "description":"7 g protein per serving. Non GMO (certified NSF non-GMO True North by NSF International) - gluten free. See nutrition information for fat and saturated fat content. This package is recyclable. However, recycling programs for this package may not exist in your area. Per 2 Tbsp: 190 calories; 2.5 g sat fat (14% DV); 140 mg sodium (6% DV); 3 g total sugars. Questions? Comments? 1-800-283-8915. Visit us at jif.com. Smart Label. Look for the flavor seal. Contains no preservatives. No refrigeration required. Boys & Girls Clubs of America.",
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "gro_jif_crmytogo",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_crmytogo.png",
-          "price": "$2.99",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_crmytogo.png"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Jif Creamy Peanut Butter To Go Cups"
+        "value":"Jif Peanut Butter Creamy - 28 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "description": "Spread on the yippee with smooth, creamy peanut buttery perfection. Skippy Creamy Peanut Butter Spread adds more yum and fun to just about anything. And with 25% less fat, Skippy Reduced Fat Creamy Peanut Butter Spread gives you even more to smile for.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Skippy"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup",
-                "Reduced Fat",
-                "Trans Fat Free",
-                "Vegan"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_skippy_regular_03",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_regular_03.png",
-          "price": "$2.79",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_regular_03.png"
-        },
-        "matched_terms": [
+        "matched_terms":[
           "peanut"
         ],
-        "value": "Skippy Reduced Fat Creamy Peanut Butter"
-      },
-      {
-        "data": {
-          "description": "Jif Peanut Butter has that perfect combination of creamy texture with the fresh-roasted peanut taste you love.",
-          "facets": [
+        "data":{
+          "id":"960086537",
+          "url":"/",
+          "price":4.59,
+          "facets":[
             {
-              "name": "Brand",
-              "values": [
+              "name":"Brand",
+              "values":[
                 "Jif"
               ]
             },
             {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
+              "name":"Inventory",
+              "values":[
+                907
               ]
             },
             {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
+              "name":"Margin",
+              "values":[
+                0.1
               ]
             },
             {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_jif_creamy_pb_03",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_creamy_pb_03.png",
-          "price": "$3.29",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_creamy_pb_03.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Jif Creamy Peanut Butter"
-      },
-      {
-        "data": {
-          "description": "Craving peanutty taste that packs a crunch? Look no further than Skippy Super Chunk Peanut Butter. Every jar is blended with loads of real peanut pieces so you get the fun flavor of Skippy Peanut Butter, plus crazy-good crunchiness.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Skippy"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "Trans Fat Free"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_skippy_super_ch_02",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_super_ch_02.png",
-          "price": "$4.49",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_super_ch_02.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Skippy Super Chunk Peanut Butter"
-      },
-      {
-        "data": {
-          "description": "In 1933, Joseph Rosenfield had the nutty idea to change the formula for peanut butter. He created Skippy peanut butter, which was less sticky and longer-lasting. Peanut butter lovers fell in love, and spread the fun to their families and friends. Fifty years after Joseph Rosenfield\u0092s innovation,...",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Hormel"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
+              "name":"Nutrition",
+              "values":[
                 "Gluten Free",
-                "Trans Fat Free"
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                4.59
               ]
             }
           ],
-          "groups": [
+          "keywords":[
+            "butter",
+            "peanut",
+            "spreads"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-960086537.png",
+          "description":"Fresh roasted peanut taste. Peanut butter spread contains 90% peanuts. 190 calories per 2 tbsp. Visit us at www.jif.com. Low sodium! See nutrition information for fat and saturated fat content. No need to stir. Natural ingredients, minimal oil separation is natural. Look for the flavor seal. Contains no preservatives. No refrigeration required. Gluten free. Questions? Comments? 1-800-283-8915. This package is recyclable. However, recycling programs for this package may not exist in your area.",
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "gro_skippy_hnyroast",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_hnyroast.png",
-          "price": "$2.79",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_hnyroast.png"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Skippy Roasted Honey Nut Creamy Peanut Butter"
+        "value":"Jif Natural Peanut Butter Creamy - 16 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "description": "thinkThin High Protein Bars contain a balanced mix of quality ingredients covered in decadent chocolate, providing an indulgent taste with none of the guilt.Every bite of our Creamy Peanut Butter bar is packed with the delicious combination of creamy peanut butter and luscious milk chocolate.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "thinkThin"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "Gluten Free"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "Snacks",
-              "group_id": "830",
-              "path": "/431/46",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Baby",
-                  "id": "46"
-                }
-              ]
-            },
-            {
-              "display_name": "Bars",
-              "group_id": "71",
-              "path": "/431/625/830",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "Snacks",
-                  "id": "830"
-                }
-              ]
-            },
-            {
-              "display_name": "Energy & Protein",
-              "group_id": "339",
-              "path": "/431/625/830/71",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "Snacks",
-                  "id": "830"
-                },
-                {
-                  "display_name": "Bars",
-                  "id": "71"
-                }
-              ]
-            }
-          ],
-          "id": "gro_pid_4010959",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010959.png",
-          "price": "$17.99",
-          "quantity": "1cs",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010959.png"
-        },
-        "matched_terms": [
-          "peanut"
+        "matched_terms":[
+          "peanuts"
         ],
-        "value": "thinkThin High Protein Bars, Creamy Peanut Butter"
+        "data":{
+          "id":"960153193",
+          "url":"/",
+          "price":1.11,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                54
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.07
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                1.11
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-960153193.png",
+          "description":"Visit us at: planters.com. 1-877-677-3268. Please have package available. Please include code number from bottom of can in all correspondence. Per 1 oz: 160 calories; 1.5 g sat fat (8% DV); 105 mg sodium (4% DV); 5 g sugars.",
+          "weighted_keywords":{
+            "peanuts":2
+          },
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Honey Roasted - 12 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "description": "thinkThin High Protein Bars contain a balanced mix of quality ingredients covered in decadent chocolate, providing an indulgent taste with none of the guilt.Every bite of our Chunky Peanut Butter bar is chock full of wholesome roasted peanuts covered in delicious milk chocolate.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "thinkThin"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "Gluten Free"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "Snacks",
-              "group_id": "830",
-              "path": "/431/46",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Baby",
-                  "id": "46"
-                }
-              ]
-            },
-            {
-              "display_name": "Bars",
-              "group_id": "71",
-              "path": "/431/625/830",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "Snacks",
-                  "id": "830"
-                }
-              ]
-            },
-            {
-              "display_name": "Energy & Protein",
-              "group_id": "339",
-              "path": "/431/625/830/71",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "Snacks",
-                  "id": "830"
-                },
-                {
-                  "display_name": "Bars",
-                  "id": "71"
-                }
-              ]
-            }
-          ],
-          "id": "gro_pid_4010960",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010960.png",
-          "price": "$17.99",
-          "quantity": "1cs",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010960.png"
-        },
-        "matched_terms": [
+        "matched_terms":[
           "peanut"
         ],
-        "value": "thinkThin High Protein Bars, Chunky Peanut Butter"
+        "data":{
+          "id":"102020688",
+          "url":"/",
+          "price":2.5,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Keebler"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                76
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.05
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.5
+              ]
+            }
+          ],
+          "keywords":[
+            "multipacks",
+            "variety"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-102020688.png",
+          "description":"Made with real peanut butter. Visit Keebler.com for information on promotions, recipes, products, and FAQs To check your offer order status go to: Kelloggs.com/specialorders. Phone us at 1-877-453-5837. Write to PO Box CAMB, Battle Creek, MI 49016-1986. Provide production code on package.",
+          "weighted_keywords":{
+            "cheese":2
+          },
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Keebler Crackers Sandwich Cheese & Peanut Butter - 8 - 1.38 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                ""
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": []
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "Oil & Vinegar",
-              "group_id": "593",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Vegetable & Nut Oil",
-              "group_id": "943",
-              "path": "/431/625/593",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "Oil & Vinegar",
-                  "id": "593"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut",
-              "group_id": "645",
-              "path": "/431/625/593/943",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "Oil & Vinegar",
-                  "id": "593"
-                },
-                {
-                  "display_name": "Vegetable & Nut Oil",
-                  "id": "943"
-                }
-              ]
-            }
-          ],
-          "id": "gro_planters_peanut_o_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_planters_peanut_o_01.png",
-          "price": "$5.69",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_planters_peanut_o_01.png"
-        },
-        "matched_terms": [
-          "peanut"
+        "matched_terms":[
+          "peanuts"
         ],
-        "value": "Planters Peanut Oil"
-      },
-      {
-        "data": {
-          "description": "Banana yoghurt with Guittard dark chocolate, banana chips, and peanuts.",
-          "facets": [
+        "data":{
+          "id":"109700659",
+          "url":"/",
+          "price":1.25,
+          "facets":[
             {
-              "name": "Brand",
-              "values": [
-                "Noosa"
+              "name":"Brand",
+              "values":[
+                "Frito-Lay, INC"
               ]
             },
             {
-              "name": "Claims",
-              "values": [
-                "Gluten Free"
+              "name":"Inventory",
+              "values":[
+                821
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.11
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                1.25
               ]
             }
           ],
-          "groups": [
+          "keywords":[
+            "multipacks",
+            "variety"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109700659.png",
+          "description":"Cracker Jacks the classic caramel coated popcorn and peanuts treat with a fun surprise inside every box. One of America's most beloved treats, Cracker Jack caramel coated popcorn and peanuts were first introduced to the public in 1893.",
+          "weighted_keywords":{
+            "popcorn":2
+          },
+          "groups":[
             {
-              "display_name": "Dairy",
-              "group_id": "281",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Yogurt",
-              "group_id": "993",
-              "path": "/431/46/376",
-              "path_list": [
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Baby",
-                  "id": "46"
-                },
-                {
-                  "display_name": "Food",
-                  "id": "376"
-                }
-              ]
-            },
-            {
-              "display_name": "Indulgent",
-              "group_id": "473",
-              "path": "/281/993",
-              "path_list": [
-                {
-                  "display_name": "Dairy",
-                  "id": "281"
-                },
-                {
-                  "display_name": "Yogurt",
-                  "id": "993"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "dai_pid_2003736",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/dai_pid_2003736.png",
-          "price": "$2.49",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/dai_pid_2003736.png"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Noosa Mates Finest Yoghurt and Crunchies, Banana Chocolate Peanut"
-      },
-      {
-        "data": {
-          "description": "Picture rich, delicious peanut butter creme sandwiched between two tasty cookies with a tantalizing crunch. It's a smooth, crisp combination you won't be able to resist. That's our Peanut Butter Creme Cookie.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Back to Nature"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "No Artificial Color",
-                "No Artificial Ingredients",
-                "No High Fructose Corn Syrup",
-                "No Preservatives"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "Cookies, Cakes & Pastry",
-              "group_id": "243",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Cookies",
-              "group_id": "241",
-              "path": "/431/625/243",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "Cookies, Cakes & Pastry",
-                  "id": "243"
-                }
-              ]
-            },
-            {
-              "display_name": "Sandwich",
-              "group_id": "768",
-              "path": "/431/625/243/241",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "Cookies, Cakes & Pastry",
-                  "id": "243"
-                },
-                {
-                  "display_name": "Cookies",
-                  "id": "241"
-                }
-              ]
-            }
-          ],
-          "id": "gro_pid_4011296",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4011296.png",
-          "price": "$4.49",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4011296.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Back to Nature Peanut Butter Creme Cookies"
-      },
-      {
-        "data": {
-          "description": "With true REESE'S Peanut Butter taste, these chips are perfect for brownies, chocolate cookies and fudge.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Hershey's"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": []
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "Baking Needs",
-              "group_id": "61",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Baking Chocolate",
-              "group_id": "60",
-              "path": "/431/625/61",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "Baking Needs",
-                  "id": "61"
-                }
-              ]
-            }
-          ],
-          "id": "gro_pid_4009829",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4009829.png",
-          "price": "$3.69",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4009829.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Reese's Peanut Butter Chips"
-      },
-      {
-        "data": {
-          "description": "PB2 has the same consistency as full fat peanut butter with all of the natural roasted peanut flavor, but with nearly 85% less fat calories. PB2 is made with high quality peanuts that are slow-roasted to our specifications and pressed to remove the oil. All-natural with no artificial flavors, sw...",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "PB2"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "All Natural",
-                "No Artificial Ingredients"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_pid_4008604",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4008604.png",
-          "price": "$5.79",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4008604.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "PB2 Powdered Peanut Butter"
-      },
-      {
-        "data": {
-          "description": "I like peanut butter so much I dedicated years of my life to creating an entirely new, one-of-a-kind way to make it. I know what you're thinking: how many ways can there be to make peanut butter? Well, there are at least two: what everyone else does and what we do. And I guarantee once you try o...",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Justin's"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "All Natural",
-                "Dairy Free",
-                "Gluten Free",
-                "No Hydrogenated Oils",
-                "Vegan"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_jstns_pntbttr",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jstns_pntbttr.png",
-          "price": "$6.99",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jstns_pntbttr.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Justin's All-Natural Classic Peanut Butter"
-      },
-      {
-        "data": {
-          "description": "Peanut Butter & Co. Dark Chocolate Dreams is peanut butter that is blended with rich dark chocolate for a delicious spread that is great on bananas, perfect with pretzels, or tasty on toast.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Peanut Butter & Co."
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "All Natural",
-                "Cholesterol Free",
-                "GMO Free",
-                "Gluten Free",
-                "No Hydrogenated Oils",
-                "Trans Fat Free",
-                "Vegetarian"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "spe_pbco_choc",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/spe_pbco_choc.png",
-          "price": "$5.59",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/spe_pbco_choc.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Peanut Butter & Co. Dark Chocolate Dreams"
-      },
-      {
-        "data": {
-          "description": "Everybody loves a delicious, satisfying snack. Paired with pretzels, apples, and carrots, our Dipping Cups make snacking a breeze. They're a terrific snacking choice for energy! Peanut Butter & Co. Dark Chocolate Dreams Dipping Cups are perfect for snacking on the go! Pop them in your lunchbox, ...",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Peanut Butter & Co."
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "Cholesterol Free",
-                "GMO Free",
-                "No High Fructose Corn Syrup",
-                "No Hydrogenated Oils"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_pid_4012592",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4012592.png",
-          "price": "$4.99",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4012592.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Peanut Butter & Co. Dipping Cups, Dark Chocolate Dreams"
-      },
-      {
-        "data": {
-          "description": "I like peanut butter so much I dedicated years of my life to creating an entirely new, one-of-a-kind way to make it. I know what you're thinking, how many ways can there be to make peanut butter? Well, there are at least two. What everyone else does and what we do. And I guarantee once you try o...",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Justin's"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "All Natural",
-                "Gluten Free",
-                "Vegan"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_pid_4010728",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010728.png",
-          "price": "$6.99",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4010728.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Justin's All-Natural Classic Peanut Butter Squeeze Packs"
-      },
-      {
-        "data": {
-          "description": "Peanut Butter & Co. Cinnamon Raisin Swirl is peanut butter blended with cinnamon and raisins. It's like spreading your peanut butter on cinnamon raisin bread without the bread. It's delicious on apples, bagels, or straight from the jar.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Peanut Butter & Co."
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "All Natural",
-                "Cholesterol Free",
-                "GMO Free",
-                "Gluten Free",
-                "No Hydrogenated Oils",
-                "Trans Fat Free",
-                "Vegetarian"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "spe_pbco_cinn",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/spe_pbco_cinn.png",
-          "price": "$5.59",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/spe_pbco_cinn.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Peanut Butter & Co. Cinnamon Raisin Swirl"
+        "value":"Cracker Jack Popcorn & Peanuts Caramel Coated The Original - 1 Oz",
+        "is_slotted":false
       }
     ],
-    "total_num_results": 104
+    "sort_options":[
+      
+    ],
+    "total_num_results":301,
+    "features":[
+      {
+        "feature_name":"auto_generated_refined_query_rules",
+        "display_name":"Affinity Engine",
+        "enabled":true,
+        "variant":null
+      },
+      {
+        "feature_name":"filter_items",
+        "display_name":"Filter-item boosts",
+        "enabled":true,
+        "variant":null
+      },
+      {
+        "feature_name":"manual_searchandizing",
+        "display_name":"Searchandizing",
+        "enabled":true,
+        "variant":null
+      },
+      {
+        "feature_name":"personalization",
+        "display_name":"Personalization",
+        "enabled":true,
+        "variant":null
+      },
+      {
+        "feature_name":"query_items",
+        "display_name":"Learn To Rank",
+        "enabled":true,
+        "variant":null
+      }
+    ]
   },
-  "result_id": "63312bf4-46ab-446f-848a-e0eac97fcf58"
+  "result_id":"0d1c52d5-9ccd-4c7f-b982-9b6130baf871",
 }

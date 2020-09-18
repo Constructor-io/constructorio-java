@@ -1,816 +1,636 @@
 {
-  "result_id": "8f9ee792-d03f-4fcc-9cf6-187c03b4e157",
-  "sections": {
-    "Products": [
+  "sections":{
+    "Products":[
       {
-        "data": {
-          "description": "The same great Jif taste in a convenient snack size that's perfect for dipping!",
-          "facets": [
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"109350015",
+          "url":"/",
+          "price":2.99,
+          "facets":[
             {
-              "name": "Brand",
-              "values": [
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                364
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.12
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.99
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109350015.png",
+          "description":"Heart Healthy: May reduce the risk of heart disease. Scientific evidence suggests but does not prove that eating 1.5 ounces per day of most nuts as part of a diet low in saturated fat and cholesterol and not resulting in increased caloric intake may reduce the risk of heart disease. See nutrition information for fat content (1.5 oz is about 58 pieces). Per 1 oz: 160 calories; 2 g sat fat (10% DV); 150 mg sodium (6% DV); 1 g sugars. Visit us at: planters.com. Please have package available. Please include code number on package in all correspondence. USA quality.",
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Dry Roasted - 16 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"204100011",
+          "url":"/",
+          "price":4.59,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
                 "Jif"
               ]
             },
             {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
+              "name":"Inventory",
+              "values":[
+                75
               ]
             },
             {
-              "display_name": "Cases",
-              "group_id": "162",
-              "path": "/431/46",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Baby",
-                  "id": "46"
-                }
+              "name":"Margin",
+              "values":[
+                0.07
               ]
             },
             {
-              "display_name": "Snacks",
-              "group_id": "830",
-              "path": "/431/46",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Baby",
-                  "id": "46"
-                }
-              ]
-            }
-          ],
-          "id": "gro_pid_4220124",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4220124.png",
-          "price": "$15.99",
-          "quantity": "1cs",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_pid_4220124.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Jif Creamy Peanut Butter To Go Cups, Case"
-      },
-      {
-        "data": {
-          "description": "Craving peanutty taste that packs a crunch? Look no further than Skippy Super Chunk Peanut Butter. Every jar is blended with loads of real peanut pieces so you get the fun flavor of Skippy Peanut Butter, plus crazy-good crunchiness.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Skippy"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup",
-                "Vegan"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_skippy_super_ch_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_super_ch_01.png",
-          "price": "$2.79",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_super_ch_01.png"
-        },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Skippy Super Chunk Peanut Butter"
-      },
-      {
-        "data": {
-          "description": "Fill your panty with Wild Harvest Organic Creamy Peanut Butter that can turn boring meals into better meals, instantly. You can always count on convenience with Wild Harvest.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Wild Harvest"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
+              "name":"Nutrition",
+              "values":[
                 "Gluten Free",
-                "No Artificial Ingredients",
-                "No High Fructose Corn Syrup",
-                "No Hydrogenated Oils",
-                "Organic"
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                4.59
               ]
             }
           ],
-          "groups": [
+          "keywords":[
+            "butter",
+            "peanut",
+            "spreads"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-204100011.png",
+          "description":"7 g protein per serving. 190 calories per 2 tbsp. Non GMO (Not made with genetically modified ingredients. Trace amounts of genetically modified material may be present). Gluten free. No. 1 choice of choosy moms. Look for the flavor seal. Contains no preservatives. No refrigeration required. Visit us at jif.com. Questions? Comments? 1-800-283-8915. This package is recyclable. However, recycling programs for this package may not exist in your area. See nutrition information for fat and saturated fat content. Proud Sponsor: Boys & Girls Clubs of America.",
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "gro_whrvsto_pb_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_whrvsto_pb_01.png",
-          "price": "$5.29",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_whrvsto_pb_01.png"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "Wild Harvest Organic Creamy Peanut Butter"
+        "value":"Jif Peanut Butter Creamy - 16 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "description": "Jif Reduced Fat peanut Butter has fresh-roasted peanut taste with 25% less fat than regular Jif Peanut Butter.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Jif"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "No Preservatives",
-                "Reduced Fat"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_jif_rf_crm_pb_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_rf_crm_pb_01.png",
-          "price": "$3.29",
-          "quantity": "1lb",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_jif_rf_crm_pb_01.png"
-        },
-        "matched_terms": [
+        "matched_terms":[
           "peanut"
         ],
-        "value": "Jif Reduced Fat Creamy Peanut Butter"
+        "data":{
+          "id":"109350016",
+          "url":"/",
+          "price":2.99,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                452
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.11
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.99
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109350016.png",
+          "description":"Per 1 oz: 170 calories; 2 g sat fat (10% DV); 5 mg sodium (0% DV); 1 g sugars. 50% less sodium than Planters Dry Roasted Peanuts. Heart Healthy: May reduce the risk of heart disease. Scientific evidence suggests but does not prove that eating 1.5 ounces per day of most nuts as part of a diet low in saturated fat and cholesterol and not resulting in increased caloric intake may reduce the risk of heart disease. See nutrition for fat content. (1.5 oz is about 58 pieces). Contains 75 mg sodium per serving compared to 150 mg in Planters Dry Roasted Peanuts. American Heart Association Certified: Meets criteria for heart-healthy food. Visit us at: planters.com. 1-877-677-3268. Please have package available. Please include code number on package in all correspondence. Quality USA.",
+          "weighted_keywords":{
+            "roast":2
+          },
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Dry Roasted Lightly Salted - 16 Oz",
+        "is_slotted":false
       },
       {
-        "data": {
-          "description": "Smucker's Creamy Natural Peanut Butter is made with two simple ingredients: fresh-roasted peanuts and a dash of salt. It's perfect for pairing with Smucker's famous jams and jellies for a great PB & J. Also enjoy as a snack with fruits or crackers, or use in recipes.",
-          "facets": [
-            {
-              "name": "Brand",
-              "values": [
-                "Smucker's"
-              ]
-            },
-            {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup"
-              ]
-            }
-          ],
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
-                }
-              ]
-            }
-          ],
-          "id": "gro_smuck_crm_pb_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_smuck_crm_pb_01.png",
-          "price": "$2.59",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_smuck_crm_pb_01.png"
-        },
-        "matched_terms": [
+        "matched_terms":[
           "peanut"
         ],
-        "value": "Smucker's Creamy Natural Peanut Butter"
-      },
-      {
-        "data": {
-          "description": "Spread on the smiles with smooth, creamy peanut buttery perfection. Skippy Creamy Peanut Butter adds more yum and fun to just about anything. It's nothing but smooth snacking with this creamy classic.",
-          "facets": [
+        "data":{
+          "id":"960110940",
+          "url":"/",
+          "price":4.59,
+          "facets":[
             {
-              "name": "Brand",
-              "values": [
+              "name":"Brand",
+              "values":[
                 "Skippy"
               ]
             },
             {
-              "name": "Claims",
-              "values": [
-                "No High Fructose Corn Syrup",
-                "Vegan"
+              "name":"Inventory",
+              "values":[
+                938
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.14
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Gluten Free",
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                4.59
               ]
             }
           ],
-          "groups": [
+          "keywords":[
+            "butter",
+            "peanut",
+            "spreads"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-960110940.png",
+          "description":"Fuel the fun! Look for inner quality seal. No preservatives, artificial flavors, or colors (Similar to all peanut butters). Visit us at: peanutbutter.com. Did you know? When combine with foods like whole grain bread, fruit & low fat milk, Skippy Peanut Butter helps to make a nutritioous meal or snack delicious. Gluten free. May be produced with genetic engineering. Good source of Vitamin E.",
+          "weighted_keywords":{
+            "spread":2
+          },
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                }
-              ]
-            },
-            {
-              "display_name": "Peanut Butter",
-              "group_id": "646",
-              "path": "/431/625/614",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
-                },
-                {
-                  "display_name": "PB & J",
-                  "id": "614"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "gro_skippy_regular_01",
-          "image_url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_regular_01.png",
-          "price": "$2.79",
-          "quantity": "1ea",
-          "url": "https://d17bbgoo3npfov.cloudfront.net/images/gro_skippy_regular_01.png"
+          ]
         },
-        "matched_terms": [
+        "value":"SKIPPY Peanut Butter Spread Creamy - 16.3 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
           "peanut"
         ],
-        "value": "Skippy Creamy Peanut Butter"
+        "data":{
+          "id":"109350041",
+          "url":"/",
+          "price":2.99,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Planters"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                117
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.07
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                2.99
+              ]
+            }
+          ],
+          "keywords":[
+            "nuts"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-109350041.png",
+          "description":"Per 1 oz: 160 calories; 2 g sat fat (10% DV); 105 mg sodium (4% DV); 4 g sugars. Partially produced with genetic engineering. Visit us at: planters.com. 1-877-677-3268. Please have package available. Please include code number on package in all correspondence. Quality USA.",
+          "groups":[
+            {
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Planters Peanuts Dry Roasted Honey Roasted - 16 Oz",
+        "is_slotted":false
+      },
+      {
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"204100025",
+          "url":"/",
+          "price":5.99,
+          "facets":[
+            {
+              "name":"Brand",
+              "values":[
+                "Jif"
+              ]
+            },
+            {
+              "name":"Inventory",
+              "values":[
+                602
+              ]
+            },
+            {
+              "name":"Margin",
+              "values":[
+                0.05
+              ]
+            },
+            {
+              "name":"Nutrition",
+              "values":[
+                "Gluten Free",
+                "Kosher"
+              ]
+            },
+            {
+              "name":"Price",
+              "values":[
+                5.99
+              ]
+            }
+          ],
+          "keywords":[
+            "butter",
+            "peanut",
+            "spreads"
+          ],
+          "image_url":"https://d17bbgoo3npfov.cloudfront.net/images/farmstand-204100025.png",
+          "description":"7 g protein per serving. Non GMO (certified NSF non-GMO True North by NSF International) - gluten free. See nutrition information for fat and saturated fat content. This package is recyclable. However, recycling programs for this package may not exist in your area. Per 2 Tbsp: 190 calories; 2.5 g sat fat (14% DV); 140 mg sodium (6% DV); 3 g total sugars. Questions? Comments? 1-800-283-8915. Visit us at jif.com. Smart Label. Look for the flavor seal. Contains no preservatives. No refrigeration required. Boys & Girls Clubs of America.",
+          "groups":[
+            {
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"Jif Peanut Butter Creamy - 28 Oz",
+        "is_slotted":false
       }
     ],
-    "Search Suggestions": [
+    "Search Suggestions":[
       {
-        "data": {
-          "groups": [
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"reeses peanut butter cups",
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "peanut"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "peanut"
+        "value":"reeses peanut butter cups",
+        "is_slotted":false
       },
       {
-        "data": {
-          "groups": [
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"skippy peanut butter",
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "peanut butter"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "peanut butter"
+        "value":"skippy peanut butter",
+        "is_slotted":false
       },
       {
-        "data": {
-          "groups": [
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"peanuts",
+          "groups":[
             {
-              "display_name": "Frozen",
-              "group_id": "391",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Ice Cream & Treats",
-              "group_id": "466",
-              "path": "/391",
-              "path_list": [
+              "group_id":"Personal%20Care%20%26%20Health",
+              "display_name":"Personal Care & Health",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Frozen",
-                  "id": "391"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             },
             {
-              "display_name": "Sandwiches, Bars, & Cones",
-              "group_id": "771",
-              "path": "/391/466",
-              "path_list": [
+              "group_id":"Frozen%20Foods",
+              "display_name":"Frozen Foods",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Frozen",
-                  "id": "391"
-                },
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            },
+            {
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Ice Cream & Treats",
-                  "id": "466"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "ice cream"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "ice cream"
+        "value":"peanuts",
+        "is_slotted":false
       },
       {
-        "data": {
-          "groups": [
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"peanut butter crackers",
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "creamy peanut butter"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "creamy peanut butter"
+        "value":"peanut butter crackers",
+        "is_slotted":false
       },
       {
-        "data": {
-          "groups": [
-            {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            }
-          ],
-          "id": "smucker's creamy natural peanut butter"
-        },
-        "matched_terms": [
+        "matched_terms":[
           "peanut"
         ],
-        "value": "smucker's creamy natural peanut butter"
+        "data":{
+          "id":"peanut oil",
+          "groups":[
+            {
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
+                {
+                  "id":"all",
+                  "display_name":"All"
+                }
+              ]
+            }
+          ]
+        },
+        "value":"peanut oil",
+        "is_slotted":false
       },
       {
-        "data": {
-          "groups": [
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"peanut butter",
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                }
-              ]
-            },
-            {
-              "display_name": "PB & J",
-              "group_id": "614",
-              "path": "/431/625",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Pantry",
-                  "id": "625"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "skippy super chunk peanut butter"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "skippy super chunk peanut butter"
+        "value":"peanut butter",
+        "is_slotted":false
       },
       {
-        "data": {
-          "groups": [
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"organic peanut butter",
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Snacks",
-              "group_id": "830",
-              "path": "/431/46",
-              "path_list": [
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Baby",
-                  "id": "46"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             },
             {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
+              "group_id":"Cookies%2C%20Snacks%20%26%20Candy",
+              "display_name":"Cookies, Snacks & Candy",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "bar peanut"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "bar peanut"
+        "value":"organic peanut butter",
+        "is_slotted":false
       },
       {
-        "data": {
-          "groups": [
+        "matched_terms":[
+          "peanut"
+        ],
+        "data":{
+          "id":"natural peanut butter",
+          "groups":[
             {
-              "display_name": "Grocery",
-              "group_id": "431",
-              "path": null,
-              "path_list": []
-            },
-            {
-              "display_name": "Snacks",
-              "group_id": "830",
-              "path": "/431/46",
-              "path_list": [
+              "group_id":"Condiments%2C%20Spice%20%26%20Bake",
+              "display_name":"Condiments, Spice & Bake",
+              "path":"/all",
+              "path_list":[
                 {
-                  "display_name": "Grocery",
-                  "id": "431"
-                },
-                {
-                  "display_name": "Baby",
-                  "id": "46"
-                }
-              ]
-            },
-            {
-              "display_name": "Pantry",
-              "group_id": "625",
-              "path": "/431",
-              "path_list": [
-                {
-                  "display_name": "Grocery",
-                  "id": "431"
+                  "id":"all",
+                  "display_name":"All"
                 }
               ]
             }
-          ],
-          "id": "bar peanut butter"
+          ]
         },
-        "matched_terms": [
-          "peanut"
-        ],
-        "value": "bar peanut butter"
+        "value":"natural peanut butter",
+        "is_slotted":false
       }
     ]
+  },
+  "result_id":"4fa448bb-d3cf-4ebf-bfc2-aa565b28fab2",
+  "request":{
+    "query":"peanut",
+    "num_results_Products":"6",
+    "num_results_Search Suggestions":"8",
+    "term":"peanut",
+    "features":{
+      "query_items":true,
+      "auto_generated_refined_query_rules":true,
+      "personalization":true,
+      "manual_searchandizing":true,
+      "filter_items":true
+    },
+    "feature_variants":{
+      "query_items":null,
+      "auto_generated_refined_query_rules":null,
+      "personalization":null,
+      "manual_searchandizing":null,
+      "filter_items":null
+    },
+    "searchandized_items":{
+      
+    }
   }
 }

@@ -18,16 +18,14 @@ public class SearchResponseTest {
     public void createSearchResponseShouldReturnAResult() throws Exception {
         String string = Utils.getTestResource("response.search.peanut.json");
         SearchResponse response = ConstructorIO.createSearchResponse(string);
-        assertEquals("search facets exist", response.getResponse().getFacets().size(), 4);
+        assertEquals("search facets exist", response.getResponse().getFacets().size(), 3);
         assertEquals("search facet [Brand] exists", response.getResponse().getFacets().get(0).getName(), "Brand");
-        assertEquals("search facet [Claims] exists", response.getResponse().getFacets().get(1).getName(), "Claims");
-        assertEquals("search facet [Price] exists", response.getResponse().getFacets().get(2).getName(), "Price");
-        assertEquals("search facet [Rating] exists", response.getResponse().getFacets().get(3).getName(), "Rating");
-        assertEquals("search groups exist", response.getResponse().getGroups().size(), 3);
-        assertEquals("search group [Dairy] exists", response.getResponse().getGroups().get(0).getDisplayName(), "Dairy");
-        assertEquals("search group [Dairy] children exist", response.getResponse().getGroups().get(0).getChildren().size(), 3);
+        assertEquals("search facet [Claims] exists", response.getResponse().getFacets().get(1).getName(), "Nutrition");
+        assertEquals("search facet [Rating] exists", response.getResponse().getFacets().get(2).getName(), "Price");
+        assertEquals("search groups exist", response.getResponse().getGroups().size(), 1);
+        assertEquals("search group [Cookies, Snacks & Candy] exists", response.getResponse().getGroups().get(0).getChildren().get(0).getDisplayName(), "Cookies, Snacks & Candy");
         assertEquals("search results exist", response.getResponse().getResults().size(), 24);
-        assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 301);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 

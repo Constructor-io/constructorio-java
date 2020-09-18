@@ -1,4 +1,33 @@
 {
+  "request":{
+    "page":1,
+    "num_results_per_page":24,
+    "section":"Products",
+    "term":"peanut",
+    "fmt_options":{
+      "groups_start":"current",
+      "groups_max_depth":1
+    },
+    "sort_by":"relevance",
+    "sort_order":"descending",
+    "features":{
+      "query_items":true,
+      "auto_generated_refined_query_rules":true,
+      "personalization":true,
+      "manual_searchandizing":true,
+      "filter_items":true
+    },
+    "feature_variants":{
+      "query_items":null,
+      "auto_generated_refined_query_rules":null,
+      "personalization":null,
+      "manual_searchandizing":null,
+      "filter_items":null
+    },
+    "searchandized_items":{
+      
+    }
+  },
   "response":{
     "facets":[
       {
@@ -2536,33 +2565,4 @@
     ]
   },
   "result_id":"0d1c52d5-9ccd-4c7f-b982-9b6130baf871",
-  "request":{
-    "page":1,
-    "num_results_per_page":24,
-    "section":"Products",
-    "term":"peanut",
-    "fmt_options":{
-      "groups_start":"current",
-      "groups_max_depth":1
-    },
-    "sort_by":"relevance",
-    "sort_order":"descending",
-    "features":{
-      "query_items":true,
-      "auto_generated_refined_query_rules":true,
-      "personalization":true,
-      "manual_searchandizing":true,
-      "filter_items":true
-    },
-    "feature_variants":{
-      "query_items":null,
-      "auto_generated_refined_query_rules":null,
-      "personalization":null,
-      "manual_searchandizing":null,
-      "filter_items":null
-    },
-    "searchandized_items":{
-      
-    }
-  }
 }

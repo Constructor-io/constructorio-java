@@ -1,4 +1,27 @@
 {
+  "request":{
+    "query":"peanut",
+    "num_results_Products":"6",
+    "num_results_Search Suggestions":"8",
+    "term":"peanut",
+    "features":{
+      "query_items":true,
+      "auto_generated_refined_query_rules":true,
+      "personalization":true,
+      "manual_searchandizing":true,
+      "filter_items":true
+    },
+    "feature_variants":{
+      "query_items":null,
+      "auto_generated_refined_query_rules":null,
+      "personalization":null,
+      "manual_searchandizing":null,
+      "filter_items":null
+    },
+    "searchandized_items":{
+      
+    }
+  },
   "sections":{
     "Products":[
       {
@@ -610,27 +633,4 @@
     ]
   },
   "result_id":"4fa448bb-d3cf-4ebf-bfc2-aa565b28fab2",
-  "request":{
-    "query":"peanut",
-    "num_results_Products":"6",
-    "num_results_Search Suggestions":"8",
-    "term":"peanut",
-    "features":{
-      "query_items":true,
-      "auto_generated_refined_query_rules":true,
-      "personalization":true,
-      "manual_searchandizing":true,
-      "filter_items":true
-    },
-    "feature_variants":{
-      "query_items":null,
-      "auto_generated_refined_query_rules":null,
-      "personalization":null,
-      "manual_searchandizing":null,
-      "filter_items":null
-    },
-    "searchandized_items":{
-      
-    }
-  }
 }

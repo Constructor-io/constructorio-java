@@ -2,6 +2,7 @@ package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
 
@@ -147,6 +148,22 @@ public class ConstructorIOSearchTest {
         SearchResponse response = constructor.search(request, null);
         assertEquals("search results exist", response.getResponse().getResults().size(), 30);
         assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 33);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithRedirect() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("medium");
+        SearchResponse response = constructor.search(request, userInfo);
+        assertNull("search results do not exist", response.getResponse().getResults());
+        assertTrue("search redirect exists", response.getResponse().getRedirect() != null);
+        assertTrue("search redirect data exists", response.getResponse().getRedirect().getData() != null);
+        assertTrue("search redirect data URL exists", response.getResponse().getRedirect().getData().getUrl() != null);
+        assertTrue("search redirect data rule ID exists", response.getResponse().getRedirect().getData().getRuleId() != null);
+        assertTrue("search redirect data match ID exists", response.getResponse().getRedirect().getData().getMatchId() != null);
+        assertTrue("search redirect matched terms exist", response.getResponse().getRedirect().getMatchedTerms().contains("medium"));
         assertTrue("search result id exists", response.getResultId() != null);
     }
 }

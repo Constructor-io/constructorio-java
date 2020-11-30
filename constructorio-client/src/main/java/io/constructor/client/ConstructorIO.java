@@ -958,8 +958,13 @@ public class ConstructorIO {
     protected static SearchResponse createSearchResponse(String string) {
         JSONObject json = new JSONObject(string);
         JSONObject response = json.getJSONObject("response");
-        JSONArray results = response.getJSONArray("results");
-        moveMetadataOutOfResultData(results);
+        JSONArray results;
+
+        if (!response.isNull("results")) {
+            results = response.getJSONArray("results");
+            moveMetadataOutOfResultData(results);
+        }
+  
         String transformed = json.toString();
         return new Gson().fromJson(transformed, SearchResponse.class);
     }

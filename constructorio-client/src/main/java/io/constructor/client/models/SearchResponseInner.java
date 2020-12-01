@@ -24,6 +24,9 @@ public class SearchResponseInner {
     @SerializedName("sort_options")
     private List<FilterSortOption> sortOptions;
 
+    @SerializedName("redirect")
+    private Redirect redirect;
+
     /**
      * @return the facets
      */
@@ -57,5 +60,12 @@ public class SearchResponseInner {
      */
     public List<FilterSortOption> getSortOptions() {
       return sortOptions;
+    }
+
+    /**
+     * @return redirect data
+     */
+    public Redirect getRedirect() {
+      return redirect;
     }
 }

@@ -460,10 +460,10 @@ public class ConstructorIO {
                 }
             }
 
-            for (String formatOptionName : req.getFormatOptions().keySet()) {
-                String formatOptionValue = req.getFormatOptions().get(formatOptionName);
+            for (String formatOptionKey : req.getFormatOptions().keySet()) {
+                String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
                   url = url.newBuilder()
-                      .addQueryParameter("fmt_options[" + formatOptionName + "]", formatOptionValue)
+                      .addQueryParameter("fmt_options[" + formatOptionKey + "]", formatOptionValue)
                       .build();
             }
 
@@ -601,10 +601,10 @@ public class ConstructorIO {
                 }
             }
 
-            for (String formatOptionName : req.getFormatOptions().keySet()) {
-              String formatOptionValue = req.getFormatOptions().get(formatOptionName);
+            for (String formatOptionKey : req.getFormatOptions().keySet()) {
+              String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
                 url = url.newBuilder()
-                    .addQueryParameter("fmt_options[" + formatOptionName + "]", formatOptionValue)
+                    .addQueryParameter("fmt_options[" + formatOptionKey + "]", formatOptionValue)
                     .build();
             }
 

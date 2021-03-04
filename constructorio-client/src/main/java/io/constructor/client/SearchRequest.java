@@ -36,6 +36,7 @@ public class SearchRequest {
       this.resultsPerPage = 30;
       this.facets = new HashMap<String, List<String>>();
       this.sortAscending = true;
+      this.formatOptions = new HashMap<String, String>();
     }
 
     /**

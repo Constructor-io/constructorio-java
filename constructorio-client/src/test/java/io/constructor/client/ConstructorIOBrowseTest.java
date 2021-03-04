@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import io.constructor.client.models.BrowseResponse;
+import io.constructor.client.models.FilterGroup;
 
 public class ConstructorIOBrowseTest {
 
@@ -144,5 +145,38 @@ public class ConstructorIOBrowseTest {
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
         assertTrue("browse total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithMaxGroupsDepthOf3() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
+        request.getFormatOptions().put("groups_max_depth", "3");
+        BrowseResponse response = constructor.browse(request, userInfo);
+        FilterGroup root = response.getResponse().getGroups().get(0);
+        FilterGroup firstGen = root.getChildren().get(0);
+        FilterGroup secondGen = firstGen.getChildren().get(0);
+        FilterGroup thirdGen = secondGen.getChildren().get(0);
+        assertEquals("search result [root] exists", root.getGroupId(), "all");
+        assertEquals("search result [firstGen] exists", firstGen.getGroupId(), "sale");
+        assertEquals("search result [secondGen] exists", secondGen.getGroupId(), "sale|men");
+        assertEquals("search result [thirdGen] exists", thirdGen.getGroupId(), "sale|men|clothing");
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithMaxGroupsDepthOf1() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
+        request.getFormatOptions().put("groups_max_depth", "1");
+        BrowseResponse response = constructor.browse(request, userInfo);
+        FilterGroup root = response.getResponse().getGroups().get(0);
+        FilterGroup firstGen = root.getChildren().get(0);
+        assertEquals("search result [root] exists", root.getGroupId(), "all");
+        assertEquals("search result [firstGen] exists", firstGen.getGroupId(), "sale");
+        assertEquals("search result [firstGen] children", firstGen.getChildren().size(), 0);
+        assertTrue("search result id exists", response.getResultId() != null);
     }
 }

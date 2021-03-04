@@ -68,6 +68,7 @@ public class BrowseRequestTest {
         request.setFacets(facets);
         request.setSortBy("smooth-to-chunky");
         request.setSortAscending(false);
+        request.setFormatOptions(formatOptions);
 
         assertEquals(request.getFilterName(), "VacationType");
         assertEquals(request.getFilterValue(), "Air Travel");
@@ -78,6 +79,6 @@ public class BrowseRequestTest {
         assertEquals(request.getFacets(), facets);
         assertEquals(request.getSortBy(), "smooth-to-chunky");
         assertEquals(request.getSortAscending(), false);
-
+        assertEquals(request.getFormatOptions(), formatOptions);
     }
 }

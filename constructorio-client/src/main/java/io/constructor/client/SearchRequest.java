@@ -18,7 +18,8 @@ public class SearchRequest {
     private String sortBy;
     private boolean sortAscending;
     private String collectionId;
-    
+    private Map<String, String>formatOptions;
+
     /**
      * Creates a search request
      *
@@ -35,6 +36,7 @@ public class SearchRequest {
       this.resultsPerPage = 30;
       this.facets = new HashMap<String, List<String>>();
       this.sortAscending = true;
+      this.formatOptions = new HashMap<String, String>();
     }
 
     /**
@@ -161,5 +163,19 @@ public class SearchRequest {
      */
     public String getCollectionId() {
       return collectionId;
+    }
+
+    /**
+     * @param formatOptions the formatOptions to set
+     */
+    public void setFormatOptions(Map<String, String> formatOptions) {
+      this.formatOptions = formatOptions;
+    }
+
+    /**
+     * @return the format options
+     */
+    public Map<String, String> getFormatOptions() {
+      return formatOptions;
     }
 }

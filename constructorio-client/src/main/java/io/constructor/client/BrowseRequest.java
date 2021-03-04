@@ -18,6 +18,7 @@ public class BrowseRequest {
     private String groupId;
     private String sortBy;
     private boolean sortAscending;
+    private Map<String, String>formatOptions;
     
     /**
      * Creates a browse request
@@ -39,6 +40,7 @@ public class BrowseRequest {
       this.resultsPerPage = 30;
       this.facets = new HashMap<String, List<String>>();
       this.sortAscending = true;
+      this.formatOptions = new HashMap<String, String>();
     }
 
     /**
@@ -167,4 +169,17 @@ public class BrowseRequest {
       return sortAscending;
     }
 
+    /**
+     * @param formatOptions the formatOptions to set
+     */
+    public void setFormatOptions(Map<String, String> formatOptions) {
+      this.formatOptions = formatOptions;
+    }
+
+    /**
+     * @return the format options
+     */
+    public Map<String, String> getFormatOptions() {
+      return formatOptions;
+    }
 }

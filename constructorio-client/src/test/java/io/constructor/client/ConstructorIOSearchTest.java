@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import io.constructor.client.models.FilterGroup;
 import io.constructor.client.models.SearchResponse;
 
 public class ConstructorIOSearchTest {
@@ -164,6 +165,39 @@ public class ConstructorIOSearchTest {
         assertTrue("search redirect data rule ID exists", response.getResponse().getRedirect().getData().getRuleId() != null);
         assertTrue("search redirect data match ID exists", response.getResponse().getRedirect().getData().getMatchId() != null);
         assertTrue("search redirect matched terms exist", response.getResponse().getRedirect().getMatchedTerms().contains("medium"));
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithMaxGroupsDepthOf3() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("jacket");
+        request.getFormatOptions().put("groups_max_depth", "3");
+        SearchResponse response = constructor.search(request, userInfo);
+        FilterGroup root = response.getResponse().getGroups().get(0);
+        FilterGroup firstGen = root.getChildren().get(0);
+        FilterGroup secondGen = firstGen.getChildren().get(0);
+        FilterGroup thirdGen = secondGen.getChildren().get(0);
+        assertEquals("search result [root] exists", root.getGroupId(), "all");
+        assertEquals("search result [firstGen] exists", firstGen.getGroupId(), "women");
+        assertEquals("search result [secondGen] exists", secondGen.getGroupId(), "women|clothing");
+        assertEquals("search result [thirdGen] exists", thirdGen.getGroupId(), "women|clothing|jackets");
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithMaxGroupsDepthOf1() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("jacket");
+        request.getFormatOptions().put("groups_max_depth", "1");
+        SearchResponse response = constructor.search(request, userInfo);
+        FilterGroup root = response.getResponse().getGroups().get(0);
+        FilterGroup firstGen = root.getChildren().get(0);
+        assertEquals("search result [root] exists", root.getGroupId(), "all");
+        assertEquals("search result [firstGen] exists", firstGen.getGroupId(), "women");
+        assertEquals("search result [firstGen] children", firstGen.getChildren().size(), 0);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 }

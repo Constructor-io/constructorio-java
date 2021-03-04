@@ -52,6 +52,8 @@ public class SearchRequestTest {
         SearchRequest request = new SearchRequest(query);
         Map<String, List<String>> facets = new HashMap<String, List<String>>();
         facets.put("Flavors", Arrays.asList("Honey Roasted", "Dry Roasted", "Unsalted"));
+        Map<String, String> formatOptions = new HashMap<String, String>();
+        formatOptions.put("groups_start", "top");
         
         request.setQuery("airline tickets");
         request.setSection("Search Suggestions");
@@ -62,6 +64,7 @@ public class SearchRequestTest {
         request.setSortBy("smooth-to-chunky");
         request.setSortAscending(false);
         request.setCollectionId("last minute getaways");
+        request.setFormatOptions(formatOptions);
 
         assertEquals(request.getQuery(), "airline tickets");
         assertEquals(request.getSection(), "Search Suggestions");
@@ -72,5 +75,6 @@ public class SearchRequestTest {
         assertEquals(request.getSortBy(), "smooth-to-chunky");
         assertEquals(request.getSortAscending(), false);
         assertEquals(request.getCollectionId(), "last minute getaways");
+        assertEquals(request.getFormatOptions(), formatOptions);
     }
 }

@@ -460,6 +460,13 @@ public class ConstructorIO {
                 }
             }
 
+            for (String formatOptionName : req.getFormatOptions().keySet()) {
+                String formatOptionValue = req.getFormatOptions().get(formatOptionName);
+                  url = url.newBuilder()
+                      .addQueryParameter("fmt_options[" + formatOptionName + "]", formatOptionValue)
+                      .build();
+            }
+
             if (StringUtils.isNotBlank(req.getSortBy())) {
                 url = url.newBuilder()
                     .addQueryParameter("sort_by", req.getSortBy())
@@ -592,6 +599,13 @@ public class ConstructorIO {
                         .addQueryParameter("filters[" + facetName + "]", facetValue)
                         .build();
                 }
+            }
+
+            for (String formatOptionName : req.getFormatOptions().keySet()) {
+              String formatOptionValue = req.getFormatOptions().get(formatOptionName);
+                url = url.newBuilder()
+                    .addQueryParameter("fmt_options[" + formatOptionName + "]", formatOptionValue)
+                    .build();
             }
 
             if (StringUtils.isNotBlank(req.getSortBy())) {

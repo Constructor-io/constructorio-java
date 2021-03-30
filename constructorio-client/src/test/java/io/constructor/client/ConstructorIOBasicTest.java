@@ -177,13 +177,13 @@ public class ConstructorIOBasicTest {
 
     @Test
     public void verifyShouldReturnTrueWithValidKeyTokenPair() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("tok_AFQd9IKamjHXRsTp", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertEquals("verify should return true for testing key/pair", constructor.verify(), true);
     }
 
     @Test
     public void getVersionShouldReturnClientVersion() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("tok_AFQd9IKamjHXRsTp", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         assertEquals("grabs version from pom.xml", constructor.getVersion(), "ciojava-5.7.0");
     }
 

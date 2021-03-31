@@ -43,7 +43,7 @@ public class ConstructorIOSearchAsyncTest {
         responseResolved = response;
       };
     });
-    await().atMost(2, SECONDS).until(responseIsResolved());
+    await().atMost(5, SECONDS).until(responseIsResolved());
     assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 30);
     assertEquals("search results count as expected", (int) responseResolved.getResponse().getTotalNumberOfResults(),
         104);
@@ -66,7 +66,7 @@ public class ConstructorIOSearchAsyncTest {
           responseResolved = response;
         };
       });
-      await().atMost(2, SECONDS).until(responseIsResolved());
+      await().atMost(5, SECONDS).until(responseIsResolved());
       assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 30);
       assertEquals("search results count as expected", (int)responseResolved.getResponse().getTotalNumberOfResults(), 126);
       assertTrue("search result id exists", responseResolved.getResultId() != null);

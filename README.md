@@ -186,7 +186,7 @@ constructor.browse(request, userInfo, new BrowseCallback() {
 
 # Retrieving Recommendation Results
 
-To retrieve browse results, you will need to create a `BrowseRequest`. In this request, you can also specify the number of results you want and the items (given the ids) that you want to retrieve recommendations for. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
+To retrieve recommendation results, you will need to create a `RecommendationsRequest`. In this request, you can also specify the number of results you want and the items (given the ids) that you want to retrieve recommendations for. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
 ```java
 // Create a RecommendationsRequest with the pod id to request results for
@@ -205,22 +205,6 @@ RecommendationsResponse response = constructor.recommendations(request, userInfo
 
 // Request results as a JSON string
 String response = constructor.recommendationsAsJSON(request, userInfo);
-```
-
-If you'd like to retrieve recommendation results asynchronously, the above code can be modified slightly to utilize a callback methodology:
-
-```java
-constructor.recommendations(request, userInfo, new BrowseCallback() {
-  @Override
-  public void onFailure(final ConstructorException exception) {
-    // failure condition
-  }
-
-  @Override
-  public void onResponse(final SearchResponse response) {
-    // success condition - data located within `response`
-  };
-});
 ```
 
 # Testing

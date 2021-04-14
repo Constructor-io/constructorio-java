@@ -1,20 +1,25 @@
 [![Release](https://jitpack.io/v/Constructor-io/constructorio-java.svg)](https://jitpack.io/#Constructor-io/constructorio-java) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Constructor-io/constructorio-java/blob/master/LICENSE)
 
 # Constructor-IO Java Client
+
 [Constructor.io](http://constructor.io/) provides search as a service that optimizes results using artificial intelligence (including natural language processing, re-ranking to optimize for conversions, and user personalization).
 
 # Documentation
+
 For the most up-to-date documentation for this library, please visit our [API Documentation](https://docs.constructor.io/rest-api.html?java).
 
 # Installation
+
 1. Follow the directions at [Jitpack.io](https://jitpack.io/#Constructor-io/constructorio-java/v5.3.3) to add the client to your project.
 2. Retrieve your autocomplete token and key.  You can find this at your [Constructor.io dashboard](https://constructor.io/dashboard).
 3. Create a new instance of the client.
+
 ```java
 ConstructorIO constructor = new ConstructorIO("apitoken", "apikey", true, null);
 ```
 
 # Creating and Modifying Items
+
 A `ConstructorItem` contains all the information about a product or search suggestion. To add or update an individual item, you will need to provide a `ConstructorItem` and the relevant `Autocomplete Section` it belongs to.
 
 ```java
@@ -35,6 +40,7 @@ constructor.addOrUpdateItem(item, "Products");
 ```
 
 Similarly with adding or updating a batch of items, you will need to provide an array of `ConstructorItem`'s and their relevant `Autocomplete Section`.
+
 ```java
 // Create an array of items
 ConstructorItem[] items = new ConstructorItem[20];
@@ -77,7 +83,7 @@ String response = constructor.autocompleteAsJSON(request, userInfo);
 
 # Retrieving Search Results
 
-To retrieve search results, you will need to create a `SearchRequest`. In this request you can specify the number of results you want per page, the page you want, sorting instructions, and also filter the search by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
+To retrieve search results, you will need to create a `SearchRequest`. In this request you can specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
 ```java
 // Create a SearchRequest with the term to request results for
@@ -143,7 +149,7 @@ String response = constructor.naturalLanguageSearchAsJSON(request, userInfo);
 
 # Retrieving Browse Results
 
-To retrieve browse results, you will need to create a `BrowseRequest`. When creating the `BrowseRequest` the filter name can be one of `collection_id`, `group_id`, or a facet name (i.e. Brand). In this request, you can also specify the number of results you want per page, the page you want, sorting instructions, and also filter the search by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
+To retrieve browse results, you will need to create a `BrowseRequest`. When creating the `BrowseRequest` the filter name can be one of `collection_id`, `group_id`, or a facet name (i.e. Brand). In this request, you can also specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
 ```java
 // Create a BrowseRequest with the filter name and filter value to request results for
@@ -178,7 +184,7 @@ constructor.browse(request, userInfo, new BrowseCallback() {
   }
 
   @Override
-  public void onResponse(final SearchResponse response) {
+  public void onResponse(final BrowseResponse response) {
     // success condition - data located within `response`
   };
 });
@@ -208,6 +214,7 @@ String response = constructor.recommendationsAsJSON(request, userInfo);
 ```
 
 # Testing
+
 Download the repository and run the following commands from `./constructorio-client`
 
 ```bash

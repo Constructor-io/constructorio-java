@@ -43,7 +43,7 @@ public class ConstructorIOSearchAsyncTest {
         responseResolved = response;
       };
     });
-    await().atMost(2, SECONDS).until(responseIsResolved());
+    await().atMost(5, SECONDS).until(responseIsResolved());
     assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 30);
     assertEquals("search results count as expected", (int) responseResolved.getResponse().getTotalNumberOfResults(),
         104);
@@ -56,7 +56,6 @@ public class ConstructorIOSearchAsyncTest {
       ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, "betaac.cnstrc.com");
       constructor.setApiKey("key_aXLmVpkVp4BX21Sw");
       SearchRequest request = new SearchRequest("bananas");
-      request.setCollectionId("fresh-deals");
       constructor.search(request, null, new SearchCallback() {
         @Override
         public void onFailure(final ConstructorException exception) {
@@ -67,9 +66,9 @@ public class ConstructorIOSearchAsyncTest {
           responseResolved = response;
         };
       });
-      await().atMost(2, SECONDS).until(responseIsResolved());
+      await().atMost(5, SECONDS).until(responseIsResolved());
       assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 30);
-      assertEquals("search results count as expected", (int)responseResolved.getResponse().getTotalNumberOfResults(), 33);
+      assertEquals("search results count as expected", (int)responseResolved.getResponse().getTotalNumberOfResults(), 126);
       assertTrue("search result id exists", responseResolved.getResultId() != null);
       responseResolved = null;
   }

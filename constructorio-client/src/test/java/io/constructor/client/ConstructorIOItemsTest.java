@@ -13,21 +13,21 @@ public class ConstructorIOItemsTest {
 
     @Test
     public void addItemShouldReturnTrue() throws Exception {
-      ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+      ConstructorIO constructor = new ConstructorIO("tok_AFQd9IKamjHXRsTp", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       ConstructorItem item = Utils.createProductItem();
       assertTrue("addition succeeds", constructor.addItem(item, "Products"));
     }
 
     @Test
     public void addOrUpdateItemShouldReturnTrue() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("tok_AFQd9IKamjHXRsTp", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem item = Utils.createProductItem();
         assertTrue("upsert succeeds", constructor.addOrUpdateItem(item, "Products"));
     }
 
     @Test
     public void addBatchShouldReturnTrue() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("tok_AFQd9IKamjHXRsTp", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem[] items = {
             Utils.createProductItem(),
             Utils.createProductItem(),
@@ -38,7 +38,7 @@ public class ConstructorIOItemsTest {
 
     @Test
     public void addOrUpdateBatchShouldReturnTrue() throws Exception {
-      ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+      ConstructorIO constructor = new ConstructorIO("tok_AFQd9IKamjHXRsTp", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       ConstructorItem[] items = {
         Utils.createProductItem(),
         Utils.createProductItem(),
@@ -49,7 +49,7 @@ public class ConstructorIOItemsTest {
 
     @Test
     public void modifyShouldReturnTrue() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("tok_AFQd9IKamjHXRsTp", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem itemOld = Utils.createProductItem();
         constructor.addItem(itemOld, "Products");
         Thread.sleep(2000);
@@ -62,7 +62,7 @@ public class ConstructorIOItemsTest {
 
     @Test
     public void removeShouldReturnTrue() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("tok_AFQd9IKamjHXRsTp", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         ConstructorItem item = Utils.createProductItem();
         constructor.addItem(item, "Products");
         Thread.sleep(2000);
@@ -72,7 +72,7 @@ public class ConstructorIOItemsTest {
 
     @Test
     public void removeBatchShouldReturnTrue() throws Exception {
-      ConstructorIO constructor = new ConstructorIO("YSOxV00F0Kk2R0KnPQN8", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+      ConstructorIO constructor = new ConstructorIO("tok_AFQd9IKamjHXRsTp", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       ConstructorItem[] items = {
         Utils.createProductItem(),
         Utils.createProductItem(),

@@ -1,20 +1,25 @@
 [![Release](https://jitpack.io/v/Constructor-io/constructorio-java.svg)](https://jitpack.io/#Constructor-io/constructorio-java) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Constructor-io/constructorio-java/blob/master/LICENSE)
 
 # Constructor-IO Java Client
+
 [Constructor.io](http://constructor.io/) provides search as a service that optimizes results using artificial intelligence (including natural language processing, re-ranking to optimize for conversions, and user personalization).
 
 # Documentation
+
 For the most up-to-date documentation for this library, please visit our [API Documentation](https://docs.constructor.io/rest-api.html?java).
 
 # Installation
+
 1. Follow the directions at [Jitpack.io](https://jitpack.io/#Constructor-io/constructorio-java/v5.3.3) to add the client to your project.
 2. Retrieve your autocomplete token and key.  You can find this at your [Constructor.io dashboard](https://constructor.io/dashboard).
 3. Create a new instance of the client.
+
 ```java
 ConstructorIO constructor = new ConstructorIO("apitoken", "apikey", true, null);
 ```
 
 # Creating and Modifying Items
+
 A `ConstructorItem` contains all the information about a product or search suggestion. To add or update an individual item, you will need to provide a `ConstructorItem` and the relevant `Autocomplete Section` it belongs to.
 
 ```java
@@ -35,6 +40,7 @@ constructor.addOrUpdateItem(item, "Products");
 ```
 
 Similarly with adding or updating a batch of items, you will need to provide an array of `ConstructorItem`'s and their relevant `Autocomplete Section`.
+
 ```java
 // Create an array of items
 ConstructorItem[] items = new ConstructorItem[20];
@@ -77,7 +83,7 @@ String response = constructor.autocompleteAsJSON(request, userInfo);
 
 # Retrieving Search Results
 
-To retrieve search results, you will need to create a `SearchRequest`. In this request you can specify the number of results you want per page, the page you want, sorting instructions, and also filter the search by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
+To retrieve search results, you will need to create a `SearchRequest`. In this request you can specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
 ```java
 // Create a SearchRequest with the term to request results for
@@ -122,7 +128,7 @@ constructor.search(request, userInfo, new SearchCallback() {
 
 To retrieve search results for text that originated from speech transcription rather than typing, you will need to create a `NaturalLanguageSearchRequest`. In this request you can specify the number of results you want per page and the page you want.  All other information is inferred from the text itself.  If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.  The response returned contains all of the same data points as a standard search response.
 
-```
+```java
 // Create a SearchRequest with the term to request results for
 NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("peanut butter");
 
@@ -141,8 +147,74 @@ SearchResponse response = constructor.naturalLanguageSearch(request, userInfo);
 String response = constructor.naturalLanguageSearchAsJSON(request, userInfo);
 ```
 
+# Retrieving Browse Results
+
+To retrieve browse results, you will need to create a `BrowseRequest`. When creating the `BrowseRequest` the filter name can be one of `collection_id`, `group_id`, or a facet name (i.e. Brand). In this request, you can also specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
+
+```java
+// Create a BrowseRequest with the filter name and filter value to request results for
+BrowseRequest request = new BrowseRequest("group_id", "8193");
+
+// Add in additional parameters
+request.setResultsPerPage(5);
+request.setPage(1);
+request.setGroupId("625");r
+request.setSortBy("Price");
+request.setSortAscending(true);
+request.getFacets().put("Brand", Arrays.asList("Jif"))
+
+// Create a UserInfo object with the session and unique device identifier (optional)
+UserInfo userInfo = new UserInfo(5, "device-id-1123123");
+userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
+
+// Request results as an object
+BrowseResponse response = constructor.browse(request, userInfo);
+
+// Request results as a JSON string
+String response = constructor.browseAsJSON(request, userInfo);
+```
+
+If you'd like to retrieve browse results asynchronously, the above code can be modified slightly to utilize a callback methodology:
+
+```java
+constructor.browse(request, userInfo, new BrowseCallback() {
+  @Override
+  public void onFailure(final ConstructorException exception) {
+    // failure condition
+  }
+
+  @Override
+  public void onResponse(final BrowseResponse response) {
+    // success condition - data located within `response`
+  };
+});
+```
+
+# Retrieving Recommendation Results
+
+To retrieve recommendation results, you will need to create a `RecommendationsRequest`. In this request, you can also specify the number of results you want and the items (given the ids) that you want to retrieve recommendations for. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
+
+```java
+// Create a RecommendationsRequest with the pod id to request results for
+RecommendationsRequest request = new RecommendationsRequest("pdp_complementary_items");
+
+// Add in additional parameters
+request.setNumResults(5);
+request.setItemIds(Arrays.asList("9838172"))
+
+// Create a UserInfo object with the session and unique device identifier (optional)
+UserInfo userInfo = new UserInfo(5, "device-id-1123123");
+userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
+
+// Request results as an object
+RecommendationsResponse response = constructor.recommendations(request, userInfo);
+
+// Request results as a JSON string
+String response = constructor.recommendationsAsJSON(request, userInfo);
+```
 
 # Testing
+
 Download the repository and run the following commands from `./constructorio-client`
 
 ```bash

@@ -126,4 +126,116 @@ public class ConstructorIOCatalogTest {
     assertTrue("task_id exists", jsonObj.has("task_id") == true);
     assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
   }
+
+  @Test
+  public void UpdateCatalogWithNoFilesShouldError() throws Exception {
+    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    Map<String, File> files = new HashMap<String, File>();
+    CatalogRequest req = new CatalogRequest(files);
+
+    thrown.expect(ConstructorException.class);
+    thrown.expectMessage("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
+    constructor.updateCatalog(req);
+  }
+
+  @Test
+  public void UpdateCatalogWithItemsFileShouldReturnTaskInfo() throws Exception {
+    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    Map<String, File> files = new HashMap<String, File>();
+
+    files.put("items", new File("src/test/resources/csv/items.csv"));
+
+    CatalogRequest req = new CatalogRequest(files);
+    String response = constructor.updateCatalog(req);
+    JSONObject jsonObj = new JSONObject(response);
+
+    assertTrue("task_id exists", jsonObj.has("task_id") == true);
+    assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+  }
+
+  @Test
+  public void UpdateCatalogWithItemsAndNotificationEmailShouldReturnTaskInfo() throws Exception {
+    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    Map<String, File> files = new HashMap<String, File>();
+
+    files.put("items", new File("src/test/resources/csv/items.csv"));
+
+    CatalogRequest req = new CatalogRequest(files);
+
+    req.setNotificationEmail("jimmy@constructor.io");
+
+    String response = constructor.updateCatalog(req);
+    JSONObject jsonObj = new JSONObject(response);
+
+    assertTrue("task_id exists", jsonObj.has("task_id") == true);
+    assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+  }
+
+  @Test
+  public void UpdateCatalogWithItemsAndSectionShouldReturnTaskInfo() throws Exception {
+    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    Map<String, File> files = new HashMap<String, File>();
+
+    files.put("items", new File("src/test/resources/csv/items.csv"));
+
+    CatalogRequest req = new CatalogRequest(files);
+
+    req.setSection("Content");
+
+    String response = constructor.updateCatalog(req);
+    JSONObject jsonObj = new JSONObject(response);
+
+    assertTrue("task_id exists", jsonObj.has("task_id") == true);
+    assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+  }
+
+  @Test
+  public void UpdateCatalogWithItemsAndForceShouldReturnTaskInfo() throws Exception {
+    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    Map<String, File> files = new HashMap<String, File>();
+    files.put("items", new File("src/test/resources/csv/items.csv"));
+
+    CatalogRequest req = new CatalogRequest(files);
+
+    req.setForce(true);
+
+    String response = constructor.updateCatalog(req);
+    JSONObject jsonObj = new JSONObject(response);
+
+    assertTrue("task_id exists", jsonObj.has("task_id") == true);
+    assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+  }
+
+  @Test
+  public void UpdateCatalogWithItemsAndVariationsFilesShouldReturnTaskInfo() throws Exception {
+    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    Map<String, File> files = new HashMap<String, File>();
+
+    files.put("items", new File("src/test/resources/csv/items.csv"));
+    files.put("variations", new File("src/test/resources/csv/variations.csv"));
+
+    CatalogRequest req = new CatalogRequest(files);
+    String response = constructor.updateCatalog(req);
+    JSONObject jsonObj = new JSONObject(response);
+
+    assertTrue("task_id exists", jsonObj.has("task_id") == true);
+    assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+  }
+
+  @Test
+  public void UpdateCatalogWithItemsAndVariationsAndItemGroupsFilesShouldReturnTaskInfo() throws Exception {
+    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    Map<String, File> files = new HashMap<String, File>();
+
+    files.put("items", new File("src/test/resources/csv/items.csv"));
+    files.put("variations", new File("src/test/resources/csv/variations.csv"));
+    files.put("item_groups", new File("src/test/resources/csv/item_groups.csv"));
+
+    CatalogRequest req = new CatalogRequest(files);
+    String response = constructor.updateCatalog(req);
+    JSONObject jsonObj = new JSONObject(response);
+
+    assertTrue("task_id exists", jsonObj.has("task_id") == true);
+    assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+  }
 }

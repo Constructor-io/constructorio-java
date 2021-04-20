@@ -56,6 +56,33 @@ constructor.addItemBatch(items, "Products");
 constructor.addOrUpdateItemBatch(items, "Products");
 ```
 
+# Replacing and Updating Catalogs
+To replace or update your product catalog, you will need to create a `CatalogRequest`. In this request, you can specify the files you want to upload (items, variations, and item groups) and the section you want to upload to. You can also set a notification e-mail to be alerted when a file ingestion fails.
+
+```java
+// Create a files map and add the relevant files
+Map<String, File> files = new HashMap<String, File>();
+files.put("items", new File("src/test/resources/csv/items.csv"));
+files.put("variations", new File("src/test/resources/csv/variations.csv"));
+files.put("item_groups", new File("src/test/resources/csv/item_groups.csv"));
+
+// Create a CatalogRequest with files to upload and the section to upload to
+CatalogRequest request = new CatalogRequest(files, "Products");
+
+// Set a notification e-mail
+request.setNotificationEmail("integration@company.com");
+
+// Set the force flag if the catalog should be processed even if it will invalidate a large number of existing items
+request.setForce(true)
+
+// Send a request to replace the catalog (sync)
+constructor.replaceCatalog(request);
+
+// Or send a request to update the catalog (delta)
+constructor.updateCatalog(request);
+```
+
+
 # Retrieving Autocomplete Results
 
 To retrieve autocomplete results, you will need to create an `AutocompleteRequest`. In this request you can specify the number of results you want per autocomplete section.  If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.

@@ -19,7 +19,7 @@ public class ConstructorIOCatalogTest {
   public void ReplaceCatalogWithNoFilesShouldError() throws Exception {
     ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
 
     thrown.expect(ConstructorException.class);
     thrown.expectMessage("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
@@ -33,7 +33,7 @@ public class ConstructorIOCatalogTest {
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
     
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
     String response = constructor.replaceCatalog(req);
     JSONObject jsonObj = new JSONObject(response);
 
@@ -48,7 +48,7 @@ public class ConstructorIOCatalogTest {
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
     
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
 
     req.setNotificationEmail("jimmy@constructor.io");
 
@@ -66,7 +66,7 @@ public class ConstructorIOCatalogTest {
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
 
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
 
     req.setSection("Content");
 
@@ -83,7 +83,7 @@ public class ConstructorIOCatalogTest {
     Map<String, File> files = new HashMap<String, File>();
     files.put("items", new File("src/test/resources/csv/items.csv"));
     
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
 
     req.setForce(true);
 
@@ -102,7 +102,7 @@ public class ConstructorIOCatalogTest {
     files.put("items", new File("src/test/resources/csv/items.csv"));
     files.put("variations", new File("src/test/resources/csv/variations.csv"));
     
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
     String response = constructor.replaceCatalog(req);
     JSONObject jsonObj = new JSONObject(response);
 
@@ -119,7 +119,7 @@ public class ConstructorIOCatalogTest {
     files.put("variations", new File("src/test/resources/csv/variations.csv"));
     files.put("item_groups", new File("src/test/resources/csv/item_groups.csv"));
 
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
     String response = constructor.replaceCatalog(req);
     JSONObject jsonObj = new JSONObject(response);
 
@@ -131,7 +131,7 @@ public class ConstructorIOCatalogTest {
   public void UpdateCatalogWithNoFilesShouldError() throws Exception {
     ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
 
     thrown.expect(ConstructorException.class);
     thrown.expectMessage("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
@@ -145,7 +145,7 @@ public class ConstructorIOCatalogTest {
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
 
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
     String response = constructor.updateCatalog(req);
     JSONObject jsonObj = new JSONObject(response);
 
@@ -160,7 +160,7 @@ public class ConstructorIOCatalogTest {
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
 
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
 
     req.setNotificationEmail("jimmy@constructor.io");
 
@@ -178,7 +178,7 @@ public class ConstructorIOCatalogTest {
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
 
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
 
     req.setSection("Content");
 
@@ -195,7 +195,7 @@ public class ConstructorIOCatalogTest {
     Map<String, File> files = new HashMap<String, File>();
     files.put("items", new File("src/test/resources/csv/items.csv"));
 
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
 
     req.setForce(true);
 
@@ -214,7 +214,7 @@ public class ConstructorIOCatalogTest {
     files.put("items", new File("src/test/resources/csv/items.csv"));
     files.put("variations", new File("src/test/resources/csv/variations.csv"));
 
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
     String response = constructor.updateCatalog(req);
     JSONObject jsonObj = new JSONObject(response);
 
@@ -231,7 +231,7 @@ public class ConstructorIOCatalogTest {
     files.put("variations", new File("src/test/resources/csv/variations.csv"));
     files.put("item_groups", new File("src/test/resources/csv/item_groups.csv"));
 
-    CatalogRequest req = new CatalogRequest(files);
+    CatalogRequest req = new CatalogRequest(files, "Products");
     String response = constructor.updateCatalog(req);
     JSONObject jsonObj = new JSONObject(response);
 

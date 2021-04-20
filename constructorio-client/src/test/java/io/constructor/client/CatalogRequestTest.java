@@ -18,14 +18,23 @@ public class CatalogRequestTest {
     @Test
     public void newWithNullFilesShouldFail() throws Exception {
       thrown.expect(IllegalArgumentException.class);
-      new CatalogRequest(null);
+      new CatalogRequest(null, "Products");
+    }
+
+    @Test
+    public void newWithNullSectionShouldFail() throws Exception {
+      Map<String, File> files = new HashMap<String, File>();
+      files.put("items", new File("src/test/resources/csv/items.csv"));
+
+      thrown.expect(IllegalArgumentException.class);
+      new CatalogRequest(null, null);
     }
 
     @Test
     public void newShouldReturnCatalogRequest() throws Exception {
       Map<String, File> files = new HashMap<String, File>();
       files.put("items", new File("src/test/resources/csv/items.csv"));
-      CatalogRequest request = new CatalogRequest(files);
+      CatalogRequest request = new CatalogRequest(files, "Products");
       assertEquals(request.getFiles(), files);
     }
 
@@ -33,7 +42,7 @@ public class CatalogRequestTest {
     public void newShouldReturnDefaultProperties() throws Exception {
       Map<String, File> files = new HashMap<String, File>();
       files.put("items", new File("src/test/resources/csv/items.csv"));
-      CatalogRequest request = new CatalogRequest(files);
+      CatalogRequest request = new CatalogRequest(files, "Products");
       assertEquals(request.getFiles(), files);
       assertEquals(request.getSection(), "Products");
     }
@@ -42,7 +51,7 @@ public class CatalogRequestTest {
     public void settersShouldSet() throws Exception {
         Map<String, File> files = new HashMap<String, File>();
         files.put("items", new File("src/test/resources/csv/items.csv"));
-        CatalogRequest request = new CatalogRequest(files);
+        CatalogRequest request = new CatalogRequest(files, "Products");
 
         Map<String, File> newFiles = new HashMap<String, File>();
         newFiles.put("variations", new File("src/test/resources/csv/variations.csv"));

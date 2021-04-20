@@ -16,14 +16,18 @@ public class CatalogRequest {
    * Creates a catalog request
    *
    * @param files the files to be uploaded
+   * @param section the autocomplete section to upload the files to
    */
-  public CatalogRequest(Map<String, File> files) {
+  public CatalogRequest(Map<String, File> files, String section) {
     if (files == null) {
       throw new IllegalArgumentException("files is required");
     }
+    if (section == null) {
+      throw new IllegalArgumentException("section is required");
+    }
 
     this.files = files;
-    this.section = "Products";
+    this.section = section;
   }
 
   /**

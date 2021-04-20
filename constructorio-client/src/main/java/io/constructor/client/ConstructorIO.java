@@ -2,6 +2,7 @@ package io.constructor.client;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -24,6 +25,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Request.Builder;
@@ -830,8 +832,11 @@ public class ConstructorIO {
         okhttp3.HttpUrl.Builder builder = new HttpUrl.Builder()
             .scheme(this.protocol)
             .addQueryParameter("key", this.apiKey)
-            .addQueryParameter("c", this.version)
             .host(this.host);
+
+        if (!paths.contains("catalog")) {
+            builder.addQueryParameter("c", this.version);
+        }
 
         for (String path : paths) {
           String canonicalPath = OkHttpUrlBuilderUtils.canonicalize(path, 0, path.length(), 
@@ -1044,6 +1049,61 @@ public class ConstructorIO {
 
             // Add metadata to result data object
             resultData.put("metadata", metadata);
+        }
+    }
+
+    /**
+     * Send a full catalog to replace the current one
+     *
+     * @param req the catalog request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String replaceCatalog(CatalogRequest req) throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v1","catalog"));
+            HttpUrl.Builder urlBuilder = url.newBuilder()
+                .addQueryParameter("section", req.getSection());
+            MultipartBody.Builder multipartBuilder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);
+            String notificationEmail = req.getNotificationEmail();
+            Boolean force = req.getForce();
+            Map<String, File> files = req.getFiles();
+
+            if (notificationEmail != null) {
+                urlBuilder.addQueryParameter("notification_email", notificationEmail);
+            }
+            if (force != null) {
+                urlBuilder.addQueryParameter("force", Boolean.toString(force));
+            }
+
+            url = urlBuilder.build();
+
+            if (files != null) {
+                for (Map.Entry<String,File> entry : files.entrySet()) {
+                    String fileName = entry.getKey();
+                    File file = entry.getValue();
+
+                    multipartBuilder.addFormDataPart(fileName, fileName + ".csv", RequestBody.create(MediaType.parse("application/octet-stream"), file));
+                }
+            }
+
+            RequestBody requestBody = multipartBuilder.build();
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .put(requestBody)
+                .build();
+
+            Response response = client.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            String errorMessage = exception.getMessage();
+
+            if (errorMessage == "Multipart body must have at least one part.") {
+                throw new ConstructorException("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
+            } else {
+                throw new ConstructorException(exception);
+            }
         }
     }
 }

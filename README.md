@@ -217,6 +217,49 @@ constructor.browse(request, userInfo, new BrowseCallback() {
 });
 ```
 
+# Retrieving Browse Results for Item ID's
+
+To retrieve browse results for a supplied list of item ID's, you will need to create a `BrowseItemsRequest`. When creating the `BrowseItemsRequest` the `ids` parameter will be a list of item ID's. In this request, you can also specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
+
+```java
+// Create a BrowseItemsRequest with the filter name and filter value to request results for
+BrowseItemsRequest request = new BrowseItemsRequest(Arrays.asList("t-shirt-xxl"));
+
+// Add in additional parameters
+request.setResultsPerPage(5);
+request.setPage(1);
+request.setGroupId("625");r
+request.setSortBy("Price");
+request.setSortAscending(true);
+request.getFacets().put("Brand", Arrays.asList("Jif"))
+
+// Create a UserInfo object with the session and unique device identifier (optional)
+UserInfo userInfo = new UserInfo(5, "device-id-1123123");
+userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
+
+// Request results as an object
+BrowseResponse response = constructor.browseItems(request, userInfo);
+
+// Request results as a JSON string
+String response = constructor.browseItemsAsJSON(request, userInfo);
+```
+
+If you'd like to retrieve browse items results asynchronously, the above code can be modified slightly to utilize a callback methodology:
+
+```java
+constructor.browseItems(request, userInfo, new BrowseCallback() {
+  @Override
+  public void onFailure(final ConstructorException exception) {
+    // failure condition
+  }
+
+  @Override
+  public void onResponse(final BrowseResponse response) {
+    // success condition - data located within `response`
+  };
+});
+```
+
 # Retrieving Recommendation Results
 
 To retrieve recommendation results, you will need to create a `RecommendationsRequest`. In this request, you can also specify the number of results you want and the items (given the ids) that you want to retrieve recommendations for. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.

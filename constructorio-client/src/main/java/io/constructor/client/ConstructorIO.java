@@ -571,6 +571,7 @@ public class ConstructorIO {
             throw new ConstructorException(exception);
         }
     } 
+
     /**
      * Creates a browse OkHttp request
      * 
@@ -700,6 +701,148 @@ public class ConstructorIO {
     public String browseAsJSON(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
       try {
         Request request = createBrowseRequest(req, userInfo);
+        Response response = clientWithRetry.newCall(request).execute();
+        return getResponseBody(response);
+      } catch (Exception exception) {
+          throw new ConstructorException(exception);
+      }
+    }
+
+    /**
+     * Creates a browse items OkHttp request
+     * 
+     * @param req the browse items request
+     * @param userInfo optional information about the user
+     * @return a browse OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createBrowseItemsRequest(BrowseItemsRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList("browse", "items");
+            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
+            url = url.newBuilder()
+                .addQueryParameter("section", req.getSection())
+                .addQueryParameter("page", String.valueOf(req.getPage()))
+                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                .build();
+
+            for (String id : req.getIds()) {
+                url = url.newBuilder()
+                    .addQueryParameter("ids", id)
+                    .build();
+            }
+
+            if (req.getGroupId() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("filters[group_id]", req.getGroupId())
+                    .build();
+            }
+
+            for (String facetName : req.getFacets().keySet()) {
+                for (String facetValue : req.getFacets().get(facetName)) {
+                    url = url.newBuilder()
+                        .addQueryParameter("filters[" + facetName + "]", facetValue)
+                        .build();
+                }
+            }
+
+            for (String formatOptionKey : req.getFormatOptions().keySet()) {
+              String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
+                url = url.newBuilder()
+                    .addQueryParameter("fmt_options[" + formatOptionKey + "]", formatOptionValue)
+                    .build();
+            }
+
+            if (StringUtils.isNotBlank(req.getSortBy())) {
+                url = url.newBuilder()
+                    .addQueryParameter("sort_by", req.getSortBy())
+                    .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
+                    .build();
+            }
+
+            Request request = this.makeUserRequestBuilder(userInfo)
+                .url(url)
+                .get()
+                .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the browse service with item id's.
+     *
+     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the browse items request
+     * @param userInfo optional information about the user
+     * @return a browse response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public BrowseResponse browseItems(BrowseItemsRequest req, UserInfo userInfo) throws ConstructorException {
+      try {
+          Request request = createBrowseItemsRequest(req, userInfo);
+          Response response = clientWithRetry.newCall(request).execute();
+          String json = getResponseBody(response);
+          return createBrowseResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the browse service with item id's.
+     *
+     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the browse items request
+     * @param userInfo optional information about the user
+     * @param c a callback with success and failure conditions
+     * @throws ConstructorException if the request is invalid.
+     */
+    public void browseItems(BrowseItemsRequest req, UserInfo userInfo, final BrowseCallback c) throws ConstructorException {
+        try {
+            Request request = createBrowseItemsRequest(req, userInfo);
+            clientWithRetry.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    c.onFailure(new ConstructorException(e));
+                }
+
+                @Override
+                public void onResponse(Call call, final Response response) throws IOException {
+                    try {
+                        String json = getResponseBody(response);
+                        BrowseResponse res = createBrowseResponse(json);
+                        c.onResponse(res);
+                    } catch (Exception e) {
+                        c.onFailure(new ConstructorException(e));
+                    }
+                }
+            });
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the browse service with item id's.
+     *
+     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
+     * That's important. That will be a solid latency difference.
+     *
+     * @param req the browse items request
+     * @param userInfo optional information about the user
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String browseItemsAsJSON(BrowseItemsRequest req, UserInfo userInfo) throws ConstructorException {
+      try {
+        Request request = createBrowseItemsRequest(req, userInfo);
         Response response = clientWithRetry.newCall(request).execute();
         return getResponseBody(response);
       } catch (Exception exception) {

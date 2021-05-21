@@ -41,7 +41,7 @@ public class ConstructorIOSearchUrlEncodingTest {
         constructor.search(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/search/r%2Bco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.8.0&section=Products&page=1&num_results_per_page=30";
+        String expectedPath = "/search/r%2Bco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.9.0&section=Products&page=1&num_results_per_page=30";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -57,7 +57,7 @@ public class ConstructorIOSearchUrlEncodingTest {
         constructor.search(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/search/r%20co?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.8.0&section=Products&page=1&num_results_per_page=30";
+        String expectedPath = "/search/r%20co?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.9.0&section=Products&page=1&num_results_per_page=30";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -73,7 +73,7 @@ public class ConstructorIOSearchUrlEncodingTest {
         constructor.search(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/search/r%2Fco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.8.0&section=Products&page=1&num_results_per_page=30";
+        String expectedPath = "/search/r%2Fco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.9.0&section=Products&page=1&num_results_per_page=30";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -89,7 +89,7 @@ public class ConstructorIOSearchUrlEncodingTest {
         constructor.search(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/search/r'co?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.8.0&section=Products&page=1&num_results_per_page=30";
+        String expectedPath = "/search/r'co?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.9.0&section=Products&page=1&num_results_per_page=30";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }

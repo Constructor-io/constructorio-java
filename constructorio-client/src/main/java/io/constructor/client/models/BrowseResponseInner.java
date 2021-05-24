@@ -24,6 +24,9 @@ public class BrowseResponseInner {
     @SerializedName("sort_options")
     private List<FilterSortOption> sortOptions;
 
+    @SerializedName("collection")
+    private ItemCollection collection;
+    
     /**
      * @return the facets
      */
@@ -57,5 +60,12 @@ public class BrowseResponseInner {
      */
     public List<FilterSortOption> getSortOptions() {
       return sortOptions;
+    }
+
+    /**
+     * @return the item collection data
+     */
+    public ItemCollection getCollection() {
+      return collection;
     }
 }

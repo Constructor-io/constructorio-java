@@ -25,6 +25,7 @@ public class ConstructorIOBrowseTest {
         BrowseResponse response = constructor.browse(request, userInfo);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
         assertTrue("browse total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
+        assertTrue("browse collection data does not exist", response.getResponse().getCollection() == null);
         assertTrue("browse result id exists", response.getResultId() != null);
     }
 
@@ -133,6 +134,10 @@ public class ConstructorIOBrowseTest {
         BrowseResponse response = constructor.browse(request, null);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
         assertTrue("browse total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
+        assertTrue("browse collection data exists", response.getResponse().getCollection() != null);
+        assertEquals("browse collection id exists", response.getResponse().getCollection().getId(), "fresh-deals");
+        assertEquals("browse collection name exists", response.getResponse().getCollection().getDisplayName(), "Fresh deals");
+        assertTrue("browse collection inner data does not exist", response.getResponse().getCollection().getData() == null);
         assertTrue("browse result id exists", response.getResultId() != null);
     }
 

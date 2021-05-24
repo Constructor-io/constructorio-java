@@ -5,7 +5,7 @@ import java.util.Map;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Item collection data of items ... uses Gson/Reflection to load data in
+ * Constructor.io Item collection data ... uses Gson/Reflection to load data in
  */
 public class ItemCollection {
 
@@ -33,7 +33,7 @@ public class ItemCollection {
     }
 
     /**
-     * @return the colletion data
+     * @return the collection data
      */
     public Map<String, Object> getData() {
       return data;

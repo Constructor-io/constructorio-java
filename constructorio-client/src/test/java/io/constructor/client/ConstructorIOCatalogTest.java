@@ -12,12 +12,15 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ConstructorIOCatalogTest {
+  
+  String token = System.getenv("TEST_API_TOKEN");
+
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
   @Test
   public void ReplaceCatalogWithNoFilesShouldError() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
     CatalogRequest req = new CatalogRequest(files, "Products");
 
@@ -28,7 +31,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void ReplaceCatalogWithItemsFileShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
@@ -43,7 +46,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void ReplaceCatalogWithItemsAndNotificationEmailShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
@@ -61,7 +64,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void ReplaceCatalogWithItemsAndSectionShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
@@ -79,7 +82,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void ReplaceCatalogWithItemsAndForceShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
     files.put("items", new File("src/test/resources/csv/items.csv"));
     
@@ -96,7 +99,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void ReplaceCatalogWithItemsAndVariationsFilesShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
@@ -112,7 +115,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void ReplaceCatalogWithItemsAndVariationsAndItemGroupsFilesShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
@@ -129,7 +132,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void UpdateCatalogWithNoFilesShouldError() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
     CatalogRequest req = new CatalogRequest(files, "Products");
 
@@ -140,7 +143,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void UpdateCatalogWithItemsFileShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
@@ -155,7 +158,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void UpdateCatalogWithItemsAndNotificationEmailShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
@@ -173,7 +176,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void UpdateCatalogWithItemsAndSectionShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
@@ -191,7 +194,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void UpdateCatalogWithItemsAndForceShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
     files.put("items", new File("src/test/resources/csv/items.csv"));
 
@@ -208,7 +211,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void UpdateCatalogWithItemsAndVariationsFilesShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
@@ -224,7 +227,7 @@ public class ConstructorIOCatalogTest {
 
   @Test
   public void UpdateCatalogWithItemsAndVariationsAndItemGroupsFilesShouldReturnTaskInfo() throws Exception {
-    ConstructorIO constructor = new ConstructorIO("tok_T6UrSf4KHgDpPjFM", "key_dsE9a33xJ0tt0tCS", true, null);
+    ConstructorIO constructor = new ConstructorIO(token, "key_dsE9a33xJ0tt0tCS", true, null);
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));

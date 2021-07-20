@@ -22,7 +22,7 @@ public class ConstructorIOAutocompleteTest {
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         AutocompleteRequest request = new AutocompleteRequest("Stanley");
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
-        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 1);
+        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 5);
         assertEquals("autocomplete search suggestions exist", response.getSections().get("Search Suggestions").size(), 1);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
@@ -32,7 +32,7 @@ public class ConstructorIOAutocompleteTest {
         ConstructorIO constructor = new ConstructorIO(token, "ZqXaOfXuBWD4s3XzCI1q", true, null);
         AutocompleteRequest request = new AutocompleteRequest("Stanley");
         AutocompleteResponse response = constructor.autocomplete(request, null);
-        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 1);
+        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 5);
         assertEquals("autocomplete search suggestions exist", response.getSections().get("Search Suggestions").size(), 1);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
@@ -43,7 +43,7 @@ public class ConstructorIOAutocompleteTest {
         AutocompleteRequest request = new AutocompleteRequest("Stanley");
         request.getResultsPerSection().put("Products", 10);
         AutocompleteResponse response = constructor.autocomplete(request, null);
-        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 1);
+        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 5);
         assertEquals("autocomplete search suggestions exist", response.getSections().get("Search Suggestions").size(), 0);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }

@@ -36,12 +36,12 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
         mockServer.enqueue(mockResponse);
 
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", false, "127.0.0.1", mockServer.getPort());
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", false, "127.0.0.1", mockServer.getPort());
         AutocompleteRequest request = new AutocompleteRequest("r+co");
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/autocomplete/r%2Bco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.10.0";
+        String expectedPath = "/autocomplete/r%2Bco?key=ZqXaOfXuBWD4s3XzCI1q&c=ciojava-5.10.0";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -52,12 +52,12 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
         mockServer.enqueue(mockResponse);
 
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", false, "127.0.0.1", mockServer.getPort());
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", false, "127.0.0.1", mockServer.getPort());
         AutocompleteRequest request = new AutocompleteRequest("r co");
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/autocomplete/r%20co?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.10.0";
+        String expectedPath = "/autocomplete/r%20co?key=ZqXaOfXuBWD4s3XzCI1q&c=ciojava-5.10.0";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -68,12 +68,12 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
         mockServer.enqueue(mockResponse);
 
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", false, "127.0.0.1", mockServer.getPort());
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", false, "127.0.0.1", mockServer.getPort());
         AutocompleteRequest request = new AutocompleteRequest("r/co");
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/autocomplete/r%2Fco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.10.0";
+        String expectedPath = "/autocomplete/r%2Fco?key=ZqXaOfXuBWD4s3XzCI1q&c=ciojava-5.10.0";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -84,12 +84,12 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
         mockServer.enqueue(mockResponse);
 
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", false, "127.0.0.1", mockServer.getPort());
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", false, "127.0.0.1", mockServer.getPort());
         AutocompleteRequest request = new AutocompleteRequest("r'co");
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/autocomplete/r'co?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.10.0";
+        String expectedPath = "/autocomplete/r'co?key=ZqXaOfXuBWD4s3XzCI1q&c=ciojava-5.10.0";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }

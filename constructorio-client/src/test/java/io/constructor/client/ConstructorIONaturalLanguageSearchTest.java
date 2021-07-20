@@ -16,7 +16,7 @@ public class ConstructorIONaturalLanguageSearchTest {
 
     @Test
     public void NaturalLanguageSearchShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me peanuts");
         SearchResponse response = constructor.naturalLanguageSearch(request, userInfo);
@@ -27,7 +27,7 @@ public class ConstructorIONaturalLanguageSearchTest {
 
     @Test
     public void NaturalLanguageSearchShouldReturnAResultWithFivePerPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me peanuts");
         request.setResultsPerPage(5);
@@ -39,7 +39,7 @@ public class ConstructorIONaturalLanguageSearchTest {
 
     @Test
     public void NaturalLanguageSearchShouldReturnAResultWithLastPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me peanuts");
         request.setPage(4);
@@ -51,7 +51,7 @@ public class ConstructorIONaturalLanguageSearchTest {
 
     @Test
     public void NaturalLanguageSearchShouldReturnAResultWithNullUserInfo() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me peanuts");
         SearchResponse response = constructor.naturalLanguageSearch(request, null);
         assertEquals("search results exist", response.getResponse().getResults().size(), 30);

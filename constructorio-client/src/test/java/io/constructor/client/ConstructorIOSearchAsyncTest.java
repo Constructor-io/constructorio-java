@@ -30,7 +30,7 @@ public class ConstructorIOSearchAsyncTest {
 
   @Test
   public void SearchShouldReturnAResult() throws Exception {
-    final ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+    final ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
     final UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
     final SearchRequest request = new SearchRequest("peanut");
     constructor.search(request, userInfo, new SearchCallback() {

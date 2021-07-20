@@ -95,10 +95,10 @@ public class ConstructorIOSearchTest {
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 30);
         assertEquals("search result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 13);
-        assertEquals("search result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 8);
-        assertEquals("search result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "Bully – Leather Jacket");
-        assertEquals("search result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "M0E20000000FBLO");
-        assertEquals("search result variation [url] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getUrl(), "https://demo.commercetools.com/en/bully-leather-jacket-251-grey.html");
+        assertEquals("search result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 13);
+        assertEquals("search result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "Jacket “Rivka“ Luis Trenker cream");
+        assertEquals("search result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "M0E20000000E2ZJ");
+        assertEquals("search result variation [url] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getUrl(), "https://demo.commercetools.com/en/luistrenker-jacket-K245511299-cream.html");
         assertTrue("search total results count should be greater than 0", (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("search result id exists", response.getResultId() != null);
     }

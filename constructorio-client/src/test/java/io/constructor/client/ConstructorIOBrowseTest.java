@@ -129,23 +129,23 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithCollectionId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_aXLmVpkVp4BX21Sw", true, "betaac.cnstrc.com");
-        BrowseRequest request = new BrowseRequest("collection_id", "fresh-deals");
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        BrowseRequest request = new BrowseRequest("collection_id", "test");
         BrowseResponse response = constructor.browse(request, null);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
         assertTrue("browse total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse collection exists", response.getResponse().getCollection() != null);
-        assertEquals("browse collection id exists", response.getResponse().getCollection().getId(), "fresh-deals");
-        assertEquals("browse collection name exists", response.getResponse().getCollection().getDisplayName(), "Fresh deals");
+        assertEquals("browse collection id exists", response.getResponse().getCollection().getId(), "test");
+        assertEquals("browse collection name exists", response.getResponse().getCollection().getDisplayName(), "test");
         assertTrue("browse collection data does not exist", response.getResponse().getCollection().getData() == null);
         assertTrue("browse result id exists", response.getResultId() != null);
     }
 
     @Test
     public void BrowseShouldReturnAResultWithNewApiKeySet() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, "betaac.cnstrc.com");
-        constructor.setApiKey("key_aXLmVpkVp4BX21Sw");
-        BrowseRequest request = new BrowseRequest("collection_id", "fresh-deals");
+        ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
+        constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
+        BrowseRequest request = new BrowseRequest("Brand", "Barnana");
         BrowseResponse response = constructor.browse(request, null);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
         assertTrue("browse total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);

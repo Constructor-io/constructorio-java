@@ -53,8 +53,8 @@ public class ConstructorIOSearchAsyncTest {
 
   @Test
   public void SearchShouldReturnAResultWithNewApiKeySet() throws Exception {
-      ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, "betaac.cnstrc.com");
-      constructor.setApiKey("key_aXLmVpkVp4BX21Sw");
+      ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
+      constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
       SearchRequest request = new SearchRequest("bananas");
       constructor.search(request, null, new SearchCallback() {
         @Override
@@ -68,7 +68,7 @@ public class ConstructorIOSearchAsyncTest {
       });
       await().atMost(5, SECONDS).until(responseIsResolved());
       assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 30);
-      assertEquals("search results count as expected", (int)responseResolved.getResponse().getTotalNumberOfResults(), 126);
+      assertEquals("search results count as expected", (int)responseResolved.getResponse().getTotalNumberOfResults(), 84);
       assertTrue("search result id exists", responseResolved.getResultId() != null);
       responseResolved = null;
   }

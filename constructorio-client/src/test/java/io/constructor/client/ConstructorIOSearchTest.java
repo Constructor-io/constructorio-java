@@ -90,16 +90,16 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithVariations() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("jacket");
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 13);
-        assertEquals("search result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 13);
-        assertEquals("search result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "Jacket “Rivka“ Luis Trenker cream");
-        assertEquals("search result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "M0E20000000E2ZJ");
-        assertEquals("search result variation [url] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getUrl(), "https://demo.commercetools.com/en/luistrenker-jacket-K245511299-cream.html");
+        assertEquals("search result [variations] exists", response.getResponse().getResults().get(21).getVariations().size(), 13);
+        assertEquals("search result variation [facets] exists", response.getResponse().getResults().get(21).getVariations().get(0).getData().getFacets().size(), 13);
+        assertEquals("search result variation [value] exists", response.getResponse().getResults().get(21).getVariations().get(0).getValue(), "Jacket “Rivka“ Luis Trenker cream");
+        assertEquals("search result variation [variation id] exists", response.getResponse().getResults().get(21).getVariations().get(0).getData().getVariationId(), "M0E20000000E2ZJ");
+        assertEquals("search result variation [url] exists", response.getResponse().getResults().get(21).getVariations().get(0).getData().getUrl(), "https://demo.commercetools.com/en/luistrenker-jacket-K245511299-cream.html");
         assertTrue("search total results count should be greater than 0", (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("search result id exists", response.getResultId() != null);
     }
@@ -131,12 +131,12 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithNewApiKeySet() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, "betaac.cnstrc.com");
-        constructor.setApiKey("key_aXLmVpkVp4BX21Sw");
+        ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
+        constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
         SearchRequest request = new SearchRequest("bananas");
         SearchResponse response = constructor.search(request, null);
         assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 126);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 84);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 

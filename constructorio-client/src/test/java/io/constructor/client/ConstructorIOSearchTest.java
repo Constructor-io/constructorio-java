@@ -106,16 +106,16 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithSortOptions() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("jacket");
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search result [sort options] exists", response.getResponse().getSortOptions().size(), 1);
-        assertEquals("search result sort option [display name] exists", response.getResponse().getSortOptions().get(0).getDisplayName(), "Relevance");
-        assertEquals("search result sort option [sort by] exists", response.getResponse().getSortOptions().get(0).getSortBy(), "relevance");
-        assertEquals("search result sort option [sort order] exists", response.getResponse().getSortOptions().get(0).getSortOrder(), "descending");
-        assertEquals("search result sort option [status] exists", response.getResponse().getSortOptions().get(0).getStatus(), "selected");
-        assertTrue("search total results count should be greater than 0", (int) response.getResponse().getTotalNumberOfResults() > 0);
+        assertEquals("search result [sort options] exists", response.getResponse().getSortOptions().size(), 2);
+        assertEquals("search result sort option [display name] exists", response.getResponse().getSortOptions().get(1).getDisplayName(), "DESC");
+        assertEquals("search result sort option [sort by] exists", response.getResponse().getSortOptions().get(1).getSortBy(), "relevance");
+        assertEquals("search result sort option [sort order] exists", response.getResponse().getSortOptions().get(1).getSortOrder(), "descending");
+        assertEquals("search result sort option [status] exists", response.getResponse().getSortOptions().get(1).getStatus(), "selected");
+        assertTrue("search total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -158,32 +158,32 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithMaxGroupsDepthOf3() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("jacket");
+        SearchRequest request = new SearchRequest("Shirt ”Linda” MU beige");
         request.getFormatOptions().put("groups_max_depth", "3");
         SearchResponse response = constructor.search(request, userInfo);
         FilterGroup root = response.getResponse().getGroups().get(0);
         FilterGroup firstGen = root.getChildren().get(0);
         FilterGroup secondGen = firstGen.getChildren().get(0);
         FilterGroup thirdGen = secondGen.getChildren().get(0);
-        assertEquals("search result [root] exists", root.getGroupId(), "all");
+        assertEquals("search result [root] exists", root.getGroupId(), "All");
         assertEquals("search result [firstGen] exists", firstGen.getGroupId(), "women");
         assertEquals("search result [secondGen] exists", secondGen.getGroupId(), "women|clothing");
-        assertEquals("search result [thirdGen] exists", thirdGen.getGroupId(), "women|clothing|jackets");
+        assertEquals("search result [thirdGen] exists", thirdGen.getGroupId(), "women|clothing|shirts");
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
     @Test
     public void SearchShouldReturnAResultWithMaxGroupsDepthOf1() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("jacket");
+        SearchRequest request = new SearchRequest("Shirt ”Linda” MU beige");
         request.getFormatOptions().put("groups_max_depth", "1");
         SearchResponse response = constructor.search(request, userInfo);
         FilterGroup root = response.getResponse().getGroups().get(0);
         FilterGroup firstGen = root.getChildren().get(0);
-        assertEquals("search result [root] exists", root.getGroupId(), "all");
+        assertEquals("search result [root] exists", root.getGroupId(), "All");
         assertEquals("search result [firstGen] exists", firstGen.getGroupId(), "women");
         assertEquals("search result [firstGen] children", firstGen.getChildren().size(), 0);
         assertTrue("search result id exists", response.getResultId() != null);

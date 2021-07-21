@@ -19,7 +19,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "Blue");
         BrowseResponse response = constructor.browse(request, userInfo);
@@ -31,7 +31,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseAsJSONShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "Blue");
         String response = constructor.browseAsJSON(request, userInfo);
@@ -40,7 +40,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithFivePerPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "Blue");
         request.setResultsPerPage(5);
@@ -52,7 +52,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithDifferentPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "Blue");
         request.setPage(5);
@@ -64,10 +64,10 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithGroupId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "Blue");
-        request.setGroupId("sale");
+        request.setGroupId("accessories|men");
         BrowseResponse response = constructor.browse(request, userInfo);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
         assertTrue("browse total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
@@ -76,7 +76,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithBrandFacets() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "Blue");
         request.getFacets().put("Brand", Arrays.asList("Frankie", "Cycle"));
@@ -88,7 +88,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithVariations() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "Blue");
         BrowseResponse response = constructor.browse(request, userInfo);
@@ -104,22 +104,22 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithSortOptions() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "Blue");
         BrowseResponse response = constructor.browse(request, userInfo);
-        assertEquals("browse result [sort options] exists", response.getResponse().getSortOptions().size(), 1);
-        assertEquals("browse result sort option [display name] exists", response.getResponse().getSortOptions().get(0).getDisplayName(), "Relevance");
-        assertEquals("browse result sort option [sort by] exists", response.getResponse().getSortOptions().get(0).getSortBy(), "relevance");
-        assertEquals("browse result sort option [sort order] exists", response.getResponse().getSortOptions().get(0).getSortOrder(), "descending");
-        assertEquals("browse result sort option [status] exists", response.getResponse().getSortOptions().get(0).getStatus(), "selected");
+        assertEquals("browse result [sort options] exists", response.getResponse().getSortOptions().size(), 2);
+        assertEquals("browse result sort option [display name] exists", response.getResponse().getSortOptions().get(1).getDisplayName(), "DESC");
+        assertEquals("browse result sort option [sort by] exists", response.getResponse().getSortOptions().get(1).getSortBy(), "relevance");
+        assertEquals("browse result sort option [sort order] exists", response.getResponse().getSortOptions().get(1).getSortOrder(), "descending");
+        assertEquals("browse result sort option [status] exists", response.getResponse().getSortOptions().get(1).getStatus(), "selected");
         assertTrue("browse total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse result id exists", response.getResultId() != null);
     }
 
     @Test
     public void BrowseShouldReturnAResultWithNullUserInfo() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         BrowseRequest request = new BrowseRequest("Color", "Blue");
         BrowseResponse response = constructor.browse(request, null);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
@@ -154,7 +154,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithMaxGroupsDepthOf3() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "Blue");
         request.getFormatOptions().put("groups_max_depth", "3");
@@ -163,24 +163,24 @@ public class ConstructorIOBrowseTest {
         FilterGroup firstGen = root.getChildren().get(0);
         FilterGroup secondGen = firstGen.getChildren().get(0);
         FilterGroup thirdGen = secondGen.getChildren().get(0);
-        assertEquals("browse result [root] exists", root.getGroupId(), "all");
-        assertEquals("browse result [firstGen] exists", firstGen.getGroupId(), "sale");
-        assertEquals("browse result [secondGen] exists", secondGen.getGroupId(), "sale|men");
-        assertEquals("browse result [thirdGen] exists", thirdGen.getGroupId(), "sale|men|clothing");
+        assertEquals("browse result [root] exists", root.getGroupId(), "All");
+        assertEquals("browse result [firstGen] exists", firstGen.getGroupId(), "women");
+        assertEquals("browse result [secondGen] exists", secondGen.getGroupId(), "women|clothing");
+        assertEquals("browse result [thirdGen] exists", thirdGen.getGroupId(), "women|clothing|shirts");
         assertTrue("browse result id exists", response.getResultId() != null);
     }
 
     @Test
     public void BrowseShouldReturnAResultWithMaxGroupsDepthOf1() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "Blue");
         request.getFormatOptions().put("groups_max_depth", "1");
         BrowseResponse response = constructor.browse(request, userInfo);
         FilterGroup root = response.getResponse().getGroups().get(0);
         FilterGroup firstGen = root.getChildren().get(0);
-        assertEquals("browse result [root] exists", root.getGroupId(), "all");
-        assertEquals("browse result [firstGen] exists", firstGen.getGroupId(), "sale");
+        assertEquals("browse result [root] exists", root.getGroupId(), "All");
+        assertEquals("browse result [firstGen] exists", firstGen.getGroupId(), "women");
         assertEquals("browse result [firstGen] children", firstGen.getChildren().size(), 0);
         assertTrue("browse result id exists", response.getResultId() != null);
     }

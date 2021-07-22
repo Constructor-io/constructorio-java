@@ -13,7 +13,7 @@ import org.junit.rules.ExpectedException;
 
 public class ConstructorIOCatalogTest {
   
-  String token = System.getenv("TEST_API_TOKEN");
+  private String token = System.getenv("TEST_API_TOKEN");
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();

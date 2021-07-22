@@ -18,10 +18,10 @@ public class ConstructorIONaturalLanguageSearchTest {
     public void NaturalLanguageSearchShouldReturnAResult() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me peanuts");
+        NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me jackets");
         SearchResponse response = constructor.naturalLanguageSearch(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search results count as expected", (int) response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 1);
+        assertEquals("search results count as expected", (int) response.getResponse().getTotalNumberOfResults(), 1);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -29,11 +29,11 @@ public class ConstructorIONaturalLanguageSearchTest {
     public void NaturalLanguageSearchShouldReturnAResultWithFivePerPage() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me peanuts");
+        NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me jackets");
         request.setResultsPerPage(5);
         SearchResponse response = constructor.naturalLanguageSearch(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 5);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 1);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 1);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -41,21 +41,21 @@ public class ConstructorIONaturalLanguageSearchTest {
     public void NaturalLanguageSearchShouldReturnAResultWithLastPage() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me peanuts");
-        request.setPage(4);
+        NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me jackets");
+        request.setPage(1);
         SearchResponse response = constructor.naturalLanguageSearch(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 14);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 1);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 1);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
     @Test
     public void NaturalLanguageSearchShouldReturnAResultWithNullUserInfo() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
-        NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me peanuts");
+        NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me jackets");
         SearchResponse response = constructor.naturalLanguageSearch(request, null);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 1);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 1);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 }

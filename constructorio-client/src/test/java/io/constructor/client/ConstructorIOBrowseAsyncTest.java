@@ -31,7 +31,7 @@ public class ConstructorIOBrowseAsyncTest {
   public void BrowseShouldReturnAResult() throws Exception {
       ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
       UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-      BrowseRequest request = new BrowseRequest("Brand", "Barnana");
+      BrowseRequest request = new BrowseRequest("Color", "blue");
       constructor.browse(request, userInfo, new BrowseCallback() {
         @Override
         public void onFailure(final ConstructorException exception) {
@@ -53,7 +53,7 @@ public class ConstructorIOBrowseAsyncTest {
   public void BrowseShouldReturnAResultWithNewApiKeySet() throws Exception {
       ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
       constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
-      BrowseRequest request = new BrowseRequest("Brand", "Barnana");
+      BrowseRequest request = new BrowseRequest("Color", "blue");
       constructor.browse(request, null, new BrowseCallback() {
         @Override
         public void onFailure(final ConstructorException exception) {

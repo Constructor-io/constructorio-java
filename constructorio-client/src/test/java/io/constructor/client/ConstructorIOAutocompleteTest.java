@@ -12,13 +12,14 @@ import io.constructor.client.models.AutocompleteResponse;
 public class ConstructorIOAutocompleteTest {
     
     private String token = System.getenv("TEST_API_TOKEN");
+    private String apiKey = System.getenv("TEST_API_KEY");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void autocompleteShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO(token, "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         AutocompleteRequest request = new AutocompleteRequest("jacket");
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
@@ -29,7 +30,7 @@ public class ConstructorIOAutocompleteTest {
 
     @Test
     public void autocompleteShouldReturnAResultWithNullUserInfo() throws Exception {
-        ConstructorIO constructor = new ConstructorIO(token, "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         AutocompleteRequest request = new AutocompleteRequest("jacket");
         AutocompleteResponse response = constructor.autocomplete(request, null);
         assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 1);
@@ -39,7 +40,7 @@ public class ConstructorIOAutocompleteTest {
 
     @Test
     public void autocompleteShouldReturnAResultWithProductsOnly() throws Exception {
-        ConstructorIO constructor = new ConstructorIO(token, "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         AutocompleteRequest request = new AutocompleteRequest("jacket");
         request.getResultsPerSection().put("Products", 10);
         AutocompleteResponse response = constructor.autocomplete(request, null);
@@ -50,7 +51,7 @@ public class ConstructorIOAutocompleteTest {
 
     @Test
     public void autocompleteShouldReturnAResultWithSearchSuggestionsOnly() throws Exception {
-        ConstructorIO constructor = new ConstructorIO(token, "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         AutocompleteRequest request = new AutocompleteRequest("jacket");
         request.getResultsPerSection().put("Search Suggestions", 10);
         AutocompleteResponse response = constructor.autocomplete(request, null);
@@ -62,7 +63,7 @@ public class ConstructorIOAutocompleteTest {
     @Test
     public void autocompleteShouldReturnAResultWithNewApiKeySet() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
-        constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
+        constructor.setApiKey(apiKey);
         AutocompleteRequest request = new AutocompleteRequest("jacket");
         request.getResultsPerSection().put("Search Suggestions", 10);
         AutocompleteResponse response = constructor.autocomplete(request, null);

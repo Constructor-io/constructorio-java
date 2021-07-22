@@ -17,10 +17,11 @@ public class ConstructorIOBrowseItemsTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+    private String apiKey = System.getenv("TEST_API_KEY");
 
     @Test
     public void BrowseItemsShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10001", "10002");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
@@ -32,7 +33,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Test
     public void BrowseItemsAsJSONShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10001", "10002");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
@@ -42,7 +43,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Test
     public void BrowseItemsShouldReturnAResultWithFivePerPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10001", "10002", "10003", "10004", "10005", "10006");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
@@ -55,7 +56,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Test
     public void BrowseItemsShouldReturnAResultWithDifferentPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10001", "10002", "10003", "10004", "10005", "10006");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
@@ -69,7 +70,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Test
     public void BrowseItemsShouldReturnAResultWithGroupId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10001", "10002", "10003", "10004", "10004", "10005");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
@@ -82,7 +83,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Test
     public void BrowseItemsShouldReturnAResultWithColorFacets() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10001");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
@@ -95,7 +96,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Test
     public void BrowseItemsShouldReturnAResultWithVariations() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10001");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
@@ -112,7 +113,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Test
     public void BrowseItemsShouldReturnAResultWithSortOptions() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10001");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
@@ -128,7 +129,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Test
     public void BrowseItemsShouldReturnAResultWithNullUserInfo() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         List<String> ids = Arrays.asList("10001");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         BrowseResponse response = constructor.browseItems(request, null);
@@ -140,7 +141,7 @@ public class ConstructorIOBrowseItemsTest {
     @Test
     public void BrowseItemsShouldReturnAResultWithNewApiKeySet() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
-        constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
+        constructor.setApiKey(apiKey);
         List<String> ids = Arrays.asList("10001");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         BrowseResponse response = constructor.browseItems(request, null);
@@ -151,7 +152,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Test
     public void BrowseItemsShouldReturnAResultWithMaxGroupsDepthOf3() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10002");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
@@ -170,7 +171,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Test
     public void BrowseItemsShouldReturnAResultWithMaxGroupsDepthOf1() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10002");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);

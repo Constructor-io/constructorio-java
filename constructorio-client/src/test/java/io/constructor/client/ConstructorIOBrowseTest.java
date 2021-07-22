@@ -14,12 +14,14 @@ import io.constructor.client.models.FilterGroup;
 
 public class ConstructorIOBrowseTest {
 
+    private String apiKey = System.getenv("TEST_API_KEY");
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void BrowseShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "blue");
         BrowseResponse response = constructor.browse(request, userInfo);
@@ -31,7 +33,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseAsJSONShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "blue");
         String response = constructor.browseAsJSON(request, userInfo);
@@ -40,7 +42,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithFivePerPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "blue");
         request.setResultsPerPage(5);
@@ -52,7 +54,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithDifferentPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "blue");
         request.setPage(1);
@@ -64,7 +66,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithGroupId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "blue");
         request.setGroupId("All");
@@ -76,7 +78,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithBrandFacets() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "blue");
         request.getFacets().put("Brand", Arrays.asList("XYZ"));
@@ -88,7 +90,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithVariations() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "blue");
         BrowseResponse response = constructor.browse(request, userInfo);
@@ -104,7 +106,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithSortOptions() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "blue");
         BrowseResponse response = constructor.browse(request, userInfo);
@@ -119,7 +121,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithNullUserInfo() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         BrowseRequest request = new BrowseRequest("Color", "blue");
         BrowseResponse response = constructor.browse(request, null);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
@@ -129,7 +131,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithCollectionId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         BrowseRequest request = new BrowseRequest("collection_id", "test");
         BrowseResponse response = constructor.browse(request, null);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
@@ -144,7 +146,7 @@ public class ConstructorIOBrowseTest {
     @Test
     public void BrowseShouldReturnAResultWithNewApiKeySet() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
-        constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
+        constructor.setApiKey(apiKey);
         BrowseRequest request = new BrowseRequest("Color", "blue");
         BrowseResponse response = constructor.browse(request, null);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
@@ -154,7 +156,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithMaxGroupsDepthOf3() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "yellow");
         request.getFormatOptions().put("groups_max_depth", "3");
@@ -172,7 +174,7 @@ public class ConstructorIOBrowseTest {
 
     @Test
     public void BrowseShouldReturnAResultWithMaxGroupsDepthOf1() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "yellow");
         request.getFormatOptions().put("groups_max_depth", "1");

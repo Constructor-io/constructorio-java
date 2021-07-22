@@ -15,12 +15,14 @@ import io.constructor.client.models.SearchResponse;
 
 public class ConstructorIOSearchTest {
 
+    private String apiKey = System.getenv("TEST_API_KEY");
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void SearchAsJSONShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("item");
         String response = constructor.searchAsJSON(request, userInfo);
@@ -29,7 +31,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithFivePerPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("item1");
         request.setResultsPerPage(5);
@@ -41,7 +43,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithLastPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("item1");
         request.setPage(1);
@@ -53,7 +55,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithSearchSuggestionsSection() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("jacket");
         request.setSection("Search Suggestions");
@@ -65,7 +67,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithGroupId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("item1");
         request.setGroupId("All");
@@ -77,7 +79,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithColorFacets() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("item");
         request.getFacets().put("Color", Arrays.asList("blue"));
@@ -89,7 +91,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithVariations() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("item1");
         SearchResponse response = constructor.search(request, userInfo);
@@ -105,7 +107,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithSortOptions() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("jacket");
         SearchResponse response = constructor.search(request, userInfo);
@@ -120,7 +122,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithNullUserInfo() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         SearchRequest request = new SearchRequest("item");
         SearchResponse response = constructor.search(request, null);
         assertEquals("search results exist", response.getResponse().getResults().size(), 9);
@@ -131,7 +133,7 @@ public class ConstructorIOSearchTest {
     @Test
     public void SearchShouldReturnAResultWithNewApiKeySet() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
-        constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
+        constructor.setApiKey(apiKey);
         SearchRequest request = new SearchRequest("item");
         SearchResponse response = constructor.search(request, null);
         assertEquals("search results exist", response.getResponse().getResults().size(), 9);
@@ -141,7 +143,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithRedirect() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("medium");
         SearchResponse response = constructor.search(request, userInfo);
@@ -157,7 +159,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithMaxGroupsDepthOf3() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("item2");
         request.getFormatOptions().put("groups_max_depth", "3");
@@ -175,7 +177,7 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithMaxGroupsDepthOf1() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("item2");
         request.getFormatOptions().put("groups_max_depth", "1");

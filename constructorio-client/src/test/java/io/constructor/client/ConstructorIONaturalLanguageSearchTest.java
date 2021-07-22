@@ -11,12 +11,14 @@ import io.constructor.client.models.SearchResponse;
 
 public class ConstructorIONaturalLanguageSearchTest {
 
+    private String apiKey = System.getenv("TEST_API_KEY");
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void NaturalLanguageSearchShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me jackets");
         SearchResponse response = constructor.naturalLanguageSearch(request, userInfo);
@@ -27,7 +29,7 @@ public class ConstructorIONaturalLanguageSearchTest {
 
     @Test
     public void NaturalLanguageSearchShouldReturnAResultWithFivePerPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me jackets");
         request.setResultsPerPage(5);
@@ -39,7 +41,7 @@ public class ConstructorIONaturalLanguageSearchTest {
 
     @Test
     public void NaturalLanguageSearchShouldReturnAResultWithLastPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me jackets");
         request.setPage(1);
@@ -51,7 +53,7 @@ public class ConstructorIONaturalLanguageSearchTest {
 
     @Test
     public void NaturalLanguageSearchShouldReturnAResultWithNullUserInfo() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         NaturalLanguageSearchRequest request = new NaturalLanguageSearchRequest("show me jackets");
         SearchResponse response = constructor.naturalLanguageSearch(request, null);
         assertEquals("search results exist", response.getResponse().getResults().size(), 1);

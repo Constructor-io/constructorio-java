@@ -15,6 +15,7 @@ import io.constructor.client.models.BrowseResponse;
 public class ConstructorIOBrowseAsyncTest {
   
   private BrowseResponse responseResolved;
+  private String apiKey = System.getenv("TEST_API_KEY");
 
   private Callable<Boolean> responseIsResolved() {
     return new Callable<Boolean>() {
@@ -29,7 +30,7 @@ public class ConstructorIOBrowseAsyncTest {
 
   @Test
   public void BrowseShouldReturnAResult() throws Exception {
-      ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+      ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
       UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
       BrowseRequest request = new BrowseRequest("Color", "blue");
       constructor.browse(request, userInfo, new BrowseCallback() {
@@ -52,7 +53,7 @@ public class ConstructorIOBrowseAsyncTest {
   @Test
   public void BrowseShouldReturnAResultWithNewApiKeySet() throws Exception {
       ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
-      constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
+      constructor.setApiKey(apiKey);
       BrowseRequest request = new BrowseRequest("Color", "blue");
       constructor.browse(request, null, new BrowseCallback() {
         @Override

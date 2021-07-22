@@ -15,6 +15,7 @@ import okhttp3.mockwebserver.RecordedRequest;
 public class ConstructorIOSearchUrlEncodingTest {
 
     private static MockWebServer mockServer;
+    private String apiKey = System.getenv("TEST_API_KEY");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -36,12 +37,12 @@ public class ConstructorIOSearchUrlEncodingTest {
         MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
         mockServer.enqueue(mockResponse);
 
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", false, "127.0.0.1", mockServer.getPort());
+        ConstructorIO constructor = new ConstructorIO("", apiKey, false, "127.0.0.1", mockServer.getPort());
         SearchRequest request = new SearchRequest("r+co");
         constructor.search(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/search/r%2Bco?key=ZqXaOfXuBWD4s3XzCI1q&c=ciojava-5.10.0&section=Products&page=1&num_results_per_page=30";
+        String expectedPath = String.format("/search/r%%2Bco?key=%s&c=ciojava-5.10.0&section=Products&page=1&num_results_per_page=30", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -52,12 +53,12 @@ public class ConstructorIOSearchUrlEncodingTest {
         MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
         mockServer.enqueue(mockResponse);
 
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", false, "127.0.0.1", mockServer.getPort());
+        ConstructorIO constructor = new ConstructorIO("", apiKey, false, "127.0.0.1", mockServer.getPort());
         SearchRequest request = new SearchRequest("r co");
         constructor.search(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/search/r%20co?key=ZqXaOfXuBWD4s3XzCI1q&c=ciojava-5.10.0&section=Products&page=1&num_results_per_page=30";
+        String expectedPath = String.format("/search/r%%20co?key=%s&c=ciojava-5.10.0&section=Products&page=1&num_results_per_page=30", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -68,12 +69,12 @@ public class ConstructorIOSearchUrlEncodingTest {
         MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
         mockServer.enqueue(mockResponse);
 
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", false, "127.0.0.1", mockServer.getPort());
+        ConstructorIO constructor = new ConstructorIO("", apiKey, false, "127.0.0.1", mockServer.getPort());
         SearchRequest request = new SearchRequest("r/co");
         constructor.search(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/search/r%2Fco?key=ZqXaOfXuBWD4s3XzCI1q&c=ciojava-5.10.0&section=Products&page=1&num_results_per_page=30";
+        String expectedPath = String.format("/search/r%%2Fco?key=%s&c=ciojava-5.10.0&section=Products&page=1&num_results_per_page=30", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -84,12 +85,12 @@ public class ConstructorIOSearchUrlEncodingTest {
         MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
         mockServer.enqueue(mockResponse);
 
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", false, "127.0.0.1", mockServer.getPort());
+        ConstructorIO constructor = new ConstructorIO("", apiKey, false, "127.0.0.1", mockServer.getPort());
         SearchRequest request = new SearchRequest("r'co");
         constructor.search(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/search/r'co?key=ZqXaOfXuBWD4s3XzCI1q&c=ciojava-5.10.0&section=Products&page=1&num_results_per_page=30";
+        String expectedPath = String.format("/search/r'co?key=%s&c=ciojava-5.10.0&section=Products&page=1&num_results_per_page=30", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }

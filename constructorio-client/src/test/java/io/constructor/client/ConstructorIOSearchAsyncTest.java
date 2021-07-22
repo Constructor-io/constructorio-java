@@ -16,6 +16,7 @@ import io.constructor.client.models.SearchResponse;
 public class ConstructorIOSearchAsyncTest {
   
   private SearchResponse responseResolved;
+  private String apiKey = System.getenv("TEST_API_KEY");
 
   private Callable<Boolean> responseIsResolved() {
     return new Callable<Boolean>() {
@@ -30,7 +31,7 @@ public class ConstructorIOSearchAsyncTest {
 
   @Test
   public void SearchShouldReturnAResult() throws Exception {
-    final ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+    final ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
     final UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
     final SearchRequest request = new SearchRequest("peanut");
     constructor.search(request, userInfo, new SearchCallback() {
@@ -53,7 +54,7 @@ public class ConstructorIOSearchAsyncTest {
   @Test
   public void SearchShouldReturnAResultWithNewApiKeySet() throws Exception {
       ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
-      constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
+      constructor.setApiKey(apiKey);
       SearchRequest request = new SearchRequest("item1");
       constructor.search(request, null, new SearchCallback() {
         @Override

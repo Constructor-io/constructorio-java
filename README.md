@@ -293,3 +293,10 @@ mvn install             # installs dependencies
 mvn test                # run tests
 mvn jacoco:report       # writes code coverage reports to ./target/site/jacoco
 ```
+
+# Environment Variables
+
+```bash
+TEST_API_KEY            # autocomplete_key for the tests
+TEST_API_TOKEN          # API token for the tests
+```

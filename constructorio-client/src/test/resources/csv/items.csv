@@ -1,5 +1,5 @@
 id,item_name,url,group_ids,facet:Color,facet:Brand
-10001,Item1,https://test.com/p/10001,All,blue,XYZ
+10001,Item1,https://test.com/p/10001,All,Blue,XYZ
 10002,Item2,https://test.com/p/10002,BrandXY,yellow,
 10003,Item3,https://test.com/p/10003,,,
 10004,Item4,https://test.com/p/10004,,,

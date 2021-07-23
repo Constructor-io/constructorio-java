@@ -23,7 +23,7 @@ public class ConstructorIOBrowseTest {
     public void BrowseShouldReturnAResult() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        BrowseRequest request = new BrowseRequest("Color", "blue");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
         BrowseResponse response = constructor.browse(request, userInfo);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
         assertTrue("browse total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
@@ -35,7 +35,7 @@ public class ConstructorIOBrowseTest {
     public void BrowseAsJSONShouldReturnAResult() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        BrowseRequest request = new BrowseRequest("Color", "blue");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
         String response = constructor.browseAsJSON(request, userInfo);
         assertTrue("browse results exist", response.length() > 0);
     }
@@ -44,7 +44,7 @@ public class ConstructorIOBrowseTest {
     public void BrowseShouldReturnAResultWithFivePerPage() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        BrowseRequest request = new BrowseRequest("Color", "blue");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
         request.setResultsPerPage(5);
         BrowseResponse response = constructor.browse(request, userInfo);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
@@ -56,7 +56,7 @@ public class ConstructorIOBrowseTest {
     public void BrowseShouldReturnAResultWithDifferentPage() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        BrowseRequest request = new BrowseRequest("Color", "blue");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
         request.setPage(1);
         BrowseResponse response = constructor.browse(request, userInfo);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
@@ -68,7 +68,7 @@ public class ConstructorIOBrowseTest {
     public void BrowseShouldReturnAResultWithGroupId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        BrowseRequest request = new BrowseRequest("Color", "blue");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
         request.setGroupId("All");
         BrowseResponse response = constructor.browse(request, userInfo);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
@@ -80,7 +80,7 @@ public class ConstructorIOBrowseTest {
     public void BrowseShouldReturnAResultWithBrandFacets() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        BrowseRequest request = new BrowseRequest("Color", "blue");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
         request.getFacets().put("Brand", Arrays.asList("XYZ"));
         BrowseResponse response = constructor.browse(request, userInfo);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
@@ -92,7 +92,7 @@ public class ConstructorIOBrowseTest {
     public void BrowseShouldReturnAResultWithVariations() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        BrowseRequest request = new BrowseRequest("Color", "blue");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
         BrowseResponse response = constructor.browse(request, userInfo);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
         assertEquals("browse result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 1);
@@ -108,7 +108,7 @@ public class ConstructorIOBrowseTest {
     public void BrowseShouldReturnAResultWithSortOptions() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        BrowseRequest request = new BrowseRequest("Color", "blue");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
         BrowseResponse response = constructor.browse(request, userInfo);
         assertEquals("browse result [sort options] exists", response.getResponse().getSortOptions().size(), 2);
         assertEquals("browse result sort option [display name] exists", response.getResponse().getSortOptions().get(1).getDisplayName(), "DESC");
@@ -122,7 +122,7 @@ public class ConstructorIOBrowseTest {
     @Test
     public void BrowseShouldReturnAResultWithNullUserInfo() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
-        BrowseRequest request = new BrowseRequest("Color", "blue");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
         BrowseResponse response = constructor.browse(request, null);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
         assertTrue("browse total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
@@ -147,7 +147,7 @@ public class ConstructorIOBrowseTest {
     public void BrowseShouldReturnAResultWithNewApiKeySet() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
         constructor.setApiKey(apiKey);
-        BrowseRequest request = new BrowseRequest("Color", "blue");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
         BrowseResponse response = constructor.browse(request, null);
         assertTrue("browse results exist", response.getResponse().getResults().size() > 0);
         assertTrue("browse total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);

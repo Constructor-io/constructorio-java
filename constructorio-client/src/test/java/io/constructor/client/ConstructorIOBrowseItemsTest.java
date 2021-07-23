@@ -82,12 +82,12 @@ public class ConstructorIOBrowseItemsTest {
     }
 
     @Test
-    public void BrowseItemsShouldReturnAResultWithColorFacets() throws Exception {
+    public void BrowseItemsShouldReturnAResultWithBrandFacets() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10001");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
-        request.getFacets().put("Color", Arrays.asList("blue"));
+        request.getFacets().put("Brand", Arrays.asList("XYZ"));
         BrowseResponse response = constructor.browseItems(request, userInfo);
         assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
         assertTrue("browse items total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);

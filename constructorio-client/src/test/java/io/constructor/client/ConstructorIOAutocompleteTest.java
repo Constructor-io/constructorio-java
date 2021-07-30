@@ -10,6 +10,9 @@ import org.junit.rules.ExpectedException;
 import io.constructor.client.models.AutocompleteResponse;
 
 public class ConstructorIOAutocompleteTest {
+    
+    private String token = System.getenv("TEST_API_TOKEN");
+    private String apiKey = System.getenv("TEST_API_KEY");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -67,5 +70,16 @@ public class ConstructorIOAutocompleteTest {
         assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 0);
         assertEquals("autocomplete search suggestions exist", response.getSections().get("Search Suggestions").size(), 1);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void autocompleteShouldReturnAResultWithHiddenFields() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        AutocompleteRequest request = new AutocompleteRequest("item1");
+        request.getHiddenFields().add("testField");
+        AutocompleteResponse response = constructor.autocomplete(request, userInfo);
+        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 5);
+        assertEquals("autocomplete result [testField] exists", response.getSections().get("Products").get(0).getData().getMetadata().get("testField"), "hiddenFieldValue");
     }
 }

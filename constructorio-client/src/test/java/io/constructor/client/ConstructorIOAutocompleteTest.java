@@ -11,7 +11,6 @@ import io.constructor.client.models.AutocompleteResponse;
 
 public class ConstructorIOAutocompleteTest {
     
-    private String token = System.getenv("TEST_API_TOKEN");
     private String apiKey = System.getenv("TEST_API_KEY");
 
     @Rule
@@ -74,7 +73,7 @@ public class ConstructorIOAutocompleteTest {
 
     @Test
     public void autocompleteShouldReturnAResultWithHiddenFields() throws Exception {
-        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         AutocompleteRequest request = new AutocompleteRequest("item1");
         request.getHiddenFields().add("testField");

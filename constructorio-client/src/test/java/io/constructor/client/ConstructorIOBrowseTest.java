@@ -14,6 +14,8 @@ import io.constructor.client.models.FilterGroup;
 
 public class ConstructorIOBrowseTest {
 
+    private String apiKey = System.getenv("TEST_API_KEY");
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -183,5 +185,16 @@ public class ConstructorIOBrowseTest {
         assertEquals("browse result [firstGen] exists", firstGen.getGroupId(), "sale");
         assertEquals("browse result [firstGen] children", firstGen.getChildren().size(), 0);
         assertTrue("browse result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void BrowseShouldReturnAResultWithHiddenFields() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Brand", "XYZ");
+        request.getHiddenFields().add("testField");
+        BrowseResponse response = constructor.browse(request, userInfo);
+        assertEquals("browse results exist", response.getResponse().getResults().size(), 1);
+        assertEquals("browse result [testField] exists", response.getResponse().getResults().get(0).getData().getMetadata().get("testField"), "hiddenFieldValue");
     }
 }

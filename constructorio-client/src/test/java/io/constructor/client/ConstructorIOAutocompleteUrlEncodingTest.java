@@ -41,7 +41,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/autocomplete/r%2Bco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.10.0";
+        String expectedPath = "/autocomplete/r%2Bco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.11.0";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -57,7 +57,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/autocomplete/r%20co?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.10.0";
+        String expectedPath = "/autocomplete/r%20co?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.11.0";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -73,7 +73,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/autocomplete/r%2Fco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.10.0";
+        String expectedPath = "/autocomplete/r%2Fco?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.11.0";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -89,7 +89,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = "/autocomplete/r'co?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.10.0";
+        String expectedPath = "/autocomplete/r'co?key=key_K2hlXt5aVSwoI1Uw&c=ciojava-5.11.0";
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }

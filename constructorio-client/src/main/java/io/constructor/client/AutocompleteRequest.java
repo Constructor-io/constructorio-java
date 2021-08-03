@@ -2,6 +2,8 @@ package io.constructor.client;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Constructor.io Autocomplete Request
@@ -10,6 +12,7 @@ public class AutocompleteRequest {
 
     private String query;
     private Map<String, Integer> resultsPerSection;
+    private List<String> hiddenFields;
 
     /**
      * Creates an autocomplete request
@@ -23,6 +26,7 @@ public class AutocompleteRequest {
 
       this.query = query;
       this.resultsPerSection = new HashMap<String, Integer>();
+      this.hiddenFields = new ArrayList<String>();
     }
 
     /**
@@ -51,5 +55,19 @@ public class AutocompleteRequest {
      */
     public Map<String, Integer> getResultsPerSection() {
       return resultsPerSection;
+    }
+    
+    /**
+     * @param hiddenFields the hiddenFields to set
+     */
+    public void setHiddenFields(List<String> hiddenFields) {
+      this.hiddenFields = hiddenFields;
+    }
+
+    /**
+     * @return the hidden fields
+     */
+    public List<String> getHiddenFields() {
+      return hiddenFields;
     }
 }

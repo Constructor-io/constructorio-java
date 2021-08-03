@@ -189,4 +189,15 @@ public class ConstructorIOSearchTest {
         assertEquals("search result [firstGen] children", firstGen.getChildren().size(), 0);
         assertTrue("search result id exists", response.getResultId() != null);
     }
+
+    @Test
+    public void SearchShouldReturnAResultWithHiddenFields() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("item1");
+        request.getHiddenFields().add("testField");
+        SearchResponse response = constructor.search(request, userInfo);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
+        assertEquals("search result [testField] exists", response.getResponse().getResults().get(0).getData().getMetadata().get("testField"), "hiddenFieldValue");
+    }
 }

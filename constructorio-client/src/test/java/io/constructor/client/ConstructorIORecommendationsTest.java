@@ -13,12 +13,14 @@ import io.constructor.client.models.RecommendationsResponse;
 
 public class ConstructorIORecommendationsTest {
 
+    private String apiKey = System.getenv("TEST_API_KEY");
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void getRecommendationsShouldReturnAResultWithSingleItemId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         RecommendationsRequest request = new RecommendationsRequest("item_page_1");
         request.setItemIds(Arrays.asList("power_drill"));
@@ -29,7 +31,7 @@ public class ConstructorIORecommendationsTest {
 
     @Test
     public void getRecommendationsShouldReturnAResultWithMultipleItemIds() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         RecommendationsRequest request = new RecommendationsRequest("item_page_1");
         request.setItemIds(Arrays.asList("power_drill", "drill"));
@@ -40,7 +42,7 @@ public class ConstructorIORecommendationsTest {
 
     @Test
     public void getRecommendationsShouldReturnAResultWithNumResults() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "ZqXaOfXuBWD4s3XzCI1q", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         RecommendationsRequest request = new RecommendationsRequest("item_page_1");
         request.setItemIds(Arrays.asList("power_drill", "drill"));
@@ -53,7 +55,7 @@ public class ConstructorIORecommendationsTest {
     @Test
     public void getRecommendationsShouldReturnAResultWithNewApiKeySet() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
-        constructor.setApiKey("ZqXaOfXuBWD4s3XzCI1q");
+        constructor.setApiKey(apiKey);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         RecommendationsRequest request = new RecommendationsRequest("item_page_1");
         request.setItemIds(Arrays.asList("power_drill", "drill"));

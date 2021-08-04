@@ -16,6 +16,7 @@ import io.constructor.client.models.SearchResponse;
 public class ConstructorIOSearchAsyncTest {
   
   private SearchResponse responseResolved;
+  private String apiKey = System.getenv("TEST_API_KEY");
 
   private Callable<Boolean> responseIsResolved() {
     return new Callable<Boolean>() {
@@ -30,7 +31,7 @@ public class ConstructorIOSearchAsyncTest {
 
   @Test
   public void SearchShouldReturnAResult() throws Exception {
-    final ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+    final ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
     final UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
     final SearchRequest request = new SearchRequest("peanut");
     constructor.search(request, userInfo, new SearchCallback() {
@@ -44,18 +45,17 @@ public class ConstructorIOSearchAsyncTest {
       };
     });
     await().atMost(5, SECONDS).until(responseIsResolved());
-    assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 30);
-    assertEquals("search results count as expected", (int) responseResolved.getResponse().getTotalNumberOfResults(),
-        104);
+    assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 1);
+    assertEquals("search results count as expected", (int) responseResolved.getResponse().getTotalNumberOfResults(), 1);
     assertTrue("search result id exists", responseResolved.getResultId() != null);
     responseResolved = null;
   }
 
   @Test
   public void SearchShouldReturnAResultWithNewApiKeySet() throws Exception {
-      ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, "betaac.cnstrc.com");
-      constructor.setApiKey("key_aXLmVpkVp4BX21Sw");
-      SearchRequest request = new SearchRequest("bananas");
+      ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
+      constructor.setApiKey(apiKey);
+      SearchRequest request = new SearchRequest("item1");
       constructor.search(request, null, new SearchCallback() {
         @Override
         public void onFailure(final ConstructorException exception) {
@@ -67,8 +67,8 @@ public class ConstructorIOSearchAsyncTest {
         };
       });
       await().atMost(5, SECONDS).until(responseIsResolved());
-      assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 30);
-      assertEquals("search results count as expected", (int)responseResolved.getResponse().getTotalNumberOfResults(), 126);
+      assertEquals("search results exist", responseResolved.getResponse().getResults().size(), 9);
+      assertEquals("search results count as expected", (int)responseResolved.getResponse().getTotalNumberOfResults(), 9);
       assertTrue("search result id exists", responseResolved.getResultId() != null);
       responseResolved = null;
   }

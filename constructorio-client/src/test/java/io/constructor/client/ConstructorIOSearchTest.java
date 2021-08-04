@@ -22,67 +22,55 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchAsJSONShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("peanut");
+        SearchRequest request = new SearchRequest("item");
         String response = constructor.searchAsJSON(request, userInfo);
         assertTrue("search results exist", response.length() > 1);
     }
 
     @Test
     public void SearchShouldReturnAResultWithFivePerPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("peanut");
+        SearchRequest request = new SearchRequest("item1");
         request.setResultsPerPage(5);
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 5);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 9);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
     @Test
     public void SearchShouldReturnAResultWithLastPage() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("peanut");
-        request.setPage(4);
+        SearchRequest request = new SearchRequest("item1");
+        request.setPage(1);
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 14);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 9);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
     @Test
     public void SearchShouldReturnAResultWithSearchSuggestionsSection() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("peanut");
+        SearchRequest request = new SearchRequest("jacket");
         request.setSection("Search Suggestions");
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 17);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 17);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 4);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 4);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
     @Test
     public void SearchShouldReturnAResultWithGroupId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("peanut");
-        request.setGroupId("431");
-        SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 95);
-        assertTrue("search result id exists", response.getResultId() != null);
-    }
-
-    @Test
-    public void SearchShouldReturnAResultWithBrandFacets() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
-        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("peanut");
-        request.getFacets().put("Brand", Arrays.asList("Back to Nature", "Barbara's"));
+        SearchRequest request = new SearchRequest("item1");
+        request.setGroupId("All");
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 2);
         assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 2);
@@ -90,60 +78,72 @@ public class ConstructorIOSearchTest {
     }
 
     @Test
-    public void SearchShouldReturnAResultWithVariations() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+    public void SearchShouldReturnAResultWithColorFacets() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("jacket");
+        SearchRequest request = new SearchRequest("item");
+        request.getFacets().put("Color", Arrays.asList("Blue"));
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 13);
-        assertEquals("search result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 8);
-        assertEquals("search result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "Bully – Leather Jacket");
-        assertEquals("search result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "M0E20000000FBLO");
-        assertEquals("search result variation [url] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getUrl(), "https://demo.commercetools.com/en/bully-leather-jacket-251-grey.html");
+        assertEquals("search results exist", response.getResponse().getResults().size(), 1);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 1);
+        assertTrue("search result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithVariations() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("item1");
+        SearchResponse response = constructor.search(request, userInfo);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
+        assertEquals("search result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 1);
+        assertEquals("search result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 2);
+        assertEquals("search result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "item1 variation");
+        assertEquals("search result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "20001");
+        assertEquals("search result variation [url] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getUrl(), "https://test.com/p/20001");
         assertTrue("search total results count should be greater than 0", (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
     @Test
     public void SearchShouldReturnAResultWithSortOptions() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("jacket");
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search result [sort options] exists", response.getResponse().getSortOptions().size(), 1);
-        assertEquals("search result sort option [display name] exists", response.getResponse().getSortOptions().get(0).getDisplayName(), "Relevance");
-        assertEquals("search result sort option [sort by] exists", response.getResponse().getSortOptions().get(0).getSortBy(), "relevance");
-        assertEquals("search result sort option [sort order] exists", response.getResponse().getSortOptions().get(0).getSortOrder(), "descending");
-        assertEquals("search result sort option [status] exists", response.getResponse().getSortOptions().get(0).getStatus(), "selected");
-        assertTrue("search total results count should be greater than 0", (int) response.getResponse().getTotalNumberOfResults() > 0);
+        assertEquals("search result [sort options] exists", response.getResponse().getSortOptions().size(), 2);
+        assertEquals("search result sort option [display name] exists", response.getResponse().getSortOptions().get(1).getDisplayName(), "DESC");
+        assertEquals("search result sort option [sort by] exists", response.getResponse().getSortOptions().get(1).getSortBy(), "relevance");
+        assertEquals("search result sort option [sort order] exists", response.getResponse().getSortOptions().get(1).getSortOrder(), "descending");
+        assertEquals("search result sort option [status] exists", response.getResponse().getSortOptions().get(1).getStatus(), "selected");
+        assertTrue("search total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
     @Test
     public void SearchShouldReturnAResultWithNullUserInfo() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
-        SearchRequest request = new SearchRequest("peanut");
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        SearchRequest request = new SearchRequest("item");
         SearchResponse response = constructor.search(request, null);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 104);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 9);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
     @Test
     public void SearchShouldReturnAResultWithNewApiKeySet() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, "betaac.cnstrc.com");
-        constructor.setApiKey("key_aXLmVpkVp4BX21Sw");
-        SearchRequest request = new SearchRequest("bananas");
+        ConstructorIO constructor = new ConstructorIO("", "thiskeydoesnotexist", true, null);
+        constructor.setApiKey(apiKey);
+        SearchRequest request = new SearchRequest("item");
         SearchResponse response = constructor.search(request, null);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 30);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 126);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 9);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
     @Test
     public void SearchShouldReturnAResultWithRedirect() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_K2hlXt5aVSwoI1Uw", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("medium");
         SearchResponse response = constructor.search(request, userInfo);
@@ -159,33 +159,33 @@ public class ConstructorIOSearchTest {
 
     @Test
     public void SearchShouldReturnAResultWithMaxGroupsDepthOf3() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("jacket");
+        SearchRequest request = new SearchRequest("item2");
         request.getFormatOptions().put("groups_max_depth", "3");
         SearchResponse response = constructor.search(request, userInfo);
         FilterGroup root = response.getResponse().getGroups().get(0);
         FilterGroup firstGen = root.getChildren().get(0);
         FilterGroup secondGen = firstGen.getChildren().get(0);
         FilterGroup thirdGen = secondGen.getChildren().get(0);
-        assertEquals("search result [root] exists", root.getGroupId(), "all");
-        assertEquals("search result [firstGen] exists", firstGen.getGroupId(), "women");
-        assertEquals("search result [secondGen] exists", secondGen.getGroupId(), "women|clothing");
-        assertEquals("search result [thirdGen] exists", thirdGen.getGroupId(), "women|clothing|jackets");
+        assertEquals("search result [root] exists", root.getGroupId(), "All");
+        assertEquals("search result [firstGen] exists", firstGen.getGroupId(), "Brands");
+        assertEquals("search result [secondGen] exists", secondGen.getGroupId(), "BrandX");
+        assertEquals("search result [thirdGen] exists", thirdGen.getGroupId(), "BrandXY");
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
     @Test
     public void SearchShouldReturnAResultWithMaxGroupsDepthOf1() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", "key_dKjn8oS8czBw7Ebv", true, null);
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("jacket");
+        SearchRequest request = new SearchRequest("item2");
         request.getFormatOptions().put("groups_max_depth", "1");
         SearchResponse response = constructor.search(request, userInfo);
         FilterGroup root = response.getResponse().getGroups().get(0);
         FilterGroup firstGen = root.getChildren().get(0);
-        assertEquals("search result [root] exists", root.getGroupId(), "all");
-        assertEquals("search result [firstGen] exists", firstGen.getGroupId(), "women");
+        assertEquals("search result [root] exists", root.getGroupId(), "All");
+        assertEquals("search result [firstGen] exists", firstGen.getGroupId(), "Brands");
         assertEquals("search result [firstGen] children", firstGen.getChildren().size(), 0);
         assertTrue("search result id exists", response.getResultId() != null);
     }

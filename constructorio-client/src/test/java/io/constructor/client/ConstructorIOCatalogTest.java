@@ -19,7 +19,7 @@ public class ConstructorIOCatalogTest {
   
   private String token = System.getenv("TEST_API_TOKEN");
   private String apiKey = System.getenv("TEST_API_KEY");
-  File csvFolder = new File("src/test/resources/csv");
+  private File csvFolder = new File("src/test/resources/csv");
   private File itemsFile = new File("src/test/resources/csv/items.csv");
   private File variationsFile = new File("src/test/resources/csv/variations.csv");
   private File itemGroupsFile = new File("src/test/resources/csv/item_groups.csv");

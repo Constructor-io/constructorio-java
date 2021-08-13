@@ -423,6 +423,14 @@ public class ConstructorIO {
                     .addQueryParameter("hidden_fields", hiddenField)
                     .build();
             }
+            
+            for (String filterName : req.getFilters().keySet()) {
+                for (String facetValue : req.getFilters().get(filterName)) {
+                    url = url.newBuilder()
+                        .addQueryParameter("filters[" + filterName + "]", facetValue)
+                        .build();
+                }
+            }
 
             Request request = this.makeUserRequestBuilder(userInfo)
                 .url(url)

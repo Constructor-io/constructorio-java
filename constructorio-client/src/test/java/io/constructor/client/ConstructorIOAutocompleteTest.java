@@ -3,7 +3,10 @@ package io.constructor.client;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import com.google.gson.internal.LinkedTreeMap;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -94,6 +97,7 @@ public class ConstructorIOAutocompleteTest {
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
         assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 2);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
+        assertEquals("autocomplete request [group_id] filter should match", ((ArrayList)((LinkedTreeMap)response.getRequest().get("filters")).get("group_id")).get(0), "All");
     }
 
     @Test
@@ -106,5 +110,7 @@ public class ConstructorIOAutocompleteTest {
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
         assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 1);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
+        assertEquals("autocomplete request [Brand] filter should match", ((ArrayList)((LinkedTreeMap)response.getRequest().get("filters")).get("Brand")).get(0), "XYZ");
+        assertEquals("autocomplete request [group_id] filter should match", ((ArrayList)((LinkedTreeMap)response.getRequest().get("filters")).get("group_id")).get(0), "All");
     }
 }

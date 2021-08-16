@@ -1103,11 +1103,7 @@ public class ConstructorIO {
         } finally {
             response.close();
         }
-        if(errorCode != null) {
-            throw new ConstructorException(errorMessage, errorCode);
-        } else {
-            throw new ConstructorException(errorMessage);
-        }
+        throw new ConstructorException(errorMessage, errorCode);
     }
 
     /**

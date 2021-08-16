@@ -9,9 +9,9 @@ public class ConstructorException extends Exception {
 
 	public ConstructorException(Exception e) {
 		super(e);
-		if(e instanceof ConstructorException) {
+		if (e instanceof ConstructorException) {
 			Integer errorCode = ((ConstructorException) e).getErrorCode();
-			if(errorCode != null){
+			if (errorCode != null){
 				this.errorCode = errorCode;
 			}
 		}

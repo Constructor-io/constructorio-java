@@ -1096,6 +1096,7 @@ public class ConstructorIO {
      */
     protected static String getResponseBody(Response response) throws ConstructorException {
         String errorMessage = "Unknown error";
+        Integer errorCode = null;
         try {
             String body = response.body().string();
             if (response.isSuccessful()) {
@@ -1103,13 +1104,14 @@ public class ConstructorIO {
             } else {
                 ServerError error = new Gson().fromJson(body, ServerError.class);
                 errorMessage = "[HTTP " + response.code() + "] " + error.getMessage();
+                errorCode = response.code();
             }
         } catch (Exception e) {
             errorMessage = "[HTTP " + response.code() + "]";
         } finally {
             response.close();
         }
-        throw new ConstructorException(errorMessage);
+        throw new ConstructorException(errorMessage, errorCode);
     }
 
     /**

@@ -223,4 +223,28 @@ public class ConstructorIOBasicTest {
         Response response = Utils.createResponse(404, body);
         ConstructorIO.getResponseBody(response);
     }
+
+    @Test
+    public void getResponseBodyShouldReturnExceptionWithErrorCodeOn401() throws Exception{
+        try {
+            String body = Utils.getTestResource("response.401.json");
+            Response response = Utils.createResponse(401, body);
+            ConstructorIO.getResponseBody(response);
+        } catch (ConstructorException e) {
+            assertEquals(Integer.valueOf(401), e.getErrorCode());
+            assertEquals("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at constructor.io/dashboard", e.getMessage());
+        }
+    }
+
+    @Test
+    public void getResponseBodyShouldReturnExceptionWithErrorCodeOn404() throws Exception {
+        try {
+            String body = Utils.getTestResource("response.404.json");
+            Response response = Utils.createResponse(404, body);
+            ConstructorIO.getResponseBody(response);   
+        } catch (ConstructorException e) {
+            assertEquals(Integer.valueOf(404), e.getErrorCode());
+            assertEquals("[HTTP 404] You're trying to access an invalid endpoint. Please check documentation for allowed endpoints.", e.getMessage());
+        }
+    }
 }

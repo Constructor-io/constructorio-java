@@ -1120,7 +1120,7 @@ public class ConstructorIO {
      * @return version number
      */
     protected String getVersion() {
-      return "ciojava-5.13.0";
+      return "ciojava-5.13.1";
     }
 
     /**

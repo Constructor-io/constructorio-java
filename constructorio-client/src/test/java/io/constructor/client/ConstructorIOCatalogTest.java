@@ -5,8 +5,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.Map;
 import java.util.HashMap;
 import java.io.File;
+import java.net.URL;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
+import org.junit.Before;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -15,9 +19,35 @@ public class ConstructorIOCatalogTest {
   
   private String token = System.getenv("TEST_API_TOKEN");
   private String apiKey = System.getenv("TEST_API_KEY");
+  private File csvFolder = new File("src/test/resources/csv");
+  private File itemsFile = new File("src/test/resources/csv/items.csv");
+  private File variationsFile = new File("src/test/resources/csv/variations.csv");
+  private File itemGroupsFile = new File("src/test/resources/csv/item_groups.csv");
+  private String baseUrl = "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
+  
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
+
+  @Before
+  public void init() throws Exception{
+    URL itemsUrl = new URL(baseUrl + "items.csv");
+    FileUtils.copyURLToFile(itemsUrl, itemsFile);
+
+    URL variationsUrl = new URL(baseUrl + "variations.csv");
+    FileUtils.copyURLToFile(variationsUrl, variationsFile);
+    
+    URL itemGroupsUrl = new URL(baseUrl + "item_groups.csv");
+    FileUtils.copyURLToFile(itemGroupsUrl, itemGroupsFile);
+  }
+
+  @After
+  public void teardown() throws Exception{
+    itemsFile.delete();
+    variationsFile.delete();
+    itemGroupsFile.delete();
+    csvFolder.delete();
+  }
 
   @Test
   public void ReplaceCatalogWithNoFilesShouldError() throws Exception {

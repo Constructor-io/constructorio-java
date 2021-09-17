@@ -6,7 +6,7 @@
 
 # Documentation
 
-For the most up-to-date documentation for this library, please visit our [API Documentation](https://docs.constructor.io/rest-api.html?java).
+Full API documentation is available on [Github Pages](https://constructor-io.github.io/constructorio-java/)
 
 # Installation
 
@@ -292,6 +292,7 @@ mvn clean               # clean target directory
 mvn install             # installs dependencies
 mvn test                # run tests
 mvn jacoco:report       # writes code coverage reports to ./target/site/jacoco
+mvn javadoc:javadoc     # generate docs
 ```
 
 # Environment Variables

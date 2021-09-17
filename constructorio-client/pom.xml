@@ -73,6 +73,7 @@
 				<configuration>
 					<reportOutputDirectory>../</reportOutputDirectory>
 					<destDir>docs</destDir>
+					<show>public</show>
 				</configuration>
 			</plugin>
 			<plugin>

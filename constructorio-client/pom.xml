@@ -73,7 +73,7 @@
 				<configuration>
 					<reportOutputDirectory>./</reportOutputDirectory>
 					<destDir>docs</destDir>
-        </configuration>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

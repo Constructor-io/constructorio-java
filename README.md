@@ -8,6 +8,10 @@
 
 Full API documentation is available on [Github Pages](https://constructor-io.github.io/constructorio-java/)
 
+# Requirements
+
+Requesting results from your JVM based back-end can be useful in order to control result rendering logic on your server, or augment/hydrate results with data from another system. However, a back-end integration has additional requirements compared to a front-end integration. Please review [Back End API Integration](https://constructorio.zendesk.com/hc/en-us/articles/360047993194-Back-end-API-Integration) for more detail.
+
 # Installation
 
 1. Follow the directions at [Jitpack.io](https://jitpack.io/#Constructor-io/constructorio-java/v5.3.3) to add the client to your project.

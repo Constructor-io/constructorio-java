@@ -9,6 +9,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import com.google.gson.Gson;
 
@@ -43,6 +44,8 @@ public class ConstructorIO {
     private static OkHttpClient client = new OkHttpClient.Builder()
         .addInterceptor(new ConstructorInterceptor())
         .retryOnConnectionFailure(false)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
         .build();
 
     /**

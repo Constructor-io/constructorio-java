@@ -15,10 +15,10 @@
 -docencoding
 'UTF-8'
 -doctitle
-'constructorio-client 5.13.1 API'
+'constructorio-client 5.13.2 API'
 -linkoffline
 'https://docs.oracle.com/javase/7/docs/api' '/Users/enes/constuctor/constructorio-java/constructorio-client/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle
-'constructorio-client 5.13.1 API'
+'constructorio-client 5.13.2 API'

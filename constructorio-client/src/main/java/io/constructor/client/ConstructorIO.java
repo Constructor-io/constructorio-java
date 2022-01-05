@@ -1002,7 +1002,7 @@ public class ConstructorIO {
             .addQueryParameter("key", this.apiKey)
             .host(this.host);
 
-        if (!paths.contains("catalog") && !paths.contains("tasks")) {
+        if (!paths.contains("catalog") && !paths.contains("tasks") && !paths.contains("task")) {
             builder.addQueryParameter("c", this.version);
         }
 
@@ -1195,6 +1195,17 @@ public class ConstructorIO {
         JSONObject json = new JSONObject(string);
         String transformed = json.toString();
         return new Gson().fromJson(transformed, AllTasksResponse.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static Task createTaskResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, Task.class);
     }
 
     /**
@@ -1401,6 +1412,66 @@ public class ConstructorIO {
     public String allTasksAsJson(AllTasksRequest req) throws ConstructorException {
         try {
             Request request = createAllTasksRequest(req, "v1");
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Creates a Task OkHttp request
+     *
+     * @param req the Task request
+     * @return a Task OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createTaskRequest(TaskRequest req, String apiVersion) throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList(apiVersion, "task", req.getTaskId());
+            HttpUrl url = this.makeUrl(paths).newBuilder().build();
+
+            Request request = this.makeAuthorizedRequestBuilder()
+                    .url(url)
+                    .get()
+                    .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the task service for a task id
+     *
+     *
+     * @param req the task request
+     * @return a Task response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public Task task(TaskRequest req) throws ConstructorException {
+        try {
+            Request request = createTaskRequest(req, "v1");
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createTaskResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the task service for a task id
+     *
+     *
+     * @param req the task request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String taskAsJson(TaskRequest req) throws ConstructorException {
+        try {
+            Request request = createTaskRequest(req, "v1");
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
         } catch (Exception exception) {

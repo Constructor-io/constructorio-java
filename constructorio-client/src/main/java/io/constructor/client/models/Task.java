@@ -22,9 +22,14 @@ public class Task {
     @SerializedName("last_update")
     private String lastUpdate;
 
+    @SerializedName("start_time")
+    private String startTime;
+
     @SerializedName("filename")
     private String filename;
 
+    @SerializedName("result")
+    private Object result;
 
     /**
      * @return the id
@@ -62,6 +67,20 @@ public class Task {
      */
     public String getFilename() {
         return filename;
+    }
+
+    /**
+     * @return the start_time
+     */
+    public String getStartTime() {
+        return startTime;
+    }
+
+    /**
+     * @return the result
+     */
+    public Object getResult() {
+        return result;
     }
 
 }

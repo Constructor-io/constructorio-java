@@ -28,6 +28,9 @@ public class Task {
     @SerializedName("filename")
     private String filename;
 
+    @SerializedName("protocol")
+    private String protocol;
+
     @SerializedName("result")
     private Object result;
 
@@ -74,6 +77,13 @@ public class Task {
      */
     public String getStartTime() {
         return startTime;
+    }
+
+    /**
+     * @return the protocol
+     */
+    public String getProtocol() {
+        return protocol;
     }
 
     /**

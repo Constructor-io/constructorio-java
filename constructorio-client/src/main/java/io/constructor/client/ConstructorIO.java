@@ -1187,7 +1187,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations response.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an All Tasks response.
      * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
@@ -1198,7 +1198,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations response.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Task response.
      * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */

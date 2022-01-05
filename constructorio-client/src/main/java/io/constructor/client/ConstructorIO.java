@@ -13,15 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.gson.Gson;
 
+import io.constructor.client.models.*;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import io.constructor.client.models.AutocompleteResponse;
-import io.constructor.client.models.BrowseResponse;
-import io.constructor.client.models.SearchResponse;
-import io.constructor.client.models.RecommendationsResponse;
-import io.constructor.client.models.ServerError;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -1006,7 +1002,7 @@ public class ConstructorIO {
             .addQueryParameter("key", this.apiKey)
             .host(this.host);
 
-        if (!paths.contains("catalog")) {
+        if (!paths.contains("catalog") && !paths.contains("tasks")) {
             builder.addQueryParameter("c", this.version);
         }
 
@@ -1191,6 +1187,17 @@ public class ConstructorIO {
     }
 
     /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static AllTasksResponse createAllTasksResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, AllTasksResponse.class);
+    }
+
+    /**
      * Moves metadata out of the result data for an array of results
      * @param results A JSON array of results
      */
@@ -1333,6 +1340,71 @@ public class ConstructorIO {
             } else {
                 throw new ConstructorException(exception);
             }
+        }
+    }
+
+    /**
+     * Creates a All Tasks OkHttp request
+     *
+     * @param req the All Tasks request
+     * @return a All Tasks OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createAllTasksRequest(AllTasksRequest req, String apiVersion) throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList(apiVersion, "tasks");
+            HttpUrl url = this.makeUrl(paths);
+
+            url = url.newBuilder()
+                    .addQueryParameter("page", String.valueOf(req.getPage()))
+                    .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                    .build();
+
+            Request request = this.makeAuthorizedRequestBuilder()
+                    .url(url)
+                    .get()
+                    .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the tasks service for all tasks
+     *
+     *
+     * @param req the all tasks request
+     * @return a all tasks response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public AllTasksResponse allTasks(AllTasksRequest req) throws ConstructorException {
+        try {
+            Request request = createAllTasksRequest(req, "v1");
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createAllTasksResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the tasks service for all tasks
+     *
+     *
+     * @param req the all tasks request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String allTasksAsJson(AllTasksRequest req) throws ConstructorException {
+        try {
+            Request request = createAllTasksRequest(req, "v1");
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
         }
     }
 }

@@ -86,7 +86,7 @@ public class ConstructorIOTasksTest {
         }).findAny().orElse(null);
 
         assertTrue("At least one task exists", response.getTotalCount() >= 1);
-        assertTrue("Previously uploaded task_id exists", task != null);
+        assertNotNull("Previously uploaded task_id exists", task);
     }
 
     @Test
@@ -109,55 +109,47 @@ public class ConstructorIOTasksTest {
         }
 
         assertTrue("At least one task exists", jsonObj.getInt("total_count") >= 1);
-        assertTrue("Previously uploaded task_id exists", task != null);
+        assertNotNull("Previously uploaded task_id exists", task);
     }
 
     @Test
     public void AllTasksShouldReturnErrorWithInvalidApiKey() throws Exception {
-        try {
-            ConstructorIO constructor = new ConstructorIO(apiToken, "notanapikey", true, null);
-            AllTasksRequest request = new AllTasksRequest();
-            AllTasksResponse response = constructor.allTasks(request);
-        } catch (ConstructorException e)
-        {
-            assertEquals("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration.", e.getCause().getMessage());
-        }
+        ConstructorIO constructor = new ConstructorIO(apiToken, "notanapikey", true, null);
+        AllTasksRequest request = new AllTasksRequest();
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration.");
+        AllTasksResponse response = constructor.allTasks(request);
     }
 
     @Test
     public void AllTasksShouldReturnErrorWithInvalidApiToken() throws Exception {
-        try {
-            ConstructorIO constructor = new ConstructorIO("notanapitoken", apiKey, true, null);
-            AllTasksRequest request = new AllTasksRequest();
-            AllTasksResponse response = constructor.allTasks(request);
-        } catch (ConstructorException e)
-        {
-            assertEquals("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", e.getCause().getMessage());
-        }
+        ConstructorIO constructor = new ConstructorIO("notanapitoken", apiKey, true, null);
+        AllTasksRequest request = new AllTasksRequest();
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard");
+        AllTasksResponse response = constructor.allTasks(request);
     }
 
     @Test
     public void AllTasksAsJSONShouldReturnErrorWithInvalidApiKey() throws Exception {
-        try {
-            ConstructorIO constructor = new ConstructorIO(apiToken, "notanapikey", true, null);
-            AllTasksRequest request = new AllTasksRequest();
-            String response = constructor.allTasksAsJson(request);
-        } catch (ConstructorException e)
-        {
-            assertEquals("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration.", e.getCause().getMessage());
-        }
+        ConstructorIO constructor = new ConstructorIO(apiToken, "notanapikey", true, null);
+        AllTasksRequest request = new AllTasksRequest();
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration.");
+        String response = constructor.allTasksAsJson(request);
     }
 
     @Test
     public void AllTasksAsJSONShouldReturnErrorWithInvalidApiToken() throws Exception {
-        try {
-            ConstructorIO constructor = new ConstructorIO("notanapitoken", apiKey, true, null);
-            AllTasksRequest request = new AllTasksRequest();
-            String response = constructor.allTasksAsJson(request);
-        } catch (ConstructorException e)
-        {
-            assertEquals("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", e.getCause().getMessage());
-        }
+        ConstructorIO constructor = new ConstructorIO("notanapitoken", apiKey, true, null);
+        AllTasksRequest request = new AllTasksRequest();
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard");
+        String response = constructor.allTasksAsJson(request);
     }
 
 }

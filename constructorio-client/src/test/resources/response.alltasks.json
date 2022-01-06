@@ -1,0 +1,431 @@
+{
+  "tasks": [
+    {
+      "id": 30963447,
+      "status": "DONE",
+      "submission_time": "2022-01-06T04:50:55Z",
+      "last_update": "2022-01-06T04:50:59Z",
+      "start_time": "2022-01-06T04:50:57Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-04-50-55.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958468,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:50:17Z",
+      "last_update": "2022-01-06T00:50:26Z",
+      "start_time": "2022-01-06T00:50:24Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-50-17.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958467,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:50:16Z",
+      "last_update": "2022-01-06T00:50:23Z",
+      "start_time": "2022-01-06T00:50:21Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-50-13.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958466,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:50:07Z",
+      "last_update": "2022-01-06T00:50:20Z",
+      "start_time": "2022-01-06T00:50:18Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-50-06.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958462,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:50:05Z",
+      "last_update": "2022-01-06T00:50:17Z",
+      "start_time": "2022-01-06T00:50:14Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-50-04.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958460,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:50:03Z",
+      "last_update": "2022-01-06T00:50:14Z",
+      "start_time": "2022-01-06T00:50:11Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-50-03.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958459,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:50:02Z",
+      "last_update": "2022-01-06T00:50:11Z",
+      "start_time": "2022-01-06T00:50:09Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-50-02.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958457,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:50:01Z",
+      "last_update": "2022-01-06T00:50:08Z",
+      "start_time": "2022-01-06T00:50:06Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-50-00.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958455,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:49:59Z",
+      "last_update": "2022-01-06T00:50:05Z",
+      "start_time": "2022-01-06T00:50:03Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-49-59.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958453,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:49:57Z",
+      "last_update": "2022-01-06T00:50:02Z",
+      "start_time": "2022-01-06T00:50:00Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-49-56.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958452,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:49:54Z",
+      "last_update": "2022-01-06T00:49:59Z",
+      "start_time": "2022-01-06T00:49:57Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-49-54.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958451,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:49:51Z",
+      "last_update": "2022-01-06T00:49:56Z",
+      "start_time": "2022-01-06T00:49:54Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-49-51.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958448,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:49:49Z",
+      "last_update": "2022-01-06T00:49:53Z",
+      "start_time": "2022-01-06T00:49:50Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-49-48.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958443,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:49:45Z",
+      "last_update": "2022-01-06T00:49:46Z",
+      "start_time": "2022-01-06T00:49:46Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-49-45.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958441,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:49:42Z",
+      "last_update": "2022-01-06T00:49:43Z",
+      "start_time": "2022-01-06T00:49:43Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-49-41.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958392,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:47:22Z",
+      "last_update": "2022-01-06T00:47:25Z",
+      "start_time": "2022-01-06T00:47:23Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-47-21.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958391,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:47:19Z",
+      "last_update": "2022-01-06T00:47:22Z",
+      "start_time": "2022-01-06T00:47:19Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-47-18.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958389,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:47:15Z",
+      "last_update": "2022-01-06T00:47:17Z",
+      "start_time": "2022-01-06T00:47:16Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-47-14.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958384,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:47:09Z",
+      "last_update": "2022-01-06T00:47:11Z",
+      "start_time": "2022-01-06T00:47:10Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-47-09.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    },
+    {
+      "id": 30958382,
+      "status": "DONE",
+      "submission_time": "2022-01-06T00:47:06Z",
+      "last_update": "2022-01-06T00:47:07Z",
+      "start_time": "2022-01-06T00:47:07Z",
+      "result": {
+        "changelog": {
+          "sections": {
+            "Products": {
+              "items_updated": 11,
+              "items_deleted": 0
+            }
+          }
+        },
+        "index_built": true
+      },
+      "filename": "ZqXaOfXuBWD4s3XzCI1q_Products_sync_2022-01-06-00-47-05.tar",
+      "type": "ingestion",
+      "protocol": "http"
+    }
+  ],
+  "total_count": 4733,
+  "status_counts": {
+    "QUEUED": 6,
+    "IN_PROGRESS": 0,
+    "DONE": 20,
+    "FAILED": 0
+  }
+}

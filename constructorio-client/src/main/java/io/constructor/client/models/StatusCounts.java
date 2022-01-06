@@ -22,16 +22,12 @@ public class StatusCounts {
     /**
      * @return the QUEUED status count
      */
-    public int getQueued() {
-        return queued;
-    }
+    public int getQueued() { return queued; }
 
     /**
      * @return the DONE status count
      */
-    public int getDone() {
-        return done;
-    }
+    public int getDone() { return done; }
 
     /**
      * @return the IN_PROGRESS status count

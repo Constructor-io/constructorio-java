@@ -1364,6 +1364,7 @@ public class ConstructorIO {
      * Creates a All Tasks OkHttp request
      *
      * @param req the All Tasks request
+     * @param apiVersion version of api for url path
      * @return a All Tasks OkHttp request
      * @throws ConstructorException
      */
@@ -1391,7 +1392,6 @@ public class ConstructorIO {
     /**
      * Queries the tasks service for all tasks
      *
-     *
      * @param req the all tasks request
      * @return a all tasks response
      * @throws ConstructorException if the request is invalid.
@@ -1409,7 +1409,6 @@ public class ConstructorIO {
 
     /**
      * Queries the tasks service for all tasks
-     *
      *
      * @param req the all tasks request
      * @return a string of JSON
@@ -1429,6 +1428,7 @@ public class ConstructorIO {
      * Creates a Task OkHttp request
      *
      * @param req the Task request
+     * @param apiVersion version of api for url path
      * @return a Task OkHttp request
      * @throws ConstructorException
      */
@@ -1451,7 +1451,6 @@ public class ConstructorIO {
     /**
      * Queries the task service for a task id
      *
-     *
      * @param req the task request
      * @return a Task response
      * @throws ConstructorException if the request is invalid.
@@ -1469,7 +1468,6 @@ public class ConstructorIO {
 
     /**
      * Queries the task service for a task id
-     *
      *
      * @param req the task request
      * @return a string of JSON

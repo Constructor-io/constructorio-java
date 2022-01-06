@@ -37,16 +37,12 @@ public class Task {
     /**
      * @return the id
      */
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     /**
      * @return the type
      */
-    public String getType() {
-        return type;
-    }
+    public String getType() { return type; }
 
     /**
      * @return the status
@@ -61,36 +57,26 @@ public class Task {
     /**
      * @return the last_update
      */
-    public String getLastUpdate() {
-        return lastUpdate;
-    }
+    public String getLastUpdate() { return lastUpdate; }
 
     /**
      * @return the filename
      */
-    public String getFilename() {
-        return filename;
-    }
+    public String getFilename() { return filename; }
 
     /**
      * @return the start_time
      */
-    public String getStartTime() {
-        return startTime;
-    }
+    public String getStartTime() { return startTime; }
 
     /**
      * @return the protocol
      */
-    public String getProtocol() {
-        return protocol;
-    }
+    public String getProtocol() { return protocol; }
 
     /**
      * @return the result
      */
-    public Object getResult() {
-        return result;
-    }
+    public Object getResult() { return result; }
 
 }

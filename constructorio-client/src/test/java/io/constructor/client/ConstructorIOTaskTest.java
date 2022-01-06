@@ -1,6 +1,5 @@
 package io.constructor.client;
 
-import io.constructor.client.models.AllTasksResponse;
 import io.constructor.client.models.Task;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;

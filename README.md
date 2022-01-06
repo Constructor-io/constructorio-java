@@ -330,6 +330,7 @@ mvn clean               # clean target directory
 mvn install             # installs dependencies
 mvn test                # run tests
 mvn jacoco:report       # writes code coverage reports to ./target/site/jacoco
+mvn javadoc:javadoc     # generate docs
 ```
 
 # Environment Variables

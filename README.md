@@ -287,6 +287,40 @@ RecommendationsResponse response = constructor.recommendations(request, userInfo
 String response = constructor.recommendationsAsJSON(request, userInfo);
 ```
 
+# Retrieving All Tasks
+
+To retrieve all tasks, you will need to create a `AllTasksRequest`. In this request you can also specify the page and number of results per page. The page and number of results per page will default to 1 and 20 respectively.
+
+```java
+// Create a AllTasksRequest to request results for
+AllTasksRequest request = new AllTasksRequest();
+
+// Add in additional parameters
+request.setPage(2);
+request.setResultsPerPage(10);
+
+//Request all tasks as an object
+AllTasksResponse response = constructor.allTasks(request);
+
+//Request all tasks as a JSON string
+String response = constructor.allTasksAsJSON(request);
+```
+
+# Retrieving Task with task_id
+
+To retrieve a specific task with a task_id, you will need to create a `TaskRequest`.
+
+```java
+// Create a TaskRequest with the task_id to retrieve
+TaskRequest request = new TaskRequest("12345");
+
+//Request task as an object
+Task response = constructor.task(request);
+
+//Request task as a JSON string
+String response = constructor.taskAsJSON(request);
+```
+
 # Testing
 
 Download the repository and run the following commands from `./constructorio-client`
@@ -296,7 +330,6 @@ mvn clean               # clean target directory
 mvn install             # installs dependencies
 mvn test                # run tests
 mvn jacoco:report       # writes code coverage reports to ./target/site/jacoco
-mvn javadoc:javadoc     # generate docs
 ```
 
 # Environment Variables

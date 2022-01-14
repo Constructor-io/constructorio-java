@@ -25,7 +25,8 @@ public class BrowseRequest {
     /**
      * Creates a browse request
      *
-     * @param query the term to return browse results for
+     * @param filterName filter name to display results from
+     * @param filterValue filter value to display results from
      */
     public BrowseRequest(String filterName, String filterValue) throws IllegalArgumentException {
       if (filterName == null) {

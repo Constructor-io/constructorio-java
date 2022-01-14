@@ -22,7 +22,7 @@ public class BrowseItemsRequest {
     /**
      * Creates a browse request
      *
-     * @param query the items to return browse results for
+     * @param ids the items to return browse results for
      */
     public BrowseItemsRequest(List<String> ids) throws IllegalArgumentException {
       if (ids == null || ids.size() == 0) {

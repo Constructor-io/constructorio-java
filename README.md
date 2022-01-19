@@ -155,6 +155,17 @@ constructor.search(request, userInfo, new SearchCallback() {
 });
 ```
 
+## Retrieving a breakdown of number of search results per algorithm
+
+To determine number of results coming from token matching algorithm vs. cognitive embeddings algorithm, you can use the `ResultSources` object under the response.
+
+```java
+// Request results as an object
+SearchResponse response = constructor.search(request, userInfo);
+Integer resultsFromTokenMatching = response.getResponse().getResultSources().getTokenMatch().getCount();
+Integer resultsFromCognitiveEmbeddings = response.getResponse().getResultSources().getEmbeddingsMatch().getCount();
+```
+
 # Retrieving Search Results for Speech
 
 To retrieve search results for text that originated from speech transcription rather than typing, you will need to create a `NaturalLanguageSearchRequest`. In this request you can specify the number of results you want per page and the page you want.  All other information is inferred from the text itself.  If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.  The response returned contains all of the same data points as a standard search response.

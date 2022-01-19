@@ -27,6 +27,9 @@ public class SearchResponseInner {
     @SerializedName("redirect")
     private Redirect redirect;
 
+    @SerializedName("result_sources")
+    private ResultSources resultSources;
+
     /**
      * @return the facets
      */
@@ -67,5 +70,12 @@ public class SearchResponseInner {
      */
     public Redirect getRedirect() {
       return redirect;
+    }
+    
+    /**
+     * @return resultSources data
+     */
+    public ResultSources getResultSources() {
+      return resultSources;
     }
 }

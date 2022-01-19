@@ -200,4 +200,14 @@ public class ConstructorIOSearchTest {
         assertEquals("search results exist", response.getResponse().getResults().size(), 9);
         assertEquals("search result [testField] exists", response.getResponse().getResults().get(0).getData().getMetadata().get("testField"), "hiddenFieldValue");
     }
+
+    @Test
+    public void SearchShouldReturnAResultWithResultSources() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("jacket");
+        SearchResponse response = constructor.search(request, userInfo);
+        assertEquals("search result result sources exists", (int)response.getResponse().getResultSources().getTokenMatch().getCount(), 1);
+        assertEquals("search result result sources exists", (int)response.getResponse().getResultSources().getEmbeddingsMatch().getCount(), 0);
+    }
 }

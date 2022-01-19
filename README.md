@@ -139,7 +139,24 @@ SearchResponse response = constructor.search(request, userInfo);
 String response = constructor.searchAsJSON(request, userInfo);
 ```
 
+If you'd like to retrieve search results asynchronously, the above code can be modified slightly to utilize a callback methodology:
+
+```java
+constructor.search(request, userInfo, new SearchCallback() {
+  @Override
+  public void onFailure(final ConstructorException exception) {
+    // failure condition
+  }
+
+  @Override
+  public void onResponse(final SearchResponse response) {
+    // success condition - data located within `response`
+  };
+});
+```
+
 ## Retrieving a breakdown of number of search results per algorithm
+
 To determine number of results coming from token matching algorithm vs. cognitive embeddings algorithm, you can use the `ResultSources` object under the response.
 
 ```java

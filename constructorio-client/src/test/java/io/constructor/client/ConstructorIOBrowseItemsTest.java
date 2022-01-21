@@ -184,4 +184,18 @@ public class ConstructorIOBrowseItemsTest {
         assertEquals("browse items result [firstGen] children", firstGen.getChildren().size(), 0);
         assertTrue("browse items result id exists", response.getResultId() != null);
     }
+
+    @Test
+    public void BrowseItemsShouldReturnAResultWithHiddenFields() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        List<String> ids = Arrays.asList("10001", "10002");
+        BrowseItemsRequest request = new BrowseItemsRequest(ids);
+        request.getHiddenFields().add("testField");
+        BrowseResponse response = constructor.browseItems(request, userInfo);
+        assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
+        assertTrue("browse items total results count should be equal to length of supplied ids", (int)response.getResponse().getTotalNumberOfResults() == ids.size());
+        assertTrue("browse items result id exists", response.getResultId() != null);
+        assertEquals("browse items [testField] exists", response.getResponse().getResults().get(0).getData().getMetadata().get("testField"), "hiddenFieldValue");
+    }
 }

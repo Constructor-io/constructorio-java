@@ -1,5 +1,6 @@
 package io.constructor.client;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ public class BrowseItemsRequest {
     private String sortBy;
     private boolean sortAscending;
     private Map<String, String>formatOptions;
+    private List<String> hiddenFields;
     
     /**
      * Creates a browse request
@@ -36,6 +38,7 @@ public class BrowseItemsRequest {
       this.facets = new HashMap<String, List<String>>();
       this.sortAscending = true;
       this.formatOptions = new HashMap<String, String>();
+      this.hiddenFields = new ArrayList<String>();
     }
 
     /**
@@ -162,5 +165,19 @@ public class BrowseItemsRequest {
      */
     public Map<String, String> getFormatOptions() {
       return formatOptions;
+    }
+
+    /**
+     * @param hiddenFields the hiddenFields to set
+     */
+    public void setHiddenFields(List<String> hiddenFields) {
+        this.hiddenFields = hiddenFields;
+    }
+
+    /**
+     * @return the hidden fields
+     */
+    public List<String> getHiddenFields() {
+        return hiddenFields;
     }
 }

@@ -46,6 +46,7 @@ public class BrowseItemsRequestTest {
         facets.put("Flavors", Arrays.asList("Honey Roasted", "Dry Roasted", "Unsalted"));
         Map<String, String> formatOptions = new HashMap<String, String>();
         formatOptions.put("groups_start", "top");
+        List<String> hiddenFields = Arrays.asList("hiddenField1", "hiddenField2");
         
         request.setIds(newIds);
         request.setSection("Browse Suggestions");
@@ -56,6 +57,7 @@ public class BrowseItemsRequestTest {
         request.setSortBy("smooth-to-chunky");
         request.setSortAscending(false);
         request.setFormatOptions(formatOptions);
+        request.setHiddenFields(hiddenFields);
 
         assertEquals(request.getIds(), newIds);
         assertEquals(request.getSection(), "Browse Suggestions");
@@ -66,5 +68,6 @@ public class BrowseItemsRequestTest {
         assertEquals(request.getSortBy(), "smooth-to-chunky");
         assertEquals(request.getSortAscending(), false);
         assertEquals(request.getFormatOptions(), formatOptions);
+        assertEquals(request.getHiddenFields(), hiddenFields);
     }
 }

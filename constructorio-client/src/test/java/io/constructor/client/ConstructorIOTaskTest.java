@@ -3,8 +3,8 @@ package io.constructor.client;
 import io.constructor.client.models.Task;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -18,18 +18,18 @@ import static org.junit.Assert.*;
 
 public class ConstructorIOTaskTest {
 
-    private String apiKey = System.getenv("TEST_API_KEY");
-    private String apiToken = System.getenv("TEST_API_TOKEN");
-    private File csvFolder = new File("src/test/resources/csv");
-    private File itemsFile = new File("src/test/resources/csv/items.csv");
-    private String baseUrl = "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
-    private int task_id = 0;
+    private static String apiKey = System.getenv("TEST_API_KEY");
+    private static String apiToken = System.getenv("TEST_API_TOKEN");
+    private static File csvFolder = new File("src/test/resources/csv");
+    private static File itemsFile = new File("src/test/resources/csv/items.csv");
+    private static String baseUrl = "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
+    private static int task_id = 0;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @Before
-    public void init() throws Exception{
+    @BeforeClass
+    public static void init() throws Exception{
         URL itemsUrl = new URL(baseUrl + "items.csv");
         FileUtils.copyURLToFile(itemsUrl, itemsFile);
 
@@ -45,8 +45,8 @@ public class ConstructorIOTaskTest {
         task_id = jsonObj.getInt("task_id");
     }
 
-    @After
-    public void teardown() throws Exception{
+    @AfterClass
+    public static void teardown() throws Exception{
         itemsFile.delete();
         csvFolder.delete();
     }

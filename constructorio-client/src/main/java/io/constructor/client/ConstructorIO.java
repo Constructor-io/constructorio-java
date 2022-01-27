@@ -791,6 +791,12 @@ public class ConstructorIO {
                     .build();
             }
 
+            for (String hiddenField : req.getHiddenFields()) {
+                url = url.newBuilder()
+                        .addQueryParameter("hidden_fields", hiddenField)
+                        .build();
+            }
+
             Request request = this.makeUserRequestBuilder(userInfo)
                 .url(url)
                 .get()

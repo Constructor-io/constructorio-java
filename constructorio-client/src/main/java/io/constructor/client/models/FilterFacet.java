@@ -31,6 +31,9 @@ public class FilterFacet {
   @SerializedName("type")
   private String type;
 
+  @SerializedName("data")
+  private Map<String, Object> data;
+
   /**
    * @return the displayName
    */
@@ -78,5 +81,12 @@ public class FilterFacet {
    */
   public String getType() {
     return type;
+  }
+
+  /**
+   * @return the data
+   */
+  public Map<String, Object> getData() {
+    return data;
   }
 }

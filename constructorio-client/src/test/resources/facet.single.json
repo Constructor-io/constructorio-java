@@ -31,5 +31,9 @@
       "value": "1-inf"
     }
   ],
-  "type": "single"
+  "type": "single",
+  "data": {
+    "foo": "bar",
+    "bar": 123
+  }
 }

@@ -41,6 +41,9 @@ public class FiltersTest {
     assertNull(facet.getMax());
     assertNull(facet.getMin());
     assertNull(facet.getStatus());
+    assertEquals(facet.getData().size(), 2);
+    assertEquals(facet.getData().get("foo"), "bar");
+    assertEquals(facet.getData().get("bar"), 123.0);
   }
 
   @Test

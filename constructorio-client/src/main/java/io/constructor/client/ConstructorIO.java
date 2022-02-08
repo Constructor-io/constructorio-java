@@ -85,9 +85,9 @@ public class ConstructorIO {
      * Creates a constructor.io Client.
      *
      * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param apiKey API Key, used publicly in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete service at ac.cnstrc.com.
      * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
      */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, String constructorToken) {
@@ -111,9 +111,9 @@ public class ConstructorIO {
      * Creates a constructor.io Client.
      *
      * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param apiKey API Key, used publicly in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete service at ac.cnstrc.com.
     */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host) {
       this(apiToken, apiKey, isHTTPS, host, null);
@@ -123,9 +123,9 @@ public class ConstructorIO {
      * Creates a constructor.io Client.
      *
      * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param apiKey API Key, used publicly in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete service at ac.cnstrc.com.
      * @param port The port to connect to
     */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, int port) {
@@ -1005,7 +1005,7 @@ public class ConstructorIO {
     /**
      * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
      *
-     * @param path endpoint of the autocomplete service.
+     * @param paths endpoint of the autocomplete service.
      * @return the created URL. Now you can use it to issue requests and things!
      */
     protected HttpUrl makeUrl(List<String> paths) throws UnsupportedEncodingException {
@@ -1136,7 +1136,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an autocomplete response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static AutocompleteResponse createAutocompleteResponse(String string) {
@@ -1153,7 +1153,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an search response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static SearchResponse createSearchResponse(String string) {
@@ -1172,7 +1172,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an browse response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static BrowseResponse createBrowseResponse(String string) {
@@ -1186,7 +1186,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static RecommendationsResponse createRecommendationsResponse(String string) {
@@ -1200,7 +1200,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an All Tasks response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static AllTasksResponse createAllTasksResponse(String string) {
@@ -1211,7 +1211,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into a Task response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static Task createTaskResponse(String string) {
@@ -1231,7 +1231,7 @@ public class ConstructorIO {
             JSONObject resultData = result.getJSONObject("data");
             JSONObject metadata = new JSONObject();
             
-            // Recursive call to move unspecified properties in result variations to it's metadata object
+            // Recursive call to move unspecified properties in result variations to its metadata object
             if (!result.isNull("variations")) {
                 JSONArray variations = result.getJSONArray("variations");
                 moveMetadataOutOfResultData(variations);

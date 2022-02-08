@@ -24,6 +24,8 @@ import io.constructor.client.models.RecommendationsResponse;
 import io.constructor.client.models.ServerError;
 import io.constructor.client.models.AllTasksResponse;
 import io.constructor.client.models.Task;
+import io.constructor.client.models.NextQuizResponse;
+import io.constructor.client.models.FinalizeQuizResponse;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -1034,7 +1036,7 @@ public class ConstructorIO {
     /**
      * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
      *
-     * @param path endpoint of the autocomplete service.
+     * @param paths endpoint of the autocomplete service.
      * @return the created URL. Now you can use it to issue requests and things!
      */
     protected HttpUrl makeUrl(List<String> paths, UserInfo info) throws UnsupportedEncodingException {
@@ -1218,6 +1220,28 @@ public class ConstructorIO {
         JSONObject json = new JSONObject(string);
         String transformed = json.toString();
         return new Gson().fromJson(transformed, Task.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Next Quiz response.
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static NextQuizResponse createNextQuizResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, NextQuizResponse.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Task response.
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static FinalizeQuizResponse createFinalizeQuizResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, FinalizeQuizResponse.class);
     }
 
     /**
@@ -1488,4 +1512,126 @@ public class ConstructorIO {
             throw new ConstructorException(exception);
         }
     }
+
+    /**
+     * Creates a Quiz OkHttp request
+     *
+     * @param req the Next Quiz request
+     * @param type the type of quiz request (next/finalize)
+     * @return a Task OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createQuizRequest(QuizRequest req, String type, UserInfo userInfo) throws ConstructorException {
+        try {
+            if (!type.equals("next") && !type.equals("finalize"))
+                throw new IllegalArgumentException("type must be either 'next' or 'finalize'");
+
+            List<String> paths = Arrays.asList("quizzes", req.getId(), type);
+            HttpUrl url = this.makeUrl(paths);
+            url = url.newBuilder().addQueryParameter("index_key", req.getIndexKey()).build();
+
+            if (req.getSection() != null) {
+                url = url.newBuilder()
+                        .addQueryParameter("section", req.getSection())
+                        .build();
+            }
+
+            if (req.getVersionId() != null) {
+                url = url.newBuilder()
+                        .addQueryParameter("version_id", req.getVersionId())
+                        .build();
+            }
+
+            if (req.getA().size() > 0) {
+                for (List<String> questionAnswers : req.getA())
+                {
+                    String answerParam = String.join(",", questionAnswers);
+                    url = url.newBuilder().addQueryParameter("a", answerParam).build();
+                }
+            } else {
+                if (type.equals("finalize")) {
+                    throw new IllegalArgumentException("a (answers) is a required parameter for a finalize request");
+                }
+            }
+
+            Request request = this.makeUserRequestBuilder(userInfo)
+                    .url(url)
+                    .get()
+                    .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the quiz service for the next quiz/question
+     *
+     * @param req the Next Quiz request
+     * @return a Next Quiz Response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public NextQuizResponse nextQuiz(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createQuizRequest(req, "next", userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createNextQuizResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the quiz service for the next quiz/question
+     *
+     * @param req the Next Quiz request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String nextQuizAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createQuizRequest(req, "next", userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+//    /**
+//     * Queries the quiz service for the next quiz/question
+//     *
+//     * @param req the Next Quiz request
+//     * @return a Next Quiz Response
+//     * @throws ConstructorException if the request is invalid.
+//     */
+//    public NextQuizResponse nextQuiz(QuizRequest req) throws ConstructorException {
+//        try {
+//            Request request = createNextQuizRequest(req);
+//            Response response = clientWithRetry.newCall(request).execute();
+//            String json = getResponseBody(response);
+//            return createNextQuizResponse(json);
+//        } catch (Exception exception) {
+//            throw new ConstructorException(exception);
+//        }
+//    }
+//
+//    /**
+//     * Queries the quiz service for the next quiz/question
+//     *
+//     * @param req the Next Quiz request
+//     * @return a string of JSON
+//     * @throws ConstructorException if the request is invalid.
+//     */
+//    public String nextQuizAsJson(QuizRequest req) throws ConstructorException {
+//        try {
+//            Request request = createNextQuizRequest(req);
+//            Response response = clientWithRetry.newCall(request).execute();
+//            return getResponseBody(response);
+//        } catch (Exception exception) {
+//            throw new ConstructorException(exception);
+//        }
+//    }
 }

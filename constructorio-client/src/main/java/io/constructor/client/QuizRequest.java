@@ -10,7 +10,7 @@ public class QuizRequest {
     private String id;
     private String indexKey;
     private String section;
-    private List<List<Integer>> a;
+    private List<List<String>> a;
     private String versionId;
 
     /**
@@ -76,14 +76,14 @@ public class QuizRequest {
      * @param a the list of answers in the format [ [1,2], [3,4] ] where [1,2] are the selected answers
      *          for the first question and [3,4] are the selected answers for the second question
      */
-    public void setA(List<List<Integer>> a) {
+    public void setA(List<List<String>> a) {
         this.a = a;
     }
 
     /**
      * @return the list of answers for the quiz
      */
-    public List<List<Integer>> getA() { return a; }
+    public List<List<String>> getA() { return a; }
 
     /**
      * @param versionId the specific version id for the quiz

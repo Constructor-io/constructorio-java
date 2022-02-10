@@ -25,6 +25,8 @@ public class QuizRequest {
         if (indexKey == null)
             throw new IllegalArgumentException("indexKey is a required parameter of type String");
 
+        this.id = id;
+        this.indexKey = indexKey;
         this.section = null;
         this.a = new ArrayList<>();
         this.versionId = null;
@@ -40,9 +42,7 @@ public class QuizRequest {
     /**
      * @return the id of the quiz to request
      */
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
 
     /**
      * @param indexKey the index_key/api_key of the product catalog

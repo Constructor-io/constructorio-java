@@ -1234,7 +1234,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Task response.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Finalize Quiz response.
      * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */

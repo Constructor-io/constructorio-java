@@ -23,7 +23,5 @@ public class FinalizeQuizResponse {
     /**
      * @return the result
      */
-    public QuizResult getResult() {
-        return result;
-    }
+    public QuizResult getResult() { return result; }
 }

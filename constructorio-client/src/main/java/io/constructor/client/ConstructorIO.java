@@ -1516,7 +1516,7 @@ public class ConstructorIO {
     /**
      * Creates a Quiz OkHttp request
      *
-     * @param req the Next Quiz request
+     * @param req the Quiz request
      * @param type the type of quiz request (next/finalize)
      * @return a Task OkHttp request
      * @throws ConstructorException
@@ -1526,7 +1526,7 @@ public class ConstructorIO {
             if (!type.equals("next") && !type.equals("finalize"))
                 throw new IllegalArgumentException("type must be either 'next' or 'finalize'");
 
-            List<String> paths = Arrays.asList("quizzes", req.getId(), type);
+            List<String> paths = Arrays.asList("v1", "quizzes", req.getId(), type);
             HttpUrl url = this.makeUrl(paths);
             url = url.newBuilder().addQueryParameter("index_key", req.getIndexKey()).build();
 
@@ -1600,38 +1600,38 @@ public class ConstructorIO {
         }
     }
 
-//    /**
-//     * Queries the quiz service for the next quiz/question
-//     *
-//     * @param req the Next Quiz request
-//     * @return a Next Quiz Response
-//     * @throws ConstructorException if the request is invalid.
-//     */
-//    public NextQuizResponse nextQuiz(QuizRequest req) throws ConstructorException {
-//        try {
-//            Request request = createNextQuizRequest(req);
-//            Response response = clientWithRetry.newCall(request).execute();
-//            String json = getResponseBody(response);
-//            return createNextQuizResponse(json);
-//        } catch (Exception exception) {
-//            throw new ConstructorException(exception);
-//        }
-//    }
-//
-//    /**
-//     * Queries the quiz service for the next quiz/question
-//     *
-//     * @param req the Next Quiz request
-//     * @return a string of JSON
-//     * @throws ConstructorException if the request is invalid.
-//     */
-//    public String nextQuizAsJson(QuizRequest req) throws ConstructorException {
-//        try {
-//            Request request = createNextQuizRequest(req);
-//            Response response = clientWithRetry.newCall(request).execute();
-//            return getResponseBody(response);
-//        } catch (Exception exception) {
-//            throw new ConstructorException(exception);
-//        }
-//    }
+    /**
+     * Queries the quiz service for the next quiz/question
+     *
+     * @param req the Finalize Quiz request
+     * @return a Finalize Quiz Response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public FinalizeQuizResponse finalizeQuiz(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createQuizRequest(req, "finalize", userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createFinalizeQuizResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the quiz service for the next quiz/question
+     *
+     * @param req the Finalize Quiz request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String finalizeQuizAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createQuizRequest(req, "finalize", userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
 }

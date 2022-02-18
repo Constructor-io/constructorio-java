@@ -21,6 +21,7 @@ public class BrowseRequest {
     private boolean sortAscending;
     private Map<String, String>formatOptions;
     private List<String> hiddenFields;
+    private List<String> hiddenFacets;
     
     /**
      * Creates a browse request
@@ -45,6 +46,7 @@ public class BrowseRequest {
       this.sortAscending = true;
       this.formatOptions = new HashMap<String, String>();
       this.hiddenFields = new ArrayList<String>();
+      this.hiddenFacets = new ArrayList<String>();
     }
 
     /**
@@ -199,5 +201,19 @@ public class BrowseRequest {
      */
     public List<String> getHiddenFields() {
       return hiddenFields;
+    }
+
+    /**
+     * @param hiddenFacets the hiddenFacets to set
+     */
+    public void setHiddenFacets(List<String> hiddenFacets) {
+      this.hiddenFacets = hiddenFacets;
+    }
+
+    /**
+     * @return the hidden facets
+     */
+    public List<String> getHiddenFacets() {
+      return hiddenFacets;
     }
 }

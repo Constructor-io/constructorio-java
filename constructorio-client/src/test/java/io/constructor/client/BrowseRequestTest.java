@@ -59,6 +59,7 @@ public class BrowseRequestTest {
         Map<String, String> formatOptions = new HashMap<String, String>();
         formatOptions.put("groups_start", "top");
         List<String> hiddenFields = Arrays.asList("hiddenField1", "hiddenField2");
+        List<String> hiddenFacets = Arrays.asList("hiddenFacet1", "hiddenFacet2");
         
         request.setFilterName("VacationType");
         request.setFilterValue("Air Travel");
@@ -71,6 +72,7 @@ public class BrowseRequestTest {
         request.setSortAscending(false);
         request.setFormatOptions(formatOptions);
         request.setHiddenFields(hiddenFields);
+        request.setHiddenFacets(hiddenFacets);
 
         assertEquals(request.getFilterName(), "VacationType");
         assertEquals(request.getFilterValue(), "Air Travel");
@@ -83,5 +85,7 @@ public class BrowseRequestTest {
         assertEquals(request.getSortAscending(), false);
         assertEquals(request.getFormatOptions(), formatOptions);
         assertEquals(request.getHiddenFields(), hiddenFields);
+        assertEquals(request.getHiddenFacets(), hiddenFacets);
+
     }
 }

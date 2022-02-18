@@ -55,6 +55,7 @@ public class SearchRequestTest {
         Map<String, String> formatOptions = new HashMap<String, String>();
         formatOptions.put("groups_start", "top");
         List<String> hiddenFields = Arrays.asList("hiddenField1", "hiddenField2");
+        List<String> hiddenFacets = Arrays.asList("hiddenFacet1", "hiddenFacet2");
         
         request.setQuery("airline tickets");
         request.setSection("Search Suggestions");
@@ -67,6 +68,7 @@ public class SearchRequestTest {
         request.setCollectionId("last minute getaways");
         request.setFormatOptions(formatOptions);
         request.setHiddenFields(hiddenFields);
+        request.setHiddenFacets(hiddenFacets);
         
         assertEquals(request.getQuery(), "airline tickets");
         assertEquals(request.getSection(), "Search Suggestions");
@@ -79,5 +81,6 @@ public class SearchRequestTest {
         assertEquals(request.getCollectionId(), "last minute getaways");
         assertEquals(request.getFormatOptions(), formatOptions);
         assertEquals(request.getHiddenFields(), hiddenFields);
+        assertEquals(request.getHiddenFacets(), hiddenFacets);
     }
 }

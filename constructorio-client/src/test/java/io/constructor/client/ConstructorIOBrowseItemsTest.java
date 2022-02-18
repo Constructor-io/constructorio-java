@@ -1,16 +1,19 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import io.constructor.client.models.BrowseResponse;
+import io.constructor.client.models.FilterFacet;
 import io.constructor.client.models.FilterGroup;
 
 public class ConstructorIOBrowseItemsTest {
@@ -197,5 +200,26 @@ public class ConstructorIOBrowseItemsTest {
         assertTrue("browse items total results count should be equal to length of supplied ids", (int)response.getResponse().getTotalNumberOfResults() == ids.size());
         assertTrue("browse items result id exists", response.getResultId() != null);
         assertEquals("browse items [testField] exists", response.getResponse().getResults().get(0).getData().getMetadata().get("testField"), "hiddenFieldValue");
+    }
+
+    @Test
+    public void BrowseItemsShouldReturnAResultWithHiddenFacets() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        List<String> ids = Arrays.asList("10001", "10002");
+        BrowseItemsRequest request = new BrowseItemsRequest(ids);
+        request.getHiddenFacets().add("Brand");
+        BrowseResponse response = constructor.browseItems(request, userInfo);
+        FilterFacet brandFacet = response.getResponse().getFacets().stream().filter(new Predicate<FilterFacet>() {
+            @Override
+            public boolean test(FilterFacet f) {
+                return f.getName().equals("Brand");
+            }
+        }).findAny().orElse(null);
+
+        assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
+        assertTrue("browse items total results count should be equal to length of supplied ids", (int)response.getResponse().getTotalNumberOfResults() == ids.size());
+        assertTrue("browse items result id exists", response.getResultId() != null);
+        assertNotNull("browse facet [Brand] exists", brandFacet);
     }
 }

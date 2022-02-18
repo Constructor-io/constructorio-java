@@ -211,7 +211,6 @@ public class ConstructorIOSearchTest {
         SearchRequest request = new SearchRequest("item1");
         request.getHiddenFacets().add("Brand");
 
-        System.out.println(request.getHiddenFacets());
         SearchResponse response = constructor.search(request, userInfo);
         FilterFacet brandFacet = response.getResponse().getFacets().stream().filter(new Predicate<FilterFacet>() {
             @Override

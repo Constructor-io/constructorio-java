@@ -128,6 +128,10 @@ request.setSortBy("Price");
 request.setSortAscending(true);
 request.getFacets().put("Brand", Arrays.asList("Jif"))
 
+// Add the following paramaters to request for hidden fields or facets
+request.getHiddenFields().add("hidden_price_field");
+request.getHiddenFacets().add("hidden_brand_facet");
+
 // Create a UserInfo object with the session and unique device identifier (optional)
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
 userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
@@ -205,6 +209,10 @@ request.setSortBy("Price");
 request.setSortAscending(true);
 request.getFacets().put("Brand", Arrays.asList("Jif"))
 
+// Add the following paramaters to request for hidden fields or facets
+request.getHiddenFields().add("hidden_price_field");
+request.getHiddenFacets().add("hidden_brand_facet");
+
 // Create a UserInfo object with the session and unique device identifier (optional)
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
 userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
@@ -247,6 +255,10 @@ request.setGroupId("625");r
 request.setSortBy("Price");
 request.setSortAscending(true);
 request.getFacets().put("Brand", Arrays.asList("Jif"))
+
+// Add the following paramaters to request for hidden fields or facets
+request.getHiddenFields().add("hidden_price_field");
+request.getHiddenFacets().add("hidden_brand_facet");
 
 // Create a UserInfo object with the session and unique device identifier (optional)
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");

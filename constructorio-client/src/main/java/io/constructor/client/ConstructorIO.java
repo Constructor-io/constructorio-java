@@ -490,7 +490,13 @@ public class ConstructorIO {
 
             for (String hiddenField : req.getHiddenFields()) {
                 url = url.newBuilder()
-                    .addQueryParameter("hidden_fields", hiddenField)
+                    .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
+                    .build();
+            }
+
+            for (String hiddenFacet : req.getHiddenFacets()) {
+                url = url.newBuilder()
+                    .addQueryParameter("fmt_options[hidden_facets]", hiddenFacet)
                     .build();
             }
 
@@ -638,7 +644,13 @@ public class ConstructorIO {
 
             for (String hiddenField : req.getHiddenFields()) {
                 url = url.newBuilder()
-                    .addQueryParameter("hidden_fields", hiddenField)
+                    .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
+                    .build();
+            }
+
+            for (String hiddenFacet : req.getHiddenFacets()) {
+                url = url.newBuilder()
+                    .addQueryParameter("fmt_options[hidden_facets]", hiddenFacet)
                     .build();
             }
 
@@ -793,7 +805,13 @@ public class ConstructorIO {
 
             for (String hiddenField : req.getHiddenFields()) {
                 url = url.newBuilder()
-                        .addQueryParameter("hidden_fields", hiddenField)
+                        .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
+                        .build();
+            }
+
+            for (String hiddenFacet : req.getHiddenFacets()) {
+                url = url.newBuilder()
+                        .addQueryParameter("fmt_options[hidden_facets]", hiddenFacet)
                         .build();
             }
 

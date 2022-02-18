@@ -1,9 +1,11 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,6 +13,7 @@ import org.junit.rules.ExpectedException;
 
 import io.constructor.client.models.BrowseResponse;
 import io.constructor.client.models.FilterGroup;
+import io.constructor.client.models.FilterFacet;
 
 public class ConstructorIOBrowseTest {
 
@@ -196,5 +199,23 @@ public class ConstructorIOBrowseTest {
         BrowseResponse response = constructor.browse(request, userInfo);
         assertEquals("browse results exist", response.getResponse().getResults().size(), 1);
         assertEquals("browse result [testField] exists", response.getResponse().getResults().get(0).getData().getMetadata().get("testField"), "hiddenFieldValue");
+    }
+
+    @Test
+    public void BrowseShouldReturnAResultWithHiddenFacets() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Brand", "XYZ");
+        request.getHiddenFacets().add("Brand");
+        BrowseResponse response = constructor.browse(request, userInfo);
+        FilterFacet brandFacet = response.getResponse().getFacets().stream().filter(new Predicate<FilterFacet>() {
+            @Override
+            public boolean test(FilterFacet f) {
+                return f.getName().equals("Brand");
+            }
+        }).findAny().orElse(null);
+
+        assertEquals("browse results exist", response.getResponse().getResults().size(), 1);
+        assertNotNull("browse facet [Brand] exists", brandFacet);
     }
 }

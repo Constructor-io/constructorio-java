@@ -21,6 +21,7 @@ public class SearchRequest {
     private String collectionId;
     private Map<String, String>formatOptions;
     private List<String> hiddenFields;
+    private List<String> hiddenFacets;
 
     /**
      * Creates a search request
@@ -40,6 +41,7 @@ public class SearchRequest {
       this.sortAscending = true;
       this.formatOptions = new HashMap<String, String>();
       this.hiddenFields = new ArrayList<String>();
+      this.hiddenFacets = new ArrayList<String>();
     }
 
     /**
@@ -194,5 +196,19 @@ public class SearchRequest {
      */
     public List<String> getHiddenFields() {
       return hiddenFields;
+    }
+
+    /**
+     * @param hiddenFacets the hiddenFacets to set
+     */
+    public void setHiddenFacets(List<String> hiddenFacets) {
+      this.hiddenFacets = hiddenFacets;
+    }
+
+    /**
+     * @return the hidden facets
+     */
+    public List<String> getHiddenFacets() {
+      return hiddenFacets;
     }
 }

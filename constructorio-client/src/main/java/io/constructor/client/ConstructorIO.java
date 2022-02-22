@@ -34,6 +34,7 @@ import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.Interceptor;
 
 /**
  * Constructor.io Client
@@ -53,22 +54,36 @@ public class ConstructorIO {
     /**
      * the HTTP client used by all instances (with retry, only for idempotent requests like GET)
      */
-    private static OkHttpClient clientWithRetry = new OkHttpClient.Builder()
-        .addInterceptor(new ConstructorInterceptor())
+    private static OkHttpClient clientWithRetry = client.newBuilder()
         .retryOnConnectionFailure(true)
         .build();
 
     /**
      * @param newClient the HTTP client to use by all instances
      */
-    protected static void setClient(OkHttpClient newClient) {
-        client = newClient;
+    public static void setClient(OkHttpClient newClient) {
+        OkHttpClient.Builder builder = newClient.newBuilder().retryOnConnectionFailure(false);
+        List<Interceptor> interceptors =  newClient.interceptors();
+        Boolean exists = false;
+
+        for (Interceptor interceptor : interceptors) {
+            if (interceptor instanceof ConstructorInterceptor) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            builder.addInterceptor(new ConstructorInterceptor());
+        }
+
+        client = builder.build();
+        clientWithRetry = builder.retryOnConnectionFailure(true).build();
     }
 
     /**
      * @return the HTTP client used by all instances
      */
-    protected static OkHttpClient getClient() {
+    public static OkHttpClient getClient() {
         return client;
     }
 

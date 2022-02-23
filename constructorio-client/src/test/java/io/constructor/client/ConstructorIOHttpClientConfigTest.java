@@ -30,7 +30,7 @@ public class ConstructorIOHttpClientConfigTest {
     }
 
     @Test
-    public void setClientShouldSetClientProperly() {
+    public void setHttpClientShouldSetClientProperly() {
         assertEquals(30000, ConstructorIO.getHttpClient().readTimeoutMillis());
         assertEquals(30000, ConstructorIO.getHttpClient().writeTimeoutMillis());
         assertEquals(10000, ConstructorIO.getHttpClient().connectTimeoutMillis());
@@ -55,7 +55,7 @@ public class ConstructorIOHttpClientConfigTest {
     }
 
     @Test
-    public void configClientShouldConfigClientProperly() {
+    public void setHttpClientConfigShouldConfigClientProperly() {
         assertEquals(30000, ConstructorIO.getHttpClient().readTimeoutMillis());
         assertEquals(30000, ConstructorIO.getHttpClient().writeTimeoutMillis());
         assertEquals(10000, ConstructorIO.getHttpClient().connectTimeoutMillis());

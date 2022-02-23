@@ -35,6 +35,8 @@ import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.Interceptor;
+import okhttp3.Dispatcher;
+import okhttp3.ConnectionPool;
 
 /**
  * Constructor.io Client
@@ -80,6 +82,48 @@ public class ConstructorIO {
         clientWithRetry = builder.retryOnConnectionFailure(true).build();
     }
 
+    /**
+     *
+     * @param config the Http client config
+     */
+    public static void configHttpClient(HttpClientConfig config) {
+        OkHttpClient.Builder builder = client.newBuilder();
+        Dispatcher dispatcher = new Dispatcher();
+
+        if (config.getReadTimeout() != null) {
+            builder.readTimeout(config.getReadTimeout(), TimeUnit.MILLISECONDS);
+        }
+
+        if (config.getWriteTimeout() != null) {
+            builder.writeTimeout(config.getWriteTimeout(), TimeUnit.MILLISECONDS);
+        }
+
+        if (config.getConnectTimeout() != null) {
+            builder.connectTimeout(config.getConnectTimeout(), TimeUnit.MILLISECONDS);
+        }
+
+        if (config.getConnPoolMaxIdleConnections() != null || config.getConnPoolKeepAliveDuration() != null) {
+            Integer maxIdle = config.getConnPoolMaxIdleConnections();
+            Integer keepAlive = config.getConnPoolKeepAliveDuration();
+            ConnectionPool pool = new ConnectionPool(maxIdle == null ? 5 : maxIdle, keepAlive == null ? 5l : maxIdle, TimeUnit.MILLISECONDS);
+            builder.connectionPool(pool);
+        }
+
+        if (config.getDispatcherMaxRequests() != null) {
+            dispatcher.setMaxRequests(config.getDispatcherMaxRequests());
+        }
+
+        if (config.getDispatcherMaxRequestsPerHost() != null) {
+            dispatcher.setMaxRequestsPerHost(config.getDispatcherMaxRequestsPerHost());
+        }
+
+        if (config.getDispatcherMaxRequestsPerHost() != null || config.getDispatcherMaxRequests() != null) {
+            builder.dispatcher(dispatcher);
+        }
+
+        client = builder.build();
+        clientWithRetry = builder.retryOnConnectionFailure(true).build();
+    }
     /**
      * @return the HTTP client used by all instances
      */

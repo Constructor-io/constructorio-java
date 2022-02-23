@@ -61,9 +61,9 @@ public class ConstructorIO {
         .build();
 
     /**
-     * @param newClient the HTTP client to use by all instances
+     * @param newClient the OkHttpClient to use by all isntances
      */
-    public static void setClient(OkHttpClient newClient) {
+    public static void setHttpClient(OkHttpClient newClient) {
         OkHttpClient.Builder builder = newClient.newBuilder().retryOnConnectionFailure(false);
         List<Interceptor> interceptors =  newClient.interceptors();
         Boolean exists = false;
@@ -86,7 +86,7 @@ public class ConstructorIO {
      *
      * @param config the Http client config
      */
-    public static void configHttpClient(HttpClientConfig config) {
+    public static void setHttpClientConfig(HttpClientConfig config) {
         OkHttpClient.Builder builder = client.newBuilder();
         Dispatcher dispatcher = new Dispatcher();
 
@@ -127,7 +127,7 @@ public class ConstructorIO {
     /**
      * @return the HTTP client used by all instances
      */
-    public static OkHttpClient getClient() {
+    public static OkHttpClient getHttpClient() {
         return client;
     }
 

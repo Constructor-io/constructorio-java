@@ -61,7 +61,7 @@ public class ConstructorIO {
         .build();
 
     /**
-     * @param newClient the OkHttpClient to use by all isntances
+     * @param newClient the OkHttpClient to use by all instances
      */
     public static void setHttpClient(OkHttpClient newClient) {
         OkHttpClient.Builder builder = newClient.newBuilder().retryOnConnectionFailure(false);

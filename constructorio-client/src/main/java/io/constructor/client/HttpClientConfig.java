@@ -1,119 +1,119 @@
 package io.constructor.client;
 
 public class HttpClientConfig {
-    private Integer readTimeout;
-    private Integer writeTimeout;
-    private Integer connectTimeout;
-    private Integer connPoolMaxIdleConnections;
-    private Integer connPoolKeepAliveDuration;
-    private Integer dispatcherMaxRequests;
-    private Integer dispatcherMaxRequestsPerHost;
+    private int readTimeout;
+    private int writeTimeout;
+    private int connectTimeout;
+    private int connectionPoolMaxIdleConnections;
+    private int connectionPoolKeepAliveDuration;
+    private int dispatcherMaxRequests;
+    private int dispatcherMaxRequestsPerHost;
 
     HttpClientConfig() {
-        this.readTimeout = null;
-        this.writeTimeout = null;
-        this.connectTimeout = null;
-        this.connPoolMaxIdleConnections = null;
-        this.connPoolKeepAliveDuration = null;
-        this.dispatcherMaxRequests = null;
-        this.dispatcherMaxRequestsPerHost = null;
+        this.readTimeout = 30000;
+        this.writeTimeout = 30000;
+        this.connectTimeout = 10000;
+        this.connectionPoolMaxIdleConnections = 5;
+        this.connectionPoolKeepAliveDuration = 300000;
+        this.dispatcherMaxRequests = 64;
+        this.dispatcherMaxRequestsPerHost = 5;
     }
 
     /**
      * @return the read timeout in milliseconds
      */
-    public Integer getReadTimeout() {
+    public int getReadTimeout() {
         return readTimeout;
     }
 
     /**
      * @param readTimeout the read timeout for new connections in milliseconds
      */
-    public void setReadTimeout(Integer readTimeout) {
+    public void setReadTimeout(int readTimeout) {
         this.readTimeout = readTimeout;
     }
 
     /**
      * @return the write timeout in milliseconds
      */
-    public Integer getWriteTimeout() {
+    public int getWriteTimeout() {
         return writeTimeout;
     }
 
     /**
      * @param writeTimeout the write timeout for new connections in milliseconds
      */
-    public void setWriteTimeout(Integer writeTimeout) {
+    public void setWriteTimeout(int writeTimeout) {
         this.writeTimeout = writeTimeout;
     }
 
     /**
      * @return the connect timeout in milliseconds
      */
-    public Integer getConnectTimeout() {
+    public int getConnectTimeout() {
         return connectTimeout;
     }
 
     /**
      * @param connectTimeout the connect timeout for new connections in milliseconds
      */
-    public void setConnectTimeout(Integer connectTimeout) {
+    public void setConnectTimeout(int connectTimeout) {
         this.connectTimeout = connectTimeout;
     }
 
     /**
      * @return the maximum number of idle connections in the pool
      */
-    public Integer getConnPoolMaxIdleConnections() {
-        return connPoolMaxIdleConnections;
+    public int getConnectionPoolMaxIdleConnections() {
+        return connectionPoolMaxIdleConnections;
     }
 
     /**
-     * @param connPoolMaxIdleConnections the maximum number of idle connections in the pool
+     * @param connectionPoolMaxIdleConnections the maximum number of idle connections in the pool
      */
-    public void setConnPoolMaxIdleConnections(Integer connPoolMaxIdleConnections) {
-        this.connPoolMaxIdleConnections = connPoolMaxIdleConnections;
+    public void setConnectionPoolMaxIdleConnections(int connectionPoolMaxIdleConnections) {
+        this.connectionPoolMaxIdleConnections = connectionPoolMaxIdleConnections;
     }
 
     /**
      * @return the keep alive duration in milliseconds
      */
-    public Integer getConnPoolKeepAliveDuration() {
-        return connPoolKeepAliveDuration;
+    public int getConnectionPoolKeepAliveDuration() {
+        return connectionPoolKeepAliveDuration;
     }
 
     /**
-     * @param connPoolKeepAliveDuration the time in milliseconds to keep the connection alive in the pool before closing it
+     * @param connectionPoolKeepAliveDuration the time in milliseconds to keep the connection alive in the pool before closing it
      */
-    public void setConnPoolKeepAliveDuration(Integer connPoolKeepAliveDuration) {
-        this.connPoolKeepAliveDuration = connPoolKeepAliveDuration;
+    public void setConnectionPoolKeepAliveDuration(int connectionPoolKeepAliveDuration) {
+        this.connectionPoolKeepAliveDuration = connectionPoolKeepAliveDuration;
     }
 
     /**
      * @return the max requests to execute concurrently
      */
-    public Integer getDispatcherMaxRequests() {
+    public int getDispatcherMaxRequests() {
         return dispatcherMaxRequests;
     }
 
     /**
      * @param dispatcherMaxRequests the max requests to execute concurrently
      */
-    public void setDispatcherMaxRequests(Integer dispatcherMaxRequests) {
+    public void setDispatcherMaxRequests(int dispatcherMaxRequests) {
         this.dispatcherMaxRequests = dispatcherMaxRequests;
     }
 
     /**
      * @return the max requests for each host to execute concurrently
      */
-    public Integer getDispatcherMaxRequestsPerHost() {
+    public int getDispatcherMaxRequestsPerHost() {
         return dispatcherMaxRequestsPerHost;
     }
 
     /**
      * @param dispatcherMaxRequestsPerHost the max requests for each host to execute concurrently
      */
-    public void setDispatcherMaxRequestsPerHost(Integer dispatcherMaxRequestsPerHost) {
+    public void setDispatcherMaxRequestsPerHost(int dispatcherMaxRequestsPerHost) {
         this.dispatcherMaxRequestsPerHost = dispatcherMaxRequestsPerHost;
     }
 }

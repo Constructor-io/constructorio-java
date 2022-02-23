@@ -78,7 +78,7 @@ public class ConstructorIOHttpClientConfigTest {
     }
 
     @Test
-    public void nullConfigVariablesDoNotGetConfigured() {
+    public void setHttpClientConfigWithEmptyConfigShouldReturnDefaults() {
         assertEquals(30000, ConstructorIO.getHttpClient().readTimeoutMillis());
         assertEquals(30000, ConstructorIO.getHttpClient().writeTimeoutMillis());
         assertEquals(10000, ConstructorIO.getHttpClient().connectTimeoutMillis());
@@ -86,14 +86,13 @@ public class ConstructorIOHttpClientConfigTest {
         assertEquals(5, ConstructorIO.getHttpClient().dispatcher().getMaxRequestsPerHost());
 
         HttpClientConfig config = new HttpClientConfig();
-
-        assertNull(config.getDispatcherMaxRequests());
-        assertNull(config.getDispatcherMaxRequestsPerHost());
-        assertNull(config.getReadTimeout());
-        assertNull(config.getWriteTimeout());
-        assertNull(config.getConnectTimeout());
-        assertNull(config.getConnPoolKeepAliveDuration());
-        assertNull(config.getConnPoolMaxIdleConnections());
+        assertEquals(64, config.getDispatcherMaxRequests());
+        assertEquals(5, config.getDispatcherMaxRequestsPerHost());
+        assertEquals(30000, config.getReadTimeout());
+        assertEquals(30000, config.getWriteTimeout());
+        assertEquals(10000, config.getConnectTimeout());
+        assertEquals(300000, config.getConnectionPoolKeepAliveDuration());
+        assertEquals(5, config.getConnectionPoolMaxIdleConnections());
         ConstructorIO.setHttpClientConfig(config);
 
         assertEquals(30000, ConstructorIO.getHttpClient().readTimeoutMillis());

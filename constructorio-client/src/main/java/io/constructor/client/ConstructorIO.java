@@ -90,36 +90,16 @@ public class ConstructorIO {
         OkHttpClient.Builder builder = client.newBuilder();
         Dispatcher dispatcher = new Dispatcher();
 
-        if (config.getReadTimeout() != null) {
-            builder.readTimeout(config.getReadTimeout(), TimeUnit.MILLISECONDS);
-        }
+        builder.readTimeout(config.getReadTimeout(), TimeUnit.MILLISECONDS);
+        builder.writeTimeout(config.getWriteTimeout(), TimeUnit.MILLISECONDS);
+        builder.connectTimeout(config.getConnectTimeout(), TimeUnit.MILLISECONDS);
 
-        if (config.getWriteTimeout() != null) {
-            builder.writeTimeout(config.getWriteTimeout(), TimeUnit.MILLISECONDS);
-        }
+        ConnectionPool pool = new ConnectionPool(config.getConnectionPoolMaxIdleConnections(), config.getConnectionPoolKeepAliveDuration(), TimeUnit.MILLISECONDS);
+        builder.connectionPool(pool);
 
-        if (config.getConnectTimeout() != null) {
-            builder.connectTimeout(config.getConnectTimeout(), TimeUnit.MILLISECONDS);
-        }
-
-        if (config.getConnPoolMaxIdleConnections() != null || config.getConnPoolKeepAliveDuration() != null) {
-            Integer maxIdle = config.getConnPoolMaxIdleConnections();
-            Integer keepAlive = config.getConnPoolKeepAliveDuration();
-            ConnectionPool pool = new ConnectionPool(maxIdle == null ? 5 : maxIdle, keepAlive == null ? 300000L : maxIdle, TimeUnit.MILLISECONDS);
-            builder.connectionPool(pool);
-        }
-
-        if (config.getDispatcherMaxRequests() != null) {
-            dispatcher.setMaxRequests(config.getDispatcherMaxRequests());
-        }
-
-        if (config.getDispatcherMaxRequestsPerHost() != null) {
-            dispatcher.setMaxRequestsPerHost(config.getDispatcherMaxRequestsPerHost());
-        }
-
-        if (config.getDispatcherMaxRequestsPerHost() != null || config.getDispatcherMaxRequests() != null) {
-            builder.dispatcher(dispatcher);
-        }
+        dispatcher.setMaxRequests(config.getDispatcherMaxRequests());
+        dispatcher.setMaxRequestsPerHost(config.getDispatcherMaxRequestsPerHost());
+        builder.dispatcher(dispatcher);
 
         client = builder.build();
         clientWithRetry = builder.retryOnConnectionFailure(true).build();

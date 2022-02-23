@@ -20,7 +20,7 @@ public class HttpClientConfig {
     }
 
     /**
-     * @return the okhttp read timeout in milliseconds
+     * @return the read timeout in milliseconds
      */
     public Integer getReadTimeout() {
         return readTimeout;
@@ -76,7 +76,7 @@ public class HttpClientConfig {
     }
 
     /**
-     * @return the keep alive duration in millis
+     * @return the keep alive duration in milliseconds
      */
     public Integer getConnPoolKeepAliveDuration() {
         return connPoolKeepAliveDuration;

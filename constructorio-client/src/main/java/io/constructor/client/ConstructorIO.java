@@ -105,7 +105,7 @@ public class ConstructorIO {
         if (config.getConnPoolMaxIdleConnections() != null || config.getConnPoolKeepAliveDuration() != null) {
             Integer maxIdle = config.getConnPoolMaxIdleConnections();
             Integer keepAlive = config.getConnPoolKeepAliveDuration();
-            ConnectionPool pool = new ConnectionPool(maxIdle == null ? 5 : maxIdle, keepAlive == null ? 5l : maxIdle, TimeUnit.MILLISECONDS);
+            ConnectionPool pool = new ConnectionPool(maxIdle == null ? 5 : maxIdle, keepAlive == null ? 300000L : maxIdle, TimeUnit.MILLISECONDS);
             builder.connectionPool(pool);
         }
 

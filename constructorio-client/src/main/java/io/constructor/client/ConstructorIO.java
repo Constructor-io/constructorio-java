@@ -34,6 +34,9 @@ import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.Interceptor;
+import okhttp3.Dispatcher;
+import okhttp3.ConnectionPool;
 
 /**
  * Constructor.io Client
@@ -53,22 +56,58 @@ public class ConstructorIO {
     /**
      * the HTTP client used by all instances (with retry, only for idempotent requests like GET)
      */
-    private static OkHttpClient clientWithRetry = new OkHttpClient.Builder()
-        .addInterceptor(new ConstructorInterceptor())
+    private static OkHttpClient clientWithRetry = client.newBuilder()
         .retryOnConnectionFailure(true)
         .build();
 
     /**
-     * @param newClient the HTTP client to use by all instances
+     * @param newClient the OkHttpClient to use by all instances
      */
-    protected static void setClient(OkHttpClient newClient) {
-        client = newClient;
+    public static void setHttpClient(OkHttpClient newClient) {
+        OkHttpClient.Builder builder = newClient.newBuilder().retryOnConnectionFailure(false);
+        List<Interceptor> interceptors =  newClient.interceptors();
+        Boolean exists = false;
+
+        for (Interceptor interceptor : interceptors) {
+            if (interceptor instanceof ConstructorInterceptor) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            builder.addInterceptor(new ConstructorInterceptor());
+        }
+
+        client = builder.build();
+        clientWithRetry = builder.retryOnConnectionFailure(true).build();
     }
 
     /**
+     *
+     * @param config the Http client config
+     */
+    public static void setHttpClientConfig(HttpClientConfig config) {
+        OkHttpClient.Builder builder = client.newBuilder();
+        Dispatcher dispatcher = new Dispatcher();
+
+        builder.readTimeout(config.getReadTimeout(), TimeUnit.MILLISECONDS);
+        builder.writeTimeout(config.getWriteTimeout(), TimeUnit.MILLISECONDS);
+        builder.connectTimeout(config.getConnectTimeout(), TimeUnit.MILLISECONDS);
+
+        ConnectionPool pool = new ConnectionPool(config.getConnectionPoolMaxIdleConnections(), config.getConnectionPoolKeepAliveDuration(), TimeUnit.MILLISECONDS);
+        builder.connectionPool(pool);
+
+        dispatcher.setMaxRequests(config.getDispatcherMaxRequests());
+        dispatcher.setMaxRequestsPerHost(config.getDispatcherMaxRequestsPerHost());
+        builder.dispatcher(dispatcher);
+
+        client = builder.build();
+        clientWithRetry = builder.retryOnConnectionFailure(true).build();
+    }
+    /**
      * @return the HTTP client used by all instances
      */
-    protected static OkHttpClient getClient() {
+    public static OkHttpClient getHttpClient() {
         return client;
     }
 

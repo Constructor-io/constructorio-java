@@ -68,8 +68,8 @@ public class Utils {
     public static void enableHTTPLogging() {
         HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
         logger.setLevel(Level.NONE);
-        OkHttpClient client = ConstructorIO.getClient();
+        OkHttpClient client = ConstructorIO.getHttpClient();
         OkHttpClient newClient = client.newBuilder().addInterceptor(logger).build();
-        ConstructorIO.setClient(newClient);
+        ConstructorIO.setHttpClient(newClient);
     }
 }

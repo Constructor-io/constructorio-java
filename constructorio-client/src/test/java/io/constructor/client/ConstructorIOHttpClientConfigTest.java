@@ -34,6 +34,7 @@ public class ConstructorIOHttpClientConfigTest {
         assertEquals(30000, ConstructorIO.getHttpClient().readTimeoutMillis());
         assertEquals(30000, ConstructorIO.getHttpClient().writeTimeoutMillis());
         assertEquals(10000, ConstructorIO.getHttpClient().connectTimeoutMillis());
+        assertEquals(0, ConstructorIO.getHttpClient().callTimeoutMillis());
         assertEquals(64, ConstructorIO.getHttpClient().dispatcher().getMaxRequests());
         assertEquals(5, ConstructorIO.getHttpClient().dispatcher().getMaxRequestsPerHost());
 
@@ -44,11 +45,13 @@ public class ConstructorIOHttpClientConfigTest {
                 .readTimeout(5, TimeUnit.SECONDS)
                 .writeTimeout(5, TimeUnit.SECONDS)
                 .connectTimeout(5, TimeUnit.SECONDS)
+                .callTimeout(1800, TimeUnit.MILLISECONDS)
                 .dispatcher(dispatcher).build());
 
         assertEquals(5000, ConstructorIO.getHttpClient().readTimeoutMillis());
         assertEquals(5000, ConstructorIO.getHttpClient().writeTimeoutMillis());
         assertEquals(5000, ConstructorIO.getHttpClient().connectTimeoutMillis());
+        assertEquals(1800, ConstructorIO.getHttpClient().callTimeoutMillis());
         assertEquals(20, ConstructorIO.getHttpClient().dispatcher().getMaxRequests());
         assertEquals(2, ConstructorIO.getHttpClient().dispatcher().getMaxRequestsPerHost());
         assertEquals(1, ConstructorIO.getHttpClient().interceptors().size());
@@ -59,6 +62,7 @@ public class ConstructorIOHttpClientConfigTest {
         assertEquals(30000, ConstructorIO.getHttpClient().readTimeoutMillis());
         assertEquals(30000, ConstructorIO.getHttpClient().writeTimeoutMillis());
         assertEquals(10000, ConstructorIO.getHttpClient().connectTimeoutMillis());
+        assertEquals(0, ConstructorIO.getHttpClient().callTimeoutMillis());
         assertEquals(64, ConstructorIO.getHttpClient().dispatcher().getMaxRequests());
         assertEquals(5, ConstructorIO.getHttpClient().dispatcher().getMaxRequestsPerHost());
 
@@ -68,11 +72,13 @@ public class ConstructorIOHttpClientConfigTest {
         config.setDispatcherMaxRequestsPerHost(20);
         config.setReadTimeout(100);
         config.setWriteTimeout(100);
+        config.setCallTimeout(1800);
         ConstructorIO.setHttpClientConfig(config);
 
         assertEquals(100, ConstructorIO.getHttpClient().readTimeoutMillis());
         assertEquals(100, ConstructorIO.getHttpClient().writeTimeoutMillis());
         assertEquals(500, ConstructorIO.getHttpClient().connectTimeoutMillis());
+        assertEquals(1800, ConstructorIO.getHttpClient().callTimeoutMillis());
         assertEquals(30, ConstructorIO.getHttpClient().dispatcher().getMaxRequests());
         assertEquals(20, ConstructorIO.getHttpClient().dispatcher().getMaxRequestsPerHost());
     }
@@ -82,6 +88,7 @@ public class ConstructorIOHttpClientConfigTest {
         assertEquals(30000, ConstructorIO.getHttpClient().readTimeoutMillis());
         assertEquals(30000, ConstructorIO.getHttpClient().writeTimeoutMillis());
         assertEquals(10000, ConstructorIO.getHttpClient().connectTimeoutMillis());
+        assertEquals(0, ConstructorIO.getHttpClient().callTimeoutMillis());
         assertEquals(64, ConstructorIO.getHttpClient().dispatcher().getMaxRequests());
         assertEquals(5, ConstructorIO.getHttpClient().dispatcher().getMaxRequestsPerHost());
 
@@ -91,6 +98,7 @@ public class ConstructorIOHttpClientConfigTest {
         assertEquals(30000, config.getReadTimeout());
         assertEquals(30000, config.getWriteTimeout());
         assertEquals(10000, config.getConnectTimeout());
+        assertEquals(0, config.getCallTimeout());
         assertEquals(300000, config.getConnectionPoolKeepAliveDuration());
         assertEquals(5, config.getConnectionPoolMaxIdleConnections());
         ConstructorIO.setHttpClientConfig(config);
@@ -98,6 +106,7 @@ public class ConstructorIOHttpClientConfigTest {
         assertEquals(30000, ConstructorIO.getHttpClient().readTimeoutMillis());
         assertEquals(30000, ConstructorIO.getHttpClient().writeTimeoutMillis());
         assertEquals(10000, ConstructorIO.getHttpClient().connectTimeoutMillis());
+        assertEquals(0, ConstructorIO.getHttpClient().callTimeoutMillis());
         assertEquals(64, ConstructorIO.getHttpClient().dispatcher().getMaxRequests());
         assertEquals(5, ConstructorIO.getHttpClient().dispatcher().getMaxRequestsPerHost());
     }

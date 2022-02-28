@@ -92,6 +92,7 @@ public class ConstructorIO {
 
         builder.readTimeout(config.getReadTimeout(), TimeUnit.MILLISECONDS);
         builder.writeTimeout(config.getWriteTimeout(), TimeUnit.MILLISECONDS);
+        builder.callTimeout(config.getCallTimeout(), TimeUnit.MILLISECONDS);
         builder.connectTimeout(config.getConnectTimeout(), TimeUnit.MILLISECONDS);
 
         ConnectionPool pool = new ConnectionPool(config.getConnectionPoolMaxIdleConnections(), config.getConnectionPoolKeepAliveDuration(), TimeUnit.MILLISECONDS);

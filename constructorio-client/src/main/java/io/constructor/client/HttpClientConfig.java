@@ -8,11 +8,13 @@ public class HttpClientConfig {
     private int connectionPoolKeepAliveDuration;
     private int dispatcherMaxRequests;
     private int dispatcherMaxRequestsPerHost;
+    private int callTimeout;
 
     HttpClientConfig() {
         this.readTimeout = 30000;
         this.writeTimeout = 30000;
         this.connectTimeout = 10000;
+        this.callTimeout = 0;
         this.connectionPoolMaxIdleConnections = 5;
         this.connectionPoolKeepAliveDuration = 300000;
         this.dispatcherMaxRequests = 64;
@@ -59,6 +61,20 @@ public class HttpClientConfig {
      */
     public void setConnectTimeout(int connectTimeout) {
         this.connectTimeout = connectTimeout;
+    }
+
+    /**
+     * @return the call timeout in milliseconds
+     */
+    public int getCallTimeout() {
+        return callTimeout;
+    }
+
+    /**
+     * @param callTimeout the call timeout for complete calls in milliseconds
+     */
+    public void setCallTimeout(int callTimeout) {
+        this.callTimeout = callTimeout;
     }
 
     /**

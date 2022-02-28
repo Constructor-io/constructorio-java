@@ -88,7 +88,7 @@ public class OkHttpUrlBuilderUtils {
           encodedCharBuffer = new Buffer();
         }
 
-        if (charset == null || charset.equals(Util.UTF_8)) {
+        if (charset == null || charset.equals(Charset.forName("UTF-8"))) {
           encodedCharBuffer.writeUtf8CodePoint(codePoint);
         } else {
           encodedCharBuffer.writeString(input, i, i + Character.charCount(codePoint), charset);

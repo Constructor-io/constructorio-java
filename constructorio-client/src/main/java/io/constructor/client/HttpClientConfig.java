@@ -10,7 +10,7 @@ public class HttpClientConfig {
     private int dispatcherMaxRequestsPerHost;
     private int callTimeout;
 
-    HttpClientConfig() {
+    public HttpClientConfig() {
         this.readTimeout = 30000;
         this.writeTimeout = 30000;
         this.connectTimeout = 10000;

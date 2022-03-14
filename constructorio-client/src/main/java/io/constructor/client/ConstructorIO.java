@@ -1189,7 +1189,7 @@ public class ConstructorIO {
      * @return version number
      */
     protected String getVersion() {
-      return "ciojava-5.15.3";
+      return "ciojava-5.15.5";
     }
 
     /**
@@ -1410,6 +1410,63 @@ public class ConstructorIO {
                 .url(url)
                 .patch(requestBody)
                 .build();
+
+            Response response = client.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            String errorMessage = exception.getMessage();
+
+            if (errorMessage == "Multipart body must have at least one part.") {
+                throw new ConstructorException("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
+            } else {
+                throw new ConstructorException(exception);
+            }
+        }
+    }
+
+    /**
+     * Send a patch delta catalog to update specific items (delta)
+     *
+     * @param req the catalog request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String patchCatalog(CatalogRequest req) throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v1","catalog"));
+            HttpUrl.Builder urlBuilder = url.newBuilder()
+                    .addQueryParameter("section", req.getSection());
+            MultipartBody.Builder multipartBuilder = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM);
+            String notificationEmail = req.getNotificationEmail();
+            Boolean force = req.getForce();
+            Map<String, File> files = req.getFiles();
+
+            if (notificationEmail != null) {
+                urlBuilder.addQueryParameter("notification_email", notificationEmail);
+            }
+            if (force != null) {
+                urlBuilder.addQueryParameter("force", Boolean.toString(force));
+            }
+
+            urlBuilder.addQueryParameter("patch_delta", Boolean.toString(true));
+
+            url = urlBuilder.build();
+
+            if (files != null) {
+                for (Map.Entry<String,File> entry : files.entrySet()) {
+                    String fileName = entry.getKey();
+                    File file = entry.getValue();
+
+                    multipartBuilder.addFormDataPart(fileName, fileName + ".csv", RequestBody.create(MediaType.parse("application/octet-stream"), file));
+                }
+            }
+
+            RequestBody requestBody = multipartBuilder.build();
+            Request request = this.makeAuthorizedRequestBuilder()
+                    .url(url)
+                    .patch(requestBody)
+                    .build();
 
             Response response = client.newCall(request).execute();
             return getResponseBody(response);

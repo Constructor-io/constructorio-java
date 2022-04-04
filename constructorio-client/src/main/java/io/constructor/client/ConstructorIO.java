@@ -465,7 +465,7 @@ public class ConstructorIO {
 
             for (String hiddenField : req.getHiddenFields()) {
                 url = url.newBuilder()
-                    .addQueryParameter("hidden_fields", hiddenField)
+                    .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
                     .build();
             }
             

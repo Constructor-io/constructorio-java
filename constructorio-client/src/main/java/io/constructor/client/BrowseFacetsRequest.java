@@ -13,6 +13,7 @@ public class BrowseFacetsRequest {
     private int page;
     private int resultsPerPage;
     private Map<String, String>formatOptions;
+
     /**
      * Creates a browse facets request
      *

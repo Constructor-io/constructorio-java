@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * Constructor.io Browse Facet Response ... uses Gson/Reflection to load data in
  */
 public class BrowseFacetsResponse {
+
     @SerializedName("result_id")
     private String resultId;
 

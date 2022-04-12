@@ -13,17 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.gson.Gson;
 
+import io.constructor.client.models.*;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import io.constructor.client.models.AutocompleteResponse;
-import io.constructor.client.models.BrowseResponse;
-import io.constructor.client.models.SearchResponse;
-import io.constructor.client.models.RecommendationsResponse;
-import io.constructor.client.models.ServerError;
-import io.constructor.client.models.AllTasksResponse;
-import io.constructor.client.models.Task;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -558,6 +552,8 @@ public class ConstructorIO {
                 .get()
                 .build();
 
+
+            System.out.println(url);
             return request;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -946,6 +942,148 @@ public class ConstructorIO {
     }
 
     /**
+     * Creates a browse facets OkHttp request
+     *
+     * @param req the browse facets request
+     * @return a browse OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createBrowseFacetsRequest(BrowseFacetsRequest req) throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList("browse", "facets");
+            HttpUrl url = this.makeUrl(paths);
+            url = url.newBuilder()
+                    .addQueryParameter("page", String.valueOf(req.getPage()))
+                    .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                    .build();
+
+            for (String formatOptionKey : req.getFormatOptions().keySet()) {
+                String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
+                url = url.newBuilder()
+                        .addQueryParameter("fmt_options[" + formatOptionKey + "]", formatOptionValue)
+                        .build();
+            }
+
+            Request request = this.makeAuthorizedRequestBuilder()
+                    .url(url)
+                    .get()
+                    .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the browse facets service
+     *
+     *
+     * @param req the browse facets request
+     * @return a browse facets response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public BrowseFacetsResponse browseFacets(BrowseFacetsRequest req) throws ConstructorException {
+        try {
+            Request request = createBrowseFacetsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createBrowseFacetsResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the browse facets service
+     *
+     *
+     * @param req the browse facets request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String browseFacetsAsJSON(BrowseFacetsRequest req) throws ConstructorException {
+        try {
+            Request request = createBrowseFacetsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Creates a browse facets OkHttp request
+     *
+     * @param req the browse facets request
+     * @return a browse OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createBrowseFacetOptionsRequest (BrowseFacetOptionsRequest req) throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList("browse", "facet_options");
+            HttpUrl url = this.makeUrl(paths);
+            url = url.newBuilder()
+                    .addQueryParameter("facet_name", String.valueOf(req.getFacetName()))
+                    .build();
+
+            for (String formatOptionKey : req.getFormatOptions().keySet()) {
+                String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
+                url = url.newBuilder()
+                        .addQueryParameter("fmt_options[" + formatOptionKey + "]", formatOptionValue)
+                        .build();
+            }
+
+            Request request = this.makeAuthorizedRequestBuilder()
+                    .url(url)
+                    .get()
+                    .build();
+
+            System.out.println(url);
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the browse facet options service
+     *
+     *
+     * @param req the browse facet options request
+     * @return a browse facet options response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public BrowseFacetOptionsResponse browseFacetOptions(BrowseFacetOptionsRequest req) throws ConstructorException {
+        try {
+            Request request = createBrowseFacetOptionsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createBrowseFacetOptionsResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the browse facet options service
+     *
+     *
+     * @param req the browse facet options request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String browseFacetOptionsAsJSON(BrowseFacetOptionsRequest req) throws ConstructorException {
+        try {
+            Request request = createBrowseFacetOptionsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
      * Queries the search service with natural language processing.
      *
      * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
@@ -1241,6 +1379,28 @@ public class ConstructorIO {
       String transformed = json.toString();
       return new Gson().fromJson(transformed, BrowseResponse.class);
   }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an browse facets response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static BrowseFacetsResponse createBrowseFacetsResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, BrowseFacetsResponse.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an browse facets response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static BrowseFacetOptionsResponse createBrowseFacetOptionsResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, BrowseFacetOptionsResponse.class);
+    }
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations response.

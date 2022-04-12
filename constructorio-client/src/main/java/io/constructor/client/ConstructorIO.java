@@ -13,11 +13,19 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.gson.Gson;
 
-import io.constructor.client.models.*;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import io.constructor.client.models.AutocompleteResponse;
+import io.constructor.client.models.BrowseResponse;
+import io.constructor.client.models.SearchResponse;
+import io.constructor.client.models.RecommendationsResponse;
+import io.constructor.client.models.ServerError;
+import io.constructor.client.models.AllTasksResponse;
+import io.constructor.client.models.Task;
+import io.constructor.client.models.BrowseFacetOptionsResponse;
+import io.constructor.client.models.BrowseFacetsResponse;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -552,8 +560,6 @@ public class ConstructorIO {
                 .get()
                 .build();
 
-
-            System.out.println(url);
             return request;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -1039,7 +1045,6 @@ public class ConstructorIO {
                     .get()
                     .build();
 
-            System.out.println(url);
             return request;
         } catch (Exception exception) {
             throw new ConstructorException(exception);

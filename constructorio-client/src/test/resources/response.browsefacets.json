@@ -1,0 +1,124 @@
+{
+  "response": {
+    "facets": [
+      {
+        "display_name": "articleNumberManufacturer",
+        "name": "articleNumberManufacturer",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "articleNumberMax",
+        "name": "articleNumberMax",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "baseId",
+        "name": "baseId",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "Color",
+        "name": "Color",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "color",
+        "name": "color",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "colorFreeDefinition",
+        "name": "colorFreeDefinition",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "commonSize",
+        "name": "commonSize",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "designer",
+        "name": "designer",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "flavor",
+        "name": "flavor",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "gender",
+        "name": "gender",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "madeInItaly",
+        "name": "madeInItaly",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "matrixId",
+        "name": "matrixId",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "season",
+        "name": "season",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "size",
+        "name": "size",
+        "type": "multiple",
+        "data": {}
+      },
+      {
+        "display_name": "style",
+        "name": "style",
+        "type": "multiple",
+        "data": {}
+      }
+    ],
+    "total_num_results": 15
+  },
+  "result_id": "d3fe21ab-41eb-4f57-9e24-92cfaf5c89f1",
+  "request": {
+    "page": 1,
+    "num_results_per_page": 20,
+    "term": "",
+    "fmt_options": {
+      "groups_start": "current",
+      "groups_max_depth": 1
+    },
+    "sort_by": "relevance",
+    "sort_order": "descending",
+    "section": "Products",
+    "features": {
+      "query_items": true,
+      "auto_generated_refined_query_rules": true,
+      "manual_searchandizing": true,
+      "personalization": true,
+      "filter_items": true
+    },
+    "feature_variants": {
+      "query_items": null,
+      "auto_generated_refined_query_rules": null,
+      "manual_searchandizing": null,
+      "personalization": null,
+      "filter_items": null
+    }
+  }
+}

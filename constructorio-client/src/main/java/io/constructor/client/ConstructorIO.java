@@ -205,96 +205,6 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds an item to your autocomplete.
-     *
-     * @param item the item that you're adding.
-     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
-     * @return true if working
-     * @throws ConstructorException if the request is invalid.
-     */
-    public boolean addItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
-        try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
-            Map<String, Object> data = item.toMap();
-            data.put("autocomplete_section", autocompleteSection);
-            String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .post(body)
-                .build();
-
-            Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
-    }
-
-    /**
-     * Adds an item to your autocomplete or updates it if it already exists.
-     *
-     * @param item the item that you're adding.
-     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
-     * @return true if working
-     * @throws ConstructorException if the request is invalid.
-     */
-    public boolean addOrUpdateItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
-        try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
-            url = url.newBuilder().addQueryParameter("force", "1").build();
-            Map<String, Object> data = item.toMap();
-            data.put("autocomplete_section", autocompleteSection);
-            String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .put(body)
-                .build();
-
-            Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
-    }
-
-    /**
-     * Adds multiple items to your autocomplete (limit of 1000 items)
-     *
-     * @param items the items you want to add.
-     * @param autocompleteSection the section of the autocomplete that you're adding the items to.
-     * @return true if working
-     * @throws ConstructorException if the request is invalid.
-     */
-    public boolean addItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
-        try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
-            Map<String, Object> data = new HashMap<String, Object>();
-            List<Object> itemsAsJSON = new ArrayList<Object>();
-            for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toMap());
-            }
-            data.put("items", itemsAsJSON);
-            data.put("autocomplete_section", autocompleteSection);
-            String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .post(body)
-                .build();
-
-            Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
-    }
-
-    /**
      * Adds multiple items to your autocomplete whilst updating existing ones (limit of 1000 items)
      *
      * @param items the items you want to add.
@@ -302,9 +212,11 @@ public class ConstructorIO {
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
+    // TODO: Update this
+    // I am thinking about renaming this to addOrUpdateItems
     public boolean addOrUpdateItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
             url = url.newBuilder().addQueryParameter("force", "1").build();
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
@@ -312,7 +224,7 @@ public class ConstructorIO {
                 itemsAsJSON.add(item.toMap());
             }
             data.put("items", itemsAsJSON);
-            data.put("autocomplete_section", autocompleteSection);
+            data.put("section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
@@ -336,12 +248,13 @@ public class ConstructorIO {
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid.
      */
+    // TODO: Get rid of this - Discuss with Steve
     public boolean removeItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
             Map<String, Object> data = new HashMap<String, Object>();
-            data.put("item_name", item.getItemName());
-            data.put("autocomplete_section", autocompleteSection);
+            data.put("id", item.getId());
+            data.put("section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
@@ -365,6 +278,8 @@ public class ConstructorIO {
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
+    // TODO: Keep this
+    // Rename to removeItems?
     public boolean removeItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
@@ -374,7 +289,7 @@ public class ConstructorIO {
                 itemsAsJSON.add(item.toMap());
             }
             data.put("items", itemsAsJSON);
-            data.put("autocomplete_section", autocompleteSection);
+            data.put("section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
@@ -399,12 +314,13 @@ public class ConstructorIO {
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
+    // TODO: Update this
     public boolean modifyItem(ConstructorItem item, String autocompleteSection, String previousItemName) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
             Map<String, Object> data = item.toMap();
-            data.put("new_item_name", item.getItemName());
-            data.put("autocomplete_section", autocompleteSection);
+            data.put("new_item_name", item.getName());
+            data.put("section", autocompleteSection);
             data.put("item_name", previousItemName);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);

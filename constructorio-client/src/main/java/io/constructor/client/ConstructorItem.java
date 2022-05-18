@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class ConstructorItem {
 
-    private String itemName;
+    private String name;
     private Integer suggestedScore;
     private List<String> keywords;
     private String url;
@@ -23,14 +23,14 @@ public class ConstructorItem {
     /**
      * Creates an autocomplete item.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
      *
-     * @param itemName the name of the item that you are adding.
+     * @param name the name of the item that you are adding.
      */
-    public ConstructorItem(String itemName) throws IllegalArgumentException {
-        if (itemName == null) {
-            throw new IllegalArgumentException("itemName is required");
+    public ConstructorItem(String name) throws IllegalArgumentException {
+        if (name == null) {
+            throw new IllegalArgumentException("name is required");
         }
 
-        this.itemName = itemName;
+        this.name = name;
         this.suggestedScore = null;
         this.keywords = null;
         this.url = null;
@@ -46,38 +46,42 @@ public class ConstructorItem {
      * Returns the HashMap form of an autocomplete item for converting to JSON
      */
     public Map<String, Object> toMap() {
+        Map<String, Object> dataMap = new HashMap<String, Object>(this.metadata);
         Map<String, Object> params = new HashMap<String, Object>();
 
-        if (itemName == null) {
-            throw new IllegalArgumentException("itemName is required");
+        if (name == null) {
+            throw new IllegalArgumentException("name is required");
         }
 
-        params.put("item_name", this.itemName);
-        params.put("suggested_score", this.suggestedScore);
-        params.put("keywords", this.keywords);
-        params.put("url", this.url);
-        params.put("image_url", this.imageUrl);
-        params.put("description", this.description);
+        if (id == null) {
+            throw new IllegalArgumentException("id is required");
+        }
+
         params.put("id", this.id);
-        params.put("facets", this.facets);
-        params.put("metadata", this.metadata);
-        params.put("group_ids", this.groupIds);
+        params.put("name", this.name);
+        params.put("suggested_score", this.suggestedScore);
+        dataMap.put("keywords", this.keywords);
+        dataMap.put("url", this.url);
+        dataMap.put("image_url", this.imageUrl);
+        dataMap.put("facets", this.facets);
+        dataMap.put("group_ids", this.groupIds);
+        dataMap.put("description", this.description);
        
         return params;
     }
 
     /**
-     * @return the itemName
+     * @return the name
      */
-    public String getItemName() {
-        return itemName;
+    public String getName() {
+        return name;
     }
  
     /**
-     * @param itemName the itemName to set
+     * @param name the name to set
      */
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setName(String name) {
+        this.name = name;
     }
     
     /**

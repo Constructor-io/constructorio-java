@@ -27,7 +27,8 @@ public class Utils {
     public static ConstructorItem createProductItem() {
         String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
         String url = "https://constructor.io/products/" + name;
-        ConstructorItem item = new ConstructorItem(name);
+        // Use the name as the ID
+        ConstructorItem item = new ConstructorItem(name, name);
         item.setUrl(url);
         return item;
     }

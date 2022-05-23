@@ -205,16 +205,14 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds multiple items to your autocomplete whilst updating existing ones (limit of 1000 items)
+     * Adds multiple items to your index whilst updating existing ones (limit of 1000 items)
      *
      * @param items the items you want to add.
      * @param autocompleteSection the section of the autocomplete that you're adding the items to.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    // TODO: Update this
-    // I am thinking about renaming this to addOrUpdateItems
-    public boolean addOrUpdateItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
+    public boolean addOrUpdateItems(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
             url = url.newBuilder().addQueryParameter("force", "1").build();
@@ -224,7 +222,7 @@ public class ConstructorIO {
                 itemsAsJSON.add(item.toMap());
             }
             data.put("items", itemsAsJSON);
-            data.put("section", autocompleteSection);
+            // data.put("section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
@@ -241,46 +239,14 @@ public class ConstructorIO {
     }
 
     /**
-     * Removes an item from your autocomplete.
-     *
-     * @param item the item that you're removing.
-     * @param autocompleteSection the section of the autocomplete that you're removing the item from.
-     * @return true if successfully removed
-     * @throws ConstructorException if the request is invalid.
-     */
-    // TODO: Get rid of this - Discuss with Steve
-    public boolean removeItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
-        try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
-            Map<String, Object> data = new HashMap<String, Object>();
-            data.put("id", item.getId());
-            data.put("section", autocompleteSection);
-            String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .delete(body)
-                .build();
-
-            Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
-    }
-
-    /**
-     * Removes multiple items from your autocomplete (limit of 1000 items)
+     * Removes multiple items from your index (limit of 1000 items)
      *
      * @param items the items that you are removing
      * @param autocompleteSection the section of the autocomplete that you're removing the items from.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    // TODO: Keep this
-    // Rename to removeItems?
-    public boolean removeItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
+    public boolean removeItems(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
             Map<String, Object> data = new HashMap<String, Object>();
@@ -306,7 +272,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Modifies an item from your autocomplete.
+     * Modifies items from your index.
      *
      * @param item the item that you're modifying.
      * @param autocompleteSection the section of the autocomplete that you're modifying the item for.
@@ -314,19 +280,21 @@ public class ConstructorIO {
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    // TODO: Update this
-    public boolean modifyItem(ConstructorItem item, String autocompleteSection, String previousItemName) throws ConstructorException {
+    public boolean modifyItems(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
-            Map<String, Object> data = item.toMap();
-            data.put("new_item_name", item.getName());
-            data.put("section", autocompleteSection);
-            data.put("item_name", previousItemName);
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> itemsAsJSON = new ArrayList<Object>();
+            for (ConstructorItem item : items) {
+                itemsAsJSON.add(item.toMap());
+            }
+            data.put("items", itemsAsJSON);
+            // data.put("section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
                 .url(url)
-                .put(body)
+                .patch(body)
                 .build();
 
             Response response = client.newCall(request).execute();

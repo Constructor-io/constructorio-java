@@ -10,7 +10,7 @@ import java.util.Map;
 public class ConstructorItem {
 
     private String name;
-    private Integer suggestedScore;
+    private Float suggestedScore;
     private List<String> keywords;
     private String url;
     private String imageUrl;
@@ -25,18 +25,22 @@ public class ConstructorItem {
      *
      * @param name the name of the item that you are adding.
      */
-    public ConstructorItem(String name) throws IllegalArgumentException {
+    public ConstructorItem(String name, String id) throws IllegalArgumentException {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
 
+        if (id == null) {
+            throw new IllegalArgumentException("id is required");
+        }
+
         this.name = name;
+        this.id = id;
         this.suggestedScore = null;
         this.keywords = null;
         this.url = null;
         this.imageUrl = null;
         this.description = null;
-        this.id = null;
         this.facets = null;
         this.metadata = null;
         this.groupIds = null;
@@ -46,7 +50,12 @@ public class ConstructorItem {
      * Returns the HashMap form of an autocomplete item for converting to JSON
      */
     public Map<String, Object> toMap() {
-        Map<String, Object> dataMap = new HashMap<String, Object>(this.metadata);
+        Map<String, Object> dataMap = new HashMap<String, Object>();
+        
+        if (this.metadata != null) {
+            dataMap.putAll(this.metadata);
+        }
+
         Map<String, Object> params = new HashMap<String, Object>();
 
         if (name == null) {
@@ -87,14 +96,14 @@ public class ConstructorItem {
     /**
      * @return the suggestedScore
      */
-    public Integer getSuggestedScore() {
+    public Float getSuggestedScore() {
         return suggestedScore;
     }
 
     /**
      * @param suggestedScore the suggestedScore to set
      */
-    public void setSuggestedScore(Integer suggestedScore) {
+    public void setSuggestedScore(Float suggestedScore) {
         this.suggestedScore = suggestedScore;
     }
 

@@ -209,14 +209,18 @@ public class ConstructorIO {
      *
      * @param items the items you want to add.
      * @param section the section of the autocomplete that you're adding the items to.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateItems(ConstructorItem[] items, String section) throws ConstructorException {
+    public boolean addOrUpdateItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
-            // TODO: Check force
-            url = url.newBuilder().addQueryParameter("force", "1").addQueryParameter("section", section).build();
+            url = url
+                .newBuilder()
+                .addQueryParameter("force", force.toString())
+                .addQueryParameter("section", section)
+                .build();
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -236,6 +240,14 @@ public class ConstructorIO {
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
+    }
+
+    public boolean addOrUpdateItems(ConstructorItem[] items) throws ConstructorException {
+        return addOrUpdateItems(items, "Products", false);
+    }
+
+    public boolean addOrUpdateItems(ConstructorItem[] items, String section) throws ConstructorException {
+        return addOrUpdateItems(items, section, false);
     }
 
     /**
@@ -276,15 +288,18 @@ public class ConstructorIO {
      *
      * @param item the item that you're modifying.
      * @param section the section of the autocomplete that you're modifying the item for.
-     * @param previousItemName the previous name of the item.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modifyItems(ConstructorItem[] items, String section) throws ConstructorException {
+    public boolean modifyItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
-            // TODO: Add force option
-            url = url.newBuilder().addQueryParameter("section", section).build();
+            url = url
+                .newBuilder()
+                .addQueryParameter("force", force.toString())
+                .addQueryParameter("section", section)
+                .build();
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -304,6 +319,14 @@ public class ConstructorIO {
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
+    }
+
+    public boolean modifyItems(ConstructorItem[] items) throws ConstructorException {
+        return modifyItems(items, "Products", false);
+    }
+
+    public boolean modifyItems(ConstructorItem[] items, String section) throws ConstructorException {
+        return modifyItems(items, section, false);
     }
 
     /**

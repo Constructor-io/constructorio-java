@@ -34,6 +34,18 @@ public class Utils {
     }
 
     /**
+     * @return a ConstructorVariation
+     */
+    public static ConstructorVariation createProductVariation(String itemId) {
+        String name = "Variation" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+        String url = "https://constructor.io/variations/" + name;
+        // Use the name as the ID
+        ConstructorVariation variation = new ConstructorVariation(name, name, itemId);
+        variation.setUrl(url);
+        return variation;
+    }
+
+    /**
      * @param statusCode the http status code
      * @param bodyText the body
      * @return an HTTP response

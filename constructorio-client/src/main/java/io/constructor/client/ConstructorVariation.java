@@ -73,7 +73,7 @@ public class ConstructorVariation {
         }
 
         params.put("id", this.id);
-        params.put("itemId", this.itemId);
+        params.put("item_id", this.itemId);
         params.put("name", this.name);
         params.put("suggested_score", this.suggestedScore);
         dataMap.put("keywords", this.keywords);

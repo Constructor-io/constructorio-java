@@ -28,9 +28,7 @@ public class ConstructorIOItemsTest {
     @Test
     public void modifyItemsShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-        // TODO: Clean this up
-        ConstructorItem[] itemsOld = new ConstructorItem[1];
-        itemsOld[0] = Utils.createProductItem();
+        ConstructorItem[] itemsOld = { Utils.createProductItem() };
         constructor.addOrUpdateItems(itemsOld, "Products");
         Thread.sleep(2000);
 
@@ -38,8 +36,7 @@ public class ConstructorIOItemsTest {
         ConstructorItem itemNew = new ConstructorItem(itemOld.getName(), itemOld.getName());
         itemNew.setUrl(itemOld.getUrl());
         itemNew.setSuggestedScore((float) 1337.00);
-        ConstructorItem[] itemsNew = new ConstructorItem[1];
-        itemsNew[0] = itemNew;
+        ConstructorItem[] itemsNew = { itemNew };
         assertTrue("modify succeeds", constructor.modifyItems(itemsNew, "Products"));
     }
 

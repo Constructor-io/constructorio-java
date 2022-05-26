@@ -205,7 +205,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds multiple items to your index whilst updating existing ones (limit of 1000 items)
+     * Adds multiple items to your index whilst updating existing ones (limit of 1,000 items)
      *
      * @param items the items you want to add.
      * @param section the section of the autocomplete that you're adding the items to.
@@ -251,7 +251,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Removes multiple items from your index (limit of 1000 items)
+     * Removes multiple items from your index (limit of 1,000 items)
      *
      * @param items the items that you are removing
      * @param section the section of the autocomplete that you're removing the items from.
@@ -376,7 +376,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds multiple variation to your index whilst updating existing ones (limit of 1000 items)
+     * Adds multiple variation to your index whilst updating existing ones (limit of 1,000 items)
      *
      * @param variations the items you want to add.
      * @param section the section of the autocomplete that you're adding the items to.

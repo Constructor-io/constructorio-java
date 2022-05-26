@@ -286,7 +286,7 @@ public class ConstructorIO {
     /**
      * Modifies items from your index.
      *
-     * @param item the item that you're modifying.
+     * @param items the items that you're modifying.
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @return true if successfully modified
@@ -327,6 +327,98 @@ public class ConstructorIO {
 
     public boolean modifyItems(ConstructorItem[] items, String section) throws ConstructorException {
         return modifyItems(items, section, false);
+    }
+
+    /**
+     * Modifies items from your index.
+     *
+     * @param variations the variations that you're modifying.
+     * @param section the section of the autocomplete that you're modifying the item for.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @return true if successfully modified
+     * @throws ConstructorException if the request is invalid.
+     */
+    public boolean modifyVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
+            url = url
+                .newBuilder()
+                .addQueryParameter("force", force.toString())
+                .addQueryParameter("section", section)
+                .build();
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> variationsAsJSON = new ArrayList<Object>();
+            for (ConstructorVariation variation : variations) {
+                variationsAsJSON.add(variation.toMap());
+            }
+            data.put("variations", variationsAsJSON);
+            String params = new Gson().toJson(data);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .patch(body)
+                .build();
+
+            Response response = client.newCall(request).execute();
+            getResponseBody(response);
+            return true;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    public boolean modifyVariations(ConstructorVariation[] variations) throws ConstructorException {
+        return modifyVariations(variations, "Products", false);
+    }
+
+    public boolean modifyVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+        return modifyVariations(variations, section, false);
+    }
+
+    /**
+     * Adds multiple variation to your index whilst updating existing ones (limit of 1000 items)
+     *
+     * @param variations the items you want to add.
+     * @param section the section of the autocomplete that you're adding the items to.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @return true if working
+     * @throws ConstructorException if the request is invalid.
+     */
+    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
+            url = url
+                .newBuilder()
+                .addQueryParameter("force", force.toString())
+                .addQueryParameter("section", section)
+                .build();
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> variationsAsJSON = new ArrayList<Object>();
+            for (ConstructorVariation variation : variations) {
+                variationsAsJSON.add(variation.toMap());
+            }
+            data.put("variations", variationsAsJSON);
+            String params = new Gson().toJson(data);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .put(body)
+                .build();
+
+            Response response = client.newCall(request).execute();
+            getResponseBody(response);
+            return true;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    public boolean addOrUpdateVariations(ConstructorVariation[] variations) throws ConstructorException {
+        return addOrUpdateVariations(variations, "Products", false);
+    }
+
+    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+        return addOrUpdateVariations(variations, section, false);
     }
 
     /**

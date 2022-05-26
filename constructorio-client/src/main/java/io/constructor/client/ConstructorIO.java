@@ -208,21 +208,21 @@ public class ConstructorIO {
      * Adds multiple items to your index whilst updating existing ones (limit of 1000 items)
      *
      * @param items the items you want to add.
-     * @param autocompleteSection the section of the autocomplete that you're adding the items to.
+     * @param section the section of the autocomplete that you're adding the items to.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateItems(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
+    public boolean addOrUpdateItems(ConstructorItem[] items, String section) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
-            url = url.newBuilder().addQueryParameter("force", "1").build();
+            // TODO: Check force
+            url = url.newBuilder().addQueryParameter("force", "1").addQueryParameter("section", section).build();
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
                 itemsAsJSON.add(item.toMap());
             }
             data.put("items", itemsAsJSON);
-            // data.put("section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
@@ -242,11 +242,11 @@ public class ConstructorIO {
      * Removes multiple items from your index (limit of 1000 items)
      *
      * @param items the items that you are removing
-     * @param autocompleteSection the section of the autocomplete that you're removing the items from.
+     * @param section the section of the autocomplete that you're removing the items from.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    public boolean removeItems(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
+    public boolean removeItems(ConstructorItem[] items, String section) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
             Map<String, Object> data = new HashMap<String, Object>();
@@ -255,7 +255,7 @@ public class ConstructorIO {
                 itemsAsJSON.add(item.toMap());
             }
             data.put("items", itemsAsJSON);
-            data.put("section", autocompleteSection);
+            data.put("section", section);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
@@ -275,21 +275,22 @@ public class ConstructorIO {
      * Modifies items from your index.
      *
      * @param item the item that you're modifying.
-     * @param autocompleteSection the section of the autocomplete that you're modifying the item for.
+     * @param section the section of the autocomplete that you're modifying the item for.
      * @param previousItemName the previous name of the item.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modifyItems(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
+    public boolean modifyItems(ConstructorItem[] items, String section) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
+            // TODO: Add force option
+            url = url.newBuilder().addQueryParameter("section", section).build();
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
                 itemsAsJSON.add(item.toMap());
             }
             data.put("items", itemsAsJSON);
-            // data.put("section", autocompleteSection);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()

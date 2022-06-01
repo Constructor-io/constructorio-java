@@ -22,7 +22,7 @@ public class ConstructorVariation {
     private List<String> groupIds;
 
     /**
-     * Creates an autocomplete item.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
+     * Creates a variation.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
      *
      * @param name the name of the item that you are adding.
      */
@@ -53,7 +53,7 @@ public class ConstructorVariation {
     }
 
     /**
-     * Returns the HashMap form of an autocomplete item for converting to JSON
+     * Returns the HashMap form of a variation for converting to JSON
      */
     public Map<String, Object> toMap() {
         Map<String, Object> dataMap = new HashMap<String, Object>();

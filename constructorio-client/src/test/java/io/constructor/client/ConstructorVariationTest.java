@@ -27,16 +27,18 @@ public class ConstructorVariationTest {
     @Test
     public void newShouldReturnConstructorVariation() throws Exception {
         String variationName = this.getRandomProductName();
+        String variationId = variationName;
         String itemId = this.getRandomProductName();
-        ConstructorVariation variation = new ConstructorVariation(variationName, variationName, itemId);
+        ConstructorVariation variation = new ConstructorVariation(variationId, itemId, variationName);
         assertEquals(variation.getName(), variationName);
     }
 
     @Test
     public void newShouldReturnDefaultProperties() throws Exception {
         String variationName = this.getRandomProductName();
+        String variationId = variationName;
         String itemId = this.getRandomProductName();
-        ConstructorVariation variation = new ConstructorVariation(variationName, variationName, itemId);
+        ConstructorVariation variation = new ConstructorVariation(variationId, itemId, variationName);
         assertEquals(variation.getName(), variationName);
         assertEquals(variation.getSuggestedScore(), null);
         assertEquals(variation.getKeywords(), null);

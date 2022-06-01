@@ -26,9 +26,9 @@ public class Utils {
      */
     public static ConstructorItem createProductItem() {
         String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+        String id = name;
         String url = "https://constructor.io/products/" + name;
-        // Use the name as the ID
-        ConstructorItem item = new ConstructorItem(name, name);
+        ConstructorItem item = new ConstructorItem(id, name);
         item.setUrl(url);
         return item;
     }
@@ -38,9 +38,9 @@ public class Utils {
      */
     public static ConstructorVariation createProductVariation(String itemId) {
         String name = "Variation" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+        String id = name;
         String url = "https://constructor.io/variations/" + name;
-        // Use the name as the ID
-        ConstructorVariation variation = new ConstructorVariation(name, name, itemId);
+        ConstructorVariation variation = new ConstructorVariation(id, itemId, name);
         variation.setUrl(url);
         return variation;
     }

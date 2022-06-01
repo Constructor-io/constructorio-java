@@ -26,11 +26,29 @@ public class ConstructorVariation {
      *
      * @param name the name of the item that you are adding.
      */
-    public ConstructorVariation(String name, String id, String itemId) throws IllegalArgumentException {
-        if (name == null) {
-            throw new IllegalArgumentException("name is required");
+    public ConstructorVariation(String id, String itemId) throws IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException("id is required");
         }
 
+        if (itemId == null) {
+            throw new IllegalArgumentException("itemId is required");
+        }
+
+        this.id = id;
+        this.itemId = itemId;
+        this.name = null;
+        this.suggestedScore = null;
+        this.keywords = null;
+        this.url = null;
+        this.imageUrl = null;
+        this.description = null;
+        this.facets = null;
+        this.metadata = null;
+        this.groupIds = null;
+    }
+
+    public ConstructorVariation(String id, String itemId, String name) throws IllegalArgumentException {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -64,9 +82,6 @@ public class ConstructorVariation {
 
         Map<String, Object> params = new HashMap<String, Object>();
 
-        if (name == null) {
-            throw new IllegalArgumentException("name is required");
-        }
 
         if (id == null) {
             throw new IllegalArgumentException("id is required");

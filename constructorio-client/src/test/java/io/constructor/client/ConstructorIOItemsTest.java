@@ -33,7 +33,7 @@ public class ConstructorIOItemsTest {
         Thread.sleep(2000);
 
         ConstructorItem itemOld = itemsOld[0];
-        ConstructorItem itemNew = new ConstructorItem(itemOld.getName(), itemOld.getName());
+        ConstructorItem itemNew = new ConstructorItem(itemOld.getId());
         itemNew.setUrl(itemOld.getUrl());
         itemNew.setSuggestedScore((float) 1337.00);
         ConstructorItem[] itemsNew = { itemNew };

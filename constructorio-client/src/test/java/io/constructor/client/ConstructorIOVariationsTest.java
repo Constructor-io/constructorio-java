@@ -44,7 +44,7 @@ public class ConstructorIOVariationsTest {
         Thread.sleep(2000);
 
         ConstructorVariation variationOld = variationsOld[0];
-        ConstructorVariation variationNew = new ConstructorVariation(variationOld.getName(), variationOld.getName(), variationOld.getItemId());
+        ConstructorVariation variationNew = new ConstructorVariation(variationOld.getId(), variationOld.getItemId());
         variationNew.setUrl(variationOld.getUrl());
         variationNew.setSuggestedScore((float) 1337.00);
         ConstructorVariation[] variationsNew = { variationNew };

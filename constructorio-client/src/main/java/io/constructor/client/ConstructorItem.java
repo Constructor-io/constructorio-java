@@ -21,21 +21,34 @@ public class ConstructorItem {
     private List<String> groupIds;
 
     /**
-     * Creates an item.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
+     * Creates an item.  Optional public fields are in the <a href="https://docs.constructor.io/rest_api/items/items/">API documentation</a>
      *
      * @param name the name of the item that you are adding.
      */
-    public ConstructorItem(String name, String id) throws IllegalArgumentException {
-        if (name == null) {
-            throw new IllegalArgumentException("name is required");
-        }
-
+    public ConstructorItem(String id) throws IllegalArgumentException {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
 
-        this.name = name;
         this.id = id;
+        this.name = null;
+        this.suggestedScore = null;
+        this.keywords = null;
+        this.url = null;
+        this.imageUrl = null;
+        this.description = null;
+        this.facets = null;
+        this.metadata = null;
+        this.groupIds = null;
+    }
+
+    public ConstructorItem(String id, String name) throws IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException("id is required");
+        }
+
+        this.id = id;
+        this.name = name;
         this.suggestedScore = null;
         this.keywords = null;
         this.url = null;
@@ -57,10 +70,6 @@ public class ConstructorItem {
         }
 
         Map<String, Object> params = new HashMap<String, Object>();
-
-        if (name == null) {
-            throw new IllegalArgumentException("name is required");
-        }
 
         if (id == null) {
             throw new IllegalArgumentException("id is required");

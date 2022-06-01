@@ -19,22 +19,24 @@ public class ConstructorItemTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void newWithNullItemNameShouldFail() throws Exception {
+    public void newWithNullItemNameShouldPass() throws Exception {
         thrown.expect(IllegalArgumentException.class);
-        new ConstructorItem(null, null);
+        new ConstructorItem(null, "Item");
     }
 
     @Test
     public void newShouldReturnConstructorItem() throws Exception {
         String itemName = this.getRandomProductName();
-        ConstructorItem item = new ConstructorItem(itemName, itemName);
+        String itemId = itemName;
+        ConstructorItem item = new ConstructorItem(itemId, itemName);
         assertEquals(item.getName(), itemName);
     }
 
     @Test
     public void newShouldReturnDefaultProperties() throws Exception {
         String itemName = this.getRandomProductName();
-        ConstructorItem item = new ConstructorItem(itemName, itemName);
+        String itemId = itemName;
+        ConstructorItem item = new ConstructorItem(itemId, itemName);
         assertEquals(item.getName(), itemName);
         assertEquals(item.getSuggestedScore(), null);
         assertEquals(item.getKeywords(), null);
@@ -50,7 +52,8 @@ public class ConstructorItemTest {
     @Test
     public void settersShouldSet() throws Exception {
         String itemName = this.getRandomProductName();
-        ConstructorItem item = new ConstructorItem(itemName, itemName);
+        String itemId = itemName;
+        ConstructorItem item = new ConstructorItem(itemId, itemName);
         Float suggestedScore = (float) 100000.00;
         item.setName("airline tickets");
         item.setSuggestedScore(suggestedScore);

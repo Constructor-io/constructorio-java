@@ -19,7 +19,7 @@ public class ConstructorItemTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void newWithNullItemNameShouldPass() throws Exception {
+    public void newWithNullItemIdShouldFail() throws Exception {
         thrown.expect(IllegalArgumentException.class);
         new ConstructorItem(null, "Item");
     }
@@ -44,7 +44,6 @@ public class ConstructorItemTest {
         assertEquals(item.getImageUrl(), null);
         assertEquals(item.getDescription(), null);
         assertEquals(item.getId(), itemName);
-        assertEquals(item.getFacets(), null);
         assertEquals(item.getFacets(), null);
         assertEquals(item.getGroupIds(), null);
     }

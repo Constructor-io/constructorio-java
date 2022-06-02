@@ -19,7 +19,7 @@ public class ConstructorVariationTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void newWithNullvariationNameShouldFail() throws Exception {
+    public void newWithNullVariationNameShouldFail() throws Exception {
         thrown.expect(IllegalArgumentException.class);
         new ConstructorVariation(null, null, null);
     }

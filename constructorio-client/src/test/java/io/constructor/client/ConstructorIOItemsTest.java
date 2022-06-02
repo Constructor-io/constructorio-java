@@ -41,7 +41,7 @@ public class ConstructorIOItemsTest {
     }
 
     @Test
-    public void removeBatchShouldReturnTrue() throws Exception {
+    public void removeItemsShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ConstructorItem[] items = {
         Utils.createProductItem(),

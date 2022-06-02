@@ -330,7 +330,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Modifies items from your index.
+     * Modifies variations from your index.
      *
      * @param variations the variations that you're modifying.
      * @param section the section of the autocomplete that you're modifying the item for.
@@ -376,7 +376,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds multiple variation to your index whilst updating existing ones (limit of 1,000 items)
+     * Adds multiple variations to your index whilst updating existing ones (limit of 1,000 items)
      *
      * @param variations the items you want to add.
      * @param section the section of the autocomplete that you're adding the items to.

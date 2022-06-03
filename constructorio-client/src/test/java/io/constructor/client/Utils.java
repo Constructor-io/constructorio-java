@@ -26,10 +26,23 @@ public class Utils {
      */
     public static ConstructorItem createProductItem() {
         String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+        String id = name;
         String url = "https://constructor.io/products/" + name;
-        ConstructorItem item = new ConstructorItem(name);
+        ConstructorItem item = new ConstructorItem(id, name);
         item.setUrl(url);
         return item;
+    }
+
+    /**
+     * @return a ConstructorVariation
+     */
+    public static ConstructorVariation createProductVariation(String itemId) {
+        String name = "Variation" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+        String id = name;
+        String url = "https://constructor.io/variations/" + name;
+        ConstructorVariation variation = new ConstructorVariation(id, itemId, name);
+        variation.setUrl(url);
+        return variation;
     }
 
     /**

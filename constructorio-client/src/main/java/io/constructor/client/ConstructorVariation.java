@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Constructor.io Item
+ * Constructor.io Variation
  */
-public class ConstructorItem {
+public class ConstructorVariation {
 
     private String name;
     private Float suggestedScore;
@@ -15,22 +15,28 @@ public class ConstructorItem {
     private String url;
     private String imageUrl;
     private String id;
+    private String itemId;
     private String description;
     private Map<String, String> facets;
     private Map<String, String> metadata;
     private List<String> groupIds;
 
     /**
-     * Creates an item.  Optional public fields are in the <a href="https://docs.constructor.io/rest_api/items/items/">API documentation</a>
+     * Creates a variation.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
      *
      * @param name the name of the item that you are adding.
      */
-    public ConstructorItem(String id) throws IllegalArgumentException {
+    public ConstructorVariation(String id, String itemId) throws IllegalArgumentException {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
 
+        if (itemId == null) {
+            throw new IllegalArgumentException("itemId is required");
+        }
+
         this.id = id;
+        this.itemId = itemId;
         this.name = null;
         this.suggestedScore = null;
         this.keywords = null;
@@ -42,13 +48,18 @@ public class ConstructorItem {
         this.groupIds = null;
     }
 
-    public ConstructorItem(String id, String name) throws IllegalArgumentException {
+    public ConstructorVariation(String id, String itemId, String name) throws IllegalArgumentException {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
 
-        this.id = id;
+        if (itemId == null) {
+            throw new IllegalArgumentException("itemId is required");
+        }
+
         this.name = name;
+        this.id = id;
+        this.itemId = itemId;
         this.suggestedScore = null;
         this.keywords = null;
         this.url = null;
@@ -60,7 +71,7 @@ public class ConstructorItem {
     }
 
     /**
-     * Returns the HashMap form of an item for converting to JSON
+     * Returns the HashMap form of a variation for converting to JSON
      */
     public Map<String, Object> toMap() {
         Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -71,11 +82,13 @@ public class ConstructorItem {
 
         Map<String, Object> params = new HashMap<String, Object>();
 
+
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
 
         params.put("id", this.id);
+        params.put("item_id", this.itemId);
         params.put("name", this.name);
         params.put("suggested_score", this.suggestedScore);
         dataMap.put("keywords", this.keywords);
@@ -184,6 +197,20 @@ public class ConstructorItem {
      */
     public void setId(String id) {
         this.id = id;
+    }
+
+    /**
+     * @return the itemId
+     */
+    public String getItemId() {
+        return itemId;
+    }
+
+    /**
+     * @param itemId the itemId to set
+     */
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     /**

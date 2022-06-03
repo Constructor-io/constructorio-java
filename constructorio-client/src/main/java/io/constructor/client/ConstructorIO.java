@@ -205,47 +205,28 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds an item to your autocomplete.
+     * Adds multiple items to your index whilst updating existing ones (limit of 1,000 items)
      *
-     * @param item the item that you're adding.
-     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
+     * @param items the items you want to add.
+     * @param section the section of the autocomplete that you're adding the items to.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
+    public boolean addOrUpdateItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
-            Map<String, Object> data = item.toMap();
-            data.put("autocomplete_section", autocompleteSection);
-            String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .post(body)
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
+            url = url
+                .newBuilder()
+                .addQueryParameter("force", force.toString())
+                .addQueryParameter("section", section)
                 .build();
-
-            Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
-    }
-
-    /**
-     * Adds an item to your autocomplete or updates it if it already exists.
-     *
-     * @param item the item that you're adding.
-     * @param autocompleteSection the section of the autocomplete that you're adding the item to.
-     * @return true if working
-     * @throws ConstructorException if the request is invalid.
-     */
-    public boolean addOrUpdateItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
-        try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
-            url = url.newBuilder().addQueryParameter("force", "1").build();
-            Map<String, Object> data = item.toMap();
-            data.put("autocomplete_section", autocompleteSection);
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> itemsAsJSON = new ArrayList<Object>();
+            for (ConstructorItem item : items) {
+                itemsAsJSON.add(item.toMap());
+            }
+            data.put("items", itemsAsJSON);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
@@ -261,111 +242,23 @@ public class ConstructorIO {
         }
     }
 
-    /**
-     * Adds multiple items to your autocomplete (limit of 1000 items)
-     *
-     * @param items the items you want to add.
-     * @param autocompleteSection the section of the autocomplete that you're adding the items to.
-     * @return true if working
-     * @throws ConstructorException if the request is invalid.
-     */
-    public boolean addItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
-        try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
-            Map<String, Object> data = new HashMap<String, Object>();
-            List<Object> itemsAsJSON = new ArrayList<Object>();
-            for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toMap());
-            }
-            data.put("items", itemsAsJSON);
-            data.put("autocomplete_section", autocompleteSection);
-            String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .post(body)
-                .build();
+    public boolean addOrUpdateItems(ConstructorItem[] items) throws ConstructorException {
+        return addOrUpdateItems(items, "Products", false);
+    }
 
-            Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
+    public boolean addOrUpdateItems(ConstructorItem[] items, String section) throws ConstructorException {
+        return addOrUpdateItems(items, section, false);
     }
 
     /**
-     * Adds multiple items to your autocomplete whilst updating existing ones (limit of 1000 items)
-     *
-     * @param items the items you want to add.
-     * @param autocompleteSection the section of the autocomplete that you're adding the items to.
-     * @return true if working
-     * @throws ConstructorException if the request is invalid.
-     */
-    public boolean addOrUpdateItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
-        try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
-            url = url.newBuilder().addQueryParameter("force", "1").build();
-            Map<String, Object> data = new HashMap<String, Object>();
-            List<Object> itemsAsJSON = new ArrayList<Object>();
-            for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toMap());
-            }
-            data.put("items", itemsAsJSON);
-            data.put("autocomplete_section", autocompleteSection);
-            String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .put(body)
-                .build();
-
-            Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
-    }
-
-    /**
-     * Removes an item from your autocomplete.
-     *
-     * @param item the item that you're removing.
-     * @param autocompleteSection the section of the autocomplete that you're removing the item from.
-     * @return true if successfully removed
-     * @throws ConstructorException if the request is invalid.
-     */
-    public boolean removeItem(ConstructorItem item, String autocompleteSection) throws ConstructorException {
-        try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
-            Map<String, Object> data = new HashMap<String, Object>();
-            data.put("item_name", item.getItemName());
-            data.put("autocomplete_section", autocompleteSection);
-            String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .delete(body)
-                .build();
-
-            Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
-    }
-
-    /**
-     * Removes multiple items from your autocomplete (limit of 1000 items)
+     * Removes multiple items from your index (limit of 1,000 items)
      *
      * @param items the items that you are removing
-     * @param autocompleteSection the section of the autocomplete that you're removing the items from.
+     * @param section the section of the autocomplete that you're removing the items from.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    public boolean removeItemBatch(ConstructorItem[] items, String autocompleteSection) throws ConstructorException {
+    public boolean removeItems(ConstructorItem[] items, String section) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
             Map<String, Object> data = new HashMap<String, Object>();
@@ -374,7 +267,7 @@ public class ConstructorIO {
                 itemsAsJSON.add(item.toMap());
             }
             data.put("items", itemsAsJSON);
-            data.put("autocomplete_section", autocompleteSection);
+            data.put("section", section);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
@@ -391,21 +284,120 @@ public class ConstructorIO {
     }
 
     /**
-     * Modifies an item from your autocomplete.
+     * Modifies items from your index.
      *
-     * @param item the item that you're modifying.
-     * @param autocompleteSection the section of the autocomplete that you're modifying the item for.
-     * @param previousItemName the previous name of the item.
+     * @param items the items that you're modifying.
+     * @param section the section of the autocomplete that you're modifying the item for.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modifyItem(ConstructorItem item, String autocompleteSection, String previousItemName) throws ConstructorException {
+    public boolean modifyItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
-            Map<String, Object> data = item.toMap();
-            data.put("new_item_name", item.getItemName());
-            data.put("autocomplete_section", autocompleteSection);
-            data.put("item_name", previousItemName);
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
+            url = url
+                .newBuilder()
+                .addQueryParameter("force", force.toString())
+                .addQueryParameter("section", section)
+                .build();
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> itemsAsJSON = new ArrayList<Object>();
+            for (ConstructorItem item : items) {
+                itemsAsJSON.add(item.toMap());
+            }
+            data.put("items", itemsAsJSON);
+            String params = new Gson().toJson(data);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .patch(body)
+                .build();
+
+            Response response = client.newCall(request).execute();
+            getResponseBody(response);
+            return true;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    public boolean modifyItems(ConstructorItem[] items) throws ConstructorException {
+        return modifyItems(items, "Products", false);
+    }
+
+    public boolean modifyItems(ConstructorItem[] items, String section) throws ConstructorException {
+        return modifyItems(items, section, false);
+    }
+
+    /**
+     * Modifies variations from your index.
+     *
+     * @param variations the variations that you're modifying.
+     * @param section the section of the autocomplete that you're modifying the item for.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @return true if successfully modified
+     * @throws ConstructorException if the request is invalid.
+     */
+    public boolean modifyVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
+            url = url
+                .newBuilder()
+                .addQueryParameter("force", force.toString())
+                .addQueryParameter("section", section)
+                .build();
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> variationsAsJSON = new ArrayList<Object>();
+            for (ConstructorVariation variation : variations) {
+                variationsAsJSON.add(variation.toMap());
+            }
+            data.put("variations", variationsAsJSON);
+            String params = new Gson().toJson(data);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .patch(body)
+                .build();
+
+            Response response = client.newCall(request).execute();
+            getResponseBody(response);
+            return true;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    public boolean modifyVariations(ConstructorVariation[] variations) throws ConstructorException {
+        return modifyVariations(variations, "Products", false);
+    }
+
+    public boolean modifyVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+        return modifyVariations(variations, section, false);
+    }
+
+    /**
+     * Adds multiple variations to your index whilst updating existing ones (limit of 1,000 items)
+     *
+     * @param variations the items you want to add.
+     * @param section the section of the autocomplete that you're adding the items to.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @return true if working
+     * @throws ConstructorException if the request is invalid.
+     */
+    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
+            url = url
+                .newBuilder()
+                .addQueryParameter("force", force.toString())
+                .addQueryParameter("section", section)
+                .build();
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> variationsAsJSON = new ArrayList<Object>();
+            for (ConstructorVariation variation : variations) {
+                variationsAsJSON.add(variation.toMap());
+            }
+            data.put("variations", variationsAsJSON);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
@@ -419,6 +411,14 @@ public class ConstructorIO {
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
+    }
+
+    public boolean addOrUpdateVariations(ConstructorVariation[] variations) throws ConstructorException {
+        return addOrUpdateVariations(variations, "Products", false);
+    }
+
+    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+        return addOrUpdateVariations(variations, section, false);
     }
 
     /**

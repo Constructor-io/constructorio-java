@@ -24,8 +24,8 @@ public class ConstructorVariation {
     /**
      * Creates a variation.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
      *
-     * @param id the id of the item that you are adding.
-     * @param itemId the id of the item that you are adding.
+     * @param id the id of the variation that you are adding.
+     * @param itemId the id of the item this variation is attached to.
      * @param name the name of the variation that you are adding.
      */
     public ConstructorVariation(String id, String itemId, String name) throws IllegalArgumentException {

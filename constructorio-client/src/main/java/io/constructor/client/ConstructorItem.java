@@ -23,15 +23,16 @@ public class ConstructorItem {
     /**
      * Creates an item.  Optional public fields are in the <a href="https://docs.constructor.io/rest_api/items/items/">API documentation</a>
      *
+     * @param id the id of the item that you are adding.
      * @param name the name of the item that you are adding.
      */
-    public ConstructorItem(String id) throws IllegalArgumentException {
+    public ConstructorItem(String id, String name) throws IllegalArgumentException {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
 
         this.id = id;
-        this.name = null;
+        this.name = name;
         this.suggestedScore = null;
         this.keywords = null;
         this.url = null;
@@ -42,13 +43,13 @@ public class ConstructorItem {
         this.groupIds = null;
     }
 
-    public ConstructorItem(String id, String name) throws IllegalArgumentException {
+    public ConstructorItem(String id) throws IllegalArgumentException {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
 
         this.id = id;
-        this.name = name;
+        this.name = null;
         this.suggestedScore = null;
         this.keywords = null;
         this.url = null;

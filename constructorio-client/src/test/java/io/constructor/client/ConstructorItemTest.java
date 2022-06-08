@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.UUID;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -73,5 +75,28 @@ public class ConstructorItemTest {
         assertEquals(item.getFacets(), null);
         assertEquals(item.getMetadata(), null);
         assertEquals(item.getGroupIds().size(), 3);
+    }
+
+    @Test
+    public void toMapShouldHaveADataObject() throws Exception {
+        String itemName = this.getRandomProductName();
+        String itemId = itemName;
+        ConstructorItem item = new ConstructorItem(itemId, itemName);
+        Float suggestedScore = (float) 100000.00;
+        Map<String, String> metadata = new HashMap<String, String>();
+        
+        item.setName("airline tickets");
+        item.setSuggestedScore(suggestedScore);
+        item.setKeywords(Arrays.asList("London", "Tokyo", "New "));
+        item.setUrl("https://constructor.io/test");
+        item.setImageUrl("https://constructor.io/test.png");
+        item.setId("TICK-007");
+        metadata.put("test_field", "test");
+        item.setMetadata(metadata);
+
+        Map<String, String> metadataFields = (Map<String, String>) item.toMap().get("data");
+        assertEquals(metadataFields.get("url"), "https://constructor.io/test");
+        assertEquals(metadataFields.get("image_url"), "https://constructor.io/test.png");
+        assertEquals(metadataFields.get("test_field"), "test");
     }
 }

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.UUID;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -79,5 +81,29 @@ public class ConstructorVariationTest {
         assertEquals(variation.getFacets(), null);
         assertEquals(variation.getMetadata(), null);
         assertEquals(variation.getGroupIds().size(), 3);
+    }
+
+    @Test
+    public void toMapShouldHaveADataObject() throws Exception {
+        String variationName = this.getRandomProductName();
+        String itemId = this.getRandomProductName();
+        ConstructorVariation variation = new ConstructorVariation(variationName, variationName, itemId);
+        Float suggestedScore = (float) 100000.00;
+        Map<String, String> metadata = new HashMap<String, String>();
+
+        variation.setName("airline tickets");
+        variation.setSuggestedScore(suggestedScore);
+        variation.setKeywords(Arrays.asList("London", "Tokyo", "New "));
+        variation.setUrl("https://constructor.io/test");
+        variation.setImageUrl("https://constructor.io/test.png");
+        variation.setId("TICK-007");
+        variation.setItemId("TICK");
+        metadata.put("test_field", "test");
+        variation.setMetadata(metadata);
+
+        Map<String, String> metadataFields = (Map<String, String>) variation.toMap().get("data");
+        assertEquals(metadataFields.get("url"), "https://constructor.io/test");
+        assertEquals(metadataFields.get("image_url"), "https://constructor.io/test.png");
+        assertEquals(metadataFields.get("test_field"), "test");
     }
 }

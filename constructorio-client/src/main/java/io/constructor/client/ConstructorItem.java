@@ -85,6 +85,7 @@ public class ConstructorItem {
         dataMap.put("facets", this.facets);
         dataMap.put("group_ids", this.groupIds);
         dataMap.put("description", this.description);
+        params.put("data", dataMap);
        
         return params;
     }

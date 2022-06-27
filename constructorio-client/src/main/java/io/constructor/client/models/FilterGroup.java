@@ -1,6 +1,7 @@
 package io.constructor.client.models;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -23,6 +24,9 @@ public class FilterGroup {
 
     @SerializedName("group_id")
     private String groupId;
+
+    @SerializedName("data")
+    private Map<String, Object> data;
 
     /**
      * @return the children
@@ -57,5 +61,12 @@ public class FilterGroup {
      */
     public String getGroupId() {
       return groupId;
+    }
+
+    /**
+     * @return the data
+     */
+    public Map<String, Object> getData() {
+      return data;
     }
 }

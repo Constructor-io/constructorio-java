@@ -225,7 +225,6 @@ public class ConstructorIOBrowseTest {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "yellow");
-        request.getFormatOptions().put("groups_max_depth", "3");
         BrowseResponse response = constructor.browse(request, userInfo);
         FilterGroup root = response.getResponse().getGroups().get(0);
 

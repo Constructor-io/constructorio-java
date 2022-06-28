@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
+import java.util.Map;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -217,5 +218,18 @@ public class ConstructorIOBrowseTest {
 
         assertEquals("browse results exist", response.getResponse().getResults().size(), 1);
         assertNotNull("browse facet [Brand] exists", brandFacet);
+    }
+
+    @Test
+    public void BrowseShouldReturnAResultThatHasGroupsWithDataObject() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Color", "yellow");
+        BrowseResponse response = constructor.browse(request, userInfo);
+        FilterGroup root = response.getResponse().getGroups().get(0);
+
+        assertEquals("browse result [root] exists", root.getGroupId(), "All");
+        assertTrue("browse result [root] has data field", root.getData() instanceof Map);
+        assertEquals("browse result [root] has data field and it's empty", root.getData().size(), 0);
     }
 }

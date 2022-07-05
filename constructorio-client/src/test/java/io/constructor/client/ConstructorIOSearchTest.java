@@ -5,9 +5,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -231,5 +234,51 @@ public class ConstructorIOSearchTest {
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search result result sources exists", (int)response.getResponse().getResultSources().getTokenMatch().getCount(), 1);
         assertEquals("search result result sources exists", (int)response.getResponse().getResultSources().getEmbeddingsMatch().getCount(), 0);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultProvidedVariationsMapAsArray() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("Jacket");
+        VariationsMap variationsMap = new VariationsMap();
+        variationsMap.setdType(VariationsMap.Dtypes.array);
+        variationsMap.addGroupByRule("variation", "data.variation_id");
+        variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+        request.setVariationsMap(variationsMap);
+        SearchResponse response = constructor.search(request, userInfo);
+
+        String json = new Gson().toJson(response.getRequest().get("variations_map"));
+        VariationsMap variationsMapFromResponse = new Gson().fromJson(json, VariationsMap.class);
+        ArrayList<Object> varMapObject = (ArrayList<Object>) response.getResponse().getResults().get(0).getVariationsMap();
+
+        assertNotNull("variations map exists", response.getRequest().get("variations_map"));
+        assertEquals("variations map is correct", variationsMap.getdType(), variationsMapFromResponse.getdType());
+        assertTrue("result contains variations_map", varMapObject.size() >= 1);
+        assertEquals("variations map values is correct", variationsMap.getValues().get("size").aggregation, variationsMapFromResponse.getValues().get("size").aggregation);
+        assertEquals("variations map group by is correct", variationsMap.getGroupBy().get(0).field, variationsMapFromResponse.getGroupBy().get(0).field);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultProvidedVariationsMapAsObject() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("Jacket");
+        VariationsMap variationsMap = new VariationsMap();
+        variationsMap.setdType(VariationsMap.Dtypes.object);
+        variationsMap.addGroupByRule("variation", "data.variation_id");
+        variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+        request.setVariationsMap(variationsMap);
+        SearchResponse response = constructor.search(request, userInfo);
+
+        String json = new Gson().toJson(response.getRequest().get("variations_map"));
+        VariationsMap variationsMapFromResponse = new Gson().fromJson(json, VariationsMap.class);
+        LinkedTreeMap<String, Object> varMapObject = (LinkedTreeMap<String, Object>) response.getResponse().getResults().get(0).getVariationsMap();
+
+        assertNotNull("variations map exists", response.getRequest().get("variations_map"));
+        assertEquals("variations map is correct", variationsMap.getdType(), variationsMapFromResponse.getdType());
+        assertTrue("result contains variations_map", varMapObject.size() >= 1);
+        assertEquals("variations map values is correct", variationsMap.getValues().get("size").aggregation, variationsMapFromResponse.getValues().get("size").aggregation);
+        assertEquals("variations map group by is correct", variationsMap.getGroupBy().get(0).field, variationsMapFromResponse.getGroupBy().get(0).field);
     }
 }

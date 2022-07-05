@@ -1,11 +1,9 @@
 package io.constructor.client;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 
 import org.junit.Rule;
@@ -13,6 +11,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import io.constructor.client.models.AutocompleteResponse;
+
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class ConstructorIOAutocompleteTest {
     
@@ -112,5 +113,51 @@ public class ConstructorIOAutocompleteTest {
         assertTrue("autocomplete result id exists", response.getResultId() != null);
         assertEquals("autocomplete request [Brand] filter should match", ((ArrayList)((LinkedTreeMap)response.getRequest().get("filters")).get("Brand")).get(0), "XYZ");
         assertEquals("autocomplete request [group_id] filter should match", ((ArrayList)((LinkedTreeMap)response.getRequest().get("filters")).get("group_id")).get(0), "All");
+    }
+
+    @Test
+    public void AutocompleteShouldReturnAResultProvidedVariationsMapAsArray() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        AutocompleteRequest request = new AutocompleteRequest("Jacket");
+        VariationsMap variationsMap = new VariationsMap();
+        variationsMap.setdType(VariationsMap.Dtypes.array);
+        variationsMap.addGroupByRule("variation", "data.variation_id");
+        variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+        request.setVariationsMap(variationsMap);
+        AutocompleteResponse response = constructor.autocomplete(request, userInfo);
+
+        String json = new Gson().toJson(response.getRequest().get("variations_map"));
+        VariationsMap variationsMapFromResponse = new Gson().fromJson(json, VariationsMap.class);
+        ArrayList<Object> varMapObject = (ArrayList<Object>) response.getSections().get("Products").get(0).getVariationsMap();
+
+        assertNotNull("variations map exists", response.getRequest().get("variations_map"));
+        assertEquals("variations map is correct", variationsMap.getdType(), variationsMapFromResponse.getdType());
+        assertTrue("result contains variations_map", varMapObject.size() >= 1);
+        assertEquals("variations map values is correct", variationsMap.getValues().get("size").aggregation, variationsMapFromResponse.getValues().get("size").aggregation);
+        assertEquals("variations map group by is correct", variationsMap.getGroupBy().get(0).field, variationsMapFromResponse.getGroupBy().get(0).field);
+    }
+
+    @Test
+    public void AutocompleteShouldReturnAResultProvidedVariationsMapAsObject() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        AutocompleteRequest request = new AutocompleteRequest("Jacket");
+        VariationsMap variationsMap = new VariationsMap();
+        variationsMap.setdType(VariationsMap.Dtypes.object);
+        variationsMap.addGroupByRule("variation", "data.variation_id");
+        variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+        request.setVariationsMap(variationsMap);
+        AutocompleteResponse response = constructor.autocomplete(request, userInfo);
+
+        String json = new Gson().toJson(response.getRequest().get("variations_map"));
+        VariationsMap variationsMapFromResponse = new Gson().fromJson(json, VariationsMap.class);
+        LinkedTreeMap<String, Object> varMapObject = (LinkedTreeMap<String, Object>) response.getSections().get("Products").get(0).getVariationsMap();
+
+        assertNotNull("variations map exists", response.getRequest().get("variations_map"));
+        assertEquals("variations map is correct", variationsMap.getdType(), variationsMapFromResponse.getdType());
+        assertTrue("result contains variations_map", varMapObject.size() >= 1);
+        assertEquals("variations map values is correct", variationsMap.getValues().get("size").aggregation, variationsMapFromResponse.getValues().get("size").aggregation);
+        assertEquals("variations map group by is correct", variationsMap.getGroupBy().get(0).field, variationsMapFromResponse.getGroupBy().get(0).field);
     }
 }

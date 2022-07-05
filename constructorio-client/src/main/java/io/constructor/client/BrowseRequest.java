@@ -22,6 +22,7 @@ public class BrowseRequest {
     private Map<String, String>formatOptions;
     private List<String> hiddenFields;
     private List<String> hiddenFacets;
+    private VariationsMap variationsMap;
     
     /**
      * Creates a browse request
@@ -47,6 +48,7 @@ public class BrowseRequest {
       this.formatOptions = new HashMap<String, String>();
       this.hiddenFields = new ArrayList<String>();
       this.hiddenFacets = new ArrayList<String>();
+      this.variationsMap = null;
     }
 
     /**
@@ -215,5 +217,19 @@ public class BrowseRequest {
      */
     public List<String> getHiddenFacets() {
       return hiddenFacets;
+    }
+
+    /**
+     * @param variationsMap the variationsMap to set
+     */
+    public void setVariationsMap(VariationsMap variationsMap) {
+        this.variationsMap = variationsMap;
+    }
+
+    /**
+     * @return the variations map
+     */
+    public VariationsMap getVariationsMap() {
+        return variationsMap;
     }
 }

@@ -21,6 +21,9 @@ public class Result {
   @SerializedName("variations")
   private List<Result> variations;
 
+  @SerializedName("variations_map")
+  private Object variationsMap;
+
   /**
    * @return the value
    */
@@ -47,5 +50,12 @@ public class Result {
    */
   public List<Result> getVariations() {
     return variations;
+  }
+
+  /**
+   * @return the variationsMap
+   */
+  public Object getVariationsMap() {
+    return variationsMap;
   }
 }

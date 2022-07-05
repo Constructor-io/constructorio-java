@@ -2,6 +2,7 @@ package io.constructor.client;
 
 import io.constructor.client.models.Task;
 import org.apache.commons.io.FileUtils;
+import org.hamcrest.core.StringContains;
 import org.json.JSONObject;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -97,7 +98,7 @@ public class ConstructorIOTaskTest {
         TaskRequest request = new TaskRequest(String.valueOf(task_id));
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 400] We have no record of this key. You can find your key at app.constructor.io/dashboard.");
+        thrown.expectMessage(StringContains.containsString("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
         Task response = constructor.task(request);
     }
 
@@ -107,7 +108,7 @@ public class ConstructorIOTaskTest {
         TaskRequest request = new TaskRequest(String.valueOf(task_id));
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 400] We have no record of this key. You can find your key at app.constructor.io/dashboard.");
+        thrown.expectMessage(StringContains.containsString("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
         String response = constructor.taskAsJson(request);
     }
 

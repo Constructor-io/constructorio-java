@@ -479,6 +479,13 @@ public class ConstructorIO {
                 }
             }
 
+            if (req.getVariationsMap() != null) {
+                String variationsMapJson = new Gson().toJson(req.getVariationsMap());
+                url = url.newBuilder()
+                        .addQueryParameter("variations_map", variationsMapJson)
+                        .build();
+            }
+
             Request request = this.makeUserRequestBuilder(userInfo)
                 .url(url)
                 .get()
@@ -552,6 +559,13 @@ public class ConstructorIO {
             if (req.getCollectionId() != null) {
                 url = url.newBuilder()
                 .addQueryParameter("collection_id", req.getCollectionId())
+                .build();
+            }
+
+            if (req.getVariationsMap() != null) {
+                String variationsMapJson = new Gson().toJson(req.getVariationsMap());
+                url = url.newBuilder()
+                .addQueryParameter("variations_map", variationsMapJson)
                 .build();
             }
 
@@ -701,6 +715,13 @@ public class ConstructorIO {
                     .addQueryParameter("sort_by", req.getSortBy())
                     .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
                     .build();
+            }
+
+            if (req.getVariationsMap() != null) {
+                String variationsMapJson = new Gson().toJson(req.getVariationsMap());
+                url = url.newBuilder()
+                        .addQueryParameter("variations_map", variationsMapJson)
+                        .build();
             }
 
             Request request = this.makeUserRequestBuilder(userInfo)
@@ -1189,6 +1210,13 @@ public class ConstructorIO {
                         .addQueryParameter("item_id", itemId)
                         .build();
                 }
+            }
+
+            if (req.getVariationsMap() != null) {
+                String variationsMapJson = new Gson().toJson(req.getVariationsMap());
+                url = url.newBuilder()
+                        .addQueryParameter("variations_map", variationsMapJson)
+                        .build();
             }
 
             Request request = this.makeUserRequestBuilder(userInfo)

@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import io.constructor.client.models.AllTasksResponse;
 import io.constructor.client.models.Task;
 import org.apache.commons.io.FileUtils;
+import org.hamcrest.core.StringContains;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.AfterClass;
@@ -138,7 +139,7 @@ public class ConstructorIOTasksTest {
         AllTasksRequest request = new AllTasksRequest();
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration.");
+        thrown.expectMessage(StringContains.containsString("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
         String response = constructor.allTasksAsJson(request);
     }
 

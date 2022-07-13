@@ -4,10 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 import java.util.Map;
 
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -232,4 +235,51 @@ public class ConstructorIOBrowseTest {
         assertTrue("browse result [root] has data field", root.getData() instanceof Map);
         assertEquals("browse result [root] has data field and it's empty", root.getData().size(), 0);
     }
+
+    @Test
+    public void BrowseShouldReturnAResultProvidedVariationsMapAsArray() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Brand", "XYZ");
+        VariationsMap variationsMap = new VariationsMap();
+        variationsMap.setdType(VariationsMap.Dtypes.array);
+        variationsMap.addGroupByRule("variation", "data.variation_id");
+        variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+        request.setVariationsMap(variationsMap);
+        BrowseResponse response = constructor.browse(request, userInfo);
+
+        String json = new Gson().toJson(response.getRequest().get("variations_map"));
+        VariationsMap variationsMapFromResponse = new Gson().fromJson(json, VariationsMap.class);
+        ArrayList<Object> varMapObject = (ArrayList<Object>) response.getResponse().getResults().get(0).getVariationsMap();
+
+        assertNotNull("variations map exists", response.getRequest().get("variations_map"));
+        assertEquals("variations map is correct", variationsMap.getdType(), variationsMapFromResponse.getdType());
+        assertTrue("result contains variations_map", varMapObject.size() >= 1);
+        assertEquals("variations map values is correct", variationsMap.getValues().get("size").aggregation, variationsMapFromResponse.getValues().get("size").aggregation);
+        assertEquals("variations map group by is correct", variationsMap.getGroupBy().get(0).field, variationsMapFromResponse.getGroupBy().get(0).field);
+    }
+
+    @Test
+    public void BrowseShouldReturnAResultProvidedVariationsMapAsObject() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Brand", "XYZ");
+        VariationsMap variationsMap = new VariationsMap();
+        variationsMap.setdType(VariationsMap.Dtypes.object);
+        variationsMap.addGroupByRule("variation", "data.variation_id");
+        variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+        request.setVariationsMap(variationsMap);
+        BrowseResponse response = constructor.browse(request, userInfo);
+
+        String json = new Gson().toJson(response.getRequest().get("variations_map"));
+        VariationsMap variationsMapFromResponse = new Gson().fromJson(json, VariationsMap.class);
+        LinkedTreeMap<String, Object> varMapObject = (LinkedTreeMap<String, Object>) response.getResponse().getResults().get(0).getVariationsMap();
+
+        assertNotNull("variations map exists", response.getRequest().get("variations_map"));
+        assertEquals("variations map is correct", variationsMap.getdType(), variationsMapFromResponse.getdType());
+        assertTrue("result contains variations_map", varMapObject.size() >= 1);
+        assertEquals("variations map values is correct", variationsMap.getValues().get("size").aggregation, variationsMapFromResponse.getValues().get("size").aggregation);
+        assertEquals("variations map group by is correct", variationsMap.getGroupBy().get(0).field, variationsMapFromResponse.getGroupBy().get(0).field);
+    }
+
 }

@@ -11,6 +11,7 @@ public class RecommendationsRequest {
     private int numResults;
     private List<String> itemIds;
     private String section;
+    private VariationsMap variationsMap;
 
     /**
      * Creates a recommendations request
@@ -26,6 +27,7 @@ public class RecommendationsRequest {
       this.numResults = 10;
       this.itemIds = null;
       this.section = "Products";
+      this.variationsMap = null;
     }
 
     /**
@@ -82,5 +84,19 @@ public class RecommendationsRequest {
      */
     public String getSection() {
       return section;
+    }
+
+    /**
+     * @param variationsMap the variationsMap to set
+     */
+    public void setVariationsMap(VariationsMap variationsMap) {
+        this.variationsMap = variationsMap;
+    }
+
+    /**
+     * @return the variations map
+     */
+    public VariationsMap getVariationsMap() {
+        return variationsMap;
     }
 }

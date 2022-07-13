@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
-/**
  * Constructor.io Variations Map Object ... uses Gson/Reflection to load data in
  */
 public class VariationsMap {

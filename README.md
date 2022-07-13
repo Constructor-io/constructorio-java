@@ -105,6 +105,13 @@ request.setResultsPerSection(resultsPerSection);
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
 userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
 
+// Add a variations map to request specific variation attributes as an array or object (optional)
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.setdType(VariationsMap.Dtypes.array);
+variationsMap.addGroupByRule("variation", "data.variation_id");
+variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+request.setVariationsMap(variationsMap);
+
 // Request results as an object
 AutocompleteResponse response = constructor.autocomplete(request, userInfo);
 
@@ -135,6 +142,13 @@ request.getHiddenFacets().add("hidden_brand_facet");
 // Create a UserInfo object with the session and unique device identifier (optional)
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
 userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
+
+// Add a variations map to request specific variation attributes as an array or object (optional)
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.setdType(VariationsMap.Dtypes.array);
+variationsMap.addGroupByRule("variation", "data.variation_id");
+variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+request.setVariationsMap(variationsMap);
 
 // Request results as an object
 SearchResponse response = constructor.search(request, userInfo);
@@ -216,6 +230,13 @@ request.getHiddenFacets().add("hidden_brand_facet");
 // Create a UserInfo object with the session and unique device identifier (optional)
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
 userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
+
+// Add a variations map to request specific variation attributes as an array or object (optional)
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.setdType(VariationsMap.Dtypes.array);
+variationsMap.addGroupByRule("variation", "data.variation_id");
+variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+request.setVariationsMap(variationsMap);
 
 // Request results as an object
 BrowseResponse response = constructor.browse(request, userInfo);
@@ -302,6 +323,13 @@ request.setItemIds(Arrays.asList("9838172"))
 // Create a UserInfo object with the session and unique device identifier (optional)
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
 userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
+
+// Add a variations map to request specific variation attributes as an array or object (optional)
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.setdType(VariationsMap.Dtypes.array);
+variationsMap.addGroupByRule("variation", "data.variation_id");
+variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+request.setVariationsMap(variationsMap);
 
 // Request results as an object
 RecommendationsResponse response = constructor.recommendations(request, userInfo);

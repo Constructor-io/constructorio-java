@@ -43,11 +43,9 @@ public class ConstructorIOItemsTest {
     @Test
     public void removeItemsShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-      ConstructorItem[] items = {
-        Utils.createProductItem(),
-        Utils.createProductItem(),
-        Utils.createProductItem()
-      };
-      assertTrue("batch removal succeeds", constructor.removeItems(items, "Products"));
+      ConstructorItem item = Utils.createProductItem();
+      ConstructorItem[] items = { item };
+
+      assertTrue("removal succeeds", constructor.removeItems(items, "Products"));
     }
 }

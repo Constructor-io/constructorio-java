@@ -260,14 +260,62 @@ public class ConstructorIO {
      */
     public boolean removeItems(ConstructorItem[] items, String section) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
+            url = url
+                .newBuilder()
+                .addQueryParameter("section", section)
+                .build();
+
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toMap());
+                Map<String, Object> params = new HashMap<String, Object>();
+                
+                params.put("id", item.getId());
+                itemsAsJSON.add(params);
             }
             data.put("items", itemsAsJSON);
-            data.put("section", section);
+            
+            String params = new Gson().toJson(data);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .delete(body)
+                .build();
+
+            Response response = client.newCall(request).execute();
+            getResponseBody(response);
+            return true;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Removes multiple variations from your index (limit of 1,000 variations)
+     *
+     * @param items the items that you are removing
+     * @param section the section of the autocomplete that you're removing the items from.
+     * @return true if successfully removed
+     * @throws ConstructorException if the request is invalid
+     */
+    public boolean removeVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
+            url = url
+                .newBuilder()
+                .addQueryParameter("section", section)
+                .build();
+
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> variationsAsJSON = new ArrayList<Object>();
+            for (ConstructorVariation variation : variations) {
+                Map<String, Object> params = new HashMap<String, Object>();
+                
+                params.put("id", variation.getId());
+                variationsAsJSON.add(params);
+            }
+            data.put("variations", variationsAsJSON);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()

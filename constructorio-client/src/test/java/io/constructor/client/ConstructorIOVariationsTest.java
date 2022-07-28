@@ -50,4 +50,14 @@ public class ConstructorIOVariationsTest {
         ConstructorVariation[] variationsNew = { variationNew };
         assertTrue("modify succeeds", constructor.modifyVariations(variationsNew, "Products"));
     }
+
+    @Test
+    public void removeVariationsShouldReturnTrue() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      ConstructorVariation[] variations = {
+        Utils.createProductVariation("Random-ID"),
+      };
+
+      assertTrue("removal succeeds", constructor.removeVariations(variations, "Products"));
+    }
 }

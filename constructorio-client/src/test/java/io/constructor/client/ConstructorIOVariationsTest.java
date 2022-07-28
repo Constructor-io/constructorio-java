@@ -1,10 +1,17 @@
 package io.constructor.client;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import io.constructor.client.models.VariationsResponse;
 
 public class ConstructorIOVariationsTest {
   
@@ -59,5 +66,61 @@ public class ConstructorIOVariationsTest {
       };
 
       assertTrue("removal succeeds", constructor.removeVariations(variations, "Products"));
+    }
+
+    @Test
+    public void getVariationsShouldReturnAResponse() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      VariationsRequest request = new VariationsRequest();
+      VariationsResponse response = constructor.getVariations(request);
+
+      assertTrue("Total count is bigger than 1", response.getTotalCount() > 1);
+      assertNotNull("Variations exist", response.getVariations());
+    }
+
+    @Test
+    public void getVariationsWithAnIdShouldReturnAResponse() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      VariationsRequest request = new VariationsRequest();
+      request.setIds(Arrays.asList("20001"));
+      VariationsResponse response = constructor.getVariations(request);
+
+      assertTrue("Total count is bigger than or equal to 1", response.getTotalCount() >= 1);
+      assertNotNull("Variations exist", response.getVariations());
+    }
+
+    @Test
+    public void getVariationsWithAnItemIdShouldReturnAResponse() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      VariationsRequest request = new VariationsRequest();
+      request.setItemId("10001");
+      VariationsResponse response = constructor.getVariations(request);
+
+      assertTrue("Total count is bigger than or equal to 1", response.getTotalCount() >= 1);
+      assertNotNull("Variations exist", response.getVariations());
+    }
+
+    @Test
+    public void getVariationsWithMultipleIdsShouldReturnAResponse() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      VariationsRequest request = new VariationsRequest();
+      request.setIds(Arrays.asList("20001", "M0E20000000E2ZK"));
+      VariationsResponse response = constructor.getVariations(request);
+
+      assertTrue("Total count is bigger than or equal to 2", response.getTotalCount() >= 2);
+      assertNotNull("Variations exist", response.getVariations());
+    }
+    
+    @Test
+    public void getVariationsAsJsonShouldReturnAResponse() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      VariationsRequest request = new VariationsRequest();
+      String response = constructor.getVariationsAsJson(request);
+      JSONObject jsonObj = new JSONObject(response);
+      JSONArray variationsArray = jsonObj.getJSONArray("variations");
+
+
+      assertTrue("Total count is bigger than 1", jsonObj.getInt("total_count") > 1);
+      assertNotNull("Variations exist", variationsArray);
     }
 }

@@ -25,6 +25,7 @@ import io.constructor.client.models.RecommendationsResponse;
 import io.constructor.client.models.ServerError;
 import io.constructor.client.models.AllTasksResponse;
 import io.constructor.client.models.Task;
+import io.constructor.client.models.VariationsResponse;
 import io.constructor.client.models.BrowseFacetOptionsResponse;
 import io.constructor.client.models.BrowseFacetsResponse;
 import okhttp3.Call;
@@ -339,7 +340,7 @@ public class ConstructorIO {
             Request request = createItemsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();
             String json = getResponseBody(response);
-            return createItemsReponse(json);
+            return createItemsResponse(json);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -538,6 +539,84 @@ public class ConstructorIO {
 
     public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
         return addOrUpdateVariations(variations, section, false);
+    }
+
+    /**
+     * Creates a variations OkHttp request
+     * 
+     * @param req the variations request
+     * @return a browse OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createVariationsRequest(VariationsRequest req) throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList("v2", "variations");
+            HttpUrl url = this.makeUrl(paths);
+            url = url.newBuilder()
+                .addQueryParameter("section", req.getSection())
+                .addQueryParameter("page", String.valueOf(req.getPage()))
+                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                .removeAllQueryParameters("c")
+                .build();
+
+            String itemId = req.getItemId();
+
+            if (itemId != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("item_id", itemId)
+                    .build();
+            }
+
+            for (String id : req.getIds()) {
+                url = url.newBuilder()
+                    .addQueryParameter("id", id)
+                    .build();
+            }
+
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .get()
+                .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the variations service for variations
+     *
+     * @param req the variations request
+     * @return an VariationsResponse response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public VariationsResponse getVariations(VariationsRequest req) throws ConstructorException {
+        try {
+            Request request = createVariationsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createVariationsResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the variations service for variations
+     *
+     * @param req the variations request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String getVariationsAsJson(VariationsRequest req) throws ConstructorException {
+        try {
+            Request request = createVariationsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
     }
 
     /**
@@ -1595,10 +1674,21 @@ public class ConstructorIO {
      * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
-    protected static ItemsResponse createItemsReponse(String string) {
+    protected static ItemsResponse createItemsResponse(String string) {
         JSONObject json = new JSONObject(string);
         String transformed = json.toString();
         return new Gson().fromJson(transformed, ItemsResponse.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an Variations response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static VariationsResponse createVariationsResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, VariationsResponse.class);
     }
 
     /**

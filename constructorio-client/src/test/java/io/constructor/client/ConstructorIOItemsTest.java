@@ -98,6 +98,6 @@ public class ConstructorIOItemsTest {
 
 
       assertTrue("Total count is bigger than 1", jsonObj.getInt("total_count") > 1);
-      assertNotNull("Items exis", itemsArray);
+      assertNotNull("Items exist", itemsArray);
     }
 }

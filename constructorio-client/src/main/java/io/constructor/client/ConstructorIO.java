@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import io.constructor.client.models.AutocompleteResponse;
 import io.constructor.client.models.BrowseResponse;
+import io.constructor.client.models.ItemsResponse;
 import io.constructor.client.models.SearchResponse;
 import io.constructor.client.models.RecommendationsResponse;
 import io.constructor.client.models.ServerError;
@@ -286,6 +287,76 @@ public class ConstructorIO {
             Response response = client.newCall(request).execute();
             getResponseBody(response);
             return true;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Creates an items OkHttp request
+     * 
+     * @param req the items request
+     * @return a browse OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createItemsRequest(ItemsRequest req) throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList("v2", "items");
+            HttpUrl url = this.makeUrl(paths);
+            url = url.newBuilder()
+                .addQueryParameter("section", req.getSection())
+                .addQueryParameter("page", String.valueOf(req.getPage()))
+                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                .removeAllQueryParameters("c")
+                .build();
+
+            for (String id : req.getIds()) {
+                url = url.newBuilder()
+                    .addQueryParameter("id", id)
+                    .build();
+            }
+
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .get()
+                .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the items service for items
+     *
+     * @param req the items request
+     * @return an ItemsResponse response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public ItemsResponse getItems(ItemsRequest req) throws ConstructorException {
+        try {
+            Request request = createItemsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createItemsReponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the items service for items
+     *
+     * @param req the items request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String getItemsAsJson(ItemsRequest req) throws ConstructorException {
+        try {
+            Request request = createItemsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -1517,6 +1588,17 @@ public class ConstructorIO {
         JSONObject json = new JSONObject(string);
         String transformed = json.toString();
         return new Gson().fromJson(transformed, Task.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an Items response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static ItemsResponse createItemsReponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, ItemsResponse.class);
     }
 
     /**

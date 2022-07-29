@@ -72,6 +72,24 @@ public class ConstructorVariation {
         this.groupIds = null;
     }
 
+    public ConstructorVariation(String id) throws IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException("id is required");
+        }
+
+        this.id = id;
+        this.itemId = null;
+        this.name = null;
+        this.suggestedScore = null;
+        this.keywords = null;
+        this.url = null;
+        this.imageUrl = null;
+        this.description = null;
+        this.facets = null;
+        this.metadata = null;
+        this.groupIds = null;
+    }
+
     /**
      * Returns the HashMap form of a variation for converting to JSON
      */

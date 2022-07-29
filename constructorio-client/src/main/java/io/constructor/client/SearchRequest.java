@@ -23,7 +23,11 @@ public class SearchRequest {
     private List<String> hiddenFields;
     private List<String> hiddenFacets;
     private VariationsMap variationsMap;
-
+    private String preFilterExpression;
+    private String qsParam;
+    private String now;
+    private int offset;
+    
     /**
      * Creates a search request
      *
@@ -44,6 +48,10 @@ public class SearchRequest {
       this.hiddenFields = new ArrayList<String>();
       this.hiddenFacets = new ArrayList<String>();
       this.variationsMap = null;
+      this.preFilterExpression = null;
+      this.qsParam = null;
+      this.now = null;
+      this.offset = 0;
     }
 
     /**
@@ -82,7 +90,7 @@ public class SearchRequest {
     }
 
     /**
-     * @param page the page to set
+     * @param page the page to set (Can't be used together with the 'offset' parameter)
      */
     public void setPage(int page) {
       this.page = page;
@@ -218,13 +226,69 @@ public class SearchRequest {
      * @param variationsMap the variationsMap to set
      */
     public void setVariationsMap(VariationsMap variationsMap) {
-        this.variationsMap = variationsMap;
+      this.variationsMap = variationsMap;
     }
 
     /**
      * @return the variations map
      */
     public VariationsMap getVariationsMap() {
-        return variationsMap;
+      return variationsMap;
+    }
+
+    /**
+     * @param preFilterExpression the faceting expression to scope search results (JSON-encoded query string). Please refer to https://docs.constructor.io/rest_api/collections#add-items-dynamically
+     */
+    public void setPreFilterExpression(String preFilterExpression) {
+      this.preFilterExpression = preFilterExpression;
+    }
+
+    /**
+     * @return the prefilter expression
+    */
+    public String getPreFilterExpression() {
+      return preFilterExpression;
+    }
+
+    /**
+     * @param qsParam any parameters listed in the API documentation can be serialized into a JSON object and parsed through this parameter. Please refer to https://docs.constructor.io/rest_api/search/queries/
+     */
+    public void setQsParam(String qsParam) {
+      this.qsParam = qsParam;
+    }
+
+    /**
+     * @return the qs parameter
+    */
+    public String getQsParam() {
+      return qsParam;
+    }
+
+    /**
+     * @param now a unix epoch timestamp used to emulate "past" and "future" requests
+     */
+    public void setNow(String now) {
+      this.now = now;
+    }
+
+    /**
+     * @return the now parameter
+    */
+    public String getNow() {
+      return now;
+    }
+
+    /**
+     * @param offset the number of results to skip from the beginning (Can't be used together with the 'page' parameter)
+     */
+    public void setOffset(int offset) {
+      this.offset = offset;
+    }
+
+    /**
+     * @return the offset
+    */
+    public int getOffset() {
+      return offset;
     }
 }

@@ -181,7 +181,7 @@ public class SearchRequest {
     }
 
     /**
-     * @param formatOptions the formatOptions to set
+     * @param formatOptions the formatOptions to set. Please refer to https://docs.constructor.io/rest_api/search/queries for details
      */
     public void setFormatOptions(Map<String, String> formatOptions) {
       this.formatOptions = formatOptions;

@@ -586,13 +586,15 @@ public class ConstructorIO {
                     .build();
             }
 
+            if (req.getPage() != 1) {
+                url = url.newBuilder()
+                    .addQueryParameter("page", String.valueOf(req.getPage()))
+                    .build();
+            }
+
             if (req.getOffset() != 0) {
                 url = url.newBuilder()
                     .addQueryParameter("offset", String.valueOf(req.getOffset()))
-                    .build();
-            } else {
-                url = url.newBuilder()
-                    .addQueryParameter("page", String.valueOf(req.getPage()))
                     .build();
             }
 

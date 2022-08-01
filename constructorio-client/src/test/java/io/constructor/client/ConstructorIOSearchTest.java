@@ -343,4 +343,16 @@ public class ConstructorIOSearchTest {
         assertNotNull("offset exists", response.getRequest().get("offset"));
         assertEquals(String.valueOf(offset), new DecimalFormat("#").format(response.getRequest().get("offset")));
     }
+
+    @Test
+    public void SearchShouldReturnErrorWithPageAndOffset() throws Exception {
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("[HTTP 400] You've used both 'page' and 'offset' parameters for pagination. Please, use just one of them");
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("Jacket");
+        request.setPage(2);
+        request.setOffset(5);
+        constructor.search(request, userInfo);
+    }
 }

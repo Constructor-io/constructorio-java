@@ -508,6 +508,7 @@ public class ConstructorIO {
      */
     protected Request createSearchRequest(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
+            Boolean authorizedRequest = false;
             List<String> paths = Arrays.asList("search", req.getQuery());
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
             url = url.newBuilder()
@@ -598,7 +599,12 @@ public class ConstructorIO {
                     .build();
             }
 
-            Request request = this.makeUserRequestBuilder(userInfo, true)
+            // Make an authorized request if the `now` parameter is provided
+            if (req.getNow() != null) {
+                authorizedRequest = true;
+            }
+            
+            Request request = this.makeUserRequestBuilder(userInfo, authorizedRequest)
                 .url(url)
                 .get()
                 .build();
@@ -1366,9 +1372,11 @@ public class ConstructorIO {
      */
     protected Builder makeUserRequestBuilder(UserInfo info, Boolean authorizedRequest) {
         Builder builder = makeUserRequestBuilder(info);
+
         if (authorizedRequest) {
             builder.addHeader("Authorization", this.credentials);
         }
+
         return builder;
     }
 

@@ -412,6 +412,7 @@ public class ConstructorIO {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
             url = url
                 .newBuilder()
+                .addQueryParameter("force", force.toString())
                 .addQueryParameter("section", section)
                 .build();
 

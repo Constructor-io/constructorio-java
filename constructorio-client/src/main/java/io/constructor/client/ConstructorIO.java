@@ -308,7 +308,6 @@ public class ConstructorIO {
                 .addQueryParameter("section", req.getSection())
                 .addQueryParameter("page", String.valueOf(req.getPage()))
                 .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                .removeAllQueryParameters("c")
                 .build();
 
             for (String id : req.getIds()) {
@@ -556,7 +555,6 @@ public class ConstructorIO {
                 .addQueryParameter("section", req.getSection())
                 .addQueryParameter("page", String.valueOf(req.getPage()))
                 .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                .removeAllQueryParameters("c")
                 .build();
 
             String itemId = req.getItemId();

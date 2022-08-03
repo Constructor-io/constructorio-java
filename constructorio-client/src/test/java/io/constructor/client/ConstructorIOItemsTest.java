@@ -106,7 +106,7 @@ public class ConstructorIOItemsTest {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ConstructorItem item = Utils.createProductItem();
       ConstructorItem[] items = { item };
-      
+
       assertTrue("removal succeeds", constructor.removeItems(items, "Products"));
     }
 

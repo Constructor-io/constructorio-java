@@ -269,14 +269,14 @@ public class ConstructorIO {
                 .build();
 
             Map<String, Object> data = new HashMap<String, Object>();
-            List<Object> itemsAsJSON = new ArrayList<Object>();
+            List<Object> itemIds = new ArrayList<Object>();
             for (ConstructorItem item : items) {
                 Map<String, Object> params = new HashMap<String, Object>();
                 
                 params.put("id", item.getId());
-                itemsAsJSON.add(params);
+                itemIds.add(params);
             }
-            data.put("items", itemsAsJSON);
+            data.put("items", itemIds);
             
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
@@ -380,14 +380,14 @@ public class ConstructorIO {
                 .build();
 
             Map<String, Object> data = new HashMap<String, Object>();
-            List<Object> variationsAsJSON = new ArrayList<Object>();
+            List<Object> variationIds = new ArrayList<Object>();
             for (ConstructorVariation variation : variations) {
                 Map<String, Object> params = new HashMap<String, Object>();
                 
                 params.put("id", variation.getId());
-                variationsAsJSON.add(params);
+                variationIds.add(params);
             }
-            data.put("variations", variationsAsJSON);
+            data.put("variations", variationIds);
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()

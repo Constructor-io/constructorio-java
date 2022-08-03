@@ -39,6 +39,23 @@ public class ConstructorIOVariationsTest {
     }
 
     @Test
+    public void addOrUpdateVariationsShouldReturnTrueWithAllParameters() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      ConstructorItem item = Utils.createProductItem();
+      ConstructorItem[] items = { item };
+      constructor.addOrUpdateItems(items);
+
+      Thread.sleep(2000);
+
+      ConstructorVariation[] variations = {
+        Utils.createProductVariation(item.getId()),
+        Utils.createProductVariation(item.getId()),
+        Utils.createProductVariation(item.getId())
+      };
+      assertTrue("batch upsert succeeds", constructor.addOrUpdateVariations(variations, "Products", true, "test@constructor.io"));
+    }
+
+    @Test
     public void modifyVariationsShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem item = Utils.createProductItem();
@@ -56,6 +73,26 @@ public class ConstructorIOVariationsTest {
         variationNew.setSuggestedScore((float) 1337.00);
         ConstructorVariation[] variationsNew = { variationNew };
         assertTrue("modify succeeds", constructor.modifyVariations(variationsNew, "Products"));
+    }
+
+    @Test
+    public void modifyVariationsShouldReturnTrueWithAllParameters() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        ConstructorItem item = Utils.createProductItem();
+        ConstructorItem[] items = { item };
+        constructor.addOrUpdateItems(items);
+        Thread.sleep(2000);
+
+        ConstructorVariation[] variationsOld = { Utils.createProductVariation(item.getId()) };
+        constructor.addOrUpdateVariations(variationsOld, "Products");
+        Thread.sleep(2000);
+
+        ConstructorVariation variationOld = variationsOld[0];
+        ConstructorVariation variationNew = new ConstructorVariation(variationOld.getId(), variationOld.getItemId());
+        variationNew.setUrl(variationOld.getUrl());
+        variationNew.setSuggestedScore((float) 1337.00);
+        ConstructorVariation[] variationsNew = { variationNew };
+        assertTrue("modify succeeds", constructor.modifyVariations(variationsNew, "Products", true, "test@constructor.io"));
     }
 
     @Test
@@ -86,6 +123,16 @@ public class ConstructorIOVariationsTest {
       };
 
       assertTrue("removal succeeds", constructor.removeVariations(variations, "Products"));
+    }
+
+    @Test
+    public void removeVariationsShouldReturnTrueWithAllParameters() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      ConstructorVariation[] variations = {
+        Utils.createProductVariation("Random-ID"),
+      };
+
+      assertTrue("removal succeeds", constructor.removeVariations(variations, "Products", true, "test@constructor.io"));
     }
 
     @Test

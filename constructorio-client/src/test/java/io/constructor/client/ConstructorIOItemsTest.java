@@ -33,6 +33,17 @@ public class ConstructorIOItemsTest {
     }
 
     @Test
+    public void addOrUpdateItemsShouldReturnTrueWithAllParameters() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      ConstructorItem[] items = {
+        Utils.createProductItem(),
+        Utils.createProductItem(),
+        Utils.createProductItem()
+      };
+      assertTrue("batch upsert succeeds", constructor.addOrUpdateItems(items, "Products", true, "test@constructor.io"));
+    }
+
+    @Test
     public void modifyItemsShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] itemsOld = { Utils.createProductItem() };
@@ -48,12 +59,36 @@ public class ConstructorIOItemsTest {
     }
 
     @Test
+    public void modifyItemsShouldReturnTrueWithAllParameters() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        ConstructorItem[] itemsOld = { Utils.createProductItem() };
+        constructor.addOrUpdateItems(itemsOld, "Products");
+        Thread.sleep(2000);
+
+        ConstructorItem itemOld = itemsOld[0];
+        ConstructorItem itemNew = new ConstructorItem(itemOld.getId());
+        itemNew.setUrl(itemOld.getUrl());
+        itemNew.setSuggestedScore((float) 1337.00);
+        ConstructorItem[] itemsNew = { itemNew };
+        assertTrue("modify succeeds", constructor.modifyItems(itemsNew, "Products", true, "test@constructor.io"));
+    }
+
+    @Test
     public void removeItemsShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ConstructorItem item = Utils.createProductItem();
       ConstructorItem[] items = { item };
 
       assertTrue("removal succeeds", constructor.removeItems(items, "Products"));
+    }
+
+    @Test
+    public void removeItemsShouldReturnTrueWithAllParameters() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      ConstructorItem item = Utils.createProductItem();
+      ConstructorItem[] items = { item };
+
+      assertTrue("removal succeeds", constructor.removeItems(items, "Products", true, "test@constructor.io"));
     }
 
     @Test

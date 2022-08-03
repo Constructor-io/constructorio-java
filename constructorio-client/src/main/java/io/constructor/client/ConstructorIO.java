@@ -402,16 +402,25 @@ public class ConstructorIO {
      *
      * @param items the items that you are removing
      * @param section the section of the autocomplete that you're removing the items from.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    public boolean removeVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+    public boolean removeVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
             url = url
                 .newBuilder()
                 .addQueryParameter("section", section)
                 .build();
+
+            if (notificationEmail != null) {
+              url = url
+                .newBuilder()
+                .addQueryParameter("notification_email", notificationEmail)
+                .build();
+            }
 
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> variationIds = new ArrayList<Object>();
@@ -435,6 +444,18 @@ public class ConstructorIO {
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
+    }
+
+    public boolean removeVariations(ConstructorVariation[] variations) throws ConstructorException {
+      return removeVariations(variations, "Products", false, null);
+    }
+
+    public boolean removeVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+      return removeVariations(variations, section, false, null);
+    }
+
+    public boolean removeVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+      return removeVariations(variations, section, force, null);
     }
 
     /**
@@ -502,10 +523,11 @@ public class ConstructorIO {
      * @param variations the variations that you're modifying.
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modifyVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+    public boolean modifyVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
             url = url
@@ -513,6 +535,14 @@ public class ConstructorIO {
                 .addQueryParameter("force", force.toString())
                 .addQueryParameter("section", section)
                 .build();
+
+            if (notificationEmail != null) {
+              url = url
+                .newBuilder()
+                .addQueryParameter("notification_email", notificationEmail)
+                .build();
+            }
+
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> variationsAsJSON = new ArrayList<Object>();
             for (ConstructorVariation variation : variations) {
@@ -535,11 +565,15 @@ public class ConstructorIO {
     }
 
     public boolean modifyVariations(ConstructorVariation[] variations) throws ConstructorException {
-        return modifyVariations(variations, "Products", false);
+        return modifyVariations(variations, "Products", false, null);
     }
 
     public boolean modifyVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
-        return modifyVariations(variations, section, false);
+        return modifyVariations(variations, section, false, null);
+    }
+
+    public boolean modifyVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+        return modifyVariations(variations, section, force, null);
     }
 
     /**
@@ -548,10 +582,11 @@ public class ConstructorIO {
      * @param variations the items you want to add.
      * @param section the section of the autocomplete that you're adding the items to.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
             url = url
@@ -559,6 +594,14 @@ public class ConstructorIO {
                 .addQueryParameter("force", force.toString())
                 .addQueryParameter("section", section)
                 .build();
+
+            if (notificationEmail != null) {
+              url = url
+                .newBuilder()
+                .addQueryParameter("notification_email", notificationEmail)
+                .build();
+            }
+
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> variationsAsJSON = new ArrayList<Object>();
             for (ConstructorVariation variation : variations) {
@@ -581,11 +624,15 @@ public class ConstructorIO {
     }
 
     public boolean addOrUpdateVariations(ConstructorVariation[] variations) throws ConstructorException {
-        return addOrUpdateVariations(variations, "Products", false);
+        return addOrUpdateVariations(variations, "Products", false, null);
     }
 
     public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
-        return addOrUpdateVariations(variations, section, false);
+        return addOrUpdateVariations(variations, section, false, null);
+    }
+
+    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+        return addOrUpdateVariations(variations, section, force, null);
     }
 
     /**

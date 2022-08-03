@@ -84,7 +84,7 @@ public class ConstructorIOCatalogTest {
     
     CatalogRequest req = new CatalogRequest(files, "Products");
 
-    req.setNotificationEmail("jimmy@constructor.io");
+    req.setNotificationEmail("test@constructor.io");
 
     String response = constructor.replaceCatalog(req);
     JSONObject jsonObj = new JSONObject(response);
@@ -196,7 +196,7 @@ public class ConstructorIOCatalogTest {
 
     CatalogRequest req = new CatalogRequest(files, "Products");
 
-    req.setNotificationEmail("jimmy@constructor.io");
+    req.setNotificationEmail("test@constructor.io");
 
     String response = constructor.updateCatalog(req);
     JSONObject jsonObj = new JSONObject(response);
@@ -308,7 +308,7 @@ public class ConstructorIOCatalogTest {
 
     CatalogRequest req = new CatalogRequest(files, "Products");
 
-    req.setNotificationEmail("jimmy@constructor.io");
+    req.setNotificationEmail("test@constructor.io");
 
     String response = constructor.patchCatalog(req);
     JSONObject jsonObj = new JSONObject(response);

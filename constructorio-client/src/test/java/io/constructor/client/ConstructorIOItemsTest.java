@@ -3,6 +3,7 @@ package io.constructor.client;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.json.JSONArray;
@@ -10,13 +11,28 @@ import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.AfterClass;
 
 import io.constructor.client.models.ItemsResponse;
 
 public class ConstructorIOItemsTest {
   
-    private String token = System.getenv("TEST_API_TOKEN");
-    private String apiKey = System.getenv("TEST_API_KEY");
+    private static String token = System.getenv("TEST_API_TOKEN");
+    private static String apiKey = System.getenv("TEST_API_KEY");
+    private static ArrayList<ConstructorItem> itemsToCleanup = new ArrayList<ConstructorItem>();
+
+    private void addItemsToCleanUpArray(ConstructorItem[] items) {
+      for (ConstructorItem constructorItem : items) {
+        itemsToCleanup.add(constructorItem);
+      }
+    }
+
+    @AfterClass
+    public static void cleanupItems() throws ConstructorException {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      
+      constructor.removeItems(itemsToCleanup.toArray(new ConstructorItem[itemsToCleanup.size()]), "Products");
+    }
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -29,7 +45,9 @@ public class ConstructorIOItemsTest {
         Utils.createProductItem(),
         Utils.createProductItem()
       };
+
       assertTrue("batch upsert succeeds", constructor.addOrUpdateItems(items, "Products"));
+      addItemsToCleanUpArray(items);
     }
 
     @Test
@@ -40,14 +58,18 @@ public class ConstructorIOItemsTest {
         Utils.createProductItem(),
         Utils.createProductItem()
       };
+
       assertTrue("batch upsert succeeds", constructor.addOrUpdateItems(items, "Products", true, "test@constructor.io"));
+      addItemsToCleanUpArray(items);
     }
 
     @Test
     public void modifyItemsShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] itemsOld = { Utils.createProductItem() };
+
         constructor.addOrUpdateItems(itemsOld, "Products");
+
         Thread.sleep(2000);
 
         ConstructorItem itemOld = itemsOld[0];
@@ -55,14 +77,18 @@ public class ConstructorIOItemsTest {
         itemNew.setUrl(itemOld.getUrl());
         itemNew.setSuggestedScore((float) 1337.00);
         ConstructorItem[] itemsNew = { itemNew };
+
         assertTrue("modify succeeds", constructor.modifyItems(itemsNew, "Products"));
+        addItemsToCleanUpArray(itemsNew);
     }
 
     @Test
     public void modifyItemsShouldReturnTrueWithAllParameters() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] itemsOld = { Utils.createProductItem() };
+
         constructor.addOrUpdateItems(itemsOld, "Products");
+
         Thread.sleep(2000);
 
         ConstructorItem itemOld = itemsOld[0];
@@ -70,7 +96,9 @@ public class ConstructorIOItemsTest {
         itemNew.setUrl(itemOld.getUrl());
         itemNew.setSuggestedScore((float) 1337.00);
         ConstructorItem[] itemsNew = { itemNew };
+
         assertTrue("modify succeeds", constructor.modifyItems(itemsNew, "Products", true, "test@constructor.io"));
+        addItemsToCleanUpArray(itemsNew);
     }
 
     @Test
@@ -78,7 +106,7 @@ public class ConstructorIOItemsTest {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ConstructorItem item = Utils.createProductItem();
       ConstructorItem[] items = { item };
-
+      
       assertTrue("removal succeeds", constructor.removeItems(items, "Products"));
     }
 

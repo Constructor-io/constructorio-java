@@ -286,7 +286,7 @@ public class ConstructorIOBrowseTest {
     }
 
     @Test
-    public void SearchShouldReturnAResultWithPreFilterExpression() throws Exception {
+    public void BrowseShouldReturnAResultWithPreFilterExpression() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Brand", "XYZ");
@@ -301,7 +301,7 @@ public class ConstructorIOBrowseTest {
     }
 
     @Test
-    public void SearchShouldReturnAResultWithQsParam() throws Exception {
+    public void BrowseShouldReturnAResultWithQsParam() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Brand", "XYZ");
@@ -315,7 +315,7 @@ public class ConstructorIOBrowseTest {
     }
 
     @Test
-    public void SearchShouldReturnAResultWithNow() throws Exception {
+    public void BrowseShouldReturnAResultWithNow() throws Exception {
         ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null );
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Brand", "XYZ");
@@ -329,7 +329,7 @@ public class ConstructorIOBrowseTest {
     }
 
     @Test
-    public void SearchShouldReturnAResultWithOffset() throws Exception {
+    public void BrowseShouldReturnAResultWithOffset() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Brand", "XYZ");
@@ -343,7 +343,7 @@ public class ConstructorIOBrowseTest {
     }
 
     @Test
-    public void SearchShouldReturnErrorWithPageAndOffset() throws Exception {
+    public void BrowseShouldReturnErrorWithPageAndOffset() throws Exception {
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 400] You've used both 'page' and 'offset' parameters for pagination. Please, use just one of them");
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );

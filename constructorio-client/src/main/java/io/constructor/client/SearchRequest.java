@@ -265,7 +265,7 @@ public class SearchRequest {
     }
 
     /**
-     * @param now a unix epoch timestamp used to emulate "past" and "future" requests
+     * @param now a unix epoch timestamp used to emulate "past" and "future" requests. Please refer to https://docs.constructor.io/rest_api/search/queries/
      */
     public void setNow(String now) {
       this.now = now;

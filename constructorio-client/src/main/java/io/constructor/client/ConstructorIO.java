@@ -582,9 +582,13 @@ public class ConstructorIO {
             }
 
             if (req.getNow() != null) {
+                // Make an authorized request if the `now` parameter is provided
+                authorizedRequest = true;
+
                 url = url.newBuilder()
                     .addQueryParameter("now", req.getNow())
                     .build();
+
             }
 
             if (req.getPage() != 1) {
@@ -597,11 +601,6 @@ public class ConstructorIO {
                 url = url.newBuilder()
                     .addQueryParameter("offset", String.valueOf(req.getOffset()))
                     .build();
-            }
-
-            // Make an authorized request if the `now` parameter is provided
-            if (req.getNow() != null) {
-                authorizedRequest = true;
             }
             
             Request request = this.makeUserRequestBuilder(userInfo, authorizedRequest)

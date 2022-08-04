@@ -298,6 +298,7 @@ public class ConstructorIOSearchTest {
         SearchResponse response = constructor.search(request, userInfo);
         String preFilterExpressionFromRequestJsonString = new Gson().toJson(response.getRequest().get("pre_filter_expression"));
 
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 0);
         assertNotNull("pre_filter_expression exists", response.getRequest().get("pre_filter_expression"));
         assertEquals(preFilterExpression, preFilterExpressionFromRequestJsonString);
     }
@@ -313,6 +314,7 @@ public class ConstructorIOSearchTest {
         SearchResponse response = constructor.search(request, userInfo);
         Map<String, List<String>> filtersFromRequest = (Map) response.getRequest().get("filters");
 
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 0);
         assertEquals(Arrays.asList("green"), filtersFromRequest.get("Color"));
     }
 
@@ -326,6 +328,7 @@ public class ConstructorIOSearchTest {
 
         SearchResponse response = constructor.search(request, userInfo);
 
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 0);
         assertNotNull("now exists", response.getRequest().get("now"));
         assertEquals(now, new DecimalFormat("#").format(response.getRequest().get("now")));
     }
@@ -340,6 +343,7 @@ public class ConstructorIOSearchTest {
 
         SearchResponse response = constructor.search(request, userInfo);
 
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 0);
         assertNotNull("offset exists", response.getRequest().get("offset"));
         assertEquals(String.valueOf(offset), new DecimalFormat("#").format(response.getRequest().get("offset")));
     }

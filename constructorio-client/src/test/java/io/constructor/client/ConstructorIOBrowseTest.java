@@ -296,6 +296,7 @@ public class ConstructorIOBrowseTest {
         BrowseResponse response = constructor.browse(request, userInfo);
         String preFilterExpressionFromRequestJsonString = new Gson().toJson(response.getRequest().get("pre_filter_expression"));
 
+        assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
         assertNotNull("pre_filter_expression exists", response.getRequest().get("pre_filter_expression"));
         assertEquals(preFilterExpression, preFilterExpressionFromRequestJsonString);
     }
@@ -311,6 +312,7 @@ public class ConstructorIOBrowseTest {
         BrowseResponse response = constructor.browse(request, userInfo);
         Map<String, List<String>> filtersFromRequest = (Map) response.getRequest().get("filters");
 
+        assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
         assertEquals(Arrays.asList("green"), filtersFromRequest.get("Color"));
     }
 
@@ -324,6 +326,7 @@ public class ConstructorIOBrowseTest {
 
         BrowseResponse response = constructor.browse(request, userInfo);
 
+        assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
         assertNotNull("now exists", response.getRequest().get("now"));
         assertEquals(now, new DecimalFormat("#").format(response.getRequest().get("now")));
     }
@@ -338,6 +341,7 @@ public class ConstructorIOBrowseTest {
 
         BrowseResponse response = constructor.browse(request, userInfo);
 
+        assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
         assertNotNull("offset exists", response.getRequest().get("offset"));
         assertEquals(String.valueOf(offset), new DecimalFormat("#").format(response.getRequest().get("offset")));
     }

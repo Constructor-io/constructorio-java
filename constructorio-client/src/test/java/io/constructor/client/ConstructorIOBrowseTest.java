@@ -4,8 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.Map;
 
@@ -22,6 +24,7 @@ import io.constructor.client.models.FilterFacet;
 public class ConstructorIOBrowseTest {
 
     private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiToken = System.getenv("TEST_API_TOKEN");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -282,4 +285,72 @@ public class ConstructorIOBrowseTest {
         assertEquals("variations map group by is correct", variationsMap.getGroupBy().get(0).field, variationsMapFromResponse.getGroupBy().get(0).field);
     }
 
+    @Test
+    public void SearchShouldReturnAResultWithPreFilterExpression() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Brand", "XYZ");
+        String preFilterExpression = "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"electronics-group-id\"},{\"name\":\"Price\",\"range\":[\"-inf\",200.0]}]},{\"and\":[{\"name\":\"Type\",\"value\":\"Laptop\"},{\"not\":{\"name\":\"Price\",\"range\":[800.0,\"inf\"]}}]}]}";
+        request.setPreFilterExpression(preFilterExpression);
+
+        BrowseResponse response = constructor.browse(request, userInfo);
+        String preFilterExpressionFromRequestJsonString = new Gson().toJson(response.getRequest().get("pre_filter_expression"));
+
+        assertNotNull("pre_filter_expression exists", response.getRequest().get("pre_filter_expression"));
+        assertEquals(preFilterExpression, preFilterExpressionFromRequestJsonString);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithQsParam() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Brand", "XYZ");
+        String qsParam = "{\"filters\":{\"Color\":[\"green\"]}}";
+        request.setQsParam(qsParam);
+
+        BrowseResponse response = constructor.browse(request, userInfo);
+        Map<String, List<String>> filtersFromRequest = (Map) response.getRequest().get("filters");
+
+        assertEquals(Arrays.asList("green"), filtersFromRequest.get("Color"));
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithNow() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Brand", "XYZ");
+        String now = "1659053211";
+        request.setNow(now);
+
+        BrowseResponse response = constructor.browse(request, userInfo);
+
+        assertNotNull("now exists", response.getRequest().get("now"));
+        assertEquals(now, new DecimalFormat("#").format(response.getRequest().get("now")));
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithOffset() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Brand", "XYZ");
+        int offset = 5;
+        request.setOffset(offset);
+
+        BrowseResponse response = constructor.browse(request, userInfo);
+
+        assertNotNull("offset exists", response.getRequest().get("offset"));
+        assertEquals(String.valueOf(offset), new DecimalFormat("#").format(response.getRequest().get("offset")));
+    }
+
+    @Test
+    public void SearchShouldReturnErrorWithPageAndOffset() throws Exception {
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("[HTTP 400] You've used both 'page' and 'offset' parameters for pagination. Please, use just one of them");
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Brand", "XYZ");
+        request.setPage(2);
+        request.setOffset(5);
+        constructor.browse(request, userInfo);
+    }
 }

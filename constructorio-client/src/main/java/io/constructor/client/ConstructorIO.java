@@ -508,11 +508,11 @@ public class ConstructorIO {
      */
     protected Request createSearchRequest(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
+            Boolean authorizedRequest = false;
             List<String> paths = Arrays.asList("search", req.getQuery());
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
             url = url.newBuilder()
                 .addQueryParameter("section", req.getSection())
-                .addQueryParameter("page", String.valueOf(req.getPage()))
                 .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
                 .build();
 
@@ -558,18 +558,52 @@ public class ConstructorIO {
 
             if (req.getCollectionId() != null) {
                 url = url.newBuilder()
-                .addQueryParameter("collection_id", req.getCollectionId())
-                .build();
+                    .addQueryParameter("collection_id", req.getCollectionId())
+                    .build();
             }
 
             if (req.getVariationsMap() != null) {
                 String variationsMapJson = new Gson().toJson(req.getVariationsMap());
                 url = url.newBuilder()
-                .addQueryParameter("variations_map", variationsMapJson)
-                .build();
+                    .addQueryParameter("variations_map", variationsMapJson)
+                    .build();
             }
 
-            Request request = this.makeUserRequestBuilder(userInfo)
+            if (req.getPreFilterExpression() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("pre_filter_expression", req.getPreFilterExpression())
+                    .build();
+            }
+
+            if (req.getQsParam() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("qs", req.getQsParam())
+                    .build();
+            }
+
+            if (req.getNow() != null) {
+                // Make an authorized request if the `now` parameter is provided
+                authorizedRequest = true;
+
+                url = url.newBuilder()
+                    .addQueryParameter("now", req.getNow())
+                    .build();
+
+            }
+
+            if (req.getPage() != 1) {
+                url = url.newBuilder()
+                    .addQueryParameter("page", String.valueOf(req.getPage()))
+                    .build();
+            }
+
+            if (req.getOffset() != 0) {
+                url = url.newBuilder()
+                    .addQueryParameter("offset", String.valueOf(req.getOffset()))
+                    .build();
+            }
+            
+            Request request = this.makeUserRequestBuilder(userInfo, authorizedRequest)
                 .url(url)
                 .get()
                 .build();
@@ -1326,6 +1360,22 @@ public class ConstructorIO {
         if (info != null && info.getUserAgent() != null) {
             builder.addHeader("User-Agent", info.getUserAgent());
         }
+        return builder;
+    }
+
+    /**
+     * Creates a builder for an end user request
+     *
+     * @param info user information if available
+     * @return Request Builder
+     */
+    protected Builder makeUserRequestBuilder(UserInfo info, Boolean authorizedRequest) {
+        Builder builder = makeUserRequestBuilder(info);
+
+        if (authorizedRequest) {
+            builder.addHeader("Authorization", this.credentials);
+        }
+
         return builder;
     }
 

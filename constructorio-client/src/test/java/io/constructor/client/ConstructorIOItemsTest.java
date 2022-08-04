@@ -31,14 +31,14 @@ public class ConstructorIOItemsTest {
     public static void cleanupItems() throws ConstructorException {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       
-      constructor.removeItems(itemsToCleanup.toArray(new ConstructorItem[itemsToCleanup.size()]), "Products");
+      constructor.deleteItems(itemsToCleanup.toArray(new ConstructorItem[itemsToCleanup.size()]), "Products");
     }
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void addOrUpdateItemsShouldReturnTrue() throws Exception {
+    public void createOrReplaceItemsShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ConstructorItem[] items = {
         Utils.createProductItem(),
@@ -46,12 +46,12 @@ public class ConstructorIOItemsTest {
         Utils.createProductItem()
       };
 
-      assertTrue("batch upsert succeeds", constructor.addOrUpdateItems(items, "Products"));
+      assertTrue("add or replace succeeds", constructor.createOrReplaceItems(items, "Products"));
       addItemsToCleanUpArray(items);
     }
 
     @Test
-    public void addOrUpdateItemsShouldReturnTrueWithAllParameters() throws Exception {
+    public void createOrReplaceItemsShouldReturnTrueWithAllParameters() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ConstructorItem[] items = {
         Utils.createProductItem(),
@@ -59,16 +59,16 @@ public class ConstructorIOItemsTest {
         Utils.createProductItem()
       };
 
-      assertTrue("batch upsert succeeds", constructor.addOrUpdateItems(items, "Products", true, "test@constructor.io"));
+      assertTrue("add or replace succeeds", constructor.createOrReplaceItems(items, "Products", true, "test@constructor.io"));
       addItemsToCleanUpArray(items);
     }
 
     @Test
-    public void modifyItemsShouldReturnTrue() throws Exception {
+    public void updateItemsShouldReturnTrue() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] itemsOld = { Utils.createProductItem() };
 
-        constructor.addOrUpdateItems(itemsOld, "Products");
+        constructor.createOrReplaceItems(itemsOld, "Products");
 
         Thread.sleep(2000);
 
@@ -78,16 +78,16 @@ public class ConstructorIOItemsTest {
         itemNew.setSuggestedScore((float) 1337.00);
         ConstructorItem[] itemsNew = { itemNew };
 
-        assertTrue("modify succeeds", constructor.modifyItems(itemsNew, "Products"));
+        assertTrue("update succeeds", constructor.updateItems(itemsNew, "Products"));
         addItemsToCleanUpArray(itemsNew);
     }
 
     @Test
-    public void modifyItemsShouldReturnTrueWithAllParameters() throws Exception {
+    public void updateItemsShouldReturnTrueWithAllParameters() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] itemsOld = { Utils.createProductItem() };
 
-        constructor.addOrUpdateItems(itemsOld, "Products");
+        constructor.createOrReplaceItems(itemsOld, "Products");
 
         Thread.sleep(2000);
 
@@ -97,65 +97,65 @@ public class ConstructorIOItemsTest {
         itemNew.setSuggestedScore((float) 1337.00);
         ConstructorItem[] itemsNew = { itemNew };
 
-        assertTrue("modify succeeds", constructor.modifyItems(itemsNew, "Products", true, "test@constructor.io"));
+        assertTrue("update succeeds", constructor.updateItems(itemsNew, "Products", true, "test@constructor.io"));
         addItemsToCleanUpArray(itemsNew);
     }
 
     @Test
-    public void removeItemsShouldReturnTrue() throws Exception {
+    public void deleteItemsShouldReturnTrue() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ConstructorItem item = Utils.createProductItem();
       ConstructorItem[] items = { item };
 
-      assertTrue("removal succeeds", constructor.removeItems(items, "Products"));
+      assertTrue("delete succeeds", constructor.deleteItems(items, "Products"));
     }
 
     @Test
-    public void removeItemsShouldReturnTrueWithAllParameters() throws Exception {
+    public void deleteItemsShouldReturnTrueWithAllParameters() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ConstructorItem item = Utils.createProductItem();
       ConstructorItem[] items = { item };
 
-      assertTrue("removal succeeds", constructor.removeItems(items, "Products", true, "test@constructor.io"));
+      assertTrue("delete succeeds", constructor.deleteItems(items, "Products", true, "test@constructor.io"));
     }
 
     @Test
-    public void getItemsShouldReturnAResponse() throws Exception {
+    public void retrieveItemsShouldReturnAResponse() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ItemsRequest request = new ItemsRequest();
-      ItemsResponse response = constructor.getItems(request);
+      ItemsResponse response = constructor.retrieveItems(request);
 
       assertTrue("Total count is bigger than 1", response.getTotalCount() > 1);
       assertNotNull("Items exist", response.getItems());
     }
 
     @Test
-    public void getItemsWithAnIdShouldReturnAResponse() throws Exception {
+    public void retrieveItemsWithAnIdShouldReturnAResponse() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ItemsRequest request = new ItemsRequest();
       request.setIds(Arrays.asList("10001"));
-      ItemsResponse response = constructor.getItems(request);
+      ItemsResponse response = constructor.retrieveItems(request);
 
       assertTrue("Total count is bigger than or equal to 1", response.getTotalCount() >= 1);
       assertNotNull("Items exist", response.getItems());
     }
 
     @Test
-    public void getItemsWithMultipleIdsShouldReturnAResponse() throws Exception {
+    public void retrieveItemsWithMultipleIdsShouldReturnAResponse() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ItemsRequest request = new ItemsRequest();
       request.setIds(Arrays.asList("10001", "10002"));
-      ItemsResponse response = constructor.getItems(request);
+      ItemsResponse response = constructor.retrieveItems(request);
 
       assertTrue("Total count is bigger than or equal to 2", response.getTotalCount() >= 2);
       assertNotNull("Items exist", response.getItems());
     }
     
     @Test
-    public void getItemsAsJsonShouldReturnAResponse() throws Exception {
+    public void retrieveItemsAsJsonShouldReturnAResponse() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       ItemsRequest request = new ItemsRequest();
-      String response = constructor.getItemsAsJson(request);
+      String response = constructor.retrieveItemsAsJson(request);
       JSONObject jsonObj = new JSONObject(response);
       JSONArray itemsArray = jsonObj.getJSONArray("items");
 

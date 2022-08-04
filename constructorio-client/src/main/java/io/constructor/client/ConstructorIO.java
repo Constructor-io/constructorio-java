@@ -207,16 +207,16 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds multiple items to your index whilst updating existing ones (limit of 1,000 items)
+     * Adds multiple items to your index whilst replacing existing ones (limit of 1,000 items)
      *
-     * @param items the items you want to add.
-     * @param section the section of the autocomplete that you're adding the items to.
+     * @param items the items you want to add or replace.
+     * @param section the section of the index that you're adding the items to.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean createOrReplaceItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
             url = url
@@ -253,29 +253,29 @@ public class ConstructorIO {
         }
     }
 
-    public boolean addOrUpdateItems(ConstructorItem[] items) throws ConstructorException {
-        return addOrUpdateItems(items, "Products", false, null);
+    public boolean createOrReplaceItems(ConstructorItem[] items) throws ConstructorException {
+        return createOrReplaceItems(items, "Products", false, null);
     }
 
-    public boolean addOrUpdateItems(ConstructorItem[] items, String section) throws ConstructorException {
-        return addOrUpdateItems(items, section, false, null);
+    public boolean createOrReplaceItems(ConstructorItem[] items, String section) throws ConstructorException {
+        return createOrReplaceItems(items, section, false, null);
     }
 
-    public boolean addOrUpdateItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
-        return addOrUpdateItems(items, section, force, null);
+    public boolean createOrReplaceItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
+        return createOrReplaceItems(items, section, force, null);
     }
 
     /**
-     * Removes multiple items from your index (limit of 1,000 items)
+     * Deleted multiple items from your index (limit of 1,000 items)
      *
-     * @param items the items that you are removing
-     * @param section the section of the autocomplete that you're removing the items from.
+     * @param items the items that you are deleting
+     * @param section the section of the index that you're removing the items from.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    public boolean removeItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean deleteItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
             url = url
@@ -316,16 +316,16 @@ public class ConstructorIO {
         }
     }
 
-    public boolean removeItems(ConstructorItem[] items) throws ConstructorException {
-      return removeItems(items, "Products", false, null);
+    public boolean deleteItems(ConstructorItem[] items) throws ConstructorException {
+      return deleteItems(items, "Products", false, null);
     }
 
-    public boolean removeItems(ConstructorItem[] items, String section) throws ConstructorException {
-      return removeItems(items, section, false, null);
+    public boolean deleteItems(ConstructorItem[] items, String section) throws ConstructorException {
+      return deleteItems(items, section, false, null);
     }
 
-    public boolean removeItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
-      return removeItems(items, section, force, null);
+    public boolean deleteItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
+      return deleteItems(items, section, force, null);
     }
 
     /**
@@ -363,13 +363,13 @@ public class ConstructorIO {
     }
 
     /**
-     * Queries the items service for items
+     * Retrieves the items service for items
      *
      * @param req the items request
      * @return an ItemsResponse response
      * @throws ConstructorException if the request is invalid.
      */
-    public ItemsResponse getItems(ItemsRequest req) throws ConstructorException {
+    public ItemsResponse retrieveItems(ItemsRequest req) throws ConstructorException {
         try {
             Request request = createItemsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();
@@ -387,7 +387,7 @@ public class ConstructorIO {
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String getItemsAsJson(ItemsRequest req) throws ConstructorException {
+    public String retrieveItemsAsJson(ItemsRequest req) throws ConstructorException {
         try {
             Request request = createItemsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();
@@ -398,16 +398,16 @@ public class ConstructorIO {
     }
 
     /**
-     * Removes multiple variations from your index (limit of 1,000 variations)
+     * Deletes multiple variations from your index (limit of 1,000 variations)
      *
-     * @param items the items that you are removing
+     * @param items the items that you are deleting
      * @param section the section of the autocomplete that you're removing the items from.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    public boolean removeVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean deleteVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
             url = url
@@ -447,29 +447,29 @@ public class ConstructorIO {
         }
     }
 
-    public boolean removeVariations(ConstructorVariation[] variations) throws ConstructorException {
-      return removeVariations(variations, "Products", false, null);
+    public boolean deleteVariations(ConstructorVariation[] variations) throws ConstructorException {
+      return deleteVariations(variations, "Products", false, null);
     }
 
-    public boolean removeVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
-      return removeVariations(variations, section, false, null);
+    public boolean deleteVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+      return deleteVariations(variations, section, false, null);
     }
 
-    public boolean removeVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
-      return removeVariations(variations, section, force, null);
+    public boolean deleteVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+      return deleteVariations(variations, section, force, null);
     }
 
     /**
-     * Modifies items from your index.
+     * Updates items from your index.
      *
-     * @param items the items that you're modifying.
+     * @param items the items that you're updating
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modifyItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean updateItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
             url = url
@@ -506,29 +506,29 @@ public class ConstructorIO {
         }
     }
 
-    public boolean modifyItems(ConstructorItem[] items) throws ConstructorException {
-        return modifyItems(items, "Products", false, null);
+    public boolean updateItems(ConstructorItem[] items) throws ConstructorException {
+        return updateItems(items, "Products", false, null);
     }
 
-    public boolean modifyItems(ConstructorItem[] items, String section) throws ConstructorException {
-        return modifyItems(items, section, false, null);
+    public boolean updateItems(ConstructorItem[] items, String section) throws ConstructorException {
+        return updateItems(items, section, false, null);
     }
 
-    public boolean modifyItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
-        return modifyItems(items, section, force, null);
+    public boolean updateItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
+        return updateItems(items, section, force, null);
     }
 
     /**
-     * Modifies variations from your index.
+     * Update variations from your index.
      *
-     * @param variations the variations that you're modifying.
+     * @param variations the variations that you're updating.
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modifyVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean updateVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
             url = url
@@ -565,29 +565,29 @@ public class ConstructorIO {
         }
     }
 
-    public boolean modifyVariations(ConstructorVariation[] variations) throws ConstructorException {
-        return modifyVariations(variations, "Products", false, null);
+    public boolean updateVariations(ConstructorVariation[] variations) throws ConstructorException {
+        return updateVariations(variations, "Products", false, null);
     }
 
-    public boolean modifyVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
-        return modifyVariations(variations, section, false, null);
+    public boolean updateVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+        return updateVariations(variations, section, false, null);
     }
 
-    public boolean modifyVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
-        return modifyVariations(variations, section, force, null);
+    public boolean updateVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+        return updateVariations(variations, section, force, null);
     }
 
     /**
-     * Adds multiple variations to your index whilst updating existing ones (limit of 1,000 items)
+     * Adds multiple variations to your index whilst replacing existing ones (limit of 1,000 items)
      *
-     * @param variations the items you want to add.
+     * @param variations the items you want to add or replace.
      * @param section the section of the autocomplete that you're adding the items to.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
             url = url
@@ -624,16 +624,16 @@ public class ConstructorIO {
         }
     }
 
-    public boolean addOrUpdateVariations(ConstructorVariation[] variations) throws ConstructorException {
-        return addOrUpdateVariations(variations, "Products", false, null);
+    public boolean createOrReplaceVariations(ConstructorVariation[] variations) throws ConstructorException {
+        return createOrReplaceVariations(variations, "Products", false, null);
     }
 
-    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
-        return addOrUpdateVariations(variations, section, false, null);
+    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+        return createOrReplaceVariations(variations, section, false, null);
     }
 
-    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
-        return addOrUpdateVariations(variations, section, force, null);
+    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+        return createOrReplaceVariations(variations, section, force, null);
     }
 
     /**
@@ -685,7 +685,7 @@ public class ConstructorIO {
      * @return an VariationsResponse response
      * @throws ConstructorException if the request is invalid.
      */
-    public VariationsResponse getVariations(VariationsRequest req) throws ConstructorException {
+    public VariationsResponse retrieveVariations(VariationsRequest req) throws ConstructorException {
         try {
             Request request = createVariationsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();
@@ -703,7 +703,7 @@ public class ConstructorIO {
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String getVariationsAsJson(VariationsRequest req) throws ConstructorException {
+    public String retrieveVariationsAsJson(VariationsRequest req) throws ConstructorException {
         try {
             Request request = createVariationsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();

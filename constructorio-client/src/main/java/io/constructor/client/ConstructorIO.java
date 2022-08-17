@@ -1770,6 +1770,10 @@ public class ConstructorIO {
      */
     protected static ItemsResponse createItemsResponse(String string) {
         JSONObject json = new JSONObject(string);
+        JSONArray items = json.getJSONArray("items");
+        JSONArray itemsTransformed = transformItemsAPIV2Response(items);
+        json.put("items", itemsTransformed);
+
         String transformed = json.toString();
         return new Gson().fromJson(transformed, ItemsResponse.class);
     }
@@ -1781,6 +1785,10 @@ public class ConstructorIO {
      */
     protected static VariationsResponse createVariationsResponse(String string) {
         JSONObject json = new JSONObject(string);
+        JSONArray variations = json.getJSONArray("variations");
+        JSONArray variationsTransformed = transformItemsAPIV2Response(variations);
+        json.put("variations", variationsTransformed);
+
         String transformed = json.toString();
         return new Gson().fromJson(transformed, VariationsResponse.class);
     }
@@ -1819,6 +1827,45 @@ public class ConstructorIO {
             // Add metadata to result data object
             resultData.put("metadata", metadata);
         }
+    }
+
+    /**
+     * Transforms Items API V2 response to ConstructorItem and ConstructorVariation form
+     * @param results A JSON array of results
+     */
+    protected static JSONArray transformItemsAPIV2Response(JSONArray results) {
+        for (int i = 0; i < results.length(); i++) {
+            JSONObject result = results.getJSONObject(i);
+            JSONObject resultData = result.getJSONObject("data");
+            JSONObject metadata = new JSONObject();
+            
+            // Move unspecified properties in result data object to metadata object
+            for (Object propertyKey : resultData.keySet()) {
+                String propertyName = (String)propertyKey;
+                Object propertyValue = resultData.get(propertyName);
+
+                if (!propertyName.matches("(description|id|url|image_url|group_ids|facets|keywords)")) {
+                    metadata.put(propertyName, propertyValue);
+                } else {
+                    String camelCasePropertyName = propertyName.replaceFirst("_[a-z]",
+                        String.valueOf(
+                          Character.toUpperCase(
+                            propertyName.charAt(
+                              propertyName.indexOf("_") + 1))));
+                    result.put(camelCasePropertyName, propertyValue);
+                }
+            }
+
+            // Add metadata to result data object
+            result.put("metadata", metadata);
+
+            // Suggested score is already at the top level but its name needs to be converted to camelcase
+            if (result.has("suggested_score")) {
+              result.put("suggestedScore", result.get("suggested_score"));
+            }
+        }
+
+        return results;
     }
 
     /**

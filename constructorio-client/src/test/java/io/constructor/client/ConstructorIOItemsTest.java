@@ -163,4 +163,21 @@ public class ConstructorIOItemsTest {
       assertTrue("Total count is bigger than 1", jsonObj.getInt("total_count") > 1);
       assertNotNull("Items exist", itemsArray);
     }
+
+    @Test
+    public void retrieveItemsShouldDeserializeItemsCorrectly() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      ItemsRequest request = new ItemsRequest();
+      ItemsResponse response = constructor.retrieveItems(request);
+
+      assertTrue("Total count is bigger than 1", response.getTotalCount() > 1);
+      assertNotNull("Items exist", response.getItems());
+      
+      ConstructorItem item = response.getItems().get(0);
+      
+      assertNotNull("Item name deserialized properly", item.getName());
+      assertNotNull("Facets deserialized properly", item.getFacets());
+      assertNotNull("Metadata deserialized properly", item.getMetadata());
+      assertNotNull("URL deserialized properly", item.getUrl());
+    }
 }

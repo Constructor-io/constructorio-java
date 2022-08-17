@@ -176,7 +176,7 @@ public class ConstructorIOVariationsTest {
     public void retrieveVariationsWithMultipleIdsShouldReturnAResponse() throws Exception {
       ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
       VariationsRequest request = new VariationsRequest();
-      request.setIds(Arrays.asList("20001", "M0E20000000E2ZK"));
+      request.setIds(Arrays.asList("20001", "M0E20000000E2ZJ"));
       VariationsResponse response = constructor.retrieveVariations(request);
 
       assertTrue("Total count is bigger than or equal to 2", response.getTotalCount() >= 2);
@@ -194,5 +194,22 @@ public class ConstructorIOVariationsTest {
 
       assertTrue("Total count is bigger than 1", jsonObj.getInt("total_count") > 1);
       assertNotNull("Variations exist", variationsArray);
+    }
+
+    @Test
+    public void retrieveVariationsShouldDeserializeVariationsCorrectly() throws Exception {
+      ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+      VariationsRequest request = new VariationsRequest();
+      VariationsResponse response = constructor.retrieveVariations(request);
+
+      assertTrue("Total count is bigger than 1", response.getTotalCount() > 1);
+      assertNotNull("Variations exist", response.getVariations());
+      
+      ConstructorVariation variation = response.getVariations().get(0);
+      
+      assertNotNull("Item name deserialized properly", variation.getName());
+      assertNotNull("Facets deserialized properly", variation.getFacets());
+      assertNotNull("Metadata deserialized properly", variation.getMetadata());
+      assertNotNull("URL deserialized properly", variation.getUrl());
     }
 }

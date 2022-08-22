@@ -1,10 +1,8 @@
 package io.constructor.client;
 
+import java.io.EOFException;
 import java.nio.charset.Charset;
-import okhttp3.internal.Util;
 import okio.Buffer;
-
-import static okhttp3.internal.Util.decodeHexDigit;
 
 /**
  * Utility file that contains code paths from https://square.github.io/okhttp/4.x/okhttp/okhttp3/-http-url/-builder/
@@ -15,6 +13,13 @@ public class OkHttpUrlBuilderUtils {
 
   public static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
   public static final String PATH_SEGMENT_ENCODE_SET = " \"<>^`{}|/\\?#";
+
+  public static int decodeHexDigit(char c) {
+    if (c >= '0' && c <= '9') return c - '0';
+    if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+    if (c >= 'A' && c <= 'F') return c - 'A' + 10;
+    return -1;
+  }
 
   public static boolean percentEncoded(String encoded, int pos, int limit) {
     return pos + 2 < limit
@@ -95,10 +100,16 @@ public class OkHttpUrlBuilderUtils {
         }
 
         while (!encodedCharBuffer.exhausted()) {
-          int b = encodedCharBuffer.readByte() & 0xff;
-          out.writeByte('%');
-          out.writeByte(HEX_DIGITS[(b >> 4) & 0xf]);
-          out.writeByte(HEX_DIGITS[b & 0xf]);
+          int b;
+          try {
+            b = encodedCharBuffer.readByte() & 0xff;
+            out.writeByte('%');
+            out.writeByte(HEX_DIGITS[(b >> 4) & 0xf]);
+            out.writeByte(HEX_DIGITS[b & 0xf]);
+          } catch (EOFException e) {
+            // Break the loop, end of file reached
+            break;
+          }
         }
       } else {
         // This character doesn't need encoding. Just copy it over.

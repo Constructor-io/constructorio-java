@@ -72,6 +72,9 @@
         "is_slotted":false,
         "strategy":{
           "id":"alternative_items"
+        },
+        "labels": {
+          "is_sponsored": true
         }
       },
       {

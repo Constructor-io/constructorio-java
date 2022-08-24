@@ -400,7 +400,7 @@ public class ConstructorIO {
     /**
      * Deletes multiple variations from your index (limit of 1,000 variations)
      *
-     * @param items the items that you are deleting
+     * @param variations the variations that you are deleting
      * @param section the section of the autocomplete that you're removing the items from.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.

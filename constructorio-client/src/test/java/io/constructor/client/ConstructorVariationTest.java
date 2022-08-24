@@ -89,7 +89,7 @@ public class ConstructorVariationTest {
         String itemId = this.getRandomProductName();
         ConstructorVariation variation = new ConstructorVariation(variationName, variationName, itemId);
         Float suggestedScore = (float) 100000.00;
-        Map<String, String> metadata = new HashMap<String, String>();
+        Map<String, Object> metadata = new HashMap<String, Object>();
 
         variation.setName("airline tickets");
         variation.setSuggestedScore(suggestedScore);

@@ -17,8 +17,8 @@ public class ConstructorVariation {
     private String id;
     private String itemId;
     private String description;
-    private Map<String, String> facets;
-    private Map<String, String> metadata;
+    private Map<String, List<String>> facets;
+    private Map<String, Object> metadata;
     private List<String> groupIds;
 
     /**
@@ -61,6 +61,24 @@ public class ConstructorVariation {
 
         this.id = id;
         this.itemId = itemId;
+        this.name = null;
+        this.suggestedScore = null;
+        this.keywords = null;
+        this.url = null;
+        this.imageUrl = null;
+        this.description = null;
+        this.facets = null;
+        this.metadata = null;
+        this.groupIds = null;
+    }
+
+    public ConstructorVariation(String id) throws IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException("id is required");
+        }
+
+        this.id = id;
+        this.itemId = null;
         this.name = null;
         this.suggestedScore = null;
         this.keywords = null;
@@ -219,28 +237,28 @@ public class ConstructorVariation {
     /**
      * @return the facets
      */
-    public Map<String, String> getFacets() {
+    public Map<String, List<String>> getFacets() {
         return facets;
     }
     
     /**
      * @param facets the facets to set
      */
-    public void setFacets(Map<String, String> facets) {
+    public void setFacets(Map<String, List<String>> facets) {
         this.facets = facets;
     }
 
     /**
      * @return the metadata
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
     
     /**
      * @param metadata the metadata to set
      */
-    public void setMetadata(Map<String, String> metadata) {
+    public void setMetadata(Map<String, Object> metadata) {
         this.metadata = metadata;
     }
 

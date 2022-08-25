@@ -1087,7 +1087,7 @@
           "productType": "Outerwear",
           "price": "536.25"
         },
-        "value": "Coat Aspesi blue"
+        "value": "Coat Aspesi blue",
       }, {
         "data": {
           "facets": [{
@@ -1305,7 +1305,10 @@
           "variation_id": "M0E20000000ECU0"
         },
         "value": "Coat Aspesi blue"
-      }]
+      }],
+      "labels": {
+        "is_sponsored": true
+      }
     }, {
       "data": {
         "facets": [{

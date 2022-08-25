@@ -28,6 +28,7 @@ public class BrowseResponseTest {
         assertEquals("browse group [All] children exist", response.getResponse().getGroups().get(0).getChildren().size(), 5);
         assertEquals("browse results exist", response.getResponse().getResults().size(), 5);
         assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 562);
+        assertTrue("browse result labels exists", response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertEquals("request filter value exists", response.getRequest().get("browse_filter_value"), "Blue");

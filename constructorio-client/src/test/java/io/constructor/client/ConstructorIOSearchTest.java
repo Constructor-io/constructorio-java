@@ -101,6 +101,16 @@ public class ConstructorIOSearchTest {
     }
 
     @Test
+    public void SearchShouldReturnAResultWithLabels() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("item");
+        SearchResponse response = constructor.search(request, userInfo);
+        assertTrue("search results exist", response.getResponse().getResults().size() > 0);
+        assertTrue("labels exist", response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+    }
+
+    @Test
     public void SearchShouldReturnAResultWithVariations() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");

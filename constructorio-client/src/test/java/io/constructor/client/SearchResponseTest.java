@@ -50,6 +50,7 @@ public class SearchResponseTest {
         assertEquals("search result variation metadata [product type] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getMetadata().get("productType"), "Apparel");
         assertEquals("search result variation metadata [price] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getMetadata().get("price"), "411.25");
         assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 261);
+        assertTrue("search result labels exist", response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
         assertTrue("search result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertEquals("request query exists", response.getRequest().get("term"), "jacket");

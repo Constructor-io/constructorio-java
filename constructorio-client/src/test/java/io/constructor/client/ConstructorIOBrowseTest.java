@@ -209,6 +209,17 @@ public class ConstructorIOBrowseTest {
     }
 
     @Test
+    public void BrowseShouldReturnAResultWithLabels() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Brand", "XYZ");
+        request.getHiddenFields().add("testField");
+        BrowseResponse response = constructor.browse(request, userInfo);
+        assertEquals("browse results exist", response.getResponse().getResults().size(), 1);
+        assertTrue("browse result labels exist", response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+    }
+
+    @Test
     public void BrowseShouldReturnAResultWithHiddenFacets() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");

@@ -1,6 +1,8 @@
 package io.constructor.client;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 import com.google.gson.Gson;
 import org.junit.Rule;
@@ -85,5 +87,19 @@ public class ConstructorIORecommendationsTest {
         assertEquals("variations map is correct", variationsMap.getdType(), variationsMapFromResponse.getdType());
         assertEquals("variations map values is correct", variationsMap.getValues().get("size").aggregation, variationsMapFromResponse.getValues().get("size").aggregation);
         assertEquals("variations map group by is correct", variationsMap.getGroupBy().get(0).field, variationsMapFromResponse.getGroupBy().get(0).field);
+    }
+
+    @Test
+    public void getRecommendationsShouldReturnAResultWithFilters() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        RecommendationsRequest request = new RecommendationsRequest("filtered_items");
+        HashMap<String, List<String>> facets = new HashMap<String, List<String>>();
+        facets.put("Color", Arrays.asList("yellow", "red", "green"));
+        request.setFacets(facets);
+        request.setNumResults(5);
+        RecommendationsResponse response = constructor.recommendations(request, userInfo);
+        assertTrue("recommendation results exist", response.getResponse().getResults().size() > 0);
+        assertTrue("recommendation result id exists", response.getResultId() != null);
     }
 }

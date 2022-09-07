@@ -1571,6 +1571,16 @@ public class ConstructorIO {
                 }
             }
 
+            if (req.getFacets() != null) {
+                for (String facetName : req.getFacets().keySet()) {
+                    for (String facetValue : req.getFacets().get(facetName)) {
+                        url = url.newBuilder()
+                            .addQueryParameter("filters[" + facetName + "]", facetValue)
+                            .build();
+                    }
+                }
+            }
+
             if (req.getVariationsMap() != null) {
                 String variationsMapJson = new Gson().toJson(req.getVariationsMap());
                 url = url.newBuilder()

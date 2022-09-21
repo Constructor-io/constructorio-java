@@ -15,9 +15,8 @@ import static org.junit.Assert.*;
 
 public class ConstructorIONextQuizTest {
 
-    private final String apiKey = System.getenv("TEST_API_KEY");
-    private final String quizKey = System.getenv("QUIZ_API_KEY");
-    private final String quizId = "etchells-emporium-quiz";
+    private final String quizKey = System.getenv("TEST_API_KEY");
+    private final String quizId = "test-quiz";
     private static List<List<String>> validAnswers = new ArrayList<> ();
 
     @BeforeClass
@@ -31,35 +30,31 @@ public class ConstructorIONextQuizTest {
 
     @Test
     public void NextQuizShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
         NextQuizResponse response = constructor.nextQuiz(request, null);
 
         assertEquals("Quiz next_question id is correct", 1, response.getNextQuestion().getId());
         assertNotNull("version_id exists", response.getVersionId());
-        assertNotNull("is_all_skippable exists", response.getIsAllSkippable());
-        assertNotNull("is_skippable exists", response.getIsSkippable());
         assertNotNull("is_last_question exists", response.getIsLastQuestion());
     }
 
     @Test
     public void NextQuizAsJsonShouldReturnAResult() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
         String response = constructor.nextQuizAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
 
         assertEquals("Quiz next_question id is correct", 1, jsonObject.getJSONObject("next_question").getInt("id"));
         assertFalse("version_id exists", jsonObject.isNull("version_id"));
-        assertFalse("is_all_skippable exists", jsonObject.isNull("is_all_skippable"));
-        assertFalse("is_skippable exists", jsonObject.isNull("is_skippable"));
         assertFalse("is_last_question exists", jsonObject.isNull("is_last_question"));
     }
 
     @Test
     public void NextQuizShouldReturnErrorWithInvalidQuizId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest("invalidQuiz", quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest("invalidQuiz");
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a valid quiz id before trying again.");
@@ -68,8 +63,8 @@ public class ConstructorIONextQuizTest {
 
     @Test
     public void NextQuizAsJsonShouldReturnErrorWithInvalidQuizId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest("invalidQuiz", quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest("invalidQuiz");
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a valid quiz id before trying again.");
@@ -78,8 +73,8 @@ public class ConstructorIONextQuizTest {
 
     @Test
     public void NextQuizShouldReturnErrorWithInvalidIndexKey() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, "not a valid api key");
+        ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 404] The quiz you requested, \"etchells-emporium-quiz\" was not found, please specify a valid quiz id before trying again.");
@@ -88,8 +83,8 @@ public class ConstructorIONextQuizTest {
 
     @Test
     public void NextQuizAsJsonShouldReturnErrorWithInvalidIndexKey() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, "not a valid api key");
+        ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 404] The quiz you requested, \"etchells-emporium-quiz\" was not found, please specify a valid quiz id before trying again.");
@@ -98,22 +93,20 @@ public class ConstructorIONextQuizTest {
 
     @Test
     public void NextQuizShouldReturnResultWithAnswersParameter() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
         request.setA(validAnswers);
         NextQuizResponse response = constructor.nextQuiz(request, null);
 
         assertEquals("Quiz next_question id is correct", 3, response.getNextQuestion().getId());
         assertNotNull("version_id exists", response.getVersionId());
-        assertNotNull("is_all_skippable exists", response.getIsAllSkippable());
-        assertNotNull("is_skippable exists", response.getIsSkippable());
         assertNotNull("is_last_question exists", response.getIsLastQuestion());
     }
 
     @Test
     public void NextQuizAsJsonShouldReturnResultWithAnswersParameter() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
         request.setA(validAnswers);
         String response = constructor.nextQuizAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);

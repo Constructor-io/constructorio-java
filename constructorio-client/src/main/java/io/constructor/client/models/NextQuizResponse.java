@@ -10,14 +10,8 @@ public class NextQuizResponse {
     @SerializedName("next_question")
     private QuizQuestion nextQuestion;
 
-    @SerializedName("is_skippable")
-    private Boolean isSkippable;
-
     @SerializedName("is_last_question")
     private Boolean isLastQuestion;
-
-    @SerializedName("is_all_skippable")
-    private Boolean isAllSkippable;
 
     @SerializedName("version_id")
     private String versionId;
@@ -28,19 +22,9 @@ public class NextQuizResponse {
     public QuizQuestion getNextQuestion() { return nextQuestion; }
 
     /**
-     * @return the is_skippable
-     */
-    public Boolean getIsSkippable() { return isSkippable; }
-
-    /**
      * @return the is_last_question
      */
     public Boolean getIsLastQuestion() { return isLastQuestion; }
-
-    /**
-     * @return the is_all_skippable
-     */
-    public Boolean getIsAllSkippable() { return isAllSkippable; }
 
     /**
      * @return the version_id

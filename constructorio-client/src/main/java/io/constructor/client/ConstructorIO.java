@@ -1528,7 +1528,6 @@ public class ConstructorIO {
 
             List<String> paths = Arrays.asList("v1", "quizzes", req.getId(), type);
             HttpUrl url = this.makeUrl(paths);
-            url = url.newBuilder().addQueryParameter("index_key", req.getIndexKey()).build();
 
             if (req.getSection() != null) {
                 url = url.newBuilder()
@@ -1558,6 +1557,8 @@ public class ConstructorIO {
                     .url(url)
                     .get()
                     .build();
+
+            System.out.println(url);
 
             return request;
         } catch (Exception exception) {

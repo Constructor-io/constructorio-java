@@ -9,8 +9,8 @@ public class QuizResult {
     @SerializedName("filter_expression")
     private Map<String, Object> filterExpression;
 
-    @SerializedName("browse_url")
-    private String browseUrl;
+    @SerializedName("result_url")
+    private String resultUrl;
 
     /**
      * @return the filter_expression
@@ -18,7 +18,7 @@ public class QuizResult {
     public Map<String, Object> getFilterExpression() { return filterExpression; }
 
     /**
-     * @return the browse_url
+     * @return the result_url
      */
-    public String getBrowseUrl() { return browseUrl; }
+    public String getResultUrl() { return resultUrl; }
 }

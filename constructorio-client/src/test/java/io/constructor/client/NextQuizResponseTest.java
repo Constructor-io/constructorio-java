@@ -26,8 +26,6 @@ public class NextQuizResponseTest {
         assertNotNull("next_question options exists", response.getNextQuestion().getOptions());
         assertEquals("next_question options id exists", 1, response.getNextQuestion().getOptions().get(0).getId());
         assertEquals("next_question options value exists", "Option 1", response.getNextQuestion().getOptions().get(0).getValue());
-        assertTrue("is_skippable exists", response.getIsSkippable());
-        assertTrue("is_all_skippable exists", response.getIsAllSkippable());
         assertTrue("is_last_question exists", response.getIsLastQuestion());
         assertEquals("version_id exists","string", response.getVersionId());
     }

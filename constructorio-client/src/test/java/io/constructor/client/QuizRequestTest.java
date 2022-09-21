@@ -29,19 +29,18 @@ public class QuizRequestTest {
     @Test
     public void NewShouldErrorWithNoQuizId() throws Exception {
         thrown.expect(IllegalArgumentException.class);
-        new QuizRequest(null, "123");
+        new QuizRequest(null);
     }
 
     @Test
     public void NewShouldErrorWithNoIndexKey() throws Exception {
         thrown.expect(IllegalArgumentException.class);
-        new QuizRequest("id", null);
+        new QuizRequest("id");
     }
     @Test
     public void settersShouldSet() throws Exception {
-        QuizRequest request = new QuizRequest("id", "key");
+        QuizRequest request = new QuizRequest("id");
         assertEquals("id", request.getId());
-        assertEquals("key", request.getIndexKey());
         assertNull(request.getSection());
         assertNull(request.getVersionId());
         assertTrue(request.getA().size() == 0);

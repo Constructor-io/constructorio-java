@@ -17,16 +17,12 @@ public class QuizRequest {
      * Creates a Next Quiz/Finalize Quiz request
      *
      * @param id the id of the quiz to request
-     * @param indexKey the index key of the product catalog
      */
-    public QuizRequest(String id, String indexKey) {
+    public QuizRequest(String id) {
         if (id == null)
             throw new IllegalArgumentException("id is a required parameter of type String");
-        if (indexKey == null)
-            throw new IllegalArgumentException("indexKey is a required parameter of type String");
 
         this.id = id;
-        this.indexKey = indexKey;
         this.section = null;
         this.a = new ArrayList<>();
         this.versionId = null;
@@ -43,20 +39,6 @@ public class QuizRequest {
      * @return the id of the quiz to request
      */
     public String getId() { return id; }
-
-    /**
-     * @param indexKey the index_key/api_key of the product catalog
-     */
-    public void setIndexKey(String indexKey) {
-        this.indexKey = indexKey;
-    }
-
-    /**
-     * @return the index_key/api_key of the product catalog
-     */
-    public String getIndexKey() {
-        return indexKey;
-    }
 
     /**
      * @param section the section of the product catalog

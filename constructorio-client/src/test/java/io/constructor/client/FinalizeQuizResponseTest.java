@@ -21,7 +21,7 @@ public class FinalizeQuizResponseTest {
         assertNotNull("result exists", response.getResult());
         assertNotNull("filter_expression exists", response.getResult().getFilterExpression());
         assertNotNull("filter_expression and exists", response.getResult().getFilterExpression().get("and"));
-        assertEquals("browse_url exists", "BROWSE_URL", response.getResult().getBrowseUrl());
+        assertEquals("browse_url exists", "BROWSE_URL", response.getResult().getResultUrl());
         assertEquals("version_id exists","string", response.getVersionId());
     }
 }

@@ -15,6 +15,18 @@ public class QuizQuestion {
     @SerializedName("type")
     private String type;
 
+    @SerializedName("description")
+    private String description;
+
+    @SerializedName("cta_text")
+    private String ctaText;
+
+    @SerializedName("images")
+    private QuizImages images;
+
+    @SerializedName("input_placeholder")
+    private String inputPlaceholder;
+
     @SerializedName("options")
     private List<QuizOption> options;
 
@@ -38,4 +50,23 @@ public class QuizQuestion {
      */
     public List<QuizOption> getOptions() { return options; }
 
+    /**
+     * @return the description
+     */
+    public String getDescription() { return description; }
+
+    /**
+     * @return the ctaText
+     */
+    public String getCtaText() { return ctaText; }
+
+    /**
+     * @return the images
+     */
+    public QuizImages getImages() { return images; }
+
+    /**
+     * @return the inputPlaceholder
+     */
+    public String getInputPlaceholder() { return inputPlaceholder; }
 }

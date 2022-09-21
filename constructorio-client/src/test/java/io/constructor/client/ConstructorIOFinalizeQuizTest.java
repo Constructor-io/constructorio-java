@@ -15,15 +15,14 @@ import static org.junit.Assert.*;
 
 public class ConstructorIOFinalizeQuizTest {
 
-    private final String apiKey = System.getenv("TEST_API_KEY");
-    private final String quizKey = System.getenv("QUIZ_API_KEY");
-    private final String quizId = "etchells-emporium-quiz";
+    private final String quizKey = System.getenv("TEST_API_KEY");
+    private final String quizId = "test-quiz";
     private static List<List<String>> validAnswers = new ArrayList<> ();
 
     @BeforeClass
     public static void init () {
-        validAnswers.add(new ArrayList<String>(Arrays.asList("1", "2")));
         validAnswers.add(new ArrayList<String>(Arrays.asList("1")));
+        validAnswers.add(new ArrayList<String>(Arrays.asList("1", "2")));
     }
 
     @Rule
@@ -31,8 +30,8 @@ public class ConstructorIOFinalizeQuizTest {
 
     @Test
     public void FinalizeQuizShouldErrorWithoutAnswersParameter() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("a (answers) is a required parameter for a finalize request");
@@ -41,8 +40,8 @@ public class ConstructorIOFinalizeQuizTest {
 
     @Test
     public void FinalizeQuizAsJSONShouldErrorWithoutAnswersParameter() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("a (answers) is a required parameter for a finalize request");
@@ -51,20 +50,20 @@ public class ConstructorIOFinalizeQuizTest {
 
     @Test
     public void FinalizeQuizShouldReturnResultWithAnswersParameter() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
         request.setA(validAnswers);
         FinalizeQuizResponse response = constructor.finalizeQuiz(request, null);
 
         assertNotNull("version_id exists", response.getVersionId());
         assertNotNull("result exists", response.getResult());
-        assertNotNull("result browse_url exists", response.getResult().getBrowseUrl());
+        assertNotNull("result browse_url exists", response.getResult().getResultUrl());
     }
 
     @Test
     public void FinalizeQuizAsJsonShouldReturnResultWithAnswersParameter() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
         request.setA(validAnswers);
         String response = constructor.finalizeQuizAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
@@ -76,8 +75,8 @@ public class ConstructorIOFinalizeQuizTest {
 
     @Test
     public void FinalizeQuizShouldReturnErrorWithInvalidQuizId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest("invalidQuiz", quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest("invalidQuiz");
         request.setA(validAnswers);
 
         thrown.expect(ConstructorException.class);
@@ -87,8 +86,8 @@ public class ConstructorIOFinalizeQuizTest {
 
     @Test
     public void FinalizeQuizAsJsonShouldReturnErrorWithInvalidQuizId() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest("invalidQuiz", quizKey);
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest("invalidQuiz");
         request.setA(validAnswers);
 
         thrown.expect(ConstructorException.class);
@@ -98,23 +97,23 @@ public class ConstructorIOFinalizeQuizTest {
 
     @Test
     public void FinalizeQuizShouldReturnErrorWithInvalidIndexKey() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, "not a valid api key");
+        ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
         request.setA(validAnswers);
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 404] The quiz you requested, \"etchells-emporium-quiz\" was not found, please specify a valid quiz id before trying again.");
+        thrown.expectMessage("[HTTP 404] The quiz you requested, \"" + quizId + "\" was not found, please specify a valid quiz id before trying again.");
         FinalizeQuizResponse response = constructor.finalizeQuiz(request, null);
     }
 
     @Test
     public void FinalizeQuizAsJsonShouldReturnErrorWithInvalidIndexKey() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("", null, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId, "not a valid api key");
+        ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
         request.setA(validAnswers);
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 404] The quiz you requested, \"etchells-emporium-quiz\" was not found, please specify a valid quiz id before trying again.");
+        thrown.expectMessage("[HTTP 404] The quiz you requested, \"" + quizId + "\" was not found, please specify a valid quiz id before trying again.");
         String response = constructor.finalizeQuizAsJson(request, null);
     }
 }

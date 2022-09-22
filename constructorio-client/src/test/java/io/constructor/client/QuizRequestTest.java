@@ -33,11 +33,6 @@ public class QuizRequestTest {
     }
 
     @Test
-    public void NewShouldErrorWithNoIndexKey() throws Exception {
-        thrown.expect(IllegalArgumentException.class);
-        new QuizRequest("id");
-    }
-    @Test
     public void settersShouldSet() throws Exception {
         QuizRequest request = new QuizRequest("id");
         assertEquals("id", request.getId());

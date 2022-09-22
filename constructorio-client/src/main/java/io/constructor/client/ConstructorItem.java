@@ -9,88 +9,112 @@ import java.util.Map;
  */
 public class ConstructorItem {
 
-    private String itemName;
-    private Integer suggestedScore;
+    private String name;
+    private Float suggestedScore;
     private List<String> keywords;
     private String url;
     private String imageUrl;
     private String id;
     private String description;
-    private Map<String, String> facets;
-    private Map<String, String> metadata;
+    private Map<String, List<String>> facets;
+    private Map<String, Object> metadata;
     private List<String> groupIds;
 
     /**
-     * Creates an autocomplete item.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
+     * Creates an item.  Optional public fields are in the <a href="https://docs.constructor.io/rest_api/items/items/">API documentation</a>
      *
-     * @param itemName the name of the item that you are adding.
+     * @param id the id of the item that you are adding.
+     * @param name the name of the item that you are adding.
      */
-    public ConstructorItem(String itemName) throws IllegalArgumentException {
-        if (itemName == null) {
-            throw new IllegalArgumentException("itemName is required");
+    public ConstructorItem(String id, String name) throws IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException("id is required");
         }
 
-        this.itemName = itemName;
+        this.id = id;
+        this.name = name;
         this.suggestedScore = null;
         this.keywords = null;
         this.url = null;
         this.imageUrl = null;
         this.description = null;
-        this.id = null;
+        this.facets = null;
+        this.metadata = null;
+        this.groupIds = null;
+    }
+
+    public ConstructorItem(String id) throws IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException("id is required");
+        }
+
+        this.id = id;
+        this.name = null;
+        this.suggestedScore = null;
+        this.keywords = null;
+        this.url = null;
+        this.imageUrl = null;
+        this.description = null;
         this.facets = null;
         this.metadata = null;
         this.groupIds = null;
     }
 
     /**
-     * Returns the HashMap form of an autocomplete item for converting to JSON
+     * Returns the HashMap form of an item for converting to JSON
      */
     public Map<String, Object> toMap() {
-        Map<String, Object> params = new HashMap<String, Object>();
-
-        if (itemName == null) {
-            throw new IllegalArgumentException("itemName is required");
+        Map<String, Object> dataMap = new HashMap<String, Object>();
+        
+        if (this.metadata != null) {
+            dataMap.putAll(this.metadata);
         }
 
-        params.put("item_name", this.itemName);
-        params.put("suggested_score", this.suggestedScore);
-        params.put("keywords", this.keywords);
-        params.put("url", this.url);
-        params.put("image_url", this.imageUrl);
-        params.put("description", this.description);
+        Map<String, Object> params = new HashMap<String, Object>();
+
+        if (id == null) {
+            throw new IllegalArgumentException("id is required");
+        }
+
         params.put("id", this.id);
-        params.put("facets", this.facets);
-        params.put("metadata", this.metadata);
-        params.put("group_ids", this.groupIds);
+        params.put("name", this.name);
+        params.put("suggested_score", this.suggestedScore);
+        dataMap.put("keywords", this.keywords);
+        dataMap.put("url", this.url);
+        dataMap.put("image_url", this.imageUrl);
+        dataMap.put("facets", this.facets);
+        dataMap.put("group_ids", this.groupIds);
+        dataMap.put("description", this.description);
+        params.put("data", dataMap);
        
         return params;
     }
 
     /**
-     * @return the itemName
+     * @return the name
      */
-    public String getItemName() {
-        return itemName;
+    public String getName() {
+        return name;
     }
  
     /**
-     * @param itemName the itemName to set
+     * @param name the name to set
      */
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setName(String name) {
+        this.name = name;
     }
     
     /**
      * @return the suggestedScore
      */
-    public Integer getSuggestedScore() {
+    public Float getSuggestedScore() {
         return suggestedScore;
     }
 
     /**
      * @param suggestedScore the suggestedScore to set
      */
-    public void setSuggestedScore(Integer suggestedScore) {
+    public void setSuggestedScore(Float suggestedScore) {
         this.suggestedScore = suggestedScore;
     }
 
@@ -167,28 +191,28 @@ public class ConstructorItem {
     /**
      * @return the facets
      */
-    public Map<String, String> getFacets() {
+    public Map<String, List<String>> getFacets() {
         return facets;
     }
     
     /**
      * @param facets the facets to set
      */
-    public void setFacets(Map<String, String> facets) {
+    public void setFacets(Map<String, List<String>> facets) {
         this.facets = facets;
     }
 
     /**
      * @return the metadata
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
     
     /**
      * @param metadata the metadata to set
      */
-    public void setMetadata(Map<String, String> metadata) {
+    public void setMetadata(Map<String, Object> metadata) {
         this.metadata = metadata;
     }
 

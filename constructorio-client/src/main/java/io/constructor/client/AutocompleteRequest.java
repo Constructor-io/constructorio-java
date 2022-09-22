@@ -14,6 +14,7 @@ public class AutocompleteRequest {
     private Map<String, Integer> resultsPerSection;
     private List<String> hiddenFields;
     private Map<String, List<String>> filters;
+    private VariationsMap variationsMap;
 
     /**
      * Creates an autocomplete request
@@ -29,6 +30,7 @@ public class AutocompleteRequest {
       this.resultsPerSection = new HashMap<String, Integer>();
       this.hiddenFields = new ArrayList<String>();
       this.filters = new HashMap<String, List<String>>();
+      this.variationsMap = null;
     }
 
     /**
@@ -85,5 +87,19 @@ public class AutocompleteRequest {
      */
     public Map<String, List<String>> getFilters() {
       return filters;
+    }
+
+    /**
+     * @param variationsMap the variationsMap to set
+     */
+    public void setVariationsMap(VariationsMap variationsMap) {
+        this.variationsMap = variationsMap;
+    }
+
+    /**
+     * @return the variations map
+     */
+    public VariationsMap getVariationsMap() {
+        return variationsMap;
     }
 }

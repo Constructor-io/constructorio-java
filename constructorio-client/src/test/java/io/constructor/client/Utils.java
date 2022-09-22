@@ -3,6 +3,9 @@ package io.constructor.client;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+import java.util.HashMap;
 import java.util.UUID;
 
 import okhttp3.MediaType;
@@ -26,10 +29,52 @@ public class Utils {
      */
     public static ConstructorItem createProductItem() {
         String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+        String id = name;
         String url = "https://constructor.io/products/" + name;
-        ConstructorItem item = new ConstructorItem(name);
+        
+        HashMap<String, List<String>> facets = new HashMap<String, List<String>>();
+        facets.put("color", Arrays.asList("blue", "red"));
+
+        HashMap<String, Object> metadata = new HashMap<String, Object>();
+        metadata.put("brand", "abc");
+
+        HashMap<String, String> complexMetadataField = new HashMap<String, String>();
+        complexMetadataField.put("key1", "val1");
+        complexMetadataField.put("key2", "val2");
+        metadata.put("complexMetadataField", complexMetadataField);
+
+        ConstructorItem item = new ConstructorItem(id, name);
         item.setUrl(url);
+        item.setFacets(facets);
+        item.setMetadata(metadata);
         return item;
+    }
+
+    /**
+     * @return a ConstructorVariation
+     */
+    public static ConstructorVariation createProductVariation(String itemId) {
+        String name = "Variation" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
+        String id = name;
+        String url = "https://constructor.io/variations/" + name;
+
+        HashMap<String, List<String>> facets = new HashMap<String, List<String>>();
+        facets.put("color", Arrays.asList("blue", "red"));
+
+        HashMap<String, Object> metadata = new HashMap<String, Object>();
+        metadata.put("brand", "abc");
+
+        HashMap<String, String> complexMetadataField = new HashMap<String, String>();
+        complexMetadataField.put("key1", "val1");
+        complexMetadataField.put("key2", "val2");
+        metadata.put("complexMetadataField", complexMetadataField);
+
+        ConstructorVariation variation = new ConstructorVariation(id, itemId, name);
+        variation.setUrl(url);
+        variation.setUrl(url);
+        variation.setFacets(facets);
+        variation.setMetadata(metadata);
+        return variation;
     }
 
     /**
@@ -68,8 +113,8 @@ public class Utils {
     public static void enableHTTPLogging() {
         HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
         logger.setLevel(Level.NONE);
-        OkHttpClient client = ConstructorIO.getClient();
+        OkHttpClient client = ConstructorIO.getHttpClient();
         OkHttpClient newClient = client.newBuilder().addInterceptor(logger).build();
-        ConstructorIO.setClient(newClient);
+        ConstructorIO.setHttpClient(newClient);
     }
 }

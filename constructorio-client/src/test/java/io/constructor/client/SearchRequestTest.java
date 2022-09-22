@@ -44,6 +44,10 @@ public class SearchRequestTest {
         assertNull(request.getSortBy());
         assertTrue(request.getSortAscending());
         assertNull(request.getCollectionId());
+        assertNull(request.getPreFilterExpression());
+        assertNull(request.getQsParam());
+        assertNull(request.getNow());
+        assertEquals(request.getOffset(), 0);
     }
 
     @Test
@@ -55,6 +59,11 @@ public class SearchRequestTest {
         Map<String, String> formatOptions = new HashMap<String, String>();
         formatOptions.put("groups_start", "top");
         List<String> hiddenFields = Arrays.asList("hiddenField1", "hiddenField2");
+        List<String> hiddenFacets = Arrays.asList("hiddenFacet1", "hiddenFacet2");
+        String preFilterExpression = "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"electronics-group-id\"},{\"name\":\"Price\",\"range\":[\"-inf\",200]}]},{\"and\":[{\"name\":\"Type\",\"value\":\"Laptop\"},{\"not\":{\"name\":\"Price\",\"range\":[800,\"inf\"]}}]}]}";
+        String qsParam = "{\"num_results_per_page\":\"10\",\"filters\":{\"keywords\":[\"battery-powered\"]}}";
+        String now = "1659049486";
+        int offset = 2;
         
         request.setQuery("airline tickets");
         request.setSection("Search Suggestions");
@@ -67,6 +76,11 @@ public class SearchRequestTest {
         request.setCollectionId("last minute getaways");
         request.setFormatOptions(formatOptions);
         request.setHiddenFields(hiddenFields);
+        request.setHiddenFacets(hiddenFacets);
+        request.setPreFilterExpression(preFilterExpression);
+        request.setQsParam(qsParam);
+        request.setNow(now);
+        request.setOffset(offset);
         
         assertEquals(request.getQuery(), "airline tickets");
         assertEquals(request.getSection(), "Search Suggestions");
@@ -79,5 +93,11 @@ public class SearchRequestTest {
         assertEquals(request.getCollectionId(), "last minute getaways");
         assertEquals(request.getFormatOptions(), formatOptions);
         assertEquals(request.getHiddenFields(), hiddenFields);
+        assertEquals(request.getHiddenFacets(), hiddenFacets);
+        assertEquals(request.getPreFilterExpression(), preFilterExpression);
+        assertEquals(request.getQsParam(), qsParam);
+        assertEquals(request.getNow(), now);
+        assertEquals(request.getOffset(), offset);
+
     }
 }

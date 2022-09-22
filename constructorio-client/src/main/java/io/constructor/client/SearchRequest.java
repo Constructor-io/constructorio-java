@@ -21,7 +21,13 @@ public class SearchRequest {
     private String collectionId;
     private Map<String, String>formatOptions;
     private List<String> hiddenFields;
-
+    private List<String> hiddenFacets;
+    private VariationsMap variationsMap;
+    private String preFilterExpression;
+    private String qsParam;
+    private String now;
+    private int offset;
+    
     /**
      * Creates a search request
      *
@@ -40,6 +46,12 @@ public class SearchRequest {
       this.sortAscending = true;
       this.formatOptions = new HashMap<String, String>();
       this.hiddenFields = new ArrayList<String>();
+      this.hiddenFacets = new ArrayList<String>();
+      this.variationsMap = null;
+      this.preFilterExpression = null;
+      this.qsParam = null;
+      this.now = null;
+      this.offset = 0;
     }
 
     /**
@@ -78,7 +90,7 @@ public class SearchRequest {
     }
 
     /**
-     * @param page the page to set
+     * @param page the page to set (Can't be used together with the 'offset' parameter)
      */
     public void setPage(int page) {
       this.page = page;
@@ -169,7 +181,7 @@ public class SearchRequest {
     }
 
     /**
-     * @param formatOptions the formatOptions to set
+     * @param formatOptions the formatOptions to set. Please refer to https://docs.constructor.io/rest_api/search/queries for details
      */
     public void setFormatOptions(Map<String, String> formatOptions) {
       this.formatOptions = formatOptions;
@@ -194,5 +206,89 @@ public class SearchRequest {
      */
     public List<String> getHiddenFields() {
       return hiddenFields;
+    }
+
+    /**
+     * @param hiddenFacets the hiddenFacets to set
+     */
+    public void setHiddenFacets(List<String> hiddenFacets) {
+      this.hiddenFacets = hiddenFacets;
+    }
+
+    /**
+     * @return the hidden facets
+     */
+    public List<String> getHiddenFacets() {
+      return hiddenFacets;
+    }
+
+    /**
+     * @param variationsMap the variationsMap to set
+     */
+    public void setVariationsMap(VariationsMap variationsMap) {
+      this.variationsMap = variationsMap;
+    }
+
+    /**
+     * @return the variations map
+     */
+    public VariationsMap getVariationsMap() {
+      return variationsMap;
+    }
+
+    /**
+     * @param preFilterExpression the faceting expression to scope search results (JSON-encoded query string). Please refer to https://docs.constructor.io/rest_api/collections#add-items-dynamically
+     */
+    public void setPreFilterExpression(String preFilterExpression) {
+      this.preFilterExpression = preFilterExpression;
+    }
+
+    /**
+     * @return the prefilter expression
+    */
+    public String getPreFilterExpression() {
+      return preFilterExpression;
+    }
+
+    /**
+     * @param qsParam any parameters listed in the API documentation can be serialized into a JSON object and parsed through this parameter. Please refer to https://docs.constructor.io/rest_api/search/queries/
+     */
+    public void setQsParam(String qsParam) {
+      this.qsParam = qsParam;
+    }
+
+    /**
+     * @return the qs parameter
+    */
+    public String getQsParam() {
+      return qsParam;
+    }
+
+    /**
+     * @param now a unix epoch timestamp used to emulate "past" and "future" requests. Please refer to https://docs.constructor.io/rest_api/search/queries/
+     */
+    public void setNow(String now) {
+      this.now = now;
+    }
+
+    /**
+     * @return the now parameter
+    */
+    public String getNow() {
+      return now;
+    }
+
+    /**
+     * @param offset the number of results to skip from the beginning (Can't be used together with the 'page' parameter)
+     */
+    public void setOffset(int offset) {
+      this.offset = offset;
+    }
+
+    /**
+     * @return the offset
+    */
+    public int getOffset() {
+      return offset;
     }
 }

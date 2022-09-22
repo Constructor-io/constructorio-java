@@ -10,7 +10,7 @@ Full API documentation is available on [Github Pages](https://constructor-io.git
 
 # Requirements
 
-Requesting results from your JVM based back-end can be useful in order to control result rendering logic on your server, or augment/hydrate results with data from another system. However, a back-end integration has additional requirements compared to a front-end integration. Please review [Back End API Integration](https://constructorio.zendesk.com/hc/en-us/articles/360047993194-Back-end-API-Integration) for more detail.
+Requesting results from your JVM based back-end can be useful in order to control result rendering logic on your server, or augment/hydrate results with data from another system. However, a back-end integration has additional requirements compared to a front-end integration. Please review the [Additional Information For Backend Integrations](https://github.com/Constructor-io/constructorio-java/wiki/Additional-Information-for-Backend-Integrations) article within the wiki for more detail.
 
 # Installation
 
@@ -105,6 +105,13 @@ request.setResultsPerSection(resultsPerSection);
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
 userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
 
+// Add a variations map to request specific variation attributes as an array or object (optional)
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.setdType(VariationsMap.Dtypes.array);
+variationsMap.addGroupByRule("variation", "data.variation_id");
+variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+request.setVariationsMap(variationsMap);
+
 // Request results as an object
 AutocompleteResponse response = constructor.autocomplete(request, userInfo);
 
@@ -128,9 +135,20 @@ request.setSortBy("Price");
 request.setSortAscending(true);
 request.getFacets().put("Brand", Arrays.asList("Jif"))
 
+// Add the following paramaters to request for hidden fields or facets
+request.getHiddenFields().add("hidden_price_field");
+request.getHiddenFacets().add("hidden_brand_facet");
+
 // Create a UserInfo object with the session and unique device identifier (optional)
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
 userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
+
+// Add a variations map to request specific variation attributes as an array or object (optional)
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.setdType(VariationsMap.Dtypes.array);
+variationsMap.addGroupByRule("variation", "data.variation_id");
+variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+request.setVariationsMap(variationsMap);
 
 // Request results as an object
 SearchResponse response = constructor.search(request, userInfo);
@@ -205,9 +223,20 @@ request.setSortBy("Price");
 request.setSortAscending(true);
 request.getFacets().put("Brand", Arrays.asList("Jif"))
 
+// Add the following paramaters to request for hidden fields or facets
+request.getHiddenFields().add("hidden_price_field");
+request.getHiddenFacets().add("hidden_brand_facet");
+
 // Create a UserInfo object with the session and unique device identifier (optional)
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
 userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
+
+// Add a variations map to request specific variation attributes as an array or object (optional)
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.setdType(VariationsMap.Dtypes.array);
+variationsMap.addGroupByRule("variation", "data.variation_id");
+variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+request.setVariationsMap(variationsMap);
 
 // Request results as an object
 BrowseResponse response = constructor.browse(request, userInfo);
@@ -247,6 +276,10 @@ request.setGroupId("625");r
 request.setSortBy("Price");
 request.setSortAscending(true);
 request.getFacets().put("Brand", Arrays.asList("Jif"))
+
+// Add the following paramaters to request for hidden fields or facets
+request.getHiddenFields().add("hidden_price_field");
+request.getHiddenFacets().add("hidden_brand_facet");
 
 // Create a UserInfo object with the session and unique device identifier (optional)
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
@@ -290,6 +323,13 @@ request.setItemIds(Arrays.asList("9838172"))
 // Create a UserInfo object with the session and unique device identifier (optional)
 UserInfo userInfo = new UserInfo(5, "device-id-1123123");
 userInfo.setUserSegments(Arrays.asList("Desktop", "Chrome"));
+
+// Add a variations map to request specific variation attributes as an array or object (optional)
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.setdType(VariationsMap.Dtypes.array);
+variationsMap.addGroupByRule("variation", "data.variation_id");
+variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+request.setVariationsMap(variationsMap);
 
 // Request results as an object
 RecommendationsResponse response = constructor.recommendations(request, userInfo);

@@ -84,7 +84,10 @@
           ]
         },
         "value":"Planters Peanuts Dry Roasted - 16 Oz",
-        "is_slotted":false
+        "is_slotted":false,
+        "labels": {
+          "is_sponsored": true
+        }
       },
       {
         "matched_terms":[

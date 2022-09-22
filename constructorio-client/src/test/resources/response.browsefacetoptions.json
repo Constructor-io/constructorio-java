@@ -1,0 +1,70 @@
+{
+  "response": {
+    "facets": [
+      {
+        "display_name": "Color",
+        "name": "Color",
+        "type": "multiple",
+        "options": [
+          {
+            "status": "",
+            "count": 2,
+            "display_name": "Blue",
+            "value": "Blue",
+            "data": {}
+          },
+          {
+            "status": "",
+            "count": 1,
+            "display_name": "yellow",
+            "value": "yellow",
+            "data": {}
+          },
+          {
+            "status": "",
+            "count": 1,
+            "display_name": "red",
+            "value": "red",
+            "data": {}
+          },
+          {
+            "status": "",
+            "count": 1,
+            "display_name": "green",
+            "value": "green",
+            "data": {}
+          }
+        ],
+        "data": {}
+      }
+    ]
+  },
+  "result_id": "b776803b-5e00-4c92-b519-3ef58bf027f6",
+  "request": {
+    "facet_name": "Color",
+    "term": "",
+    "page": 1,
+    "num_results_per_page": 20,
+    "fmt_options": {
+      "groups_start": "current",
+      "groups_max_depth": 1
+    },
+    "sort_by": "relevance",
+    "sort_order": "descending",
+    "section": "Products",
+    "features": {
+      "query_items": true,
+      "auto_generated_refined_query_rules": true,
+      "manual_searchandizing": true,
+      "personalization": true,
+      "filter_items": true
+    },
+    "feature_variants": {
+      "query_items": null,
+      "auto_generated_refined_query_rules": null,
+      "manual_searchandizing": null,
+      "personalization": null,
+      "filter_items": null
+    }
+  }
+}

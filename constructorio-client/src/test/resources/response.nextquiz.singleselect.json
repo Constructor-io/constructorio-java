@@ -12,7 +12,7 @@
         "value": "Who",
         "attribute": {
           "name": "group_id",
-          "value": "test-value",
+          "value": "test-value"
         },
         "images": {
           "primary_url": "https://example.com/image",

@@ -2321,8 +2321,6 @@ public class ConstructorIO {
                     .get()
                     .build();
 
-            System.out.println(url);
-
             return request;
         } catch (Exception exception) {
             throw new ConstructorException(exception);

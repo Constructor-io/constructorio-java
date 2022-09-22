@@ -9,8 +9,8 @@ public class QuizResult {
     @SerializedName("filter_expression")
     private Map<String, Object> filterExpression;
 
-    @SerializedName("result_url")
-    private String resultUrl;
+    @SerializedName("results_url")
+    private String resultsUrl;
 
     /**
      * @return the filter_expression
@@ -20,5 +20,5 @@ public class QuizResult {
     /**
      * @return the result_url
      */
-    public String getResultUrl() { return resultUrl; }
+    public String getResultsUrl() { return resultsUrl; }
 }

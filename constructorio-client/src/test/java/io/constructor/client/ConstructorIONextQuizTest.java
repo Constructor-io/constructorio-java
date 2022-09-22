@@ -21,8 +21,8 @@ public class ConstructorIONextQuizTest {
 
     @BeforeClass
     public static void init () {
-        validAnswers.add(new ArrayList<String>(Arrays.asList("1", "2")));
         validAnswers.add(new ArrayList<String>(Arrays.asList("1")));
+        validAnswers.add(new ArrayList<String>(Arrays.asList("1", "2")));
     }
 
     @Rule
@@ -77,7 +77,7 @@ public class ConstructorIONextQuizTest {
         QuizRequest request = new QuizRequest(quizId);
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 404] The quiz you requested, \"etchells-emporium-quiz\" was not found, please specify a valid quiz id before trying again.");
+        thrown.expectMessage("[HTTP 404] The quiz you requested, \"" + quizId + "\" was not found, please specify a valid quiz id before trying again.");
         NextQuizResponse response = constructor.nextQuiz(request, null);
     }
 
@@ -87,7 +87,7 @@ public class ConstructorIONextQuizTest {
         QuizRequest request = new QuizRequest(quizId);
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 404] The quiz you requested, \"etchells-emporium-quiz\" was not found, please specify a valid quiz id before trying again.");
+        thrown.expectMessage("[HTTP 404] The quiz you requested, \"" + quizId + "\" was not found, please specify a valid quiz id before trying again.");
         String response = constructor.nextQuizAsJson(request, null);
     }
 
@@ -113,8 +113,6 @@ public class ConstructorIONextQuizTest {
 
         assertEquals("Quiz next_question id is correct", 3, jsonObject.getJSONObject("next_question").getInt("id"));
         assertFalse("version_id exists", jsonObject.isNull("version_id"));
-        assertFalse("is_all_skippable exists", jsonObject.isNull("is_all_skippable"));
-        assertFalse("is_skippable exists", jsonObject.isNull("is_skippable"));
         assertFalse("is_last_question exists", jsonObject.isNull("is_last_question"));
     }
 }

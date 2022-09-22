@@ -57,7 +57,7 @@ public class ConstructorIOFinalizeQuizTest {
 
         assertNotNull("version_id exists", response.getVersionId());
         assertNotNull("result exists", response.getResult());
-        assertNotNull("result browse_url exists", response.getResult().getResultUrl());
+        assertNotNull("result results_url exists", response.getResult().getResultsUrl());
     }
 
     @Test
@@ -70,7 +70,7 @@ public class ConstructorIOFinalizeQuizTest {
 
         assertFalse("version_id exists", jsonObject.isNull("version_id"));
         assertFalse("result exists", jsonObject.isNull("result"));
-        assertFalse("result browse_url exists", jsonObject.getJSONObject("result").isNull("browse_url"));
+        assertFalse("result results_url exists", jsonObject.getJSONObject("result").isNull("results_url"));
     }
 
     @Test

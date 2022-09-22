@@ -1881,6 +1881,7 @@ public class ConstructorIO {
         return new Gson().fromJson(transformed, FinalizeQuizResponse.class);
     }
 
+    /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an Items response.
      * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.

@@ -13,6 +13,9 @@ public class QuizOption {
     @SerializedName("attribute")
     private QuizOptionAttribute attribute;
 
+    @SerializedName("images")
+    private QuizImages images;
+
     /**
      * @return the id
      */
@@ -27,4 +30,9 @@ public class QuizOption {
      * @return the quiz option attribute
      */
     public QuizOptionAttribute getAttribute() { return attribute; }
+
+    /**
+     * @return the quiz option images
+     */
+    public QuizImages getImages() { return images; }
 }

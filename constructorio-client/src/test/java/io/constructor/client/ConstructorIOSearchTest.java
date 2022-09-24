@@ -403,6 +403,7 @@ public class ConstructorIOSearchTest {
         assertTrue("search result refined content [data] exists", response.getResponse().getRefinedContent().get(0).getData() != null);
         assertEquals("search result refined content data [tag-1] exists", response.getResponse().getRefinedContent().get(0).getData().get("tag-1"), "tag-1-value");
         assertEquals("search result refined content data [tag-2] exists", response.getResponse().getRefinedContent().get(0).getData().get("tag-2"), "tag-2-value");
+        assertTrue("search result refined content data [arbitraryDataObject] exists", response.getResponse().getRefinedContent().get(0).getData().get("arbitraryDataObject") != null);
         assertTrue("search result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertEquals("request query exists", response.getRequest().get("term"), "item");

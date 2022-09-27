@@ -83,7 +83,7 @@ public class ConstructorItemTest {
         String itemId = itemName;
         ConstructorItem item = new ConstructorItem(itemId, itemName);
         Float suggestedScore = (float) 100000.00;
-        Map<String, String> metadata = new HashMap<String, String>();
+        Map<String, Object> metadata = new HashMap<String, Object>();
         
         item.setName("airline tickets");
         item.setSuggestedScore(suggestedScore);

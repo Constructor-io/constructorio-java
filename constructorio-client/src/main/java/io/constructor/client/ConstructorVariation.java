@@ -95,7 +95,7 @@ public class ConstructorVariation {
      */
     public Map<String, Object> toMap() {
         Map<String, Object> dataMap = new HashMap<String, Object>();
-        
+
         if (this.metadata != null) {
             dataMap.putAll(this.metadata);
         }
@@ -118,7 +118,7 @@ public class ConstructorVariation {
         dataMap.put("group_ids", this.groupIds);
         dataMap.put("description", this.description);
         params.put("data", dataMap);
-       
+
         return params;
     }
 
@@ -128,14 +128,14 @@ public class ConstructorVariation {
     public String getName() {
         return name;
     }
- 
+
     /**
      * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
     }
-    
+
     /**
      * @return the suggestedScore
      */
@@ -240,7 +240,7 @@ public class ConstructorVariation {
     public Map<String, List<Object>> getFacets() {
         return facets;
     }
-    
+
     /**
      * @param facets the facets to set
      */
@@ -254,7 +254,7 @@ public class ConstructorVariation {
     public Map<String, Object> getMetadata() {
         return metadata;
     }
-    
+
     /**
      * @param metadata the metadata to set
      */

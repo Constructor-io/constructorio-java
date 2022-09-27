@@ -32,8 +32,8 @@ public class Utils {
         String id = name;
         String url = "https://constructor.io/products/" + name;
         
-        HashMap<String, List<String>> facets = new HashMap<String, List<String>>();
-        facets.put("color", Arrays.asList("blue", "red"));
+        HashMap<String, List<Object>> facets = new HashMap<String, List<Object>>();
+        facets.put("color", Arrays.<Object>asList("blue", "red", 123));
 
         HashMap<String, Object> metadata = new HashMap<String, Object>();
         metadata.put("brand", "abc");
@@ -58,8 +58,8 @@ public class Utils {
         String id = name;
         String url = "https://constructor.io/variations/" + name;
 
-        HashMap<String, List<String>> facets = new HashMap<String, List<String>>();
-        facets.put("color", Arrays.asList("blue", "red"));
+        HashMap<String, List<Object>> facets = new HashMap<String, List<Object>>();
+        facets.put("color", Arrays.<Object>asList("blue", "red", 123));
 
         HashMap<String, Object> metadata = new HashMap<String, Object>();
         metadata.put("brand", "abc");

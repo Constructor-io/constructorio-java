@@ -90,6 +90,16 @@ public class ConstructorIOAutocompleteTest {
     }
 
     @Test
+    public void autocompleteShouldReturnAResultWithLabels() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        AutocompleteRequest request = new AutocompleteRequest("item");
+        AutocompleteResponse response = constructor.autocomplete(request, userInfo);
+        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 5);
+        assertTrue("autocomplete result labels exists", response.getSections().get("Products").get(0).getLabels().get("is_sponsored"));
+    }
+
+    @Test
     public void autocompleteShouldReturnAResultWithOneFilter() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");

@@ -25,6 +25,7 @@ public class RecommendationsResponseTest {
         assertEquals("total number of results", (int)response.getResponse().getTotalNumberOfResults(), 10);
         assertTrue("recommendation result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
+        assertTrue("recommendation result labels exist", response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
         assertEquals("request filter value exists", response.getRequest().get("item_id"), "109350015");
     }
 }

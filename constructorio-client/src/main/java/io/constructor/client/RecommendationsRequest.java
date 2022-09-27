@@ -1,6 +1,8 @@
 package io.constructor.client;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Constructor.io Recommendations Request
@@ -10,6 +12,7 @@ public class RecommendationsRequest {
     private String podId;
     private int numResults;
     private List<String> itemIds;
+    private Map<String, List<String>>facets;
     private String section;
     private VariationsMap variationsMap;
 
@@ -28,6 +31,7 @@ public class RecommendationsRequest {
       this.itemIds = null;
       this.section = "Products";
       this.variationsMap = null;
+      this.facets = new HashMap<String, List<String>>();
     }
 
     /**
@@ -98,5 +102,19 @@ public class RecommendationsRequest {
      */
     public VariationsMap getVariationsMap() {
         return variationsMap;
+    }
+
+    /**
+     * @param facets the facets to set
+     */
+    public void setFacets(Map<String, List<String>> facets) {
+      this.facets = facets;
+    }
+
+    /**
+     * @return the facets
+     */
+    public Map<String, List<String>> getFacets() {
+      return facets;
     }
 }

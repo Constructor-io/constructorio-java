@@ -22,6 +22,7 @@ public class AutocompleteResponseTest {
         assertEquals("product suggestions exist", response.getSections().get("Products").size(), 6);
         assertTrue("result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
+        assertTrue("labels exists", response.getSections().get("Products").get(0).getLabels().get("is_sponsored"));
         assertEquals("request query exists", response.getRequest().get("query"), "peanut");
     }
 

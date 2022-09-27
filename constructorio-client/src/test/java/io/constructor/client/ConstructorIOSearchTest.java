@@ -5,12 +5,16 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNull;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,6 +26,7 @@ import io.constructor.client.models.SearchResponse;
 public class ConstructorIOSearchTest {
 
     private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiToken = System.getenv("TEST_API_TOKEN");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -42,8 +47,8 @@ public class ConstructorIOSearchTest {
         SearchRequest request = new SearchRequest("item1");
         request.setResultsPerPage(5);
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 5);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 9);
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 5);
+        assertTrue("search results count as expected", (int)response.getResponse().getTotalNumberOfResults() >= 5);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -54,8 +59,8 @@ public class ConstructorIOSearchTest {
         SearchRequest request = new SearchRequest("item1");
         request.setPage(1);
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 9);
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 5);
+        assertTrue("search results count as expected", (int)response.getResponse().getTotalNumberOfResults() >= 5);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -78,8 +83,8 @@ public class ConstructorIOSearchTest {
         SearchRequest request = new SearchRequest("item1");
         request.setGroupId("All");
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 2);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 2);
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 1);
+        assertTrue("search results count as expected", (int)response.getResponse().getTotalNumberOfResults() >= 1);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -87,7 +92,7 @@ public class ConstructorIOSearchTest {
     public void SearchShouldReturnAResultWithColorFacets() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("item");
+        SearchRequest request = new SearchRequest("item1");
         request.getFacets().put("Color", Arrays.asList("Blue"));
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 1);
@@ -96,12 +101,22 @@ public class ConstructorIOSearchTest {
     }
 
     @Test
+    public void SearchShouldReturnAResultWithLabels() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("item");
+        SearchResponse response = constructor.search(request, userInfo);
+        assertTrue("search results exist", response.getResponse().getResults().size() > 0);
+        assertTrue("labels exist", response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+    }
+
+    @Test
     public void SearchShouldReturnAResultWithVariations() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("item1");
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 5);
         assertEquals("search result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 1);
         assertEquals("search result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 2);
         assertEquals("search result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "item1 variation");
@@ -131,8 +146,8 @@ public class ConstructorIOSearchTest {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         SearchRequest request = new SearchRequest("item");
         SearchResponse response = constructor.search(request, null);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 9);
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 5);
+        assertTrue("search results count as expected", (int)response.getResponse().getTotalNumberOfResults() >= 5);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -142,8 +157,8 @@ public class ConstructorIOSearchTest {
         constructor.setApiKey(apiKey);
         SearchRequest request = new SearchRequest("item");
         SearchResponse response = constructor.search(request, null);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
-        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 9);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 5);
+        assertEquals("search results count as expected", (int)response.getResponse().getTotalNumberOfResults(), 5);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -203,7 +218,7 @@ public class ConstructorIOSearchTest {
         SearchRequest request = new SearchRequest("item1");
         request.getHiddenFields().add("testField");
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 5);
         assertEquals("search result [testField] exists", response.getResponse().getResults().get(0).getData().getMetadata().get("testField"), "hiddenFieldValue");
     }
 
@@ -222,7 +237,7 @@ public class ConstructorIOSearchTest {
             }
         }).findAny().orElse(null);
 
-        assertEquals("search results exist", response.getResponse().getResults().size(), 9);
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 5);
         assertNotNull("search facet [Brand] exists", brandFacet);
     }
 
@@ -280,5 +295,78 @@ public class ConstructorIOSearchTest {
         assertTrue("result contains variations_map", varMapObject.size() >= 1);
         assertEquals("variations map values is correct", variationsMap.getValues().get("size").aggregation, variationsMapFromResponse.getValues().get("size").aggregation);
         assertEquals("variations map group by is correct", variationsMap.getGroupBy().get(0).field, variationsMapFromResponse.getGroupBy().get(0).field);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithPreFilterExpression() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("Jacket");
+        String preFilterExpression = "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"electronics-group-id\"},{\"name\":\"Price\",\"range\":[\"-inf\",200.0]}]},{\"and\":[{\"name\":\"Type\",\"value\":\"Laptop\"},{\"not\":{\"name\":\"Price\",\"range\":[800.0,\"inf\"]}}]}]}";
+        request.setPreFilterExpression(preFilterExpression);
+
+        SearchResponse response = constructor.search(request, userInfo);
+        String preFilterExpressionFromRequestJsonString = new Gson().toJson(response.getRequest().get("pre_filter_expression"));
+
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 0);
+        assertNotNull("pre_filter_expression exists", response.getRequest().get("pre_filter_expression"));
+        assertEquals(preFilterExpression, preFilterExpressionFromRequestJsonString);
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithQsParam() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("item");
+        String qsParam = "{\"filters\":{\"Color\":[\"green\"]}}";
+        request.setQsParam(qsParam);
+
+        SearchResponse response = constructor.search(request, userInfo);
+        Map<String, List<String>> filtersFromRequest = (Map) response.getRequest().get("filters");
+
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 0);
+        assertEquals(Arrays.asList("green"), filtersFromRequest.get("Color"));
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithNow() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("Jacket");
+        String now = "1659053211";
+        request.setNow(now);
+
+        SearchResponse response = constructor.search(request, userInfo);
+
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 0);
+        assertNotNull("now exists", response.getRequest().get("now"));
+        assertEquals(now, new DecimalFormat("#").format(response.getRequest().get("now")));
+    }
+
+    @Test
+    public void SearchShouldReturnAResultWithOffset() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("Jacket");
+        int offset = 5;
+        request.setOffset(offset);
+
+        SearchResponse response = constructor.search(request, userInfo);
+
+        assertTrue("search results exist", response.getResponse().getResults().size() >= 0);
+        assertNotNull("offset exists", response.getRequest().get("offset"));
+        assertEquals(String.valueOf(offset), new DecimalFormat("#").format(response.getRequest().get("offset")));
+    }
+
+    @Test
+    public void SearchShouldReturnErrorWithPageAndOffset() throws Exception {
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("[HTTP 400] You've used both 'page' and 'offset' parameters for pagination. Please, use just one of them");
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("Jacket");
+        request.setPage(2);
+        request.setOffset(5);
+        constructor.search(request, userInfo);
     }
 }

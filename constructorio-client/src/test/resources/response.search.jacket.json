@@ -967,7 +967,10 @@
           "variation_id": "M0E20000000FBM0"
         },
         "value": "Bully \u2013 Leather Jacket"
-      }]
+      }],
+      "labels": {
+        "is_sponsored": true
+      }
     }, {
       "data": {
         "description": "Thanks to their perfect tailoring, leather jackets by Bully are a favorite choice, not only for fashion insiders. Softest leather and modern manufacturing techniques create investment pieces that will add status to any look for a long time!",

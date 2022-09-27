@@ -94,7 +94,7 @@ public class ConstructorItemTest {
         metadata.put("test_field", "test");
         item.setMetadata(metadata);
 
-        Map<String, String> metadataFields = (Map<String, String>) item.toMap().get("data");
+        Map<String, Object> metadataFields = (Map<String, Object>) item.toMap().get("data");
         assertEquals(metadataFields.get("url"), "https://constructor.io/test");
         assertEquals(metadataFields.get("image_url"), "https://constructor.io/test.png");
         assertEquals(metadataFields.get("test_field"), "test");

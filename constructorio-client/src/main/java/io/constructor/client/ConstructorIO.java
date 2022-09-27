@@ -19,11 +19,13 @@ import org.json.JSONObject;
 
 import io.constructor.client.models.AutocompleteResponse;
 import io.constructor.client.models.BrowseResponse;
+import io.constructor.client.models.ItemsResponse;
 import io.constructor.client.models.SearchResponse;
 import io.constructor.client.models.RecommendationsResponse;
 import io.constructor.client.models.ServerError;
 import io.constructor.client.models.AllTasksResponse;
 import io.constructor.client.models.Task;
+import io.constructor.client.models.VariationsResponse;
 import io.constructor.client.models.BrowseFacetOptionsResponse;
 import io.constructor.client.models.BrowseFacetsResponse;
 import okhttp3.Call;
@@ -205,15 +207,16 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds multiple items to your index whilst updating existing ones (limit of 1,000 items)
+     * Adds multiple items to your index whilst replacing existing ones (limit of 1,000 items)
      *
-     * @param items the items you want to add.
-     * @param section the section of the autocomplete that you're adding the items to.
+     * @param items the items you want to add or replace.
+     * @param section the section of the index that you're adding the items to.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
+    public boolean createOrReplaceItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
             url = url
@@ -221,6 +224,14 @@ public class ConstructorIO {
                 .addQueryParameter("force", force.toString())
                 .addQueryParameter("section", section)
                 .build();
+
+            if (notificationEmail != null) {
+              url = url
+                .newBuilder()
+                .addQueryParameter("notification_email", notificationEmail)
+                .build();
+            }
+
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -242,32 +253,54 @@ public class ConstructorIO {
         }
     }
 
-    public boolean addOrUpdateItems(ConstructorItem[] items) throws ConstructorException {
-        return addOrUpdateItems(items, "Products", false);
+    public boolean createOrReplaceItems(ConstructorItem[] items) throws ConstructorException {
+        return createOrReplaceItems(items, "Products", false, null);
     }
 
-    public boolean addOrUpdateItems(ConstructorItem[] items, String section) throws ConstructorException {
-        return addOrUpdateItems(items, section, false);
+    public boolean createOrReplaceItems(ConstructorItem[] items, String section) throws ConstructorException {
+        return createOrReplaceItems(items, section, false, null);
+    }
+
+    public boolean createOrReplaceItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
+        return createOrReplaceItems(items, section, force, null);
     }
 
     /**
-     * Removes multiple items from your index (limit of 1,000 items)
+     * Deleted multiple items from your index (limit of 1,000 items)
      *
-     * @param items the items that you are removing
-     * @param section the section of the autocomplete that you're removing the items from.
+     * @param items the items that you are deleting
+     * @param section the section of the index that you're removing the items from.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    public boolean removeItems(ConstructorItem[] items, String section) throws ConstructorException {
+    public boolean deleteItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
-            Map<String, Object> data = new HashMap<String, Object>();
-            List<Object> itemsAsJSON = new ArrayList<Object>();
-            for (ConstructorItem item : items) {
-                itemsAsJSON.add(item.toMap());
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
+            url = url
+                .newBuilder()
+                .addQueryParameter("force", force.toString())
+                .addQueryParameter("section", section)
+                .build();
+
+            if (notificationEmail != null) {
+              url = url
+                .newBuilder()
+                .addQueryParameter("notification_email", notificationEmail)
+                .build();
             }
-            data.put("items", itemsAsJSON);
-            data.put("section", section);
+
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> itemIds = new ArrayList<Object>();
+            for (ConstructorItem item : items) {
+                Map<String, Object> params = new HashMap<String, Object>();
+                
+                params.put("id", item.getId());
+                itemIds.add(params);
+            }
+            data.put("items", itemIds);
+            
             String params = new Gson().toJson(data);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeAuthorizedRequestBuilder()
@@ -283,16 +316,160 @@ public class ConstructorIO {
         }
     }
 
+    public boolean deleteItems(ConstructorItem[] items) throws ConstructorException {
+      return deleteItems(items, "Products", false, null);
+    }
+
+    public boolean deleteItems(ConstructorItem[] items, String section) throws ConstructorException {
+      return deleteItems(items, section, false, null);
+    }
+
+    public boolean deleteItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
+      return deleteItems(items, section, force, null);
+    }
+
     /**
-     * Modifies items from your index.
+     * Creates an items OkHttp request
+     * 
+     * @param req the items request
+     * @return a browse OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createItemsRequest(ItemsRequest req) throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList("v2", "items");
+            HttpUrl url = this.makeUrl(paths);
+            url = url.newBuilder()
+                .addQueryParameter("section", req.getSection())
+                .addQueryParameter("page", String.valueOf(req.getPage()))
+                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                .build();
+
+            for (String id : req.getIds()) {
+                url = url.newBuilder()
+                    .addQueryParameter("id", id)
+                    .build();
+            }
+
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .get()
+                .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Retrieves the items service for items
      *
-     * @param items the items that you're modifying.
+     * @param req the items request
+     * @return an ItemsResponse response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public ItemsResponse retrieveItems(ItemsRequest req) throws ConstructorException {
+        try {
+            Request request = createItemsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createItemsResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the items service for items
+     *
+     * @param req the items request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String retrieveItemsAsJson(ItemsRequest req) throws ConstructorException {
+        try {
+            Request request = createItemsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Deletes multiple variations from your index (limit of 1,000 variations)
+     *
+     * @param variations the variations that you are deleting
+     * @param section the section of the autocomplete that you're removing the items from.
+     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
+     * @return true if successfully removed
+     * @throws ConstructorException if the request is invalid
+     */
+    public boolean deleteVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
+            url = url
+                .newBuilder()
+                .addQueryParameter("force", force.toString())
+                .addQueryParameter("section", section)
+                .build();
+
+            if (notificationEmail != null) {
+              url = url
+                .newBuilder()
+                .addQueryParameter("notification_email", notificationEmail)
+                .build();
+            }
+
+            Map<String, Object> data = new HashMap<String, Object>();
+            List<Object> variationIds = new ArrayList<Object>();
+            for (ConstructorVariation variation : variations) {
+                Map<String, Object> params = new HashMap<String, Object>();
+                
+                params.put("id", variation.getId());
+                variationIds.add(params);
+            }
+            data.put("variations", variationIds);
+            String params = new Gson().toJson(data);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .delete(body)
+                .build();
+
+            Response response = client.newCall(request).execute();
+            getResponseBody(response);
+            return true;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    public boolean deleteVariations(ConstructorVariation[] variations) throws ConstructorException {
+      return deleteVariations(variations, "Products", false, null);
+    }
+
+    public boolean deleteVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+      return deleteVariations(variations, section, false, null);
+    }
+
+    public boolean deleteVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+      return deleteVariations(variations, section, force, null);
+    }
+
+    /**
+     * Updates items from your index.
+     *
+     * @param items the items that you're updating
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modifyItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
+    public boolean updateItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
             url = url
@@ -300,6 +477,14 @@ public class ConstructorIO {
                 .addQueryParameter("force", force.toString())
                 .addQueryParameter("section", section)
                 .build();
+
+            if (notificationEmail != null) {
+              url = url
+                .newBuilder()
+                .addQueryParameter("notification_email", notificationEmail)
+                .build();
+            }
+
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemsAsJSON = new ArrayList<Object>();
             for (ConstructorItem item : items) {
@@ -321,24 +506,29 @@ public class ConstructorIO {
         }
     }
 
-    public boolean modifyItems(ConstructorItem[] items) throws ConstructorException {
-        return modifyItems(items, "Products", false);
+    public boolean updateItems(ConstructorItem[] items) throws ConstructorException {
+        return updateItems(items, "Products", false, null);
     }
 
-    public boolean modifyItems(ConstructorItem[] items, String section) throws ConstructorException {
-        return modifyItems(items, section, false);
+    public boolean updateItems(ConstructorItem[] items, String section) throws ConstructorException {
+        return updateItems(items, section, false, null);
+    }
+
+    public boolean updateItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
+        return updateItems(items, section, force, null);
     }
 
     /**
-     * Modifies variations from your index.
+     * Update variations from your index.
      *
-     * @param variations the variations that you're modifying.
+     * @param variations the variations that you're updating.
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean modifyVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+    public boolean updateVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
             url = url
@@ -346,6 +536,14 @@ public class ConstructorIO {
                 .addQueryParameter("force", force.toString())
                 .addQueryParameter("section", section)
                 .build();
+
+            if (notificationEmail != null) {
+              url = url
+                .newBuilder()
+                .addQueryParameter("notification_email", notificationEmail)
+                .build();
+            }
+
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> variationsAsJSON = new ArrayList<Object>();
             for (ConstructorVariation variation : variations) {
@@ -367,24 +565,29 @@ public class ConstructorIO {
         }
     }
 
-    public boolean modifyVariations(ConstructorVariation[] variations) throws ConstructorException {
-        return modifyVariations(variations, "Products", false);
+    public boolean updateVariations(ConstructorVariation[] variations) throws ConstructorException {
+        return updateVariations(variations, "Products", false, null);
     }
 
-    public boolean modifyVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
-        return modifyVariations(variations, section, false);
+    public boolean updateVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+        return updateVariations(variations, section, false, null);
+    }
+
+    public boolean updateVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+        return updateVariations(variations, section, force, null);
     }
 
     /**
-     * Adds multiple variations to your index whilst updating existing ones (limit of 1,000 items)
+     * Adds multiple variations to your index whilst replacing existing ones (limit of 1,000 items)
      *
-     * @param variations the items you want to add.
+     * @param variations the items you want to add or replace.
      * @param section the section of the autocomplete that you're adding the items to.
      * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
             url = url
@@ -392,6 +595,14 @@ public class ConstructorIO {
                 .addQueryParameter("force", force.toString())
                 .addQueryParameter("section", section)
                 .build();
+
+            if (notificationEmail != null) {
+              url = url
+                .newBuilder()
+                .addQueryParameter("notification_email", notificationEmail)
+                .build();
+            }
+
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> variationsAsJSON = new ArrayList<Object>();
             for (ConstructorVariation variation : variations) {
@@ -413,12 +624,93 @@ public class ConstructorIO {
         }
     }
 
-    public boolean addOrUpdateVariations(ConstructorVariation[] variations) throws ConstructorException {
-        return addOrUpdateVariations(variations, "Products", false);
+    public boolean createOrReplaceVariations(ConstructorVariation[] variations) throws ConstructorException {
+        return createOrReplaceVariations(variations, "Products", false, null);
     }
 
-    public boolean addOrUpdateVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
-        return addOrUpdateVariations(variations, section, false);
+    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+        return createOrReplaceVariations(variations, section, false, null);
+    }
+
+    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+        return createOrReplaceVariations(variations, section, force, null);
+    }
+
+    /**
+     * Creates a variations OkHttp request
+     * 
+     * @param req the variations request
+     * @return a browse OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createVariationsRequest(VariationsRequest req) throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList("v2", "variations");
+            HttpUrl url = this.makeUrl(paths);
+            url = url.newBuilder()
+                .addQueryParameter("section", req.getSection())
+                .addQueryParameter("page", String.valueOf(req.getPage()))
+                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                .build();
+
+            String itemId = req.getItemId();
+
+            if (itemId != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("item_id", itemId)
+                    .build();
+            }
+
+            for (String id : req.getIds()) {
+                url = url.newBuilder()
+                    .addQueryParameter("id", id)
+                    .build();
+            }
+
+            Request request = this.makeAuthorizedRequestBuilder()
+                .url(url)
+                .get()
+                .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the variations service for variations
+     *
+     * @param req the variations request
+     * @return an VariationsResponse response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public VariationsResponse retrieveVariations(VariationsRequest req) throws ConstructorException {
+        try {
+            Request request = createVariationsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createVariationsResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the variations service for variations
+     *
+     * @param req the variations request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String retrieveVariationsAsJson(VariationsRequest req) throws ConstructorException {
+        try {
+            Request request = createVariationsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
     }
 
     /**
@@ -508,11 +800,11 @@ public class ConstructorIO {
      */
     protected Request createSearchRequest(SearchRequest req, UserInfo userInfo) throws ConstructorException {
         try {
+            Boolean authorizedRequest = false;
             List<String> paths = Arrays.asList("search", req.getQuery());
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
             url = url.newBuilder()
                 .addQueryParameter("section", req.getSection())
-                .addQueryParameter("page", String.valueOf(req.getPage()))
                 .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
                 .build();
 
@@ -558,18 +850,52 @@ public class ConstructorIO {
 
             if (req.getCollectionId() != null) {
                 url = url.newBuilder()
-                .addQueryParameter("collection_id", req.getCollectionId())
-                .build();
+                    .addQueryParameter("collection_id", req.getCollectionId())
+                    .build();
             }
 
             if (req.getVariationsMap() != null) {
                 String variationsMapJson = new Gson().toJson(req.getVariationsMap());
                 url = url.newBuilder()
-                .addQueryParameter("variations_map", variationsMapJson)
-                .build();
+                    .addQueryParameter("variations_map", variationsMapJson)
+                    .build();
             }
 
-            Request request = this.makeUserRequestBuilder(userInfo)
+            if (req.getPreFilterExpression() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("pre_filter_expression", req.getPreFilterExpression())
+                    .build();
+            }
+
+            if (req.getQsParam() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("qs", req.getQsParam())
+                    .build();
+            }
+
+            if (req.getNow() != null) {
+                // Make an authorized request if the `now` parameter is provided
+                authorizedRequest = true;
+
+                url = url.newBuilder()
+                    .addQueryParameter("now", req.getNow())
+                    .build();
+
+            }
+
+            if (req.getPage() != 1) {
+                url = url.newBuilder()
+                    .addQueryParameter("page", String.valueOf(req.getPage()))
+                    .build();
+            }
+
+            if (req.getOffset() != 0) {
+                url = url.newBuilder()
+                    .addQueryParameter("offset", String.valueOf(req.getOffset()))
+                    .build();
+            }
+            
+            Request request = this.makeUserRequestBuilder(userInfo, authorizedRequest)
                 .url(url)
                 .get()
                 .build();
@@ -669,11 +995,11 @@ public class ConstructorIO {
      */
     protected Request createBrowseRequest(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
         try {
+            Boolean authorizedRequest = false;
             List<String> paths = Arrays.asList("browse", req.getFilterName(), req.getFilterValue());
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
             url = url.newBuilder()
                 .addQueryParameter("section", req.getSection())
-                .addQueryParameter("page", String.valueOf(req.getPage()))
                 .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
                 .build();
 
@@ -720,11 +1046,44 @@ public class ConstructorIO {
             if (req.getVariationsMap() != null) {
                 String variationsMapJson = new Gson().toJson(req.getVariationsMap());
                 url = url.newBuilder()
-                        .addQueryParameter("variations_map", variationsMapJson)
-                        .build();
+                    .addQueryParameter("variations_map", variationsMapJson)
+                    .build();
             }
 
-            Request request = this.makeUserRequestBuilder(userInfo)
+            if (req.getPreFilterExpression() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("pre_filter_expression", req.getPreFilterExpression())
+                    .build();
+            }
+
+            if (req.getQsParam() != null) {
+                url = url.newBuilder()
+                    .addQueryParameter("qs", req.getQsParam())
+                    .build();
+            }
+
+            if (req.getNow() != null) {
+                // Make an authorized request if the `now` parameter is provided
+                authorizedRequest = true;
+
+                url = url.newBuilder()
+                    .addQueryParameter("now", req.getNow())
+                    .build();
+            }
+
+            if (req.getPage() != 1) {
+                url = url.newBuilder()
+                    .addQueryParameter("page", String.valueOf(req.getPage()))
+                    .build();
+            }
+
+            if (req.getOffset() != 0) {
+                url = url.newBuilder()
+                    .addQueryParameter("offset", String.valueOf(req.getOffset()))
+                    .build();
+            }
+
+            Request request = this.makeUserRequestBuilder(userInfo, authorizedRequest)
                 .url(url)
                 .get()
                 .build();
@@ -1212,6 +1571,16 @@ public class ConstructorIO {
                 }
             }
 
+            if (req.getFacets() != null) {
+                for (String facetName : req.getFacets().keySet()) {
+                    for (String facetValue : req.getFacets().get(facetName)) {
+                        url = url.newBuilder()
+                            .addQueryParameter("filters[" + facetName + "]", facetValue)
+                            .build();
+                    }
+                }
+            }
+
             if (req.getVariationsMap() != null) {
                 String variationsMapJson = new Gson().toJson(req.getVariationsMap());
                 url = url.newBuilder()
@@ -1330,6 +1699,23 @@ public class ConstructorIO {
     }
 
     /**
+     * Creates a builder for an end user request
+     *
+     * @param info user information if available
+     * @param authorizedRequest if true, send the request with authorized credentials
+     * @return Request Builder
+     */
+    protected Builder makeUserRequestBuilder(UserInfo info, Boolean authorizedRequest) {
+        Builder builder = makeUserRequestBuilder(info);
+
+        if (authorizedRequest) {
+            builder.addHeader("Authorization", this.credentials);
+        }
+
+        return builder;
+    }
+
+    /**
      * Checks the response from an endpoint and throws an exception if an error occurred
      *
      * @return whether the request was successful
@@ -1360,7 +1746,7 @@ public class ConstructorIO {
      * @return version number
      */
     protected String getVersion() {
-      return "ciojava-5.18.0";
+      return "ciojava-5.20.4";
     }
 
     /**
@@ -1472,6 +1858,36 @@ public class ConstructorIO {
     }
 
     /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an Items response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static ItemsResponse createItemsResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        JSONArray items = json.getJSONArray("items");
+        JSONArray itemsTransformed = transformItemsAPIV2Response(items);
+        json.put("items", itemsTransformed);
+
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, ItemsResponse.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an Variations response.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static VariationsResponse createVariationsResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        JSONArray variations = json.getJSONArray("variations");
+        JSONArray variationsTransformed = transformItemsAPIV2Response(variations);
+        json.put("variations", variationsTransformed);
+
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, VariationsResponse.class);
+    }
+
+    /**
      * Moves metadata out of the result data for an array of results
      * @param results A JSON array of results
      */
@@ -1505,6 +1921,45 @@ public class ConstructorIO {
             // Add metadata to result data object
             resultData.put("metadata", metadata);
         }
+    }
+
+    /**
+     * Transforms Items API V2 response to ConstructorItem and ConstructorVariation form
+     * @param results A JSON array of results
+     */
+    protected static JSONArray transformItemsAPIV2Response(JSONArray results) {
+        for (int i = 0; i < results.length(); i++) {
+            JSONObject result = results.getJSONObject(i);
+            JSONObject resultData = result.getJSONObject("data");
+            JSONObject metadata = new JSONObject();
+            
+            // Move unspecified properties in result data object to metadata object
+            for (Object propertyKey : resultData.keySet()) {
+                String propertyName = (String)propertyKey;
+                Object propertyValue = resultData.get(propertyName);
+
+                if (!propertyName.matches("(description|id|url|image_url|group_ids|facets|keywords)")) {
+                    metadata.put(propertyName, propertyValue);
+                } else {
+                    String camelCasePropertyName = propertyName.replaceFirst("_[a-z]",
+                        String.valueOf(
+                          Character.toUpperCase(
+                            propertyName.charAt(
+                              propertyName.indexOf("_") + 1))));
+                    result.put(camelCasePropertyName, propertyValue);
+                }
+            }
+
+            // Add metadata to result data object
+            result.put("metadata", metadata);
+
+            // Suggested score is already at the top level but its name needs to be converted to camelcase
+            if (result.has("suggested_score")) {
+              result.put("suggestedScore", result.get("suggested_score"));
+            }
+        }
+
+        return results;
     }
 
     /**

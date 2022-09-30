@@ -30,6 +30,9 @@ public class SearchResponseInner {
     @SerializedName("result_sources")
     private ResultSources resultSources;
 
+    @SerializedName("refined_content")
+    private List<RefinedContent> refinedContent;
+
     /**
      * @return the facets
      */
@@ -77,5 +80,12 @@ public class SearchResponseInner {
      */
     public ResultSources getResultSources() {
       return resultSources;
+    }
+
+    /**
+     * @return refined content
+     */
+    public List<RefinedContent> getRefinedContent() {
+      return refinedContent;
     }
 }

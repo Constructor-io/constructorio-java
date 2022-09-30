@@ -1,0 +1,228 @@
+{
+  "response": {
+    "result_sources": {
+      "token_match": {
+        "count": 5
+      },
+      "embeddings_match": {
+        "count": 0
+      }
+    },
+    "facets": [{
+      "display_name": "Price",
+      "name": "Price",
+      "data": {},
+      "type": "range",
+      "hidden": false,
+      "status": {},
+      "min": 1.29,
+      "max": 30
+    }, {
+      "display_name": "Color",
+      "name": "Color",
+      "type": "multiple",
+      "options": [{
+        "status": "",
+        "count": 1,
+        "display_name": "green",
+        "value": "green",
+        "data": {}
+      }],
+      "hidden": false,
+      "data": {}
+    }],
+    "groups": [],
+    "results": [{
+      "matched_terms": ["item"],
+      "data": {
+        "id": "10005",
+        "url": "https://test.com/p/10005",
+        "facets": [{
+          "name": "Price",
+          "values": [30]
+        }],
+        "image_url": "https://test.com/p/10005",
+        "description": "item",
+        "deactivated": false
+      },
+      "value": "Item5",
+      "is_slotted": true,
+      "labels": {
+        "is_sponsored": true
+      }
+    }, {
+      "matched_terms": ["item"],
+      "data": {
+        "id": "10006",
+        "url": "https://test.com/p/10006",
+        "facets": [{
+          "name": "Price",
+          "values": [20]
+        }],
+        "image_url": "https://test.com/p/10006",
+        "description": "item",
+        "deactivated": false
+      },
+      "value": "Item6",
+      "is_slotted": false,
+      "labels": {}
+    }, {
+      "matched_terms": ["item"],
+      "data": {
+        "id": "10007",
+        "url": "https://test.com/p/10007",
+        "facets": [{
+          "name": "Color",
+          "values": ["green"]
+        }, {
+          "name": "Price",
+          "values": [23]
+        }],
+        "image_url": "https://test.com/p/10007",
+        "description": "item",
+        "deactivated": false
+      },
+      "value": "Item7",
+      "is_slotted": false,
+      "labels": {}
+    }, {
+      "matched_terms": ["item"],
+      "data": {
+        "id": "10008",
+        "url": "https://test.com/p/10008",
+        "facets": [{
+          "name": "Price",
+          "values": [1.29]
+        }],
+        "image_url": "https://test.com/p/10008",
+        "description": "item",
+        "deactivated": false
+      },
+      "value": "Item8",
+      "is_slotted": false,
+      "labels": {}
+    }, {
+      "matched_terms": ["item"],
+      "data": {
+        "id": "10009",
+        "url": "https://test.com/p/10009",
+        "facets": [{
+          "name": "Price",
+          "values": [25]
+        }],
+        "image_url": "https://test.com/p/10009",
+        "description": "item",
+        "deactivated": false
+      },
+      "value": "Item9",
+      "is_slotted": false,
+      "labels": {}
+    }],
+    "sort_options": [{
+      "sort_by": "Collection",
+      "display_name": "ASC",
+      "sort_order": "ascending",
+      "status": ""
+    }, {
+      "sort_by": "relevance",
+      "display_name": "DESC",
+      "sort_order": "descending",
+      "status": "selected"
+    }],
+    "refined_content": [{
+      "data": {
+        "body": "Content 1 Body",
+        "header": "Content 1 Header",
+        "altText": "Content 1 desktop alt text",
+        "ctaLink": "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png",
+        "ctaText": "Content 1 CTA Button",
+        "assetUrl": "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png",
+        "mobileAssetUrl": "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png",
+        "mobileAssetAltText": "Content 1 mobile alt text"
+      }
+    }, {
+      "data": {
+        "body": "Content 2 Body",
+        "header": "Content 2 Header",
+        "altText": "Content 2 desktop alt text",
+        "ctaLink": "https://constructor.io/wp-content/uploads/2022/04/Dont-just-trust-the-AI-1.png",
+        "ctaText": "Content 2 Button",
+        "assetUrl": "https://constructor.io/wp-content/uploads/2022/04/Dont-just-trust-the-AI-1.png",
+        "mobileAssetUrl": "https://constructor.io/wp-content/uploads/2022/04/Dont-just-trust-the-AI-1.png",
+        "mobileAssetAltText": "Content 2 mobile alt text"
+      }
+    }],
+    "total_num_results": 5,
+    "features": [{
+      "feature_name": "auto_generated_refined_query_rules",
+      "display_name": "Affinity Engine",
+      "enabled": true,
+      "variant": {
+        "name": "default_rules",
+        "display_name": "Default weights"
+      }
+    }, {
+      "feature_name": "filter_items",
+      "display_name": "Filter-item boosts",
+      "enabled": true,
+      "variant": {
+        "name": "filter_items_w_atcs_and_purchases",
+        "display_name": ""
+      }
+    }, {
+      "feature_name": "manual_searchandizing",
+      "display_name": "Searchandizing",
+      "enabled": true,
+      "variant": null
+    }, {
+      "feature_name": "personalization",
+      "display_name": "Personalization",
+      "enabled": true,
+      "variant": {
+        "name": "default_personalization",
+        "display_name": "Default Personalization"
+      }
+    }, {
+      "feature_name": "query_items",
+      "display_name": "Learn To Rank",
+      "enabled": true,
+      "variant": {
+        "name": "query_items_ctr_and_l2r",
+        "display_name": "CTR & LTR"
+      }
+    }]
+  },
+  "result_id": "7938b9e8-369b-4f0c-ae74-69b85dcb5b12",
+  "request": {
+    "num_results_per_page": 20,
+    "blacklist_rules": true,
+    "term": "item",
+    "page": 1,
+    "fmt_options": {
+      "groups_start": "current",
+      "groups_max_depth": 1
+    },
+    "sort_by": "relevance",
+    "sort_order": "descending",
+    "section": "Products",
+    "features": {
+      "query_items": true,
+      "auto_generated_refined_query_rules": true,
+      "manual_searchandizing": true,
+      "personalization": true,
+      "filter_items": true
+    },
+    "feature_variants": {
+      "query_items": "query_items_ctr_and_l2r",
+      "auto_generated_refined_query_rules": "default_rules",
+      "manual_searchandizing": null,
+      "personalization": "default_personalization",
+      "filter_items": "filter_items_w_atcs_and_purchases"
+    },
+    "searchandized_items": {
+      "10005": [1, {
+        "is_sponsored": true
+      }]
+    }
+  }
+}

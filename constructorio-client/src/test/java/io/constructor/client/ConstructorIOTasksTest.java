@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import io.constructor.client.models.AllTasksResponse;
 import io.constructor.client.models.Task;
@@ -77,6 +76,10 @@ public class ConstructorIOTasksTest {
     public void AllTasksShouldReturnAListOfTasks() throws Exception {
         ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
         AllTasksRequest request = new AllTasksRequest();
+
+        request.setResultsPerPage(5);
+        request.setPage(1);
+
         AllTasksResponse response = constructor.allTasks(request);
 
         Task task = response.getTasks().stream().filter(new Predicate<Task>() {
@@ -111,6 +114,58 @@ public class ConstructorIOTasksTest {
 
         assertTrue("At least one task exists", jsonObj.getInt("total_count") >= 1);
         assertNotNull("Previously uploaded task_id exists", task);
+    }
+
+    @Test
+    public void AllTasksShouldReturnAListOfTasksWhenStartAndEndDateIsPassed() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
+        AllTasksRequest request = new AllTasksRequest();
+
+        request.setStartDate("2022-09-03");
+        request.setEndDate("2022-09-30");
+
+        AllTasksResponse response = constructor.allTasks(request);
+
+        assertTrue("At least one task exists", response.getTotalCount() >= 1);
+    }
+
+    @Test
+    public void AllTasksAsJsonShouldReturnAListOfTasksWhenStartAndEndDateIsPassed() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
+        AllTasksRequest request = new AllTasksRequest();
+
+        request.setStartDate("2022-09-03");
+        request.setEndDate("2022-09-30");
+
+        String response = constructor.allTasksAsJson(request);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("At least one task exists", jsonObj.getInt("total_count") >= 1);
+    }
+
+    @Test
+    public void AllTasksShouldReturnAListOfTasksWhenStatusIsPassed() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
+        AllTasksRequest request = new AllTasksRequest();
+
+        request.setStatus("DONE");
+
+        AllTasksResponse response = constructor.allTasks(request);
+
+        assertTrue("At least one task exists", response.getTotalCount() >= 1);
+    }
+
+    @Test
+    public void AllTasksAsJsonShouldReturnAListOfTasksWhenStatusIsPassed() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
+        AllTasksRequest request = new AllTasksRequest();
+
+        request.setStatus("DONE");
+
+        String response = constructor.allTasksAsJson(request);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("At least one task exists", jsonObj.getInt("total_count") >= 1);
     }
 
     @Test

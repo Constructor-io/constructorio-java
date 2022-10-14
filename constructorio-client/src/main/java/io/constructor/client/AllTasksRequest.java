@@ -6,6 +6,9 @@ package io.constructor.client;
 public class AllTasksRequest {
     private int resultsPerPage;
     private int page;
+    private String startDate;
+    private String endDate;
+    private String status;
 
     /**
      * Creates a All Tasks request
@@ -13,7 +16,6 @@ public class AllTasksRequest {
      */
     public AllTasksRequest() {
         this.page = 1;
-        this.resultsPerPage = 20;
     }
 
     /**
@@ -44,4 +46,45 @@ public class AllTasksRequest {
         return resultsPerPage;
     }
 
+    /**
+     * @param startDate The start date of results to return - YYYY-MM-DD
+     */
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * @return startDate The start date of results to return - YYYY-MM-DD
+     */
+    public String getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * @param startDate The start date of results to return - YYYY-MM-DD
+     */
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
+     * @return endDate The end date of results to return - YYYY-MM-DD
+     */
+    public String getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * @param status The status of tasks to return - 'QUEUED', 'IN_PROGRESS', 'DONE', 'FAILED', 'CANCELED'
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return status The status of tasks to return - 'QUEUED', 'IN_PROGRESS', 'DONE', 'FAILED', 'CANCELED'
+     */
+    public String getStatus() {
+        return status;
+    }
 }

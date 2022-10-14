@@ -2138,14 +2138,34 @@ public class ConstructorIO {
      * @throws ConstructorException
      */
     protected Request createAllTasksRequest(AllTasksRequest req, String apiVersion) throws ConstructorException {
-        try {
+      try {
             List<String> paths = Arrays.asList(apiVersion, "tasks");
             HttpUrl url = this.makeUrl(paths);
+            HttpUrl.Builder urlBuilder = url.newBuilder()
+                .addQueryParameter("page", String.valueOf(req.getPage()));
+            
+            String resultsPerPage = String.valueOf(req.getResultsPerPage());
+            String startDate = req.getStartDate();
+            String endDate = req.getEndDate();
+            String status = req.getStatus();
+            
+            if (resultsPerPage != null && !resultsPerPage.equals("0")) {
+                urlBuilder.addQueryParameter("num_results_per_page", resultsPerPage);
+            }
 
-            url = url.newBuilder()
-                    .addQueryParameter("page", String.valueOf(req.getPage()))
-                    .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                    .build();
+            if (startDate != null) {
+                urlBuilder.addQueryParameter("start_date", startDate);
+            }
+
+            if (endDate != null) {
+                urlBuilder.addQueryParameter("end_date", endDate);
+            }
+
+            if (status != null) {
+                urlBuilder.addQueryParameter("status", status);
+            }
+
+            url = urlBuilder.build();
 
             Request request = this.makeAuthorizedRequestBuilder()
                     .url(url)

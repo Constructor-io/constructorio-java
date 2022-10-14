@@ -61,7 +61,7 @@ public class AllTasksRequest {
     }
 
     /**
-     * @param startDate The start date of results to return - YYYY-MM-DD
+     * @param endDate The end date of results to return - YYYY-MM-DD
      */
     public void setEndDate(String endDate) {
         this.endDate = endDate;

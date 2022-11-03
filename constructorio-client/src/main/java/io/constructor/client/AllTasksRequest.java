@@ -99,7 +99,7 @@ public class AllTasksRequest {
     /**
      * @param type The type of results to return - 'ingestion', 'user_data_request'
      */
-  	public void setType(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

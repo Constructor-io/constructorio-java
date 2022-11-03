@@ -9,8 +9,9 @@ public class AllTasksRequest {
     private String startDate;
     private String endDate;
     private String status;
+    private String type;
 
-    /**
+  	/**
      * Creates a All Tasks request
      *
      */
@@ -87,4 +88,18 @@ public class AllTasksRequest {
     public String getStatus() {
         return status;
     }
+    
+    /**
+     * @return type The type of results to return - 'ingestion', 'user_data_request'
+     */
+    public String getType() {
+     		return type;
+	  }
+
+    /**
+     * @param type The type of results to return - 'ingestion', 'user_data_request'
+     */
+  	public void setType(String type) {
+    		this.type = type;
+  	}
 }

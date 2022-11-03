@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.time.LocalDate;
 
 import io.constructor.client.models.AllTasksResponse;
 import io.constructor.client.models.Task;
@@ -121,8 +122,10 @@ public class ConstructorIOTasksTest {
         ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
         AllTasksRequest request = new AllTasksRequest();
 
-        request.setStartDate("2022-09-03");
-        request.setEndDate("2022-09-30");
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = endDate.minusDays(30);
+        request.setStartDate(startDate.toString());
+        request.setEndDate(endDate.toString());
 
         AllTasksResponse response = constructor.allTasks(request);
 
@@ -134,8 +137,10 @@ public class ConstructorIOTasksTest {
         ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
         AllTasksRequest request = new AllTasksRequest();
 
-        request.setStartDate("2022-09-03");
-        request.setEndDate("2022-09-30");
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = endDate.minusDays(30);
+        request.setStartDate(startDate.toString());
+        request.setEndDate(endDate.toString());
 
         String response = constructor.allTasksAsJson(request);
         JSONObject jsonObj = new JSONObject(response);
@@ -161,6 +166,31 @@ public class ConstructorIOTasksTest {
         AllTasksRequest request = new AllTasksRequest();
 
         request.setStatus("DONE");
+
+        String response = constructor.allTasksAsJson(request);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("At least one task exists", jsonObj.getInt("total_count") >= 1);
+    }
+
+    @Test
+    public void AllTasksShouldReturnAListOfTasksWhenTypeIsPassed() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
+        AllTasksRequest request = new AllTasksRequest();
+
+        request.setType("ingestion");
+
+        AllTasksResponse response = constructor.allTasks(request);
+
+        assertTrue("At least one task exists", response.getTotalCount() >= 1);
+    }
+
+    @Test
+    public void AllTasksAsJsonShouldReturnAListOfTasksWhenTypeIsPassed() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
+        AllTasksRequest request = new AllTasksRequest();
+
+        request.setType("ingestion");
 
         String response = constructor.allTasksAsJson(request);
         JSONObject jsonObj = new JSONObject(response);

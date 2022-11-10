@@ -10,9 +10,6 @@ public class QuizOptionAttribute {
     @SerializedName("value")
     private String value;
 
-    @SerializedName("images")
-    private QuizImages images;
-
     /**
      * @return the quiz option name
      */
@@ -22,9 +19,4 @@ public class QuizOptionAttribute {
      * @return the quiz option value.
      */
     public String getValue() { return value; }
-
-    /**
-     * @return the quiz option value.
-     */
-    public QuizImages getImages() { return images; }
 }

@@ -1,6 +1,6 @@
 package io.constructor.client;
 
-import io.constructor.client.models.FinalizeQuizResponse;
+import io.constructor.client.models.QuizResultsResponse;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -8,15 +8,15 @@ import org.junit.rules.ExpectedException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class FinalizeQuizResponseTest {
+public class QuizResultsResponseTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void createFinalizeQuizResponseShouldReturnAResult() throws Exception {
+    public void createQuizResultsResponseShouldReturnAResult() throws Exception {
         String string = Utils.getTestResource("response.finalizequiz.json");
-        FinalizeQuizResponse response = ConstructorIO.createFinalizeQuizResponse(string);
+        QuizResultsResponse response = ConstructorIO.createQuizResultsResponse(string);
 
         assertNotNull("result exists", response.getResult());
         assertNotNull("filter_expression exists", response.getResult().getFilterExpression());

@@ -25,8 +25,8 @@ import io.constructor.client.models.RecommendationsResponse;
 import io.constructor.client.models.ServerError;
 import io.constructor.client.models.AllTasksResponse;
 import io.constructor.client.models.Task;
-import io.constructor.client.models.NextQuizResponse;
-import io.constructor.client.models.FinalizeQuizResponse;
+import io.constructor.client.models.QuizQuestionResponse;
+import io.constructor.client.models.QuizResultsResponse;
 import io.constructor.client.models.VariationsResponse;
 import io.constructor.client.models.BrowseFacetOptionsResponse;
 import io.constructor.client.models.BrowseFacetsResponse;
@@ -1864,10 +1864,10 @@ public class ConstructorIO {
      * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
-    protected static NextQuizResponse createNextQuizResponse(String string) {
+    protected static QuizQuestionResponse createQuizQuestionResponse(String string) {
         JSONObject json = new JSONObject(string);
         String transformed = json.toString();
-        return new Gson().fromJson(transformed, NextQuizResponse.class);
+        return new Gson().fromJson(transformed, QuizQuestionResponse.class);
     }
 
     /**
@@ -1875,10 +1875,10 @@ public class ConstructorIO {
      * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
-    protected static FinalizeQuizResponse createFinalizeQuizResponse(String string) {
+    protected static QuizResultsResponse createQuizResultsResponse(String string) {
         JSONObject json = new JSONObject(string);
         String transformed = json.toString();
-        return new Gson().fromJson(transformed, FinalizeQuizResponse.class);
+        return new Gson().fromJson(transformed, QuizResultsResponse.class);
     }
 
     /**
@@ -2304,8 +2304,8 @@ public class ConstructorIO {
                         .build();
             }
 
-            if (req.getA().size() > 0) {
-                for (List<String> questionAnswers : req.getA())
+            if (req.getAnswers().size() > 0) {
+                for (List<String> questionAnswers : req.getAnswers())
                 {
                     String answerParam = String.join(",", questionAnswers);
                     url = url.newBuilder().addQueryParameter("a", answerParam).build();
@@ -2328,31 +2328,31 @@ public class ConstructorIO {
     }
 
     /**
-     * Queries the quiz service for the next quiz/question
+     * Queries the quiz service for a quiz question
      *
      * @param req the Next Quiz request
-     * @return a Next Quiz Response
+     * @return a Quiz Question Response
      * @throws ConstructorException if the request is invalid.
      */
-    public NextQuizResponse nextQuiz(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+    public QuizQuestionResponse quizQuestion(QuizRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "next", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
             String json = getResponseBody(response);
-            return createNextQuizResponse(json);
+            return createQuizQuestionResponse(json);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
     }
 
     /**
-     * Queries the quiz service for the next quiz/question
+     * Queries the quiz service for the a quiz question
      *
      * @param req the Next Quiz request
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String nextQuizAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+    public String quizQuestionAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "next", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
@@ -2363,31 +2363,31 @@ public class ConstructorIO {
     }
 
     /**
-     * Queries the quiz service for the next quiz/question
+     * Queries the quiz service for the quiz results
      *
      * @param req the Finalize Quiz request
-     * @return a Finalize Quiz Response
+     * @return a Quiz Results Response
      * @throws ConstructorException if the request is invalid.
      */
-    public FinalizeQuizResponse finalizeQuiz(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+    public QuizResultsResponse quizResults(QuizRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "finalize", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
             String json = getResponseBody(response);
-            return createFinalizeQuizResponse(json);
+            return createQuizResultsResponse(json);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
     }
 
     /**
-     * Queries the quiz service for the next quiz/question
+     * Queries the quiz service for the quiz results
      *
      * @param req the Finalize Quiz request
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String finalizeQuizAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+    public String quizResultsAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "finalize", userInfo);
             Response response = clientWithRetry.newCall(request).execute();

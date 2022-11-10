@@ -3,12 +3,12 @@ package io.constructor.client.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Constructor.io Next Quiz Response ... uses Gson/Reflection to load data in
+ * Constructor.io Quiz Question Response ... uses Gson/Reflection to load data in
  */
-public class NextQuizResponse {
+public class QuizQuestionResponse {
 
     @SerializedName("next_question")
-    private QuizQuestion nextQuestion;
+    private QuizQuestion quizQuestion;
 
     @SerializedName("is_last_question")
     private Boolean isLastQuestion;
@@ -19,7 +19,7 @@ public class NextQuizResponse {
     /**
      * @return the next_question
      */
-    public QuizQuestion getNextQuestion() { return nextQuestion; }
+    public QuizQuestion getQuizQuestion() { return quizQuestion; }
 
     /**
      * @return the is_last_question

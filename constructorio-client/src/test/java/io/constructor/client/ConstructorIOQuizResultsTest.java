@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
-import io.constructor.client.models.FinalizeQuizResponse;
+import io.constructor.client.models.QuizResultsResponse;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -14,7 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
-public class ConstructorIOFinalizeQuizTest {
+public class ConstructorIOQuizResultsTest {
 
     private final String quizKey = System.getenv("TEST_API_KEY");
     private final String quizId = "test-quiz";
@@ -36,31 +36,31 @@ public class ConstructorIOFinalizeQuizTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void FinalizeQuizShouldErrorWithoutAnswersParameter() throws Exception {
+    public void QuizResultsShouldErrorWithoutAnswersParameter() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("a (answers) is a required parameter for a finalize request");
-        FinalizeQuizResponse response = constructor.finalizeQuiz(request, null);
+        QuizResultsResponse response = constructor.quizResults(request, null);
     }
 
     @Test
-    public void FinalizeQuizAsJSONShouldErrorWithoutAnswersParameter() throws Exception {
+    public void QuizResultsAsJSONShouldErrorWithoutAnswersParameter() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("a (answers) is a required parameter for a finalize request");
-        String response = constructor.finalizeQuizAsJson(request, null);
+        String response = constructor.quizResultsAsJson(request, null);
     }
 
     @Test
-    public void FinalizeQuizShouldReturnResultWithAnswersParameter() throws Exception {
+    public void QuizResultsShouldReturnResultWithAnswersParameter() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setA(validAnswers);
-        FinalizeQuizResponse response = constructor.finalizeQuiz(request, null);
+        request.setAnswers(validAnswers);
+        QuizResultsResponse response = constructor.quizResults(request, null);
 
         assertNotNull("version_id exists", response.getVersionId());
         assertNotNull("result exists", response.getResult());
@@ -68,11 +68,11 @@ public class ConstructorIOFinalizeQuizTest {
     }
 
     @Test
-    public void FinalizeQuizAsJsonShouldReturnResultWithAnswersParameter() throws Exception {
+    public void QuizResultsAsJsonShouldReturnResultWithAnswersParameter() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setA(validAnswers);
-        String response = constructor.finalizeQuizAsJson(request, null);
+        request.setAnswers(validAnswers);
+        String response = constructor.quizResultsAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
 
         assertFalse("version_id exists", jsonObject.isNull("version_id"));
@@ -81,11 +81,11 @@ public class ConstructorIOFinalizeQuizTest {
     }
 
     @Test
-    public void FinalizeQuizShouldReturnResultWithAllAnswerTypes() throws Exception {
+    public void QuizResultsShouldReturnResultWithAllAnswerTypes() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setA(finalAnswers);
-        FinalizeQuizResponse response = constructor.finalizeQuiz(request, null);
+        request.setAnswers(finalAnswers);
+        QuizResultsResponse response = constructor.quizResults(request, null);
         String jsonFilterExpression = new Gson().toJson(response.getResult().getFilterExpression());
 
         assertNotNull("version_id exists", response.getVersionId());
@@ -96,11 +96,11 @@ public class ConstructorIOFinalizeQuizTest {
     }
 
     @Test
-    public void FinalizeQuizAsJsonShouldReturnResultWithAllAnswerTypes() throws Exception {
+    public void QuizResultsAsJsonShouldReturnResultWithAllAnswerTypes() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setA(finalAnswers);
-        String response = constructor.finalizeQuizAsJson(request, null);
+        request.setAnswers(finalAnswers);
+        String response = constructor.quizResultsAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
 
         assertFalse("version_id exists", jsonObject.isNull("version_id"));
@@ -110,46 +110,46 @@ public class ConstructorIOFinalizeQuizTest {
     }
 
     @Test
-    public void FinalizeQuizShouldReturnErrorWithInvalidQuizId() throws Exception {
+    public void QuizResultsShouldReturnErrorWithInvalidQuizId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest("invalidQuiz");
-        request.setA(validAnswers);
+        request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a valid quiz id before trying again.");
-        FinalizeQuizResponse response = constructor.finalizeQuiz(request, null);
+        QuizResultsResponse response = constructor.quizResults(request, null);
     }
 
     @Test
-    public void FinalizeQuizAsJsonShouldReturnErrorWithInvalidQuizId() throws Exception {
+    public void QuizResultsAsJsonShouldReturnErrorWithInvalidQuizId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest("invalidQuiz");
-        request.setA(validAnswers);
+        request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a valid quiz id before trying again.");
-        String response = constructor.finalizeQuizAsJson(request, null);
+        String response = constructor.quizResultsAsJson(request, null);
     }
 
     @Test
-    public void FinalizeQuizShouldReturnErrorWithInvalidIndexKey() throws Exception {
+    public void QuizResultsShouldReturnErrorWithInvalidIndexKey() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setA(validAnswers);
+        request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 404] The quiz you requested, \"" + quizId + "\" was not found, please specify a valid quiz id before trying again.");
-        FinalizeQuizResponse response = constructor.finalizeQuiz(request, null);
+        QuizResultsResponse response = constructor.quizResults(request, null);
     }
 
     @Test
-    public void FinalizeQuizAsJsonShouldReturnErrorWithInvalidIndexKey() throws Exception {
+    public void QuizResultsAsJsonShouldReturnErrorWithInvalidIndexKey() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setA(validAnswers);
+        request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("[HTTP 404] The quiz you requested, \"" + quizId + "\" was not found, please specify a valid quiz id before trying again.");
-        String response = constructor.finalizeQuizAsJson(request, null);
+        String response = constructor.quizResultsAsJson(request, null);
     }
 }

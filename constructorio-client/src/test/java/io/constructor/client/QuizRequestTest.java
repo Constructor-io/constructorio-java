@@ -38,14 +38,14 @@ public class QuizRequestTest {
         assertEquals("id", request.getId());
         assertNull(request.getSection());
         assertNull(request.getVersionId());
-        assertTrue(request.getA().size() == 0);
+        assertTrue(request.getAnswers().size() == 0);
 
         request.setSection("newsection");
         request.setVersionId("newversion");
-        request.setA(validAnswers);
+        request.setAnswers(validAnswers);
 
         assertEquals("newsection", request.getSection());
         assertEquals("newversion", request.getVersionId());
-        assertEquals(request.getA(), validAnswers);
+        assertEquals(request.getAnswers(), validAnswers);
     }
 }

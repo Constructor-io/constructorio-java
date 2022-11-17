@@ -14,14 +14,14 @@ public class AllTasksRequestTest {
     @Test
     public void newShouldReturnTaskRequestWithDefaults() throws Exception {
         AllTasksRequest request = new AllTasksRequest();
-        assertEquals(20, request.getResultsPerPage());
+        assertEquals(0, request.getResultsPerPage());
         assertEquals( 1, request.getPage());
     }
 
     @Test
     public void settersShouldSet() throws Exception {
         AllTasksRequest request = new AllTasksRequest();
-        assertEquals(20, request.getResultsPerPage());
+        assertEquals(0, request.getResultsPerPage());
         assertEquals( 1, request.getPage());
 
         request.setPage(5);

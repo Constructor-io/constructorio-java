@@ -2148,7 +2148,8 @@ public class ConstructorIO {
             String startDate = req.getStartDate();
             String endDate = req.getEndDate();
             String status = req.getStatus();
-            
+            String type = req.getType(); 
+
             if (resultsPerPage != null && !resultsPerPage.equals("0")) {
                 urlBuilder.addQueryParameter("num_results_per_page", resultsPerPage);
             }
@@ -2163,6 +2164,10 @@ public class ConstructorIO {
 
             if (status != null) {
                 urlBuilder.addQueryParameter("status", status);
+            }
+
+            if (type != null) {
+                urlBuilder.addQueryParameter("type", type);
             }
 
             url = urlBuilder.build();

@@ -1,8 +1,5 @@
 package io.constructor.client;
 
-import java.io.File;
-import java.util.Map;
-
 /**
  * Constructor.io Get Task Request
  */

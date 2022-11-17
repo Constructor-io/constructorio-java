@@ -41,7 +41,7 @@ public class ConstructorIOQuizResultsTest {
         QuizRequest request = new QuizRequest(quizId);
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("a (answers) is a required parameter for a finalize request");
+        thrown.expectMessage("answers is a required parameter for a finalize request");
         QuizResultsResponse response = constructor.quizResults(request, null);
     }
 
@@ -51,7 +51,7 @@ public class ConstructorIOQuizResultsTest {
         QuizRequest request = new QuizRequest(quizId);
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("a (answers) is a required parameter for a finalize request");
+        thrown.expectMessage("answers is a required parameter for a finalize request");
         String response = constructor.quizResultsAsJson(request, null);
     }
 

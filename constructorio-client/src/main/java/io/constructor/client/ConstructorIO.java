@@ -2312,7 +2312,7 @@ public class ConstructorIO {
                 }
             } else {
                 if (type.equals("finalize")) {
-                    throw new IllegalArgumentException("a (answers) is a required parameter for a finalize request");
+                    throw new IllegalArgumentException("answers is a required parameter for a finalize request");
                 }
             }
 
@@ -2334,7 +2334,7 @@ public class ConstructorIO {
      * @return a Quiz Question Response
      * @throws ConstructorException if the request is invalid.
      */
-    public QuizQuestionResponse quizQuestion(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+    public QuizQuestionResponse quizNextQuestion(QuizRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "next", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
@@ -2352,7 +2352,7 @@ public class ConstructorIO {
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String quizQuestionAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+    public String quizNextQuestionAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "next", userInfo);
             Response response = clientWithRetry.newCall(request).execute();

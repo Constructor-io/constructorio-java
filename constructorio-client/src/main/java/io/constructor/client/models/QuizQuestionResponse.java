@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 public class QuizQuestionResponse {
 
     @SerializedName("next_question")
-    private QuizQuestion quizQuestion;
+    private QuizQuestion nextQuestion;
 
     @SerializedName("is_last_question")
     private Boolean isLastQuestion;
@@ -19,7 +19,7 @@ public class QuizQuestionResponse {
     /**
      * @return the next_question
      */
-    public QuizQuestion getQuizQuestion() { return quizQuestion; }
+    public QuizQuestion getNextQuestion() { return nextQuestion; }
 
     /**
      * @return the is_last_question

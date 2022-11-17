@@ -1860,7 +1860,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Next Quiz response.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz Question response.
      * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
@@ -1871,7 +1871,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Finalize Quiz response.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz results response.
      * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
@@ -2330,7 +2330,7 @@ public class ConstructorIO {
     /**
      * Queries the quiz service for a quiz question
      *
-     * @param req the Next Quiz request
+     * @param req the Quiz request
      * @return a Quiz Question Response
      * @throws ConstructorException if the request is invalid.
      */
@@ -2348,7 +2348,7 @@ public class ConstructorIO {
     /**
      * Queries the quiz service for the a quiz question
      *
-     * @param req the Next Quiz request
+     * @param req the Quiz request
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
@@ -2365,7 +2365,7 @@ public class ConstructorIO {
     /**
      * Queries the quiz service for the quiz results
      *
-     * @param req the Finalize Quiz request
+     * @param req the Quiz request
      * @return a Quiz Results Response
      * @throws ConstructorException if the request is invalid.
      */
@@ -2383,7 +2383,7 @@ public class ConstructorIO {
     /**
      * Queries the quiz service for the quiz results
      *
-     * @param req the Finalize Quiz request
+     * @param req the Quiz request
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */

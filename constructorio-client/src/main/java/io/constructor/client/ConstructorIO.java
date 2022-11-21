@@ -25,6 +25,8 @@ import io.constructor.client.models.RecommendationsResponse;
 import io.constructor.client.models.ServerError;
 import io.constructor.client.models.AllTasksResponse;
 import io.constructor.client.models.Task;
+import io.constructor.client.models.QuizQuestionResponse;
+import io.constructor.client.models.QuizResultsResponse;
 import io.constructor.client.models.VariationsResponse;
 import io.constructor.client.models.BrowseFacetOptionsResponse;
 import io.constructor.client.models.BrowseFacetsResponse;
@@ -129,9 +131,9 @@ public class ConstructorIO {
      * Creates a constructor.io Client.
      *
      * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param apiKey API Key, used publicly in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete service at ac.cnstrc.com.
      * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
      */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, String constructorToken) {
@@ -155,9 +157,9 @@ public class ConstructorIO {
      * Creates a constructor.io Client.
      *
      * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param apiKey API Key, used publicly in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete service at ac.cnstrc.com.
     */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host) {
       this(apiToken, apiKey, isHTTPS, host, null);
@@ -167,9 +169,9 @@ public class ConstructorIO {
      * Creates a constructor.io Client.
      *
      * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param apiKey API Key, used publicly in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete service at ac.cnstrc.com.
      * @param port The port to connect to
     */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, int port) {
@@ -1603,7 +1605,7 @@ public class ConstructorIO {
     /**
      * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
      *
-     * @param path endpoint of the autocomplete service.
+     * @param paths endpoint of the autocomplete service.
      * @return the created URL. Now you can use it to issue requests and things!
      */
     protected HttpUrl makeUrl(List<String> paths) throws UnsupportedEncodingException {
@@ -1632,7 +1634,7 @@ public class ConstructorIO {
     /**
      * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
      *
-     * @param path endpoint of the autocomplete service.
+     * @param paths endpoint of the autocomplete service.
      * @return the created URL. Now you can use it to issue requests and things!
      */
     protected HttpUrl makeUrl(List<String> paths, UserInfo info) throws UnsupportedEncodingException {
@@ -1751,7 +1753,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an autocomplete response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static AutocompleteResponse createAutocompleteResponse(String string) {
@@ -1768,7 +1770,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an search response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static SearchResponse createSearchResponse(String string) {
@@ -1787,7 +1789,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an browse response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static BrowseResponse createBrowseResponse(String string) {
@@ -1823,7 +1825,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static RecommendationsResponse createRecommendationsResponse(String string) {
@@ -1837,7 +1839,7 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an All Tasks response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static AllTasksResponse createAllTasksResponse(String string) {
@@ -1848,13 +1850,35 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into a Task response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
      * a Gson Type Adapter.
      */
     protected static Task createTaskResponse(String string) {
         JSONObject json = new JSONObject(string);
         String transformed = json.toString();
         return new Gson().fromJson(transformed, Task.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz Question response.
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static QuizQuestionResponse createQuizQuestionResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, QuizQuestionResponse.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz results response.
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static QuizResultsResponse createQuizResultsResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, QuizResultsResponse.class);
     }
 
     /**
@@ -1898,7 +1922,7 @@ public class ConstructorIO {
             JSONObject resultData = result.getJSONObject("data");
             JSONObject metadata = new JSONObject();
             
-            // Recursive call to move unspecified properties in result variations to it's metadata object
+            // Recursive call to move unspecified properties in result variations to its metadata object
             if (!result.isNull("variations")) {
                 JSONArray variations = result.getJSONArray("variations");
                 moveMetadataOutOfResultData(variations);
@@ -2270,6 +2294,127 @@ public class ConstructorIO {
     public String taskAsJson(TaskRequest req) throws ConstructorException {
         try {
             Request request = createTaskRequest(req, "v1");
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Creates a Quiz OkHttp request
+     *
+     * @param req the Quiz request
+     * @param type the type of quiz request (next/finalize)
+     * @return a Task OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createQuizRequest(QuizRequest req, String type, UserInfo userInfo) throws ConstructorException {
+        try {
+            if (!type.equals("next") && !type.equals("finalize"))
+                throw new IllegalArgumentException("type must be either 'next' or 'finalize'");
+
+            List<String> paths = Arrays.asList("v1", "quizzes", req.getId(), type);
+            HttpUrl url = this.makeUrl(paths);
+
+            if (req.getSection() != null) {
+                url = url.newBuilder()
+                        .addQueryParameter("section", req.getSection())
+                        .build();
+            }
+
+            if (req.getVersionId() != null) {
+                url = url.newBuilder()
+                        .addQueryParameter("version_id", req.getVersionId())
+                        .build();
+            }
+
+            if (req.getAnswers().size() > 0) {
+                for (List<String> questionAnswers : req.getAnswers())
+                {
+                    String answerParam = String.join(",", questionAnswers);
+                    url = url.newBuilder().addQueryParameter("a", answerParam).build();
+                }
+            } else {
+                if (type.equals("finalize")) {
+                    throw new IllegalArgumentException("answers is a required parameter for a finalize request");
+                }
+            }
+
+            Request request = this.makeUserRequestBuilder(userInfo)
+                    .url(url)
+                    .get()
+                    .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the quiz service for a quiz question
+     *
+     * @param req the Quiz request
+     * @return a Quiz Question Response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public QuizQuestionResponse quizNextQuestion(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createQuizRequest(req, "next", userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createQuizQuestionResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the quiz service for the a quiz question
+     *
+     * @param req the Quiz request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String quizNextQuestionAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createQuizRequest(req, "next", userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the quiz service for the quiz results
+     *
+     * @param req the Quiz request
+     * @return a Quiz Results Response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public QuizResultsResponse quizResults(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createQuizRequest(req, "finalize", userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createQuizResultsResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the quiz service for the quiz results
+     *
+     * @param req the Quiz request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String quizResultsAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            Request request = createQuizRequest(req, "finalize", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
         } catch (Exception exception) {

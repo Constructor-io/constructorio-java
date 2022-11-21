@@ -1,0 +1,18 @@
+{
+  "result": {
+    "filter_expression": {
+      "and": [
+        {
+          "name": "TEST_FILTER_NAME",
+          "value": "TEST_FILTER_VALUE"
+        },
+        {
+          "name": "TEST_FILTER_NAME_2",
+          "value": "TEST_FILTER_VALUE_2"
+        }
+      ]
+    },
+    "results_url": "BROWSE_URL"
+  },
+  "version_id": "string"
+}

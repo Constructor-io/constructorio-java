@@ -1,0 +1,37 @@
+{
+  "next_question": {
+    "id": 1,
+    "title": "Sample multiple select question",
+    "description": "Sample description",
+    "type": "multiple",
+    "cta_text": "Next",
+    "images": null,
+    "options": [
+      {
+        "id": 1,
+        "value": "Who",
+        "attribute": {
+          "name": "group_id",
+          "value": "test-value"
+        },
+        "images": {
+          "primary_url": null,
+          "primary_alt": null,
+          "secondary_url": "https://example.com/small_image",
+          "secondary_alt": "Example secondary image"
+        }
+      },
+      {
+        "id": 2,
+        "value": "What",
+        "attribute": {
+          "name": "group_id",
+          "value": "test-value"
+        },
+        "images": null
+      }
+    ]
+  },
+  "version_id": "11db5ac7-67e1-4000-9000-414d8425cab3",
+  "is_last_question": false
+}

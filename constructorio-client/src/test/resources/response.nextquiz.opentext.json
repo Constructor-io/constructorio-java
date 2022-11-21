@@ -1,0 +1,18 @@
+{
+  "next_question": {
+    "id": 1,
+    "title": "Sample open text question",
+    "description": "Sample description",
+    "type": "open",
+    "cta_text": "Next",
+    "images": {
+      "primary_url": "https://example.com/image",
+      "primary_alt": "Example image",
+      "secondary_url": null,
+      "secondary_alt": null
+    },
+    "input_placeholder": "Sample input placeholder"
+  },
+  "version_id": "11db5ac7-67e1-4000-9000-414d8425cab3",
+  "is_last_question": false
+}

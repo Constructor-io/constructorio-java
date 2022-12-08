@@ -44,6 +44,7 @@ public class FiltersTest {
     assertEquals(facet.getData().size(), 2);
     assertEquals(facet.getData().get("foo"), "bar");
     assertEquals(facet.getData().get("bar"), 123.0);
+    assertEquals(facet.getHidden(), true);
   }
 
   @Test

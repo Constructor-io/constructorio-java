@@ -235,6 +235,7 @@ public class ConstructorIOBrowseTest {
 
         assertEquals("browse results exist", response.getResponse().getResults().size(), 1);
         assertNotNull("browse facet [Brand] exists", brandFacet);
+        assertTrue("browse facet [Brand] is hidden", brandFacet.getHidden());
     }
 
     @Test

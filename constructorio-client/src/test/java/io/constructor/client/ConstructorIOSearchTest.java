@@ -239,6 +239,7 @@ public class ConstructorIOSearchTest {
 
         assertTrue("search results exist", response.getResponse().getResults().size() >= 5);
         assertNotNull("search facet [Brand] exists", brandFacet);
+        assertTrue("search facet [Brand] is hidden", brandFacet.getHidden());
     }
 
     @Test

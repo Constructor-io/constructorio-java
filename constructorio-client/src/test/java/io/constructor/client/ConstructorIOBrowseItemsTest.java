@@ -221,5 +221,6 @@ public class ConstructorIOBrowseItemsTest {
         assertTrue("browse items total results count should be equal to length of supplied ids", (int)response.getResponse().getTotalNumberOfResults() == ids.size());
         assertTrue("browse items result id exists", response.getResultId() != null);
         assertNotNull("browse facet [Brand] exists", brandFacet);
+        assertTrue("browse facet [Brand] is hidden", brandFacet.getHidden());
     }
 }

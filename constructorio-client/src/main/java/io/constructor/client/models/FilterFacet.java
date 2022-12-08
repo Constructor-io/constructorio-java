@@ -34,6 +34,9 @@ public class FilterFacet {
   @SerializedName("data")
   private Map<String, Object> data;
 
+  @SerializedName("hidden")
+  private Boolean hidden;
+
   /**
    * @return the displayName
    */
@@ -88,5 +91,12 @@ public class FilterFacet {
    */
   public Map<String, Object> getData() {
     return data;
+  }
+
+  /**
+   * @return the hidden
+   */
+  public Boolean getHidden() {
+    return hidden;
   }
 }

@@ -38,4 +38,16 @@ public class BrowseResponse {
     public Map<String, Object> getRequest() {
       return request;
     }
+
+    public void setResultId(String resultId) {
+        this.resultId = resultId;
+    }
+
+    public void setResponse(BrowseResponseInner response) {
+        this.response = response;
+    }
+
+    public void setRequest(Map<String, Object> request) {
+        this.request = request;
+    }
 }

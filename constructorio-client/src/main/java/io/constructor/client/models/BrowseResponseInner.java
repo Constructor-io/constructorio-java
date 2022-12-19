@@ -26,46 +26,70 @@ public class BrowseResponseInner {
 
     @SerializedName("collection")
     private ItemCollection collection;
-    
+
     /**
      * @return the facets
      */
     public List<FilterFacet> getFacets() {
-      return facets;
+        return facets;
     }
 
     /**
      * @return the groups
      */
     public List<FilterGroup> getGroups() {
-      return groups;
+        return groups;
     }
 
     /**
      * @return the results
      */
     public List<Result> getResults() {
-      return results;
+        return results;
     }
 
     /**
      * @return the totalNumberOfResults
      */
     public Integer getTotalNumberOfResults() {
-      return totalNumberOfResults;
+        return totalNumberOfResults;
     }
 
     /**
      * @return the sort options
      */
     public List<FilterSortOption> getSortOptions() {
-      return sortOptions;
+        return sortOptions;
     }
 
     /**
      * @return the item collection data
      */
     public ItemCollection getCollection() {
-      return collection;
+        return collection;
+    }
+
+    public void setFacets(List<FilterFacet> facets) {
+        this.facets = facets;
+    }
+
+    public void setGroups(List<FilterGroup> groups) {
+        this.groups = groups;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
+    }
+
+    public void setTotalNumberOfResults(Integer totalNumberOfResults) {
+        this.totalNumberOfResults = totalNumberOfResults;
+    }
+
+    public void setSortOptions(List<FilterSortOption> sortOptions) {
+        this.sortOptions = sortOptions;
+    }
+
+    public void setCollection(ItemCollection collection) {
+        this.collection = collection;
     }
 }

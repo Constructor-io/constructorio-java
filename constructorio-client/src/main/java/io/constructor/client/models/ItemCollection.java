@@ -38,4 +38,16 @@ public class ItemCollection {
     public Map<String, Object> getData() {
       return data;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public void setData(Map<String, Object> data) {
+        this.data = data;
+    }
 }

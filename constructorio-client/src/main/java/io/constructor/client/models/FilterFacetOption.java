@@ -58,4 +58,24 @@ public class FilterFacetOption {
   public String getValue() {
     return value;
   }
+
+  public void setCount(Integer count) {
+    this.count = count;
+  }
+
+  public void setData(Map<String, Object> data) {
+    this.data = data;
+  }
+
+  public void setDisplayName(String displayName) {
+    this.displayName = displayName;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
+  }
 }

@@ -46,5 +46,20 @@ public class FilterSortOption {
   public String getStatus() {
     return status;
   }
-  
+
+  public void setDisplayName(String displayName) {
+    this.displayName = displayName;
+  }
+
+  public void setSortBy(String sortBy) {
+    this.sortBy = sortBy;
+  }
+
+  public void setSortOrder(String sortOrder) {
+    this.sortOrder = sortOrder;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
 }

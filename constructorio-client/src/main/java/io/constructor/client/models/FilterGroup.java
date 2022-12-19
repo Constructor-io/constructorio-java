@@ -69,4 +69,28 @@ public class FilterGroup {
     public Map<String, Object> getData() {
       return data;
     }
+
+    public void setChildren(List<FilterGroup> children) {
+        this.children = children;
+    }
+
+    public void setParents(List<FilterGroup> parents) {
+        this.parents = parents;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public void setData(Map<String, Object> data) {
+        this.data = data;
+    }
 }

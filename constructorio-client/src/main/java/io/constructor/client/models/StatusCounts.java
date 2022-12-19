@@ -22,21 +22,44 @@ public class StatusCounts {
     /**
      * @return the QUEUED status count
      */
-    public int getQueued() { return queued; }
+    public int getQueued() {
+        return queued;
+    }
 
     /**
      * @return the DONE status count
      */
-    public int getDone() { return done; }
+    public int getDone() {
+        return done;
+    }
 
     /**
      * @return the IN_PROGRESS status count
      */
-    public int getInProgress() { return inProgress; }
+    public int getInProgress() {
+        return inProgress;
+    }
 
     /**
      * @return the FAILED status count
      */
-    public int getFailed() { return failed; }
+    public int getFailed() {
+        return failed;
+    }
 
+    public void setQueued(int queued) {
+        this.queued = queued;
+    }
+
+    public void setDone(int done) {
+        this.done = done;
+    }
+
+    public void setInProgress(int inProgress) {
+        this.inProgress = inProgress;
+    }
+
+    public void setFailed(int failed) {
+        this.failed = failed;
+    }
 }

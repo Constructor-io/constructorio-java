@@ -1,6 +1,7 @@
 package io.constructor.client.models;
 
 import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 import io.constructor.client.ConstructorVariation;
@@ -29,5 +30,13 @@ public class VariationsResponse {
      */
     public List<ConstructorVariation> getVariations() {
         return variations;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public void setVariations(List<ConstructorVariation> variations) {
+        this.variations = variations;
     }
 }

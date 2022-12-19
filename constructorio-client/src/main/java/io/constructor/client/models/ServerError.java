@@ -7,13 +7,17 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ServerError {
 
-  @SerializedName("message")
-  private String message;
+    @SerializedName("message")
+    private String message;
 
-  /**
-   * @return the message
-   */
-  public String getMessage() {
-    return message;
-  }
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

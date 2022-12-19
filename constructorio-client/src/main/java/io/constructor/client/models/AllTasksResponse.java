@@ -1,6 +1,7 @@
 package io.constructor.client.models;
 
 import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -36,5 +37,17 @@ public class AllTasksResponse {
      */
     public StatusCounts getStatusCounts() {
         return statusCounts;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void setStatusCounts(StatusCounts statusCounts) {
+        this.statusCounts = statusCounts;
     }
 }

@@ -8,23 +8,31 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResultPod {
 
-  @SerializedName("display_name")
-  private String displayName;
+    @SerializedName("display_name")
+    private String displayName;
 
-  @SerializedName("id")
-  private String id;
+    @SerializedName("id")
+    private String id;
 
-  /**
-   * @return the display name
-   */
-  public String getDisplayName() {
-    return displayName;
-  }
+    /**
+     * @return the display name
+     */
+    public String getDisplayName() {
+        return displayName;
+    }
 
-  /**
-   * @return the values
-   */
-  public String getId() {
-    return id;
-  }
+    /**
+     * @return the values
+     */
+    public String getId() {
+        return id;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

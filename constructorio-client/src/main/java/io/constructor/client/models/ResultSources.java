@@ -8,23 +8,31 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResultSources {
 
-  @SerializedName("token_match")
-  private ResultSourcesData tokenMatch;
+    @SerializedName("token_match")
+    private ResultSourcesData tokenMatch;
 
-  @SerializedName("embeddings_match")
-  private ResultSourcesData embeddingsMatch;
+    @SerializedName("embeddings_match")
+    private ResultSourcesData embeddingsMatch;
 
-  /**
-   * @return the tokenMatch
-   */
-  public ResultSourcesData getTokenMatch() {
-    return tokenMatch;
-  }
-  
-  /**
-   * @return the embeddingsMatch
-   */
-  public ResultSourcesData getEmbeddingsMatch() {
-    return embeddingsMatch;
-  }
+    /**
+     * @return the tokenMatch
+     */
+    public ResultSourcesData getTokenMatch() {
+        return tokenMatch;
+    }
+
+    /**
+     * @return the embeddingsMatch
+     */
+    public ResultSourcesData getEmbeddingsMatch() {
+        return embeddingsMatch;
+    }
+
+    public void setTokenMatch(ResultSourcesData tokenMatch) {
+        this.tokenMatch = tokenMatch;
+    }
+
+    public void setEmbeddingsMatch(ResultSourcesData embeddingsMatch) {
+        this.embeddingsMatch = embeddingsMatch;
+    }
 }

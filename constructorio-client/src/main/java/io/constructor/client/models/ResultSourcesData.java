@@ -7,13 +7,17 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ResultSourcesData {
 
-  @SerializedName("count")
-  private Integer count;
+    @SerializedName("count")
+    private Integer count;
 
-  /**
-   * @return the count
-   */
-  public Integer getCount() {
-    return count;
-  }
+    /**
+     * @return the count
+     */
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 }

@@ -99,4 +99,40 @@ public class FilterFacet {
   public Boolean getHidden() {
     return hidden;
   }
+
+  public void setDisplayName(String displayName) {
+    this.displayName = displayName;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setStatus(Map<String, Object> status) {
+    this.status = status;
+  }
+
+  public void setMax(Double max) {
+    this.max = max;
+  }
+
+  public void setMin(Double min) {
+    this.min = min;
+  }
+
+  public void setOptions(List<FilterFacetOption> options) {
+    this.options = options;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public void setData(Map<String, Object> data) {
+    this.data = data;
+  }
+
+  public void setHidden(Boolean hidden) {
+    this.hidden = hidden;
+  }
 }

@@ -37,91 +37,99 @@ public class Task {
     /**
      * @return the id
      */
-    public int getId() { return id; }
-
-    /**
-     * @param id the id
-     */
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
     /**
      * @return the type
      */
-    public String getType() { return type; }
-
-    /**
-     * @param type the type
-     */
-    public void setType(String type) { this.type = type; }
+    public String getType() {
+        return type;
+    }
 
     /**
      * @return the status
      */
-    public String getStatus() { return status; }
-
-    /**
-     * @param status the status
-     */
-    public void setStatus(String status) { this.status = status; }
+    public String getStatus() {
+        return status;
+    }
 
     /**
      * @return the submission_time
      */
-    public String getSubmissionTime() { return submissionTime; }
-
-    /**
-     * @param submissionTime the submission_time
-     */
-    public void setSubmissionTime(String submissionTime) { this.submissionTime = submissionTime; }
+    public String getSubmissionTime() {
+        return submissionTime;
+    }
 
     /**
      * @return the last_update
      */
-    public String getLastUpdate() { return lastUpdate; }
-
-    /**
-     * @param lastUpdate the last_update
-     */
-    public void setLastUpdate(String lastUpdate) { this.lastUpdate = lastUpdate; }
+    public String getLastUpdate() {
+        return lastUpdate;
+    }
 
     /**
      * @return the filename
      */
-    public String getFilename() { return filename; }
-
-    /**
-     * @param filename the filename
-     */
-    public void setFilename(String filename) { this.filename = filename; }
+    public String getFilename() {
+        return filename;
+    }
 
     /**
      * @return the start_time
      */
-    public String getStartTime() { return startTime; }
-
-    /**
-     * @param startTime the start_time
-     */
-    public void setStartTime(String startTime) { this.startTime = startTime; }
+    public String getStartTime() {
+        return startTime;
+    }
 
     /**
      * @return the protocol
      */
-    public String getProtocol() { return protocol; }
-
-    /**
-     * @param protocol the protocol
-     */
-    public void setProtocol(String protocol) { this.protocol = protocol; }
+    public String getProtocol() {
+        return protocol;
+    }
 
     /**
      * @return the result
      */
-    public Object getResult() { return result; }
+    public Object getResult() {
+        return result;
+    }
 
-    /**
-     * @param result the result
-     */
-    public void setResult(Object result) { this.result = result; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setSubmissionTime(String submissionTime) {
+        this.submissionTime = submissionTime;
+    }
+
+    public void setLastUpdate(String lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    public void setResult(Object result) {
+        this.result = result;
+    }
 }

@@ -22,21 +22,21 @@ public class ItemCollection {
      * @return the id
      */
     public String getId() {
-      return id;
+        return id;
     }
 
     /**
      * @return the display name
      */
     public String getDisplayName() {
-      return displayName;
+        return displayName;
     }
 
     /**
      * @return the collection data
      */
     public Map<String, Object> getData() {
-      return data;
+        return data;
     }
 
     public void setId(String id) {

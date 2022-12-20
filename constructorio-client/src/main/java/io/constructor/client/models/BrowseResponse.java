@@ -22,21 +22,21 @@ public class BrowseResponse {
      * @return the resultId
      */
     public String getResultId() {
-      return resultId;
+        return resultId;
     }
 
     /**
      * @return the response
      */
     public BrowseResponseInner getResponse() {
-      return response;
+        return response;
     }
 
     /**
      * @return the request as understood by the server
      */
     public Map<String, Object> getRequest() {
-      return request;
+        return request;
     }
 
     public void setResultId(String resultId) {

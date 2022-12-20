@@ -1,6 +1,7 @@
 package io.constructor.client.models;
 
 import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 import io.constructor.client.ConstructorItem;

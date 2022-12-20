@@ -22,5 +22,7 @@ public class BrowseFacetOptionsResponseInner {
     /**
      * @param facets the facets
      */
-    public void setFacets(List<FilterFacet> facets) { this.facets = facets; }
+    public void setFacets(List<FilterFacet> facets) {
+        this.facets = facets;
+    }
 }

@@ -111,4 +111,10 @@
 			</plugin>
 		</plugins>
 	</build>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/Constructor-io/constructorio-java</url>
+    </repository>
+  </distributionManagement>
 </project>

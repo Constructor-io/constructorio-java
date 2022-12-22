@@ -16,6 +16,6 @@ jobs:
           java-version: '16'
           distribution: 'adopt'
       - name: Publish package
-        run: mvn --batch-mode deploy
+        run: mvn --batch-mode deploy -f ./constructorio-client/pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

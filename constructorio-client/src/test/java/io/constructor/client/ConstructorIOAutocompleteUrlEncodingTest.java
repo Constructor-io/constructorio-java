@@ -42,7 +42,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = String.format("/autocomplete/r%%2Bco?key=%s&c=ciojava-5.21.1", apiKey);
+        String expectedPath = String.format("/autocomplete/r%%2Bco?key=%s&c=ciojava-5.21.2", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -58,7 +58,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = String.format("/autocomplete/r%%20co?key=%s&c=ciojava-5.21.1", apiKey);
+        String expectedPath = String.format("/autocomplete/r%%20co?key=%s&c=ciojava-5.21.2", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -74,7 +74,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = String.format("/autocomplete/r%%2Fco?key=%s&c=ciojava-5.21.1", apiKey);
+        String expectedPath = String.format("/autocomplete/r%%2Fco?key=%s&c=ciojava-5.21.2", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -90,7 +90,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = String.format("/autocomplete/r'co?key=%s&c=ciojava-5.21.1", apiKey);
+        String expectedPath = String.format("/autocomplete/r'co?key=%s&c=ciojava-5.21.2", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }

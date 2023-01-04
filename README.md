@@ -14,7 +14,7 @@ Requesting results from your JVM based back-end can be useful in order to contro
 
 # Installation
 
-1. Follow the directions at [Jitpack.io](https://jitpack.io/#Constructor-io/constructorio-java/v5.21.1) to add the client to your project.
+1. Follow the directions at [Jitpack.io](https://jitpack.io/#Constructor-io/constructorio-java/v5.21.2) to add the client to your project.
 2. Retrieve your autocomplete token and key.  You can find this at your [Constructor.io dashboard](https://constructor.io/dashboard).
 3. Create a new instance of the client.
 

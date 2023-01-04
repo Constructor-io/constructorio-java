@@ -23,5 +23,15 @@ public class QuizResultsResponse {
     /**
      * @return the result
      */
-    public QuizResult getResult() { return result; }
+    public QuizResult getResult() {
+        return result;
+    }
+
+    public void setVersionId(String versionId) {
+        this.versionId = versionId;
+    }
+
+    public void setResult(QuizResult result) {
+        this.result = result;
+    }
 }

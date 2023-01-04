@@ -19,21 +19,44 @@ public class QuizImages {
     /**
      * @return the primary url
      */
-    public String getPrimaryUrl() { return primaryUrl; }
+    public String getPrimaryUrl() {
+        return primaryUrl;
+    }
 
     /**
      * @return the primary alt
      */
-    public String getPrimaryAlt() { return primaryAlt; }
+    public String getPrimaryAlt() {
+        return primaryAlt;
+    }
 
     /**
      * @return the secondary url
      */
-    public String getSecondaryUrl() { return secondaryUrl; }
+    public String getSecondaryUrl() {
+        return secondaryUrl;
+    }
 
     /**
      * @return the secondary alt
      */
-    public String getSecondaryAlt() { return secondaryAlt; }
+    public String getSecondaryAlt() {
+        return secondaryAlt;
+    }
 
+    public void setPrimaryUrl(String primaryUrl) {
+        this.primaryUrl = primaryUrl;
+    }
+
+    public void setPrimaryAlt(String primaryAlt) {
+        this.primaryAlt = primaryAlt;
+    }
+
+    public void setSecondaryUrl(String secondaryUrl) {
+        this.secondaryUrl = secondaryUrl;
+    }
+
+    public void setSecondaryAlt(String secondaryAlt) {
+        this.secondaryAlt = secondaryAlt;
+    }
 }

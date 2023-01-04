@@ -23,20 +23,32 @@ public class AutocompleteResponse {
      * @return the resultId
      */
     public String getResultId() {
-      return resultId;
+        return resultId;
     }
 
     /**
      * @return the sections
      */
     public Map<String, List<Result>> getSections() {
-      return sections;
+        return sections;
     }
 
     /**
      * @return the request as understood by the server
      */
     public Map<String, Object> getRequest() {
-      return request;
+        return request;
+    }
+
+    public void setSections(Map<String, List<Result>> sections) {
+        this.sections = sections;
+    }
+
+    public void setResultId(String resultId) {
+        this.resultId = resultId;
+    }
+
+    public void setRequest(Map<String, Object> request) {
+        this.request = request;
     }
 }

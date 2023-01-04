@@ -32,41 +32,65 @@ public class FilterGroup {
      * @return the children
      */
     public List<FilterGroup> getChildren() {
-      return children;
+        return children;
     }
 
     /**
      * @return the parents
      */
     public List<FilterGroup> getParents() {
-      return parents;
+        return parents;
     }
 
     /**
      * @return the count
      */
     public Integer getCount() {
-      return count;
+        return count;
     }
 
     /**
      * @return the displayName
      */
     public String getDisplayName() {
-      return displayName;
+        return displayName;
     }
 
     /**
      * @return the groupId
      */
     public String getGroupId() {
-      return groupId;
+        return groupId;
     }
 
     /**
      * @return the data
      */
     public Map<String, Object> getData() {
-      return data;
+        return data;
+    }
+
+    public void setChildren(List<FilterGroup> children) {
+        this.children = children;
+    }
+
+    public void setParents(List<FilterGroup> parents) {
+        this.parents = parents;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public void setData(Map<String, Object> data) {
+        this.data = data;
     }
 }

@@ -1,6 +1,7 @@
 package io.constructor.client.models;
 
 import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 import io.constructor.client.ConstructorItem;
@@ -29,5 +30,13 @@ public class ItemsResponse {
      */
     public List<ConstructorItem> getItems() {
         return items;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public void setItems(List<ConstructorItem> items) {
+        this.items = items;
     }
 }

@@ -18,4 +18,11 @@ public class BrowseFacetOptionsResponseInner {
     public List<FilterFacet> getFacets() {
         return facets;
     }
+
+    /**
+     * @param facets the facets
+     */
+    public void setFacets(List<FilterFacet> facets) {
+        this.facets = facets;
+    }
 }

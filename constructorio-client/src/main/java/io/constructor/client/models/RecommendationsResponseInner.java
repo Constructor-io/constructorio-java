@@ -22,20 +22,32 @@ public class RecommendationsResponseInner {
      * @return the results
      */
     public List<Result> getResults() {
-      return results;
+        return results;
     }
 
     /**
      * @return the totalNumberOfResults
      */
     public Integer getTotalNumberOfResults() {
-      return totalNumberOfResults;
+        return totalNumberOfResults;
     }
 
     /**
      * @return the pod
      */
     public ResultPod getPod() {
-      return pod;
+        return pod;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
+    }
+
+    public void setTotalNumberOfResults(Integer totalNumberOfResults) {
+        this.totalNumberOfResults = totalNumberOfResults;
+    }
+
+    public void setPod(ResultPod pod) {
+        this.pod = pod;
     }
 }

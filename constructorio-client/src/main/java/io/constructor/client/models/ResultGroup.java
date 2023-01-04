@@ -8,33 +8,45 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResultGroup {
 
-  @SerializedName("display_name")
-  private String displayName;
+    @SerializedName("display_name")
+    private String displayName;
 
-  @SerializedName("group_id")
-  private String groupId;
+    @SerializedName("group_id")
+    private String groupId;
 
-  @SerializedName("path")
-  private String path;
+    @SerializedName("path")
+    private String path;
 
-  /**
-   * @return the displayName
-   */
-  public String getDisplayName() {
-    return displayName;
-  }
+    /**
+     * @return the displayName
+     */
+    public String getDisplayName() {
+        return displayName;
+    }
 
-  /**
-   * @return the groupId
-   */
-  public String getGroupId() {
-    return groupId;
-  }
+    /**
+     * @return the groupId
+     */
+    public String getGroupId() {
+        return groupId;
+    }
 
-  /**
-   * @return the path
-   */
-  public String getPath() {
-    return path;
-  }
+    /**
+     * @return the path
+     */
+    public String getPath() {
+        return path;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 }

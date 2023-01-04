@@ -29,4 +29,11 @@ public class BrowseFacetsResponseInner {
         return totalNumberOfResults;
     }
 
+    public void setFacets(List<FilterFacet> facets) {
+        this.facets = facets;
+    }
+
+    public void setTotalNumberOfResults(Integer totalNumberOfResults) {
+        this.totalNumberOfResults = totalNumberOfResults;
+    }
 }

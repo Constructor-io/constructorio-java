@@ -19,15 +19,33 @@ public class QuizQuestionResponse {
     /**
      * @return the next_question
      */
-    public QuizQuestion getNextQuestion() { return nextQuestion; }
+    public QuizQuestion getNextQuestion() {
+        return nextQuestion;
+    }
 
     /**
      * @return the is_last_question
      */
-    public Boolean getIsLastQuestion() { return isLastQuestion; }
+    public Boolean getIsLastQuestion() {
+        return isLastQuestion;
+    }
 
     /**
      * @return the version_id
      */
-    public String getVersionId() { return versionId; }
+    public String getVersionId() {
+        return versionId;
+    }
+
+    public void setNextQuestion(QuizQuestion nextQuestion) {
+        this.nextQuestion = nextQuestion;
+    }
+
+    public void setIsLastQuestion(Boolean isLastQuestion) {
+        this.isLastQuestion = isLastQuestion;
+    }
+
+    public void setVersionId(String versionId) {
+        this.versionId = versionId;
+    }
 }

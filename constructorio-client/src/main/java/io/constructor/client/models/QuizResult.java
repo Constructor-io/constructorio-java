@@ -15,10 +15,22 @@ public class QuizResult {
     /**
      * @return the filter_expression
      */
-    public Map<String, Object> getFilterExpression() { return filterExpression; }
+    public Map<String, Object> getFilterExpression() {
+        return filterExpression;
+    }
 
     /**
      * @return the result_url
      */
-    public String getResultsUrl() { return resultsUrl; }
+    public String getResultsUrl() {
+        return resultsUrl;
+    }
+
+    public void setFilterExpression(Map<String, Object> filterExpression) {
+        this.filterExpression = filterExpression;
+    }
+
+    public void setResultsUrl(String resultsUrl) {
+        this.resultsUrl = resultsUrl;
+    }
 }

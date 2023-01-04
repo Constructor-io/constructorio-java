@@ -37,55 +37,87 @@ public class SearchResponseInner {
      * @return the facets
      */
     public List<FilterFacet> getFacets() {
-      return facets;
+        return facets;
     }
 
     /**
      * @return the groups
      */
     public List<FilterGroup> getGroups() {
-      return groups;
+        return groups;
     }
 
     /**
      * @return the results
      */
     public List<Result> getResults() {
-      return results;
+        return results;
     }
 
     /**
      * @return the totalNumberOfResults
      */
     public Integer getTotalNumberOfResults() {
-      return totalNumberOfResults;
+        return totalNumberOfResults;
     }
 
     /**
      * @return the sort options
      */
     public List<FilterSortOption> getSortOptions() {
-      return sortOptions;
+        return sortOptions;
     }
 
     /**
      * @return redirect data
      */
     public Redirect getRedirect() {
-      return redirect;
+        return redirect;
     }
-    
+
     /**
      * @return resultSources data
      */
     public ResultSources getResultSources() {
-      return resultSources;
+        return resultSources;
     }
 
     /**
      * @return refined content
      */
     public List<RefinedContent> getRefinedContent() {
-      return refinedContent;
+        return refinedContent;
+    }
+
+    public void setFacets(List<FilterFacet> facets) {
+        this.facets = facets;
+    }
+
+    public void setGroups(List<FilterGroup> groups) {
+        this.groups = groups;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
+    }
+
+    public void setTotalNumberOfResults(Integer totalNumberOfResults) {
+        this.totalNumberOfResults = totalNumberOfResults;
+    }
+
+    public void setSortOptions(List<FilterSortOption> sortOptions) {
+        this.sortOptions = sortOptions;
+    }
+
+    public void setRedirect(Redirect redirect) {
+        this.redirect = redirect;
+    }
+
+    public void setResultSources(ResultSources resultSources) {
+        this.resultSources = resultSources;
+    }
+
+    public void setRefinedContent(List<RefinedContent> refinedContent) {
+        this.refinedContent = refinedContent;
     }
 }

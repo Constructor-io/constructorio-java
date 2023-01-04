@@ -41,8 +41,8 @@ public class QuizQuestionResponse {
         this.nextQuestion = nextQuestion;
     }
 
-    public void setLastQuestion(Boolean lastQuestion) {
-        isLastQuestion = lastQuestion;
+    public void setIsLastQuestion(Boolean isLastQuestion) {
+        this.isLastQuestion = isLastQuestion;
     }
 
     public void setVersionId(String versionId) {

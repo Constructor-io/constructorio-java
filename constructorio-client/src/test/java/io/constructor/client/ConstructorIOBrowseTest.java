@@ -204,7 +204,7 @@ public class ConstructorIOBrowseTest {
         BrowseRequest request = new BrowseRequest("Brand", "XYZ");
         request.getHiddenFields().add("testField");
         BrowseResponse response = constructor.browse(request, userInfo);
-        assertEquals("browse results exist", response.getResponse().getResults().size(), 1);
+        assertEquals("browse results exist", response.getResponse().getResults().size(), 4);
         assertEquals("browse result [testField] exists", response.getResponse().getResults().get(0).getData().getMetadata().get("testField"), "hiddenFieldValue");
     }
 
@@ -215,7 +215,7 @@ public class ConstructorIOBrowseTest {
         BrowseRequest request = new BrowseRequest("Brand", "XYZ");
         request.getHiddenFields().add("testField");
         BrowseResponse response = constructor.browse(request, userInfo);
-        assertEquals("browse results exist", response.getResponse().getResults().size(), 1);
+        assertEquals("browse results exist", response.getResponse().getResults().size(), 4);
         assertTrue("browse result labels exist", response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
     }
 
@@ -233,7 +233,7 @@ public class ConstructorIOBrowseTest {
             }
         }).findAny().orElse(null);
 
-        assertEquals("browse results exist", response.getResponse().getResults().size(), 1);
+        assertEquals("browse results exist", response.getResponse().getResults().size(), 4);
         assertNotNull("browse facet [Brand] exists", brandFacet);
         assertTrue("browse facet [Brand] is hidden", brandFacet.getHidden());
     }

@@ -166,7 +166,7 @@ public class ConstructorIOSearchTest {
     public void SearchShouldReturnAResultWithRedirect() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("medium");
+        SearchRequest request = new SearchRequest("rolling");
         SearchResponse response = constructor.search(request, userInfo);
         assertNull("search results do not exist", response.getResponse().getResults());
         assertTrue("search redirect exists", response.getResponse().getRedirect() != null);
@@ -174,7 +174,7 @@ public class ConstructorIOSearchTest {
         assertTrue("search redirect data URL exists", response.getResponse().getRedirect().getData().getUrl() != null);
         assertTrue("search redirect data rule ID exists", response.getResponse().getRedirect().getData().getRuleId() != null);
         assertTrue("search redirect data match ID exists", response.getResponse().getRedirect().getData().getMatchId() != null);
-        assertTrue("search redirect matched terms exist", response.getResponse().getRedirect().getMatchedTerms().contains("medium"));
+        assertTrue("search redirect matched terms exist", response.getResponse().getRedirect().getMatchedTerms().contains("rolling"));
         assertTrue("search result id exists", response.getResultId() != null);
     }
 
@@ -362,7 +362,7 @@ public class ConstructorIOSearchTest {
     @Test
     public void SearchShouldReturnErrorWithPageAndOffset() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 400] You've used both 'page' and 'offset' parameters for pagination. Please, use just one of them");
+        thrown.expectMessage("[HTTP 400] offset, page are mutually exclusive");
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null );
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("Jacket");

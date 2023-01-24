@@ -25,7 +25,7 @@ import io.constructor.client.models.SearchResponse;
 
 public class ConstructorIOSearchTest {
 
-    private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
     private String apiToken = System.getenv("TEST_API_TOKEN");
 
     @Rule

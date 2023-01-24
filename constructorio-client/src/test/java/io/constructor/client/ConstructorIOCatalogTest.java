@@ -18,7 +18,7 @@ import org.junit.rules.ExpectedException;
 public class ConstructorIOCatalogTest {
   
   private String token = System.getenv("TEST_API_TOKEN");
-  private String apiKey = System.getenv("TEST_API_KEY");
+  private String apiKey = System.getenv("TEST_CATALOG_API_KEY");
   private File csvFolder = new File("src/test/resources/csv");
   private File itemsFile = new File("src/test/resources/csv/items.csv");
   private File variationsFile = new File("src/test/resources/csv/variations.csv");

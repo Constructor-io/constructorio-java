@@ -17,7 +17,7 @@ import okhttp3.Request.Builder;
 public class ConstructorIOBasicTest {
     
     private String token = System.getenv("TEST_API_TOKEN");
-    private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

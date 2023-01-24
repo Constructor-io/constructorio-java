@@ -16,7 +16,7 @@ import io.constructor.client.models.SearchResponse;
 public class ConstructorIOSearchAsyncTest {
   
   private SearchResponse responseResolved;
-  private String apiKey = System.getenv("TEST_API_KEY");
+  private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
   private Callable<Boolean> responseIsResolved() {
     return new Callable<Boolean>() {

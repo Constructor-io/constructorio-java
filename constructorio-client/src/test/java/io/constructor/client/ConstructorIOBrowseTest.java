@@ -23,7 +23,7 @@ import io.constructor.client.models.FilterFacet;
 
 public class ConstructorIOBrowseTest {
 
-    private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
     private String apiToken = System.getenv("TEST_API_TOKEN");
 
     @Rule

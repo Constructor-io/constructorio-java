@@ -15,7 +15,7 @@ import io.constructor.client.models.BrowseResponse;
 public class ConstructorIOBrowseAsyncTest {
   
   private BrowseResponse responseResolved;
-  private String apiKey = System.getenv("TEST_API_KEY");
+  private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
   private Callable<Boolean> responseIsResolved() {
     return new Callable<Boolean>() {

@@ -11,7 +11,7 @@ import io.constructor.client.models.SearchResponse;
 
 public class ConstructorIONaturalLanguageSearchTest {
 
-    private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

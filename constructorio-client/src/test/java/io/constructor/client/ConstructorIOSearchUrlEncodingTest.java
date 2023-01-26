@@ -15,7 +15,7 @@ import okhttp3.mockwebserver.RecordedRequest;
 public class ConstructorIOSearchUrlEncodingTest {
 
     private static MockWebServer mockServer;
-    private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

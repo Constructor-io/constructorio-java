@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 public class ConstructorIOTaskTest {
 
-    private static String apiKey = System.getenv("TEST_API_KEY");
+    private static String apiKey = System.getenv("TEST_CATALOG_API_KEY");
     private static String apiToken = System.getenv("TEST_API_TOKEN");
     private static File csvFolder = new File("src/test/resources/csv");
     private static File itemsFile = new File("src/test/resources/csv/items.csv");

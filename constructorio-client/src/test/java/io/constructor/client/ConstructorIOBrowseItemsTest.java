@@ -20,7 +20,7 @@ public class ConstructorIOBrowseItemsTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
     @Test
     public void BrowseItemsShouldReturnAResult() throws Exception {

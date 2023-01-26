@@ -12,7 +12,7 @@ public class ConstructorIOBrowseFacetOptionsTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
     private String apiToken = System.getenv("TEST_API_TOKEN");
     private String facetName = "Color";
 

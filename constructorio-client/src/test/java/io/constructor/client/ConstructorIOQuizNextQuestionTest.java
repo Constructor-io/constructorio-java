@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class ConstructorIOQuizNextQuestionTest {
 
-    private final String quizKey = System.getenv("TEST_API_KEY");
+    private final String quizKey = System.getenv("TEST_REQUEST_API_KEY");
     private final String quizId = "test-quiz";
     private static List<List<String>> validAnswers = new ArrayList<> ();
     private static List<List<String>> finalAnswers = new ArrayList<> ();

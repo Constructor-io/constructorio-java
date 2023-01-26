@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNotNull;
 public class ConstructorIOAutocompleteTest {
     
     private String token = System.getenv("TEST_API_TOKEN");
-    private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -106,7 +106,7 @@ public class ConstructorIOAutocompleteTest {
         AutocompleteRequest request = new AutocompleteRequest("item1");
         request.getFilters().put("group_id", Arrays.asList("All"));
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
-        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 2);
+        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 5);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
         assertEquals("autocomplete request [group_id] filter should match", ((ArrayList)((LinkedTreeMap)response.getRequest().get("filters")).get("group_id")).get(0), "All");
     }
@@ -119,7 +119,7 @@ public class ConstructorIOAutocompleteTest {
         request.getFilters().put("group_id", Arrays.asList("All"));
         request.getFilters().put("Brand", Arrays.asList("XYZ"));
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
-        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 1);
+        assertEquals("autocomplete product suggestions exist", response.getSections().get("Products").size(), 4);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
         assertEquals("autocomplete request [Brand] filter should match", ((ArrayList)((LinkedTreeMap)response.getRequest().get("filters")).get("Brand")).get(0), "XYZ");
         assertEquals("autocomplete request [group_id] filter should match", ((ArrayList)((LinkedTreeMap)response.getRequest().get("filters")).get("group_id")).get(0), "All");

@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class ConstructorIORecommendationsTest {
 
-    private String apiKey = System.getenv("TEST_API_KEY");
+    private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

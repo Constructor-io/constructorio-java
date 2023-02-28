@@ -29,7 +29,9 @@ public class AllRedirectsResponse {
         return totalCount;
     }
 
-    public void setRedirectRules(List<RedirectRule> redirectRules) { this.redirectRules = redirectRules;}
+    public void setRedirectRules(List<RedirectRule> redirectRules) {
+        this.redirectRules = redirectRules;
+    }
 
     public void setTotalCount(int totalCount) {
         this.totalCount = totalCount;

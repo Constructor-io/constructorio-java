@@ -1,0 +1,49 @@
+{
+  "redirect_rules": [
+    {
+      "id": 43173,
+      "start_time": "2023-02-14T08:00:00",
+      "end_time": "2023-02-15T08:00:00",
+      "url": "http://www.86e1cf60-fc1f-4dcf-8f28-9968119e72fb.com",
+      "user_segments": [
+        "123",
+        "12",
+        "3"
+      ],
+      "metadata": {
+        "test": "test"
+      },
+      "last_updated": "2023-02-27T23:46:52",
+      "matches": [
+        {
+          "id": 149872,
+          "pattern": "86e1cf60-fc1f-4dcf-8f28-9968119e72fb",
+          "match_type": "EXACT"
+        }
+      ]
+    },
+    {
+      "id": 43172,
+      "start_time": "2023-02-14T08:00:00",
+      "end_time": "2023-02-15T08:00:00",
+      "url": "http://www.86e1cf60-fc1f-4dcf-8f28-9968119e72fb.com",
+      "user_segments": [
+        "123",
+        "12",
+        "3"
+      ],
+      "metadata": {
+        "test": "test"
+      },
+      "last_updated": "2023-02-27T23:46:52",
+      "matches": [
+        {
+          "id": 149871,
+          "pattern": "86e1cf60-fc1f-4dcf-8f28-9968119e72fb",
+          "match_type": "EXACT"
+        }
+      ]
+    }
+  ],
+  "total_count": 2
+}

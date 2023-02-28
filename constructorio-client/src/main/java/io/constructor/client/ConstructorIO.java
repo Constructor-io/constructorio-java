@@ -13,23 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.gson.Gson;
 
+import io.constructor.client.models.*;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import io.constructor.client.models.AutocompleteResponse;
-import io.constructor.client.models.BrowseResponse;
-import io.constructor.client.models.ItemsResponse;
-import io.constructor.client.models.SearchResponse;
-import io.constructor.client.models.RecommendationsResponse;
-import io.constructor.client.models.ServerError;
-import io.constructor.client.models.AllTasksResponse;
-import io.constructor.client.models.Task;
-import io.constructor.client.models.QuizQuestionResponse;
-import io.constructor.client.models.QuizResultsResponse;
-import io.constructor.client.models.VariationsResponse;
-import io.constructor.client.models.BrowseFacetOptionsResponse;
-import io.constructor.client.models.BrowseFacetsResponse;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -1614,7 +1602,7 @@ public class ConstructorIO {
             .addQueryParameter("key", this.apiKey)
             .host(this.host);
 
-        if (!paths.contains("catalog") && !paths.contains("tasks") && !paths.contains("task")) {
+        if (!paths.contains("catalog") && !paths.contains("tasks") && !paths.contains("task") && !paths.contains("redirect_rules")) {
             builder.addQueryParameter("c", this.version);
         }
 
@@ -1846,6 +1834,17 @@ public class ConstructorIO {
         JSONObject json = new JSONObject(string);
         String transformed = json.toString();
         return new Gson().fromJson(transformed, AllTasksResponse.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an All Redirects response.
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
+     * a Gson Type Adapter.
+     */
+    protected static AllRedirectsResponse createAllRedirectsResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, AllRedirectsResponse.class);
     }
 
     /**
@@ -2294,6 +2293,97 @@ public class ConstructorIO {
     public String taskAsJson(TaskRequest req) throws ConstructorException {
         try {
             Request request = createTaskRequest(req, "v1");
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Creates a All Redirects OkHttp request
+     *
+     * @param req the All Redirects request
+     * @return a All Redirects OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createAllRedirectsRequest(AllRedirectsRequest req) throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList("v1", "redirect_rules");
+            HttpUrl url = this.makeUrl(paths);
+            HttpUrl.Builder urlBuilder = url.newBuilder();
+
+            String resultsPerPage = String.valueOf(req.getResultsPerPage());
+            String status = req.getStatus();
+            String query = req.getQuery();
+            int offset = req.getOffset();
+            int page = req.getPage();
+
+            if (page != 0 && offset != 0) {
+                throw new IllegalArgumentException("page and offset cannot be used together");
+            }
+
+            if (page != 0) {
+                urlBuilder.addQueryParameter("page", String.valueOf(page));
+            }
+
+            if (resultsPerPage != null && !resultsPerPage.equals("0")) {
+                urlBuilder.addQueryParameter("num_results_per_page", resultsPerPage);
+            }
+
+            if (query != null) {
+                urlBuilder.addQueryParameter("query", query);
+            }
+
+            if (status != null) {
+                urlBuilder.addQueryParameter("status", status);
+            }
+
+            if (offset != 0) {
+                urlBuilder.addQueryParameter("offset", String.valueOf(offset));
+            }
+
+            url = urlBuilder.build();
+
+            Request request = this.makeAuthorizedRequestBuilder()
+                    .url(url)
+                    .get()
+                    .build();
+
+            return request;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the redirects service for all redirects
+     *
+     * @param req the all redirects request
+     * @return a all redirects response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public AllRedirectsResponse allRedirects(AllRedirectsRequest req) throws ConstructorException {
+        try {
+            Request request = createAllRedirectsRequest(req);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createAllRedirectsResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the redirects service for all redirects
+     *
+     * @param req the all redirects request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String allRedirectsAsJson(AllRedirectsRequest req) throws ConstructorException {
+        try {
+            Request request = createAllRedirectsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
         } catch (Exception exception) {

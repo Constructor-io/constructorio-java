@@ -9,11 +9,7 @@ public class AllTasksRequest {
   private String status;
   private String type;
 
-  /** Creates a All Tasks request
-  *
-  *
-  *
-   */
+  /** Creates a All Tasks request */
   public AllTasksRequest() {
     this.page = 1;
   }

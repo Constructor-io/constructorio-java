@@ -25,4 +25,5 @@ jobs:
         distribution: 'zulu'
         cache: maven
     - name: Build with Maven
+      working-directory: ./constructorio-client
       run: mvn test

@@ -27,3 +27,7 @@ jobs:
     - name: Build with Maven
       working-directory: ./constructorio-client
       run: mvn test
+      env:
+          TEST_REQUEST_API_KEY: ${{ secrets.TEST_REQUEST_API_KEY }}
+          TEST_CATALOG_API_KEY: ${{ secrets.TEST_CATALOG_API_KEY }}
+          TEST_API_TOKEN: ${{ secrets.TEST_API_TOKEN }}

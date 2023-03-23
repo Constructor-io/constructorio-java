@@ -4,59 +4,59 @@ import com.google.gson.annotations.SerializedName;
 
 public class QuizOption {
 
-    @SerializedName("id")
-    private int id;
+  @SerializedName("id")
+  private int id;
 
-    @SerializedName("value")
-    private String value;
+  @SerializedName("value")
+  private String value;
 
-    @SerializedName("attribute")
-    private QuizOptionAttribute attribute;
+  @SerializedName("attribute")
+  private QuizOptionAttribute attribute;
 
-    @SerializedName("images")
-    private QuizImages images;
+  @SerializedName("images")
+  private QuizImages images;
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
+  /**
+   * @return the id
+   */
+  public int getId() {
+    return id;
+  }
 
-    /**
-     * @return the value
-     */
-    public String getValue() {
-        return value;
-    }
+  /**
+   * @return the value
+   */
+  public String getValue() {
+    return value;
+  }
 
-    /**
-     * @return the quiz option attribute
-     */
-    public QuizOptionAttribute getAttribute() {
-        return attribute;
-    }
+  /**
+   * @return the quiz option attribute
+   */
+  public QuizOptionAttribute getAttribute() {
+    return attribute;
+  }
 
-    /**
-     * @return the quiz option images
-     */
-    public QuizImages getImages() {
-        return images;
-    }
+  /**
+   * @return the quiz option images
+   */
+  public QuizImages getImages() {
+    return images;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+  public void setValue(String value) {
+    this.value = value;
+  }
 
-    public void setAttribute(QuizOptionAttribute attribute) {
-        this.attribute = attribute;
-    }
+  public void setAttribute(QuizOptionAttribute attribute) {
+    this.attribute = attribute;
+  }
 
-    public void setImages(QuizImages images) {
-        this.images = images;
-    }
+  public void setImages(QuizImages images) {
+    this.images = images;
+  }
 }

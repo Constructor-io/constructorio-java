@@ -2,9 +2,7 @@ package io.constructor.client;
 
 import java.util.List;
 
-/**
- * Constructor.io User Info
- */
+/** Constructor.io User Info */
 public class UserInfo {
 
   private int sessionId;
@@ -16,7 +14,7 @@ public class UserInfo {
 
   /**
    * Creates a User Info object
-   * 
+   *
    * @param sessionId the user's Session ID
    * @param clientId the user's Client ID
    */
@@ -108,7 +106,7 @@ public class UserInfo {
 
   /**
    * Validates and sets the the user segments according to the API consumer
-   * 
+   *
    * @param userSegments the userSegments to set
    */
   public void setUserSegments(List<String> userSegments) {

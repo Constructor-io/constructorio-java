@@ -1,120 +1,118 @@
 package io.constructor.client;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
-/**
- * Constructor.io Recommendations Request
- */
+/** Constructor.io Recommendations Request */
 public class RecommendationsRequest {
 
-    private String podId;
-    private int numResults;
-    private List<String> itemIds;
-    private Map<String, List<String>>facets;
-    private String section;
-    private VariationsMap variationsMap;
+  private String podId;
+  private int numResults;
+  private List<String> itemIds;
+  private Map<String, List<String>> facets;
+  private String section;
+  private VariationsMap variationsMap;
 
-    /**
-     * Creates a recommendations request
-     *
-     * @param podId the pod id to retrieve results from
-     */
-    public RecommendationsRequest(String podId) throws IllegalArgumentException {
-      if (podId == null) {
-          throw new IllegalArgumentException("podId is a required parameter of type string");
-      }
-
-      this.podId = podId;
-      this.numResults = 10;
-      this.itemIds = null;
-      this.section = "Products";
-      this.variationsMap = null;
-      this.facets = new HashMap<String, List<String>>();
+  /**
+   * Creates a recommendations request
+   *
+   * @param podId the pod id to retrieve results from
+   */
+  public RecommendationsRequest(String podId) throws IllegalArgumentException {
+    if (podId == null) {
+      throw new IllegalArgumentException("podId is a required parameter of type string");
     }
 
-    /**
-     * @param podId the pod id to set
-     */
-    public void setPodId(String podId) {
-      this.podId = podId;
-    }
-
-    /**
-     * @return the pod id
-     */
-    public String getPodId() {
-      return podId;
-    }
-
-    /**
-     * @param numResults the num results to set
-     */
-    public void setNumResults(int numResults) {
-      this.numResults = numResults;
-    }
-
-    /**
-     * @return the num results
-     */
-    public int getNumResults() {
-      return numResults;
-    }
-
-    /**
-     * @param itemIds the item id's to set
-     */
-    public void setItemIds(List<String> itemIds) {
-      this.itemIds = itemIds;
+    this.podId = podId;
+    this.numResults = 10;
+    this.itemIds = null;
+    this.section = "Products";
+    this.variationsMap = null;
+    this.facets = new HashMap<String, List<String>>();
   }
 
-    /**
-     * @return the item id's
-     */
-    public List<String> getItemIds() {
-      return itemIds;
-    }
+  /**
+   * @param podId the pod id to set
+   */
+  public void setPodId(String podId) {
+    this.podId = podId;
+  }
 
-    /**
-     * @param section the section to set
-     */
-    public void setSection(String section) {
-      this.section = section;
-    }
+  /**
+   * @return the pod id
+   */
+  public String getPodId() {
+    return podId;
+  }
 
-    /**
-     * @return the section
-     */
-    public String getSection() {
-      return section;
-    }
+  /**
+   * @param numResults the num results to set
+   */
+  public void setNumResults(int numResults) {
+    this.numResults = numResults;
+  }
 
-    /**
-     * @param variationsMap the variationsMap to set
-     */
-    public void setVariationsMap(VariationsMap variationsMap) {
-        this.variationsMap = variationsMap;
-    }
+  /**
+   * @return the num results
+   */
+  public int getNumResults() {
+    return numResults;
+  }
 
-    /**
-     * @return the variations map
-     */
-    public VariationsMap getVariationsMap() {
-        return variationsMap;
-    }
+  /**
+   * @param itemIds the item id's to set
+   */
+  public void setItemIds(List<String> itemIds) {
+    this.itemIds = itemIds;
+  }
 
-    /**
-     * @param facets the facets to set
-     */
-    public void setFacets(Map<String, List<String>> facets) {
-      this.facets = facets;
-    }
+  /**
+   * @return the item id's
+   */
+  public List<String> getItemIds() {
+    return itemIds;
+  }
 
-    /**
-     * @return the facets
-     */
-    public Map<String, List<String>> getFacets() {
-      return facets;
-    }
+  /**
+   * @param section the section to set
+   */
+  public void setSection(String section) {
+    this.section = section;
+  }
+
+  /**
+   * @return the section
+   */
+  public String getSection() {
+    return section;
+  }
+
+  /**
+   * @param variationsMap the variationsMap to set
+   */
+  public void setVariationsMap(VariationsMap variationsMap) {
+    this.variationsMap = variationsMap;
+  }
+
+  /**
+   * @return the variations map
+   */
+  public VariationsMap getVariationsMap() {
+    return variationsMap;
+  }
+
+  /**
+   * @param facets the facets to set
+   */
+  public void setFacets(Map<String, List<String>> facets) {
+    this.facets = facets;
+  }
+
+  /**
+   * @return the facets
+   */
+  public Map<String, List<String>> getFacets() {
+    return facets;
+  }
 }

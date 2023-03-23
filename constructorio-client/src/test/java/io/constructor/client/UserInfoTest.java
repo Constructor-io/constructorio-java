@@ -3,15 +3,13 @@ package io.constructor.client;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class UserInfoTest {
 
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
+  @Rule public ExpectedException thrown = ExpectedException.none();
 
   @Test
   public void newWithNullClientIdShouldFail() throws Exception {
@@ -98,7 +96,9 @@ public class UserInfoTest {
 
   @Test
   public void settingUserAgentShouldSucceed() throws Exception {
-    String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36";
+    String userAgent =
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90"
+            + " Safari/537.36";
     UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
     userInfo.setUserAgent(userAgent);
     assertEquals(userInfo.getUserAgent(), userAgent);

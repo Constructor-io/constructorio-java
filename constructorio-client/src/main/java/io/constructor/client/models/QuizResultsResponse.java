@@ -2,36 +2,34 @@ package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Constructor.io Quiz Results Response ... uses Gson/Reflection to load data in
- */
+/** Constructor.io Quiz Results Response ... uses Gson/Reflection to load data in */
 public class QuizResultsResponse {
 
-    @SerializedName("version_id")
-    private String versionId;
+  @SerializedName("version_id")
+  private String versionId;
 
-    @SerializedName("result")
-    private QuizResult result;
+  @SerializedName("result")
+  private QuizResult result;
 
-    /**
-     * @return the version_id
-     */
-    public String getVersionId() {
-        return versionId;
-    }
+  /**
+   * @return the version_id
+   */
+  public String getVersionId() {
+    return versionId;
+  }
 
-    /**
-     * @return the result
-     */
-    public QuizResult getResult() {
-        return result;
-    }
+  /**
+   * @return the result
+   */
+  public QuizResult getResult() {
+    return result;
+  }
 
-    public void setVersionId(String versionId) {
-        this.versionId = versionId;
-    }
+  public void setVersionId(String versionId) {
+    this.versionId = versionId;
+  }
 
-    public void setResult(QuizResult result) {
-        this.result = result;
-    }
+  public void setResult(QuizResult result) {
+    this.result = result;
+  }
 }

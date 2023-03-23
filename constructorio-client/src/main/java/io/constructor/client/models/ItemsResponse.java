@@ -1,42 +1,37 @@
 package io.constructor.client.models;
 
+import com.google.gson.annotations.SerializedName;
+import io.constructor.client.ConstructorItem;
 import java.util.List;
 
-import com.google.gson.annotations.SerializedName;
-
-import io.constructor.client.ConstructorItem;
-
-
-/**
- * Constructor.io Items Response ... uses Gson/Reflection to load data in
- */
+/** Constructor.io Items Response ... uses Gson/Reflection to load data in */
 public class ItemsResponse {
 
-    @SerializedName("total_count")
-    private int totalCount;
+  @SerializedName("total_count")
+  private int totalCount;
 
-    @SerializedName("items")
-    private List<ConstructorItem> items;
+  @SerializedName("items")
+  private List<ConstructorItem> items;
 
-    /**
-     * @return the totalCount
-     */
-    public int getTotalCount() {
-        return totalCount;
-    }
+  /**
+   * @return the totalCount
+   */
+  public int getTotalCount() {
+    return totalCount;
+  }
 
-    /**
-     * @return the items
-     */
-    public List<ConstructorItem> getItems() {
-        return items;
-    }
+  /**
+   * @return the items
+   */
+  public List<ConstructorItem> getItems() {
+    return items;
+  }
 
-    public void setTotalCount(int totalCount) {
-        this.totalCount = totalCount;
-    }
+  public void setTotalCount(int totalCount) {
+    this.totalCount = totalCount;
+  }
 
-    public void setItems(List<ConstructorItem> items) {
-        this.items = items;
-    }
+  public void setItems(List<ConstructorItem> items) {
+    this.items = items;
+  }
 }

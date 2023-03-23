@@ -1,8 +1,6 @@
 package io.constructor.client;
 
-/**
- * Constructor.io Natural Language Search Request
- */
+/** Constructor.io Natural Language Search Request */
 public class NaturalLanguageSearchRequest {
 
   private String query;

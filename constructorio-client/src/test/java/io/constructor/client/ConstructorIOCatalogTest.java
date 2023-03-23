@@ -2,47 +2,45 @@ package io.constructor.client;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.Map;
-import java.util.HashMap;
 import java.io.File;
 import java.net.URL;
-
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ConstructorIOCatalogTest {
-  
+
   private String token = System.getenv("TEST_API_TOKEN");
   private String apiKey = System.getenv("TEST_CATALOG_API_KEY");
   private File csvFolder = new File("src/test/resources/csv");
   private File itemsFile = new File("src/test/resources/csv/items.csv");
   private File variationsFile = new File("src/test/resources/csv/variations.csv");
   private File itemGroupsFile = new File("src/test/resources/csv/item_groups.csv");
-  private String baseUrl = "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
-  
+  private String baseUrl =
+      "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
 
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
+  @Rule public ExpectedException thrown = ExpectedException.none();
 
   @Before
-  public void init() throws Exception{
+  public void init() throws Exception {
     URL itemsUrl = new URL(baseUrl + "items.csv");
     FileUtils.copyURLToFile(itemsUrl, itemsFile);
 
     URL variationsUrl = new URL(baseUrl + "variations.csv");
     FileUtils.copyURLToFile(variationsUrl, variationsFile);
-    
+
     URL itemGroupsUrl = new URL(baseUrl + "item_groups.csv");
     FileUtils.copyURLToFile(itemGroupsUrl, itemGroupsFile);
   }
 
   @After
-  public void teardown() throws Exception{
+  public void teardown() throws Exception {
     itemsFile.delete();
     variationsFile.delete();
     itemGroupsFile.delete();
@@ -56,7 +54,8 @@ public class ConstructorIOCatalogTest {
     CatalogRequest req = new CatalogRequest(files, "Products");
 
     thrown.expect(ConstructorException.class);
-    thrown.expectMessage("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
+    thrown.expectMessage(
+        "At least one file of \"items\", \"variations\", \"item_groups\" is required.");
     constructor.replaceCatalog(req);
   }
 
@@ -66,7 +65,7 @@ public class ConstructorIOCatalogTest {
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
-    
+
     CatalogRequest req = new CatalogRequest(files, "Products");
     String response = constructor.replaceCatalog(req);
     JSONObject jsonObj = new JSONObject(response);
@@ -81,7 +80,7 @@ public class ConstructorIOCatalogTest {
     Map<String, File> files = new HashMap<String, File>();
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
-    
+
     CatalogRequest req = new CatalogRequest(files, "Products");
 
     req.setNotificationEmail("test@constructor.io");
@@ -116,7 +115,7 @@ public class ConstructorIOCatalogTest {
     ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
     Map<String, File> files = new HashMap<String, File>();
     files.put("items", new File("src/test/resources/csv/items.csv"));
-    
+
     CatalogRequest req = new CatalogRequest(files, "Products");
 
     req.setForce(true);
@@ -135,7 +134,7 @@ public class ConstructorIOCatalogTest {
 
     files.put("items", new File("src/test/resources/csv/items.csv"));
     files.put("variations", new File("src/test/resources/csv/variations.csv"));
-    
+
     CatalogRequest req = new CatalogRequest(files, "Products");
     String response = constructor.replaceCatalog(req);
     JSONObject jsonObj = new JSONObject(response);
@@ -145,7 +144,8 @@ public class ConstructorIOCatalogTest {
   }
 
   @Test
-  public void ReplaceCatalogWithItemsAndVariationsAndItemGroupsFilesShouldReturnTaskInfo() throws Exception {
+  public void ReplaceCatalogWithItemsAndVariationsAndItemGroupsFilesShouldReturnTaskInfo()
+      throws Exception {
     ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
     Map<String, File> files = new HashMap<String, File>();
 
@@ -168,7 +168,8 @@ public class ConstructorIOCatalogTest {
     CatalogRequest req = new CatalogRequest(files, "Products");
 
     thrown.expect(ConstructorException.class);
-    thrown.expectMessage("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
+    thrown.expectMessage(
+        "At least one file of \"items\", \"variations\", \"item_groups\" is required.");
     constructor.updateCatalog(req);
   }
 
@@ -257,7 +258,8 @@ public class ConstructorIOCatalogTest {
   }
 
   @Test
-  public void UpdateCatalogWithItemsAndVariationsAndItemGroupsFilesShouldReturnTaskInfo() throws Exception {
+  public void UpdateCatalogWithItemsAndVariationsAndItemGroupsFilesShouldReturnTaskInfo()
+      throws Exception {
     ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
     Map<String, File> files = new HashMap<String, File>();
 
@@ -280,7 +282,8 @@ public class ConstructorIOCatalogTest {
     CatalogRequest req = new CatalogRequest(files, "Products");
 
     thrown.expect(ConstructorException.class);
-    thrown.expectMessage("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
+    thrown.expectMessage(
+        "At least one file of \"items\", \"variations\", \"item_groups\" is required.");
     constructor.patchCatalog(req);
   }
 
@@ -369,7 +372,8 @@ public class ConstructorIOCatalogTest {
   }
 
   @Test
-  public void PatchCatalogWithItemsAndVariationsAndItemGroupsFilesShouldReturnTaskInfo() throws Exception {
+  public void PatchCatalogWithItemsAndVariationsAndItemGroupsFilesShouldReturnTaskInfo()
+      throws Exception {
     ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
     Map<String, File> files = new HashMap<String, File>();
 

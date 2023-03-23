@@ -4,18 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import com.google.gson.Gson;
-
+import io.constructor.client.models.FilterFacet;
+import io.constructor.client.models.FilterFacetOption;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import io.constructor.client.models.FilterFacet;
-import io.constructor.client.models.FilterFacetOption;
-
 public class FiltersTest {
 
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
+  @Rule public ExpectedException thrown = ExpectedException.none();
 
   @Test
   public void multipleFacet() throws Exception {
@@ -55,8 +52,8 @@ public class FiltersTest {
     assertEquals(facet.getName(), "Price");
     assertNull(facet.getOptions());
     assertEquals(facet.getType(), "range");
-    assertEquals((double)facet.getMax(), 429, 0);
-    assertEquals((double)facet.getMin(), 0, 0);
+    assertEquals((double) facet.getMax(), 429, 0);
+    assertEquals((double) facet.getMin(), 0, 0);
     assertEquals(facet.getStatus().size(), 0);
   }
 
@@ -68,8 +65,8 @@ public class FiltersTest {
     assertEquals(facet.getName(), "Price");
     assertNull(facet.getOptions());
     assertEquals(facet.getType(), "range");
-    assertEquals((double)facet.getMax(), 429, 0);
-    assertEquals((double)facet.getMin(), 0, 0);
+    assertEquals((double) facet.getMax(), 429, 0);
+    assertEquals((double) facet.getMin(), 0, 0);
     assertEquals(facet.getStatus().size(), 2);
   }
 
@@ -77,7 +74,7 @@ public class FiltersTest {
   public void facetOption() throws Exception {
     String string = Utils.getTestResource("facetoption.json");
     FilterFacetOption facet = new Gson().fromJson(string, FilterFacetOption.class);
-    assertEquals((double)facet.getCount(), 5, 0);
+    assertEquals((double) facet.getCount(), 5, 0);
     assertEquals(facet.getData().size(), 0);
     assertEquals(facet.getDisplayName(), "Jif");
     assertEquals(facet.getStatus(), "");
@@ -88,7 +85,7 @@ public class FiltersTest {
   public void facetOptionSelected() throws Exception {
     String string = Utils.getTestResource("facetoption.selected.json");
     FilterFacetOption facet = new Gson().fromJson(string, FilterFacetOption.class);
-    assertEquals((double)facet.getCount(), 5, 0);
+    assertEquals((double) facet.getCount(), 5, 0);
     assertEquals(facet.getData().size(), 0);
     assertEquals(facet.getDisplayName(), "Jif");
     assertEquals(facet.getStatus(), "selected");

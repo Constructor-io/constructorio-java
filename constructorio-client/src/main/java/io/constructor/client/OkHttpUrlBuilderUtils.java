@@ -5,13 +5,16 @@ import java.nio.charset.Charset;
 import okio.Buffer;
 
 /**
- * Utility file that contains code paths from https://square.github.io/okhttp/4.x/okhttp/okhttp3/-http-url/-builder/
- * that were otherwise unaccessible.  Line for line copy of the code needed to canonicalize URLs and define 
- * how plus signs are encoded.
+ * Utility file that contains code paths from
+ * https://square.github.io/okhttp/4.x/okhttp/okhttp3/-http-url/-builder/ that were otherwise
+ * unaccessible. Line for line copy of the code needed to canonicalize URLs and define how plus
+ * signs are encoded.
  */
 public class OkHttpUrlBuilderUtils {
 
-  public static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+  public static final char[] HEX_DIGITS = {
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+  };
   public static final String PATH_SEGMENT_ENCODE_SET = " \"<>^`{}|/\\?#";
 
   public static int decodeHexDigit(char c) {
@@ -31,6 +34,7 @@ public class OkHttpUrlBuilderUtils {
   /**
    * Returns a substring of {@code input} on the range {@code [pos..limit)} with the following
    * transformations:
+   *
    * <ul>
    *   <li>Tabs, newlines, form feeds and carriage returns are skipped.
    *   <li>In queries, ' ' is encoded to '+' and '+' is encoded to "%2B".
@@ -45,8 +49,15 @@ public class OkHttpUrlBuilderUtils {
    * @param asciiOnly true to encode all non-ASCII codepoints.
    * @param charset which charset to use, null equals UTF-8.
    */
-  public static String canonicalize(String input, int pos, int limit, String encodeSet,
-      boolean alreadyEncoded, boolean strict, boolean plusIsSpace, boolean asciiOnly,
+  public static String canonicalize(
+      String input,
+      int pos,
+      int limit,
+      String encodeSet,
+      boolean alreadyEncoded,
+      boolean strict,
+      boolean plusIsSpace,
+      boolean asciiOnly,
       Charset charset) {
     int codePoint;
     for (int i = pos; i < limit; i += Character.charCount(codePoint)) {
@@ -60,8 +71,17 @@ public class OkHttpUrlBuilderUtils {
         // Slow path: the character at i requires encoding!
         Buffer out = new Buffer();
         out.writeUtf8(input, pos, i);
-        canonicalize(out, input, i, limit, encodeSet, alreadyEncoded, strict, plusIsSpace,
-            asciiOnly, charset);
+        canonicalize(
+            out,
+            input,
+            i,
+            limit,
+            encodeSet,
+            alreadyEncoded,
+            strict,
+            plusIsSpace,
+            asciiOnly,
+            charset);
         return out.readUtf8();
       }
     }
@@ -70,8 +90,16 @@ public class OkHttpUrlBuilderUtils {
     return input.substring(pos, limit);
   }
 
-  static void canonicalize(Buffer out, String input, int pos, int limit, String encodeSet,
-      boolean alreadyEncoded, boolean strict, boolean plusIsSpace, boolean asciiOnly,
+  static void canonicalize(
+      Buffer out,
+      String input,
+      int pos,
+      int limit,
+      String encodeSet,
+      boolean alreadyEncoded,
+      boolean strict,
+      boolean plusIsSpace,
+      boolean asciiOnly,
       Charset charset) {
     Buffer encodedCharBuffer = null; // Lazily allocated.
     int codePoint;

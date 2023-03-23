@@ -3,9 +3,7 @@ package io.constructor.client;
 import java.io.File;
 import java.util.Map;
 
-/**
- * Constructor.io Catalog Request
- */
+/** Constructor.io Catalog Request */
 public class CatalogRequest {
   private Map<String, File> files;
   private String section;
@@ -73,7 +71,8 @@ public class CatalogRequest {
   }
 
   /**
-   * @param force true if the catalog should be processed even if it will invalidate a large number of existing items
+   * @param force true if the catalog should be processed even if it will invalidate a large number
+   *     of existing items
    */
   public void setForce(Boolean force) {
     this.force = force;

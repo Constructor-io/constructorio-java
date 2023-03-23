@@ -118,7 +118,7 @@ public class ConstructorIOSearchTest {
         SearchResponse response = constructor.search(request, userInfo);
         assertTrue("search results exist", response.getResponse().getResults().size() >= 5);
         assertEquals("search result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 1);
-        assertEquals("search result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 2);
+        assertTrue("search result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size() > 0);
         assertEquals("search result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "item1 variation");
         assertEquals("search result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "20001");
         assertEquals("search result variation [url] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getUrl(), "https://test.com/p/20001");

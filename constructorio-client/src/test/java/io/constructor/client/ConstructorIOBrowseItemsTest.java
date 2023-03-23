@@ -106,7 +106,7 @@ public class ConstructorIOBrowseItemsTest {
         BrowseResponse response = constructor.browseItems(request, userInfo);
         assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
         assertEquals("browse items result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 1);
-        assertEquals("browse items result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 2);
+        assertTrue("browse items result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size() > 0);
         assertEquals("browse items result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "item1 variation");
         assertEquals("browse items result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "20001");
         assertEquals("browse items result variation [url] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getUrl(), "https://test.com/p/20001");

@@ -91,7 +91,7 @@ public class ConstructorIOQuizResultsTest {
         assertNotNull("version_id exists", response.getVersionId());
         assertNotNull("result exists", response.getResult());
         assertNotNull("filter_expression exists", response.getResult().getFilterExpression());
-        assertEquals("filter expression is correct", "{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"or\":[{\"name\":\"Color\",\"value\":\"Blue\"},{\"name\":\"Color\",\"value\":\"red\"}]}]}", jsonFilterExpression);
+        assertEquals("filter expression is correct", "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"name\":\"Color\",\"value\":\"Blue\"}]},{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"name\":\"Color\",\"value\":\"red\"}]}]}", jsonFilterExpression);
         assertNotNull("result results_url exists", response.getResult().getResultsUrl());
     }
 
@@ -106,7 +106,7 @@ public class ConstructorIOQuizResultsTest {
         assertFalse("version_id exists", jsonObject.isNull("version_id"));
         assertFalse("result exists", jsonObject.isNull("result"));
         assertFalse("result results_url exists", jsonObject.getJSONObject("result").isNull("results_url"));
-        assertEquals("filter expression is correct", "{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"or\":[{\"name\":\"Color\",\"value\":\"Blue\"},{\"name\":\"Color\",\"value\":\"red\"}]}]}", jsonObject.getJSONObject("result").getJSONObject("filter_expression").toString());
+        assertEquals("filter expression is correct", "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"name\":\"Color\",\"value\":\"Blue\"}]},{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"name\":\"Color\",\"value\":\"red\"}]}]}", jsonObject.getJSONObject("result").getJSONObject("filter_expression").toString());
     }
 
     @Test

@@ -5,59 +5,59 @@ import com.google.gson.annotations.SerializedName;
 /** Constructor.io Sort Option ... uses Gson/Reflection to load data in */
 public class FilterSortOption {
 
-  @SerializedName("display_name")
-  private String displayName;
+    @SerializedName("display_name")
+    private String displayName;
 
-  @SerializedName("sort_by")
-  private String sortBy;
+    @SerializedName("sort_by")
+    private String sortBy;
 
-  @SerializedName("sort_order")
-  private String sortOrder;
+    @SerializedName("sort_order")
+    private String sortOrder;
 
-  @SerializedName("status")
-  private String status;
+    @SerializedName("status")
+    private String status;
 
-  /**
-   * @return the display name
-   */
-  public String getDisplayName() {
-    return displayName;
-  }
+    /**
+     * @return the display name
+     */
+    public String getDisplayName() {
+        return displayName;
+    }
 
-  /**
-   * @return the sort by
-   */
-  public String getSortBy() {
-    return sortBy;
-  }
+    /**
+     * @return the sort by
+     */
+    public String getSortBy() {
+        return sortBy;
+    }
 
-  /**
-   * @return the sort order
-   */
-  public String getSortOrder() {
-    return sortOrder;
-  }
+    /**
+     * @return the sort order
+     */
+    public String getSortOrder() {
+        return sortOrder;
+    }
 
-  /**
-   * @return the status
-   */
-  public String getStatus() {
-    return status;
-  }
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
 
-  public void setDisplayName(String displayName) {
-    this.displayName = displayName;
-  }
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
-  public void setSortBy(String sortBy) {
-    this.sortBy = sortBy;
-  }
+    public void setSortBy(String sortBy) {
+        this.sortBy = sortBy;
+    }
 
-  public void setSortOrder(String sortOrder) {
-    this.sortOrder = sortOrder;
-  }
+    public void setSortOrder(String sortOrder) {
+        this.sortOrder = sortOrder;
+    }
 
-  public void setStatus(String status) {
-    this.status = status;
-  }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

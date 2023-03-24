@@ -5,59 +5,59 @@ import com.google.gson.annotations.SerializedName;
 /** Constructor.io Status_Counts ... uses Gson/Reflection to load data in */
 public class StatusCounts {
 
-  @SerializedName("QUEUED")
-  private int queued;
+    @SerializedName("QUEUED")
+    private int queued;
 
-  @SerializedName("DONE")
-  private int done;
+    @SerializedName("DONE")
+    private int done;
 
-  @SerializedName("IN_PROGRESS")
-  private int inProgress;
+    @SerializedName("IN_PROGRESS")
+    private int inProgress;
 
-  @SerializedName("FAILED")
-  private int failed;
+    @SerializedName("FAILED")
+    private int failed;
 
-  /**
-   * @return the QUEUED status count
-   */
-  public int getQueued() {
-    return queued;
-  }
+    /**
+     * @return the QUEUED status count
+     */
+    public int getQueued() {
+        return queued;
+    }
 
-  /**
-   * @return the DONE status count
-   */
-  public int getDone() {
-    return done;
-  }
+    /**
+     * @return the DONE status count
+     */
+    public int getDone() {
+        return done;
+    }
 
-  /**
-   * @return the IN_PROGRESS status count
-   */
-  public int getInProgress() {
-    return inProgress;
-  }
+    /**
+     * @return the IN_PROGRESS status count
+     */
+    public int getInProgress() {
+        return inProgress;
+    }
 
-  /**
-   * @return the FAILED status count
-   */
-  public int getFailed() {
-    return failed;
-  }
+    /**
+     * @return the FAILED status count
+     */
+    public int getFailed() {
+        return failed;
+    }
 
-  public void setQueued(int queued) {
-    this.queued = queued;
-  }
+    public void setQueued(int queued) {
+        this.queued = queued;
+    }
 
-  public void setDone(int done) {
-    this.done = done;
-  }
+    public void setDone(int done) {
+        this.done = done;
+    }
 
-  public void setInProgress(int inProgress) {
-    this.inProgress = inProgress;
-  }
+    public void setInProgress(int inProgress) {
+        this.inProgress = inProgress;
+    }
 
-  public void setFailed(int failed) {
-    this.failed = failed;
-  }
+    public void setFailed(int failed) {
+        this.failed = failed;
+    }
 }

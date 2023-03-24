@@ -5,83 +5,84 @@ import java.util.Map;
 
 /** Constructor.io Catalog Request */
 public class CatalogRequest {
-  private Map<String, File> files;
-  private String section;
-  private String notificationEmail;
-  private Boolean force;
+    private Map<String, File> files;
+    private String section;
+    private String notificationEmail;
+    private Boolean force;
 
-  /**
-   * Creates a catalog request
-   *
-   * @param files the files to be uploaded
-   * @param section the autocomplete section to upload the files to
-   */
-  public CatalogRequest(Map<String, File> files, String section) {
-    if (files == null) {
-      throw new IllegalArgumentException("files is required");
+    /**
+     * Creates a catalog request
+     *
+     * @param files the files to be uploaded
+     * @param section the autocomplete section to upload the files to
+     */
+    public CatalogRequest(Map<String, File> files, String section) {
+        if (files == null) {
+            throw new IllegalArgumentException("files is required");
+        }
+        if (section == null) {
+            throw new IllegalArgumentException("section is required");
+        }
+
+        this.files = files;
+        this.section = section;
     }
-    if (section == null) {
-      throw new IllegalArgumentException("section is required");
+
+    /**
+     * @param files the files to be uploaded (items, variations, item_groups)
+     */
+    public void setFiles(Map<String, File> files) {
+        this.files = files;
     }
 
-    this.files = files;
-    this.section = section;
-  }
+    /**
+     * @return the files to be uploaded
+     */
+    public Map<String, File> getFiles() {
+        return files;
+    }
 
-  /**
-   * @param files the files to be uploaded (items, variations, item_groups)
-   */
-  public void setFiles(Map<String, File> files) {
-    this.files = files;
-  }
+    /**
+     * @param section the section to set
+     */
+    public void setSection(String section) {
+        this.section = section;
+    }
 
-  /**
-   * @return the files to be uploaded
-   */
-  public Map<String, File> getFiles() {
-    return files;
-  }
+    /**
+     * @return the notification email
+     */
+    public String getSection() {
+        return section;
+    }
 
-  /**
-   * @param section the section to set
-   */
-  public void setSection(String section) {
-    this.section = section;
-  }
+    /**
+     * @param email the email address where you'd like to receive a notifcation in case the task
+     *     fails
+     */
+    public void setNotificationEmail(String email) {
+        this.notificationEmail = email;
+    }
 
-  /**
-   * @return the notification email
-   */
-  public String getSection() {
-    return section;
-  }
+    /**
+     * @return the notification email
+     */
+    public String getNotificationEmail() {
+        return notificationEmail;
+    }
 
-  /**
-   * @param email the email address where you'd like to receive a notifcation in case the task fails
-   */
-  public void setNotificationEmail(String email) {
-    this.notificationEmail = email;
-  }
+    /**
+     * @param force true if the catalog should be processed even if it will invalidate a large
+     *     number of existing items
+     */
+    public void setForce(Boolean force) {
+        this.force = force;
+    }
 
-  /**
-   * @return the notification email
-   */
-  public String getNotificationEmail() {
-    return notificationEmail;
-  }
-
-  /**
-   * @param force true if the catalog should be processed even if it will invalidate a large number
-   *     of existing items
-   */
-  public void setForce(Boolean force) {
-    this.force = force;
-  }
-
-  /**
-   * @return the force flag
-   */
-  public Boolean getForce() {
-    return force;
-  }
+    /**
+     * @return the force flag
+     */
+    public Boolean getForce() {
+        return force;
+    }
 }

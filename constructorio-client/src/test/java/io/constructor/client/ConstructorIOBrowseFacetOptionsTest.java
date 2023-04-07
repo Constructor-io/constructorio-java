@@ -10,8 +10,7 @@ import org.junit.rules.ExpectedException;
 
 public class ConstructorIOBrowseFacetOptionsTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
     private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
     private String apiToken = System.getenv("TEST_API_TOKEN");
     private String facetName = "Color";
@@ -47,7 +46,6 @@ public class ConstructorIOBrowseFacetOptionsTest {
         assertTrue("browse facets result id exists", response.getResultId() != null);
     }
 
-
     @Test
     public void BrowseFacetOptionsAsJSONShouldReturnAResultWithValidFmtOptions() throws Exception {
         ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
@@ -58,7 +56,15 @@ public class ConstructorIOBrowseFacetOptionsTest {
         JSONObject jsonObj = new JSONObject(response);
 
         assertTrue("browse facets results exist", response.length() > 0);
-        assertTrue("show_hidden_facets is set in request", jsonObj.getJSONObject("request").getJSONObject("fmt_options").getBoolean("show_hidden_facets"));
-        assertTrue("show_hidden_facets is set in request", jsonObj.getJSONObject("request").getJSONObject("fmt_options").getBoolean("show_protected_facets"));
+        assertTrue(
+                "show_hidden_facets is set in request",
+                jsonObj.getJSONObject("request")
+                        .getJSONObject("fmt_options")
+                        .getBoolean("show_hidden_facets"));
+        assertTrue(
+                "show_hidden_facets is set in request",
+                jsonObj.getJSONObject("request")
+                        .getJSONObject("fmt_options")
+                        .getBoolean("show_protected_facets"));
     }
 }

@@ -2,11 +2,10 @@ package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.UUID;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.UUID;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -17,8 +16,7 @@ public class ConstructorVariationTest {
         return "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void newWithNullVariationNameShouldFail() throws Exception {
@@ -31,7 +29,8 @@ public class ConstructorVariationTest {
         String variationName = this.getRandomProductName();
         String variationId = variationName;
         String itemId = this.getRandomProductName();
-        ConstructorVariation variation = new ConstructorVariation(variationId, itemId, variationName);
+        ConstructorVariation variation =
+                new ConstructorVariation(variationId, itemId, variationName);
         assertEquals(variation.getName(), variationName);
     }
 
@@ -40,7 +39,8 @@ public class ConstructorVariationTest {
         String variationName = this.getRandomProductName();
         String variationId = variationName;
         String itemId = this.getRandomProductName();
-        ConstructorVariation variation = new ConstructorVariation(variationId, itemId, variationName);
+        ConstructorVariation variation =
+                new ConstructorVariation(variationId, itemId, variationName);
         assertEquals(variation.getName(), variationName);
         assertEquals(variation.getSuggestedScore(), null);
         assertEquals(variation.getKeywords(), null);
@@ -58,7 +58,8 @@ public class ConstructorVariationTest {
     public void settersShouldSet() throws Exception {
         String variationName = this.getRandomProductName();
         String itemId = this.getRandomProductName();
-        ConstructorVariation variation = new ConstructorVariation(variationName, variationName, itemId);
+        ConstructorVariation variation =
+                new ConstructorVariation(variationName, variationName, itemId);
         Float suggestedScore = (float) 100000.00;
         variation.setName("airline tickets");
         variation.setSuggestedScore(suggestedScore);
@@ -87,7 +88,8 @@ public class ConstructorVariationTest {
     public void toMapShouldHaveADataObject() throws Exception {
         String variationName = this.getRandomProductName();
         String itemId = this.getRandomProductName();
-        ConstructorVariation variation = new ConstructorVariation(variationName, variationName, itemId);
+        ConstructorVariation variation =
+                new ConstructorVariation(variationName, variationName, itemId);
         Float suggestedScore = (float) 100000.00;
         Map<String, Object> metadata = new HashMap<String, Object>();
 

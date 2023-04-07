@@ -1,13 +1,8 @@
 package io.constructor.client.models;
 
-import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Constructor.io Redirect Rule Match ... uses Gson/Reflection to load data in
- */
-
+/** Constructor.io Redirect Rule Match ... uses Gson/Reflection to load data in */
 public class RedirectRuleMatch {
     @SerializedName("id")
     private int id;

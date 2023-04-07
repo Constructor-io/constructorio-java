@@ -3,9 +3,7 @@ package io.constructor.client;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Constructor.io Next Quiz and Finalize Quiz request
- */
+/** Constructor.io Next Quiz and Finalize Quiz request */
 public class QuizRequest {
     private String id;
     private String indexKey;
@@ -38,7 +36,9 @@ public class QuizRequest {
     /**
      * @return the id of the quiz to request
      */
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
 
     /**
      * @param section the section of the product catalog
@@ -48,15 +48,16 @@ public class QuizRequest {
     }
 
     /**
-     * @return the section of the product  catalog
+     * @return the section of the product catalog
      */
     public String getSection() {
         return section;
     }
 
     /**
-     * @param answers the list of answers in the format [ [1,2], [3,4] ] where [1,2] are the selected answers
-     *          for the first question and [3,4] are the selected answers for the second question
+     * @param answers the list of answers in the format [ [1,2], [3,4] ] where [1,2] are the
+     *     selected answers for the first question and [3,4] are the selected answers for the second
+     *     question
      */
     public void setAnswers(List<List<String>> answers) {
         this.answers = answers;
@@ -65,15 +66,21 @@ public class QuizRequest {
     /**
      * @return the list of answers for the quiz
      */
-    public List<List<String>> getAnswers() { return answers; }
+    public List<List<String>> getAnswers() {
+        return answers;
+    }
 
     /**
      * @param versionId the specific version id for the quiz
      */
-    public void setVersionId(String versionId) { this.versionId = versionId;}
+    public void setVersionId(String versionId) {
+        this.versionId = versionId;
+    }
 
     /**
      * @return the specific version id for the quiz
      */
-    public String getVersionId() { return versionId; }
+    public String getVersionId() {
+        return versionId;
+    }
 }

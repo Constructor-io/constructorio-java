@@ -1,8 +1,6 @@
 package io.constructor.client;
 
-/**
- * Constructor.io Get Task Request
- */
+/** Constructor.io Get Task Request */
 public class TaskRequest {
     private String taskId;
 
@@ -31,5 +29,4 @@ public class TaskRequest {
     public String getTaskId() {
         return taskId;
     }
-
 }

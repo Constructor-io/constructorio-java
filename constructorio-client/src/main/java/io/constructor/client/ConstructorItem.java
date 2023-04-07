@@ -1,12 +1,10 @@
 package io.constructor.client;
 
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-/**
- * Constructor.io Item
- */
+/** Constructor.io Item */
 public class ConstructorItem {
 
     private String name;
@@ -21,7 +19,8 @@ public class ConstructorItem {
     private List<String> groupIds;
 
     /**
-     * Creates an item.  Optional public fields are in the <a href="https://docs.constructor.io/rest_api/items/items/">API documentation</a>
+     * Creates an item. Optional public fields are in the <a
+     * href="https://docs.constructor.io/rest_api/items/items/">API documentation</a>
      *
      * @param id the id of the item that you are adding.
      * @param name the name of the item that you are adding.
@@ -60,9 +59,7 @@ public class ConstructorItem {
         this.groupIds = null;
     }
 
-    /**
-     * Returns the HashMap form of an item for converting to JSON
-     */
+    /** Returns the HashMap form of an item for converting to JSON */
     public Map<String, Object> toMap() {
         Map<String, Object> dataMap = new HashMap<String, Object>();
 
@@ -89,7 +86,6 @@ public class ConstructorItem {
 
         return params;
     }
-
 
     /**
      * @return the name

@@ -1,14 +1,15 @@
 package io.constructor.client;
 
-import java.io.File;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Predicate;
-import java.time.LocalDate;
+import static org.junit.Assert.*;
 
 import io.constructor.client.models.AllTasksResponse;
 import io.constructor.client.models.Task;
+import java.io.File;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Predicate;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.core.StringContains;
 import org.json.JSONArray;
@@ -19,23 +20,20 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-
-import static org.junit.Assert.*;
-
 public class ConstructorIOTasksTest {
 
     private static String apiKey = System.getenv("TEST_CATALOG_API_KEY");
     private static String apiToken = System.getenv("TEST_API_TOKEN");
     private static File csvFolder = new File("src/test/resources/csv");
     private static File itemsFile = new File("src/test/resources/csv/items.csv");
-    private static String baseUrl = "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
+    private static String baseUrl =
+            "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
     private static int task_id = 0;
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
-    public static void init() throws Exception{
+    public static void init() throws Exception {
         URL itemsUrl = new URL(baseUrl + "items.csv");
         FileUtils.copyURLToFile(itemsUrl, itemsFile);
 
@@ -52,7 +50,7 @@ public class ConstructorIOTasksTest {
     }
 
     @AfterClass
-    public static void teardown() throws Exception{
+    public static void teardown() throws Exception {
         itemsFile.delete();
         csvFolder.delete();
     }
@@ -83,12 +81,17 @@ public class ConstructorIOTasksTest {
 
         AllTasksResponse response = constructor.allTasks(request);
 
-        Task task = response.getTasks().stream().filter(new Predicate<Task>() {
-            @Override
-            public boolean test(Task t) {
-                return t.getId() == task_id;
-            }
-        }).findAny().orElse(null);
+        Task task =
+                response.getTasks().stream()
+                        .filter(
+                                new Predicate<Task>() {
+                                    @Override
+                                    public boolean test(Task t) {
+                                        return t.getId() == task_id;
+                                    }
+                                })
+                        .findAny()
+                        .orElse(null);
 
         assertTrue("At least one task exists", response.getTotalCount() >= 1);
         assertNotNull("Previously uploaded task_id exists", task);
@@ -104,11 +107,9 @@ public class ConstructorIOTasksTest {
         JSONArray tasksArray = jsonObj.getJSONArray("tasks");
         JSONObject task = null;
 
-        for(int i = 0; i < tasksArray.length(); i++)
-        {
+        for (int i = 0; i < tasksArray.length(); i++) {
             JSONObject obj = tasksArray.getJSONObject(i);
-            if (obj.getInt("id") == task_id)
-            {
+            if (obj.getInt("id") == task_id) {
                 task = obj;
             }
         }
@@ -133,7 +134,8 @@ public class ConstructorIOTasksTest {
     }
 
     @Test
-    public void AllTasksAsJsonShouldReturnAListOfTasksWhenStartAndEndDateIsPassed() throws Exception {
+    public void AllTasksAsJsonShouldReturnAListOfTasksWhenStartAndEndDateIsPassed()
+            throws Exception {
         ConstructorIO constructor = new ConstructorIO(apiToken, apiKey, true, null);
         AllTasksRequest request = new AllTasksRequest();
 
@@ -204,7 +206,9 @@ public class ConstructorIOTasksTest {
         AllTasksRequest request = new AllTasksRequest();
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration.");
+        thrown.expectMessage(
+                "[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`. You can find"
+                        + " your key at app.constructor.io/dashboard/accounts/api_integration.");
         AllTasksResponse response = constructor.allTasks(request);
     }
 
@@ -214,7 +218,9 @@ public class ConstructorIOTasksTest {
         AllTasksRequest request = new AllTasksRequest();
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard");
+        thrown.expectMessage(
+                "[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a"
+                        + " new one at app.constructor.io/dashboard");
         AllTasksResponse response = constructor.allTasks(request);
     }
 
@@ -224,7 +230,9 @@ public class ConstructorIOTasksTest {
         AllTasksRequest request = new AllTasksRequest();
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage(StringContains.containsString("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
+        thrown.expectMessage(
+                StringContains.containsString(
+                        "[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
         String response = constructor.allTasksAsJson(request);
     }
 
@@ -234,8 +242,9 @@ public class ConstructorIOTasksTest {
         AllTasksRequest request = new AllTasksRequest();
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard");
+        thrown.expectMessage(
+                "[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a"
+                        + " new one at app.constructor.io/dashboard");
         String response = constructor.allTasksAsJson(request);
     }
-
 }

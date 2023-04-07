@@ -1,8 +1,7 @@
 package io.constructor.client.models;
 
-import java.util.Map;
-
 import com.google.gson.annotations.SerializedName;
+import java.util.Map;
 
 public class QuizResult {
 

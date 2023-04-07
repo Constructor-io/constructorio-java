@@ -1,23 +1,16 @@
 package io.constructor.client;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-/**
- * Constructor.io Browse Facets Request
- */
+/** Constructor.io Browse Facets Request */
 public class BrowseFacetsRequest {
 
     private int page;
     private int resultsPerPage;
-    private Map<String, String>formatOptions;
+    private Map<String, String> formatOptions;
 
-    /**
-     * Creates a browse facets request
-     *
-     */
+    /** Creates a browse facets request */
     public BrowseFacetsRequest() throws IllegalArgumentException {
         this.page = 1;
         this.resultsPerPage = 20;

@@ -2,11 +2,10 @@ package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.UUID;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.UUID;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -17,8 +16,7 @@ public class ConstructorItemTest {
         return "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void newWithNullItemIdShouldFail() throws Exception {
@@ -84,7 +82,7 @@ public class ConstructorItemTest {
         ConstructorItem item = new ConstructorItem(itemId, itemName);
         Float suggestedScore = (float) 100000.00;
         Map<String, Object> metadata = new HashMap<String, Object>();
-        
+
         item.setName("airline tickets");
         item.setSuggestedScore(suggestedScore);
         item.setKeywords(Arrays.asList("London", "Tokyo", "New "));

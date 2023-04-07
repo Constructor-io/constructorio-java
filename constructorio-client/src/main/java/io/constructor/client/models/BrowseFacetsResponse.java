@@ -1,12 +1,9 @@
 package io.constructor.client.models;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
-import com.google.gson.annotations.SerializedName;
-
-/**
- * Constructor.io Browse Facet Response ... uses Gson/Reflection to load data in
- */
+/** Constructor.io Browse Facet Response ... uses Gson/Reflection to load data in */
 public class BrowseFacetsResponse {
 
     @SerializedName("result_id")

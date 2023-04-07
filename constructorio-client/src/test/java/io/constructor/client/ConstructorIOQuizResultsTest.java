@@ -1,28 +1,27 @@
 package io.constructor.client;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import static org.junit.Assert.*;
 
 import com.google.gson.Gson;
 import io.constructor.client.models.QuizResultsResponse;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.*;
-
 public class ConstructorIOQuizResultsTest {
 
     private final String quizKey = System.getenv("TEST_REQUEST_API_KEY");
     private final String quizId = "test-quiz";
-    private static List<List<String>> validAnswers = new ArrayList<> ();
-    private static List<List<String>> finalAnswers = new ArrayList<> ();
+    private static List<List<String>> validAnswers = new ArrayList<>();
+    private static List<List<String>> finalAnswers = new ArrayList<>();
 
     @BeforeClass
-    public static void init () {
+    public static void init() {
         validAnswers.add(new ArrayList<String>(Arrays.asList("1")));
         validAnswers.add(new ArrayList<String>(Arrays.asList("1", "2")));
 
@@ -32,8 +31,7 @@ public class ConstructorIOQuizResultsTest {
         finalAnswers.add(new ArrayList<String>(Arrays.asList("true")));
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void QuizResultsShouldErrorWithoutAnswersParameter() throws Exception {
@@ -77,7 +75,9 @@ public class ConstructorIOQuizResultsTest {
 
         assertFalse("version_id exists", jsonObject.isNull("version_id"));
         assertFalse("result exists", jsonObject.isNull("result"));
-        assertFalse("result results_url exists", jsonObject.getJSONObject("result").isNull("results_url"));
+        assertFalse(
+                "result results_url exists",
+                jsonObject.getJSONObject("result").isNull("results_url"));
     }
 
     @Test
@@ -91,7 +91,10 @@ public class ConstructorIOQuizResultsTest {
         assertNotNull("version_id exists", response.getVersionId());
         assertNotNull("result exists", response.getResult());
         assertNotNull("filter_expression exists", response.getResult().getFilterExpression());
-        assertEquals("filter expression is correct", "{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"or\":[{\"name\":\"Color\",\"value\":\"Blue\"},{\"name\":\"Color\",\"value\":\"red\"}]}]}", jsonFilterExpression);
+        assertEquals(
+                "filter expression is correct",
+                "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"name\":\"Color\",\"value\":\"Blue\"}]},{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"name\":\"Color\",\"value\":\"red\"}]}]}",
+                jsonFilterExpression);
         assertNotNull("result results_url exists", response.getResult().getResultsUrl());
     }
 
@@ -105,8 +108,13 @@ public class ConstructorIOQuizResultsTest {
 
         assertFalse("version_id exists", jsonObject.isNull("version_id"));
         assertFalse("result exists", jsonObject.isNull("result"));
-        assertFalse("result results_url exists", jsonObject.getJSONObject("result").isNull("results_url"));
-        assertEquals("filter expression is correct", "{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"or\":[{\"name\":\"Color\",\"value\":\"Blue\"},{\"name\":\"Color\",\"value\":\"red\"}]}]}", jsonObject.getJSONObject("result").getJSONObject("filter_expression").toString());
+        assertFalse(
+                "result results_url exists",
+                jsonObject.getJSONObject("result").isNull("results_url"));
+        assertEquals(
+                "filter expression is correct",
+                "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"name\":\"Color\",\"value\":\"Blue\"}]},{\"and\":[{\"name\":\"group_id\",\"value\":\"BrandX\"},{\"name\":\"Color\",\"value\":\"red\"}]}]}",
+                jsonObject.getJSONObject("result").getJSONObject("filter_expression").toString());
     }
 
     @Test
@@ -116,7 +124,9 @@ public class ConstructorIOQuizResultsTest {
         request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a valid quiz id before trying again.");
+        thrown.expectMessage(
+                "[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a"
+                        + " valid quiz id before trying again.");
         QuizResultsResponse response = constructor.quizResults(request, null);
     }
 
@@ -127,7 +137,9 @@ public class ConstructorIOQuizResultsTest {
         request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a valid quiz id before trying again.");
+        thrown.expectMessage(
+                "[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a"
+                        + " valid quiz id before trying again.");
         String response = constructor.quizResultsAsJson(request, null);
     }
 
@@ -138,7 +150,10 @@ public class ConstructorIOQuizResultsTest {
         request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 404] The quiz you requested, \"" + quizId + "\" was not found, please specify a valid quiz id before trying again.");
+        thrown.expectMessage(
+                "[HTTP 404] The quiz you requested, \""
+                        + quizId
+                        + "\" was not found, please specify a valid quiz id before trying again.");
         QuizResultsResponse response = constructor.quizResults(request, null);
     }
 
@@ -149,7 +164,10 @@ public class ConstructorIOQuizResultsTest {
         request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 404] The quiz you requested, \"" + quizId + "\" was not found, please specify a valid quiz id before trying again.");
+        thrown.expectMessage(
+                "[HTTP 404] The quiz you requested, \""
+                        + quizId
+                        + "\" was not found, please specify a valid quiz id before trying again.");
         String response = constructor.quizResultsAsJson(request, null);
     }
 }

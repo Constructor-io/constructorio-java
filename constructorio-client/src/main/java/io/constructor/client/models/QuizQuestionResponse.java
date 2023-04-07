@@ -2,9 +2,7 @@ package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Constructor.io Quiz Question Response ... uses Gson/Reflection to load data in
- */
+/** Constructor.io Quiz Question Response ... uses Gson/Reflection to load data in */
 public class QuizQuestionResponse {
 
     @SerializedName("next_question")

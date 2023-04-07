@@ -4,23 +4,20 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
-
+import okhttp3.HttpUrl;
+import okhttp3.Request;
+import okhttp3.Request.Builder;
+import okhttp3.Response;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import okhttp3.HttpUrl;
-import okhttp3.Response;
-import okhttp3.Request;
-import okhttp3.Request.Builder;
-
 public class ConstructorIOBasicTest {
-    
+
     private String token = System.getenv("TEST_API_TOKEN");
     private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void newShouldSetApiToken() throws Exception {
@@ -42,7 +39,8 @@ public class ConstructorIOBasicTest {
 
     @Test
     public void newShouldSetHostname() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", false, "com.cnstrc.ac");
+        ConstructorIO constructor =
+                new ConstructorIO("boinkaToken", "doinkaKey", false, "com.cnstrc.ac");
         assertEquals("host should be set", constructor.host, "com.cnstrc.ac");
     }
 
@@ -79,31 +77,38 @@ public class ConstructorIOBasicTest {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         Builder builder = constructor.makeAuthorizedRequestBuilder();
         Request req = builder.url("https://ac.cnstrc.com").get().build();
-        assertEquals("authorization headers should be set", req.header("Authorization"), "Basic Ym9pbmthVG9rZW46");
+        assertEquals(
+                "authorization headers should be set",
+                req.header("Authorization"),
+                "Basic Ym9pbmthVG9rZW46");
     }
 
     @Test
     public void makeUserRequestBuilderShouldNotSetAuthorizationHeader() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
+        ConstructorIO constructor =
+                new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
         UserInfo info = new UserInfo(2, "sideshow bob");
         info.setForwardedFor("forwardedFor");
         Builder builder = constructor.makeUserRequestBuilder(info);
         Request req = builder.url("https://ac.cnstrc.com").get().build();
         assertNull("authorization headers should not be set", req.header("Authorization"));
     }
-    
+
     @Test
     public void makeUserRequestBuilderShouldSetConstructorTokenHeader() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
+        ConstructorIO constructor =
+                new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
         UserInfo info = new UserInfo(2, "sideshow bob");
         Builder builder = constructor.makeUserRequestBuilder(info);
         Request req = builder.url("https://ac.cnstrc.com").get().build();
-        assertEquals("constructor token should be set", req.header("x-cnstrc-token"), "whitestripes");
+        assertEquals(
+                "constructor token should be set", req.header("x-cnstrc-token"), "whitestripes");
     }
 
     @Test
     public void makeUserRequestBuilderShouldSetForwardedForHeader() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
+        ConstructorIO constructor =
+                new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
         UserInfo info = new UserInfo(2, "sideshow bob");
         info.setForwardedFor("192.168.0.1");
         Builder builder = constructor.makeUserRequestBuilder(info);
@@ -113,8 +118,11 @@ public class ConstructorIOBasicTest {
 
     @Test
     public void makeUserRequestBuilderShouldSetUserAgentHeader() throws Exception {
-        String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36";
-        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
+        String userAgent =
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)"
+                        + " Chrome/77.0.3865.90 Safari/537.36";
+        ConstructorIO constructor =
+                new ConstructorIO("boinkaToken", "doinkaKey", true, null, "whitestripes");
         UserInfo info = new UserInfo(2, "sideshow bob");
         info.setUserAgent(userAgent);
         Builder builder = constructor.makeUserRequestBuilder(info);
@@ -161,7 +169,6 @@ public class ConstructorIOBasicTest {
         assertEquals("user id is set", url.queryParameter("ui"), "bob-id-123");
     }
 
-   
     @Test
     public void makeUrlWithUserSegmentsShouldReturnAUrl() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
@@ -175,7 +182,8 @@ public class ConstructorIOBasicTest {
         assertEquals("session id is set", url.queryParameter("s"), "2");
         assertEquals("client id is set", url.queryParameter("i"), "sideshow bob");
         assertEquals("user segments are set", url.queryParameterValues("us").get(0), "Jocks");
-        assertEquals("user segments are set", url.queryParameterValues("us").get(1), "Theater kids");
+        assertEquals(
+                "user segments are set", url.queryParameterValues("us").get(1), "Theater kids");
     }
 
     @Test
@@ -209,7 +217,9 @@ public class ConstructorIOBasicTest {
     @Test
     public void getResponseBodyShouldReturnExceptionOn401() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at constructor.io/dashboard");
+        thrown.expectMessage(
+                "[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a"
+                        + " new one at constructor.io/dashboard");
         String body = Utils.getTestResource("response.401.json");
         Response response = Utils.createResponse(401, body);
         ConstructorIO.getResponseBody(response);
@@ -218,21 +228,26 @@ public class ConstructorIOBasicTest {
     @Test
     public void getResponseBodyShouldReturnExceptionOn404() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 404] You're trying to access an invalid endpoint. Please check documentation for allowed endpoints.");
+        thrown.expectMessage(
+                "[HTTP 404] You're trying to access an invalid endpoint. Please check documentation"
+                        + " for allowed endpoints.");
         String body = Utils.getTestResource("response.404.json");
         Response response = Utils.createResponse(404, body);
         ConstructorIO.getResponseBody(response);
     }
 
     @Test
-    public void getResponseBodyShouldReturnExceptionWithErrorCodeOn401() throws Exception{
+    public void getResponseBodyShouldReturnExceptionWithErrorCodeOn401() throws Exception {
         try {
             String body = Utils.getTestResource("response.401.json");
             Response response = Utils.createResponse(401, body);
             ConstructorIO.getResponseBody(response);
         } catch (ConstructorException e) {
             assertEquals(Integer.valueOf(401), e.getErrorCode());
-            assertEquals("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at constructor.io/dashboard", e.getMessage());
+            assertEquals(
+                    "[HTTP 401] Invalid auth_token. If you've forgotten your token, you can"
+                            + " generate a new one at constructor.io/dashboard",
+                    e.getMessage());
         }
     }
 
@@ -241,10 +256,13 @@ public class ConstructorIOBasicTest {
         try {
             String body = Utils.getTestResource("response.404.json");
             Response response = Utils.createResponse(404, body);
-            ConstructorIO.getResponseBody(response);   
+            ConstructorIO.getResponseBody(response);
         } catch (ConstructorException e) {
             assertEquals(Integer.valueOf(404), e.getErrorCode());
-            assertEquals("[HTTP 404] You're trying to access an invalid endpoint. Please check documentation for allowed endpoints.", e.getMessage());
+            assertEquals(
+                    "[HTTP 404] You're trying to access an invalid endpoint. Please check"
+                            + " documentation for allowed endpoints.",
+                    e.getMessage());
         }
     }
 }

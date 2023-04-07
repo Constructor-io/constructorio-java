@@ -1,7 +1,6 @@
 package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class QuizQuestion {

@@ -8,15 +8,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class BrowseRequestTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void newWithNullQueryShouldFail() throws Exception {
@@ -64,11 +62,13 @@ public class BrowseRequestTest {
         formatOptions.put("groups_start", "top");
         List<String> hiddenFields = Arrays.asList("hiddenField1", "hiddenField2");
         List<String> hiddenFacets = Arrays.asList("hiddenFacet1", "hiddenFacet2");
-        String preFilterExpression = "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"electronics-group-id\"},{\"name\":\"Price\",\"range\":[\"-inf\",200]}]},{\"and\":[{\"name\":\"Type\",\"value\":\"Laptop\"},{\"not\":{\"name\":\"Price\",\"range\":[800,\"inf\"]}}]}]}";
-        String qsParam = "{\"num_results_per_page\":\"10\",\"filters\":{\"keywords\":[\"battery-powered\"]}}";
+        String preFilterExpression =
+                "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"electronics-group-id\"},{\"name\":\"Price\",\"range\":[\"-inf\",200]}]},{\"and\":[{\"name\":\"Type\",\"value\":\"Laptop\"},{\"not\":{\"name\":\"Price\",\"range\":[800,\"inf\"]}}]}]}";
+        String qsParam =
+                "{\"num_results_per_page\":\"10\",\"filters\":{\"keywords\":[\"battery-powered\"]}}";
         String now = "1659049486";
         int offset = 2;
-        
+
         request.setFilterName("VacationType");
         request.setFilterValue("Air Travel");
         request.setSection("Browse Suggestions");
@@ -102,6 +102,5 @@ public class BrowseRequestTest {
         assertEquals(request.getQsParam(), qsParam);
         assertEquals(request.getNow(), now);
         assertEquals(request.getOffset(), offset);
-
     }
 }

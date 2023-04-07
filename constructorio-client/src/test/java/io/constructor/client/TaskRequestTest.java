@@ -8,8 +8,7 @@ import org.junit.rules.ExpectedException;
 
 public class TaskRequestTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void newWithNullTaskIdShouldFail() throws Exception {

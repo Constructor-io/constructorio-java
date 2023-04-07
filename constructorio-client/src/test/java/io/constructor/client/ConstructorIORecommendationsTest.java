@@ -1,24 +1,21 @@
 package io.constructor.client;
 
+import static org.junit.Assert.*;
+
+import com.google.gson.Gson;
+import io.constructor.client.models.RecommendationsResponse;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import com.google.gson.Gson;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import io.constructor.client.models.RecommendationsResponse;
-
-import static org.junit.Assert.*;
 
 public class ConstructorIORecommendationsTest {
 
     private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void getRecommendationsShouldReturnAResultWithSingleItemId() throws Exception {
@@ -76,7 +73,8 @@ public class ConstructorIORecommendationsTest {
         VariationsMap variationsMap = new VariationsMap();
         variationsMap.setdType(VariationsMap.Dtypes.object);
         variationsMap.addGroupByRule("variation", "data.variation_id");
-        variationsMap.addValueRule("size", VariationsMap.AggregationTypes.first, "data.facets.size");
+        variationsMap.addValueRule(
+                "size", VariationsMap.AggregationTypes.first, "data.facets.size");
         request.setVariationsMap(variationsMap);
         RecommendationsResponse response = constructor.recommendations(request, userInfo);
 
@@ -84,9 +82,18 @@ public class ConstructorIORecommendationsTest {
         VariationsMap variationsMapFromResponse = new Gson().fromJson(json, VariationsMap.class);
 
         assertNotNull("variations map exists", response.getRequest().get("variations_map"));
-        assertEquals("variations map is correct", variationsMap.getdType(), variationsMapFromResponse.getdType());
-        assertEquals("variations map values is correct", variationsMap.getValues().get("size").aggregation, variationsMapFromResponse.getValues().get("size").aggregation);
-        assertEquals("variations map group by is correct", variationsMap.getGroupBy().get(0).field, variationsMapFromResponse.getGroupBy().get(0).field);
+        assertEquals(
+                "variations map is correct",
+                variationsMap.getdType(),
+                variationsMapFromResponse.getdType());
+        assertEquals(
+                "variations map values is correct",
+                variationsMap.getValues().get("size").aggregation,
+                variationsMapFromResponse.getValues().get("size").aggregation);
+        assertEquals(
+                "variations map group by is correct",
+                variationsMap.getGroupBy().get(0).field,
+                variationsMapFromResponse.getGroupBy().get(0).field);
     }
 
     @Test

@@ -1,22 +1,15 @@
 package io.constructor.client;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-/**
- * Constructor.io Browse Facet options Request
- */
+/** Constructor.io Browse Facet options Request */
 public class BrowseFacetOptionsRequest {
 
     private String facetName;
-    private Map<String, String>formatOptions;
+    private Map<String, String> formatOptions;
 
-    /**
-     * Creates a browse facet options request
-     *
-     */
+    /** Creates a browse facet options request */
     public BrowseFacetOptionsRequest(String facetName) throws IllegalArgumentException {
         this.facetName = facetName;
         this.formatOptions = new HashMap<String, String>();

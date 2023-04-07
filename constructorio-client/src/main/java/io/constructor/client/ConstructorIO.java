@@ -1,8 +1,10 @@
 package io.constructor.client;
 
+import com.google.gson.Gson;
+import io.constructor.client.models.*;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -10,17 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import com.google.gson.Gson;
-
-import io.constructor.client.models.*;
-import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.ConnectionPool;
+import okhttp3.Dispatcher;
 import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -28,38 +25,32 @@ import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.Interceptor;
-import okhttp3.Dispatcher;
-import okhttp3.ConnectionPool;
+import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-/**
- * Constructor.io Client
- */
+/** Constructor.io Client */
 public class ConstructorIO {
 
-    /**
-     * the HTTP client used by all instances
-     */
-    private static OkHttpClient client = new OkHttpClient.Builder()
-        .addInterceptor(new ConstructorInterceptor())
-        .retryOnConnectionFailure(false)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
-        .build();
+    /** the HTTP client used by all instances */
+    private static OkHttpClient client =
+            new OkHttpClient.Builder()
+                    .addInterceptor(new ConstructorInterceptor())
+                    .retryOnConnectionFailure(false)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
+                    .build();
 
-    /**
-     * the HTTP client used by all instances (with retry, only for idempotent requests like GET)
-     */
-    private static OkHttpClient clientWithRetry = client.newBuilder()
-        .retryOnConnectionFailure(true)
-        .build();
+    /** the HTTP client used by all instances (with retry, only for idempotent requests like GET) */
+    private static OkHttpClient clientWithRetry =
+            client.newBuilder().retryOnConnectionFailure(true).build();
 
     /**
      * @param newClient the OkHttpClient to use by all instances
      */
     public static void setHttpClient(OkHttpClient newClient) {
         OkHttpClient.Builder builder = newClient.newBuilder().retryOnConnectionFailure(false);
-        List<Interceptor> interceptors =  newClient.interceptors();
+        List<Interceptor> interceptors = newClient.interceptors();
         Boolean exists = false;
 
         for (Interceptor interceptor : interceptors) {
@@ -77,7 +68,6 @@ public class ConstructorIO {
     }
 
     /**
-     *
      * @param config the Http client config
      */
     public static void setHttpClientConfig(HttpClientConfig config) {
@@ -89,7 +79,11 @@ public class ConstructorIO {
         builder.callTimeout(config.getCallTimeout(), TimeUnit.MILLISECONDS);
         builder.connectTimeout(config.getConnectTimeout(), TimeUnit.MILLISECONDS);
 
-        ConnectionPool pool = new ConnectionPool(config.getConnectionPoolMaxIdleConnections(), config.getConnectionPoolKeepAliveDuration(), TimeUnit.MILLISECONDS);
+        ConnectionPool pool =
+                new ConnectionPool(
+                        config.getConnectionPoolMaxIdleConnections(),
+                        config.getConnectionPoolKeepAliveDuration(),
+                        TimeUnit.MILLISECONDS);
         builder.connectionPool(pool);
 
         dispatcher.setMaxRequests(config.getDispatcherMaxRequests());
@@ -118,13 +112,19 @@ public class ConstructorIO {
     /**
      * Creates a constructor.io Client.
      *
-     * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiToken API Token, gotten from your <a
+     *     href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
      * @param apiKey API Key, used publicly in your in-site javascript client.
-     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete service at ac.cnstrc.com.
-     * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
+     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use
+     *     HTTPS.
+     * @param host The host of the autocomplete service that you are using. It is recommended that
+     *     you let this value be null, in which case the host defaults to the Constructor.io
+     *     autocomplete service at ac.cnstrc.com.
+     * @param constructorToken The token provided by Constructor to identify your company's traffic
+     *     if proxying requests for results
      */
-    public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, String constructorToken) {
+    public ConstructorIO(
+            String apiToken, String apiKey, boolean isHTTPS, String host, String constructorToken) {
         this.apiToken = apiToken;
         this.apiKey = apiKey;
         this.host = host;
@@ -138,22 +138,27 @@ public class ConstructorIO {
             this.protocol = "http";
         }
         this.constructorToken = constructorToken;
-        this.credentials = "Basic " + Base64.getEncoder().encodeToString((this.apiToken + ":").getBytes());
+        this.credentials =
+                "Basic " + Base64.getEncoder().encodeToString((this.apiToken + ":").getBytes());
     }
 
     /**
      * Creates a constructor.io Client.
      *
-     * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiToken API Token, gotten from your <a
+     *     href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
      * @param apiKey API Key, used publicly in your in-site javascript client.
-     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete service at ac.cnstrc.com.
-    */
+     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use
+     *     HTTPS.
+     * @param host The host of the autocomplete service that you are using. It is recommended that
+     *     you let this value be null, in which case the host defaults to the Constructor.io
+     *     autocomplete service at ac.cnstrc.com.
+     */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host) {
-      this(apiToken, apiKey, isHTTPS, host, null);
+        this(apiToken, apiKey, isHTTPS, host, null);
     }
 
-   /*
+    /*
      * Creates a constructor.io Client.
      *
      * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
@@ -161,20 +166,18 @@ public class ConstructorIO {
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
      * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete service at ac.cnstrc.com.
      * @param port The port to connect to
-    */
+     */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, int port) {
-      this(apiToken, apiKey, isHTTPS, host, null);
-      this.port = port;
+        this(apiToken, apiKey, isHTTPS, host, null);
+        this.port = port;
+    }
+
+    /** Sets apiKey */
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
     /**
-     * Sets apiKey
-     */
-    public void setApiKey(String apiKey) {
-      this.apiKey = apiKey;
-    }
-
-   /**
      * Verifies that an autocomplete service is working.
      *
      * @return true if working.
@@ -183,10 +186,7 @@ public class ConstructorIO {
     public boolean verify() throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v1", "verify"));
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .get()
-                .build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
 
             Response response = clientWithRetry.newCall(request).execute();
             getResponseBody(response);
@@ -201,25 +201,29 @@ public class ConstructorIO {
      *
      * @param items the items you want to add or replace.
      * @param section the section of the index that you're adding the items to.
-     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
-     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
+     * @param force whether or not the system should process the request even if it will invalidate
+     *     a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification
+     *     in case the task fails.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean createOrReplaceItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean createOrReplaceItems(
+            ConstructorItem[] items, String section, Boolean force, String notificationEmail)
+            throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
-            url = url
-                .newBuilder()
-                .addQueryParameter("force", force.toString())
-                .addQueryParameter("section", section)
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("force", force.toString())
+                            .addQueryParameter("section", section)
+                            .build();
 
             if (notificationEmail != null) {
-              url = url
-                .newBuilder()
-                .addQueryParameter("notification_email", notificationEmail)
-                .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("notification_email", notificationEmail)
+                                .build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
@@ -229,11 +233,9 @@ public class ConstructorIO {
             }
             data.put("items", itemsAsJSON);
             String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .put(body)
-                .build();
+            RequestBody body =
+                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder().url(url).put(body).build();
 
             Response response = client.newCall(request).execute();
             getResponseBody(response);
@@ -247,11 +249,13 @@ public class ConstructorIO {
         return createOrReplaceItems(items, "Products", false, null);
     }
 
-    public boolean createOrReplaceItems(ConstructorItem[] items, String section) throws ConstructorException {
+    public boolean createOrReplaceItems(ConstructorItem[] items, String section)
+            throws ConstructorException {
         return createOrReplaceItems(items, section, false, null);
     }
 
-    public boolean createOrReplaceItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
+    public boolean createOrReplaceItems(ConstructorItem[] items, String section, Boolean force)
+            throws ConstructorException {
         return createOrReplaceItems(items, section, force, null);
     }
 
@@ -260,43 +264,45 @@ public class ConstructorIO {
      *
      * @param items the items that you are deleting
      * @param section the section of the index that you're removing the items from.
-     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
-     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
+     * @param force whether or not the system should process the request even if it will invalidate
+     *     a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification
+     *     in case the task fails.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    public boolean deleteItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean deleteItems(
+            ConstructorItem[] items, String section, Boolean force, String notificationEmail)
+            throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
-            url = url
-                .newBuilder()
-                .addQueryParameter("force", force.toString())
-                .addQueryParameter("section", section)
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("force", force.toString())
+                            .addQueryParameter("section", section)
+                            .build();
 
             if (notificationEmail != null) {
-              url = url
-                .newBuilder()
-                .addQueryParameter("notification_email", notificationEmail)
-                .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("notification_email", notificationEmail)
+                                .build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> itemIds = new ArrayList<Object>();
             for (ConstructorItem item : items) {
                 Map<String, Object> params = new HashMap<String, Object>();
-                
+
                 params.put("id", item.getId());
                 itemIds.add(params);
             }
             data.put("items", itemIds);
-            
+
             String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .delete(body)
-                .build();
+            RequestBody body =
+                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder().url(url).delete(body).build();
 
             Response response = client.newCall(request).execute();
             getResponseBody(response);
@@ -307,20 +313,22 @@ public class ConstructorIO {
     }
 
     public boolean deleteItems(ConstructorItem[] items) throws ConstructorException {
-      return deleteItems(items, "Products", false, null);
+        return deleteItems(items, "Products", false, null);
     }
 
-    public boolean deleteItems(ConstructorItem[] items, String section) throws ConstructorException {
-      return deleteItems(items, section, false, null);
+    public boolean deleteItems(ConstructorItem[] items, String section)
+            throws ConstructorException {
+        return deleteItems(items, section, false, null);
     }
 
-    public boolean deleteItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
-      return deleteItems(items, section, force, null);
+    public boolean deleteItems(ConstructorItem[] items, String section, Boolean force)
+            throws ConstructorException {
+        return deleteItems(items, section, force, null);
     }
 
     /**
      * Creates an items OkHttp request
-     * 
+     *
      * @param req the items request
      * @return a browse OkHttp request
      * @throws ConstructorException
@@ -329,22 +337,19 @@ public class ConstructorIO {
         try {
             List<String> paths = Arrays.asList("v2", "items");
             HttpUrl url = this.makeUrl(paths);
-            url = url.newBuilder()
-                .addQueryParameter("section", req.getSection())
-                .addQueryParameter("page", String.valueOf(req.getPage()))
-                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("section", req.getSection())
+                            .addQueryParameter("page", String.valueOf(req.getPage()))
+                            .addQueryParameter(
+                                    "num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                            .build();
 
             for (String id : req.getIds()) {
-                url = url.newBuilder()
-                    .addQueryParameter("id", id)
-                    .build();
+                url = url.newBuilder().addQueryParameter("id", id).build();
             }
 
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .get()
-                .build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -392,42 +397,47 @@ public class ConstructorIO {
      *
      * @param variations the variations that you are deleting
      * @param section the section of the autocomplete that you're removing the items from.
-     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
-     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
+     * @param force whether or not the system should process the request even if it will invalidate
+     *     a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification
+     *     in case the task fails.
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    public boolean deleteVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean deleteVariations(
+            ConstructorVariation[] variations,
+            String section,
+            Boolean force,
+            String notificationEmail)
+            throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
-            url = url
-                .newBuilder()
-                .addQueryParameter("force", force.toString())
-                .addQueryParameter("section", section)
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("force", force.toString())
+                            .addQueryParameter("section", section)
+                            .build();
 
             if (notificationEmail != null) {
-              url = url
-                .newBuilder()
-                .addQueryParameter("notification_email", notificationEmail)
-                .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("notification_email", notificationEmail)
+                                .build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
             List<Object> variationIds = new ArrayList<Object>();
             for (ConstructorVariation variation : variations) {
                 Map<String, Object> params = new HashMap<String, Object>();
-                
+
                 params.put("id", variation.getId());
                 variationIds.add(params);
             }
             data.put("variations", variationIds);
             String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .delete(body)
-                .build();
+            RequestBody body =
+                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder().url(url).delete(body).build();
 
             Response response = client.newCall(request).execute();
             getResponseBody(response);
@@ -438,15 +448,18 @@ public class ConstructorIO {
     }
 
     public boolean deleteVariations(ConstructorVariation[] variations) throws ConstructorException {
-      return deleteVariations(variations, "Products", false, null);
+        return deleteVariations(variations, "Products", false, null);
     }
 
-    public boolean deleteVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
-      return deleteVariations(variations, section, false, null);
+    public boolean deleteVariations(ConstructorVariation[] variations, String section)
+            throws ConstructorException {
+        return deleteVariations(variations, section, false, null);
     }
 
-    public boolean deleteVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
-      return deleteVariations(variations, section, force, null);
+    public boolean deleteVariations(
+            ConstructorVariation[] variations, String section, Boolean force)
+            throws ConstructorException {
+        return deleteVariations(variations, section, force, null);
     }
 
     /**
@@ -454,25 +467,29 @@ public class ConstructorIO {
      *
      * @param items the items that you're updating
      * @param section the section of the autocomplete that you're modifying the item for.
-     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
-     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
+     * @param force whether or not the system should process the request even if it will invalidate
+     *     a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification
+     *     in case the task fails.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean updateItems(ConstructorItem[] items, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean updateItems(
+            ConstructorItem[] items, String section, Boolean force, String notificationEmail)
+            throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
-            url = url
-                .newBuilder()
-                .addQueryParameter("force", force.toString())
-                .addQueryParameter("section", section)
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("force", force.toString())
+                            .addQueryParameter("section", section)
+                            .build();
 
             if (notificationEmail != null) {
-              url = url
-                .newBuilder()
-                .addQueryParameter("notification_email", notificationEmail)
-                .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("notification_email", notificationEmail)
+                                .build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
@@ -482,11 +499,9 @@ public class ConstructorIO {
             }
             data.put("items", itemsAsJSON);
             String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .patch(body)
-                .build();
+            RequestBody body =
+                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();
 
             Response response = client.newCall(request).execute();
             getResponseBody(response);
@@ -500,11 +515,13 @@ public class ConstructorIO {
         return updateItems(items, "Products", false, null);
     }
 
-    public boolean updateItems(ConstructorItem[] items, String section) throws ConstructorException {
+    public boolean updateItems(ConstructorItem[] items, String section)
+            throws ConstructorException {
         return updateItems(items, section, false, null);
     }
 
-    public boolean updateItems(ConstructorItem[] items, String section, Boolean force) throws ConstructorException {
+    public boolean updateItems(ConstructorItem[] items, String section, Boolean force)
+            throws ConstructorException {
         return updateItems(items, section, force, null);
     }
 
@@ -513,25 +530,32 @@ public class ConstructorIO {
      *
      * @param variations the variations that you're updating.
      * @param section the section of the autocomplete that you're modifying the item for.
-     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
-     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
+     * @param force whether or not the system should process the request even if it will invalidate
+     *     a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification
+     *     in case the task fails.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean updateVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean updateVariations(
+            ConstructorVariation[] variations,
+            String section,
+            Boolean force,
+            String notificationEmail)
+            throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
-            url = url
-                .newBuilder()
-                .addQueryParameter("force", force.toString())
-                .addQueryParameter("section", section)
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("force", force.toString())
+                            .addQueryParameter("section", section)
+                            .build();
 
             if (notificationEmail != null) {
-              url = url
-                .newBuilder()
-                .addQueryParameter("notification_email", notificationEmail)
-                .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("notification_email", notificationEmail)
+                                .build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
@@ -541,11 +565,9 @@ public class ConstructorIO {
             }
             data.put("variations", variationsAsJSON);
             String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .patch(body)
-                .build();
+            RequestBody body =
+                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();
 
             Response response = client.newCall(request).execute();
             getResponseBody(response);
@@ -559,11 +581,14 @@ public class ConstructorIO {
         return updateVariations(variations, "Products", false, null);
     }
 
-    public boolean updateVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+    public boolean updateVariations(ConstructorVariation[] variations, String section)
+            throws ConstructorException {
         return updateVariations(variations, section, false, null);
     }
 
-    public boolean updateVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+    public boolean updateVariations(
+            ConstructorVariation[] variations, String section, Boolean force)
+            throws ConstructorException {
         return updateVariations(variations, section, force, null);
     }
 
@@ -572,25 +597,32 @@ public class ConstructorIO {
      *
      * @param variations the items you want to add or replace.
      * @param section the section of the autocomplete that you're adding the items to.
-     * @param force whether or not the system should process the request even if it will invalidate a large number of existing variations.
-     * @param notificationEmail An email address where you'd like to receive an email notification in case the task fails.
+     * @param force whether or not the system should process the request even if it will invalidate
+     *     a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification
+     *     in case the task fails.
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section, Boolean force, String notificationEmail) throws ConstructorException {
+    public boolean createOrReplaceVariations(
+            ConstructorVariation[] variations,
+            String section,
+            Boolean force,
+            String notificationEmail)
+            throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
-            url = url
-                .newBuilder()
-                .addQueryParameter("force", force.toString())
-                .addQueryParameter("section", section)
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("force", force.toString())
+                            .addQueryParameter("section", section)
+                            .build();
 
             if (notificationEmail != null) {
-              url = url
-                .newBuilder()
-                .addQueryParameter("notification_email", notificationEmail)
-                .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("notification_email", notificationEmail)
+                                .build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
@@ -600,11 +632,9 @@ public class ConstructorIO {
             }
             data.put("variations", variationsAsJSON);
             String params = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .put(body)
-                .build();
+            RequestBody body =
+                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeAuthorizedRequestBuilder().url(url).put(body).build();
 
             Response response = client.newCall(request).execute();
             getResponseBody(response);
@@ -614,21 +644,25 @@ public class ConstructorIO {
         }
     }
 
-    public boolean createOrReplaceVariations(ConstructorVariation[] variations) throws ConstructorException {
+    public boolean createOrReplaceVariations(ConstructorVariation[] variations)
+            throws ConstructorException {
         return createOrReplaceVariations(variations, "Products", false, null);
     }
 
-    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section) throws ConstructorException {
+    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section)
+            throws ConstructorException {
         return createOrReplaceVariations(variations, section, false, null);
     }
 
-    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section, Boolean force) throws ConstructorException {
+    public boolean createOrReplaceVariations(
+            ConstructorVariation[] variations, String section, Boolean force)
+            throws ConstructorException {
         return createOrReplaceVariations(variations, section, force, null);
     }
 
     /**
      * Creates a variations OkHttp request
-     * 
+     *
      * @param req the variations request
      * @return a browse OkHttp request
      * @throws ConstructorException
@@ -637,30 +671,25 @@ public class ConstructorIO {
         try {
             List<String> paths = Arrays.asList("v2", "variations");
             HttpUrl url = this.makeUrl(paths);
-            url = url.newBuilder()
-                .addQueryParameter("section", req.getSection())
-                .addQueryParameter("page", String.valueOf(req.getPage()))
-                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("section", req.getSection())
+                            .addQueryParameter("page", String.valueOf(req.getPage()))
+                            .addQueryParameter(
+                                    "num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                            .build();
 
             String itemId = req.getItemId();
 
             if (itemId != null) {
-                url = url.newBuilder()
-                    .addQueryParameter("item_id", itemId)
-                    .build();
+                url = url.newBuilder().addQueryParameter("item_id", itemId).build();
             }
 
             for (String id : req.getIds()) {
-                url = url.newBuilder()
-                    .addQueryParameter("id", id)
-                    .build();
+                url = url.newBuilder().addQueryParameter("id", id).build();
             }
 
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .get()
-                .build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -675,7 +704,8 @@ public class ConstructorIO {
      * @return an VariationsResponse response
      * @throws ConstructorException if the request is invalid.
      */
-    public VariationsResponse retrieveVariations(VariationsRequest req) throws ConstructorException {
+    public VariationsResponse retrieveVariations(VariationsRequest req)
+            throws ConstructorException {
         try {
             Request request = createVariationsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();
@@ -706,15 +736,17 @@ public class ConstructorIO {
     /**
      * Queries the autocomplete service.
      *
-     * Note that if you're making an autocomplete request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making an autocomplete request for a website, you should definitely
+     * use our javascript client instead of doing it server-side! That's important. That will be a
+     * solid latency difference.
      *
      * @param req the autocomplete request
      * @param userInfo optional information about the user
      * @return an autocomplete response
      * @throws ConstructorException if the request is invalid.
      */
-    public AutocompleteResponse autocomplete(AutocompleteRequest req, UserInfo userInfo) throws ConstructorException {
+    public AutocompleteResponse autocomplete(AutocompleteRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             String json = autocompleteAsJSON(req, userInfo);
             return createAutocompleteResponse(json);
@@ -726,15 +758,17 @@ public class ConstructorIO {
     /**
      * Queries the autocomplete service.
      *
-     * Note that if you're making an autocomplete request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making an autocomplete request for a website, you should definitely
+     * use our javascript client instead of doing it server-side! That's important. That will be a
+     * solid latency difference.
      *
      * @param req the autocomplete request
      * @param userInfo optional information about the user
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String autocompleteAsJSON(AutocompleteRequest req, UserInfo userInfo) throws ConstructorException {
+    public String autocompleteAsJSON(AutocompleteRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             List<String> paths = Arrays.asList("autocomplete", req.getQuery());
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
@@ -742,36 +776,34 @@ public class ConstructorIO {
             for (Map.Entry<String, Integer> entry : req.getResultsPerSection().entrySet()) {
                 String section = entry.getKey();
                 String count = String.valueOf(entry.getValue());
-                url = url.newBuilder()
-                    .addQueryParameter("num_results_" + section, count)
-                    .build();
+                url = url.newBuilder().addQueryParameter("num_results_" + section, count).build();
             }
 
             for (String hiddenField : req.getHiddenFields()) {
-                url = url.newBuilder()
-                    .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
+                                .build();
             }
-            
+
             for (String filterName : req.getFilters().keySet()) {
                 for (String facetValue : req.getFilters().get(filterName)) {
-                    url = url.newBuilder()
-                        .addQueryParameter("filters[" + filterName + "]", facetValue)
-                        .build();
+                    url =
+                            url.newBuilder()
+                                    .addQueryParameter("filters[" + filterName + "]", facetValue)
+                                    .build();
                 }
             }
 
             if (req.getVariationsMap() != null) {
                 String variationsMapJson = new Gson().toJson(req.getVariationsMap());
-                url = url.newBuilder()
-                        .addQueryParameter("variations_map", variationsMapJson)
-                        .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("variations_map", variationsMapJson)
+                                .build();
             }
 
-            Request request = this.makeUserRequestBuilder(userInfo)
-                .url(url)
-                .get()
-                .build();
+            Request request = this.makeUserRequestBuilder(userInfo).url(url).get().build();
 
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
@@ -782,113 +814,124 @@ public class ConstructorIO {
 
     /**
      * Creates a search OkHttp request
-     * 
+     *
      * @param req the search request
      * @param userInfo optional information about the user
      * @return a search OkHttp request
      * @throws ConstructorException
      */
-    protected Request createSearchRequest(SearchRequest req, UserInfo userInfo) throws ConstructorException {
+    protected Request createSearchRequest(SearchRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             Boolean authorizedRequest = false;
             List<String> paths = Arrays.asList("search", req.getQuery());
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
-            url = url.newBuilder()
-                .addQueryParameter("section", req.getSection())
-                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("section", req.getSection())
+                            .addQueryParameter(
+                                    "num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                            .build();
 
             if (req.getGroupId() != null) {
-                url = url.newBuilder()
-                    .addQueryParameter("filters[group_id]", req.getGroupId())
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("filters[group_id]", req.getGroupId())
+                                .build();
             }
 
             for (String facetName : req.getFacets().keySet()) {
                 for (String facetValue : req.getFacets().get(facetName)) {
-                    url = url.newBuilder()
-                        .addQueryParameter("filters[" + facetName + "]", facetValue)
-                        .build();
+                    url =
+                            url.newBuilder()
+                                    .addQueryParameter("filters[" + facetName + "]", facetValue)
+                                    .build();
                 }
             }
 
             for (String formatOptionKey : req.getFormatOptions().keySet()) {
                 String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
-                  url = url.newBuilder()
-                      .addQueryParameter("fmt_options[" + formatOptionKey + "]", formatOptionValue)
-                      .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "fmt_options[" + formatOptionKey + "]", formatOptionValue)
+                                .build();
             }
 
             for (String hiddenField : req.getHiddenFields()) {
-                url = url.newBuilder()
-                    .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
+                                .build();
             }
 
             for (String hiddenFacet : req.getHiddenFacets()) {
-                url = url.newBuilder()
-                    .addQueryParameter("fmt_options[hidden_facets]", hiddenFacet)
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("fmt_options[hidden_facets]", hiddenFacet)
+                                .build();
             }
 
             if (StringUtils.isNotBlank(req.getSortBy())) {
-                url = url.newBuilder()
-                    .addQueryParameter("sort_by", req.getSortBy())
-                    .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("sort_by", req.getSortBy())
+                                .addQueryParameter(
+                                        "sort_order",
+                                        req.getSortAscending() ? "ascending" : "descending")
+                                .build();
             }
 
             if (req.getCollectionId() != null) {
-                url = url.newBuilder()
-                    .addQueryParameter("collection_id", req.getCollectionId())
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("collection_id", req.getCollectionId())
+                                .build();
             }
 
             if (req.getVariationsMap() != null) {
                 String variationsMapJson = new Gson().toJson(req.getVariationsMap());
-                url = url.newBuilder()
-                    .addQueryParameter("variations_map", variationsMapJson)
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("variations_map", variationsMapJson)
+                                .build();
             }
 
             if (req.getPreFilterExpression() != null) {
-                url = url.newBuilder()
-                    .addQueryParameter("pre_filter_expression", req.getPreFilterExpression())
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "pre_filter_expression", req.getPreFilterExpression())
+                                .build();
             }
 
             if (req.getQsParam() != null) {
-                url = url.newBuilder()
-                    .addQueryParameter("qs", req.getQsParam())
-                    .build();
+                url = url.newBuilder().addQueryParameter("qs", req.getQsParam()).build();
             }
 
             if (req.getNow() != null) {
                 // Make an authorized request if the `now` parameter is provided
                 authorizedRequest = true;
 
-                url = url.newBuilder()
-                    .addQueryParameter("now", req.getNow())
-                    .build();
-
+                url = url.newBuilder().addQueryParameter("now", req.getNow()).build();
             }
 
             if (req.getPage() != 1) {
-                url = url.newBuilder()
-                    .addQueryParameter("page", String.valueOf(req.getPage()))
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("page", String.valueOf(req.getPage()))
+                                .build();
             }
 
             if (req.getOffset() != 0) {
-                url = url.newBuilder()
-                    .addQueryParameter("offset", String.valueOf(req.getOffset()))
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("offset", String.valueOf(req.getOffset()))
+                                .build();
             }
-            
-            Request request = this.makeUserRequestBuilder(userInfo, authorizedRequest)
-                .url(url)
-                .get()
-                .build();
+
+            Request request =
+                    this.makeUserRequestBuilder(userInfo, authorizedRequest).url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -899,8 +942,9 @@ public class ConstructorIO {
     /**
      * Queries the search service.
      *
-     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a search request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the search request
      * @param userInfo optional information about the user
@@ -921,34 +965,40 @@ public class ConstructorIO {
     /**
      * Queries the search service.
      *
-     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a search request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the search request
      * @param userInfo optional information about the user
      * @param c a callback with success and failure conditions
      * @throws ConstructorException if the request is invalid.
      */
-    public void search(SearchRequest req, UserInfo userInfo, final SearchCallback c) throws ConstructorException {
+    public void search(SearchRequest req, UserInfo userInfo, final SearchCallback c)
+            throws ConstructorException {
         try {
             Request request = createSearchRequest(req, userInfo);
-            clientWithRetry.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    c.onFailure(new ConstructorException(e));
-                }
+            clientWithRetry
+                    .newCall(request)
+                    .enqueue(
+                            new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                    c.onFailure(new ConstructorException(e));
+                                }
 
-                @Override
-                public void onResponse(Call call, final Response response) throws IOException {
-                    try {
-                        String json = getResponseBody(response);
-                        SearchResponse res = createSearchResponse(json);
-                        c.onResponse(res);
-                    } catch (Exception e) {
-                        c.onFailure(new ConstructorException(e));
-                    }
-                }
-            });
+                                @Override
+                                public void onResponse(Call call, final Response response)
+                                        throws IOException {
+                                    try {
+                                        String json = getResponseBody(response);
+                                        SearchResponse res = createSearchResponse(json);
+                                        c.onResponse(res);
+                                    } catch (Exception e) {
+                                        c.onFailure(new ConstructorException(e));
+                                    }
+                                }
+                            });
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -957,8 +1007,9 @@ public class ConstructorIO {
     /**
      * Queries the search service.
      *
-     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a search request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the search request
      * @param userInfo optional information about the user
@@ -973,110 +1024,121 @@ public class ConstructorIO {
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
-    } 
+    }
 
     /**
      * Creates a browse OkHttp request
-     * 
+     *
      * @param req the browse request
      * @param userInfo optional information about the user
      * @return a browse OkHttp request
      * @throws ConstructorException
      */
-    protected Request createBrowseRequest(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
+    protected Request createBrowseRequest(BrowseRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             Boolean authorizedRequest = false;
             List<String> paths = Arrays.asList("browse", req.getFilterName(), req.getFilterValue());
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
-            url = url.newBuilder()
-                .addQueryParameter("section", req.getSection())
-                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("section", req.getSection())
+                            .addQueryParameter(
+                                    "num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                            .build();
 
             if (req.getGroupId() != null) {
-                url = url.newBuilder()
-                    .addQueryParameter("filters[group_id]", req.getGroupId())
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("filters[group_id]", req.getGroupId())
+                                .build();
             }
 
             for (String facetName : req.getFacets().keySet()) {
                 for (String facetValue : req.getFacets().get(facetName)) {
-                    url = url.newBuilder()
-                        .addQueryParameter("filters[" + facetName + "]", facetValue)
-                        .build();
+                    url =
+                            url.newBuilder()
+                                    .addQueryParameter("filters[" + facetName + "]", facetValue)
+                                    .build();
                 }
             }
 
             for (String formatOptionKey : req.getFormatOptions().keySet()) {
-              String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
-                url = url.newBuilder()
-                    .addQueryParameter("fmt_options[" + formatOptionKey + "]", formatOptionValue)
-                    .build();
+                String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "fmt_options[" + formatOptionKey + "]", formatOptionValue)
+                                .build();
             }
 
             for (String hiddenField : req.getHiddenFields()) {
-                url = url.newBuilder()
-                    .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
+                                .build();
             }
 
             for (String hiddenFacet : req.getHiddenFacets()) {
-                url = url.newBuilder()
-                    .addQueryParameter("fmt_options[hidden_facets]", hiddenFacet)
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("fmt_options[hidden_facets]", hiddenFacet)
+                                .build();
             }
 
             if (StringUtils.isNotBlank(req.getSortBy())) {
-                url = url.newBuilder()
-                    .addQueryParameter("sort_by", req.getSortBy())
-                    .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("sort_by", req.getSortBy())
+                                .addQueryParameter(
+                                        "sort_order",
+                                        req.getSortAscending() ? "ascending" : "descending")
+                                .build();
             }
 
             if (req.getVariationsMap() != null) {
                 String variationsMapJson = new Gson().toJson(req.getVariationsMap());
-                url = url.newBuilder()
-                    .addQueryParameter("variations_map", variationsMapJson)
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("variations_map", variationsMapJson)
+                                .build();
             }
 
             if (req.getPreFilterExpression() != null) {
-                url = url.newBuilder()
-                    .addQueryParameter("pre_filter_expression", req.getPreFilterExpression())
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "pre_filter_expression", req.getPreFilterExpression())
+                                .build();
             }
 
             if (req.getQsParam() != null) {
-                url = url.newBuilder()
-                    .addQueryParameter("qs", req.getQsParam())
-                    .build();
+                url = url.newBuilder().addQueryParameter("qs", req.getQsParam()).build();
             }
 
             if (req.getNow() != null) {
                 // Make an authorized request if the `now` parameter is provided
                 authorizedRequest = true;
 
-                url = url.newBuilder()
-                    .addQueryParameter("now", req.getNow())
-                    .build();
+                url = url.newBuilder().addQueryParameter("now", req.getNow()).build();
             }
 
             if (req.getPage() != 1) {
-                url = url.newBuilder()
-                    .addQueryParameter("page", String.valueOf(req.getPage()))
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("page", String.valueOf(req.getPage()))
+                                .build();
             }
 
             if (req.getOffset() != 0) {
-                url = url.newBuilder()
-                    .addQueryParameter("offset", String.valueOf(req.getOffset()))
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("offset", String.valueOf(req.getOffset()))
+                                .build();
             }
 
-            Request request = this.makeUserRequestBuilder(userInfo, authorizedRequest)
-                .url(url)
-                .get()
-                .build();
+            Request request =
+                    this.makeUserRequestBuilder(userInfo, authorizedRequest).url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -1087,8 +1149,9 @@ public class ConstructorIO {
     /**
      * Queries the browse service.
      *
-     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a browse request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the browse request
      * @param userInfo optional information about the user
@@ -1096,11 +1159,11 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public BrowseResponse browse(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
-      try {
-          Request request = createBrowseRequest(req, userInfo);
-          Response response = clientWithRetry.newCall(request).execute();
-          String json = getResponseBody(response);
-          return createBrowseResponse(json);
+        try {
+            Request request = createBrowseRequest(req, userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createBrowseResponse(json);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -1109,34 +1172,40 @@ public class ConstructorIO {
     /**
      * Queries the browse service.
      *
-     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a browse request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the browse request
      * @param userInfo optional information about the user
      * @param c a callback with success and failure conditions
      * @throws ConstructorException if the request is invalid.
      */
-    public void browse(BrowseRequest req, UserInfo userInfo, final BrowseCallback c) throws ConstructorException {
+    public void browse(BrowseRequest req, UserInfo userInfo, final BrowseCallback c)
+            throws ConstructorException {
         try {
             Request request = createBrowseRequest(req, userInfo);
-            clientWithRetry.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    c.onFailure(new ConstructorException(e));
-                }
+            clientWithRetry
+                    .newCall(request)
+                    .enqueue(
+                            new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                    c.onFailure(new ConstructorException(e));
+                                }
 
-                @Override
-                public void onResponse(Call call, final Response response) throws IOException {
-                    try {
-                        String json = getResponseBody(response);
-                        BrowseResponse res = createBrowseResponse(json);
-                        c.onResponse(res);
-                    } catch (Exception e) {
-                        c.onFailure(new ConstructorException(e));
-                    }
-                }
-            });
+                                @Override
+                                public void onResponse(Call call, final Response response)
+                                        throws IOException {
+                                    try {
+                                        String json = getResponseBody(response);
+                                        BrowseResponse res = createBrowseResponse(json);
+                                        c.onResponse(res);
+                                    } catch (Exception e) {
+                                        c.onFailure(new ConstructorException(e));
+                                    }
+                                }
+                            });
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -1145,8 +1214,9 @@ public class ConstructorIO {
     /**
      * Queries the browse service.
      *
-     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a browse request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the browse request
      * @param userInfo optional information about the user
@@ -1154,83 +1224,90 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public String browseAsJSON(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
-      try {
-        Request request = createBrowseRequest(req, userInfo);
-        Response response = clientWithRetry.newCall(request).execute();
-        return getResponseBody(response);
-      } catch (Exception exception) {
-          throw new ConstructorException(exception);
-      }
+        try {
+            Request request = createBrowseRequest(req, userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
     }
 
     /**
      * Creates a browse items OkHttp request
-     * 
+     *
      * @param req the browse items request
      * @param userInfo optional information about the user
      * @return a browse OkHttp request
      * @throws ConstructorException
      */
-    protected Request createBrowseItemsRequest(BrowseItemsRequest req, UserInfo userInfo) throws ConstructorException {
+    protected Request createBrowseItemsRequest(BrowseItemsRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             List<String> paths = Arrays.asList("browse", "items");
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
-            url = url.newBuilder()
-                .addQueryParameter("section", req.getSection())
-                .addQueryParameter("page", String.valueOf(req.getPage()))
-                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("section", req.getSection())
+                            .addQueryParameter("page", String.valueOf(req.getPage()))
+                            .addQueryParameter(
+                                    "num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                            .build();
 
             for (String id : req.getIds()) {
-                url = url.newBuilder()
-                    .addQueryParameter("ids", id)
-                    .build();
+                url = url.newBuilder().addQueryParameter("ids", id).build();
             }
 
             if (req.getGroupId() != null) {
-                url = url.newBuilder()
-                    .addQueryParameter("filters[group_id]", req.getGroupId())
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("filters[group_id]", req.getGroupId())
+                                .build();
             }
 
             for (String facetName : req.getFacets().keySet()) {
                 for (String facetValue : req.getFacets().get(facetName)) {
-                    url = url.newBuilder()
-                        .addQueryParameter("filters[" + facetName + "]", facetValue)
-                        .build();
+                    url =
+                            url.newBuilder()
+                                    .addQueryParameter("filters[" + facetName + "]", facetValue)
+                                    .build();
                 }
             }
 
             for (String formatOptionKey : req.getFormatOptions().keySet()) {
-              String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
-                url = url.newBuilder()
-                    .addQueryParameter("fmt_options[" + formatOptionKey + "]", formatOptionValue)
-                    .build();
+                String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "fmt_options[" + formatOptionKey + "]", formatOptionValue)
+                                .build();
             }
 
             if (StringUtils.isNotBlank(req.getSortBy())) {
-                url = url.newBuilder()
-                    .addQueryParameter("sort_by", req.getSortBy())
-                    .addQueryParameter("sort_order", req.getSortAscending() ? "ascending" : "descending")
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("sort_by", req.getSortBy())
+                                .addQueryParameter(
+                                        "sort_order",
+                                        req.getSortAscending() ? "ascending" : "descending")
+                                .build();
             }
 
             for (String hiddenField : req.getHiddenFields()) {
-                url = url.newBuilder()
-                    .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
+                                .build();
             }
 
             for (String hiddenFacet : req.getHiddenFacets()) {
-                url = url.newBuilder()
-                    .addQueryParameter("fmt_options[hidden_facets]", hiddenFacet)
-                    .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("fmt_options[hidden_facets]", hiddenFacet)
+                                .build();
             }
 
-            Request request = this.makeUserRequestBuilder(userInfo)
-                .url(url)
-                .get()
-                .build();
+            Request request = this.makeUserRequestBuilder(userInfo).url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -1241,20 +1318,22 @@ public class ConstructorIO {
     /**
      * Queries the browse service with item id's.
      *
-     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a browse request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the browse items request
      * @param userInfo optional information about the user
      * @return a browse response
      * @throws ConstructorException if the request is invalid.
      */
-    public BrowseResponse browseItems(BrowseItemsRequest req, UserInfo userInfo) throws ConstructorException {
-      try {
-          Request request = createBrowseItemsRequest(req, userInfo);
-          Response response = clientWithRetry.newCall(request).execute();
-          String json = getResponseBody(response);
-          return createBrowseResponse(json);
+    public BrowseResponse browseItems(BrowseItemsRequest req, UserInfo userInfo)
+            throws ConstructorException {
+        try {
+            Request request = createBrowseItemsRequest(req, userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createBrowseResponse(json);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -1263,34 +1342,40 @@ public class ConstructorIO {
     /**
      * Queries the browse service with item id's.
      *
-     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a browse request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the browse items request
      * @param userInfo optional information about the user
      * @param c a callback with success and failure conditions
      * @throws ConstructorException if the request is invalid.
      */
-    public void browseItems(BrowseItemsRequest req, UserInfo userInfo, final BrowseCallback c) throws ConstructorException {
+    public void browseItems(BrowseItemsRequest req, UserInfo userInfo, final BrowseCallback c)
+            throws ConstructorException {
         try {
             Request request = createBrowseItemsRequest(req, userInfo);
-            clientWithRetry.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    c.onFailure(new ConstructorException(e));
-                }
+            clientWithRetry
+                    .newCall(request)
+                    .enqueue(
+                            new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                    c.onFailure(new ConstructorException(e));
+                                }
 
-                @Override
-                public void onResponse(Call call, final Response response) throws IOException {
-                    try {
-                        String json = getResponseBody(response);
-                        BrowseResponse res = createBrowseResponse(json);
-                        c.onResponse(res);
-                    } catch (Exception e) {
-                        c.onFailure(new ConstructorException(e));
-                    }
-                }
-            });
+                                @Override
+                                public void onResponse(Call call, final Response response)
+                                        throws IOException {
+                                    try {
+                                        String json = getResponseBody(response);
+                                        BrowseResponse res = createBrowseResponse(json);
+                                        c.onResponse(res);
+                                    } catch (Exception e) {
+                                        c.onFailure(new ConstructorException(e));
+                                    }
+                                }
+                            });
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -1299,22 +1384,24 @@ public class ConstructorIO {
     /**
      * Queries the browse service with item id's.
      *
-     * Note that if you're making a browse request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a browse request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the browse items request
      * @param userInfo optional information about the user
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String browseItemsAsJSON(BrowseItemsRequest req, UserInfo userInfo) throws ConstructorException {
-      try {
-        Request request = createBrowseItemsRequest(req, userInfo);
-        Response response = clientWithRetry.newCall(request).execute();
-        return getResponseBody(response);
-      } catch (Exception exception) {
-          throw new ConstructorException(exception);
-      }
+    public String browseItemsAsJSON(BrowseItemsRequest req, UserInfo userInfo)
+            throws ConstructorException {
+        try {
+            Request request = createBrowseItemsRequest(req, userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
     }
 
     /**
@@ -1324,26 +1411,28 @@ public class ConstructorIO {
      * @return a browse OkHttp request
      * @throws ConstructorException
      */
-    protected Request createBrowseFacetsRequest(BrowseFacetsRequest req) throws ConstructorException {
+    protected Request createBrowseFacetsRequest(BrowseFacetsRequest req)
+            throws ConstructorException {
         try {
             List<String> paths = Arrays.asList("browse", "facets");
             HttpUrl url = this.makeUrl(paths);
-            url = url.newBuilder()
-                    .addQueryParameter("page", String.valueOf(req.getPage()))
-                    .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                    .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("page", String.valueOf(req.getPage()))
+                            .addQueryParameter(
+                                    "num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                            .build();
 
             for (String formatOptionKey : req.getFormatOptions().keySet()) {
                 String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
-                url = url.newBuilder()
-                        .addQueryParameter("fmt_options[" + formatOptionKey + "]", formatOptionValue)
-                        .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "fmt_options[" + formatOptionKey + "]", formatOptionValue)
+                                .build();
             }
 
-            Request request = this.makeAuthorizedRequestBuilder()
-                    .url(url)
-                    .get()
-                    .build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -1353,7 +1442,6 @@ public class ConstructorIO {
 
     /**
      * Queries the browse facets service
-     *
      *
      * @param req the browse facets request
      * @return a browse facets response
@@ -1372,7 +1460,6 @@ public class ConstructorIO {
 
     /**
      * Queries the browse facets service
-     *
      *
      * @param req the browse facets request
      * @return a string of JSON
@@ -1395,25 +1482,26 @@ public class ConstructorIO {
      * @return a browse OkHttp request
      * @throws ConstructorException
      */
-    protected Request createBrowseFacetOptionsRequest (BrowseFacetOptionsRequest req) throws ConstructorException {
+    protected Request createBrowseFacetOptionsRequest(BrowseFacetOptionsRequest req)
+            throws ConstructorException {
         try {
             List<String> paths = Arrays.asList("browse", "facet_options");
             HttpUrl url = this.makeUrl(paths);
-            url = url.newBuilder()
-                    .addQueryParameter("facet_name", String.valueOf(req.getFacetName()))
-                    .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("facet_name", String.valueOf(req.getFacetName()))
+                            .build();
 
             for (String formatOptionKey : req.getFormatOptions().keySet()) {
                 String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
-                url = url.newBuilder()
-                        .addQueryParameter("fmt_options[" + formatOptionKey + "]", formatOptionValue)
-                        .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "fmt_options[" + formatOptionKey + "]", formatOptionValue)
+                                .build();
             }
 
-            Request request = this.makeAuthorizedRequestBuilder()
-                    .url(url)
-                    .get()
-                    .build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -1424,12 +1512,12 @@ public class ConstructorIO {
     /**
      * Queries the browse facet options service
      *
-     *
      * @param req the browse facet options request
      * @return a browse facet options response
      * @throws ConstructorException if the request is invalid.
      */
-    public BrowseFacetOptionsResponse browseFacetOptions(BrowseFacetOptionsRequest req) throws ConstructorException {
+    public BrowseFacetOptionsResponse browseFacetOptions(BrowseFacetOptionsRequest req)
+            throws ConstructorException {
         try {
             Request request = createBrowseFacetOptionsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();
@@ -1443,12 +1531,12 @@ public class ConstructorIO {
     /**
      * Queries the browse facet options service
      *
-     *
      * @param req the browse facet options request
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String browseFacetOptionsAsJSON(BrowseFacetOptionsRequest req) throws ConstructorException {
+    public String browseFacetOptionsAsJSON(BrowseFacetOptionsRequest req)
+            throws ConstructorException {
         try {
             Request request = createBrowseFacetOptionsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();
@@ -1461,15 +1549,17 @@ public class ConstructorIO {
     /**
      * Queries the search service with natural language processing.
      *
-     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a search request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the natural language search request
      * @param userInfo optional information about the user
      * @return a search response
      * @throws ConstructorException if the request is invalid.
      */
-    public SearchResponse naturalLanguageSearch(NaturalLanguageSearchRequest req, UserInfo userInfo) throws ConstructorException {
+    public SearchResponse naturalLanguageSearch(NaturalLanguageSearchRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             String json = naturalLanguageSearchAsJSON(req, userInfo);
             return createSearchResponse(json);
@@ -1481,29 +1571,30 @@ public class ConstructorIO {
     /**
      * Queries the search service with natural language processing.
      *
-     * Note that if you're making a search request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a search request for a website, you should definitely use our
+     * javascript client instead of doing it server-side! That's important. That will be a solid
+     * latency difference.
      *
      * @param req the natural language search request
      * @param userInfo optional information about the user
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String naturalLanguageSearchAsJSON(NaturalLanguageSearchRequest req, UserInfo userInfo) throws ConstructorException {
+    public String naturalLanguageSearchAsJSON(NaturalLanguageSearchRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             List<String> paths = Arrays.asList("search", "natural_language", req.getQuery());
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
 
-            url = url.newBuilder()
-                .addQueryParameter("section", req.getSection())
-                .addQueryParameter("page", String.valueOf(req.getPage()))
-                .addQueryParameter("num_results_per_page", String.valueOf(req.getResultsPerPage()))
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("section", req.getSection())
+                            .addQueryParameter("page", String.valueOf(req.getPage()))
+                            .addQueryParameter(
+                                    "num_results_per_page", String.valueOf(req.getResultsPerPage()))
+                            .build();
 
-            Request request = this.makeUserRequestBuilder(userInfo)
-                .url(url)
-                .get()
-                .build();
+            Request request = this.makeUserRequestBuilder(userInfo).url(url).get().build();
 
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
@@ -1515,15 +1606,17 @@ public class ConstructorIO {
     /**
      * Queries the recommendations service to retrieve results.
      *
-     * Note that if you're making a recommendations request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making a recommendations request for a website, you should definitely
+     * use our javascript client instead of doing it server-side! That's important. That will be a
+     * solid latency difference.
      *
      * @param req the recommendations request
      * @param userInfo optional information about the user
      * @return a recommendations response
      * @throws ConstructorException if the request is invalid.
      */
-    public RecommendationsResponse recommendations(RecommendationsRequest req, UserInfo userInfo) throws ConstructorException {
+    public RecommendationsResponse recommendations(RecommendationsRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             String json = recommendationsAsJSON(req, userInfo);
             return createRecommendationsResponse(json);
@@ -1535,53 +1628,53 @@ public class ConstructorIO {
     /**
      * Queries the recommendations service to retrieve results.
      *
-     * Note that if you're making an recommendations request for a website, you should definitely use our javascript client instead of doing it server-side!
-     * That's important. That will be a solid latency difference.
+     * <p>Note that if you're making an recommendations request for a website, you should definitely
+     * use our javascript client instead of doing it server-side! That's important. That will be a
+     * solid latency difference.
      *
      * @param req the recommendations request
      * @param userInfo optional information about the user
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String recommendationsAsJSON(RecommendationsRequest req, UserInfo userInfo) throws ConstructorException {
+    public String recommendationsAsJSON(RecommendationsRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             List<String> paths = Arrays.asList("recommendations", "v1", "pods", req.getPodId());
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
 
-            url = url.newBuilder()
-                .addQueryParameter("num_results", String.valueOf(req.getNumResults()))
-                .addQueryParameter("section", req.getSection())
-                .build();
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("num_results", String.valueOf(req.getNumResults()))
+                            .addQueryParameter("section", req.getSection())
+                            .build();
 
             if (req.getItemIds() != null) {
                 for (String itemId : req.getItemIds()) {
-                    url = url.newBuilder()
-                        .addQueryParameter("item_id", itemId)
-                        .build();
+                    url = url.newBuilder().addQueryParameter("item_id", itemId).build();
                 }
             }
 
             if (req.getFacets() != null) {
                 for (String facetName : req.getFacets().keySet()) {
                     for (String facetValue : req.getFacets().get(facetName)) {
-                        url = url.newBuilder()
-                            .addQueryParameter("filters[" + facetName + "]", facetValue)
-                            .build();
+                        url =
+                                url.newBuilder()
+                                        .addQueryParameter("filters[" + facetName + "]", facetValue)
+                                        .build();
                     }
                 }
             }
 
             if (req.getVariationsMap() != null) {
                 String variationsMapJson = new Gson().toJson(req.getVariationsMap());
-                url = url.newBuilder()
-                        .addQueryParameter("variations_map", variationsMapJson)
-                        .build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("variations_map", variationsMapJson)
+                                .build();
             }
 
-            Request request = this.makeUserRequestBuilder(userInfo)
-                .url(url)
-                .get()
-                .build();
+            Request request = this.makeUserRequestBuilder(userInfo).url(url).get().build();
 
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
@@ -1591,67 +1684,93 @@ public class ConstructorIO {
     }
 
     /**
-     * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
+     * Makes a URL to issue the requests to. Note that the URL will automagically have the apiKey
+     * embedded.
      *
      * @param paths endpoint of the autocomplete service.
      * @return the created URL. Now you can use it to issue requests and things!
      */
     protected HttpUrl makeUrl(List<String> paths) throws UnsupportedEncodingException {
-        okhttp3.HttpUrl.Builder builder = new HttpUrl.Builder()
-            .scheme(this.protocol)
-            .addQueryParameter("key", this.apiKey)
-            .host(this.host);
+        okhttp3.HttpUrl.Builder builder =
+                new HttpUrl.Builder()
+                        .scheme(this.protocol)
+                        .addQueryParameter("key", this.apiKey)
+                        .host(this.host);
 
-        if (!paths.contains("catalog") && !paths.contains("tasks") && !paths.contains("task") && !paths.contains("redirect_rules")) {
+        if (!paths.contains("catalog")
+                && !paths.contains("tasks")
+                && !paths.contains("task")
+                && !paths.contains("redirect_rules")) {
             builder.addQueryParameter("c", this.version);
         }
 
         for (String path : paths) {
-          String canonicalPath = OkHttpUrlBuilderUtils.canonicalize(path, 0, path.length(), 
-            OkHttpUrlBuilderUtils.PATH_SEGMENT_ENCODE_SET, false, true, true, true, null);
-          builder.addEncodedPathSegment(canonicalPath);
+            String canonicalPath =
+                    OkHttpUrlBuilderUtils.canonicalize(
+                            path,
+                            0,
+                            path.length(),
+                            OkHttpUrlBuilderUtils.PATH_SEGMENT_ENCODE_SET,
+                            false,
+                            true,
+                            true,
+                            true,
+                            null);
+            builder.addEncodedPathSegment(canonicalPath);
         }
 
         if (this.port != null) {
-          builder.port(this.port);
+            builder.port(this.port);
         }
-       
+
         return builder.build();
     }
 
     /**
-     * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
+     * Makes a URL to issue the requests to. Note that the URL will automagically have the apiKey
+     * embedded.
      *
      * @param paths endpoint of the autocomplete service.
      * @return the created URL. Now you can use it to issue requests and things!
      */
-    protected HttpUrl makeUrl(List<String> paths, UserInfo info) throws UnsupportedEncodingException {
-        okhttp3.HttpUrl.Builder builder = new HttpUrl.Builder()
-            .scheme(this.protocol)
-            .addQueryParameter("key", this.apiKey)
-            .addQueryParameter("c", this.version)
-            .addQueryParameter("s", String.valueOf(info.getSessionId()))
-            .addQueryParameter("i", info.getClientId())
-            .host(this.host);
+    protected HttpUrl makeUrl(List<String> paths, UserInfo info)
+            throws UnsupportedEncodingException {
+        okhttp3.HttpUrl.Builder builder =
+                new HttpUrl.Builder()
+                        .scheme(this.protocol)
+                        .addQueryParameter("key", this.apiKey)
+                        .addQueryParameter("c", this.version)
+                        .addQueryParameter("s", String.valueOf(info.getSessionId()))
+                        .addQueryParameter("i", info.getClientId())
+                        .host(this.host);
 
         for (String path : paths) {
-          String canonicalPath = OkHttpUrlBuilderUtils.canonicalize(path, 0, path.length(),
-            OkHttpUrlBuilderUtils.PATH_SEGMENT_ENCODE_SET, false, true, true, true, null);
-          builder.addEncodedPathSegment(canonicalPath);
+            String canonicalPath =
+                    OkHttpUrlBuilderUtils.canonicalize(
+                            path,
+                            0,
+                            path.length(),
+                            OkHttpUrlBuilderUtils.PATH_SEGMENT_ENCODE_SET,
+                            false,
+                            true,
+                            true,
+                            true,
+                            null);
+            builder.addEncodedPathSegment(canonicalPath);
         }
 
         if (info.getUserId() != null) {
-          builder.addQueryParameter("ui", String.valueOf(info.getUserId()));
+            builder.addQueryParameter("ui", String.valueOf(info.getUserId()));
         }
 
         if (info.getUserSegments() != null) {
             for (String userSegment : info.getUserSegments()) {
-              builder.addQueryParameter("us",  userSegment);
+                builder.addQueryParameter("us", userSegment);
             }
         }
 
         if (this.port != null) {
-          builder.port(this.port);
+            builder.port(this.port);
         }
 
         return builder.build();
@@ -1736,19 +1855,19 @@ public class ConstructorIO {
      * @return version number
      */
     protected String getVersion() {
-      return "ciojava-5.22.0";
+        return "ciojava-5.22.0";
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into an autocomplete response.
-     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an autocomplete
+     * response. Using JSON objects to achieve this is considerably less error prone than attempting
+     * to do it in a Gson Type Adapter.
      */
     protected static AutocompleteResponse createAutocompleteResponse(String string) {
         JSONObject json = new JSONObject(string);
         JSONObject sections = json.getJSONObject("sections");
         for (Object sectionKey : sections.keySet()) {
-            String sectionName = (String)sectionKey;
+            String sectionName = (String) sectionKey;
             JSONArray results = sections.getJSONArray(sectionName);
             moveMetadataOutOfResultData(results);
         }
@@ -1758,8 +1877,8 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an search response.
-     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it
+     * in a Gson Type Adapter.
      */
     protected static SearchResponse createSearchResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1770,29 +1889,29 @@ public class ConstructorIO {
             results = response.getJSONArray("results");
             moveMetadataOutOfResultData(results);
         }
-  
+
         String transformed = json.toString();
         return new Gson().fromJson(transformed, SearchResponse.class);
     }
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an browse response.
-     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it
+     * in a Gson Type Adapter.
      */
     protected static BrowseResponse createBrowseResponse(String string) {
-      JSONObject json = new JSONObject(string);
-      JSONObject response = json.getJSONObject("response");
-      JSONArray results = response.getJSONArray("results");
-      moveMetadataOutOfResultData(results);
-      String transformed = json.toString();
-      return new Gson().fromJson(transformed, BrowseResponse.class);
-  }
+        JSONObject json = new JSONObject(string);
+        JSONObject response = json.getJSONObject("response");
+        JSONArray results = response.getJSONArray("results");
+        moveMetadataOutOfResultData(results);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, BrowseResponse.class);
+    }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into an browse facets response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an browse facets
+     * response. Using JSON objects to acheive this is considerably less error prone than attempting
+     * to do it in a Gson Type Adapter.
      */
     protected static BrowseFacetsResponse createBrowseFacetsResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1801,9 +1920,9 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into an browse facets response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an browse facets
+     * response. Using JSON objects to acheive this is considerably less error prone than attempting
+     * to do it in a Gson Type Adapter.
      */
     protected static BrowseFacetOptionsResponse createBrowseFacetOptionsResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1812,9 +1931,9 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations response.
-     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an recommendations
+     * response. Using JSON objects to achieve this is considerably less error prone than attempting
+     * to do it in a Gson Type Adapter.
      */
     protected static RecommendationsResponse createRecommendationsResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1826,9 +1945,9 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into an All Tasks response.
-     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an All Tasks
+     * response. Using JSON objects to achieve this is considerably less error prone than attempting
+     * to do it in a Gson Type Adapter.
      */
     protected static AllTasksResponse createAllTasksResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1837,9 +1956,9 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into an All Redirects response.
-     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an All Redirects
+     * response. Using JSON objects to achieve this is considerably less error prone than attempting
+     * to do it in a Gson Type Adapter.
      */
     protected static AllRedirectsResponse createAllRedirectsResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1849,8 +1968,8 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into a Task response.
-     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Using JSON objects to achieve this is considerably less error prone than attempting to do it
+     * in a Gson Type Adapter.
      */
     protected static Task createTaskResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1859,9 +1978,9 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz Question response.
-     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz Question
+     * response. Using JSON objects to achieve this is considerably less error prone than attempting
+     * to do it in a Gson Type Adapter.
      */
     protected static QuizQuestionResponse createQuizQuestionResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1870,9 +1989,9 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz results response.
-     * Using JSON objects to achieve this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz results
+     * response. Using JSON objects to achieve this is considerably less error prone than attempting
+     * to do it in a Gson Type Adapter.
      */
     protected static QuizResultsResponse createQuizResultsResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1882,8 +2001,8 @@ public class ConstructorIO {
 
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an Items response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Using JSON objects to acheive this is considerably less error prone than attempting to do it
+     * in a Gson Type Adapter.
      */
     protected static ItemsResponse createItemsResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1896,9 +2015,9 @@ public class ConstructorIO {
     }
 
     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into an Variations response.
-     * Using JSON objects to acheive this is considerably less error prone than attempting to do it in
-     * a Gson Type Adapter.
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into an Variations
+     * response. Using JSON objects to acheive this is considerably less error prone than attempting
+     * to do it in a Gson Type Adapter.
      */
     protected static VariationsResponse createVariationsResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -1912,6 +2031,7 @@ public class ConstructorIO {
 
     /**
      * Moves metadata out of the result data for an array of results
+     *
      * @param results A JSON array of results
      */
     protected static void moveMetadataOutOfResultData(JSONArray results) {
@@ -1920,8 +2040,9 @@ public class ConstructorIO {
             JSONObject result = results.getJSONObject(i);
             JSONObject resultData = result.getJSONObject("data");
             JSONObject metadata = new JSONObject();
-            
-            // Recursive call to move unspecified properties in result variations to its metadata object
+
+            // Recursive call to move unspecified properties in result variations to its metadata
+            // object
             if (!result.isNull("variations")) {
                 JSONArray variations = result.getJSONArray("variations");
                 moveMetadataOutOfResultData(variations);
@@ -1929,15 +2050,16 @@ public class ConstructorIO {
 
             // Move unspecified properties in result data object to metadata object
             for (Object propertyKey : resultData.keySet()) {
-                String propertyName = (String)propertyKey;
-                if (!propertyName.matches("(description|id|url|image_url|groups|facets|variation_id)")) {
+                String propertyName = (String) propertyKey;
+                if (!propertyName.matches(
+                        "(description|id|url|image_url|groups|facets|variation_id)")) {
                     metadata.put(propertyName, resultData.get(propertyName));
                 }
             }
 
             // Remove unspecified properties from result data object
             for (Object propertyKey : metadata.keySet()) {
-                String propertyName = (String)propertyKey;
+                String propertyName = (String) propertyKey;
                 resultData.remove(propertyName);
             }
 
@@ -1948,6 +2070,7 @@ public class ConstructorIO {
 
     /**
      * Transforms Items API V2 response to ConstructorItem and ConstructorVariation form
+     *
      * @param results A JSON array of results
      */
     protected static JSONArray transformItemsAPIV2Response(JSONArray results) {
@@ -1955,20 +2078,23 @@ public class ConstructorIO {
             JSONObject result = results.getJSONObject(i);
             JSONObject resultData = result.getJSONObject("data");
             JSONObject metadata = new JSONObject();
-            
+
             // Move unspecified properties in result data object to metadata object
             for (Object propertyKey : resultData.keySet()) {
-                String propertyName = (String)propertyKey;
+                String propertyName = (String) propertyKey;
                 Object propertyValue = resultData.get(propertyName);
 
-                if (!propertyName.matches("(description|id|url|image_url|group_ids|facets|keywords)")) {
+                if (!propertyName.matches(
+                        "(description|id|url|image_url|group_ids|facets|keywords)")) {
                     metadata.put(propertyName, propertyValue);
                 } else {
-                    String camelCasePropertyName = propertyName.replaceFirst("_[a-z]",
-                        String.valueOf(
-                          Character.toUpperCase(
-                            propertyName.charAt(
-                              propertyName.indexOf("_") + 1))));
+                    String camelCasePropertyName =
+                            propertyName.replaceFirst(
+                                    "_[a-z]",
+                                    String.valueOf(
+                                            Character.toUpperCase(
+                                                    propertyName.charAt(
+                                                            propertyName.indexOf("_") + 1))));
                     result.put(camelCasePropertyName, propertyValue);
                 }
             }
@@ -1976,9 +2102,10 @@ public class ConstructorIO {
             // Add metadata to result data object
             result.put("metadata", metadata);
 
-            // Suggested score is already at the top level but its name needs to be converted to camelcase
+            // Suggested score is already at the top level but its name needs to be converted to
+            // camelcase
             if (result.has("suggested_score")) {
-              result.put("suggestedScore", result.get("suggested_score"));
+                result.put("suggestedScore", result.get("suggested_score"));
             }
         }
 
@@ -1994,11 +2121,11 @@ public class ConstructorIO {
      */
     public String replaceCatalog(CatalogRequest req) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1","catalog"));
-            HttpUrl.Builder urlBuilder = url.newBuilder()
-                .addQueryParameter("section", req.getSection());
-            MultipartBody.Builder multipartBuilder = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM);
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "catalog"));
+            HttpUrl.Builder urlBuilder =
+                    url.newBuilder().addQueryParameter("section", req.getSection());
+            MultipartBody.Builder multipartBuilder =
+                    new MultipartBody.Builder().setType(MultipartBody.FORM);
             String notificationEmail = req.getNotificationEmail();
             Boolean force = req.getForce();
             Map<String, File> files = req.getFiles();
@@ -2013,19 +2140,19 @@ public class ConstructorIO {
             url = urlBuilder.build();
 
             if (files != null) {
-                for (Map.Entry<String,File> entry : files.entrySet()) {
+                for (Map.Entry<String, File> entry : files.entrySet()) {
                     String fileName = entry.getKey();
                     File file = entry.getValue();
 
-                    multipartBuilder.addFormDataPart(fileName, fileName + ".csv", RequestBody.create(MediaType.parse("application/octet-stream"), file));
+                    multipartBuilder.addFormDataPart(
+                            fileName,
+                            fileName + ".csv",
+                            RequestBody.create(MediaType.parse("application/octet-stream"), file));
                 }
             }
 
             RequestBody requestBody = multipartBuilder.build();
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .put(requestBody)
-                .build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).put(requestBody).build();
 
             Response response = client.newCall(request).execute();
             return getResponseBody(response);
@@ -2033,7 +2160,9 @@ public class ConstructorIO {
             String errorMessage = exception.getMessage();
 
             if (errorMessage == "Multipart body must have at least one part.") {
-                throw new ConstructorException("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
+                throw new ConstructorException(
+                        "At least one file of \"items\", \"variations\", \"item_groups\" is"
+                                + " required.");
             } else {
                 throw new ConstructorException(exception);
             }
@@ -2049,11 +2178,11 @@ public class ConstructorIO {
      */
     public String updateCatalog(CatalogRequest req) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1","catalog"));
-            HttpUrl.Builder urlBuilder = url.newBuilder()
-                .addQueryParameter("section", req.getSection());
-            MultipartBody.Builder multipartBuilder = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM);
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "catalog"));
+            HttpUrl.Builder urlBuilder =
+                    url.newBuilder().addQueryParameter("section", req.getSection());
+            MultipartBody.Builder multipartBuilder =
+                    new MultipartBody.Builder().setType(MultipartBody.FORM);
             String notificationEmail = req.getNotificationEmail();
             Boolean force = req.getForce();
             Map<String, File> files = req.getFiles();
@@ -2068,19 +2197,20 @@ public class ConstructorIO {
             url = urlBuilder.build();
 
             if (files != null) {
-                for (Map.Entry<String,File> entry : files.entrySet()) {
+                for (Map.Entry<String, File> entry : files.entrySet()) {
                     String fileName = entry.getKey();
                     File file = entry.getValue();
 
-                    multipartBuilder.addFormDataPart(fileName, fileName + ".csv", RequestBody.create(MediaType.parse("application/octet-stream"), file));
+                    multipartBuilder.addFormDataPart(
+                            fileName,
+                            fileName + ".csv",
+                            RequestBody.create(MediaType.parse("application/octet-stream"), file));
                 }
             }
 
             RequestBody requestBody = multipartBuilder.build();
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .patch(requestBody)
-                .build();
+            Request request =
+                    this.makeAuthorizedRequestBuilder().url(url).patch(requestBody).build();
 
             Response response = client.newCall(request).execute();
             return getResponseBody(response);
@@ -2088,7 +2218,9 @@ public class ConstructorIO {
             String errorMessage = exception.getMessage();
 
             if (errorMessage == "Multipart body must have at least one part.") {
-                throw new ConstructorException("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
+                throw new ConstructorException(
+                        "At least one file of \"items\", \"variations\", \"item_groups\" is"
+                                + " required.");
             } else {
                 throw new ConstructorException(exception);
             }
@@ -2104,11 +2236,11 @@ public class ConstructorIO {
      */
     public String patchCatalog(CatalogRequest req) throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1","catalog"));
-            HttpUrl.Builder urlBuilder = url.newBuilder()
-                    .addQueryParameter("section", req.getSection());
-            MultipartBody.Builder multipartBuilder = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM);
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "catalog"));
+            HttpUrl.Builder urlBuilder =
+                    url.newBuilder().addQueryParameter("section", req.getSection());
+            MultipartBody.Builder multipartBuilder =
+                    new MultipartBody.Builder().setType(MultipartBody.FORM);
             String notificationEmail = req.getNotificationEmail();
             Boolean force = req.getForce();
             Map<String, File> files = req.getFiles();
@@ -2125,19 +2257,20 @@ public class ConstructorIO {
             url = urlBuilder.build();
 
             if (files != null) {
-                for (Map.Entry<String,File> entry : files.entrySet()) {
+                for (Map.Entry<String, File> entry : files.entrySet()) {
                     String fileName = entry.getKey();
                     File file = entry.getValue();
 
-                    multipartBuilder.addFormDataPart(fileName, fileName + ".csv", RequestBody.create(MediaType.parse("application/octet-stream"), file));
+                    multipartBuilder.addFormDataPart(
+                            fileName,
+                            fileName + ".csv",
+                            RequestBody.create(MediaType.parse("application/octet-stream"), file));
                 }
             }
 
             RequestBody requestBody = multipartBuilder.build();
-            Request request = this.makeAuthorizedRequestBuilder()
-                    .url(url)
-                    .patch(requestBody)
-                    .build();
+            Request request =
+                    this.makeAuthorizedRequestBuilder().url(url).patch(requestBody).build();
 
             Response response = client.newCall(request).execute();
             return getResponseBody(response);
@@ -2145,7 +2278,9 @@ public class ConstructorIO {
             String errorMessage = exception.getMessage();
 
             if (errorMessage == "Multipart body must have at least one part.") {
-                throw new ConstructorException("At least one file of \"items\", \"variations\", \"item_groups\" is required.");
+                throw new ConstructorException(
+                        "At least one file of \"items\", \"variations\", \"item_groups\" is"
+                                + " required.");
             } else {
                 throw new ConstructorException(exception);
             }
@@ -2160,18 +2295,19 @@ public class ConstructorIO {
      * @return a All Tasks OkHttp request
      * @throws ConstructorException
      */
-    protected Request createAllTasksRequest(AllTasksRequest req, String apiVersion) throws ConstructorException {
-      try {
+    protected Request createAllTasksRequest(AllTasksRequest req, String apiVersion)
+            throws ConstructorException {
+        try {
             List<String> paths = Arrays.asList(apiVersion, "tasks");
             HttpUrl url = this.makeUrl(paths);
-            HttpUrl.Builder urlBuilder = url.newBuilder()
-                .addQueryParameter("page", String.valueOf(req.getPage()));
-            
+            HttpUrl.Builder urlBuilder =
+                    url.newBuilder().addQueryParameter("page", String.valueOf(req.getPage()));
+
             String resultsPerPage = String.valueOf(req.getResultsPerPage());
             String startDate = req.getStartDate();
             String endDate = req.getEndDate();
             String status = req.getStatus();
-            String type = req.getType(); 
+            String type = req.getType();
 
             if (resultsPerPage != null && !resultsPerPage.equals("0")) {
                 urlBuilder.addQueryParameter("num_results_per_page", resultsPerPage);
@@ -2195,10 +2331,7 @@ public class ConstructorIO {
 
             url = urlBuilder.build();
 
-            Request request = this.makeAuthorizedRequestBuilder()
-                    .url(url)
-                    .get()
-                    .build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -2249,15 +2382,13 @@ public class ConstructorIO {
      * @return a Task OkHttp request
      * @throws ConstructorException
      */
-    protected Request createTaskRequest(TaskRequest req, String apiVersion) throws ConstructorException {
+    protected Request createTaskRequest(TaskRequest req, String apiVersion)
+            throws ConstructorException {
         try {
             List<String> paths = Arrays.asList(apiVersion, "task", req.getTaskId());
             HttpUrl url = this.makeUrl(paths).newBuilder().build();
 
-            Request request = this.makeAuthorizedRequestBuilder()
-                    .url(url)
-                    .get()
-                    .build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -2307,7 +2438,8 @@ public class ConstructorIO {
      * @return a All Redirects OkHttp request
      * @throws ConstructorException
      */
-    protected Request createAllRedirectsRequest(AllRedirectsRequest req) throws ConstructorException {
+    protected Request createAllRedirectsRequest(AllRedirectsRequest req)
+            throws ConstructorException {
         try {
             List<String> paths = Arrays.asList("v1", "redirect_rules");
             HttpUrl url = this.makeUrl(paths);
@@ -2345,10 +2477,7 @@ public class ConstructorIO {
 
             url = urlBuilder.build();
 
-            Request request = this.makeAuthorizedRequestBuilder()
-                    .url(url)
-                    .get()
-                    .build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -2399,7 +2528,8 @@ public class ConstructorIO {
      * @return a Task OkHttp request
      * @throws ConstructorException
      */
-    protected Request createQuizRequest(QuizRequest req, String type, UserInfo userInfo) throws ConstructorException {
+    protected Request createQuizRequest(QuizRequest req, String type, UserInfo userInfo)
+            throws ConstructorException {
         try {
             if (!type.equals("next") && !type.equals("finalize"))
                 throw new IllegalArgumentException("type must be either 'next' or 'finalize'");
@@ -2408,33 +2538,26 @@ public class ConstructorIO {
             HttpUrl url = this.makeUrl(paths);
 
             if (req.getSection() != null) {
-                url = url.newBuilder()
-                        .addQueryParameter("section", req.getSection())
-                        .build();
+                url = url.newBuilder().addQueryParameter("section", req.getSection()).build();
             }
 
             if (req.getVersionId() != null) {
-                url = url.newBuilder()
-                        .addQueryParameter("version_id", req.getVersionId())
-                        .build();
+                url = url.newBuilder().addQueryParameter("version_id", req.getVersionId()).build();
             }
 
             if (req.getAnswers().size() > 0) {
-                for (List<String> questionAnswers : req.getAnswers())
-                {
+                for (List<String> questionAnswers : req.getAnswers()) {
                     String answerParam = String.join(",", questionAnswers);
                     url = url.newBuilder().addQueryParameter("a", answerParam).build();
                 }
             } else {
                 if (type.equals("finalize")) {
-                    throw new IllegalArgumentException("answers is a required parameter for a finalize request");
+                    throw new IllegalArgumentException(
+                            "answers is a required parameter for a finalize request");
                 }
             }
 
-            Request request = this.makeUserRequestBuilder(userInfo)
-                    .url(url)
-                    .get()
-                    .build();
+            Request request = this.makeUserRequestBuilder(userInfo).url(url).get().build();
 
             return request;
         } catch (Exception exception) {
@@ -2449,7 +2572,8 @@ public class ConstructorIO {
      * @return a Quiz Question Response
      * @throws ConstructorException if the request is invalid.
      */
-    public QuizQuestionResponse quizNextQuestion(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+    public QuizQuestionResponse quizNextQuestion(QuizRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "next", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
@@ -2467,7 +2591,8 @@ public class ConstructorIO {
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String quizNextQuestionAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+    public String quizNextQuestionAsJson(QuizRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "next", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
@@ -2484,7 +2609,8 @@ public class ConstructorIO {
      * @return a Quiz Results Response
      * @throws ConstructorException if the request is invalid.
      */
-    public QuizResultsResponse quizResults(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+    public QuizResultsResponse quizResults(QuizRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "finalize", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
@@ -2502,7 +2628,8 @@ public class ConstructorIO {
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String quizResultsAsJson(QuizRequest req, UserInfo userInfo) throws ConstructorException {
+    public String quizResultsAsJson(QuizRequest req, UserInfo userInfo)
+            throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "finalize", userInfo);
             Response response = clientWithRetry.newCall(request).execute();

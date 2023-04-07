@@ -4,22 +4,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import io.constructor.client.models.BrowseResponse;
+import io.constructor.client.models.FilterFacet;
+import io.constructor.client.models.FilterGroup;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import io.constructor.client.models.BrowseResponse;
-import io.constructor.client.models.FilterFacet;
-import io.constructor.client.models.FilterGroup;
-
 public class ConstructorIOBrowseItemsTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
     private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
     @Test
@@ -30,7 +27,9 @@ public class ConstructorIOBrowseItemsTest {
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         BrowseResponse response = constructor.browseItems(request, userInfo);
         assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
-        assertTrue("browse items total results count should be equal to length of supplied ids", (int)response.getResponse().getTotalNumberOfResults() == ids.size());
+        assertTrue(
+                "browse items total results count should be equal to length of supplied ids",
+                (int) response.getResponse().getTotalNumberOfResults() == ids.size());
         assertTrue("browse items result id exists", response.getResultId() != null);
     }
 
@@ -52,8 +51,12 @@ public class ConstructorIOBrowseItemsTest {
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         request.setResultsPerPage(5);
         BrowseResponse response = constructor.browseItems(request, userInfo);
-        assertTrue("browse items results exist and count is five", response.getResponse().getResults().size() == 5);
-        assertTrue("browse items total results count should be equal to length of supplied ids", (int)response.getResponse().getTotalNumberOfResults() == ids.size());
+        assertTrue(
+                "browse items results exist and count is five",
+                response.getResponse().getResults().size() == 5);
+        assertTrue(
+                "browse items total results count should be equal to length of supplied ids",
+                (int) response.getResponse().getTotalNumberOfResults() == ids.size());
         assertTrue("browse items result id exists", response.getResultId() != null);
     }
 
@@ -66,8 +69,12 @@ public class ConstructorIOBrowseItemsTest {
         request.setPage(2);
         request.setResultsPerPage(3);
         BrowseResponse response = constructor.browseItems(request, userInfo);
-        assertTrue("browse items results exist", response.getResponse().getResults().size() == ids.size() / 2);
-        assertTrue("browse items total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() == ids.size());
+        assertTrue(
+                "browse items results exist",
+                response.getResponse().getResults().size() == ids.size() / 2);
+        assertTrue(
+                "browse items total results count should be greater than 0",
+                (int) response.getResponse().getTotalNumberOfResults() == ids.size());
         assertTrue("browse items result id exists", response.getResultId() != null);
     }
 
@@ -80,7 +87,9 @@ public class ConstructorIOBrowseItemsTest {
         request.setGroupId("All");
         BrowseResponse response = constructor.browseItems(request, userInfo);
         assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
-        assertTrue("browse items total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
+        assertTrue(
+                "browse items total results count should be greater than 0",
+                (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse items result id exists", response.getResultId() != null);
     }
 
@@ -93,7 +102,9 @@ public class ConstructorIOBrowseItemsTest {
         request.getFacets().put("Brand", Arrays.asList("XYZ"));
         BrowseResponse response = constructor.browseItems(request, userInfo);
         assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
-        assertTrue("browse items total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
+        assertTrue(
+                "browse items total results count should be greater than 0",
+                (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse items result id exists", response.getResultId() != null);
     }
 
@@ -105,12 +116,48 @@ public class ConstructorIOBrowseItemsTest {
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         BrowseResponse response = constructor.browseItems(request, userInfo);
         assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
-        assertEquals("browse items result [variations] exists", response.getResponse().getResults().get(0).getVariations().size(), 1);
-        assertEquals("browse items result variation [facets] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getFacets().size(), 2);
-        assertEquals("browse items result variation [value] exists", response.getResponse().getResults().get(0).getVariations().get(0).getValue(), "item1 variation");
-        assertEquals("browse items result variation [variation id] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getVariationId(), "20001");
-        assertEquals("browse items result variation [url] exists", response.getResponse().getResults().get(0).getVariations().get(0).getData().getUrl(), "https://test.com/p/20001");
-        assertTrue("browse items total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
+        assertEquals(
+                "browse items result [variations] exists",
+                response.getResponse().getResults().get(0).getVariations().size(),
+                1);
+        assertTrue(
+                "browse items result variation [facets] exists",
+                response.getResponse()
+                                .getResults()
+                                .get(0)
+                                .getVariations()
+                                .get(0)
+                                .getData()
+                                .getFacets()
+                                .size()
+                        > 0);
+        assertEquals(
+                "browse items result variation [value] exists",
+                response.getResponse().getResults().get(0).getVariations().get(0).getValue(),
+                "item1 variation");
+        assertEquals(
+                "browse items result variation [variation id] exists",
+                response.getResponse()
+                        .getResults()
+                        .get(0)
+                        .getVariations()
+                        .get(0)
+                        .getData()
+                        .getVariationId(),
+                "20001");
+        assertEquals(
+                "browse items result variation [url] exists",
+                response.getResponse()
+                        .getResults()
+                        .get(0)
+                        .getVariations()
+                        .get(0)
+                        .getData()
+                        .getUrl(),
+                "https://test.com/p/20001");
+        assertTrue(
+                "browse items total results count should be greater than 0",
+                (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse items result id exists", response.getResultId() != null);
     }
 
@@ -121,12 +168,29 @@ public class ConstructorIOBrowseItemsTest {
         List<String> ids = Arrays.asList("10001");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         BrowseResponse response = constructor.browseItems(request, userInfo);
-        assertEquals("browse items result [sort options] exists", response.getResponse().getSortOptions().size(), 2);
-        assertEquals("browse items result sort option [display name] exists", response.getResponse().getSortOptions().get(1).getDisplayName(), "DESC");
-        assertEquals("browse items result sort option [sort by] exists", response.getResponse().getSortOptions().get(1).getSortBy(), "relevance");
-        assertEquals("browse items result sort option [sort order] exists", response.getResponse().getSortOptions().get(1).getSortOrder(), "descending");
-        assertEquals("browse items result sort option [status] exists", response.getResponse().getSortOptions().get(1).getStatus(), "selected");
-        assertTrue("browse items total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
+        assertEquals(
+                "browse items result [sort options] exists",
+                response.getResponse().getSortOptions().size(),
+                2);
+        assertEquals(
+                "browse items result sort option [display name] exists",
+                response.getResponse().getSortOptions().get(1).getDisplayName(),
+                "DESC");
+        assertEquals(
+                "browse items result sort option [sort by] exists",
+                response.getResponse().getSortOptions().get(1).getSortBy(),
+                "relevance");
+        assertEquals(
+                "browse items result sort option [sort order] exists",
+                response.getResponse().getSortOptions().get(1).getSortOrder(),
+                "descending");
+        assertEquals(
+                "browse items result sort option [status] exists",
+                response.getResponse().getSortOptions().get(1).getStatus(),
+                "selected");
+        assertTrue(
+                "browse items total results count should be greater than 0",
+                (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse items result id exists", response.getResultId() != null);
     }
 
@@ -137,7 +201,9 @@ public class ConstructorIOBrowseItemsTest {
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         BrowseResponse response = constructor.browseItems(request, null);
         assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
-        assertTrue("browse items total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
+        assertTrue(
+                "browse items total results count should be greater than 0",
+                (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse items result id exists", response.getResultId() != null);
     }
 
@@ -149,7 +215,9 @@ public class ConstructorIOBrowseItemsTest {
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         BrowseResponse response = constructor.browseItems(request, null);
         assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
-        assertTrue("browse items total results count should be greater than 0", (int)response.getResponse().getTotalNumberOfResults() > 0);
+        assertTrue(
+                "browse items total results count should be greater than 0",
+                (int) response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse items result id exists", response.getResultId() != null);
     }
 
@@ -197,9 +265,14 @@ public class ConstructorIOBrowseItemsTest {
         request.getHiddenFields().add("testField");
         BrowseResponse response = constructor.browseItems(request, userInfo);
         assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
-        assertTrue("browse items total results count should be equal to length of supplied ids", (int)response.getResponse().getTotalNumberOfResults() == ids.size());
+        assertTrue(
+                "browse items total results count should be equal to length of supplied ids",
+                (int) response.getResponse().getTotalNumberOfResults() == ids.size());
         assertTrue("browse items result id exists", response.getResultId() != null);
-        assertEquals("browse items [testField] exists", response.getResponse().getResults().get(0).getData().getMetadata().get("testField"), "hiddenFieldValue");
+        assertEquals(
+                "browse items [testField] exists",
+                response.getResponse().getResults().get(0).getData().getMetadata().get("testField"),
+                "hiddenFieldValue");
     }
 
     @Test
@@ -210,15 +283,22 @@ public class ConstructorIOBrowseItemsTest {
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         request.getHiddenFacets().add("Brand");
         BrowseResponse response = constructor.browseItems(request, userInfo);
-        FilterFacet brandFacet = response.getResponse().getFacets().stream().filter(new Predicate<FilterFacet>() {
-            @Override
-            public boolean test(FilterFacet f) {
-                return f.getName().equals("Brand");
-            }
-        }).findAny().orElse(null);
+        FilterFacet brandFacet =
+                response.getResponse().getFacets().stream()
+                        .filter(
+                                new Predicate<FilterFacet>() {
+                                    @Override
+                                    public boolean test(FilterFacet f) {
+                                        return f.getName().equals("Brand");
+                                    }
+                                })
+                        .findAny()
+                        .orElse(null);
 
         assertTrue("browse items results exist", response.getResponse().getResults().size() > 0);
-        assertTrue("browse items total results count should be equal to length of supplied ids", (int)response.getResponse().getTotalNumberOfResults() == ids.size());
+        assertTrue(
+                "browse items total results count should be equal to length of supplied ids",
+                (int) response.getResponse().getTotalNumberOfResults() == ids.size());
         assertTrue("browse items result id exists", response.getResultId() != null);
         assertNotNull("browse facet [Brand] exists", brandFacet);
         assertTrue("browse facet [Brand] is hidden", brandFacet.getHidden());

@@ -1,12 +1,9 @@
 package io.constructor.client.models;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
-import com.google.gson.annotations.SerializedName;
-
-/**
- * Constructor.io Recommendations Response ... uses Gson/Reflection to load data in
- */
+/** Constructor.io Recommendations Response ... uses Gson/Reflection to load data in */
 public class RecommendationsResponse {
 
     @SerializedName("result_id")

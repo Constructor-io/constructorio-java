@@ -99,7 +99,8 @@ public class HttpClientConfig {
     }
 
     /**
-     * @param connectionPoolKeepAliveDuration the time in milliseconds to keep the connection alive in the pool before closing it
+     * @param connectionPoolKeepAliveDuration the time in milliseconds to keep the connection alive
+     *     in the pool before closing it
      */
     public void setConnectionPoolKeepAliveDuration(int connectionPoolKeepAliveDuration) {
         this.connectionPoolKeepAliveDuration = connectionPoolKeepAliveDuration;

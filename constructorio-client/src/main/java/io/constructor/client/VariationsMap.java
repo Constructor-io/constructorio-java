@@ -1,15 +1,12 @@
 package io.constructor.client;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Constructor.io Variations Map Object ... uses Gson/Reflection to load data in
- */
+/** Constructor.io Variations Map Object ... uses Gson/Reflection to load data in */
 public class VariationsMap {
 
     public class Value {
@@ -65,9 +62,7 @@ public class VariationsMap {
     @SerializedName("group_by")
     private List<Group> groupBy;
 
-    /**
-     * Creates a variations map
-     */
+    /** Creates a variations map */
     public VariationsMap() {
         this.groupBy = new ArrayList<Group>();
         this.values = new HashMap<String, Value>();

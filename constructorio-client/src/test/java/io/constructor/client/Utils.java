@@ -4,10 +4,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
@@ -17,9 +16,7 @@ import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 
-/**
- * Static functions to help with testing
- */
+/** Static functions to help with testing */
 public class Utils {
 
     private static MediaType bodyType = MediaType.parse("application/json");
@@ -31,7 +28,7 @@ public class Utils {
         String name = "Product" + UUID.randomUUID().toString().replaceAll("[\\s\\-()]", "");
         String id = name;
         String url = "https://constructor.io/products/" + name;
-        
+
         HashMap<String, List<Object>> facets = new HashMap<String, List<Object>>();
         facets.put("color", Arrays.<Object>asList("blue", "red", 123));
 
@@ -85,13 +82,14 @@ public class Utils {
     public static Response createResponse(int statusCode, String bodyText) {
         Request request = new Request.Builder().url("https://example.com").build();
         ResponseBody body = ResponseBody.create(bodyType, bodyText);
-        Response response = new Response.Builder()
-            .request(request)
-            .protocol(Protocol.HTTP_1_1)
-            .code(statusCode)
-            .body(body)
-            .message("")
-            .build();
+        Response response =
+                new Response.Builder()
+                        .request(request)
+                        .protocol(Protocol.HTTP_1_1)
+                        .code(statusCode)
+                        .body(body)
+                        .message("")
+                        .build();
 
         return response;
     }
@@ -107,9 +105,7 @@ public class Utils {
         return string;
     }
 
-    /**
-     * Enable http logging for all requests
-     */
+    /** Enable http logging for all requests */
     public static void enableHTTPLogging() {
         HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
         logger.setLevel(Level.NONE);

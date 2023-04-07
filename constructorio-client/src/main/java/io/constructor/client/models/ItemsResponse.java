@@ -1,15 +1,10 @@
 package io.constructor.client.models;
 
+import com.google.gson.annotations.SerializedName;
+import io.constructor.client.ConstructorItem;
 import java.util.List;
 
-import com.google.gson.annotations.SerializedName;
-
-import io.constructor.client.ConstructorItem;
-
-
-/**
- * Constructor.io Items Response ... uses Gson/Reflection to load data in
- */
+/** Constructor.io Items Response ... uses Gson/Reflection to load data in */
 public class ItemsResponse {
 
     @SerializedName("total_count")

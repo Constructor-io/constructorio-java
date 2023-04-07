@@ -1,8 +1,6 @@
 package io.constructor.client;
 
-/**
- * Constructor.io Get All Tasks Request
- */
+/** Constructor.io Get All Tasks Request */
 public class AllTasksRequest {
     private int resultsPerPage;
     private int page;
@@ -11,10 +9,7 @@ public class AllTasksRequest {
     private String status;
     private String type;
 
-    /**
-     * Creates a All Tasks request
-     *
-     */
+    /** Creates a All Tasks request */
     public AllTasksRequest() {
         this.page = 1;
     }
@@ -76,19 +71,21 @@ public class AllTasksRequest {
     }
 
     /**
-     * @param status The status of tasks to return - 'QUEUED', 'IN_PROGRESS', 'DONE', 'FAILED', 'CANCELED'
+     * @param status The status of tasks to return - 'QUEUED', 'IN_PROGRESS', 'DONE', 'FAILED',
+     *     'CANCELED'
      */
     public void setStatus(String status) {
         this.status = status;
     }
 
     /**
-     * @return status The status of tasks to return - 'QUEUED', 'IN_PROGRESS', 'DONE', 'FAILED', 'CANCELED'
+     * @return status The status of tasks to return - 'QUEUED', 'IN_PROGRESS', 'DONE', 'FAILED',
+     *     'CANCELED'
      */
     public String getStatus() {
         return status;
     }
-    
+
     /**
      * @return type The type of results to return - 'ingestion', 'user_data_request'
      */

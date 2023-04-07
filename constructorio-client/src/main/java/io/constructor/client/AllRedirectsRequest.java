@@ -1,8 +1,6 @@
 package io.constructor.client;
 
-/**
- * Constructor.io Get All Redirects Request
- */
+/** Constructor.io Get All Redirects Request */
 public class AllRedirectsRequest {
     private int resultsPerPage;
     private int page;
@@ -10,11 +8,8 @@ public class AllRedirectsRequest {
     private String status;
     private String query;
 
-    /**
-     * Creates a All Redirects request
-     *
-     */
-    public AllRedirectsRequest() { }
+    /** Creates a All Redirects request */
+    public AllRedirectsRequest() {}
 
     /**
      * @param page the page of results to return

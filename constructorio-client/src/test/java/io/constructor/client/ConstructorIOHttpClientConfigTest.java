@@ -1,10 +1,8 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import org.junit.After;
@@ -16,17 +14,17 @@ public class ConstructorIOHttpClientConfigTest {
     private String token = System.getenv("TEST_API_TOKEN");
     private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @After
     public void resetClient() {
-        ConstructorIO.setHttpClient(new OkHttpClient.Builder()
-                .addInterceptor(new ConstructorInterceptor())
-                .retryOnConnectionFailure(false)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .build());
+        ConstructorIO.setHttpClient(
+                new OkHttpClient.Builder()
+                        .addInterceptor(new ConstructorInterceptor())
+                        .retryOnConnectionFailure(false)
+                        .readTimeout(30, TimeUnit.SECONDS)
+                        .writeTimeout(30, TimeUnit.SECONDS)
+                        .build());
     }
 
     @Test
@@ -41,12 +39,15 @@ public class ConstructorIOHttpClientConfigTest {
         Dispatcher dispatcher = new Dispatcher();
         dispatcher.setMaxRequestsPerHost(2);
         dispatcher.setMaxRequests(20);
-        ConstructorIO.setHttpClient(ConstructorIO.getHttpClient().newBuilder()
-                .readTimeout(5, TimeUnit.SECONDS)
-                .writeTimeout(5, TimeUnit.SECONDS)
-                .connectTimeout(5, TimeUnit.SECONDS)
-                .callTimeout(1800, TimeUnit.MILLISECONDS)
-                .dispatcher(dispatcher).build());
+        ConstructorIO.setHttpClient(
+                ConstructorIO.getHttpClient()
+                        .newBuilder()
+                        .readTimeout(5, TimeUnit.SECONDS)
+                        .writeTimeout(5, TimeUnit.SECONDS)
+                        .connectTimeout(5, TimeUnit.SECONDS)
+                        .callTimeout(1800, TimeUnit.MILLISECONDS)
+                        .dispatcher(dispatcher)
+                        .build());
 
         assertEquals(5000, ConstructorIO.getHttpClient().readTimeoutMillis());
         assertEquals(5000, ConstructorIO.getHttpClient().writeTimeoutMillis());

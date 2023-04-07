@@ -1,12 +1,9 @@
 package io.constructor.client.models;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-import com.google.gson.annotations.SerializedName;
-
-/**
- * Constructor.io Browse Response Inner ... uses Gson/Reflection to load data in
- */
+/** Constructor.io Browse Response Inner ... uses Gson/Reflection to load data in */
 public class BrowseResponseInner {
 
     @SerializedName("facets")

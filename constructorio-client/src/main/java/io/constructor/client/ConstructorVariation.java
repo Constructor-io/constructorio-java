@@ -1,12 +1,10 @@
 package io.constructor.client;
 
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-/**
- * Constructor.io Variation
- */
+/** Constructor.io Variation */
 public class ConstructorVariation {
 
     private String name;
@@ -22,13 +20,15 @@ public class ConstructorVariation {
     private List<String> groupIds;
 
     /**
-     * Creates a variation.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
+     * Creates a variation. Optional public fields are in the <a
+     * href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
      *
      * @param id the id of the variation that you are adding.
      * @param itemId the id of the item this variation is attached to.
      * @param name the name of the variation that you are adding.
      */
-    public ConstructorVariation(String id, String itemId, String name) throws IllegalArgumentException {
+    public ConstructorVariation(String id, String itemId, String name)
+            throws IllegalArgumentException {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -90,9 +90,7 @@ public class ConstructorVariation {
         this.groupIds = null;
     }
 
-    /**
-     * Returns the HashMap form of a variation for converting to JSON
-     */
+    /** Returns the HashMap form of a variation for converting to JSON */
     public Map<String, Object> toMap() {
         Map<String, Object> dataMap = new HashMap<String, Object>();
 
@@ -101,7 +99,6 @@ public class ConstructorVariation {
         }
 
         Map<String, Object> params = new HashMap<String, Object>();
-
 
         if (id == null) {
             throw new IllegalArgumentException("id is required");

@@ -10,8 +10,7 @@ import org.junit.rules.ExpectedException;
 
 public class ConstructorIOBrowseFacetsTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
     private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
     private String apiToken = System.getenv("TEST_API_TOKEN");
 
@@ -43,10 +42,11 @@ public class ConstructorIOBrowseFacetsTest {
         BrowseFacetsResponse response = constructor.browseFacets(request);
 
         assertTrue("browse facets results exist", response.getResponse().getFacets().size() > 0);
-        assertTrue("browse facets total_num_results exist", response.getResponse().getTotalNumberOfResults() > 0);
+        assertTrue(
+                "browse facets total_num_results exist",
+                response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse facets result id exists", response.getResultId() != null);
     }
-
 
     @Test
     public void BrowseFacetsAsJSONShouldReturnAResultWithValidFmtOptions() throws Exception {
@@ -58,8 +58,16 @@ public class ConstructorIOBrowseFacetsTest {
         JSONObject jsonObj = new JSONObject(response);
 
         assertTrue("browse facets results exist", response.length() > 0);
-        assertTrue("show_hidden_facets is set in request", jsonObj.getJSONObject("request").getJSONObject("fmt_options").getBoolean("show_hidden_facets"));
-        assertTrue("show_hidden_facets is set in request", jsonObj.getJSONObject("request").getJSONObject("fmt_options").getBoolean("show_protected_facets"));
+        assertTrue(
+                "show_hidden_facets is set in request",
+                jsonObj.getJSONObject("request")
+                        .getJSONObject("fmt_options")
+                        .getBoolean("show_hidden_facets"));
+        assertTrue(
+                "show_hidden_facets is set in request",
+                jsonObj.getJSONObject("request")
+                        .getJSONObject("fmt_options")
+                        .getBoolean("show_protected_facets"));
     }
 
     @Test
@@ -72,10 +80,11 @@ public class ConstructorIOBrowseFacetsTest {
         BrowseFacetsResponse response = constructor.browseFacets(request);
 
         assertTrue("browse facets results exist", response.getResponse().getFacets().size() > 0);
-        assertTrue("browse facets total_num_results exist", response.getResponse().getTotalNumberOfResults() > 0);
+        assertTrue(
+                "browse facets total_num_results exist",
+                response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse facets result id exists", response.getResultId() != null);
     }
-
 
     @Test
     public void BrowseFacetsAsJSONShouldReturnAResultWithFivePerPage() throws Exception {
@@ -88,9 +97,19 @@ public class ConstructorIOBrowseFacetsTest {
         JSONObject jsonObj = new JSONObject(response);
 
         assertTrue("browse facets results exist", response.length() > 0);
-        assertTrue("num_results_per_page is set in request", jsonObj.getJSONObject("request").getInt("num_results_per_page") == 5);
-        assertTrue("show_hidden_facets is set in request", jsonObj.getJSONObject("request").getJSONObject("fmt_options").getBoolean("show_hidden_facets"));
-        assertTrue("show_hidden_facets is set in request", jsonObj.getJSONObject("request").getJSONObject("fmt_options").getBoolean("show_protected_facets"));
+        assertTrue(
+                "num_results_per_page is set in request",
+                jsonObj.getJSONObject("request").getInt("num_results_per_page") == 5);
+        assertTrue(
+                "show_hidden_facets is set in request",
+                jsonObj.getJSONObject("request")
+                        .getJSONObject("fmt_options")
+                        .getBoolean("show_hidden_facets"));
+        assertTrue(
+                "show_hidden_facets is set in request",
+                jsonObj.getJSONObject("request")
+                        .getJSONObject("fmt_options")
+                        .getBoolean("show_protected_facets"));
     }
 
     @Test
@@ -103,10 +122,11 @@ public class ConstructorIOBrowseFacetsTest {
         BrowseFacetsResponse response = constructor.browseFacets(request);
 
         assertTrue("browse facets results exist", response.getResponse().getFacets().size() >= 0);
-        assertTrue("browse facets total_num_results exist", response.getResponse().getTotalNumberOfResults() > 0);
+        assertTrue(
+                "browse facets total_num_results exist",
+                response.getResponse().getTotalNumberOfResults() > 0);
         assertTrue("browse facets result id exists", response.getResultId() != null);
     }
-
 
     @Test
     public void BrowseFacetsAsJSONShouldReturnAResultWithThirdPage() throws Exception {
@@ -119,8 +139,18 @@ public class ConstructorIOBrowseFacetsTest {
         JSONObject jsonObj = new JSONObject(response);
 
         assertTrue("browse facets results exist", response.length() > 0);
-        assertTrue("num_results_per_page is set in request", jsonObj.getJSONObject("request").getInt("page") == 3);
-        assertTrue("show_hidden_facets is set in request", jsonObj.getJSONObject("request").getJSONObject("fmt_options").getBoolean("show_hidden_facets"));
-        assertTrue("show_hidden_facets is set in request", jsonObj.getJSONObject("request").getJSONObject("fmt_options").getBoolean("show_protected_facets"));
+        assertTrue(
+                "num_results_per_page is set in request",
+                jsonObj.getJSONObject("request").getInt("page") == 3);
+        assertTrue(
+                "show_hidden_facets is set in request",
+                jsonObj.getJSONObject("request")
+                        .getJSONObject("fmt_options")
+                        .getBoolean("show_hidden_facets"));
+        assertTrue(
+                "show_hidden_facets is set in request",
+                jsonObj.getJSONObject("request")
+                        .getJSONObject("fmt_options")
+                        .getBoolean("show_protected_facets"));
     }
 }

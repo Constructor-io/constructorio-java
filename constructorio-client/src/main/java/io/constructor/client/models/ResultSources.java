@@ -2,10 +2,7 @@ package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Constructor.io ResultSources ... uses Gson/Reflection to load data in
- */
-
+/** Constructor.io ResultSources ... uses Gson/Reflection to load data in */
 public class ResultSources {
 
     @SerializedName("token_match")

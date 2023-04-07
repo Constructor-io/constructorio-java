@@ -1,6 +1,12 @@
 package io.constructor.client;
 
+import static org.junit.Assert.*;
+
 import io.constructor.client.models.Task;
+import java.io.File;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.core.StringContains;
 import org.json.JSONObject;
@@ -10,27 +16,20 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.io.File;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.*;
-
 public class ConstructorIOTaskTest {
 
     private static String apiKey = System.getenv("TEST_CATALOG_API_KEY");
     private static String apiToken = System.getenv("TEST_API_TOKEN");
     private static File csvFolder = new File("src/test/resources/csv");
     private static File itemsFile = new File("src/test/resources/csv/items.csv");
-    private static String baseUrl = "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
+    private static String baseUrl =
+            "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
     private static int task_id = 0;
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
-    public static void init() throws Exception{
+    public static void init() throws Exception {
         URL itemsUrl = new URL(baseUrl + "items.csv");
         FileUtils.copyURLToFile(itemsUrl, itemsFile);
 
@@ -47,7 +46,7 @@ public class ConstructorIOTaskTest {
     }
 
     @AfterClass
-    public static void teardown() throws Exception{
+    public static void teardown() throws Exception {
         itemsFile.delete();
         csvFolder.delete();
     }
@@ -78,7 +77,9 @@ public class ConstructorIOTaskTest {
         TaskRequest request = new TaskRequest(String.valueOf(task_id));
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard");
+        thrown.expectMessage(
+                "[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a"
+                        + " new one at app.constructor.io/dashboard");
         Task response = constructor.task(request);
     }
 
@@ -88,7 +89,9 @@ public class ConstructorIOTaskTest {
         TaskRequest request = new TaskRequest(String.valueOf(task_id));
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard");
+        thrown.expectMessage(
+                "[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a"
+                        + " new one at app.constructor.io/dashboard");
         String response = constructor.taskAsJson(request);
     }
 
@@ -98,7 +101,9 @@ public class ConstructorIOTaskTest {
         TaskRequest request = new TaskRequest(String.valueOf(task_id));
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage(StringContains.containsString("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
+        thrown.expectMessage(
+                StringContains.containsString(
+                        "[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
         Task response = constructor.task(request);
     }
 
@@ -108,8 +113,9 @@ public class ConstructorIOTaskTest {
         TaskRequest request = new TaskRequest(String.valueOf(task_id));
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage(StringContains.containsString("[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
+        thrown.expectMessage(
+                StringContains.containsString(
+                        "[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
         String response = constructor.taskAsJson(request);
     }
-
 }

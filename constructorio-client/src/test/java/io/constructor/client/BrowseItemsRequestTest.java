@@ -6,15 +6,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class BrowseItemsRequestTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void newWithNullQueryShouldFail() throws Exception {
@@ -24,14 +22,16 @@ public class BrowseItemsRequestTest {
 
     @Test
     public void newShouldReturnBrowseRequest() throws Exception {
-        List<String> ids = Arrays.asList("be73c016a2959243", "a6c7904fab526c23", "6a1d33f1dd13cc6b");
+        List<String> ids =
+                Arrays.asList("be73c016a2959243", "a6c7904fab526c23", "6a1d33f1dd13cc6b");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         assertEquals(request.getIds(), ids);
     }
 
     @Test
     public void newShouldReturnDefaultProperties() throws Exception {
-        List<String> ids = Arrays.asList("be73c016a2959243", "a6c7904fab526c23", "6a1d33f1dd13cc6b");
+        List<String> ids =
+                Arrays.asList("be73c016a2959243", "a6c7904fab526c23", "6a1d33f1dd13cc6b");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         assertEquals(request.getIds(), ids);
         assertEquals(request.getSection(), "Products");
@@ -39,7 +39,8 @@ public class BrowseItemsRequestTest {
 
     @Test
     public void settersShouldSet() throws Exception {
-        List<String> ids = Arrays.asList("be73c016a2959243", "a6c7904fab526c23", "6a1d33f1dd13cc6b");
+        List<String> ids =
+                Arrays.asList("be73c016a2959243", "a6c7904fab526c23", "6a1d33f1dd13cc6b");
         List<String> newIds = Arrays.asList("19a74297eec15244");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
         Map<String, List<String>> facets = new HashMap<String, List<String>>();
@@ -48,7 +49,7 @@ public class BrowseItemsRequestTest {
         formatOptions.put("groups_start", "top");
         List<String> hiddenFields = Arrays.asList("hiddenField1", "hiddenField2");
         List<String> hiddenFacets = Arrays.asList("hiddenFacet1", "hiddenFacet2");
-        
+
         request.setIds(newIds);
         request.setSection("Browse Suggestions");
         request.setPage(3);

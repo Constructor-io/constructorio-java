@@ -1,15 +1,10 @@
 package io.constructor.client.models;
 
+import com.google.gson.annotations.SerializedName;
+import io.constructor.client.ConstructorVariation;
 import java.util.List;
 
-import com.google.gson.annotations.SerializedName;
-
-import io.constructor.client.ConstructorVariation;
-
-
-/**
- * Constructor.io Variations Response ... uses Gson/Reflection to load data in
- */
+/** Constructor.io Variations Response ... uses Gson/Reflection to load data in */
 public class VariationsResponse {
 
     @SerializedName("total_count")

@@ -24,14 +24,14 @@ public class QuizResultsResponse {
     /**
      * @return the quiz_version_id
      */
-    public String getQuizVersionId() {
+    public String getVersionId() {
         return quizVersionId;
     }
 
     /**
      * @return the quiz_session_id
      */
-    public String getQuizSessionId() {
+    public String getSessionId() {
         return quizSessionId;
     }
 

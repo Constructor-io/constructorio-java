@@ -54,6 +54,10 @@ public class QuizQuestionResponseTest {
                 "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
                 response.getVersionId());
+        assertEquals(
+                "quiz_session_id exists",
+                "bf2f9b65-84bf-492a-bad1-66ffd07f9448",
+                response.getSessionId());
     }
 
     @Test
@@ -110,6 +114,10 @@ public class QuizQuestionResponseTest {
                 "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
                 response.getVersionId());
+        assertEquals(
+                "quiz_session_id exists",
+                "bf2f9b65-84bf-492a-bad1-66ffd07f9448",
+                response.getSessionId());
     }
 
     @Test
@@ -147,6 +155,10 @@ public class QuizQuestionResponseTest {
                 "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
                 response.getVersionId());
+        assertEquals(
+                "quiz_session_id exists",
+                "bf2f9b65-84bf-492a-bad1-66ffd07f9448",
+                response.getSessionId());
     }
 
     @Test
@@ -180,5 +192,9 @@ public class QuizQuestionResponseTest {
                 "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
                 response.getVersionId());
+        assertEquals(
+                "quiz_session_id exists",
+                "bf2f9b65-84bf-492a-bad1-66ffd07f9448",
+                response.getSessionId());
     }
 }

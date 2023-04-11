@@ -61,8 +61,8 @@ public class ConstructorIOQuizResultsTest {
         request.setAnswers(validAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
 
-        assertNotNull("quiz_version_id exists", response.getQuizVersionId());
-        assertNotNull("quiz_session_id exists", response.getQuizSessionId());
+        assertNotNull("quiz_version_id exists", response.getVersionId());
+        assertNotNull("quiz_session_id exists", response.getSessionId());
         assertNotNull("response exists", response.getResponse());
         assertNotNull("quiz_id exists", response.getQuizId());
         assertTrue("results exist", response.getResponse().getResults().size() > 0);
@@ -92,8 +92,8 @@ public class ConstructorIOQuizResultsTest {
         request.setAnswers(validAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
 
-        assertEquals("quiz_version_id exists", response.getQuizVersionId(), versionId);
-        assertEquals("quiz_session_id exists", response.getQuizSessionId(), sessionId);
+        assertEquals("quiz_version_id exists", response.getVersionId(), versionId);
+        assertEquals("quiz_session_id exists", response.getSessionId(), sessionId);
         assertNotNull("response exists", response.getResponse());
         assertNotNull("quiz_id exists", response.getQuizId());
         assertTrue("results exist", response.getResponse().getResults().size() > 0);
@@ -123,8 +123,8 @@ public class ConstructorIOQuizResultsTest {
         request.setAnswers(finalAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
 
-        assertNotNull("quiz_version_id exists", response.getQuizVersionId());
-        assertNotNull("quiz_session_id exists", response.getQuizSessionId());
+        assertNotNull("quiz_version_id exists", response.getVersionId());
+        assertNotNull("quiz_session_id exists", response.getSessionId());
         assertNotNull("response exists", response.getResponse());
         assertNotNull("quiz_id exists", response.getQuizId());
         assertTrue("results exist", response.getResponse().getResults().size() > 0);

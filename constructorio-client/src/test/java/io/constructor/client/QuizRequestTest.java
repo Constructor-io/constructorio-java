@@ -36,14 +36,17 @@ public class QuizRequestTest {
         assertEquals("id", request.getId());
         assertNull(request.getSection());
         assertNull(request.getVersionId());
+        assertNull(request.getSessionId());
         assertTrue(request.getAnswers().size() == 0);
 
         request.setSection("newsection");
         request.setVersionId("newversion");
+        request.setSessionId("newsession");
         request.setAnswers(validAnswers);
 
         assertEquals("newsection", request.getSection());
         assertEquals("newversion", request.getVersionId());
+        assertEquals("newsession", request.getSessionId());
         assertEquals(request.getAnswers(), validAnswers);
     }
 }

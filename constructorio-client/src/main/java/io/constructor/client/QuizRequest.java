@@ -10,6 +10,7 @@ public class QuizRequest {
     private String section;
     private List<List<String>> answers;
     private String versionId;
+    private String sessionId;
 
     /**
      * Creates a Next Quiz/Finalize Quiz request
@@ -24,6 +25,7 @@ public class QuizRequest {
         this.section = null;
         this.answers = new ArrayList<>();
         this.versionId = null;
+        this.sessionId = null;
     }
 
     /**
@@ -82,5 +84,19 @@ public class QuizRequest {
      */
     public String getVersionId() {
         return versionId;
+    }
+
+    /**
+     * @param sessionId the session id of this quiz instance
+     */
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    /**
+     * @return the session id of this quiz instance
+     */
+    public String getSessionId() {
+        return sessionId;
     }
 }

@@ -2542,7 +2542,17 @@ public class ConstructorIO {
             }
 
             if (req.getVersionId() != null) {
-                url = url.newBuilder().addQueryParameter("version_id", req.getVersionId()).build();
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("quiz_version_id", req.getVersionId())
+                                .build();
+            }
+
+            if (req.getSessionId() != null) {
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("quiz_session_id", req.getSessionId())
+                                .build();
             }
 
             if (req.getAnswers().size() > 0) {

@@ -11,8 +11,14 @@ public class QuizQuestionResponse {
     @SerializedName("is_last_question")
     private Boolean isLastQuestion;
 
-    @SerializedName("version_id")
+    @SerializedName("quiz_version_id")
     private String versionId;
+
+    @SerializedName("quiz_session_id")
+    private String sessionId;
+
+    @SerializedName("quiz_id")
+    private String quizId;
 
     /**
      * @return the next_question
@@ -29,10 +35,24 @@ public class QuizQuestionResponse {
     }
 
     /**
-     * @return the version_id
+     * @return the quiz_version_id
      */
     public String getVersionId() {
         return versionId;
+    }
+
+    /**
+     * @return the quiz_session_id
+     */
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    /**
+     * @return the quiz_id
+     */
+    public String getQuizId() {
+        return quizId;
     }
 
     public void setNextQuestion(QuizQuestion nextQuestion) {
@@ -45,5 +65,13 @@ public class QuizQuestionResponse {
 
     public void setVersionId(String versionId) {
         this.versionId = versionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public void setQuizId(String quizId) {
+        this.quizId = quizId;
     }
 }

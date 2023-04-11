@@ -1,35 +1,79 @@
 package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.Map;
+import java.util.List;
 
+/** Constructor.io Quiz Result ... uses Gson/Reflection to load data in */
 public class QuizResult {
 
-    @SerializedName("filter_expression")
-    private Map<String, Object> filterExpression;
+    @SerializedName("facets")
+    List<FilterFacet> facets;
 
-    @SerializedName("results_url")
-    private String resultsUrl;
+    @SerializedName("groups")
+    private List<FilterGroup> groups;
+
+    @SerializedName("results")
+    private List<Result> results;
+
+    @SerializedName("total_num_results")
+    private Integer totalNumberOfResults;
+
+    @SerializedName("sort_options")
+    private List<FilterSortOption> sortOptions;
 
     /**
-     * @return the filter_expression
+     * @return the facets
      */
-    public Map<String, Object> getFilterExpression() {
-        return filterExpression;
+    public List<FilterFacet> getFacets() {
+        return facets;
     }
 
     /**
-     * @return the result_url
+     * @return the groups
      */
-    public String getResultsUrl() {
-        return resultsUrl;
+    public List<FilterGroup> getGroups() {
+        return groups;
     }
 
-    public void setFilterExpression(Map<String, Object> filterExpression) {
-        this.filterExpression = filterExpression;
+    /**
+     * @return the results
+     */
+    public List<Result> getResults() {
+        return results;
     }
 
-    public void setResultsUrl(String resultsUrl) {
-        this.resultsUrl = resultsUrl;
+    /**
+     * @return the totalNumberOfResults
+     */
+    public Integer getTotalNumberOfResults() {
+        return totalNumberOfResults;
+    }
+
+    /**
+     * @return the sort options
+     */
+    public List<FilterSortOption> getSortOptions() {
+        return sortOptions;
+    }
+
+
+    public void setFacets(List<FilterFacet> facets) {
+        this.facets = facets;
+    }
+
+    public void setGroups(List<FilterGroup> groups) {
+        this.groups = groups;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
+    }
+
+    public void setTotalNumberOfResults(Integer totalNumberOfResults) {
+        this.totalNumberOfResults = totalNumberOfResults;
+    }
+
+    public void setSortOptions(List<FilterSortOption> sortOptions) {
+        this.sortOptions = sortOptions;
     }
 }

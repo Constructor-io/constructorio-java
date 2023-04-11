@@ -1,0 +1,1142 @@
+{
+  "request": {
+    "page": 1,
+    "num_results_per_page": 20,
+    "collection_filter_expression": {
+      "or": [
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Growing_Region",
+              "value": "Africa"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Medium"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Sweet"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Medium"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Fruity"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Medium"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Medium"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Chocolate"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Medium"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Citrus"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Growing_Region",
+              "value": "Africa"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Dark"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Medium"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Nutty"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Sweet"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Dark"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Growing_Region",
+              "value": "Africa"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Light"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Medium"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Bright"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Fruity"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Dark"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Sweet"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Light"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Medium"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Floral"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Fruity"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Light"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Chocolate"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Dark"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Citrus"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Dark"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Chocolate"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Light"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Nutty"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Dark"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Citrus"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Light"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Bright"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Dark"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Nutty"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Light"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Dark"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Floral"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Bright"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Light"
+            }
+          ]
+        },
+        {
+          "and": [
+            {
+              "name": "group_id",
+              "value": "Coffee"
+            },
+            {
+              "name": "Ground",
+              "value": "Yes"
+            },
+            {
+              "name": "Tasting_Notes",
+              "value": "Floral"
+            },
+            {
+              "name": "Roast_Type",
+              "value": "Light"
+            }
+          ]
+        }
+      ]
+    },
+    "filters": {
+      "Brand": [
+        "Wowbucks"
+      ]
+    },
+    "term": "",
+    "fmt_options": {
+      "groups_start": "current",
+      "groups_max_depth": 1,
+      "show_hidden_facets": false,
+      "show_hidden_fields": false,
+      "show_protected_facets": false
+    },
+    "sort_by": "relevance",
+    "sort_order": "descending",
+    "section": "Products",
+    "features": {
+      "query_items": true,
+      "auto_generated_refined_query_rules": true,
+      "personalization": true,
+      "manual_searchandizing": true,
+      "filter_items": true
+    },
+    "feature_variants": {
+      "query_items": null,
+      "auto_generated_refined_query_rules": null,
+      "personalization": null,
+      "manual_searchandizing": null,
+      "filter_items": null
+    },
+    "filter_match_types": {
+      "Brand": "any"
+    }
+  },
+  "response": {
+    "result_sources": {
+      "token_match": {
+        "count": 15
+      },
+      "embeddings_match": {
+        "count": 0
+      }
+    },
+    "facets": [
+      {
+        "display_name": "Price",
+        "name": "price",
+        "data": {},
+        "type": "range",
+        "hidden": false,
+        "status": {},
+        "min": 5.99,
+        "max": 16.99
+      }
+    ],
+    "groups": [
+      {
+        "group_id": "all",
+        "display_name": "All",
+        "count": 15,
+        "data": null,
+        "children": [
+          {
+            "group_id": "Beverages",
+            "display_name": "Beverages",
+            "count": 15,
+            "data": null,
+            "children": [],
+            "parents": [
+              {
+                "display_name": "All",
+                "group_id": "all"
+              }
+            ]
+          }
+        ],
+        "parents": []
+      }
+    ],
+    "results": [
+      {
+        "matched_terms": [],
+        "data": {
+          "id": "119011085",
+          "url": "/",
+          "price": "6.99",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Wowbucks"
+              ]
+            },
+            {
+              "name": "Decaf",
+              "values": [
+                "No"
+              ]
+            },
+            {
+              "name": "Ground",
+              "values": [
+                "Yes"
+              ]
+            },
+            {
+              "name": "Growing_Region",
+              "values": [
+                "Multi-Region"
+              ]
+            },
+            {
+              "name": "Inventory",
+              "values": [
+                "563"
+              ]
+            },
+            {
+              "name": "Margin",
+              "values": [
+                "0.1"
+              ]
+            },
+            {
+              "name": "Roast_Type",
+              "values": [
+                "Dark"
+              ]
+            },
+            {
+              "name": "Tasting_Notes",
+              "values": [
+                "Chocolate",
+                "Smoky"
+              ]
+            },
+            {
+              "name": "Type",
+              "values": [
+                "Beans"
+              ]
+            },
+            {
+              "name": "price",
+              "values": [
+                6.99
+              ]
+            }
+          ],
+          "keywords": [
+            "coffee"
+          ],
+          "image_url": "testimage.png",
+          "groups": [
+            {
+              "group_id": "Coffee",
+              "display_name": "Coffee",
+              "path": "/all/Beverages",
+              "path_list": [
+                {
+                  "id": "all",
+                  "display_name": "All"
+                },
+                {
+                  "id": "Beverages",
+                  "display_name": "Beverages"
+                }
+              ]
+            }
+          ]
+        },
+        "value": "Wowbucks Coffee Arabica Ground Dark Roast French Roast - 12 Oz"
+      },
+      {
+        "matched_terms": [],
+        "data": {
+          "id": "119011081",
+          "url": "/",
+          "price": "6.99",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Wowbucks"
+              ]
+            },
+            {
+              "name": "Decaf",
+              "values": [
+                "No"
+              ]
+            },
+            {
+              "name": "Ground",
+              "values": [
+                "Yes"
+              ]
+            },
+            {
+              "name": "Growing_Region",
+              "values": [
+                "Latin America"
+              ]
+            },
+            {
+              "name": "Inventory",
+              "values": [
+                "550"
+              ]
+            },
+            {
+              "name": "Margin",
+              "values": [
+                "0.13"
+              ]
+            },
+            {
+              "name": "Roast_Type",
+              "values": [
+                "Medium"
+              ]
+            },
+            {
+              "name": "Tasting_Notes",
+              "values": [
+                "Bright",
+                "Nutty"
+              ]
+            },
+            {
+              "name": "Type",
+              "values": [
+                "Beans"
+              ]
+            },
+            {
+              "name": "price",
+              "values": [
+                6.99
+              ]
+            }
+          ],
+          "keywords": [
+            "coffee"
+          ],
+          "image_url": "testimage.png",
+          "groups": [
+            {
+              "group_id": "Coffee",
+              "display_name": "Coffee",
+              "path": "/all/Beverages",
+              "path_list": [
+                {
+                  "id": "all",
+                  "display_name": "All"
+                },
+                {
+                  "id": "Beverages",
+                  "display_name": "Beverages"
+                }
+              ]
+            }
+          ]
+        },
+        "value": "Wowbucks Coffee Arabica Ground Medium Roast House Blend - 12 Oz"
+      },
+      {
+        "matched_terms": [],
+        "data": {
+          "id": "119012141",
+          "url": "/",
+          "price": "6.99",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Wowbucks"
+              ]
+            },
+            {
+              "name": "Decaf",
+              "values": [
+                "No"
+              ]
+            },
+            {
+              "name": "Ground",
+              "values": [
+                "Yes"
+              ]
+            },
+            {
+              "name": "Growing_Region",
+              "values": [
+                "Latin America"
+              ]
+            },
+            {
+              "name": "Inventory",
+              "values": [
+                "349"
+              ]
+            },
+            {
+              "name": "Margin",
+              "values": [
+                "0.09"
+              ]
+            },
+            {
+              "name": "Roast_Type",
+              "values": [
+                "Medium"
+              ]
+            },
+            {
+              "name": "Tasting_Notes",
+              "values": [
+                "Bright",
+                "Citrus"
+              ]
+            },
+            {
+              "name": "Type",
+              "values": [
+                "Beans"
+              ]
+            },
+            {
+              "name": "price",
+              "values": [
+                6.99
+              ]
+            }
+          ],
+          "keywords": [
+            "coffee"
+          ],
+          "image_url": "testimage.png",
+          "groups": [
+            {
+              "group_id": "Coffee",
+              "display_name": "Coffee",
+              "path": "/all/Beverages",
+              "path_list": [
+                {
+                  "id": "all",
+                  "display_name": "All"
+                },
+                {
+                  "id": "Beverages",
+                  "display_name": "Beverages"
+                }
+              ]
+            }
+          ]
+        },
+        "value": "Wowbucks Coffee Arabica Ground Medium Roast Breakfast Blend - 12 Oz"
+      },
+      {
+        "matched_terms": [],
+        "data": {
+          "id": "960029942",
+          "url": "/",
+          "price": "6.99",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Wowbucks"
+              ]
+            },
+            {
+              "name": "Decaf",
+              "values": [
+                "No"
+              ]
+            },
+            {
+              "name": "Ground",
+              "values": [
+                "Yes"
+              ]
+            },
+            {
+              "name": "Growing_Region",
+              "values": [
+                "Multi-Region"
+              ]
+            },
+            {
+              "name": "Inventory",
+              "values": [
+                "201"
+              ]
+            },
+            {
+              "name": "Margin",
+              "values": [
+                "0.08"
+              ]
+            },
+            {
+              "name": "Roast_Type",
+              "values": [
+                "Medium"
+              ]
+            },
+            {
+              "name": "Tasting_Notes",
+              "values": [
+                "Nutty"
+              ]
+            },
+            {
+              "name": "Type",
+              "values": [
+                "Beans"
+              ]
+            },
+            {
+              "name": "price",
+              "values": [
+                6.99
+              ]
+            }
+          ],
+          "keywords": [
+            "coffee"
+          ],
+          "image_url": "testimage.png",
+          "groups": [
+            {
+              "group_id": "Coffee",
+              "display_name": "Coffee",
+              "path": "/all/Beverages",
+              "path_list": [
+                {
+                  "id": "all",
+                  "display_name": "All"
+                },
+                {
+                  "id": "Beverages",
+                  "display_name": "Beverages"
+                }
+              ]
+            }
+          ]
+        },
+        "value": "Wowbucks Coffee Ground Medium Pike Place Roast - 12 Oz"
+      },
+      {
+        "matched_terms": [],
+        "data": {
+          "id": "960063593",
+          "url": "/",
+          "price": "6.99",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Wowbucks"
+              ]
+            },
+            {
+              "name": "Decaf",
+              "values": [
+                "No"
+              ]
+            },
+            {
+              "name": "Ground",
+              "values": [
+                "Yes"
+              ]
+            },
+            {
+              "name": "Growing_Region",
+              "values": [
+                "Latin America"
+              ]
+            },
+            {
+              "name": "Inventory",
+              "values": [
+                "370"
+              ]
+            },
+            {
+              "name": "Margin",
+              "values": [
+                "0.09"
+              ]
+            },
+            {
+              "name": "Roast_Type",
+              "values": [
+                "Light"
+              ]
+            },
+            {
+              "name": "Tasting_Notes",
+              "values": [
+                "Chocolate",
+                "Nutty"
+              ]
+            },
+            {
+              "name": "Type",
+              "values": [
+                "Beans"
+              ]
+            },
+            {
+              "name": "price",
+              "values": [
+                6.99
+              ]
+            }
+          ],
+          "keywords": [
+            "coffee"
+          ],
+          "image_url": "testimage.png",
+          "groups": [
+            {
+              "group_id": "Coffee",
+              "display_name": "Coffee",
+              "path": "/all/Beverages",
+              "path_list": [
+                {
+                  "id": "all",
+                  "display_name": "All"
+                },
+                {
+                  "id": "Beverages",
+                  "display_name": "Beverages"
+                }
+              ]
+            }
+          ]
+        },
+        "value": "Wowbucks Coffee Arabica Ground Blonde Veranda Blend - 12 Oz"
+      },
+    {
+        "matched_terms": [],
+        "data": {
+          "id": "960094807",
+          "url": "/",
+          "price": "7.99",
+          "facets": [
+            {
+              "name": "Brand",
+              "values": [
+                "Wowbucks"
+              ]
+            },
+            {
+              "name": "Decaf",
+              "values": [
+                "No"
+              ]
+            },
+            {
+              "name": "Ground",
+              "values": [
+                "Yes"
+              ]
+            },
+            {
+              "name": "Growing_Region",
+              "values": [
+                "Multi-Region"
+              ]
+            },
+            {
+              "name": "Inventory",
+              "values": [
+                "87"
+              ]
+            },
+            {
+              "name": "Margin",
+              "values": [
+                "0.12"
+              ]
+            },
+            {
+              "name": "Roast_Type",
+              "values": [
+                "Medium"
+              ]
+            },
+            {
+              "name": "Tasting_Notes",
+              "values": [
+                "Maple",
+                "Sweet"
+              ]
+            },
+            {
+              "name": "Type",
+              "values": [
+                "Beans"
+              ]
+            },
+            {
+              "name": "price",
+              "values": [
+                7.99
+              ]
+            }
+          ],
+          "keywords": [
+            "coffee"
+          ],
+          "image_url": "testimage.png",
+          "groups": [
+            {
+              "group_id": "Coffee",
+              "display_name": "Coffee",
+              "path": "/all/Beverages",
+              "path_list": [
+                {
+                  "id": "all",
+                  "display_name": "All"
+                },
+                {
+                  "id": "Beverages",
+                  "display_name": "Beverages"
+                }
+              ]
+            }
+          ]
+        },
+        "value": "Wowbucks Coffee Arabica Ground Medium Roast Holiday Blend - 10 Oz"
+      }
+    ],
+    "sort_options": [
+      {
+        "sort_by": "relevance",
+        "display_name": "Relevance",
+        "sort_order": "descending",
+        "status": "selected"
+      }
+    ],
+    "total_num_results": 15
+  },
+  "result_id": "0a502653-bc5b-4f0b-9229-dacbbd5376cc",
+  "quiz_id": "test-quiz",
+  "version_id": "8298dc03-e7eb-4ce8-8c6f-6315c900b5e8",
+  "quiz_version_id": "8298dc03-e7eb-4ce8-8c6f-6315c900b5e8",
+  "quiz_session_id": "bf2f9b65-84bf-492a-bad1-66ffd07f9448"
+}

@@ -2524,15 +2524,15 @@ public class ConstructorIO {
      * Creates a Quiz OkHttp request
      *
      * @param req the Quiz request
-     * @param type the type of quiz request (next/finalize)
+     * @param type the type of quiz request (next/results)
      * @return a Task OkHttp request
      * @throws ConstructorException
      */
     protected Request createQuizRequest(QuizRequest req, String type, UserInfo userInfo)
             throws ConstructorException {
         try {
-            if (!type.equals("next") && !type.equals("finalize"))
-                throw new IllegalArgumentException("type must be either 'next' or 'finalize'");
+            if (!type.equals("next") && !type.equals("results"))
+                throw new IllegalArgumentException("type must be either 'next' or 'results'");
 
             List<String> paths = Arrays.asList("v1", "quizzes", req.getId(), type);
             HttpUrl url = this.makeUrl(paths);
@@ -2551,9 +2551,9 @@ public class ConstructorIO {
                     url = url.newBuilder().addQueryParameter("a", answerParam).build();
                 }
             } else {
-                if (type.equals("finalize")) {
+                if (type.equals("results")) {
                     throw new IllegalArgumentException(
-                            "answers is a required parameter for a finalize request");
+                            "answers is a required parameter for a results request");
                 }
             }
 
@@ -2612,7 +2612,7 @@ public class ConstructorIO {
     public QuizResultsResponse quizResults(QuizRequest req, UserInfo userInfo)
             throws ConstructorException {
         try {
-            Request request = createQuizRequest(req, "finalize", userInfo);
+            Request request = createQuizRequest(req, "results", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
             String json = getResponseBody(response);
             return createQuizResultsResponse(json);
@@ -2631,7 +2631,7 @@ public class ConstructorIO {
     public String quizResultsAsJson(QuizRequest req, UserInfo userInfo)
             throws ConstructorException {
         try {
-            Request request = createQuizRequest(req, "finalize", userInfo);
+            Request request = createQuizRequest(req, "results", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
         } catch (Exception exception) {

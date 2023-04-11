@@ -56,7 +56,6 @@ public class QuizResult {
         return sortOptions;
     }
 
-
     public void setFacets(List<FilterFacet> facets) {
         this.facets = facets;
     }

@@ -1,7 +1,6 @@
 package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.Map;
 
 /** Constructor.io Quiz Results Response ... uses Gson/Reflection to load data in */

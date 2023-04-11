@@ -59,8 +59,6 @@ public class ConstructorIOQuizResultsTest {
         request.setAnswers(validAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
 
-
-
         assertNotNull("quiz_version_id exists", response.getQuizVersionId());
         assertNotNull("quiz_session_id exists", response.getQuizSessionId());
         assertNotNull("response exists", response.getResponse());
@@ -80,9 +78,7 @@ public class ConstructorIOQuizResultsTest {
         assertFalse("quiz_session_id exists", jsonObject.isNull("quiz_session_id"));
         assertFalse("quiz_id exists", jsonObject.isNull("quiz_id"));
         assertFalse("response exists", jsonObject.isNull("response"));
-        assertFalse(
-                "results exist",
-                jsonObject.getJSONObject("response").isNull("results"));
+        assertFalse("results exist", jsonObject.getJSONObject("response").isNull("results"));
     }
 
     @Test
@@ -111,9 +107,7 @@ public class ConstructorIOQuizResultsTest {
         assertFalse("quiz_session_id exists", jsonObject.isNull("quiz_session_id"));
         assertFalse("quiz_id exists", jsonObject.isNull("quiz_id"));
         assertFalse("response exists", jsonObject.isNull("response"));
-        assertFalse(
-                "results exist",
-                jsonObject.getJSONObject("response").isNull("results"));
+        assertFalse("results exist", jsonObject.getJSONObject("response").isNull("results"));
     }
 
     @Test

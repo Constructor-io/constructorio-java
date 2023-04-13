@@ -74,6 +74,9 @@ public class QuizRequest {
 
     /**
      * @param versionId the specific version id for the quiz
+     * Specific quiz_version_id for the quiz.
+     * Version ID will be returned with the first request and it should be passed with subsequent requests.
+     * More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning
      */
     public void setVersionId(String versionId) {
         this.versionId = versionId;
@@ -81,6 +84,9 @@ public class QuizRequest {
 
     /**
      * @return the specific version id for the quiz
+     * Specific quiz_version_id for the quiz.
+     * Version ID will be returned with the first request and it should be passed with subsequent requests.
+     * More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning
      */
     public String getVersionId() {
         return versionId;
@@ -88,6 +94,9 @@ public class QuizRequest {
 
     /**
      * @param sessionId the session id of this quiz instance
+     * Specific quiz_session_id for the quiz.
+     * Session ID will be returned with the first request, and it should be passed with subsequent requests.
+     * More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
      */
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
@@ -95,6 +104,9 @@ public class QuizRequest {
 
     /**
      * @return the session id of this quiz instance
+     * Specific quiz_session_id for the quiz.
+     * Session ID will be returned with the first request, and it should be passed with subsequent requests.
+     * More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
      */
     public String getSessionId() {
         return sessionId;

@@ -36,6 +36,9 @@ public class QuizQuestionResponse {
 
     /**
      * @return the quiz_version_id
+     * Specific quiz_version_id for the quiz.
+     * Version ID will be returned with the first request and it should be passed with subsequent requests.
+     * More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning
      */
     public String getVersionId() {
         return versionId;
@@ -43,6 +46,9 @@ public class QuizQuestionResponse {
 
     /**
      * @return the quiz_session_id
+     * Specific quiz_session_id for the quiz.
+     * Session ID will be returned with the first request and it should be passed with subsequent requests.
+     * More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
      */
     public String getSessionId() {
         return sessionId;

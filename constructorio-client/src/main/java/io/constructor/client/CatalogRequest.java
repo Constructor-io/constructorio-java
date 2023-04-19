@@ -5,9 +5,16 @@ import java.util.Map;
 
 /** Constructor.io Catalog Request */
 public class CatalogRequest {
+    public enum OnMissing {
+        FAIL,
+        IGNORE,
+        CREATE,
+    }
+
     private Map<String, File> files;
     private String section;
     private String notificationEmail;
+    private OnMissing onMissing;
     private Boolean force;
 
     /**
@@ -26,6 +33,24 @@ public class CatalogRequest {
 
         this.files = files;
         this.section = section;
+        this.onMissing = OnMissing.FAIL;
+    }
+
+    /**
+     * @param onMissing Either "FAIL", "CREATE", "IGNORE", indicating what to do when a missing item
+     *     is uploaded for patch requests. "FAIL" will fail the patch catalog request if an item
+     *     does not exist. "CREATE" will create the item if it does not exist. "IGNORE" will ignore
+     *     items that do not exist. Defaults to "FAIL". Only applicable to patchCatalog requests.
+     */
+    public void setOnMissing(OnMissing onMissing) {
+        this.onMissing = onMissing;
+    }
+
+    /**
+     * @return the onMissing strategy
+     */
+    public OnMissing getOnMissing() {
+        return onMissing;
     }
 
     /**

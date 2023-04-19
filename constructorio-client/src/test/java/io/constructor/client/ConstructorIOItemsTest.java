@@ -95,7 +95,12 @@ public class ConstructorIOItemsTest {
 
         assertTrue(
                 "update succeeds",
-                constructor.updateItems(itemsNew, "Products", true, "test@constructor.io"));
+                constructor.updateItems(
+                        itemsNew,
+                        "Products",
+                        true,
+                        "test@constructor.io",
+                        CatalogRequest.OnMissing.CREATE));
         addItemsToCleanUpArray(itemsNew);
     }
 

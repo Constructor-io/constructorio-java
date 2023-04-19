@@ -107,7 +107,11 @@ public class ConstructorIOVariationsTest {
         assertTrue(
                 "update succeeds",
                 constructor.updateVariations(
-                        variationsNew, "Products", true, "test@constructor.io"));
+                        variationsNew,
+                        "Products",
+                        true,
+                        "test@constructor.io",
+                        CatalogRequest.OnMissing.CREATE));
         addVariationsToCleanUpArray(variationsNew);
     }
 

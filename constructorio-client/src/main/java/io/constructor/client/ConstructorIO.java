@@ -469,13 +469,21 @@ public class ConstructorIO {
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate
      *     a large number of existing variations.
+     * @param onMissing Either "FAIL", "IGNORE", "CREATE", indicating how the system will handle
+     *     updating items that don't exist. "FAIL" fails the ingestion if there are items that don't
+     *     exist. "IGNORE" ignores items that don't exist. "CREATE" creates items that don't exist.
+     *     Defaults to "FAIL".
      * @param notificationEmail An email address where you'd like to receive an email notification
      *     in case the task fails.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
     public boolean updateItems(
-            ConstructorItem[] items, String section, Boolean force, String notificationEmail)
+            ConstructorItem[] items,
+            String section,
+            Boolean force,
+            String notificationEmail,
+            CatalogRequest.OnMissing onMissing)
             throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
@@ -490,6 +498,10 @@ public class ConstructorIO {
                         url.newBuilder()
                                 .addQueryParameter("notification_email", notificationEmail)
                                 .build();
+            }
+
+            if (onMissing != null && onMissing != CatalogRequest.OnMissing.FAIL) {
+                url = url.newBuilder().addQueryParameter("on_missing", onMissing.name()).build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
@@ -511,18 +523,36 @@ public class ConstructorIO {
         }
     }
 
+    /**
+     * Updates items from your index.
+     *
+     * @param items the items that you're updating
+     * @param section the section of the autocomplete that you're modifying the item for.
+     * @param force whether or not the system should process the request even if it will invalidate
+     *     a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification
+     *     in case the task fails.
+     * @return true if successfully modified
+     * @throws ConstructorException if the request is invalid.
+     */
+    public boolean updateItems(
+            ConstructorItem[] items, String section, Boolean force, String notificationEmail)
+            throws ConstructorException {
+        return updateItems(items, section, force, notificationEmail, null);
+    }
+
     public boolean updateItems(ConstructorItem[] items) throws ConstructorException {
-        return updateItems(items, "Products", false, null);
+        return updateItems(items, "Products", false, null, null);
     }
 
     public boolean updateItems(ConstructorItem[] items, String section)
             throws ConstructorException {
-        return updateItems(items, section, false, null);
+        return updateItems(items, section, false, null, null);
     }
 
     public boolean updateItems(ConstructorItem[] items, String section, Boolean force)
             throws ConstructorException {
-        return updateItems(items, section, force, null);
+        return updateItems(items, section, force, null, null);
     }
 
     /**
@@ -534,6 +564,10 @@ public class ConstructorIO {
      *     a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification
      *     in case the task fails.
+     * @param onMissing Either "FAIL", "IGNORE", "CREATE", indicating how the system will handle
+     *     updating variations that don't exist. "FAIL" fails the ingestion if there are items that
+     *     don't exist. "IGNORE" ignores variations that don't exist. "CREATE" creates items that
+     *     don't exist.
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
@@ -541,7 +575,8 @@ public class ConstructorIO {
             ConstructorVariation[] variations,
             String section,
             Boolean force,
-            String notificationEmail)
+            String notificationEmail,
+            CatalogRequest.OnMissing onMissing)
             throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
@@ -556,6 +591,9 @@ public class ConstructorIO {
                         url.newBuilder()
                                 .addQueryParameter("notification_email", notificationEmail)
                                 .build();
+            }
+            if (onMissing != null && onMissing != CatalogRequest.OnMissing.FAIL) {
+                url = url.newBuilder().addQueryParameter("on_missing", onMissing.name()).build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
@@ -577,19 +615,44 @@ public class ConstructorIO {
         }
     }
 
+    /**
+     * Update variations from your index.
+     *
+     * @param variations the variations that you're updating.
+     * @param section the section of the autocomplete that you're modifying the item for.
+     * @param force whether or not the system should process the request even if it will invalidate
+     *     a large number of existing variations.
+     * @param notificationEmail An email address where you'd like to receive an email notification
+     *     in case the task fails.
+     * @return true if successfully modified
+     * @throws ConstructorException if the request is invalid.
+     */
+    public boolean updateVariations(
+            ConstructorVariation[] variations,
+            String section,
+            Boolean force,
+            String notificationEmail)
+            throws ConstructorException {
+        try {
+            return updateVariations(variations, section, force, notificationEmail, null);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
     public boolean updateVariations(ConstructorVariation[] variations) throws ConstructorException {
-        return updateVariations(variations, "Products", false, null);
+        return updateVariations(variations, "Products", false, null, null);
     }
 
     public boolean updateVariations(ConstructorVariation[] variations, String section)
             throws ConstructorException {
-        return updateVariations(variations, section, false, null);
+        return updateVariations(variations, section, false, null, null);
     }
 
     public boolean updateVariations(
             ConstructorVariation[] variations, String section, Boolean force)
             throws ConstructorException {
-        return updateVariations(variations, section, force, null);
+        return updateVariations(variations, section, force, null, null);
     }
 
     /**
@@ -2250,6 +2313,9 @@ public class ConstructorIO {
             }
             if (force != null) {
                 urlBuilder.addQueryParameter("force", Boolean.toString(force));
+            }
+            if (req.getOnMissing() != CatalogRequest.OnMissing.FAIL) {
+                urlBuilder.addQueryParameter("on_missing", req.getOnMissing().name());
             }
 
             urlBuilder.addQueryParameter("patch_delta", Boolean.toString(true));

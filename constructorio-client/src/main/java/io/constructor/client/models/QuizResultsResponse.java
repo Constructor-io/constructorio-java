@@ -19,23 +19,23 @@ public class QuizResultsResponse {
     private Map<String, Object> request;
 
     @SerializedName("response")
-    private QuizResult response;
+    private QuizResultsResponseInner response;
 
     /**
-     * @return the quiz_version_id for the quiz Version ID will bereturned with the first request
+     * @return the quizVersionId. The quiz version id will be returned with the first request
      *     and it should be passed with subsequent requests. More information can be found:
      *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning
      */
-    public String getVersionId() {
+    public String getQuizVersionId() {
         return quizVersionId;
     }
 
     /**
-     * @return the quiz_session_id for the quiz. Session ID will be returned with the first request
+     * @return the quizSessionId. The quiz session id will be returned with the first request
      *     and it should be passed with subsequent requests. More information can be found:
      *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
      */
-    public String getSessionId() {
+    public String getQuizSessionId() {
         return quizSessionId;
     }
 
@@ -49,7 +49,7 @@ public class QuizResultsResponse {
     /**
      * @return the result
      */
-    public QuizResult getResponse() {
+    public QuizResultsResponseInner getResponse() {
         return response;
     }
 
@@ -60,7 +60,7 @@ public class QuizResultsResponse {
         return request;
     }
 
-    public void setVersionId(String quizVersionId) {
+    public void setQuizVersionId(String quizVersionId) {
         this.quizVersionId = quizVersionId;
     }
 
@@ -72,7 +72,7 @@ public class QuizResultsResponse {
         this.quizId = quizId;
     }
 
-    public void setResponse(QuizResult response) {
+    public void setResponse(QuizResultsResponseInner response) {
         this.response = response;
     }
 

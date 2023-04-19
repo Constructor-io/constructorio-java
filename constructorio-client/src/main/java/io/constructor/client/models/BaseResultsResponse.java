@@ -3,11 +3,11 @@ package io.constructor.client.models;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-/** Constructor.io Quiz Result ... uses Gson/Reflection to load data in */
-public class QuizResult {
+/** Constructor.io Base Result ... uses Gson/Reflection to load data in */
+public class BaseResultsResponse {
 
     @SerializedName("facets")
-    List<FilterFacet> facets;
+    private List<FilterFacet> facets;
 
     @SerializedName("groups")
     private List<FilterGroup> groups;

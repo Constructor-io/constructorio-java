@@ -41,7 +41,7 @@ public class ConstructorIOQuizNextQuestionTest {
         QuizQuestionResponse response = constructor.quizNextQuestion(request, null);
 
         assertEquals("Quiz next_question id is correct", 1, response.getNextQuestion().getId());
-        assertNotNull("quiz_version_id exists", response.getVersionId());
+        assertNotNull("quiz_version_id exists", response.getQuizVersionId());
         assertNotNull("is_last_question exists", response.getIsLastQuestion());
     }
 
@@ -64,13 +64,13 @@ public class ConstructorIOQuizNextQuestionTest {
     public void QuizQuestionShouldReturnAResultWithSessionIdAndVersionId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setVersionId(versionId);
-        request.setSessionId(sessionId);
+        request.setQuizVersionId(versionId);
+        request.setQuizSessionId(sessionId);
         QuizQuestionResponse response = constructor.quizNextQuestion(request, null);
 
         assertEquals("Quiz next_question id is correct", 1, response.getNextQuestion().getId());
-        assertEquals("quiz_version_id exists", response.getVersionId(), versionId);
-        assertEquals("quiz_session_id exists", response.getSessionId(), sessionId);
+        assertEquals("quiz_version_id exists", response.getQuizVersionId(), versionId);
+        assertEquals("quiz_session_id exists", response.getQuizSessionId(), sessionId);
         assertNotNull("is_last_question exists", response.getIsLastQuestion());
     }
 
@@ -78,8 +78,8 @@ public class ConstructorIOQuizNextQuestionTest {
     public void QuizQuestionAsJsonShouldReturnAResultWithSessionIdAndVersionId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setVersionId(versionId);
-        request.setSessionId(sessionId);
+        request.setQuizVersionId(versionId);
+        request.setQuizSessionId(sessionId);
         String response = constructor.quizNextQuestionAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
 
@@ -150,7 +150,7 @@ public class ConstructorIOQuizNextQuestionTest {
         QuizQuestionResponse response = constructor.quizNextQuestion(request, null);
 
         assertEquals("Quiz next_question id is correct", 3, response.getNextQuestion().getId());
-        assertNotNull("quiz_version_id exists", response.getVersionId());
+        assertNotNull("quiz_version_id exists", response.getQuizVersionId());
         assertNotNull("is_last_question exists", response.getIsLastQuestion());
     }
 
@@ -178,7 +178,7 @@ public class ConstructorIOQuizNextQuestionTest {
         QuizQuestionResponse response = constructor.quizNextQuestion(request, null);
 
         assertNull("Quiz next_question is null", response.getNextQuestion());
-        assertNotNull("quiz_version_id exists", response.getVersionId());
+        assertNotNull("quiz_version_id exists", response.getQuizVersionId());
         assertTrue("is_last_question exists", response.getIsLastQuestion());
     }
 

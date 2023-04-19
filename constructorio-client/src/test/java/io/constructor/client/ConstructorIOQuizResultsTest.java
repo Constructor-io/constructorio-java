@@ -61,8 +61,8 @@ public class ConstructorIOQuizResultsTest {
         request.setAnswers(validAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
 
-        assertNotNull("quiz_version_id exists", response.getVersionId());
-        assertNotNull("quiz_session_id exists", response.getSessionId());
+        assertNotNull("quiz_version_id exists", response.getQuizVersionId());
+        assertNotNull("quiz_session_id exists", response.getQuizSessionId());
         assertNotNull("response exists", response.getResponse());
         assertNotNull("quiz_id exists", response.getQuizId());
         assertTrue("results exist", response.getResponse().getResults().size() > 0);
@@ -87,13 +87,13 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsShouldReturnResultWithVersionIdAndSessionId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setVersionId(versionId);
-        request.setSessionId(sessionId);
+        request.setQuizVersionId(versionId);
+        request.setQuizSessionId(sessionId);
         request.setAnswers(validAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
 
-        assertEquals("quiz_version_id exists", response.getVersionId(), versionId);
-        assertEquals("quiz_session_id exists", response.getSessionId(), sessionId);
+        assertEquals("quiz_version_id exists", response.getQuizVersionId(), versionId);
+        assertEquals("quiz_session_id exists", response.getQuizSessionId(), sessionId);
         assertNotNull("response exists", response.getResponse());
         assertNotNull("quiz_id exists", response.getQuizId());
         assertTrue("results exist", response.getResponse().getResults().size() > 0);
@@ -103,8 +103,8 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsAsJsonShouldReturnResultWithVersionIdAndSessionid() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setVersionId(versionId);
-        request.setSessionId(sessionId);
+        request.setQuizVersionId(versionId);
+        request.setQuizSessionId(sessionId);
         request.setAnswers(validAnswers);
         String response = constructor.quizResultsAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
@@ -123,8 +123,8 @@ public class ConstructorIOQuizResultsTest {
         request.setAnswers(finalAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
 
-        assertNotNull("quiz_version_id exists", response.getVersionId());
-        assertNotNull("quiz_session_id exists", response.getSessionId());
+        assertNotNull("quiz_version_id exists", response.getQuizVersionId());
+        assertNotNull("quiz_session_id exists", response.getQuizSessionId());
         assertNotNull("response exists", response.getResponse());
         assertNotNull("quiz_id exists", response.getQuizId());
         assertTrue("results exist", response.getResponse().getResults().size() > 0);

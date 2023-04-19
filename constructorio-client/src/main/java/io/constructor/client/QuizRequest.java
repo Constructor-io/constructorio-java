@@ -3,43 +3,43 @@ package io.constructor.client;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Constructor.io Next Quiz and Finalize Quiz request */
+/** Constructor.io Next Quiz and Results Quiz request */
 public class QuizRequest {
-    private String id;
+    private String quizId;
     private String indexKey;
     private String section;
     private List<List<String>> answers;
-    private String versionId;
-    private String sessionId;
+    private String quizVersionId;
+    private String quizSessionId;
 
     /**
-     * Creates a Next Quiz/Finalize Quiz request
+     * Creates a Next Quiz/Results Quiz request
      *
-     * @param id the id of the quiz to request
+     * @param quizId the id of the quiz to request
      */
-    public QuizRequest(String id) {
-        if (id == null)
+    public QuizRequest(String quizId) {
+        if (quizId == null)
             throw new IllegalArgumentException("id is a required parameter of type String");
 
-        this.id = id;
+        this.quizId = quizId;
         this.section = null;
         this.answers = new ArrayList<>();
-        this.versionId = null;
-        this.sessionId = null;
+        this.quizVersionId = null;
+        this.quizSessionId = null;
     }
 
     /**
-     * @param id the id of the quiz to request
+     * @param quizId the id of the quiz to request
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setQuizId(String quizId) {
+        this.quizId = quizId;
     }
 
     /**
      * @return the id of the quiz to request
      */
-    public String getId() {
-        return id;
+    public String getQuizId() {
+        return quizId;
     }
 
     /**
@@ -73,38 +73,38 @@ public class QuizRequest {
     }
 
     /**
-     * @param versionId Version ID will be returned with the first request and it should be passed
+     * @param quizVersionId The quiz version id will be returned with the first request and it should be passed
      *     with subsequent requests. More information can be found:
      *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning
      */
-    public void setVersionId(String versionId) {
-        this.versionId = versionId;
+    public void setQuizVersionId(String quizVersionId) {
+        this.quizVersionId = quizVersionId;
     }
 
     /**
-     * @return the quiz_version_id. Version ID will be returned with the first request and it should
+     * @return the quizVersionId. The quiz version id will be returned with the first request and it should
      *     be passed with subsequent requests. More information can be found:
      *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning
      */
-    public String getVersionId() {
-        return versionId;
+    public String getQuizVersionId() {
+        return quizVersionId;
     }
 
     /**
-     * @param sessionId the session id of this quiz instance. Session ID will be returned with the
+     * @param quizSessionId The quiz session id will be returned with the
      *     first request, and it should be passed with subsequent requests. More information can be
      *     found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
      */
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
+    public void setQuizSessionId(String quizSessionId) {
+        this.quizSessionId = quizSessionId;
     }
 
     /**
-     * @return the session id of this quiz instance. Session ID will be returned with the first
-     *     request, and it should be passed with subsequent requests. More information can be found:
+     * @return the quizSessionId. The quiz session id will be returned with the first request
+     *     and it should be passed with subsequent requests. More information can be found:
      *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
      */
-    public String getSessionId() {
-        return sessionId;
+    public String getQuizSessionId() {
+        return quizSessionId;
     }
 }

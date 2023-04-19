@@ -33,20 +33,20 @@ public class QuizRequestTest {
     @Test
     public void settersShouldSet() throws Exception {
         QuizRequest request = new QuizRequest("id");
-        assertEquals("id", request.getId());
+        assertEquals("id", request.getQuizId());
         assertNull(request.getSection());
-        assertNull(request.getVersionId());
-        assertNull(request.getSessionId());
+        assertNull(request.getQuizVersionId());
+        assertNull(request.getQuizSessionId());
         assertTrue(request.getAnswers().size() == 0);
 
         request.setSection("newsection");
-        request.setVersionId("newversion");
-        request.setSessionId("newsession");
+        request.setQuizVersionId("newversion");
+        request.setQuizSessionId("newsession");
         request.setAnswers(validAnswers);
 
         assertEquals("newsection", request.getSection());
-        assertEquals("newversion", request.getVersionId());
-        assertEquals("newsession", request.getSessionId());
+        assertEquals("newversion", request.getQuizVersionId());
+        assertEquals("newsession", request.getQuizSessionId());
         assertEquals(request.getAnswers(), validAnswers);
     }
 }

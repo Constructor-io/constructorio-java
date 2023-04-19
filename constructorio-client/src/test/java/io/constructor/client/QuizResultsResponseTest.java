@@ -19,11 +19,11 @@ public class QuizResultsResponseTest {
         assertEquals(
                 "quiz_version_id exists",
                 "8298dc03-e7eb-4ce8-8c6f-6315c900b5e8",
-                response.getVersionId());
+                response.getQuizVersionId());
         assertEquals(
                 "quiz_session_id exists",
                 "bf2f9b65-84bf-492a-bad1-66ffd07f9448",
-                response.getSessionId());
+                response.getQuizSessionId());
         assertEquals("quiz_id exists", "test-quiz", response.getQuizId());
         assertNotNull("response exists", response.getResponse());
         assertEquals("response has 6 items", 6, response.getResponse().getResults().size());

@@ -2534,24 +2534,24 @@ public class ConstructorIO {
             if (!type.equals("next") && !type.equals("results"))
                 throw new IllegalArgumentException("type must be either 'next' or 'results'");
 
-            List<String> paths = Arrays.asList("v1", "quizzes", req.getId(), type);
+            List<String> paths = Arrays.asList("v1", "quizzes", req.getQuizId(), type);
             HttpUrl url = this.makeUrl(paths);
 
             if (req.getSection() != null) {
                 url = url.newBuilder().addQueryParameter("section", req.getSection()).build();
             }
 
-            if (req.getVersionId() != null) {
+            if (req.getQuizVersionId() != null) {
                 url =
                         url.newBuilder()
-                                .addQueryParameter("quiz_version_id", req.getVersionId())
+                                .addQueryParameter("quiz_version_id", req.getQuizVersionId())
                                 .build();
             }
 
-            if (req.getSessionId() != null) {
+            if (req.getQuizSessionId() != null) {
                 url =
                         url.newBuilder()
-                                .addQueryParameter("quiz_session_id", req.getSessionId())
+                                .addQueryParameter("quiz_session_id", req.getQuizSessionId())
                                 .build();
             }
 

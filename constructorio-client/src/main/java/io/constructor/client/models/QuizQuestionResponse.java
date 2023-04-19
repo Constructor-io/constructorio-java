@@ -12,10 +12,10 @@ public class QuizQuestionResponse {
     private Boolean isLastQuestion;
 
     @SerializedName("quiz_version_id")
-    private String versionId;
+    private String quizVersionId;
 
     @SerializedName("quiz_session_id")
-    private String sessionId;
+    private String quizSessionId;
 
     @SerializedName("quiz_id")
     private String quizId;
@@ -35,21 +35,21 @@ public class QuizQuestionResponse {
     }
 
     /**
-     * @return the quiz_version_id. Version ID will be returned with the first request and it should
+     * @return the quizVersionId. The quiz version id will be returned with the first request and it should
      *     be passed with subsequent requests. More information can be found:
      *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning
      */
-    public String getVersionId() {
-        return versionId;
+    public String getQuizVersionId() {
+        return quizVersionId;
     }
 
     /**
-     * @return the quiz_session_id. Session ID will be returned with the first request and it should
-     *     be passed with subsequent requests. More information can be found:
+     * @return the quizSessionId. The quiz session id will be returned with the first request
+     *     and it should be passed with subsequent requests. More information can be found:
      *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
      */
-    public String getSessionId() {
-        return sessionId;
+    public String getQuizSessionId() {
+        return quizSessionId;
     }
 
     /**
@@ -67,12 +67,12 @@ public class QuizQuestionResponse {
         this.isLastQuestion = isLastQuestion;
     }
 
-    public void setVersionId(String versionId) {
-        this.versionId = versionId;
+    public void setQuizVersionId(String quizVersionId) {
+        this.quizVersionId = quizVersionId;
     }
 
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
+    public void setQuizSessionId(String quizSessionId) {
+        this.quizSessionId = quizSessionId;
     }
 
     public void setQuizId(String quizId) {

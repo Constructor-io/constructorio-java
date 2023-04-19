@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /** Constructor.io Search Response Inner ... uses Gson/Reflection to load data in */
-public class SearchResponseInner extends BaseResultsResponse{
+public class SearchResponseInner extends BaseResultsResponse {
 
     @SerializedName("redirect")
     private Redirect redirect;

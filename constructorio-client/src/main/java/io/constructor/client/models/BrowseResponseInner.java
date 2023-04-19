@@ -1,11 +1,10 @@
 package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.List;
 
 /** Constructor.io Browse Response Inner ... uses Gson/Reflection to load data in */
-public class BrowseResponseInner extends BaseResultsResponse{
-    
+public class BrowseResponseInner extends BaseResultsResponse {
+
     @SerializedName("collection")
     private ItemCollection collection;
 

@@ -22,8 +22,8 @@ public class QuizResultsResponse {
     private QuizResultsResponseInner response;
 
     /**
-     * @return the quizVersionId. The quiz version id will be returned with the first request
-     *     and it should be passed with subsequent requests. More information can be found:
+     * @return the quizVersionId. The quiz version id will be returned with the first request and it
+     *     should be passed with subsequent requests. More information can be found:
      *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning
      */
     public String getQuizVersionId() {
@@ -31,8 +31,8 @@ public class QuizResultsResponse {
     }
 
     /**
-     * @return the quizSessionId. The quiz session id will be returned with the first request
-     *     and it should be passed with subsequent requests. More information can be found:
+     * @return the quizSessionId. The quiz session id will be returned with the first request and it
+     *     should be passed with subsequent requests. More information can be found:
      *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
      */
     public String getQuizSessionId() {

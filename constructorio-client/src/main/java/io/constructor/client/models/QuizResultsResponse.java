@@ -40,7 +40,7 @@ public class QuizResultsResponse {
     }
 
     /**
-     * @return the quiz_id
+     * @return the quizId
      */
     public String getQuizId() {
         return quizId;

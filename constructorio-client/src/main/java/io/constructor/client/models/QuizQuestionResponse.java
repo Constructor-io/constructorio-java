@@ -21,14 +21,14 @@ public class QuizQuestionResponse {
     private String quizId;
 
     /**
-     * @return the next_question
+     * @return the nextQuestion
      */
     public QuizQuestion getNextQuestion() {
         return nextQuestion;
     }
 
     /**
-     * @return the is_last_question
+     * @return the isLastQuestion
      */
     public Boolean getIsLastQuestion() {
         return isLastQuestion;
@@ -53,7 +53,7 @@ public class QuizQuestionResponse {
     }
 
     /**
-     * @return the quiz_id
+     * @return the quizId
      */
     public String getQuizId() {
         return quizId;

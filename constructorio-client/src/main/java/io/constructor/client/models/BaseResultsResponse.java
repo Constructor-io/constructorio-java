@@ -21,6 +21,9 @@ public class BaseResultsResponse {
     @SerializedName("sort_options")
     private List<FilterSortOption> sortOptions;
 
+    @SerializedName("result_sources")
+    private ResultSources resultSources;
+
     /**
      * @return the facets
      */
@@ -56,6 +59,13 @@ public class BaseResultsResponse {
         return sortOptions;
     }
 
+    /**
+     * @return resultSources data
+     */
+    public ResultSources getResultSources() {
+        return resultSources;
+    }
+
     public void setFacets(List<FilterFacet> facets) {
         this.facets = facets;
     }
@@ -74,5 +84,9 @@ public class BaseResultsResponse {
 
     public void setSortOptions(List<FilterSortOption> sortOptions) {
         this.sortOptions = sortOptions;
+    }
+
+    public void setResultSources(ResultSources resultSources) {
+        this.resultSources = resultSources;
     }
 }

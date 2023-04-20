@@ -16,8 +16,8 @@ public class ConstructorIOQuizResultsTest {
 
     private final String quizKey = System.getenv("TEST_REQUEST_API_KEY");
     private final String quizId = "test-quiz";
-    private final String versionId = "e03210db-0cc6-459c-8f17-bf014c4f554d";
-    private final String sessionId = "1234";
+    private final String quizVersionId = "e03210db-0cc6-459c-8f17-bf014c4f554d";
+    private final String quizSessionId = "1234";
     private static List<List<String>> validAnswers = new ArrayList<>();
     private static List<List<String>> finalAnswers = new ArrayList<>();
 
@@ -87,13 +87,13 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsShouldReturnResultWithVersionIdAndSessionId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setQuizVersionId(versionId);
-        request.setQuizSessionId(sessionId);
+        request.setQuizVersionId(quizVersionId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
 
-        assertEquals("quiz_version_id exists", response.getQuizVersionId(), versionId);
-        assertEquals("quiz_session_id exists", response.getQuizSessionId(), sessionId);
+        assertEquals("quiz_version_id exists", response.getQuizVersionId(), quizVersionId);
+        assertEquals("quiz_session_id exists", response.getQuizSessionId(), quizSessionId);
         assertNotNull("response exists", response.getResponse());
         assertNotNull("quiz_id exists", response.getQuizId());
         assertTrue("results exist", response.getResponse().getResults().size() > 0);
@@ -103,14 +103,14 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsAsJsonShouldReturnResultWithVersionIdAndSessionid() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setQuizVersionId(versionId);
-        request.setQuizSessionId(sessionId);
+        request.setQuizVersionId(quizVersionId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
         String response = constructor.quizResultsAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
 
-        assertEquals("quiz_version_id exists", jsonObject.get("quiz_version_id"), versionId);
-        assertEquals("quiz_session_id exists", jsonObject.get("quiz_session_id"), sessionId);
+        assertEquals("quiz_version_id exists", jsonObject.get("quiz_version_id"), quizVersionId);
+        assertEquals("quiz_session_id exists", jsonObject.get("quiz_session_id"), quizSessionId);
         assertFalse("quiz_id exists", jsonObject.isNull("quiz_id"));
         assertFalse("response exists", jsonObject.isNull("response"));
         assertFalse("results exist", jsonObject.getJSONObject("response").isNull("results"));

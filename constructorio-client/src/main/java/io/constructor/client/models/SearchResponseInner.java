@@ -9,9 +9,6 @@ public class SearchResponseInner extends BaseResultsResponse {
     @SerializedName("redirect")
     private Redirect redirect;
 
-    @SerializedName("result_sources")
-    private ResultSources resultSources;
-
     @SerializedName("refined_content")
     private List<RefinedContent> refinedContent;
 
@@ -23,13 +20,6 @@ public class SearchResponseInner extends BaseResultsResponse {
     }
 
     /**
-     * @return resultSources data
-     */
-    public ResultSources getResultSources() {
-        return resultSources;
-    }
-
-    /**
      * @return refined content
      */
     public List<RefinedContent> getRefinedContent() {
@@ -38,10 +28,6 @@ public class SearchResponseInner extends BaseResultsResponse {
 
     public void setRedirect(Redirect redirect) {
         this.redirect = redirect;
-    }
-
-    public void setResultSources(ResultSources resultSources) {
-        this.resultSources = resultSources;
     }
 
     public void setRefinedContent(List<RefinedContent> refinedContent) {

@@ -100,6 +100,25 @@ public class ConstructorIOQuizResultsTest {
     }
 
     @Test
+    public void QuizResultsShouldReturnAResultWithResultSources() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest request = new QuizRequest(quizId);
+        request.setQuizVersionId(quizVersionId);
+        request.setQuizSessionId(quizSessionId);
+        request.setAnswers(validAnswers);
+        QuizResultsResponse response = constructor.quizResults(request, null);
+
+        assertEquals(
+                "quiz result result sources exists",
+                (int) response.getResponse().getResultSources().getTokenMatch().getCount(),
+                1);
+        assertEquals(
+                "quiz result result sources exists",
+                (int) response.getResponse().getResultSources().getEmbeddingsMatch().getCount(),
+                0);
+    }
+
+    @Test
     public void QuizResultsAsJsonShouldReturnResultWithVersionIdAndSessionid() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);

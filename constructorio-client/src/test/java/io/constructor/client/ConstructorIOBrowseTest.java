@@ -42,6 +42,22 @@ public class ConstructorIOBrowseTest {
     }
 
     @Test
+    public void BrowseShouldReturnAResultWIthResultSources() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Color", "Blue");
+        BrowseResponse response = constructor.browse(request, userInfo);
+        assertEquals(
+                "browse result result sources exists",
+                (int) response.getResponse().getResultSources().getTokenMatch().getCount(),
+                1);
+        assertEquals(
+                "browse result result sources exists",
+                (int) response.getResponse().getResultSources().getEmbeddingsMatch().getCount(),
+                0);
+    }
+
+    @Test
     public void BrowseAsJSONShouldReturnAResult() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");

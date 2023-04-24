@@ -356,6 +356,23 @@ public class ConstructorIOCatalogTest {
     }
 
     @Test
+    public void PatchCatalogWithItemsAndOnMissingShouldReturnTaskInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+        files.put("items", new File("src/test/resources/csv/items.csv"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+
+        req.setOnMissing(CatalogRequest.OnMissing.CREATE);
+
+        String response = constructor.patchCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
+
+    @Test
     public void PatchCatalogWithItemsAndVariationsFilesShouldReturnTaskInfo() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();

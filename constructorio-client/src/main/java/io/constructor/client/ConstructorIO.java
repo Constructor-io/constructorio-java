@@ -567,7 +567,7 @@ public class ConstructorIO {
      * @param onMissing Either "FAIL", "IGNORE", "CREATE", indicating how the system will handle
      *     updating variations that don't exist. "FAIL" fails the ingestion if there are items that
      *     don't exist. "IGNORE" ignores variations that don't exist. "CREATE" creates items that
-     *     don't exist.
+     *     don't exist. Defaults to "FAIL".
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */

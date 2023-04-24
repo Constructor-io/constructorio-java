@@ -51,9 +51,13 @@ public class QuizQuestionResponseTest {
                 response.getNextQuestion().getOptions().get(0).getAttribute().getName());
         assertFalse("is_last_question exists", response.getIsLastQuestion());
         assertEquals(
-                "version_id exists",
+                "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
-                response.getVersionId());
+                response.getQuizVersionId());
+        assertEquals(
+                "quiz_session_id exists",
+                "bf2f9b65-84bf-492a-bad1-66ffd07f9448",
+                response.getQuizSessionId());
     }
 
     @Test
@@ -107,9 +111,13 @@ public class QuizQuestionResponseTest {
                 response.getNextQuestion().getOptions().get(0).getImages().getSecondaryUrl());
         assertFalse("is_last_question exists", response.getIsLastQuestion());
         assertEquals(
-                "version_id exists",
+                "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
-                response.getVersionId());
+                response.getQuizVersionId());
+        assertEquals(
+                "quiz_session_id exists",
+                "bf2f9b65-84bf-492a-bad1-66ffd07f9448",
+                response.getQuizSessionId());
     }
 
     @Test
@@ -144,9 +152,13 @@ public class QuizQuestionResponseTest {
                 response.getNextQuestion().getImages().getPrimaryUrl());
         assertFalse("is_last_question exists", response.getIsLastQuestion());
         assertEquals(
-                "version_id exists",
+                "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
-                response.getVersionId());
+                response.getQuizVersionId());
+        assertEquals(
+                "quiz_session_id exists",
+                "bf2f9b65-84bf-492a-bad1-66ffd07f9448",
+                response.getQuizSessionId());
     }
 
     @Test
@@ -177,8 +189,12 @@ public class QuizQuestionResponseTest {
                 response.getNextQuestion().getImages().getPrimaryUrl());
         assertFalse("is_last_question exists", response.getIsLastQuestion());
         assertEquals(
-                "version_id exists",
+                "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
-                response.getVersionId());
+                response.getQuizVersionId());
+        assertEquals(
+                "quiz_session_id exists",
+                "bf2f9b65-84bf-492a-bad1-66ffd07f9448",
+                response.getQuizSessionId());
     }
 }

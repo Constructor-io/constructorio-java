@@ -10,5 +10,5 @@ updates:
     # This option has no impact on security updates, which have a separate, internal limit of ten open pull requests.
     open-pull-requests-limit: 0
     reviewers:
-      - "esezen" # Enes
-      - "jjl014" # Jimmy
+      - "Mudaafi" # Ahmad
+      - "stanlp1" # Stanley

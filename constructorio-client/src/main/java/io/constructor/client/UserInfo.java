@@ -24,6 +24,13 @@ public class UserInfo {
     }
 
     /**
+     * Creates a User Info object
+     *
+     */
+    public UserInfo() {
+    }
+
+    /**
      * @return Client ID
      */
     public String getClientId() {

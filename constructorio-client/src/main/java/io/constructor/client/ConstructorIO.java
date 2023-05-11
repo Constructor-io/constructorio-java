@@ -1801,11 +1801,17 @@ public class ConstructorIO {
         okhttp3.HttpUrl.Builder builder =
                 new HttpUrl.Builder()
                         .scheme(this.protocol)
+                        .host(this.host)
                         .addQueryParameter("key", this.apiKey)
-                        .addQueryParameter("c", this.version)
-                        .addQueryParameter("s", String.valueOf(info.getSessionId()))
-                        .addQueryParameter("i", info.getClientId())
-                        .host(this.host);
+                        .addQueryParameter("c", this.version);
+
+        if (info.getClientId() != null) {
+            builder.addQueryParameter("i", info.getClientId());
+        }
+
+        if (info.getSessionId() != 0) {
+            builder.addQueryParameter("s", String.valueOf(info.getSessionId()));
+        }
 
         for (String path : paths) {
             String canonicalPath =

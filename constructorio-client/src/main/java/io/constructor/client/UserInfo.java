@@ -23,12 +23,8 @@ public class UserInfo {
         this.setClientId(clientId);
     }
 
-    /**
-     * Creates a User Info object
-     *
-     */
-    public UserInfo() {
-    }
+    /** Creates a User Info object */
+    public UserInfo() {}
 
     /**
      * @return Client ID

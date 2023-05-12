@@ -1,6 +1,7 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
 import org.junit.Rule;
@@ -92,6 +93,14 @@ public class UserInfoTest {
         thrown.expect(IllegalArgumentException.class);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         userInfo.setUserAgent(null);
+    }
+
+    @Test
+    public void emptyConstructorShouldSucceed() throws Exception {
+        UserInfo userInfo = new UserInfo();
+
+        assertNull(userInfo.getClientId());
+        assertEquals(userInfo.getSessionId(), 0);
     }
 
     @Test

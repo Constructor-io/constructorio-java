@@ -136,7 +136,7 @@ public class ConstructorIOBasicTest {
         HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"));
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
         assertEquals("protocol is set", url.scheme(), "https");
-        assertEquals("version is set", url.queryParameter("c"), "ciojava-5.23.2");
+        assertEquals("version is set", url.queryParameter("c"), "ciojava-5.23.3");
         assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
     }
 
@@ -147,7 +147,7 @@ public class ConstructorIOBasicTest {
         HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"), info);
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
         assertEquals("protocol is set", url.scheme(), "https");
-        assertEquals("version is set", url.queryParameter("c"), "ciojava-5.23.2");
+        assertEquals("version is set", url.queryParameter("c"), "ciojava-5.23.3");
         assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
         assertEquals("session id is set", url.queryParameter("s"), "2");
         assertEquals("client id is set", url.queryParameter("i"), "sideshow bob");
@@ -162,7 +162,7 @@ public class ConstructorIOBasicTest {
         HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"), info);
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
         assertEquals("protocol is set", url.scheme(), "https");
-        assertEquals("version is set", url.queryParameter("c"), "ciojava-5.23.2");
+        assertEquals("version is set", url.queryParameter("c"), "ciojava-5.23.3");
         assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
         assertEquals("session id is set", url.queryParameter("s"), "2");
         assertEquals("client id is set", url.queryParameter("i"), "sideshow bob");
@@ -177,7 +177,7 @@ public class ConstructorIOBasicTest {
         HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"), info);
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
         assertEquals("protocol is set", url.scheme(), "https");
-        assertEquals("version is set", url.queryParameter("c"), "ciojava-5.23.2");
+        assertEquals("version is set", url.queryParameter("c"), "ciojava-5.23.3");
         assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
         assertEquals("session id is set", url.queryParameter("s"), "2");
         assertEquals("client id is set", url.queryParameter("i"), "sideshow bob");
@@ -195,7 +195,7 @@ public class ConstructorIOBasicTest {
     @Test
     public void getVersionShouldReturnClientVersion() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-        assertEquals("grabs version from pom.xml", constructor.getVersion(), "ciojava-5.23.2");
+        assertEquals("grabs version from pom.xml", constructor.getVersion(), "ciojava-5.23.3");
     }
 
     @Test

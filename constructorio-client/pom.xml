@@ -4,7 +4,7 @@
 	<groupId>io.constructor.client</groupId>
 	<artifactId>constructorio-client</artifactId>
 	<packaging>jar</packaging>
-	<version>5.23.3</version>
+	<version>5.23.1</version>
 	<name>constructorio-client</name>
 	<url>https://github.com/Constructor-io/constructorio-java</url>
 	<dependencies>
@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20230227</version>
+			<version>20180130</version>
 		</dependency>
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
@@ -118,13 +118,6 @@
 						</googleJavaFormat>
 					</java>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>

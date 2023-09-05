@@ -4202,6 +4202,22 @@
       "sort_order": "descending",
       "status": ""
     }],
+    "refined_content": [
+			{
+				"data": {
+					"body": "Content 1 Body",
+					"tag-1": "tag-1-value",
+					"tag-2": "tag-2-value",
+					"header": "Content 1 Header",
+					"altText": "Content 1 desktop alt text",
+					"ctaLink": "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png",
+					"ctaText": "Content 1 CTA Button",
+					"assetUrl": "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png",
+					"mobileAssetUrl": "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png",
+					"mobileAssetAltText": "Content 1 mobile alt text"
+				}
+			}
+		],
     "total_num_results": 562
   },
   "result_id": "99dec817-4807-48fb-a00f-4b6e464f540e"

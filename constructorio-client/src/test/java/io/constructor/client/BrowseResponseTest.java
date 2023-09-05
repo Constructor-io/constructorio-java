@@ -206,16 +206,49 @@ public class BrowseResponseTest {
     public void createBrowseResponseShouldReturnAResultWithRefinedContent() throws Exception {
         String string = Utils.getTestResource("response.browse.color.blue.json");
         BrowseResponse response = ConstructorIO.createBrowseResponse(string);
-        assertEquals("browse result [refined content] exists", response.getResponse().getRefinedContent().size(), 1);
-        assertTrue("browse result refined content [data] exists", response.getResponse().getRefinedContent().get(0).getData() != null);
-        assertEquals("browse result refined content data [body] exists", response.getResponse().getRefinedContent().get(0).getData().get("body"), "Content 1 Body");
-        assertEquals("browse result refined content data [header] exists", response.getResponse().getRefinedContent().get(0).getData().get("header"), "Content 1 Header");
-        assertEquals("browse result refined content data [altText] exists", response.getResponse().getRefinedContent().get(0).getData().get("altText"), "Content 1 desktop alt text");
-        assertEquals("browse result refined content data [ctaLink] exists", response.getResponse().getRefinedContent().get(0).getData().get("ctaLink"), "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png");
-        assertEquals("browse result refined content data [ctaText] exists", response.getResponse().getRefinedContent().get(0).getData().get("ctaText"), "Content 1 CTA Button");
-        assertEquals("browse result refined content data [assetUrl] exists", response.getResponse().getRefinedContent().get(0).getData().get("assetUrl"), "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png");
-        assertEquals("browse result refined content data [mobileAssetUrl] exists", response.getResponse().getRefinedContent().get(0).getData().get("mobileAssetUrl"), "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png");
-        assertEquals("browse result refined content data [mobileAssetAltText] exists", response.getResponse().getRefinedContent().get(0).getData().get("mobileAssetAltText"), "Content 1 mobile alt text");
+        assertEquals(
+                "browse result [refined content] exists",
+                response.getResponse().getRefinedContent().size(),
+                1);
+        assertTrue(
+                "browse result refined content [data] exists",
+                response.getResponse().getRefinedContent().get(0).getData() != null);
+        assertEquals(
+                "browse result refined content data [body] exists",
+                response.getResponse().getRefinedContent().get(0).getData().get("body"),
+                "Content 1 Body");
+        assertEquals(
+                "browse result refined content data [header] exists",
+                response.getResponse().getRefinedContent().get(0).getData().get("header"),
+                "Content 1 Header");
+        assertEquals(
+                "browse result refined content data [altText] exists",
+                response.getResponse().getRefinedContent().get(0).getData().get("altText"),
+                "Content 1 desktop alt text");
+        assertEquals(
+                "browse result refined content data [ctaLink] exists",
+                response.getResponse().getRefinedContent().get(0).getData().get("ctaLink"),
+                "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png");
+        assertEquals(
+                "browse result refined content data [ctaText] exists",
+                response.getResponse().getRefinedContent().get(0).getData().get("ctaText"),
+                "Content 1 CTA Button");
+        assertEquals(
+                "browse result refined content data [assetUrl] exists",
+                response.getResponse().getRefinedContent().get(0).getData().get("assetUrl"),
+                "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png");
+        assertEquals(
+                "browse result refined content data [mobileAssetUrl] exists",
+                response.getResponse().getRefinedContent().get(0).getData().get("mobileAssetUrl"),
+                "https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png");
+        assertEquals(
+                "browse result refined content data [mobileAssetAltText] exists",
+                response.getResponse()
+                        .getRefinedContent()
+                        .get(0)
+                        .getData()
+                        .get("mobileAssetAltText"),
+                "Content 1 mobile alt text");
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
     }

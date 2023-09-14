@@ -491,9 +491,7 @@ public class ConstructorIOBrowseTest {
     @Test
     public void BrowseShouldReturnErrorWithPageAndOffset() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage(
-                "[HTTP 400] You've used both 'page' and 'offset' parameters for pagination. Please,"
-                        + " use just one of them");
+        thrown.expectMessage("[HTTP 400] offset, page are mutually exclusive");
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Brand", "XYZ");

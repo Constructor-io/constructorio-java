@@ -363,7 +363,8 @@ public class ConstructorIOBrowseTest {
         variationsMap.addGroupByRule("variation", "data.variation_id");
         variationsMap.addValueRule(
                 "size", VariationsMap.AggregationTypes.first, "data.facets.size");
-        variationsMap.setFilterBy("{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}");
+        variationsMap.setFilterBy(
+                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}");
         request.setVariationsMap(variationsMap);
         BrowseResponse response = constructor.browse(request, userInfo);
 

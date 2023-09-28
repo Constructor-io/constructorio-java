@@ -354,7 +354,8 @@ public class ConstructorIOSearchTest {
         variationsMap.addGroupByRule("variation", "data.variation_id");
         variationsMap.addValueRule(
                 "size", VariationsMap.AggregationTypes.first, "data.facets.size");
-        variationsMap.setFilterBy("{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}");
+        variationsMap.setFilterBy(
+                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}");
         System.out.println(variationsMap.getFilterBy());
         request.setVariationsMap(variationsMap);
         SearchResponse response = constructor.search(request, userInfo);

@@ -195,6 +195,8 @@ public class ConstructorIOAutocompleteTest {
         variationsMap.addGroupByRule("variation", "data.variation_id");
         variationsMap.addValueRule(
                 "size", VariationsMap.AggregationTypes.first, "data.facets.size");
+        variationsMap.setFilterBy(
+                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}");
         request.setVariationsMap(variationsMap);
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
 
@@ -218,6 +220,10 @@ public class ConstructorIOAutocompleteTest {
                 "variations map group by is correct",
                 variationsMap.getGroupBy().get(0).field,
                 variationsMapFromResponse.getGroupBy().get(0).field);
+        assertEquals(
+                "variations map filter by is correct",
+                variationsMap.getFilterBy(),
+                variationsMapFromResponse.getFilterBy());
     }
 
     @Test

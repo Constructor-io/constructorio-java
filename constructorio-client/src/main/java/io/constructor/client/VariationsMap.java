@@ -1,5 +1,7 @@
 package io.constructor.client;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,6 +63,9 @@ public class VariationsMap {
 
     @SerializedName("group_by")
     private List<Group> groupBy;
+
+    @SerializedName("filter_by")
+    private JsonObject filterBy;
 
     /** Creates a variations map */
     public VariationsMap() {
@@ -138,5 +143,19 @@ public class VariationsMap {
      */
     public void setGroupBy(List<Group> groupBy) {
         this.groupBy = groupBy;
+    }
+
+    /**
+     * @return JSON encoded filtering expression used to filter variations
+     */
+    public JsonObject getFilterBy() {
+        return filterBy;
+    }
+
+    /**
+     * @param filterBy JSON encoded filtering expression used to filter variations
+     */
+    public void setFilterBy(String filterBy) {
+        this.filterBy = JsonParser.parseString(filterBy).getAsJsonObject();
     }
 }

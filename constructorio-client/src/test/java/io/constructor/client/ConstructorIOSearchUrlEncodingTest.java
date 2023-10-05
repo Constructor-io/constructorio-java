@@ -43,7 +43,7 @@ public class ConstructorIOSearchUrlEncodingTest {
         RecordedRequest recordedRequest = mockServer.takeRequest();
         String expectedPath =
                 String.format(
-                        "/search/r%%2Bco?key=%s&c=ciojava-5.24.2&section=Products&num_results_per_page=30",
+                        "/search/r%%2Bco?key=%s&c=ciojava-5.24.3&section=Products&num_results_per_page=30",
                         apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
@@ -63,7 +63,7 @@ public class ConstructorIOSearchUrlEncodingTest {
         RecordedRequest recordedRequest = mockServer.takeRequest();
         String expectedPath =
                 String.format(
-                        "/search/r%%20co?key=%s&c=ciojava-5.24.2&section=Products&num_results_per_page=30",
+                        "/search/r%%20co?key=%s&c=ciojava-5.24.3&section=Products&num_results_per_page=30",
                         apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
@@ -83,7 +83,7 @@ public class ConstructorIOSearchUrlEncodingTest {
         RecordedRequest recordedRequest = mockServer.takeRequest();
         String expectedPath =
                 String.format(
-                        "/search/r%%2Fco?key=%s&c=ciojava-5.24.2&section=Products&num_results_per_page=30",
+                        "/search/r%%2Fco?key=%s&c=ciojava-5.24.3&section=Products&num_results_per_page=30",
                         apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
@@ -103,7 +103,7 @@ public class ConstructorIOSearchUrlEncodingTest {
         RecordedRequest recordedRequest = mockServer.takeRequest();
         String expectedPath =
                 String.format(
-                        "/search/r'co?key=%s&c=ciojava-5.24.2&section=Products&num_results_per_page=30",
+                        "/search/r'co?key=%s&c=ciojava-5.24.3&section=Products&num_results_per_page=30",
                         apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);

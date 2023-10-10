@@ -25,6 +25,9 @@ public class Result {
     @SerializedName("labels")
     private Map<String, Boolean> labels;
 
+    @SerializedName("strategy")
+    private Map<String, String> strategy;
+
     /**
      * @return the value
      */
@@ -67,6 +70,13 @@ public class Result {
         return labels;
     }
 
+    /**
+     * @return the strategy
+     */
+    public Map<String, String> getStrategy() {
+        return strategy;
+    }
+
     public void setValue(String value) {
         this.value = value;
     }
@@ -89,5 +99,9 @@ public class Result {
 
     public void setLabels(Map<String, Boolean> labels) {
         this.labels = labels;
+    }
+
+    public void setStrategy(Map<String, String> strategy) {
+        this.strategy = strategy;
     }
 }

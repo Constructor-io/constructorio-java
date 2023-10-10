@@ -36,5 +36,9 @@ public class RecommendationsResponseTest {
                 response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
         assertEquals(
                 "request filter value exists", response.getRequest().get("item_id"), "109350015");
+        assertEquals(
+                "recommendation result strategy exists",
+                response.getResponse().getResults().get(0).getStrategy().get("id"),
+                "alternative_items");
     }
 }

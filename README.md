@@ -24,7 +24,7 @@ ConstructorIO constructor = new ConstructorIO("apitoken", "apikey", true, null);
 
 # Creating and Modifying Items
 
-A `ConstructorItem` contains all the information about a product or search suggestion. To add or update an individual item, you will need to provide a `ConstructorItem` and the relevant `Autocomplete Section` it belongs to.
+A `ConstructorItem` contains all the information about a product or search suggestion. To add or update an individual item, you will need to provide an array containing a single `ConstructorItem` and the relevant `Autocomplete Section` it belongs to.
 
 ```java
 // Create an item
@@ -36,11 +36,10 @@ item.setSuggestedScore(Integer.valueOf(5000));
 item.setDescription("Keep yourself dry and cozy on rainy days.");
 item.setKeywords(Arrays.asList("coat", "rain", "jacket"));
 
-// Add an item to the Products section
-constructor.addItem(item, "Products");
+ConstructorItem[] items = { item };
 
 // Add or update an item in the Products section
-constructor.addOrUpdateItem(item, "Products");
+constructor.createOrReplaceItems(items, "Products"); // (limit of 1,000 items)
 ```
 
 Similarly with adding or updating a batch of items, you will need to provide an array of `ConstructorItem`'s and their relevant `Autocomplete Section`.
@@ -53,11 +52,40 @@ items[1] = new ConstructorItem("YBGID Striped Shirt");
 ...
 items[19] = new ConstructorItem("YBGID Polka Dot Shirt");
 
-// Add items to the Products section
-constructor.addItemBatch(items, "Products");
-
 // Add or update items in the Products section
-constructor.addOrUpdateItemBatch(items, "Products");
+constructor.createOrReplaceItems(items, "Products"); // (limit of 1,000 items)
+```
+
+To update existing item(s), you will need to provide an array of `ConstructorItem`(s) and their relevant `Autocomplete Section`. These `ConstructorItem`'s must have ids that already exist in your index.
+
+```java
+// Create an item
+ConstructorItem itemOld = new ConstructorItem("ROTCURTSNOC Rainy Day Coat");
+ConstructorItem[] itemsOld = { item };
+
+// Add item to the Products section
+constructor.createOrReplaceItems(itemsOld, "Products");
+
+ConstructorItem itemNew = new ConstructorItem(itemOld.getId());
+itemNew.setUrl(itemOld.getUrl());
+itemNew.setSuggestedScore((float) 1337.00);
+ConstructorItem[] itemsNew = { itemNew };
+
+// Update item(s) from the Products section
+constructor.updateItems(itemsNew, "Products");
+```
+
+# Deleting Items
+
+To delete existing item(s), you will need to provide an array of `ConstructorItem`(s) and their relevant `Autocomplete Section`.
+
+```java
+// Create an item
+ConstructorItem item = new ConstructorItem("ROTCURTSNOC Rainy Day Coat");
+ConstructorItem[] items = { item };
+
+// Delete items from the Products section
+constructor.deleteItems(items, "Products"); // (limit of 1,000 items)
 ```
 
 # Replacing and Updating Catalogs

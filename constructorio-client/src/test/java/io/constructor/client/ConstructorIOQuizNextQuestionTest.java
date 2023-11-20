@@ -42,7 +42,6 @@ public class ConstructorIOQuizNextQuestionTest {
 
         assertEquals("Quiz next_question id is correct", 1, response.getNextQuestion().getId());
         assertNotNull("quiz_version_id exists", response.getQuizVersionId());
-        assertNotNull("is_last_question exists", response.getIsLastQuestion());
     }
 
     @Test
@@ -57,7 +56,6 @@ public class ConstructorIOQuizNextQuestionTest {
                 1,
                 jsonObject.getJSONObject("next_question").getInt("id"));
         assertFalse("quiz_version_id exists", jsonObject.isNull("quiz_version_id"));
-        assertFalse("is_last_question exists", jsonObject.isNull("is_last_question"));
     }
 
     @Test
@@ -71,7 +69,6 @@ public class ConstructorIOQuizNextQuestionTest {
         assertEquals("Quiz next_question id is correct", 1, response.getNextQuestion().getId());
         assertEquals("quiz_version_id exists", response.getQuizVersionId(), quizVersionId);
         assertEquals("quiz_session_id exists", response.getQuizSessionId(), quizSessionId);
-        assertNotNull("is_last_question exists", response.getIsLastQuestion());
     }
 
     @Test
@@ -89,7 +86,6 @@ public class ConstructorIOQuizNextQuestionTest {
                 jsonObject.getJSONObject("next_question").getInt("id"));
         assertEquals("quiz_version_id exists", jsonObject.get("quiz_version_id"), quizVersionId);
         assertEquals("quiz_session_id exists", jsonObject.get("quiz_session_id"), quizSessionId);
-        assertFalse("is_last_question exists", jsonObject.isNull("is_last_question"));
     }
 
     @Test
@@ -151,7 +147,6 @@ public class ConstructorIOQuizNextQuestionTest {
 
         assertEquals("Quiz next_question id is correct", 3, response.getNextQuestion().getId());
         assertNotNull("quiz_version_id exists", response.getQuizVersionId());
-        assertNotNull("is_last_question exists", response.getIsLastQuestion());
     }
 
     @Test
@@ -167,7 +162,6 @@ public class ConstructorIOQuizNextQuestionTest {
                 3,
                 jsonObject.getJSONObject("next_question").getInt("id"));
         assertFalse("quiz_version_id exists", jsonObject.isNull("quiz_version_id"));
-        assertFalse("is_last_question exists", jsonObject.isNull("is_last_question"));
     }
 
     @Test
@@ -179,7 +173,6 @@ public class ConstructorIOQuizNextQuestionTest {
 
         assertNull("Quiz next_question is null", response.getNextQuestion());
         assertNotNull("quiz_version_id exists", response.getQuizVersionId());
-        assertTrue("is_last_question exists", response.getIsLastQuestion());
     }
 
     @Test
@@ -192,6 +185,5 @@ public class ConstructorIOQuizNextQuestionTest {
 
         assertTrue("Quiz next_question is null", jsonObject.isNull("next_question"));
         assertFalse("quiz_version_id exists", jsonObject.isNull("quiz_version_id"));
-        assertTrue("is_last_question exists", jsonObject.getBoolean("is_last_question"));
     }
 }

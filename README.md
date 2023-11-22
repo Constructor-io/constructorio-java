@@ -29,10 +29,10 @@ A `ConstructorItem` contains all the information about a product or search sugge
 ```java
 // Create an array of items
 ConstructorItem[] items = new ConstructorItem[20];
-items[0] = new ConstructorItem("50bff7c3-f0ec-4d59-9aab-290427f0c1d7");
-items[1] = new ConstructorItem("477d18bb-5ae2-4cdb-a6ff-59752a570e40");
+items[0] = new ConstructorItem("10001");
+items[1] = new ConstructorItem("10002");
 ...
-items[19] = new ConstructorItem("e348dc47-66f5-4165-bd3f-5ce7f3d1959a");
+items[19] = new ConstructorItem("10003");
 
 // Add or replace items in the Products section
 constructor.createOrReplaceItems(items, "Products"); // (limit of 1,000 items)
@@ -42,7 +42,7 @@ To update existing item(s), you will need to provide an array of `ConstructorIte
 You can pass in an "onMissing" enum to tell the system how to handle updating items that don't exist (possible values are "FAIL" | "IGNORE" | "CREATE").
 
 ```java
-ConstructorItem item = new ConstructorItem("50bff7c3-f0ec-4d59-9aab-290427f0c1d7");
+ConstructorItem item = new ConstructorItem("10001");
 item.setSuggestedScore((float) 1337.00);
 ConstructorItem[] items = { item };
 
@@ -56,11 +56,37 @@ To delete existing item(s), you will need to provide an array of `ConstructorIte
 
 ```java
 // Create an item
-ConstructorItem item = new ConstructorItem("50bff7c3-f0ec-4d59-9aab-290427f0c1d7");
+ConstructorItem item = new ConstructorItem("10001");
 ConstructorItem[] items = { item };
 
 // Delete items from the Products section
 constructor.deleteItems(items, "Products"); // (limit of 1,000 items)
+```
+
+# Retrieving Items
+
+Retrieving your items.
+
+```java
+ItemsRequest request = new ItemsRequest();
+ItemsResponse response = constructor.retrieveItems(request);
+```
+
+You can also specify certain id's to retrieve.
+
+```java
+ItemsRequest request = new ItemsRequest();
+request.setIds(Arrays.asList("10001", "10002"));
+ItemsResponse response = constructor.retrieveItems(request);
+```
+
+Retrieving your items as a JSON string.
+
+```java
+ItemsRequest request = new ItemsRequest();
+String response = constructor.retrieveItemsAsJson(request);
+JSONObject jsonObj = new JSONObject(response);
+JSONArray itemsArray = jsonObj.getJSONArray("items");
 ```
 
 # Replacing and Updating Catalogs

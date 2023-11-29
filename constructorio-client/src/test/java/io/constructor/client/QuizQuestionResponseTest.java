@@ -49,7 +49,6 @@ public class QuizQuestionResponseTest {
                 "next_question option attribute name exists",
                 "group_id",
                 response.getNextQuestion().getOptions().get(0).getAttribute().getName());
-        assertFalse("is_last_question exists", response.getIsLastQuestion());
         assertEquals(
                 "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
@@ -109,7 +108,6 @@ public class QuizQuestionResponseTest {
                 "next_question option images exists",
                 "https://example.com/small_image",
                 response.getNextQuestion().getOptions().get(0).getImages().getSecondaryUrl());
-        assertFalse("is_last_question exists", response.getIsLastQuestion());
         assertEquals(
                 "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
@@ -150,7 +148,6 @@ public class QuizQuestionResponseTest {
                 "next_question option images exists",
                 "https://example.com/image",
                 response.getNextQuestion().getImages().getPrimaryUrl());
-        assertFalse("is_last_question exists", response.getIsLastQuestion());
         assertEquals(
                 "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",
@@ -187,7 +184,6 @@ public class QuizQuestionResponseTest {
                 "next_question option images exists",
                 "https://example.com/image",
                 response.getNextQuestion().getImages().getPrimaryUrl());
-        assertFalse("is_last_question exists", response.getIsLastQuestion());
         assertEquals(
                 "quiz_version_id exists",
                 "11db5ac7-67e1-4000-9000-414d8425cab3",

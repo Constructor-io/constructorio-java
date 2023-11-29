@@ -8,9 +8,6 @@ public class QuizQuestionResponse {
     @SerializedName("next_question")
     private QuizQuestion nextQuestion;
 
-    @SerializedName("is_last_question")
-    private Boolean isLastQuestion;
-
     @SerializedName("quiz_version_id")
     private String quizVersionId;
 
@@ -25,13 +22,6 @@ public class QuizQuestionResponse {
      */
     public QuizQuestion getNextQuestion() {
         return nextQuestion;
-    }
-
-    /**
-     * @return the isLastQuestion
-     */
-    public Boolean getIsLastQuestion() {
-        return isLastQuestion;
     }
 
     /**
@@ -61,10 +51,6 @@ public class QuizQuestionResponse {
 
     public void setNextQuestion(QuizQuestion nextQuestion) {
         this.nextQuestion = nextQuestion;
-    }
-
-    public void setIsLastQuestion(Boolean isLastQuestion) {
-        this.isLastQuestion = isLastQuestion;
     }
 
     public void setQuizVersionId(String quizVersionId) {

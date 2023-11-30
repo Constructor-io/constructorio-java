@@ -47,7 +47,7 @@ item.setSuggestedScore((float) 1337.00);
 ConstructorItem[] items = { item };
 
 // Update item(s) from the Products section
-constructor.updateItems(items, "Products", false, null, "IGNORE");
+constructor.updateItems(items, "Products", false, null, CatalogRequest.OnMissing.IGNORE);
 ```
 
 # Deleting Items
@@ -72,7 +72,7 @@ ItemsRequest request = new ItemsRequest();
 ItemsResponse response = constructor.retrieveItems(request);
 ```
 
-You can also specify certain id's to retrieve.
+You can also specify certain ids to retrieve.
 
 ```java
 ItemsRequest request = new ItemsRequest();

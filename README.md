@@ -24,40 +24,69 @@ ConstructorIO constructor = new ConstructorIO("apitoken", "apikey", true, null);
 
 # Creating and Modifying Items
 
-A `ConstructorItem` contains all the information about a product or search suggestion. To add or update an individual item, you will need to provide a `ConstructorItem` and the relevant `Autocomplete Section` it belongs to.
-
-```java
-// Create an item
-ConstructorItem item = new ConstructorItem("ROTCURTSNOC Rainy Day Coat");
-item.setUrl("https://constructor.io/pdp/893092");
-item.setImageUrl("https://constructor.io/images/893092.jpg");
-item.setId("893092");
-item.setSuggestedScore(Integer.valueOf(5000));
-item.setDescription("Keep yourself dry and cozy on rainy days.");
-item.setKeywords(Arrays.asList("coat", "rain", "jacket"));
-
-// Add an item to the Products section
-constructor.addItem(item, "Products");
-
-// Add or update an item in the Products section
-constructor.addOrUpdateItem(item, "Products");
-```
-
-Similarly with adding or updating a batch of items, you will need to provide an array of `ConstructorItem`'s and their relevant `Autocomplete Section`.
+A `ConstructorItem` contains all the information about a product or search suggestion. To add or replace a batch of items, you will need to provide an array of `ConstructorItem`'s and their relevant `Autocomplete Section`.
 
 ```java
 // Create an array of items
 ConstructorItem[] items = new ConstructorItem[20];
-items[0] = new ConstructorItem("YBGID Plaid Shirt");
-items[1] = new ConstructorItem("YBGID Striped Shirt");
+items[0] = new ConstructorItem("10001");
+items[1] = new ConstructorItem("10002");
 ...
-items[19] = new ConstructorItem("YBGID Polka Dot Shirt");
+items[19] = new ConstructorItem("10003");
 
-// Add items to the Products section
-constructor.addItemBatch(items, "Products");
+// Add or replace items in the Products section
+constructor.createOrReplaceItems(items, "Products"); // (limit of 1,000 items)
+```
 
-// Add or update items in the Products section
-constructor.addOrUpdateItemBatch(items, "Products");
+To update existing item(s), you will need to provide an array of `ConstructorItem`(s) and their relevant `Autocomplete Section`.
+You can pass in an "onMissing" enum to tell the system how to handle updating items that don't exist (possible values are "FAIL" | "IGNORE" | "CREATE").
+
+```java
+ConstructorItem item = new ConstructorItem("10001");
+item.setSuggestedScore((float) 1337.00);
+ConstructorItem[] items = { item };
+
+// Update item(s) from the Products section
+constructor.updateItems(items, "Products", false, null, CatalogRequest.OnMissing.IGNORE);
+```
+
+# Deleting Items
+
+To delete existing item(s), you will need to provide an array of `ConstructorItem`(s) and their relevant `Autocomplete Section`.
+
+```java
+// Create an item
+ConstructorItem item = new ConstructorItem("10001");
+ConstructorItem[] items = { item };
+
+// Delete items from the Products section
+constructor.deleteItems(items, "Products"); // (limit of 1,000 items)
+```
+
+# Retrieving Items
+
+Retrieving your items.
+
+```java
+ItemsRequest request = new ItemsRequest();
+ItemsResponse response = constructor.retrieveItems(request);
+```
+
+You can also specify certain ids to retrieve.
+
+```java
+ItemsRequest request = new ItemsRequest();
+request.setIds(Arrays.asList("10001", "10002"));
+ItemsResponse response = constructor.retrieveItems(request);
+```
+
+Retrieving your items as a JSON string.
+
+```java
+ItemsRequest request = new ItemsRequest();
+String response = constructor.retrieveItemsAsJson(request);
+JSONObject jsonObj = new JSONObject(response);
+JSONArray itemsArray = jsonObj.getJSONArray("items");
 ```
 
 # Replacing and Updating Catalogs

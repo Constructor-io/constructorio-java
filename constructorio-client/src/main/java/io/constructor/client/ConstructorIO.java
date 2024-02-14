@@ -156,10 +156,16 @@ public class ConstructorIO {
      * @param host The host of the autocomplete service that you are using. It is recommended that
      *     you let this value be null, in which case the host defaults to the Constructor.io
      *     autocomplete service at ac.cnstrc.com.
-     * @param basePath The basePath to use with the host. It is recommended that you let this
-     *      value be null, in which there will not be any base path.
+     * @param basePath The basePath to use with the host. It is recommended that you let this value
+     *     be null, in which there will not be any base path.
      */
-    public ConstructorIO(String apiToken, String apiKey, String constructorToken, boolean isHTTPS, String host, String basePath) {
+    public ConstructorIO(
+            String apiToken,
+            String apiKey,
+            String constructorToken,
+            boolean isHTTPS,
+            String host,
+            String basePath) {
         this(apiToken, apiKey, isHTTPS, host, constructorToken);
         this.basePath = basePath;
     }

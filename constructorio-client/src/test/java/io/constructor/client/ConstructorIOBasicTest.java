@@ -1,5 +1,7 @@
 package io.constructor.client;
 
+import static org.junit.Assert.*;
+
 import java.util.Arrays;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -8,8 +10,6 @@ import okhttp3.Response;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static org.junit.Assert.*;
 
 public class ConstructorIOBasicTest {
 
@@ -46,7 +46,8 @@ public class ConstructorIOBasicTest {
     @Test
     public void newShouldSetBasePath() throws Exception {
         ConstructorIO constructor =
-                new ConstructorIO("boinkaToken", "doinkaKey", null, false, "com.cnstrc.ac", "/123/2345/");
+                new ConstructorIO(
+                        "boinkaToken", "doinkaKey", null, false, "com.cnstrc.ac", "/123/2345/");
         assertEquals("host should be set", constructor.basePath, "/123/2345/");
     }
 
@@ -148,10 +149,14 @@ public class ConstructorIOBasicTest {
 
     @Test
     public void makeUrlWithBasePathShouldReturnAUrl() throws Exception {
-        ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", null, true, "ac.cnstrc.com", "123/2345");
+        ConstructorIO constructor =
+                new ConstructorIO(
+                        "boinkaToken", "doinkaKey", null, true, "ac.cnstrc.com", "123/2345");
         HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"));
 
-        assertTrue("Url is correct", url.toString().startsWith("https://ac.cnstrc.com/123/2345/getitUuuurl?"));
+        assertTrue(
+                "Url is correct",
+                url.toString().startsWith("https://ac.cnstrc.com/123/2345/getitUuuurl?"));
         assertEquals("Path is correct", url.encodedPath(), "/123/2345/getitUuuurl");
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
         assertEquals("protocol is set", url.scheme(), "https");

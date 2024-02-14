@@ -48,7 +48,7 @@ public class ConstructorIOBasicTest {
         ConstructorIO constructor =
                 new ConstructorIO(
                         "boinkaToken", "doinkaKey", null, false, "com.cnstrc.ac", "/123/2345/");
-        assertEquals("host should be set", constructor.basePath, "/123/2345/");
+        assertEquals("basePath should be set", constructor.basePath, "/123/2345/");
     }
 
     @Test

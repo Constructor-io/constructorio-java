@@ -1,7 +1,6 @@
 package io.constructor.client;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import okhttp3.HttpUrl;
@@ -42,6 +41,14 @@ public class ConstructorIOBasicTest {
         ConstructorIO constructor =
                 new ConstructorIO("boinkaToken", "doinkaKey", false, "com.cnstrc.ac");
         assertEquals("host should be set", constructor.host, "com.cnstrc.ac");
+    }
+
+    @Test
+    public void newShouldSetBasePath() throws Exception {
+        ConstructorIO constructor =
+                new ConstructorIO(
+                        "boinkaToken", "doinkaKey", null, false, "com.cnstrc.ac", "/123/2345/");
+        assertEquals("basePath should be set", constructor.basePath, "/123/2345/");
     }
 
     @Test
@@ -134,6 +141,23 @@ public class ConstructorIOBasicTest {
     public void makeUrlShouldReturnAUrl() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"));
+        assertEquals("host is set", url.host(), "ac.cnstrc.com");
+        assertEquals("protocol is set", url.scheme(), "https");
+        assertEquals("version is set", url.queryParameter("c"), "ciojava-5.24.6");
+        assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
+    }
+
+    @Test
+    public void makeUrlWithBasePathShouldReturnAUrl() throws Exception {
+        ConstructorIO constructor =
+                new ConstructorIO(
+                        "boinkaToken", "doinkaKey", null, true, "ac.cnstrc.com", "123/2345");
+        HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"));
+
+        assertTrue(
+                "Url is correct",
+                url.toString().startsWith("https://ac.cnstrc.com/123/2345/getitUuuurl?"));
+        assertEquals("Path is correct", url.encodedPath(), "/123/2345/getitUuuurl");
         assertEquals("host is set", url.host(), "ac.cnstrc.com");
         assertEquals("protocol is set", url.scheme(), "https");
         assertEquals("version is set", url.queryParameter("c"), "ciojava-5.24.6");

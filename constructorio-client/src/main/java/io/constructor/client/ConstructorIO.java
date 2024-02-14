@@ -105,6 +105,7 @@ public class ConstructorIO {
     public String apiKey;
     public String protocol;
     public String host;
+    public String basePath;
     public Integer port;
     public String version;
     public String constructorToken;
@@ -140,6 +141,33 @@ public class ConstructorIO {
         this.constructorToken = constructorToken;
         this.credentials =
                 "Basic " + Base64.getEncoder().encodeToString((this.apiToken + ":").getBytes());
+    }
+
+    /**
+     * Creates a constructor.io Client.
+     *
+     * @param apiToken API Token, gotten from your <a
+     *     href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiKey API Key, used publicly in your in-site javascript client.
+     * @param constructorToken The token provided by Constructor to identify your company's traffic
+     *     if proxying requests for results
+     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use
+     *     HTTPS.
+     * @param host The host of the autocomplete service that you are using. It is recommended that
+     *     you let this value be null, in which case the host defaults to the Constructor.io
+     *     autocomplete service at ac.cnstrc.com.
+     * @param basePath The basePath to use with the host. It is recommended that you let this value
+     *     be null, in which there will not be any base path.
+     */
+    public ConstructorIO(
+            String apiToken,
+            String apiKey,
+            String constructorToken,
+            boolean isHTTPS,
+            String host,
+            String basePath) {
+        this(apiToken, apiKey, isHTTPS, host, constructorToken);
+        this.basePath = basePath;
     }
 
     /**
@@ -1759,6 +1787,10 @@ public class ConstructorIO {
                         .scheme(this.protocol)
                         .addQueryParameter("key", this.apiKey)
                         .host(this.host);
+
+        if (this.basePath != null && !this.basePath.isEmpty()) {
+            builder.addPathSegments(this.basePath);
+        }
 
         if (!paths.contains("catalog")
                 && !paths.contains("tasks")

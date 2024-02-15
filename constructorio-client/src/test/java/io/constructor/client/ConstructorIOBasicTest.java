@@ -165,6 +165,25 @@ public class ConstructorIOBasicTest {
     }
 
     @Test
+    public void makeUrlWithBasePathAndUserInfoShouldReturnAUrl() throws Exception {
+        ConstructorIO constructor =
+                new ConstructorIO(
+                        "boinkaToken", "doinkaKey", null, true, "ac.cnstrc.com", "123/2345");
+        UserInfo info = new UserInfo(2, "sideshow bob");
+        info.setUserId("bob-id-123");
+        HttpUrl url = constructor.makeUrl(Arrays.asList("getitUuuurl"), info);
+
+        assertTrue(
+                "Url is correct",
+                url.toString().startsWith("https://ac.cnstrc.com/123/2345/getitUuuurl?"));
+        assertEquals("Path is correct", url.encodedPath(), "/123/2345/getitUuuurl");
+        assertEquals("host is set", url.host(), "ac.cnstrc.com");
+        assertEquals("protocol is set", url.scheme(), "https");
+        assertEquals("version is set", url.queryParameter("c"), "ciojava-5.24.7");
+        assertEquals("apiKey is set", url.queryParameter("key"), "doinkaKey");
+    }
+
+    @Test
     public void makeUrlWithUserIdShouldReturnAUrl() throws Exception {
         ConstructorIO constructor = new ConstructorIO("boinkaToken", "doinkaKey", true, null);
         UserInfo info = new UserInfo(2, "sideshow bob");

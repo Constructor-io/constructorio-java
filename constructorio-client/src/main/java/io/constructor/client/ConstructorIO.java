@@ -1837,6 +1837,10 @@ public class ConstructorIO {
                         .addQueryParameter("key", this.apiKey)
                         .addQueryParameter("c", this.version);
 
+        if (this.basePath != null && !this.basePath.isEmpty()) {
+            builder.addPathSegments(this.basePath);
+        }
+
         if (info.getClientId() != null) {
             builder.addQueryParameter("i", info.getClientId());
         }

@@ -62,8 +62,7 @@ public class FilterFacetOption {
     /**
      * @return the range
      */
-
-     public Object[] getRange() {        
+    public Object[] getRange() {        
         return range;
     }
 
@@ -100,8 +99,7 @@ public class FilterFacetOption {
     }
 
     /**
-     * Validates a single range element.
-     * Each element should be string "inf" or "-inf" or a Number
+     * Validates a single range element. Each element should be string "inf" or "-inf" or a Number
      */
     private Object validateRangeElement(Object element) {
         if (element instanceof Number) {
@@ -112,7 +110,8 @@ public class FilterFacetOption {
                 return str;
             }
         }
-        throw new IllegalArgumentException("Each element of a range must be a Number or the string 'inf' or '-inf'");
+        throw new IllegalArgumentException(
+            "Each element of a range must be a Number or the string 'inf' or '-inf'"
+        );
     }
-
 }

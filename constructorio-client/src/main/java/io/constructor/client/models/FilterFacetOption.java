@@ -62,7 +62,7 @@ public class FilterFacetOption {
     /**
      * @return the range
      */
-    public Object[] getRange() {        
+    public Object[] getRange() {
         return range;
     }
 
@@ -111,7 +111,7 @@ public class FilterFacetOption {
             }
         }
         throw new IllegalArgumentException(
-            "Each element of a range must be a Number or the string 'inf' or '-inf'"
+          "Each element of a range must be a Number or the string 'inf' or '-inf'"
         );
     }
 }

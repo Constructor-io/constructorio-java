@@ -3,5 +3,6 @@
   "data": {},
   "display_name": "Jif",
   "status": "",
-  "value": "Jif"
+  "value": "Jif",
+  "range": ["-inf", 10]
 }

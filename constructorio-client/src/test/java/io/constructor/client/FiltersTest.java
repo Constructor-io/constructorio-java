@@ -79,6 +79,12 @@ public class FiltersTest {
         assertEquals(facet.getDisplayName(), "Jif");
         assertEquals(facet.getStatus(), "");
         assertEquals(facet.getValue(), "Jif");
+        assertEquals(facet.getRange()[0], "-inf");
+        assertEquals(facet.getRange()[1], 10.0);
+        Object[] range = {10, "inf"};
+        facet.setRange(range);
+        assertEquals(facet.getRange()[0], 10);
+        assertEquals(facet.getRange()[1], "inf");
     }
 
     @Test

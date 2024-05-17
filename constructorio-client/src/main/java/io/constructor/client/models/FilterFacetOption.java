@@ -21,6 +21,9 @@ public class FilterFacetOption {
     @SerializedName("value")
     private String value;
 
+    @SerializedName("range")
+    private Object[] range; // Array to hold two values of either Number or "inf", "-inf"
+
     /**
      * @return the counts
      */
@@ -56,6 +59,13 @@ public class FilterFacetOption {
         return value;
     }
 
+    /**
+     * @return the range
+     */
+    public Object[] getRange() {
+        return range;
+    }
+
     public void setCount(Integer count) {
         this.count = count;
     }
@@ -74,5 +84,33 @@ public class FilterFacetOption {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public void setRange(Object[] range) {
+        if (range != null && range.length != 2) {
+            throw new IllegalArgumentException("Range array must contain exactly two elements.");
+        }
+
+        Object[] validatedRange = new Object[2];
+        for (int i = 0; i < range.length; i++) {
+            validatedRange[i] = validateRangeElement(range[i]);
+        }
+        this.range = validatedRange;
+    }
+
+    /**
+     * Validates a single range element. Each element should be string "inf" or "-inf" or a Number
+     */
+    private Object validateRangeElement(Object element) {
+        if (element instanceof Number) {
+            return element;
+        } else if (element instanceof String) {
+            String str = (String) element;
+            if (str.equals("inf") || str.equals("-inf")) {
+                return str;
+            }
+        }
+        throw new IllegalArgumentException(
+                "Each element of a range must be a Number or the string 'inf' or '-inf'");
     }
 }

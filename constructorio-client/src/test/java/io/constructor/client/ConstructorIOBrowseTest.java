@@ -27,8 +27,7 @@ public class ConstructorIOBrowseTest {
     private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
     private String apiToken = System.getenv("TEST_API_TOKEN");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void BrowseShouldReturnAResult() throws Exception {
@@ -140,13 +139,14 @@ public class ConstructorIOBrowseTest {
         assertTrue(
                 "browse result variation [facets] exists",
                 response.getResponse()
-                        .getResults()
-                        .get(0)
-                        .getVariations()
-                        .get(0)
-                        .getData()
-                        .getFacets()
-                        .size() > 0);
+                                .getResults()
+                                .get(0)
+                                .getVariations()
+                                .get(0)
+                                .getData()
+                                .getFacets()
+                                .size()
+                        > 0);
         assertEquals(
                 "browse result variation [value] exists",
                 response.getResponse().getResults().get(0).getVariations().get(0).getValue(),
@@ -325,16 +325,17 @@ public class ConstructorIOBrowseTest {
         BrowseRequest request = new BrowseRequest("Brand", "XYZ");
         request.getHiddenFacets().add("Brand");
         BrowseResponse response = constructor.browse(request, userInfo);
-        FilterFacet brandFacet = response.getResponse().getFacets().stream()
-                .filter(
-                        new Predicate<FilterFacet>() {
-                            @Override
-                            public boolean test(FilterFacet f) {
-                                return f.getName().equals("Brand");
-                            }
-                        })
-                .findAny()
-                .orElse(null);
+        FilterFacet brandFacet =
+                response.getResponse().getFacets().stream()
+                        .filter(
+                                new Predicate<FilterFacet>() {
+                                    @Override
+                                    public boolean test(FilterFacet f) {
+                                        return f.getName().equals("Brand");
+                                    }
+                                })
+                        .findAny()
+                        .orElse(null);
 
         assertEquals("browse results exist", response.getResponse().getResults().size(), 4);
         assertNotNull("browse facet [Brand] exists", brandFacet);
@@ -372,8 +373,8 @@ public class ConstructorIOBrowseTest {
 
         String json = new Gson().toJson(response.getRequest().get("variations_map"));
         VariationsMap variationsMapFromResponse = new Gson().fromJson(json, VariationsMap.class);
-        ArrayList<Object> varMapObject = (ArrayList<Object>) response.getResponse().getResults().get(0)
-                .getVariationsMap();
+        ArrayList<Object> varMapObject =
+                (ArrayList<Object>) response.getResponse().getResults().get(0).getVariationsMap();
 
         assertNotNull("variations map exists", response.getRequest().get("variations_map"));
         assertEquals(
@@ -410,8 +411,9 @@ public class ConstructorIOBrowseTest {
 
         String json = new Gson().toJson(response.getRequest().get("variations_map"));
         VariationsMap variationsMapFromResponse = new Gson().fromJson(json, VariationsMap.class);
-        LinkedTreeMap<String, Object> varMapObject = (LinkedTreeMap<String, Object>) response.getResponse()
-                .getResults().get(0).getVariationsMap();
+        LinkedTreeMap<String, Object> varMapObject =
+                (LinkedTreeMap<String, Object>)
+                        response.getResponse().getResults().get(0).getVariationsMap();
 
         assertNotNull("variations map exists", response.getRequest().get("variations_map"));
         assertEquals(
@@ -434,12 +436,13 @@ public class ConstructorIOBrowseTest {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Brand", "XYZ");
-        String preFilterExpression = "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"electronics-group-id\"},{\"name\":\"Price\",\"range\":[\"-inf\",200.0]}]},{\"and\":[{\"name\":\"Type\",\"value\":\"Laptop\"},{\"not\":{\"name\":\"Price\",\"range\":[800.0,\"inf\"]}}]}]}";
+        String preFilterExpression =
+                "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"electronics-group-id\"},{\"name\":\"Price\",\"range\":[\"-inf\",200.0]}]},{\"and\":[{\"name\":\"Type\",\"value\":\"Laptop\"},{\"not\":{\"name\":\"Price\",\"range\":[800.0,\"inf\"]}}]}]}";
         request.setPreFilterExpression(preFilterExpression);
 
         BrowseResponse response = constructor.browse(request, userInfo);
-        String preFilterExpressionFromRequestJsonString = new Gson()
-                .toJson(response.getRequest().get("pre_filter_expression"));
+        String preFilterExpressionFromRequestJsonString =
+                new Gson().toJson(response.getRequest().get("pre_filter_expression"));
 
         assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
         assertNotNull(
@@ -585,10 +588,11 @@ public class ConstructorIOBrowseTest {
         assertTrue(
                 "browse result refined content data [arbitraryDataObject] exists",
                 response.getResponse()
-                        .getRefinedContent()
-                        .get(0)
-                        .getData()
-                        .get("arbitraryDataObject") != null);
+                                .getRefinedContent()
+                                .get(0)
+                                .getData()
+                                .get("arbitraryDataObject")
+                        != null);
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
     }
@@ -613,7 +617,10 @@ public class ConstructorIOBrowseTest {
 
         List<ResultGroupPathListItem> groupPathList = group.getPathList();
         assertTrue("pathList exists", groupPathList.size() > 0);
-        assertEquals("first pathListItem displayName matches", groupPathList.get(0).getDisplayName(), "All");
+        assertEquals(
+                "first pathListItem displayName matches",
+                groupPathList.get(0).getDisplayName(),
+                "All");
         assertEquals("first pathListItem id matches", groupPathList.get(0).getId(), "All");
     }
 }

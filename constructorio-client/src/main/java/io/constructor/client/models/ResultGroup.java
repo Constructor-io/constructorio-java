@@ -1,8 +1,7 @@
 package io.constructor.client.models;
 
-import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 /** Constructor.io Item Group ... uses Gson/Reflection to load data in */
 public class ResultGroup {

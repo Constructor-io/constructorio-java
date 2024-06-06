@@ -416,6 +416,7 @@ mvn javadoc:javadoc     # generate docs
 # Environment Variables
 
 ```bash
-TEST_API_KEY            # autocomplete_key for the tests
+TEST_REQUEST_API_KEY    # autocomplete_key for the Client Library Integration Request (CRABS) Tests
+TEST_CATALOG_API_KEY    # autocomplete_key for the Client Library Integration Tests
 TEST_API_TOKEN          # API token for the tests
 ```

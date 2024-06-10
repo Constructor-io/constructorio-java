@@ -1,6 +1,7 @@
 package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 /** Constructor.io Item Group ... uses Gson/Reflection to load data in */
 public class ResultGroup {
@@ -13,6 +14,9 @@ public class ResultGroup {
 
     @SerializedName("path")
     private String path;
+
+    @SerializedName("path_list")
+    private List<ResultGroupPathListItem> pathList;
 
     /**
      * @return the displayName
@@ -35,6 +39,13 @@ public class ResultGroup {
         return path;
     }
 
+    /**
+     * @return the pathList
+     */
+    public List<ResultGroupPathListItem> getPathList() {
+        return pathList;
+    }
+
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
@@ -45,5 +56,9 @@ public class ResultGroup {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public void setPathList(List<ResultGroupPathListItem> pathList) {
+        this.pathList = pathList;
     }
 }

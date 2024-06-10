@@ -9,6 +9,9 @@ import com.google.gson.internal.LinkedTreeMap;
 import io.constructor.client.models.BrowseResponse;
 import io.constructor.client.models.FilterFacet;
 import io.constructor.client.models.FilterGroup;
+import io.constructor.client.models.Result;
+import io.constructor.client.models.ResultGroup;
+import io.constructor.client.models.ResultGroupPathListItem;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -592,5 +595,32 @@ public class ConstructorIOBrowseTest {
                         != null);
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
+    }
+
+    @Test
+    public void BrowseShouldReturnItemLevelGroupsObject() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("group_id", "BrandA");
+        BrowseResponse response = constructor.browse(request, userInfo);
+
+        List<Result> resultsList = response.getResponse().getResults();
+        assertTrue("search results exist", resultsList.size() > 0);
+
+        List<ResultGroup> groupsList = resultsList.get(0).getData().getGroups();
+        assertTrue("groups at the item level exist", groupsList.size() > 0);
+
+        ResultGroup group = groupsList.get(0);
+        assertEquals("group displayName matches", group.getDisplayName(), "BrandA");
+        assertEquals("group groupId matches", group.getGroupId(), "BrandA");
+        assertEquals("group path matches", group.getPath(), "/All/Brands");
+
+        List<ResultGroupPathListItem> groupPathList = group.getPathList();
+        assertTrue("pathList exists", groupPathList.size() > 0);
+        assertEquals(
+                "first pathListItem displayName matches",
+                groupPathList.get(0).getDisplayName(),
+                "All");
+        assertEquals("first pathListItem id matches", groupPathList.get(0).getId(), "All");
     }
 }

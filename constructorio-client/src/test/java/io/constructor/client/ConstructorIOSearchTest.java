@@ -9,6 +9,9 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import io.constructor.client.models.FilterFacet;
 import io.constructor.client.models.FilterGroup;
+import io.constructor.client.models.Result;
+import io.constructor.client.models.ResultGroup;
+import io.constructor.client.models.ResultGroupPathListItem;
 import io.constructor.client.models.SearchResponse;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -586,5 +589,32 @@ public class ConstructorIOSearchTest {
         assertTrue("search result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertEquals("request query exists", response.getRequest().get("term"), "item");
+    }
+
+    @Test
+    public void SearchShouldReturnItemLevelGroupsObject() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        SearchRequest request = new SearchRequest("item");
+        SearchResponse response = constructor.search(request, userInfo);
+
+        List<Result> resultsList = response.getResponse().getResults();
+        assertTrue("search results exist", resultsList.size() > 0);
+
+        List<ResultGroup> groupsList = resultsList.get(0).getData().getGroups();
+        assertTrue("groups at the item level exist", groupsList.size() > 0);
+
+        ResultGroup group = groupsList.get(0);
+        assertEquals("group displayName matches", group.getDisplayName(), "BrandXY");
+        assertEquals("group groupId matches", group.getGroupId(), "BrandXY");
+        assertEquals("group path matches", group.getPath(), "/All/Brands/BrandX");
+
+        List<ResultGroupPathListItem> groupPathList = group.getPathList();
+        assertTrue("pathList exists", groupPathList.size() > 0);
+        assertEquals(
+                "first pathListItem displayName matches",
+                groupPathList.get(0).getDisplayName(),
+                "All");
+        assertEquals("first pathListItem id matches", groupPathList.get(0).getId(), "All");
     }
 }

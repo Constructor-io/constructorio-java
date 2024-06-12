@@ -409,6 +409,8 @@ Download the repository and run the following commands from `./constructorio-cli
 mvn clean               # clean target directory
 mvn install             # installs dependencies
 mvn test                # run tests
+mvn spotless:check      # check lint
+mvn spotless:apply      # run lint
 mvn jacoco:report       # writes code coverage reports to ./target/site/jacoco
 mvn javadoc:javadoc     # generate docs
 ```

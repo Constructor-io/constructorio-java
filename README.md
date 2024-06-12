@@ -409,6 +409,8 @@ Download the repository and run the following commands from `./constructorio-cli
 mvn clean               # clean target directory
 mvn install             # installs dependencies
 mvn test                # run tests
+mvn spotless:check      # check lint
+mvn spotless:apply      # run lint
 mvn jacoco:report       # writes code coverage reports to ./target/site/jacoco
 mvn javadoc:javadoc     # generate docs
 ```
@@ -416,6 +418,7 @@ mvn javadoc:javadoc     # generate docs
 # Environment Variables
 
 ```bash
-TEST_API_KEY            # autocomplete_key for the tests
+TEST_REQUEST_API_KEY    # autocomplete_key for the Client Library Integration Request (CRABS) Tests
+TEST_CATALOG_API_KEY    # autocomplete_key for the Client Library Integration Catalog Tests
 TEST_API_TOKEN          # API token for the tests
 ```

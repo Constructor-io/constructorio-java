@@ -1,0 +1,11 @@
+{
+    "name": "price",
+    "type": "range",
+    "range_type": "static",
+    "range_format": "boundaries",
+    "range_inclusive": "above",
+    "range_limits": [
+        5,
+        10
+    ]
+}

@@ -2756,4 +2756,34 @@ public class ConstructorIO {
             throw new ConstructorException(exception);
         }
     }
+
+    /**
+     * Create a facet configuration
+     *
+     * @param facetConfigurationRequest the facet configuration request
+     * @return returns the created facet
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String createFacetConfiguration(
+            FacetConfigurationRequest facetConfigurationRequest)
+            throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "facets"));
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("section", facetConfigurationRequest.getSection())
+                            .build();
+
+            String params = new Gson().toJson(facetConfigurationRequest.geFacetConfiguration());
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).post(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
 }

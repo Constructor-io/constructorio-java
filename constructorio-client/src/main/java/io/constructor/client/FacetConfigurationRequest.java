@@ -8,10 +8,10 @@ public class FacetConfigurationRequest {
     private String section;
 
     /**
-     * Creates a catalog request
+     * Creates a facet configuration request
      *
      * @param facetConfiguration the facet configuration to be created/updated
-     * @param section            the autocomplete section to upload the files to
+     * @param section the autocomplete section to upload the files to
      */
     public FacetConfigurationRequest(FacetConfiguration facetConfiguration, String section) {
         if (facetConfiguration == null) {
@@ -48,7 +48,6 @@ public class FacetConfigurationRequest {
 
     /**
      * @return the section
-     * 
      */
     public String getSection() {
         return section;

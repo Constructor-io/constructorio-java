@@ -2,8 +2,8 @@ package io.constructor.client;
 
 import static org.junit.Assert.*;
 
+import com.google.gson.Gson;
 import io.constructor.client.models.FacetConfiguration;
-
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
@@ -11,15 +11,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import com.google.gson.Gson;
-
 public class ConstructorIOFacetConfigurationTest {
 
     private String token = System.getenv("TEST_API_TOKEN");
     private String apiKey = System.getenv("TEST_CATALOG_API_KEY");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void init() throws Exception {
@@ -37,10 +34,12 @@ public class ConstructorIOFacetConfigurationTest {
     public void CreateFacetConfigurationShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         String string = Utils.getTestResource("facet.configuration.json");
-        FacetConfiguration facetConfiguration = new Gson().fromJson(string, FacetConfiguration.class);
+        FacetConfiguration facetConfiguration =
+                new Gson().fromJson(string, FacetConfiguration.class);
 
         facetConfiguration.setName("testFacet");
-        FacetConfigurationRequest request = new FacetConfigurationRequest(facetConfiguration, "Products");
+        FacetConfigurationRequest request =
+                new FacetConfigurationRequest(facetConfiguration, "Products");
 
         String response = constructor.createFacetConfiguration(request);
         JSONObject jsonObj = new JSONObject(response);
@@ -57,7 +56,6 @@ public class ConstructorIOFacetConfigurationTest {
         assertEquals(jsonObj.get("protected"), loadedJsonObj.get("protected"));
         assertEquals(jsonObj.get("countable"), loadedJsonObj.get("countable"));
         assertEquals(jsonObj.get("options_limit"), loadedJsonObj.get("options_limit"));
-
     }
 
     @Test(expected = ConstructorException.class)
@@ -81,8 +79,7 @@ public class ConstructorIOFacetConfigurationTest {
     public void testCreateFacetConfigurationWithNullConfiguration() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
-        FacetConfigurationRequest request = new FacetConfigurationRequest(null,
-                "Products");
+        FacetConfigurationRequest request = new FacetConfigurationRequest(null, "Products");
 
         constructor.createFacetConfiguration(request);
     }
@@ -94,8 +91,8 @@ public class ConstructorIOFacetConfigurationTest {
         String string = Utils.getTestResource("facet.configuration.json");
         FacetConfiguration config = new Gson().fromJson(string, FacetConfiguration.class);
 
-        FacetConfigurationRequest request = new FacetConfigurationRequest(config,
-                "Search Suggestions");
+        FacetConfigurationRequest request =
+                new FacetConfigurationRequest(config, "Search Suggestions");
 
         String response = constructor.createFacetConfiguration(request);
         JSONObject jsonObj = new JSONObject(response);

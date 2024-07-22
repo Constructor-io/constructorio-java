@@ -1,13 +1,10 @@
 package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 import java.util.Map;
 
-/**
- * Constructor.io Facet Configuration ... uses Gson/Reflection to load data in
- */
+/** Constructor.io Facet Configuration ... uses Gson/Reflection to load data in */
 public class FacetConfiguration {
     public enum MatchType {
         all,

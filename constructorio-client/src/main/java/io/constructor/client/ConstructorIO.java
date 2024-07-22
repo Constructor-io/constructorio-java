@@ -2764,15 +2764,14 @@ public class ConstructorIO {
      * @return returns the created facet
      * @throws ConstructorException if the request is invalid.
      */
-    public String createFacetConfiguration(
-            FacetConfigurationRequest facetConfigurationRequest)
+    public String createFacetConfiguration(FacetConfigurationRequest facetConfigurationRequest)
             throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v1", "facets"));
             url =
-                url.newBuilder()
-                    .addQueryParameter("section", facetConfigurationRequest.getSection())
-                    .build();
+                    url.newBuilder()
+                            .addQueryParameter("section", facetConfigurationRequest.getSection())
+                            .build();
 
             String params = new Gson().toJson(facetConfigurationRequest.geFacetConfiguration());
             RequestBody body =

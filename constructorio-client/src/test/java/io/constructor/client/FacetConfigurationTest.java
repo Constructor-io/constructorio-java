@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import com.google.gson.Gson;
 import io.constructor.client.models.FacetConfiguration;
+import io.constructor.client.models.FacetConfiguration.MatchType;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -21,7 +23,7 @@ public class FacetConfigurationTest {
         assertEquals(config.getType(), "multiple");
         assertEquals(config.getSortOrder(), "relevance");
         assertEquals(config.getSortDescending(), true);
-        assertEquals(config.getMatchType(), "any");
+        assertEquals(config.getMatchType(), MatchType.any);
         assertEquals(config.getPosition(), 2);
         assertEquals(config.getHidden(), false);
         assertEquals(config.getIsProtected(), false);

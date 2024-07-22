@@ -9,9 +9,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-
 public class FacetConfigurationTest {
-    @Rule public ExpectedException thrown = ExpectedException.none();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void multipleFacet() throws Exception {
@@ -43,6 +43,6 @@ public class FacetConfigurationTest {
         assertEquals(config.getRangeFormat(), "boundaries");
         assertEquals(config.getRangeInclusive(), "above");
         assertEquals(config.getRangeLimits().size(), 2);
-        
+
     }
 }

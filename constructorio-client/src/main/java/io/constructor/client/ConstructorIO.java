@@ -2770,9 +2770,9 @@ public class ConstructorIO {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v1", "facets"));
             url =
-                    url.newBuilder()
-                            .addQueryParameter("section", facetConfigurationRequest.getSection())
-                            .build();
+                url.newBuilder()
+                    .addQueryParameter("section", facetConfigurationRequest.getSection())
+                    .build();
 
             String params = new Gson().toJson(facetConfigurationRequest.geFacetConfiguration());
             RequestBody body =

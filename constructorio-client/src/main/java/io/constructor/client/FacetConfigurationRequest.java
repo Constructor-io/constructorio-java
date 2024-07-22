@@ -11,7 +11,7 @@ public class FacetConfigurationRequest {
      * Creates a catalog request
      *
      * @param facetConfiguration the facet configuration to be created/updated
-     * @param section the autocomplete section to upload the files to
+     * @param section            the autocomplete section to upload the files to
      */
     public FacetConfigurationRequest(FacetConfiguration facetConfiguration, String section) {
         if (facetConfiguration == null) {

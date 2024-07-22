@@ -3,7 +3,10 @@ package io.constructor.client.models;
 import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
-/** Constructor.io Facet Option Configuration ... uses Gson/Reflection to load data in */
+/**
+ * Constructor.io Facet Option Configuration ... uses Gson/Reflection to load
+ * data in
+ */
 public class FacetOptionConfiguration {
 
     @SerializedName("value")
@@ -91,6 +94,7 @@ public class FacetOptionConfiguration {
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
+
     public void setPosition(int position) {
         this.position = position;
     }

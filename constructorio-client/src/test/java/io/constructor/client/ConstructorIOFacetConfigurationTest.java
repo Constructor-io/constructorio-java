@@ -72,36 +72,34 @@ public class ConstructorIOFacetConfigurationTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         FacetConfiguration config = new FacetConfiguration();
         config.setName("emptySection");
-        FacetConfigurationRequest request = new FacetConfigurationRequest(config,"");
+        FacetConfigurationRequest request = new FacetConfigurationRequest(config, "");
 
         constructor.createFacetConfiguration(request);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateFacetConfigurationWithNullConfiguration() throws
-    Exception {
+    public void testCreateFacetConfigurationWithNullConfiguration() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
-    FacetConfigurationRequest request = new FacetConfigurationRequest(null,
-    "Products");
+        FacetConfigurationRequest request = new FacetConfigurationRequest(null,
+                "Products");
 
-    constructor.createFacetConfiguration(request);
+        constructor.createFacetConfiguration(request);
     }
 
     @Test
-    public void testCreateFacetConfigurationWithDifferentSection() throws
-    Exception {
+    public void testCreateFacetConfigurationWithDifferentSection() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
         String string = Utils.getTestResource("facet.configuration.json");
         FacetConfiguration config = new Gson().fromJson(string, FacetConfiguration.class);
 
-    FacetConfigurationRequest request = new FacetConfigurationRequest(config,
-    "Search Suggestions");
+        FacetConfigurationRequest request = new FacetConfigurationRequest(config,
+                "Search Suggestions");
 
-    String response = constructor.createFacetConfiguration(request);
-    JSONObject jsonObj = new JSONObject(response);
+        String response = constructor.createFacetConfiguration(request);
+        JSONObject jsonObj = new JSONObject(response);
 
-    assertEquals("brand", jsonObj.getString("name"));
+        assertEquals("brand", jsonObj.getString("name"));
     }
 }

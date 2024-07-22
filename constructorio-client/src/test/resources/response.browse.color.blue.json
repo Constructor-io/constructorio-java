@@ -1307,7 +1307,9 @@
         "value": "Coat Aspesi blue"
       }],
       "labels": {
-        "is_sponsored": true
+        "is_sponsored": true,
+        "foo": "bar",
+        "baz": 1
       }
     }, {
       "data": {

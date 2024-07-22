@@ -49,7 +49,13 @@ public class BrowseResponseTest {
                 562);
         assertTrue(
                 "browse result labels exists",
-                response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+                (Boolean)response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+        assertEquals(
+                "browse result labels exists",
+                (String)response.getResponse().getResults().get(0).getLabels().get("foo"), "bar");
+        assertEquals(
+                "browse result labels exists",
+                (Double)response.getResponse().getResults().get(0).getLabels().get("baz"), (Double)1.0);
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertEquals(

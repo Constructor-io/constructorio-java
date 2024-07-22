@@ -146,7 +146,7 @@ public class SearchResponseTest {
                 261);
         assertTrue(
                 "search result labels exist",
-                response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+                (Boolean)response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
         assertTrue("search result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertEquals("request query exists", response.getRequest().get("term"), "jacket");

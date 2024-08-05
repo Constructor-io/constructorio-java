@@ -93,6 +93,7 @@ public class ConstructorIO {
         client = builder.build();
         clientWithRetry = builder.retryOnConnectionFailure(true).build();
     }
+
     /**
      * @return the HTTP client used by all instances
      */

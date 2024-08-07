@@ -33,7 +33,8 @@ public class RecommendationsResponseTest {
         assertTrue("request exists", response.getRequest() != null);
         assertTrue(
                 "recommendation result labels exist",
-                (Boolean)response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+                (Boolean)
+                        response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
         assertEquals(
                 "request filter value exists", response.getRequest().get("item_id"), "109350015");
         assertEquals(

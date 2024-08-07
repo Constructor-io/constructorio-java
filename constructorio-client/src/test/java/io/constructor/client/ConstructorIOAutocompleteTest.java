@@ -137,7 +137,12 @@ public class ConstructorIOAutocompleteTest {
                 5);
         assertTrue(
                 "autocomplete result labels exists",
-                (Boolean)response.getSections().get("Products").get(0).getLabels().get("is_sponsored"));
+                (Boolean)
+                        response.getSections()
+                                .get("Products")
+                                .get(0)
+                                .getLabels()
+                                .get("is_sponsored"));
     }
 
     @Test

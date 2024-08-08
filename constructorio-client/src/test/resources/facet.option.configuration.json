@@ -1,0 +1,9 @@
+{
+    "value": "jif",
+    "replace_value_alias": true,
+    "display_name": "Jif",
+    "position": 1,
+    "data": {
+        "foo": "bar"
+    }
+}

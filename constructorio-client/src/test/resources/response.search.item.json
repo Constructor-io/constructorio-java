@@ -48,7 +48,10 @@
       "value": "Item5",
       "is_slotted": true,
       "labels": {
-        "is_sponsored": true
+        "is_sponsored": true,
+        "__cnstrc_new_arrivals": { "display_name": "New Arrival" },
+        "__cnstrc_best_sellers": { "display_name": "Bestseller" },
+        "__cnstrc_trending_now": { "display_name": "Trending Now" }
       }
     }, {
       "matched_terms": ["item"],

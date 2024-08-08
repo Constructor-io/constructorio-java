@@ -3,6 +3,8 @@ package io.constructor.client;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Map;
+
 import io.constructor.client.models.SearchResponse;
 import org.junit.Rule;
 import org.junit.Test;
@@ -146,7 +148,8 @@ public class SearchResponseTest {
                 261);
         assertTrue(
                 "search result labels exist",
-                (Boolean)response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+                (Boolean)
+                        response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
         assertTrue("search result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertEquals("request query exists", response.getRequest().get("term"), "jacket");
@@ -235,5 +238,23 @@ public class SearchResponseTest {
         assertTrue("search result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertEquals("request query exists", response.getRequest().get("term"), "item");
+    }
+
+    @Test
+    public void createSearchResponseShouldReturnAResultWithLabels() throws Exception {
+        String string = Utils.getTestResource("response.search.item.json");
+        SearchResponse response = ConstructorIO.createSearchResponse(string);
+        assertEquals(
+                "search result [labels] exists",
+                response.getResponse().getResults().get(0).getLabels().size(),
+                4);
+        assertEquals(
+                "is_sponsored label exists",
+                response.getResponse().getResults().get(0).getLabels().get("is_sponsored"),
+                true);
+        assertEquals(
+                "__cnstrc_new_arrivals label exists and it's a nested object",
+                ((Map<String, Object>)response.getResponse().getResults().get(0).getLabels().get("__cnstrc_new_arrivals")).get("display_name"),
+                "New Arrival");
     }
 }

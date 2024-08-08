@@ -3,7 +3,10 @@ package io.constructor.client;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Map;
+
 import io.constructor.client.models.BrowseResponse;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -260,5 +263,24 @@ public class BrowseResponseTest {
                 "Content 1 mobile alt text");
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
+    }
+
+
+    @Test
+    public void createBrowseResponseShouldReturnAResultWithLabels() throws Exception {
+        String string = Utils.getTestResource("response.browse.color.blue.json");
+        BrowseResponse response = ConstructorIO.createBrowseResponse(string);
+        assertEquals(
+                "search result [labels] exists",
+                response.getResponse().getResults().get(0).getLabels().size(),
+                6);
+        assertEquals(
+                "is_sponsored label exists",
+                response.getResponse().getResults().get(0).getLabels().get("is_sponsored"),
+                true);
+        assertEquals(
+                "__cnstrc_new_arrivals label exists and it's a nested object",
+                ((Map<String, Object>)response.getResponse().getResults().get(0).getLabels().get("__cnstrc_new_arrivals")).get("display_name"),
+                "New Arrival");
     }
 }

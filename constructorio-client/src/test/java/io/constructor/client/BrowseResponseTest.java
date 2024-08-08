@@ -3,10 +3,8 @@ package io.constructor.client;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Map;
-
 import io.constructor.client.models.BrowseResponse;
-
+import java.util.Map;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -265,7 +263,6 @@ public class BrowseResponseTest {
         assertTrue("request exists", response.getRequest() != null);
     }
 
-
     @Test
     public void createBrowseResponseShouldReturnAResultWithLabels() throws Exception {
         String string = Utils.getTestResource("response.browse.color.blue.json");
@@ -280,7 +277,13 @@ public class BrowseResponseTest {
                 true);
         assertEquals(
                 "__cnstrc_new_arrivals label exists and it's a nested object",
-                ((Map<String, Object>)response.getResponse().getResults().get(0).getLabels().get("__cnstrc_new_arrivals")).get("display_name"),
+                ((Map<String, Object>)
+                                response.getResponse()
+                                        .getResults()
+                                        .get(0)
+                                        .getLabels()
+                                        .get("__cnstrc_new_arrivals"))
+                        .get("display_name"),
                 "New Arrival");
     }
 }

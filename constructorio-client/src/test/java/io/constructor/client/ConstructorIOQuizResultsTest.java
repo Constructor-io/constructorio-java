@@ -16,7 +16,6 @@ public class ConstructorIOQuizResultsTest {
 
     private final String quizKey = System.getenv("TEST_REQUEST_API_KEY");
     private final String quizId = "test-quiz";
-    private final String quizVersionId = "e03210db-0cc6-459c-8f17-bf014c4f554d";
     private final String quizSessionId = "1234";
     private static List<List<String>> validAnswers = new ArrayList<>();
     private static List<List<String>> finalAnswers = new ArrayList<>();
@@ -86,6 +85,12 @@ public class ConstructorIOQuizResultsTest {
     @Test
     public void QuizResultsShouldReturnResultWithVersionIdAndSessionId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest initialRequest = new QuizRequest(quizId);
+        initialRequest.setAnswers(validAnswers);
+        QuizResultsResponse initialResponse = constructor.quizResults(initialRequest, null);
+
+        String quizVersionId = initialResponse.getQuizVersionId();
+
         QuizRequest request = new QuizRequest(quizId);
         request.setQuizVersionId(quizVersionId);
         request.setQuizSessionId(quizSessionId);
@@ -103,7 +108,6 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsShouldReturnAResultWithResultSources() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
-        request.setQuizVersionId(quizVersionId);
         request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
@@ -121,6 +125,12 @@ public class ConstructorIOQuizResultsTest {
     @Test
     public void QuizResultsAsJsonShouldReturnResultWithVersionIdAndSessionid() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
+        QuizRequest initialRequest = new QuizRequest(quizId);
+        initialRequest.setAnswers(validAnswers);
+        QuizResultsResponse initialResponse = constructor.quizResults(initialRequest, null);
+
+        String quizVersionId = initialResponse.getQuizVersionId();
+
         QuizRequest request = new QuizRequest(quizId);
         request.setQuizVersionId(quizVersionId);
         request.setQuizSessionId(quizSessionId);

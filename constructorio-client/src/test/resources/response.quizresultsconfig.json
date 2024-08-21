@@ -1,0 +1,22 @@
+{
+  "results_config": {
+      "desktop": {
+          "title": {
+              "text": "Here are your results!!",
+              "is_active": true
+          },
+          "description": {
+              "text": "Based on your answers, these are our recommendations.",
+              "is_active": true
+          },
+          "response_summary": {
+              "text": "Based on your answers of @matched_options we recommend these items",
+              "is_active": true,
+              "items_separator": ", ",
+              "last_separator": ", and "
+          }
+      }
+  },
+  "quiz_version_id": "8298dc03-e7eb-4ce8-8c6f-6315c900b5e8",
+  "quiz_id": "test-quiz"
+}

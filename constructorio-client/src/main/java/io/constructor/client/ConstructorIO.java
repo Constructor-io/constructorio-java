@@ -2105,6 +2105,17 @@ public class ConstructorIO {
         return new Gson().fromJson(transformed, QuizResultsResponse.class);
     }
 
+     /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz results configuration
+     * response. Using JSON objects to achieve this is considerably less error prone than attempting
+     * to do it in a Gson Type Adapter.
+     */
+    protected static QuizResultsConfigResponse createQuizResultsConfigResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, QuizResultsConfigResponse.class);
+    }
+
     /**
      * Transforms a JSON string to a new JSON string for easy Gson parsing into an Items response.
      * Using JSON objects to acheive this is considerably less error prone than attempting to do it
@@ -2633,15 +2644,15 @@ public class ConstructorIO {
      * Creates a Quiz OkHttp request
      *
      * @param req the Quiz request
-     * @param type the type of quiz request (next/results)
+     * @param type the type of quiz request (next/results/results_config)
      * @return a Task OkHttp request
      * @throws ConstructorException
      */
     protected Request createQuizRequest(QuizRequest req, String type, UserInfo userInfo)
             throws ConstructorException {
         try {
-            if (!type.equals("next") && !type.equals("results"))
-                throw new IllegalArgumentException("type must be either 'next' or 'results'");
+            if (!type.equals("next") && !type.equals("results") && !type.equals("results_config") )
+                throw new IllegalArgumentException("type must be either 'next' or 'results' or 'results_config'");
 
             List<String> paths = Arrays.asList("v1", "quizzes", req.getQuizId(), type);
             HttpUrl url = this.makeUrl(paths);
@@ -2751,6 +2762,43 @@ public class ConstructorIO {
             throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "results", userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the quiz service for the quiz results page configurations
+     *
+     * @param req the Quiz request
+     * @return a Quiz Results Response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public QuizResultsConfigResponse quizResultsConfig(QuizRequest req, UserInfo userInfo)
+            throws ConstructorException {
+        try {
+            Request request = createQuizRequest(req, "results_config", userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            String json = getResponseBody(response);
+            return createQuizResultsConfigResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the quiz service for the quiz results configuration
+     *
+     * @param req the Quiz request
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String quizResultsConfigAsJson(QuizRequest req, UserInfo userInfo)
+            throws ConstructorException {
+        try {
+            Request request = createQuizRequest(req, "results_config", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
         } catch (Exception exception) {

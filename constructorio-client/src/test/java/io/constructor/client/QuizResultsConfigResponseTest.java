@@ -22,6 +22,5 @@ public class QuizResultsConfigResponseTest {
                 response.getQuizVersionId());
         assertEquals("quiz_id exists", "test-quiz", response.getQuizId());
         assertNotNull("results config exists", response.getResultsConfig());
-
     }
 }

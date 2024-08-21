@@ -15,11 +15,9 @@ public class ConstructorIOQuizResultsConfigTest {
     private final String quizId = "test-quiz";
 
     @BeforeClass
-    public static void init() {
-    }
+    public static void init() {}
 
     @Rule public ExpectedException thrown = ExpectedException.none();
-
 
     @Test
     public void QuizResultsConfigShouldReturnResuls() throws Exception {
@@ -53,7 +51,6 @@ public class ConstructorIOQuizResultsConfigTest {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest("invalidQuiz");
 
-        
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(
                 "[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a"

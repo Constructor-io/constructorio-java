@@ -32,12 +32,12 @@ public class QuizResultsConfigResponse {
     }
 
     /**
-     * @return the quiz results configuration
-     * will include the title, description, and response summary of the results page.
+     * @return the quiz results configuration will include the title, description, and response
+     *     summary of the results page.
      */
     public Map<String, Object> getResultsConfig() {
-      return resultsConfig;
-  }
+        return resultsConfig;
+    }
 
     public void setQuizVersionId(String quizVersionId) {
         this.quizVersionId = quizVersionId;
@@ -48,6 +48,6 @@ public class QuizResultsConfigResponse {
     }
 
     public void setResultsConfig(Map<String, Object> resultsConfig) {
-      this.resultsConfig = resultsConfig;
-  }
+        this.resultsConfig = resultsConfig;
+    }
 }

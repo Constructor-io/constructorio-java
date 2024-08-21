@@ -2105,10 +2105,10 @@ public class ConstructorIO {
         return new Gson().fromJson(transformed, QuizResultsResponse.class);
     }
 
-     /**
-     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz results configuration
-     * response. Using JSON objects to achieve this is considerably less error prone than attempting
-     * to do it in a Gson Type Adapter.
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a Quiz results
+     * configuration response. Using JSON objects to achieve this is considerably less error prone
+     * than attempting to do it in a Gson Type Adapter.
      */
     protected static QuizResultsConfigResponse createQuizResultsConfigResponse(String string) {
         JSONObject json = new JSONObject(string);
@@ -2651,8 +2651,9 @@ public class ConstructorIO {
     protected Request createQuizRequest(QuizRequest req, String type, UserInfo userInfo)
             throws ConstructorException {
         try {
-            if (!type.equals("next") && !type.equals("results") && !type.equals("results_config") )
-                throw new IllegalArgumentException("type must be either 'next' or 'results' or 'results_config'");
+            if (!type.equals("next") && !type.equals("results") && !type.equals("results_config"))
+                throw new IllegalArgumentException(
+                        "type must be either 'next' or 'results' or 'results_config'");
 
             List<String> paths = Arrays.asList("v1", "quizzes", req.getQuizId(), type);
             HttpUrl url = this.makeUrl(paths);

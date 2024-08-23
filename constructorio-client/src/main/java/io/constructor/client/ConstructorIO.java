@@ -2643,12 +2643,12 @@ public class ConstructorIO {
     /**
      * Creates a Quiz OkHttp request
      *
-     * @param req the Quiz request
+     * @param req the QuizRequestBase (can be QuizRequest or QuizResultsConfigRequest)
      * @param type the type of quiz request (next/results/results_config)
      * @return a Task OkHttp request
      * @throws ConstructorException
      */
-    protected Request createQuizRequest(QuizRequest req, String type, UserInfo userInfo)
+    protected Request createQuizRequest(QuizRequestBase req, String type, UserInfo userInfo)
             throws ConstructorException {
         try {
             if (!type.equals("next") && !type.equals("results") && !type.equals("results_config"))
@@ -2669,22 +2669,28 @@ public class ConstructorIO {
                                 .build();
             }
 
-            if (req.getQuizSessionId() != null) {
-                url =
-                        url.newBuilder()
-                                .addQueryParameter("quiz_session_id", req.getQuizSessionId())
-                                .build();
-            }
+            // Handle specific logic for QuizRequest
+            if (req instanceof QuizRequest) {
+                QuizRequest quizRequest = (QuizRequest) req;
 
-            if (req.getAnswers().size() > 0) {
-                for (List<String> questionAnswers : req.getAnswers()) {
-                    String answerParam = String.join(",", questionAnswers);
-                    url = url.newBuilder().addQueryParameter("a", answerParam).build();
+                if (quizRequest.getQuizSessionId() != null) {
+                    url =
+                            url.newBuilder()
+                                    .addQueryParameter(
+                                            "quiz_session_id", quizRequest.getQuizSessionId())
+                                    .build();
                 }
-            } else {
-                if (type.equals("results")) {
-                    throw new IllegalArgumentException(
-                            "answers is a required parameter for a results request");
+
+                if (quizRequest.getAnswers().size() > 0) {
+                    for (List<String> questionAnswers : quizRequest.getAnswers()) {
+                        String answerParam = String.join(",", questionAnswers);
+                        url = url.newBuilder().addQueryParameter("a", answerParam).build();
+                    }
+                } else {
+                    if (type.equals("results")) {
+                        throw new IllegalArgumentException(
+                                "answers is a required parameter for a results request");
+                    }
                 }
             }
 
@@ -2777,8 +2783,8 @@ public class ConstructorIO {
      * @return a Quiz Results Response
      * @throws ConstructorException if the request is invalid.
      */
-    public QuizResultsConfigResponse quizResultsConfig(QuizRequest req, UserInfo userInfo)
-            throws ConstructorException {
+    public QuizResultsConfigResponse quizResultsConfig(
+            QuizResultsConfigRequest req, UserInfo userInfo) throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "results_config", userInfo);
             Response response = clientWithRetry.newCall(request).execute();
@@ -2796,7 +2802,7 @@ public class ConstructorIO {
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public String quizResultsConfigAsJson(QuizRequest req, UserInfo userInfo)
+    public String quizResultsConfigAsJson(QuizResultsConfigRequest req, UserInfo userInfo)
             throws ConstructorException {
         try {
             Request request = createQuizRequest(req, "results_config", userInfo);

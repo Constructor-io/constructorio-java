@@ -22,7 +22,7 @@ public class ConstructorIOQuizResultsConfigTest {
     @Test
     public void QuizResultsConfigShouldReturnResuls() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId);
+        QuizResultsConfigRequest request = new QuizResultsConfigRequest(quizId);
         String quizVersionId = constructor.quizResultsConfig(request, null).getQuizVersionId();
         request.setQuizVersionId(quizVersionId);
 
@@ -36,7 +36,7 @@ public class ConstructorIOQuizResultsConfigTest {
     @Test
     public void QuizResultsConfigAsJsonShouldReturnResult() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId);
+        QuizResultsConfigRequest request = new QuizResultsConfigRequest(quizId);
 
         String response = constructor.quizResultsConfigAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
@@ -49,7 +49,7 @@ public class ConstructorIOQuizResultsConfigTest {
     @Test
     public void QuizResultsShouldReturnErrorWithInvalidQuizId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest("invalidQuiz");
+        QuizResultsConfigRequest request = new QuizResultsConfigRequest("invalidQuiz");
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(
@@ -61,7 +61,7 @@ public class ConstructorIOQuizResultsConfigTest {
     @Test
     public void QuizResultsAsJsonShouldReturnErrorWithInvalidQuizId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest("invalidQuiz");
+        QuizResultsConfigRequest request = new QuizResultsConfigRequest("invalidQuiz");
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(
@@ -73,7 +73,7 @@ public class ConstructorIOQuizResultsConfigTest {
     @Test
     public void QuizResultsShouldReturnErrorWithInvalidIndexKey() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId);
+        QuizResultsConfigRequest request = new QuizResultsConfigRequest(quizId);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(
@@ -86,7 +86,7 @@ public class ConstructorIOQuizResultsConfigTest {
     @Test
     public void QuizResultsAsJsonShouldReturnErrorWithInvalidIndexKey() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
-        QuizRequest request = new QuizRequest(quizId);
+        QuizResultsConfigRequest request = new QuizResultsConfigRequest(quizId);
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(

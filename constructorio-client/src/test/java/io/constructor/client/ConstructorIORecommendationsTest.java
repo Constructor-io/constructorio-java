@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import io.constructor.client.models.SearchResponse;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

@@ -135,8 +135,8 @@ public class RecommendationsRequest {
     }
 
     /**
-     * @param preFilterExpression the faceting expression to scope search results (JSON-encoded
-     *     query string). Please refer to
+     * @param preFilterExpression the faceting expression to scope recommendation results
+     *     (JSON-encoded query string). Please refer to
      *     https://docs.constructor.io/rest_api/collections#add-items-dynamically
      */
     public void setPreFilterExpression(String preFilterExpression) {

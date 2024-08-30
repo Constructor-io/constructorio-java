@@ -1747,6 +1747,10 @@ public class ConstructorIO {
                 }
             }
 
+            if (StringUtils.isNotBlank(req.getTerm())) {
+                url = url.newBuilder().addQueryParameter("term", req.getTerm()).build();
+            }
+
             if (req.getFacets() != null) {
                 for (String facetName : req.getFacets().keySet()) {
                     for (String facetValue : req.getFacets().get(facetName)) {
@@ -1763,6 +1767,14 @@ public class ConstructorIO {
                 url =
                         url.newBuilder()
                                 .addQueryParameter("variations_map", variationsMapJson)
+                                .build();
+            }
+
+            if (req.getPreFilterExpression() != null) {
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "pre_filter_expression", req.getPreFilterExpression())
                                 .build();
             }
 

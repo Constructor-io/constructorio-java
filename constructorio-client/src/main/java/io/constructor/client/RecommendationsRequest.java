@@ -8,10 +8,12 @@ import java.util.Map;
 public class RecommendationsRequest {
 
     private String podId;
+    private String term;
     private int numResults;
     private List<String> itemIds;
     private Map<String, List<String>> facets;
     private String section;
+    private String preFilterExpression;
     private VariationsMap variationsMap;
 
     /**
@@ -27,8 +29,10 @@ public class RecommendationsRequest {
         this.podId = podId;
         this.numResults = 10;
         this.itemIds = null;
+        this.term = null;
         this.section = "Products";
         this.variationsMap = null;
+        this.preFilterExpression = null;
         this.facets = new HashMap<String, List<String>>();
     }
 
@@ -44,6 +48,20 @@ public class RecommendationsRequest {
      */
     public String getPodId() {
         return podId;
+    }
+
+    /**
+     * @param term the term to set (required for query recommendations pods)
+     */
+    public void setTerm(String term) {
+        this.term = term;
+    }
+
+    /**
+     * @return the term
+     */
+    public String getTerm() {
+        return term;
     }
 
     /**
@@ -114,5 +132,21 @@ public class RecommendationsRequest {
      */
     public Map<String, List<String>> getFacets() {
         return facets;
+    }
+
+    /**
+     * @param preFilterExpression the faceting expression to scope search results (JSON-encoded
+     *     query string). Please refer to
+     *     https://docs.constructor.io/rest_api/collections#add-items-dynamically
+     */
+    public void setPreFilterExpression(String preFilterExpression) {
+        this.preFilterExpression = preFilterExpression;
+    }
+
+    /**
+     * @return the prefilter expression
+     */
+    public String getPreFilterExpression() {
+        return preFilterExpression;
     }
 }

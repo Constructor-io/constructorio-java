@@ -64,6 +64,8 @@ public class SearchRequestTest {
                 "{\"num_results_per_page\":\"10\",\"filters\":{\"keywords\":[\"battery-powered\"]}}";
         String now = "1659049486";
         int offset = 2;
+        Map<String, String> filterMatchTypes = new HashMap<String, String>();
+        filterMatchTypes.put("color", "all");
 
         request.setQuery("airline tickets");
         request.setSection("Search Suggestions");
@@ -81,6 +83,7 @@ public class SearchRequestTest {
         request.setQsParam(qsParam);
         request.setNow(now);
         request.setOffset(offset);
+        request.setFilterMatchTypes(filterMatchTypes);
 
         assertEquals(request.getQuery(), "airline tickets");
         assertEquals(request.getSection(), "Search Suggestions");
@@ -98,5 +101,6 @@ public class SearchRequestTest {
         assertEquals(request.getQsParam(), qsParam);
         assertEquals(request.getNow(), now);
         assertEquals(request.getOffset(), offset);
+        assertEquals(request.getFilterMatchTypes(), filterMatchTypes);
     }
 }

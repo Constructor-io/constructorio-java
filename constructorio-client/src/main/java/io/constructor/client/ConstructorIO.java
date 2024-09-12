@@ -1022,6 +1022,15 @@ public class ConstructorIO {
                                 .build();
             }
 
+            for (String filterMatchTypesKey : req.getFilterMatchTypes().keySet()) {
+                String filterMatchTypesValue = req.getFilterMatchTypes().get(filterMatchTypesKey);
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "filter_match_types[" + filterMatchTypesKey + "]", filterMatchTypesValue)
+                                .build();
+            }
+
             Request request =
                     this.makeUserRequestBuilder(userInfo, authorizedRequest).url(url).get().build();
 

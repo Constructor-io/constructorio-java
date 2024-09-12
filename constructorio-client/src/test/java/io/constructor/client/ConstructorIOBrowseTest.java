@@ -623,4 +623,17 @@ public class ConstructorIOBrowseTest {
                 "All");
         assertEquals("first pathListItem id matches", groupPathList.get(0).getId(), "All");
     }
+
+    @Test
+    public void BrowseShouldReturnAResultWithFilterMatchTypes() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        BrowseRequest request = new BrowseRequest("Color", "yellow");
+        request.getFilterMatchTypes().put("Color", "any");
+        BrowseResponse response = constructor.browse(request, userInfo);
+
+        assertTrue("browse result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
+    }
 }

@@ -68,6 +68,8 @@ public class BrowseRequestTest {
                 "{\"num_results_per_page\":\"10\",\"filters\":{\"keywords\":[\"battery-powered\"]}}";
         String now = "1659049486";
         int offset = 2;
+        Map<String, String> filterMatchTypes = new HashMap<String, String>();
+        filterMatchTypes.put("color", "all");
 
         request.setFilterName("VacationType");
         request.setFilterValue("Air Travel");
@@ -85,6 +87,7 @@ public class BrowseRequestTest {
         request.setQsParam(qsParam);
         request.setNow(now);
         request.setOffset(offset);
+        request.setFilterMatchTypes(filterMatchTypes);
 
         assertEquals(request.getFilterName(), "VacationType");
         assertEquals(request.getFilterValue(), "Air Travel");
@@ -102,5 +105,6 @@ public class BrowseRequestTest {
         assertEquals(request.getQsParam(), qsParam);
         assertEquals(request.getNow(), now);
         assertEquals(request.getOffset(), offset);
+        assertEquals(request.getFilterMatchTypes(), filterMatchTypes);
     }
 }

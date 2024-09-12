@@ -10,7 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class BrowseItemsRequestTest {
+public class BrowseItemsRequestTest { 
 
     @Rule public ExpectedException thrown = ExpectedException.none();
 
@@ -49,6 +49,8 @@ public class BrowseItemsRequestTest {
         formatOptions.put("groups_start", "top");
         List<String> hiddenFields = Arrays.asList("hiddenField1", "hiddenField2");
         List<String> hiddenFacets = Arrays.asList("hiddenFacet1", "hiddenFacet2");
+        Map<String, String> filterMatchTypes = new HashMap<String, String>();
+        filterMatchTypes.put("color", "all");
 
         request.setIds(newIds);
         request.setSection("Browse Suggestions");
@@ -61,6 +63,7 @@ public class BrowseItemsRequestTest {
         request.setFormatOptions(formatOptions);
         request.setHiddenFields(hiddenFields);
         request.setHiddenFacets(hiddenFacets);
+        request.setFilterMatchTypes(filterMatchTypes);
 
         assertEquals(request.getIds(), newIds);
         assertEquals(request.getSection(), "Browse Suggestions");
@@ -73,5 +76,6 @@ public class BrowseItemsRequestTest {
         assertEquals(request.getFormatOptions(), formatOptions);
         assertEquals(request.getHiddenFields(), hiddenFields);
         assertEquals(request.getHiddenFacets(), hiddenFacets);
+        assertEquals(request.getFilterMatchTypes(), filterMatchTypes);
     }
 }

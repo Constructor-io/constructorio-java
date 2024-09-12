@@ -19,6 +19,7 @@ public class BrowseItemsRequest {
     private Map<String, String> formatOptions;
     private List<String> hiddenFields;
     private List<String> hiddenFacets;
+    private Map<String, String> filterMatchTypes;
 
     /**
      * Creates a browse request
@@ -39,6 +40,7 @@ public class BrowseItemsRequest {
         this.formatOptions = new HashMap<String, String>();
         this.hiddenFields = new ArrayList<String>();
         this.hiddenFacets = new ArrayList<String>();
+        this.filterMatchTypes = new HashMap<String, String>();
     }
 
     /**
@@ -193,5 +195,21 @@ public class BrowseItemsRequest {
      */
     public List<String> getHiddenFacets() {
         return hiddenFacets;
+    }
+
+    /**
+     * @param filterMatchTypes the filterMatchTypes to set. Please refer to
+     *     https://docs-beta.constructor.io/reference/v1-browse-get-browse-results for details
+     *     Possible values 'all', 'any' or 'none'
+     */
+    public void setFilterMatchTypes(Map<String, String> filterMatchTypes) {
+        this.filterMatchTypes = filterMatchTypes;
+    }
+
+    /**
+     * @return the filterMatchTypes
+     */
+    public Map<String, String> getFilterMatchTypes() {
+        return filterMatchTypes;
     }
 }

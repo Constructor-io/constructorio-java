@@ -25,6 +25,7 @@ public class BrowseRequest {
     private String qsParam;
     private String now;
     private int offset;
+    private Map<String, String> filterMatchTypes;
 
     /**
      * Creates a browse request
@@ -55,6 +56,7 @@ public class BrowseRequest {
         this.qsParam = null;
         this.now = null;
         this.offset = 0;
+        this.filterMatchTypes = new HashMap<String, String>();
     }
 
     /**
@@ -300,5 +302,21 @@ public class BrowseRequest {
      */
     public int getOffset() {
         return offset;
+    }
+
+    /**
+     * @param filterMatchTypes the filterMatchTypes to set. Please refer to
+     *     https://docs-beta.constructor.io/reference/v1-browse-get-browse-results for details
+     *     Possible values 'all', 'any' or 'none'
+     */
+    public void setFilterMatchTypes(Map<String, String> filterMatchTypes) {
+        this.filterMatchTypes = filterMatchTypes;
+    }
+
+    /**
+     * @return the filterMatchTypes
+     */
+    public Map<String, String> getFilterMatchTypes() {
+        return filterMatchTypes;
     }
 }

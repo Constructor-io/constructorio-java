@@ -14,7 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class ConstructorIOBrowseItemsTest {
+public class ConstructorIOBrowseItemsTest { 
 
     @Rule public ExpectedException thrown = ExpectedException.none();
     private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
@@ -302,5 +302,19 @@ public class ConstructorIOBrowseItemsTest {
         assertTrue("browse items result id exists", response.getResultId() != null);
         assertNotNull("browse facet [Brand] exists", brandFacet);
         assertTrue("browse facet [Brand] is hidden", brandFacet.getHidden());
+    }
+
+    @Test
+    public void BrowseItemsShouldReturnAResultWithFilterMatchTypes() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        List<String> ids = Arrays.asList("10001", "10002");
+        BrowseItemsRequest request = new BrowseItemsRequest(ids);
+        request.getFilterMatchTypes().put("Color", "any");
+        BrowseResponse response = constructor.browseItems(request, userInfo);
+
+        assertTrue("browse result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
     }
 }

@@ -65,7 +65,7 @@ public class SearchRequestTest {
         String now = "1659049486";
         int offset = 2;
         Map<String, String> filterMatchTypes = new HashMap<String, String>();
-        filterMatchTypes.put("color", "all");
+        filterMatchTypes.put("Color", "all");
 
         request.setQuery("airline tickets");
         request.setSection("Search Suggestions");

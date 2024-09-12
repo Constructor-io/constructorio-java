@@ -199,7 +199,7 @@ public class BrowseItemsRequest {
 
     /**
      * @param filterMatchTypes the filterMatchTypes to set. Please refer to
-     *     https://docs-beta.constructor.io/reference/v1-browse-get-browse-results for details
+     *     https://docs-beta.constructor.io/reference/v1-browse-get-browse-items-results for details
      *     Possible values 'all', 'any' or 'none'
      */
     public void setFilterMatchTypes(Map<String, String> filterMatchTypes) {

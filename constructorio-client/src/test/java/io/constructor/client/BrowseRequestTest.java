@@ -69,7 +69,7 @@ public class BrowseRequestTest {
         String now = "1659049486";
         int offset = 2;
         Map<String, String> filterMatchTypes = new HashMap<String, String>();
-        filterMatchTypes.put("color", "all");
+        filterMatchTypes.put("Color", "all");
 
         request.setFilterName("VacationType");
         request.setFilterValue("Air Travel");

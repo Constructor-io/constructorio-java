@@ -10,7 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class BrowseItemsRequestTest { 
+public class BrowseItemsRequestTest {
 
     @Rule public ExpectedException thrown = ExpectedException.none();
 
@@ -50,7 +50,7 @@ public class BrowseItemsRequestTest {
         List<String> hiddenFields = Arrays.asList("hiddenField1", "hiddenField2");
         List<String> hiddenFacets = Arrays.asList("hiddenFacet1", "hiddenFacet2");
         Map<String, String> filterMatchTypes = new HashMap<String, String>();
-        filterMatchTypes.put("color", "all");
+        filterMatchTypes.put("Color", "all");
 
         request.setIds(newIds);
         request.setSection("Browse Suggestions");

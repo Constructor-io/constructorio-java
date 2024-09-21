@@ -231,13 +231,13 @@ public class ConstructorIO {
      * @param items the items you want to add or replace.
      * @param section the section of the index that you're adding the items to.
      * @param force whether or not the system should process the request even if it will invalidate
-     *     a large number of existing variations.
+     *     a large number of existing items.
      * @param notificationEmail An email address where you'd like to receive an email notification
      *     in case the task fails.
-     * @return true if working
+     * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean createOrReplaceItems(
+    public String createOrReplaceItems(
             ConstructorItem[] items, String section, Boolean force, String notificationEmail)
             throws ConstructorException {
         try {
@@ -267,23 +267,22 @@ public class ConstructorIO {
             Request request = this.makeAuthorizedRequestBuilder().url(url).put(body).build();
 
             Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
     }
 
-    public boolean createOrReplaceItems(ConstructorItem[] items) throws ConstructorException {
+    public String createOrReplaceItems(ConstructorItem[] items) throws ConstructorException {
         return createOrReplaceItems(items, "Products", false, null);
     }
 
-    public boolean createOrReplaceItems(ConstructorItem[] items, String section)
+    public String createOrReplaceItems(ConstructorItem[] items, String section)
             throws ConstructorException {
         return createOrReplaceItems(items, section, false, null);
     }
 
-    public boolean createOrReplaceItems(ConstructorItem[] items, String section, Boolean force)
+    public String createOrReplaceItems(ConstructorItem[] items, String section, Boolean force)
             throws ConstructorException {
         return createOrReplaceItems(items, section, force, null);
     }
@@ -294,13 +293,13 @@ public class ConstructorIO {
      * @param items the items that you are deleting
      * @param section the section of the index that you're removing the items from.
      * @param force whether or not the system should process the request even if it will invalidate
-     *     a large number of existing variations.
+     *     a large number of existing items.
      * @param notificationEmail An email address where you'd like to receive an email notification
      *     in case the task fails.
-     * @return true if successfully removed
+     * @return a string of JSON
      * @throws ConstructorException if the request is invalid
      */
-    public boolean deleteItems(
+    public String deleteItems(
             ConstructorItem[] items, String section, Boolean force, String notificationEmail)
             throws ConstructorException {
         try {
@@ -334,23 +333,22 @@ public class ConstructorIO {
             Request request = this.makeAuthorizedRequestBuilder().url(url).delete(body).build();
 
             Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
     }
 
-    public boolean deleteItems(ConstructorItem[] items) throws ConstructorException {
+    public String deleteItems(ConstructorItem[] items) throws ConstructorException {
         return deleteItems(items, "Products", false, null);
     }
 
-    public boolean deleteItems(ConstructorItem[] items, String section)
+    public String deleteItems(ConstructorItem[] items, String section)
             throws ConstructorException {
         return deleteItems(items, section, false, null);
     }
 
-    public boolean deleteItems(ConstructorItem[] items, String section, Boolean force)
+    public String deleteItems(ConstructorItem[] items, String section, Boolean force)
             throws ConstructorException {
         return deleteItems(items, section, force, null);
     }
@@ -430,10 +428,10 @@ public class ConstructorIO {
      *     a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification
      *     in case the task fails.
-     * @return true if successfully removed
+     * @return a string of JSON
      * @throws ConstructorException if the request is invalid
      */
-    public boolean deleteVariations(
+    public String deleteVariations(
             ConstructorVariation[] variations,
             String section,
             Boolean force,
@@ -470,22 +468,22 @@ public class ConstructorIO {
 
             Response response = client.newCall(request).execute();
             getResponseBody(response);
-            return true;
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
     }
 
-    public boolean deleteVariations(ConstructorVariation[] variations) throws ConstructorException {
+    public String deleteVariations(ConstructorVariation[] variations) throws ConstructorException {
         return deleteVariations(variations, "Products", false, null);
     }
 
-    public boolean deleteVariations(ConstructorVariation[] variations, String section)
+    public String deleteVariations(ConstructorVariation[] variations, String section)
             throws ConstructorException {
         return deleteVariations(variations, section, false, null);
     }
 
-    public boolean deleteVariations(
+    public String deleteVariations(
             ConstructorVariation[] variations, String section, Boolean force)
             throws ConstructorException {
         return deleteVariations(variations, section, force, null);
@@ -497,17 +495,17 @@ public class ConstructorIO {
      * @param items the items that you're updating
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate
-     *     a large number of existing variations.
+     *     a large number of existing items.
      * @param onMissing Either "FAIL", "IGNORE", "CREATE", indicating how the system will handle
      *     updating items that don't exist. "FAIL" fails the ingestion if there are items that don't
      *     exist. "IGNORE" ignores items that don't exist. "CREATE" creates items that don't exist.
      *     Defaults to "FAIL".
      * @param notificationEmail An email address where you'd like to receive an email notification
      *     in case the task fails.
-     * @return true if successfully modified
+     * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean updateItems(
+    public String updateItems(
             ConstructorItem[] items,
             String section,
             Boolean force,
@@ -546,7 +544,7 @@ public class ConstructorIO {
 
             Response response = client.newCall(request).execute();
             getResponseBody(response);
-            return true;
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -564,22 +562,22 @@ public class ConstructorIO {
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean updateItems(
+    public String updateItems(
             ConstructorItem[] items, String section, Boolean force, String notificationEmail)
             throws ConstructorException {
         return updateItems(items, section, force, notificationEmail, null);
     }
 
-    public boolean updateItems(ConstructorItem[] items) throws ConstructorException {
+    public String updateItems(ConstructorItem[] items) throws ConstructorException {
         return updateItems(items, "Products", false, null, null);
     }
 
-    public boolean updateItems(ConstructorItem[] items, String section)
+    public String updateItems(ConstructorItem[] items, String section)
             throws ConstructorException {
         return updateItems(items, section, false, null, null);
     }
 
-    public boolean updateItems(ConstructorItem[] items, String section, Boolean force)
+    public String updateItems(ConstructorItem[] items, String section, Boolean force)
             throws ConstructorException {
         return updateItems(items, section, force, null, null);
     }
@@ -600,7 +598,7 @@ public class ConstructorIO {
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean updateVariations(
+    public String updateVariations(
             ConstructorVariation[] variations,
             String section,
             Boolean force,
@@ -637,8 +635,7 @@ public class ConstructorIO {
             Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();
 
             Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -656,7 +653,7 @@ public class ConstructorIO {
      * @return true if successfully modified
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean updateVariations(
+    public String updateVariations(
             ConstructorVariation[] variations,
             String section,
             Boolean force,
@@ -669,16 +666,16 @@ public class ConstructorIO {
         }
     }
 
-    public boolean updateVariations(ConstructorVariation[] variations) throws ConstructorException {
+    public String updateVariations(ConstructorVariation[] variations) throws ConstructorException {
         return updateVariations(variations, "Products", false, null, null);
     }
 
-    public boolean updateVariations(ConstructorVariation[] variations, String section)
+    public String updateVariations(ConstructorVariation[] variations, String section)
             throws ConstructorException {
         return updateVariations(variations, section, false, null, null);
     }
 
-    public boolean updateVariations(
+    public String updateVariations(
             ConstructorVariation[] variations, String section, Boolean force)
             throws ConstructorException {
         return updateVariations(variations, section, force, null, null);
@@ -693,10 +690,10 @@ public class ConstructorIO {
      *     a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification
      *     in case the task fails.
-     * @return true if working
+     * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
-    public boolean createOrReplaceVariations(
+    public String createOrReplaceVariations(
             ConstructorVariation[] variations,
             String section,
             Boolean force,
@@ -729,24 +726,23 @@ public class ConstructorIO {
             Request request = this.makeAuthorizedRequestBuilder().url(url).put(body).build();
 
             Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
+            return getResponseBody(response);;
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
     }
 
-    public boolean createOrReplaceVariations(ConstructorVariation[] variations)
+    public String createOrReplaceVariations(ConstructorVariation[] variations)
             throws ConstructorException {
         return createOrReplaceVariations(variations, "Products", false, null);
     }
 
-    public boolean createOrReplaceVariations(ConstructorVariation[] variations, String section)
+    public String createOrReplaceVariations(ConstructorVariation[] variations, String section)
             throws ConstructorException {
         return createOrReplaceVariations(variations, section, false, null);
     }
 
-    public boolean createOrReplaceVariations(
+    public String createOrReplaceVariations(
             ConstructorVariation[] variations, String section, Boolean force)
             throws ConstructorException {
         return createOrReplaceVariations(variations, section, force, null);

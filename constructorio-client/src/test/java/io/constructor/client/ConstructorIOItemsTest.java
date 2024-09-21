@@ -41,8 +41,11 @@ public class ConstructorIOItemsTest {
         ConstructorItem[] items = {
             Utils.createProductItem(), Utils.createProductItem(), Utils.createProductItem()
         };
+        String response = constructor.createOrReplaceItems(items, "Products");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue("add or replace succeeds", constructor.createOrReplaceItems(items, "Products"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addItemsToCleanUpArray(items);
     }
 
@@ -52,11 +55,13 @@ public class ConstructorIOItemsTest {
         ConstructorItem[] items = {
             Utils.createProductItem(), Utils.createProductItem(), Utils.createProductItem()
         };
+        String response = constructor.createOrReplaceItems(items, "Products", true, "test@constructor.io");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue(
-                "add or replace succeeds",
-                constructor.createOrReplaceItems(items, "Products", true, "test@constructor.io"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addItemsToCleanUpArray(items);
+
     }
 
     @Test
@@ -73,8 +78,11 @@ public class ConstructorIOItemsTest {
         itemNew.setUrl(itemOld.getUrl());
         itemNew.setSuggestedScore((float) 1337.00);
         ConstructorItem[] itemsNew = {itemNew};
+        String response = constructor.updateItems(itemsNew, "Products");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue("update succeeds", constructor.updateItems(itemsNew, "Products"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addItemsToCleanUpArray(itemsNew);
     }
 
@@ -92,16 +100,18 @@ public class ConstructorIOItemsTest {
         itemNew.setUrl(itemOld.getUrl());
         itemNew.setSuggestedScore((float) 1337.00);
         ConstructorItem[] itemsNew = {itemNew};
+        String response = constructor.updateItems(
+            itemsNew,
+            "Products",
+            true,
+            "test@constructor.io",
+            CatalogRequest.OnMissing.CREATE);
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue(
-                "update succeeds",
-                constructor.updateItems(
-                        itemsNew,
-                        "Products",
-                        true,
-                        "test@constructor.io",
-                        CatalogRequest.OnMissing.CREATE));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addItemsToCleanUpArray(itemsNew);
+
     }
 
     @Test
@@ -109,8 +119,11 @@ public class ConstructorIOItemsTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem item = Utils.createProductItem();
         ConstructorItem[] items = {item};
+        String response = constructor.deleteItems(items, "Products");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue("delete succeeds", constructor.deleteItems(items, "Products"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
     }
 
     @Test
@@ -118,10 +131,12 @@ public class ConstructorIOItemsTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem item = Utils.createProductItem();
         ConstructorItem[] items = {item};
+        String response = constructor.deleteItems(items, "Products", true, "test@constructor.io");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue(
-                "delete succeeds",
-                constructor.deleteItems(items, "Products", true, "test@constructor.io"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+
     }
 
     @Test

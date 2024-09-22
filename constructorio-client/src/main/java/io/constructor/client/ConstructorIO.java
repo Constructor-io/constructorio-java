@@ -343,8 +343,7 @@ public class ConstructorIO {
         return deleteItems(items, "Products", false, null);
     }
 
-    public String deleteItems(ConstructorItem[] items, String section)
-            throws ConstructorException {
+    public String deleteItems(ConstructorItem[] items, String section) throws ConstructorException {
         return deleteItems(items, section, false, null);
     }
 
@@ -482,8 +481,7 @@ public class ConstructorIO {
         return deleteVariations(variations, section, false, null);
     }
 
-    public String deleteVariations(
-            ConstructorVariation[] variations, String section, Boolean force)
+    public String deleteVariations(ConstructorVariation[] variations, String section, Boolean force)
             throws ConstructorException {
         return deleteVariations(variations, section, force, null);
     }
@@ -570,8 +568,7 @@ public class ConstructorIO {
         return updateItems(items, "Products", false, null, null);
     }
 
-    public String updateItems(ConstructorItem[] items, String section)
-            throws ConstructorException {
+    public String updateItems(ConstructorItem[] items, String section) throws ConstructorException {
         return updateItems(items, section, false, null, null);
     }
 
@@ -673,8 +670,7 @@ public class ConstructorIO {
         return updateVariations(variations, section, false, null, null);
     }
 
-    public String updateVariations(
-            ConstructorVariation[] variations, String section, Boolean force)
+    public String updateVariations(ConstructorVariation[] variations, String section, Boolean force)
             throws ConstructorException {
         return updateVariations(variations, section, force, null, null);
     }

@@ -467,7 +467,6 @@ public class ConstructorIO {
             Request request = this.makeAuthorizedRequestBuilder().url(url).delete(body).build();
 
             Response response = client.newCall(request).execute();
-            getResponseBody(response);
             return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -543,7 +542,6 @@ public class ConstructorIO {
             Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();
 
             Response response = client.newCall(request).execute();
-            getResponseBody(response);
             return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -726,7 +724,7 @@ public class ConstructorIO {
             Request request = this.makeAuthorizedRequestBuilder().url(url).put(body).build();
 
             Response response = client.newCall(request).execute();
-            return getResponseBody(response);;
+            return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }

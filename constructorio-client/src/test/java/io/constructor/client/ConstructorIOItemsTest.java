@@ -36,31 +36,36 @@ public class ConstructorIOItemsTest {
     @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void createOrReplaceItemsShouldReturnTrue() throws Exception {
+    public void createOrReplaceItemsShouldReturnAResponse() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] items = {
             Utils.createProductItem(), Utils.createProductItem(), Utils.createProductItem()
         };
+        String response = constructor.createOrReplaceItems(items, "Products");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue("add or replace succeeds", constructor.createOrReplaceItems(items, "Products"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addItemsToCleanUpArray(items);
     }
 
     @Test
-    public void createOrReplaceItemsShouldReturnTrueWithAllParameters() throws Exception {
+    public void createOrReplaceItemsShouldReturnAResponseWithAllParameters() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] items = {
             Utils.createProductItem(), Utils.createProductItem(), Utils.createProductItem()
         };
+        String response =
+                constructor.createOrReplaceItems(items, "Products", true, "test@constructor.io");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue(
-                "add or replace succeeds",
-                constructor.createOrReplaceItems(items, "Products", true, "test@constructor.io"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addItemsToCleanUpArray(items);
     }
 
     @Test
-    public void updateItemsShouldReturnTrue() throws Exception {
+    public void updateItemsShouldReturnAResponse() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] itemsOld = {Utils.createProductItem()};
 
@@ -73,13 +78,16 @@ public class ConstructorIOItemsTest {
         itemNew.setUrl(itemOld.getUrl());
         itemNew.setSuggestedScore((float) 1337.00);
         ConstructorItem[] itemsNew = {itemNew};
+        String response = constructor.updateItems(itemsNew, "Products");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue("update succeeds", constructor.updateItems(itemsNew, "Products"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addItemsToCleanUpArray(itemsNew);
     }
 
     @Test
-    public void updateItemsShouldReturnTrueWithAllParameters() throws Exception {
+    public void updateItemsShouldReturnAResponseWithAllParameters() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] itemsOld = {Utils.createProductItem()};
 
@@ -92,36 +100,42 @@ public class ConstructorIOItemsTest {
         itemNew.setUrl(itemOld.getUrl());
         itemNew.setSuggestedScore((float) 1337.00);
         ConstructorItem[] itemsNew = {itemNew};
-
-        assertTrue(
-                "update succeeds",
+        String response =
                 constructor.updateItems(
                         itemsNew,
                         "Products",
                         true,
                         "test@constructor.io",
-                        CatalogRequest.OnMissing.CREATE));
+                        CatalogRequest.OnMissing.CREATE);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addItemsToCleanUpArray(itemsNew);
     }
 
     @Test
-    public void deleteItemsShouldReturnTrue() throws Exception {
+    public void deleteItemsShouldReturnAResponse() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem item = Utils.createProductItem();
         ConstructorItem[] items = {item};
+        String response = constructor.deleteItems(items, "Products");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue("delete succeeds", constructor.deleteItems(items, "Products"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
     }
 
     @Test
-    public void deleteItemsShouldReturnTrueWithAllParameters() throws Exception {
+    public void deleteItemsShouldReturnAResponseWithAllParameters() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem item = Utils.createProductItem();
         ConstructorItem[] items = {item};
+        String response = constructor.deleteItems(items, "Products", true, "test@constructor.io");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue(
-                "delete succeeds",
-                constructor.deleteItems(items, "Products", true, "test@constructor.io"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
     }
 
     @Test

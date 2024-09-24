@@ -45,10 +45,11 @@ public class ConstructorIOVariationsTest {
             Utils.createProductVariation("random-id"),
             Utils.createProductVariation("random-id"),
         };
+        String response = constructor.createOrReplaceVariations(variations, "Products");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue(
-                "create or replace succeeds",
-                constructor.createOrReplaceVariations(variations, "Products"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addVariationsToCleanUpArray(variations);
     }
 
@@ -60,11 +61,13 @@ public class ConstructorIOVariationsTest {
             Utils.createProductVariation("random-id"),
             Utils.createProductVariation("random-id"),
         };
-
-        assertTrue(
-                "create or replace succeeds",
+        String response =
                 constructor.createOrReplaceVariations(
-                        variations, "Products", true, "test@constructor.io"));
+                        variations, "Products", true, "test@constructor.io");
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addVariationsToCleanUpArray(variations);
     }
 
@@ -83,8 +86,11 @@ public class ConstructorIOVariationsTest {
         variationNew.setUrl(variationOld.getUrl());
         variationNew.setSuggestedScore((float) 1337.00);
         ConstructorVariation[] variationsNew = {variationNew};
+        String response = constructor.updateVariations(variationsNew, "Products");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue("update succeeds", constructor.updateVariations(variationsNew, "Products"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addVariationsToCleanUpArray(variationsNew);
     }
 
@@ -103,15 +109,17 @@ public class ConstructorIOVariationsTest {
         variationNew.setUrl(variationOld.getUrl());
         variationNew.setSuggestedScore((float) 1337.00);
         ConstructorVariation[] variationsNew = {variationNew};
-
-        assertTrue(
-                "update succeeds",
+        String response =
                 constructor.updateVariations(
                         variationsNew,
                         "Products",
                         true,
                         "test@constructor.io",
-                        CatalogRequest.OnMissing.CREATE));
+                        CatalogRequest.OnMissing.CREATE);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addVariationsToCleanUpArray(variationsNew);
     }
 
@@ -129,8 +137,11 @@ public class ConstructorIOVariationsTest {
         variationNew.setUrl(variationOld.getUrl());
         variationNew.setSuggestedScore((float) 1337.00);
         ConstructorVariation[] variationsNew = {variationNew};
+        String response = constructor.updateVariations(variationsNew, "Products");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue("update succeeds", constructor.updateVariations(variationsNew, "Products"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
         addVariationsToCleanUpArray(variationsNew);
     }
 
@@ -140,8 +151,11 @@ public class ConstructorIOVariationsTest {
         ConstructorVariation[] variations = {
             Utils.createProductVariation("Random-ID"),
         };
+        String response = constructor.deleteVariations(variations, "Products");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue("delete succeeds", constructor.deleteVariations(variations, "Products"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
     }
 
     @Test
@@ -150,10 +164,12 @@ public class ConstructorIOVariationsTest {
         ConstructorVariation[] variations = {
             Utils.createProductVariation("Random-ID"),
         };
+        String response =
+                constructor.deleteVariations(variations, "Products", true, "test@constructor.io");
+        JSONObject jsonObj = new JSONObject(response);
 
-        assertTrue(
-                "delete succeeds",
-                constructor.deleteVariations(variations, "Products", true, "test@constructor.io"));
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
     }
 
     @Test

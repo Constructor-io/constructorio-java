@@ -315,7 +315,8 @@ public class ConstructorIOBrowseTest {
         assertEquals("browse results exist", response.getResponse().getResults().size(), 4);
         assertTrue(
                 "browse result labels exist",
-                response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+                (Boolean)
+                        response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
     }
 
     @Test

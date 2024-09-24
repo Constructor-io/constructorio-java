@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import io.constructor.client.models.BrowseResponse;
+import java.util.Map;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -49,7 +50,16 @@ public class BrowseResponseTest {
                 562);
         assertTrue(
                 "browse result labels exists",
-                response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+                (Boolean)
+                        response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+        assertEquals(
+                "browse result labels exists",
+                (String) response.getResponse().getResults().get(0).getLabels().get("foo"),
+                "bar");
+        assertEquals(
+                "browse result labels exists",
+                (Double) response.getResponse().getResults().get(0).getLabels().get("baz"),
+                (Double) 1.0);
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertEquals(
@@ -251,5 +261,29 @@ public class BrowseResponseTest {
                 "Content 1 mobile alt text");
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
+    }
+
+    @Test
+    public void createBrowseResponseShouldReturnAResultWithLabels() throws Exception {
+        String string = Utils.getTestResource("response.browse.color.blue.json");
+        BrowseResponse response = ConstructorIO.createBrowseResponse(string);
+        assertEquals(
+                "search result [labels] exists",
+                response.getResponse().getResults().get(0).getLabels().size(),
+                6);
+        assertEquals(
+                "is_sponsored label exists",
+                response.getResponse().getResults().get(0).getLabels().get("is_sponsored"),
+                true);
+        assertEquals(
+                "__cnstrc_new_arrivals label exists and it's a nested object",
+                ((Map<String, Object>)
+                                response.getResponse()
+                                        .getResults()
+                                        .get(0)
+                                        .getLabels()
+                                        .get("__cnstrc_new_arrivals"))
+                        .get("display_name"),
+                "New Arrival");
     }
 }

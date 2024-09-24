@@ -1,7 +1,6 @@
 package io.constructor.client;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
@@ -138,7 +137,12 @@ public class ConstructorIOAutocompleteTest {
                 5);
         assertTrue(
                 "autocomplete result labels exists",
-                response.getSections().get("Products").get(0).getLabels().get("is_sponsored"));
+                (Boolean)
+                        response.getSections()
+                                .get("Products")
+                                .get(0)
+                                .getLabels()
+                                .get("is_sponsored"));
     }
 
     @Test

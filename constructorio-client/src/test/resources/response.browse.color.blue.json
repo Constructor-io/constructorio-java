@@ -1307,7 +1307,12 @@
         "value": "Coat Aspesi blue"
       }],
       "labels": {
-        "is_sponsored": true
+        "is_sponsored": true,
+        "foo": "bar",
+        "baz": 1,
+        "__cnstrc_new_arrivals": { "display_name": "New Arrival" },
+        "__cnstrc_best_sellers": { "display_name": "Bestseller" },
+        "__cnstrc_trending_now": { "display_name": "Trending Now" }
       }
     }, {
       "data": {

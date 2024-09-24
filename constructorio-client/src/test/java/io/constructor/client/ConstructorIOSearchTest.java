@@ -120,7 +120,8 @@ public class ConstructorIOSearchTest {
         assertTrue("search results exist", response.getResponse().getResults().size() > 0);
         assertTrue(
                 "labels exist",
-                response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
+                (Boolean)
+                        response.getResponse().getResults().get(0).getLabels().get("is_sponsored"));
     }
 
     @Test

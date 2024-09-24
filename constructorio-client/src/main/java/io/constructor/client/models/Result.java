@@ -23,7 +23,7 @@ public class Result {
     private Object variationsMap;
 
     @SerializedName("labels")
-    private Map<String, Boolean> labels;
+    private Map<String, Object> labels;
 
     @SerializedName("strategy")
     private Map<String, String> strategy;
@@ -66,7 +66,7 @@ public class Result {
     /**
      * @return the labels
      */
-    public Map<String, Boolean> getLabels() {
+    public Map<String, Object> getLabels() {
         return labels;
     }
 
@@ -97,7 +97,7 @@ public class Result {
         this.variationsMap = variationsMap;
     }
 
-    public void setLabels(Map<String, Boolean> labels) {
+    public void setLabels(Map<String, Object> labels) {
         this.labels = labels;
     }
 

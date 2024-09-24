@@ -36,7 +36,7 @@ public class ConstructorIOItemsTest {
     @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void createOrReplaceItemsShouldReturnTrue() throws Exception {
+    public void createOrReplaceItemsShouldReturnAResponse() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] items = {
             Utils.createProductItem(), Utils.createProductItem(), Utils.createProductItem()
@@ -50,7 +50,7 @@ public class ConstructorIOItemsTest {
     }
 
     @Test
-    public void createOrReplaceItemsShouldReturnTrueWithAllParameters() throws Exception {
+    public void createOrReplaceItemsShouldReturnAResponseWithAllParameters() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] items = {
             Utils.createProductItem(), Utils.createProductItem(), Utils.createProductItem()
@@ -65,7 +65,7 @@ public class ConstructorIOItemsTest {
     }
 
     @Test
-    public void updateItemsShouldReturnTrue() throws Exception {
+    public void updateItemsShouldReturnAResponse() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] itemsOld = {Utils.createProductItem()};
 
@@ -87,7 +87,7 @@ public class ConstructorIOItemsTest {
     }
 
     @Test
-    public void updateItemsShouldReturnTrueWithAllParameters() throws Exception {
+    public void updateItemsShouldReturnAResponseWithAllParameters() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] itemsOld = {Utils.createProductItem()};
 
@@ -115,7 +115,7 @@ public class ConstructorIOItemsTest {
     }
 
     @Test
-    public void deleteItemsShouldReturnTrue() throws Exception {
+    public void deleteItemsShouldReturnAResponse() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem item = Utils.createProductItem();
         ConstructorItem[] items = {item};
@@ -127,7 +127,7 @@ public class ConstructorIOItemsTest {
     }
 
     @Test
-    public void deleteItemsShouldReturnTrueWithAllParameters() throws Exception {
+    public void deleteItemsShouldReturnAResponseWithAllParameters() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem item = Utils.createProductItem();
         ConstructorItem[] items = {item};

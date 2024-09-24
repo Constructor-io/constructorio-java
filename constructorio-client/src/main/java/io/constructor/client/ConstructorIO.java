@@ -552,10 +552,10 @@ public class ConstructorIO {
      * @param items the items that you're updating
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate
-     *     a large number of existing variations.
+     *     a large number of existing items.
      * @param notificationEmail An email address where you'd like to receive an email notification
      *     in case the task fails.
-     * @return true if successfully modified
+     * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
     public String updateItems(
@@ -590,7 +590,7 @@ public class ConstructorIO {
      *     updating variations that don't exist. "FAIL" fails the ingestion if there are items that
      *     don't exist. "IGNORE" ignores variations that don't exist. "CREATE" creates items that
      *     don't exist. Defaults to "FAIL".
-     * @return true if successfully modified
+     * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
     public String updateVariations(
@@ -645,7 +645,7 @@ public class ConstructorIO {
      *     a large number of existing variations.
      * @param notificationEmail An email address where you'd like to receive an email notification
      *     in case the task fails.
-     * @return true if successfully modified
+     * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
     public String updateVariations(

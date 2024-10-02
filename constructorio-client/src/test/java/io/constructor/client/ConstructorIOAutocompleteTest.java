@@ -7,6 +7,9 @@ import com.google.gson.internal.LinkedTreeMap;
 import io.constructor.client.models.AutocompleteResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -187,6 +190,27 @@ public class ConstructorIOAutocompleteTest {
                 ((ArrayList) ((LinkedTreeMap) response.getRequest().get("filters")).get("group_id"))
                         .get(0),
                 "All");
+    }
+
+    @Test
+    public void autocompleteShouldReturnAResultWithSectionFilter() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        AutocompleteRequest request = new AutocompleteRequest("item1");
+
+        Map<String, List<String>> filter = new HashMap<String, List<String>>();
+        filter.put("Brand", Arrays.asList("XYZ"));
+        request.getFiltersPerSection().put("Products", filter);
+
+        AutocompleteResponse response = constructor.autocomplete(request, userInfo);
+        LinkedTreeMap filters = (LinkedTreeMap)response.getRequest().get("filters");
+        LinkedTreeMap section = (LinkedTreeMap)filters.get("Products");
+        ArrayList filterValues = (ArrayList)section.get("Brand");
+
+        assertEquals(
+        "autocomplete request [Products][Brand] filter should match",
+        filterValues.get(0),
+        "XYZ");
     }
 
     @Test

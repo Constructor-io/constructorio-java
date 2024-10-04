@@ -636,7 +636,7 @@ public class ConstructorIOBrowseTest {
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertTrue(
-                "filter match type exists",
+                "filter match types exists",
                 response.getRequest().get("filter_match_types") != null);
         assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
     }

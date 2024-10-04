@@ -1234,7 +1234,8 @@ public class ConstructorIO {
                 url =
                         url.newBuilder()
                                 .addQueryParameter(
-                                        "filter_match_types[" + filterMatchTypesKey + "]", filterMatchTypesValue)
+                                        "filter_match_types[" + filterMatchTypesKey + "]",
+                                        filterMatchTypesValue)
                                 .build();
             }
 
@@ -1413,7 +1414,8 @@ public class ConstructorIO {
                 url =
                         url.newBuilder()
                                 .addQueryParameter(
-                                        "filter_match_types[" + filterMatchTypesKey + "]", filterMatchTypesValue)
+                                        "filter_match_types[" + filterMatchTypesKey + "]",
+                                        filterMatchTypesValue)
                                 .build();
             }
 

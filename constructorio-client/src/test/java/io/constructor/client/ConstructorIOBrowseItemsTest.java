@@ -14,7 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class ConstructorIOBrowseItemsTest { 
+public class ConstructorIOBrowseItemsTest {
 
     @Rule public ExpectedException thrown = ExpectedException.none();
     private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
@@ -310,11 +310,15 @@ public class ConstructorIOBrowseItemsTest {
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         List<String> ids = Arrays.asList("10001", "10002");
         BrowseItemsRequest request = new BrowseItemsRequest(ids);
-        request.getFilterMatchTypes().put("Color", "any");
+        request.getFacets().put("Brand", Arrays.asList("XYZ"));
+        request.getFilterMatchTypes().put("Brand", "all");
         BrowseResponse response = constructor.browseItems(request, userInfo);
 
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
+        assertTrue(
+                "filter match type exists",
+                response.getRequest().get("filter_match_types") != null);
         assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
     }
 }

@@ -629,11 +629,15 @@ public class ConstructorIOBrowseTest {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Color", "yellow");
-        request.getFilterMatchTypes().put("Color", "any");
+        request.getFacets().put("Brand", Arrays.asList("XYZ"));
+        request.getFilterMatchTypes().put("Brand", "all");
         BrowseResponse response = constructor.browse(request, userInfo);
 
         assertTrue("browse result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
+        assertTrue(
+                "filter match type exists",
+                response.getRequest().get("filter_match_types") != null);
         assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
     }
 }

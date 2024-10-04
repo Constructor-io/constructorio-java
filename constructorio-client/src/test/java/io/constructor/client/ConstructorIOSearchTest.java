@@ -623,11 +623,15 @@ public class ConstructorIOSearchTest {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("item");
-        request.getFilterMatchTypes().put("Color", "any");
+        request.getFacets().put("Brand", Arrays.asList("XYZ"));
+        request.getFilterMatchTypes().put("Brand", "all");
         SearchResponse response = constructor.search(request, userInfo);
 
         assertTrue("search result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
+        assertTrue(
+                "filter match type exists",
+                response.getRequest().get("filter_match_types") != null);
         assertEquals("request query exists", response.getRequest().get("term"), "item");
     }
 }

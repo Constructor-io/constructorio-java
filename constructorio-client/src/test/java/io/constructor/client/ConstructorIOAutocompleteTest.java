@@ -203,14 +203,14 @@ public class ConstructorIOAutocompleteTest {
         request.getFiltersPerSection().put("Products", filter);
 
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
-        LinkedTreeMap filters = (LinkedTreeMap)response.getRequest().get("filters");
-        LinkedTreeMap section = (LinkedTreeMap)filters.get("Products");
-        ArrayList filterValues = (ArrayList)section.get("Brand");
+        LinkedTreeMap filters = (LinkedTreeMap) response.getRequest().get("filters");
+        LinkedTreeMap section = (LinkedTreeMap) filters.get("Products");
+        ArrayList filterValues = (ArrayList) section.get("Brand");
 
         assertEquals(
-        "autocomplete request [Products][Brand] filter should match",
-        filterValues.get(0),
-        "XYZ");
+                "autocomplete request [Products][Brand] filter should match",
+                filterValues.get(0),
+                "XYZ");
     }
 
     @Test

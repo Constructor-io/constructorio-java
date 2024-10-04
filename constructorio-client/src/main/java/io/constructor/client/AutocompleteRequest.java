@@ -89,7 +89,6 @@ public class AutocompleteRequest {
         this.filtersPerSection = filtersPerSection;
     }
 
-
     /**
      * @return the filters
      */

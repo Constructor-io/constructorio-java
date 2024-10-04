@@ -879,10 +879,19 @@ public class ConstructorIO {
 
             for (String sectionName : req.getFiltersPerSection().keySet()) {
                 for (String filterName : req.getFiltersPerSection().get(sectionName).keySet()) {
-                    for (String facetValue : req.getFiltersPerSection().get(sectionName).get(filterName)) {
+                    for (String facetValue :
+                            req.getFiltersPerSection().get(sectionName).get(filterName)) {
                         url =
                                 url.newBuilder()
-                                        .addQueryParameter("filters" + "[" + sectionName + "]" + "[" + filterName + "]", facetValue)
+                                        .addQueryParameter(
+                                                "filters"
+                                                        + "["
+                                                        + sectionName
+                                                        + "]"
+                                                        + "["
+                                                        + filterName
+                                                        + "]",
+                                                facetValue)
                                         .build();
                     }
                 }

@@ -20,7 +20,7 @@ public class ConstructorIOQuizResultsConfigTest {
     @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void QuizResultsConfigShouldReturnResuls() throws Exception {
+    public void QuizResultsConfigShouldReturnResponse() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizResultsConfigRequest request = new QuizResultsConfigRequest(quizId);
         String quizVersionId = constructor.quizResultsConfig(request, null).getQuizVersionId();
@@ -34,7 +34,7 @@ public class ConstructorIOQuizResultsConfigTest {
     }
 
     @Test
-    public void QuizResultsConfigAsJsonShouldReturnResult() throws Exception {
+    public void QuizResultsConfigAsJsonShouldReturnResponse() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizResultsConfigRequest request = new QuizResultsConfigRequest(quizId);
 
@@ -47,7 +47,7 @@ public class ConstructorIOQuizResultsConfigTest {
     }
 
     @Test
-    public void QuizResultsShouldReturnErrorWithInvalidQuizId() throws Exception {
+    public void QuizResultsConfigShouldReturnErrorWithInvalidQuizId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizResultsConfigRequest request = new QuizResultsConfigRequest("invalidQuiz");
 
@@ -55,11 +55,11 @@ public class ConstructorIOQuizResultsConfigTest {
         thrown.expectMessage(
                 "[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a"
                         + " valid quiz id before trying again.");
-        QuizResultsConfigResponse response = constructor.quizResultsConfig(request, null);
+        constructor.quizResultsConfig(request, null);
     }
 
     @Test
-    public void QuizResultsAsJsonShouldReturnErrorWithInvalidQuizId() throws Exception {
+    public void QuizResultsConfigAsJsonShouldReturnErrorWithInvalidQuizId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizResultsConfigRequest request = new QuizResultsConfigRequest("invalidQuiz");
 
@@ -67,11 +67,11 @@ public class ConstructorIOQuizResultsConfigTest {
         thrown.expectMessage(
                 "[HTTP 404] The quiz you requested, \"invalidQuiz\" was not found, please specify a"
                         + " valid quiz id before trying again.");
-        String response = constructor.quizResultsConfigAsJson(request, null);
+        constructor.quizResultsConfigAsJson(request, null);
     }
 
     @Test
-    public void QuizResultsShouldReturnErrorWithInvalidIndexKey() throws Exception {
+    public void QuizResultsConfigShouldReturnErrorWithInvalidIndexKey() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
         QuizResultsConfigRequest request = new QuizResultsConfigRequest(quizId);
 
@@ -80,11 +80,11 @@ public class ConstructorIOQuizResultsConfigTest {
                 "[HTTP 404] The quiz you requested, \""
                         + quizId
                         + "\" was not found, please specify a valid quiz id before trying again.");
-        QuizResultsConfigResponse response = constructor.quizResultsConfig(request, null);
+        constructor.quizResultsConfig(request, null);
     }
 
     @Test
-    public void QuizResultsAsJsonShouldReturnErrorWithInvalidIndexKey() throws Exception {
+    public void QuizResultsConfigAsJsonShouldReturnErrorWithInvalidIndexKey() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
         QuizResultsConfigRequest request = new QuizResultsConfigRequest(quizId);
 
@@ -93,6 +93,6 @@ public class ConstructorIOQuizResultsConfigTest {
                 "[HTTP 404] The quiz you requested, \""
                         + quizId
                         + "\" was not found, please specify a valid quiz id before trying again.");
-        String response = constructor.quizResultsConfigAsJson(request, null);
+        constructor.quizResultsConfigAsJson(request, null);
     }
 }

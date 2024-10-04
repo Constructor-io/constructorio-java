@@ -2779,8 +2779,8 @@ public class ConstructorIO {
     /**
      * Queries the quiz service for the quiz results page configurations
      *
-     * @param req the Quiz request
-     * @return a Quiz Results Response
+     * @param req the Quiz Results Config request
+     * @return a Quiz Results Config Response
      * @throws ConstructorException if the request is invalid.
      */
     public QuizResultsConfigResponse quizResultsConfig(
@@ -2798,7 +2798,7 @@ public class ConstructorIO {
     /**
      * Queries the quiz service for the quiz results configuration
      *
-     * @param req the Quiz request
+     * @param req the Quiz Results Config request
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */

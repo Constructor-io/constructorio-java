@@ -303,4 +303,22 @@ public class ConstructorIOBrowseItemsTest {
         assertNotNull("browse facet [Brand] exists", brandFacet);
         assertTrue("browse facet [Brand] is hidden", brandFacet.getHidden());
     }
+
+    @Test
+    public void BrowseItemsShouldReturnAResultWithFilterMatchTypes() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        List<String> ids = Arrays.asList("10001", "10002");
+        BrowseItemsRequest request = new BrowseItemsRequest(ids);
+        request.getFacets().put("Brand", Arrays.asList("XYZ"));
+        request.getFilterMatchTypes().put("Brand", "all");
+        BrowseResponse response = constructor.browseItems(request, userInfo);
+
+        assertTrue("browse result id exists", response.getResultId() != null);
+        assertTrue("request exists", response.getRequest() != null);
+        assertTrue(
+                "filter match types exists",
+                response.getRequest().get("filter_match_types") != null);
+        assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
+    }
 }

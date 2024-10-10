@@ -1219,6 +1219,16 @@ public class ConstructorIO {
                                 .build();
             }
 
+            for (String filterMatchTypesKey : req.getFilterMatchTypes().keySet()) {
+                String filterMatchTypesValue = req.getFilterMatchTypes().get(filterMatchTypesKey);
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "filter_match_types[" + filterMatchTypesKey + "]",
+                                        filterMatchTypesValue)
+                                .build();
+            }
+
             Request request =
                     this.makeUserRequestBuilder(userInfo, authorizedRequest).url(url).get().build();
 
@@ -1386,6 +1396,16 @@ public class ConstructorIO {
                 url =
                         url.newBuilder()
                                 .addQueryParameter("fmt_options[hidden_facets]", hiddenFacet)
+                                .build();
+            }
+
+            for (String filterMatchTypesKey : req.getFilterMatchTypes().keySet()) {
+                String filterMatchTypesValue = req.getFilterMatchTypes().get(filterMatchTypesKey);
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "filter_match_types[" + filterMatchTypesKey + "]",
+                                        filterMatchTypesValue)
                                 .build();
             }
 

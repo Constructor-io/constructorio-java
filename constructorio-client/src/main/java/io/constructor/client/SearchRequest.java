@@ -25,6 +25,7 @@ public class SearchRequest {
     private String qsParam;
     private String now;
     private int offset;
+    private Map<String, String> filterMatchTypes;
 
     /**
      * Creates a search request
@@ -50,6 +51,7 @@ public class SearchRequest {
         this.qsParam = null;
         this.now = null;
         this.offset = 0;
+        this.filterMatchTypes = new HashMap<String, String>();
     }
 
     /**
@@ -295,5 +297,21 @@ public class SearchRequest {
      */
     public int getOffset() {
         return offset;
+    }
+
+    /**
+     * @param filterMatchTypes the filterMatchTypes to set. Please refer to
+     *     https://docs-beta.constructor.io/reference/v1-search-get-search-results for details
+     *     Possible values 'all', 'any' or 'none'
+     */
+    public void setFilterMatchTypes(Map<String, String> filterMatchTypes) {
+        this.filterMatchTypes = filterMatchTypes;
+    }
+
+    /**
+     * @return the filterMatchTypes
+     */
+    public Map<String, String> getFilterMatchTypes() {
+        return filterMatchTypes;
     }
 }

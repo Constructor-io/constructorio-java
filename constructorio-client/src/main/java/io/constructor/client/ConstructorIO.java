@@ -877,6 +877,26 @@ public class ConstructorIO {
                 }
             }
 
+            for (String sectionName : req.getFiltersPerSection().keySet()) {
+                for (String filterName : req.getFiltersPerSection().get(sectionName).keySet()) {
+                    for (String facetValue :
+                            req.getFiltersPerSection().get(sectionName).get(filterName)) {
+                        url =
+                                url.newBuilder()
+                                        .addQueryParameter(
+                                                "filters"
+                                                        + "["
+                                                        + sectionName
+                                                        + "]"
+                                                        + "["
+                                                        + filterName
+                                                        + "]",
+                                                facetValue)
+                                        .build();
+                    }
+                }
+            }
+
             if (req.getVariationsMap() != null) {
                 String variationsMapJson = new Gson().toJson(req.getVariationsMap());
                 url =

@@ -38,7 +38,7 @@ public class QuizRequest extends QuizRequestBase {
     /**
      * @param quizSessionId The quiz session id will be returned with the first request, and it
      *     should be passed with subsequent requests. More information can be found:
-     *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
+     *     https://docs.constructor.com/reference/configuration-quizzes
      */
     public void setQuizSessionId(String quizSessionId) {
         this.quizSessionId = quizSessionId;
@@ -47,7 +47,7 @@ public class QuizRequest extends QuizRequestBase {
     /**
      * @return the quizSessionId. The quiz session id will be returned with the first request and it
      *     should be passed with subsequent requests. More information can be found:
-     *     https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
+     *     https://docs.constructor.com/reference/configuration-quizzes
      */
     public String getQuizSessionId() {
         return quizSessionId;

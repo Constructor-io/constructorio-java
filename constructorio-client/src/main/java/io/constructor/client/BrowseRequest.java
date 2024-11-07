@@ -245,7 +245,7 @@ public class BrowseRequest {
     /**
      * @param preFilterExpression the faceting expression to scope search results (JSON-encoded
      *     query string). Please refer to
-     *     https://docs.constructor.com/reference/configuration-collections
+     *     https://docs.constructor.com/reference/shared-filter-expressions
      */
     public void setPreFilterExpression(String preFilterExpression) {
         this.preFilterExpression = preFilterExpression;

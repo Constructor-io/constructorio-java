@@ -20,7 +20,7 @@ public class ConstructorItem {
 
     /**
      * Creates an item. Optional public fields are in the <a
-     * href="https://docs.constructor.io/rest_api/items/items/">API documentation</a>
+     * href="https://docs.constructor.com/reference/catalog-items">API documentation</a>
      *
      * @param id the id of the item that you are adding.
      * @param name the name of the item that you are adding.

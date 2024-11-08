@@ -187,7 +187,7 @@ public class BrowseRequest {
 
     /**
      * @param formatOptions the formatOptions to set. Please refer to
-     *     https://docs.constructor.io/rest_api/search/queries for details
+     *     https://docs.constructor.com/reference/v1-search-get-search-results for details
      */
     public void setFormatOptions(Map<String, String> formatOptions) {
         this.formatOptions = formatOptions;
@@ -245,7 +245,7 @@ public class BrowseRequest {
     /**
      * @param preFilterExpression the faceting expression to scope search results (JSON-encoded
      *     query string). Please refer to
-     *     https://docs.constructor.io/rest_api/collections#add-items-dynamically
+     *     https://docs.constructor.com/reference/shared-filter-expressions
      */
     public void setPreFilterExpression(String preFilterExpression) {
         this.preFilterExpression = preFilterExpression;
@@ -261,7 +261,7 @@ public class BrowseRequest {
     /**
      * @param qsParam any parameters listed in the API documentation can be serialized into a JSON
      *     object and parsed through this parameter. Please refer to
-     *     https://docs.constructor.io/rest_api/search/queries/
+     *     https://docs.constructor.com/reference/v1-search-get-search-results/
      */
     public void setQsParam(String qsParam) {
         this.qsParam = qsParam;
@@ -276,7 +276,7 @@ public class BrowseRequest {
 
     /**
      * @param now a unix epoch timestamp used to emulate "past" and "future" requests. Please refer
-     *     to https://docs.constructor.io/rest_api/search/queries/
+     *     to https://docs.constructor.com/reference/v1-search-get-search-results/
      */
     public void setNow(String now) {
         this.now = now;
@@ -306,7 +306,7 @@ public class BrowseRequest {
 
     /**
      * @param filterMatchTypes the filterMatchTypes to set. Please refer to
-     *     https://docs-beta.constructor.io/reference/v1-browse-get-browse-results for details
+     *     https://docs.constructor.com/reference/v1-browse-get-browse-results for details
      *     Possible values 'all', 'any' or 'none'
      */
     public void setFilterMatchTypes(Map<String, String> filterMatchTypes) {

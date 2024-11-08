@@ -40,7 +40,8 @@ public class TaskResponseTest {
         assertEquals("status exists", "FAILED", response.getStatus());
         assertEquals(
                 "Error message exists",
-                "IngestionError: The items file you have uploaded is empty. Please fix it and try again.",
+                "IngestionError: The items file you have uploaded is empty. Please fix it and try"
+                        + " again.",
                 jsonObj.get("message").getAsString());
     }
 

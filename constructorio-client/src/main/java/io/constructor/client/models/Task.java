@@ -32,6 +32,9 @@ public class Task {
     @SerializedName("result")
     private Object result;
 
+    @SerializedName("error")
+    private Object error;
+
     /**
      * @return the id
      */
@@ -95,6 +98,13 @@ public class Task {
         return result;
     }
 
+    /**
+     * @return the error
+     */
+    public Object getError() {
+        return error;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -129,5 +139,9 @@ public class Task {
 
     public void setResult(Object result) {
         this.result = result;
+    }
+
+    public void setError(Object error) {
+        this.error = error;
     }
 }

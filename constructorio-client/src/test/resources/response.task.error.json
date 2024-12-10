@@ -1,0 +1,14 @@
+{
+  "id": 100721281,
+  "status": "FAILED",
+  "submission_time": "2024-08-21T18:11:49",
+  "last_update": "2024-08-21T18:11:53",
+  "start_time": "2024-08-21T18:11:51",
+  "type": "ingestion",
+  "error": {
+    "message": "IngestionError: The items file you have uploaded is empty. Please fix it and try again."
+  },
+  "filename": "filename",
+  "protocol": "http",
+  "ingestion_type": "patchdelta"
+}

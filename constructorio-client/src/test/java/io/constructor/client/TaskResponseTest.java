@@ -34,7 +34,6 @@ public class TaskResponseTest {
     public void createTaskResponseWithErrorTaskShouldReturnAResult() throws Exception {
         String string = Utils.getTestResource("response.task.error.json");
         Task response = ConstructorIO.createTaskResponse(string);
-        JsonObject jsonObj = new Gson().toJsonTree(response.getError()).getAsJsonObject();
 
         assertEquals("id exists", 100721281, response.getId());
         assertEquals("status exists", "FAILED", response.getStatus());
@@ -42,7 +41,7 @@ public class TaskResponseTest {
                 "Error message exists",
                 "IngestionError: The items file you have uploaded is empty. Please fix it and try"
                         + " again.",
-                jsonObj.get("message").getAsString());
+                response.getError().getMessage());
     }
 
     @Test

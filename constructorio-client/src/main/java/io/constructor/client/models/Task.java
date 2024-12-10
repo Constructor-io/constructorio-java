@@ -33,7 +33,7 @@ public class Task {
     private Object result;
 
     @SerializedName("error")
-    private Object error;
+    private TaskError error;
 
     /**
      * @return the id
@@ -101,7 +101,7 @@ public class Task {
     /**
      * @return the error
      */
-    public Object getError() {
+    public TaskError getError() {
         return error;
     }
 
@@ -141,7 +141,7 @@ public class Task {
         this.result = result;
     }
 
-    public void setError(Object error) {
+    public void setError(TaskError error) {
         this.error = error;
     }
 }

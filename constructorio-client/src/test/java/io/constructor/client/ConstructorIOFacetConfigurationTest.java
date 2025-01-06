@@ -2,33 +2,51 @@ package io.constructor.client;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import com.google.gson.Gson;
 import io.constructor.client.models.FacetConfiguration;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ConstructorIOFacetConfigurationTest {
 
-    private String token = System.getenv("TEST_API_TOKEN");
-    private String apiKey = System.getenv("TEST_CATALOG_API_KEY");
+    private static String token = System.getenv("TEST_API_TOKEN");
+    private static String apiKey = System.getenv("TEST_CATALOG_API_KEY");
+    private static ArrayList<String> facetsToCleanup = new ArrayList<>();
+
+    private void addFacetToCleanupArray(String facetName, String section) {
+        if (section == null) {
+            section = "Products";
+        }
+        facetsToCleanup.add(facetName + "|" + section);
+    }
+
+    private void addFacetToCleanupArray(String facetName) {
+        addFacetToCleanupArray(facetName, "Products");
+    }    
+        
+    @AfterClass
+    public static void cleanupFacets() throws ConstructorException {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+
+        for (String facet : facetsToCleanup) {
+            String[] parts = facet.split("\\|");
+            String facetName = parts[0];
+            String section = parts[1];
+    
+            try {
+                constructor.deleteFacetConfiguration(facetName, section);
+            } catch (ConstructorException e) {
+                System.err.println("Warning: Failed to clean up facet: " + facetName);
+            }
+        }
+    }
 
     @Rule public ExpectedException thrown = ExpectedException.none();
-
-    @Before
-    public void init() throws Exception {
-        // TODO: Add facet configuration cleanup after deleteFacetConfiguration function
-        // has been implemented
-    }
-
-    @After
-    public void teardown() throws Exception {
-        // TODO: Add facet configuration cleanup after deleteFacetConfiguration function
-        // has been implemented
-    }
 
     @Test
     public void CreateFacetConfigurationShouldReturn() throws Exception {
@@ -56,6 +74,7 @@ public class ConstructorIOFacetConfigurationTest {
         assertEquals(jsonObj.get("protected"), loadedJsonObj.get("protected"));
         assertEquals(jsonObj.get("countable"), loadedJsonObj.get("countable"));
         assertEquals(jsonObj.get("options_limit"), loadedJsonObj.get("options_limit"));
+        addFacetToCleanupArray("testFacet");
     }
 
     @Test(expected = ConstructorException.class)
@@ -73,6 +92,7 @@ public class ConstructorIOFacetConfigurationTest {
         FacetConfigurationRequest request = new FacetConfigurationRequest(config, "");
 
         constructor.createFacetConfiguration(request);
+        addFacetToCleanupArray("emptySection");
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -98,5 +118,69 @@ public class ConstructorIOFacetConfigurationTest {
         JSONObject jsonObj = new JSONObject(response);
 
         assertEquals("brand", jsonObj.getString("name"));
+        addFacetToCleanupArray("brand", "Search Suggestions");
+    }
+
+    @Test
+    public void testDeleteFacetConfigurationWithFacetNameAndSection() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+
+        // Create a facet first
+        String string = Utils.getTestResource("facet.configuration.json");
+        FacetConfiguration facetConfig = new Gson().fromJson(string, FacetConfiguration.class);
+        facetConfig.setName("testDeleteFacet");
+
+        constructor.createFacetConfiguration(
+                new FacetConfigurationRequest(facetConfig, "Products"));
+
+        // Delete the facet
+        String deleteResponse = constructor.deleteFacetConfiguration("testDeleteFacet", "Products");
+        JSONObject jsonObj = new JSONObject(deleteResponse);
+
+        assertTrue("Deleted facet name matches", jsonObj.get("name").equals("testDeleteFacet"));
+    }
+
+    @Test
+    public void testDeleteFacetConfigurationWithDefaultSection() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+
+        // Create a facet first
+        String string = Utils.getTestResource("facet.configuration.json");
+        FacetConfiguration facetConfig = new Gson().fromJson(string, FacetConfiguration.class);
+        facetConfig.setName("testDefaultSectionFacet");
+
+        constructor.createFacetConfiguration(
+                new FacetConfigurationRequest(facetConfig, "Products"));
+
+        // Delete the facet
+        String deleteResponse = constructor.deleteFacetConfiguration("testDefaultSectionFacet");
+        JSONObject jsonObj = new JSONObject(deleteResponse);
+
+        assertTrue("Deleted facet name matches", jsonObj.get("name").equals("testDefaultSectionFacet"));
+    }
+
+    @Test
+    public void testDeleteFacetConfigurationWithFacetConfiguration() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+
+        // Create a facet first
+        String string = Utils.getTestResource("facet.configuration.json");
+        FacetConfiguration facetConfig = new Gson().fromJson(string, FacetConfiguration.class);
+        facetConfig.setName("testDeleteWithFacetConfiguration");
+
+        FacetConfigurationRequest request = new FacetConfigurationRequest(facetConfig, "Products");
+        constructor.createFacetConfiguration(request);
+
+        // Delete the facet
+        String deleteResponse = constructor.deleteFacetConfiguration(request);
+        JSONObject jsonObj = new JSONObject(deleteResponse);
+
+        assertTrue("Deleted facet name matches", jsonObj.get("name").equals("testDeleteWithFacetConfiguration"));
+    }
+
+    @Test(expected = ConstructorException.class)
+    public void testDeleteNonExistentFacetShouldThrowException() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        constructor.deleteFacetConfiguration("nonExistentFacet", "Products");
     }
 }

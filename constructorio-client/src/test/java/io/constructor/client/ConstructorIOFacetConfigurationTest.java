@@ -2,10 +2,9 @@ package io.constructor.client;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import com.google.gson.Gson;
 import io.constructor.client.models.FacetConfiguration;
+import java.util.ArrayList;
 import org.json.JSONObject;
 import org.junit.AfterClass;
 import org.junit.Rule;
@@ -27,8 +26,8 @@ public class ConstructorIOFacetConfigurationTest {
 
     private void addFacetToCleanupArray(String facetName) {
         addFacetToCleanupArray(facetName, "Products");
-    }    
-        
+    }
+
     @AfterClass
     public static void cleanupFacets() throws ConstructorException {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
@@ -37,7 +36,7 @@ public class ConstructorIOFacetConfigurationTest {
             String[] parts = facet.split("\\|");
             String facetName = parts[0];
             String section = parts[1];
-    
+
             try {
                 constructor.deleteFacetConfiguration(facetName, section);
             } catch (ConstructorException e) {
@@ -156,7 +155,9 @@ public class ConstructorIOFacetConfigurationTest {
         String deleteResponse = constructor.deleteFacetConfiguration("testDefaultSectionFacet");
         JSONObject jsonObj = new JSONObject(deleteResponse);
 
-        assertTrue("Deleted facet name matches", jsonObj.get("name").equals("testDefaultSectionFacet"));
+        assertTrue(
+                "Deleted facet name matches",
+                jsonObj.get("name").equals("testDefaultSectionFacet"));
     }
 
     @Test
@@ -175,7 +176,9 @@ public class ConstructorIOFacetConfigurationTest {
         String deleteResponse = constructor.deleteFacetConfiguration(request);
         JSONObject jsonObj = new JSONObject(deleteResponse);
 
-        assertTrue("Deleted facet name matches", jsonObj.get("name").equals("testDeleteWithFacetConfiguration"));
+        assertTrue(
+                "Deleted facet name matches",
+                jsonObj.get("name").equals("testDeleteWithFacetConfiguration"));
     }
 
     @Test(expected = ConstructorException.class)

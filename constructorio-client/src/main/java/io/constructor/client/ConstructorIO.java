@@ -2905,10 +2905,11 @@ public class ConstructorIO {
     public String deleteFacetConfiguration(String facetName, String section)
             throws ConstructorException {
         try {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "facets", facetName))
-                .newBuilder()
-                .addQueryParameter("section", section)
-                .build();
+            HttpUrl url =
+                    this.makeUrl(Arrays.asList("v1", "facets", facetName))
+                            .newBuilder()
+                            .addQueryParameter("section", section)
+                            .build();
 
             Request request = this.makeAuthorizedRequestBuilder().url(url).delete().build();
 
@@ -2924,14 +2925,17 @@ public class ConstructorIO {
         return deleteFacetConfiguration(facetName, "Products");
     }
 
-     /**
+    /**
      * Delete a facet configuration
      *
      * @param facetConfigurationRequest the facetConfiguration request
      * @return returns the deleted facet
      * @throws ConstructorException if the request is invalid.
      */
-    public String deleteFacetConfiguration(FacetConfigurationRequest facetConfigurationRequest) throws ConstructorException {
-        return deleteFacetConfiguration(facetConfigurationRequest.geFacetConfiguration().getName(), facetConfigurationRequest.getSection());
+    public String deleteFacetConfiguration(FacetConfigurationRequest facetConfigurationRequest)
+            throws ConstructorException {
+        return deleteFacetConfiguration(
+                facetConfigurationRequest.geFacetConfiguration().getName(),
+                facetConfigurationRequest.getSection());
     }
 }

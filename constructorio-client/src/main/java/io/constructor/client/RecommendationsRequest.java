@@ -39,7 +39,6 @@ public class RecommendationsRequest {
         this.facets = new HashMap<String, List<String>>();
         this.formatOptions = new HashMap<String, String>();
         this.hiddenFields = new ArrayList<String>();
-        this.hiddenFacets = new ArrayList<String>();
     }
 
     /**

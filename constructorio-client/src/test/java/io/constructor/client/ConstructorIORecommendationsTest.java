@@ -142,7 +142,8 @@ public class ConstructorIORecommendationsTest {
     }
 
     @Test
-    public void getRecommendationsShouldReturnAResultWithFmtOptionsAndHiddenFields() throws Exception {
+    public void getRecommendationsShouldReturnAResultWithFmtOptionsAndHiddenFields()
+            throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         RecommendationsRequest request = new RecommendationsRequest("item_page_1");
@@ -152,10 +153,11 @@ public class ConstructorIORecommendationsTest {
         request.getFormatOptions().put("groups_max_depth", "3");
 
         RecommendationsResponse response = constructor.recommendations(request, userInfo);
-        Map<String, Object> fmtOptions = (Map<String, Object>) response.getRequest().get("fmt_options");
+        Map<String, Object> fmtOptions =
+                (Map<String, Object>) response.getRequest().get("fmt_options");
 
         assertTrue("recommendation results exist", response.getResponse().getResults().size() >= 0);
-        assertTrue("recommendation result id exists", response.getResultId() != null);  
+        assertTrue("recommendation result id exists", response.getResultId() != null);
         assertEquals(fmtOptions.get("groups_max_depth"), Double.valueOf("3.0"));
         assertTrue(((List<String>) fmtOptions.get("hidden_fields")).contains("testField"));
     }

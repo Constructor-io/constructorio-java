@@ -154,10 +154,10 @@ public class RecommendationsRequest {
     public String getPreFilterExpression() {
         return preFilterExpression;
     }
-    
+
     /**
      * @param formatOptions the formatOptions to set. Please refer to
-     *    https://docs.constructor.com/reference/v1-recommendations-get-pod-results for details
+     *     https://docs.constructor.com/reference/v1-recommendations-get-pod-results for details
      */
     public void setFormatOptions(Map<String, String> formatOptions) {
         this.formatOptions = formatOptions;

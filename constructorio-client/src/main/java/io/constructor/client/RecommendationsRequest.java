@@ -1,5 +1,6 @@
 package io.constructor.client;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,8 @@ public class RecommendationsRequest {
     private String section;
     private String preFilterExpression;
     private VariationsMap variationsMap;
+    private Map<String, String> formatOptions;
+    private List<String> hiddenFields;
 
     /**
      * Creates a recommendations request
@@ -34,6 +37,9 @@ public class RecommendationsRequest {
         this.variationsMap = null;
         this.preFilterExpression = null;
         this.facets = new HashMap<String, List<String>>();
+        this.formatOptions = new HashMap<String, String>();
+        this.hiddenFields = new ArrayList<String>();
+        this.hiddenFacets = new ArrayList<String>();
     }
 
     /**
@@ -148,5 +154,34 @@ public class RecommendationsRequest {
      */
     public String getPreFilterExpression() {
         return preFilterExpression;
+    }
+    
+    /**
+     * @param formatOptions the formatOptions to set. Please refer to
+     *    https://docs.constructor.com/reference/v1-recommendations-get-pod-results for details
+     */
+    public void setFormatOptions(Map<String, String> formatOptions) {
+        this.formatOptions = formatOptions;
+    }
+
+    /**
+     * @return the format options
+     */
+    public Map<String, String> getFormatOptions() {
+        return formatOptions;
+    }
+
+    /**
+     * @param hiddenFields the hiddenFields to set
+     */
+    public void setHiddenFields(List<String> hiddenFields) {
+        this.hiddenFields = hiddenFields;
+    }
+
+    /**
+     * @return the hidden fields
+     */
+    public List<String> getHiddenFields() {
+        return hiddenFields;
     }
 }

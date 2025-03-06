@@ -7,6 +7,7 @@ import io.constructor.client.models.RecommendationsResponse;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -138,5 +139,24 @@ public class ConstructorIORecommendationsTest {
 
         assertEquals(response.getRequest().get("term"), "test");
         assertTrue("recommendation result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void getRecommendationsShouldReturnAResultWithFmtOptionsAndHiddenFields() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        RecommendationsRequest request = new RecommendationsRequest("item_page_1");
+        request.setItemIds(Arrays.asList("power_drill", "drill"));
+        request.setNumResults(5);
+        request.getHiddenFields().add("testField");
+        request.getFormatOptions().put("groups_max_depth", "3");
+
+        RecommendationsResponse response = constructor.recommendations(request, userInfo);
+        Map<String, Object> fmtOptions = (Map<String, Object>) response.getRequest().get("fmt_options");
+
+        assertTrue("recommendation results exist", response.getResponse().getResults().size() >= 0);
+        assertTrue("recommendation result id exists", response.getResultId() != null);  
+        assertEquals(fmtOptions.get("groups_max_depth"), Double.valueOf("3.0"));
+        assertTrue(((List<String>) fmtOptions.get("hidden_fields")).contains("testField"));
     }
 }

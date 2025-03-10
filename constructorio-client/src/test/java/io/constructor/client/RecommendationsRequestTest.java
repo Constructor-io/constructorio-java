@@ -47,6 +47,9 @@ public class RecommendationsRequestTest {
         RecommendationsRequest request = new RecommendationsRequest(podId);
         Map<String, List<String>> facets = new HashMap<String, List<String>>();
         facets.put("Flavors", Arrays.asList("Honey Roasted", "Dry Roasted", "Unsalted"));
+        Map<String, String> formatOptions = new HashMap<String, String>();
+        formatOptions.put("groups_start", "top");
+        List<String> hiddenFields = Arrays.asList("hiddenField1", "hiddenField2");
 
         request.setPodId("zero_results_1");
         request.setNumResults(3);
@@ -54,11 +57,15 @@ public class RecommendationsRequestTest {
         request.setSection("Search Suggestions");
         request.setFacets(facets);
         request.setTerm(term);
+        request.setFormatOptions(formatOptions);
+        request.setHiddenFields(hiddenFields);
 
         assertEquals(request.getPodId(), "zero_results_1");
         assertEquals(request.getNumResults(), 3);
         assertEquals(request.getSection(), "Search Suggestions");
         assertEquals(request.getFacets(), facets);
         assertEquals(request.getTerm(), term);
+        assertEquals(request.getFormatOptions(), formatOptions);
+        assertEquals(request.getHiddenFields(), hiddenFields);
     }
 }

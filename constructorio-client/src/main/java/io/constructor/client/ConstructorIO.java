@@ -1818,6 +1818,22 @@ public class ConstructorIO {
                                 .build();
             }
 
+            for (String formatOptionKey : req.getFormatOptions().keySet()) {
+                String formatOptionValue = req.getFormatOptions().get(formatOptionKey);
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "fmt_options[" + formatOptionKey + "]", formatOptionValue)
+                                .build();
+            }
+
+            for (String hiddenField : req.getHiddenFields()) {
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
+                                .build();
+            }
+
             Request request = this.makeUserRequestBuilder(userInfo).url(url).get().build();
 
             Response response = clientWithRetry.newCall(request).execute();

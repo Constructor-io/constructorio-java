@@ -2962,7 +2962,7 @@ public class ConstructorIO {
      * @return returns the created facet option configuration
      * @throws ConstructorException if the request is invalid
      */
-    public String createFacetOptionsConfiguration(FacetOptionConfigurationRequest facetOptionConfigurationRequest)
+    public String createFacetOptionConfiguration(FacetOptionConfigurationRequest facetOptionConfigurationRequest)
             throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v1", "facets", facetOptionConfigurationRequest.getFacetName(), "options"));
@@ -2993,7 +2993,7 @@ public class ConstructorIO {
      * @return returns the deleted facet option configuration
      * @throws ConstructorException if the request is invalid
      */
-    public String deleteFacetOptionsConfiguration(String facetName, String facetOptionValue, String section)
+    public String deleteFacetOptionConfiguration(String facetName, String facetOptionValue, String section)
             throws ConstructorException {
         if (facetName == null || facetName.trim().isEmpty()) {
             throw new IllegalArgumentException("facetName is required");
@@ -3027,9 +3027,9 @@ public class ConstructorIO {
      * @return returns the deleted facet option configuration
      * @throws ConstructorException if the request is invalid
      */
-    public String deleteFacetOptionsConfiguration(String facetName, String facetOptionValue)
+    public String deleteFacetOptionConfiguration(String facetName, String facetOptionValue)
             throws ConstructorException {
-        return deleteFacetOptionsConfiguration(facetName, facetOptionValue, "Products");
+        return deleteFacetOptionConfiguration(facetName, facetOptionValue, "Products");
     }
 
     /**
@@ -3039,9 +3039,9 @@ public class ConstructorIO {
      * @return returns the deleted facet option configuration
      * @throws ConstructorException if the request is invalid
      */
-    public String deleteFacetOptionsConfiguration(FacetOptionConfigurationRequest facetOptionConfigurationRequest)
+    public String deleteFacetOptionConfiguration(FacetOptionConfigurationRequest facetOptionConfigurationRequest)
             throws ConstructorException {
-        return deleteFacetOptionsConfiguration(
+        return deleteFacetOptionConfiguration(
                 facetOptionConfigurationRequest.getFacetName(),
                 facetOptionConfigurationRequest.getFacetOptionConfiguration().getValue(),
                 facetOptionConfigurationRequest.getSection());

@@ -82,7 +82,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
 
         for (FacetOptionToCleanup facetOption : facetOptionsToCleanup) {
             try {
-                constructor.deleteFacetOptionsConfiguration(
+                constructor.deleteFacetOptionConfiguration(
                     facetOption.facetName, facetOption.optionValue, facetOption.section);
             } catch (ConstructorException e) {
                 System.err.println("Warning: Failed to clean up facet option: " + facetOption.facetName);
@@ -120,7 +120,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
         option.setHidden(false);
 
         // Create and verify configuration
-        String response = constructor.createFacetOptionsConfiguration(
+        String response = constructor.createFacetOptionConfiguration(
             new FacetOptionConfigurationRequest(option, "testFacet", PRODUCTS_SECTION));
         JSONObject jsonObj = new JSONObject(response);
 
@@ -137,7 +137,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
     @Test(expected = ConstructorException.class)
     public void testCreateFacetOptionConfigurationWithNullRequest() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-        constructor.createFacetOptionsConfiguration(null);
+        constructor.createFacetOptionConfiguration(null);
     }
 
     @Test
@@ -152,7 +152,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
 
         FacetOptionConfiguration option = createFacetOptionConfigurationObject(
             optionValue, "Test Option Different Section", 1);
-        String response = constructor.createFacetOptionsConfiguration(
+        String response = constructor.createFacetOptionConfiguration(
             new FacetOptionConfigurationRequest(option, facetName, SEARCH_SUGGESTIONS_SECTION));
 
         assertEquals(optionValue, new JSONObject(response).getString("value"));
@@ -170,10 +170,10 @@ public class ConstructorIOFacetOptionConfigurationTest {
 
         FacetOptionConfiguration option = createFacetOptionConfigurationObject(
             optionValue, "Test Option To Delete", 1);
-        constructor.createFacetOptionsConfiguration(
+        constructor.createFacetOptionConfiguration(
             new FacetOptionConfigurationRequest(option, facetName, PRODUCTS_SECTION));
 
-        String response = constructor.deleteFacetOptionsConfiguration(
+        String response = constructor.deleteFacetOptionConfiguration(
             facetName, optionValue, PRODUCTS_SECTION);
         assertEquals(optionValue, new JSONObject(response).getString("value"));
         addFacetOptionToCleanupArray(facetName, optionValue);
@@ -192,15 +192,15 @@ public class ConstructorIOFacetOptionConfigurationTest {
         FacetOptionConfigurationRequest request = new FacetOptionConfigurationRequest(
             createFacetOptionConfigurationObject(optionValue, "Test Delete With Request", 1),
             facetName, PRODUCTS_SECTION);
-        constructor.createFacetOptionsConfiguration(request);
+        constructor.createFacetOptionConfiguration(request);
 
-        String response = constructor.deleteFacetOptionsConfiguration(request);
+        String response = constructor.deleteFacetOptionConfiguration(request);
         assertEquals(optionValue, new JSONObject(response).getString("value"));
         addFacetOptionToCleanupArray(facetName, optionValue);
     }
 
     @Test(expected = ConstructorException.class)
     public void testDeleteNonExistentFacetOptionShouldThrowException() throws Exception {
-        constructor.deleteFacetOptionsConfiguration("nonExistentFacet", "nonExistentOption", PRODUCTS_SECTION);
+        constructor.deleteFacetOptionConfiguration("nonExistentFacet", "nonExistentOption", PRODUCTS_SECTION);
     }
 }

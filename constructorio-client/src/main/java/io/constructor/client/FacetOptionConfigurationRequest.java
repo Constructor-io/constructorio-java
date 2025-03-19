@@ -15,14 +15,15 @@ public class FacetOptionConfigurationRequest {
      * @param facetName the name of the facet
      * @param section the section to which the facet belongs
      */
-    public FacetOptionConfigurationRequest(FacetOptionConfiguration facetOptionConfiguration, String facetName, String section) {
+    public FacetOptionConfigurationRequest(
+            FacetOptionConfiguration facetOptionConfiguration, String facetName, String section) {
         if (facetOptionConfiguration == null) {
             throw new IllegalArgumentException("facetOptionConfiguration is required");
         }
         if (facetName == null || facetName.trim().isEmpty()) {
             throw new IllegalArgumentException("facetName is required");
         }
-        
+
         this.facetOptionConfiguration = facetOptionConfiguration;
         this.facetName = facetName;
         this.section = section;
@@ -34,7 +35,8 @@ public class FacetOptionConfigurationRequest {
      * @param option the facet option configuration to be created
      * @param facetName the name of the facet
      */
-    public FacetOptionConfigurationRequest(FacetOptionConfiguration facetOptionConfiguration, String facetName) {
+    public FacetOptionConfigurationRequest(
+            FacetOptionConfiguration facetOptionConfiguration, String facetName) {
         this(facetOptionConfiguration, facetName, "Products");
     }
 

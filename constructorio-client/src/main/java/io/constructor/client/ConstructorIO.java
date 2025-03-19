@@ -2954,4 +2954,96 @@ public class ConstructorIO {
                 facetConfigurationRequest.geFacetConfiguration().getName(),
                 facetConfigurationRequest.getSection());
     }
+    
+    /**
+     * Creates a facet option configuration
+     *
+     * @param request The facet option configuration request containing the configuration to create
+     * @return returns the created facet option configuration
+     * @throws ConstructorException if the request is invalid
+     */
+    public String createFacetOptionsConfiguration(FacetOptionConfigurationRequest facetOptionConfigurationRequest)
+            throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "facets", facetOptionConfigurationRequest.getFacetName(), "options"));
+            url = 
+                    url.newBuilder()
+                    .addQueryParameter("section", facetOptionConfigurationRequest.getSection())
+                    .build();
+
+            String params = new Gson().toJson(facetOptionConfigurationRequest.getFacetOptionConfiguration());
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).post(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Deletes a facet option configuration
+     *
+     * @param facetName the name of the facet
+     * @param facetOptionValue the value of the facet option to delete
+     * @param section the section of the facet
+     * @return returns the deleted facet option configuration
+     * @throws ConstructorException if the request is invalid
+     */
+    public String deleteFacetOptionsConfiguration(String facetName, String facetOptionValue, String section)
+            throws ConstructorException {
+        if (facetName == null || facetName.trim().isEmpty()) {
+            throw new IllegalArgumentException("facetName is required");
+        }
+        if (facetOptionValue == null || facetOptionValue.trim().isEmpty()) {
+            throw new IllegalArgumentException("facetOptionValue is required");
+        }
+
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "facets", facetName, "options", facetOptionValue));
+            url = 
+                    url.newBuilder()
+                    .addQueryParameter("section", section)
+                    .build();
+
+            Request request = this.makeAuthorizedRequestBuilder().url(url).delete().build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Deletes a facet option configuration with default section "Products"
+     *
+     * @param facetName the name of the facet
+     * @param facetOptionValue the value of the facet option to delete
+     * @return returns the deleted facet option configuration
+     * @throws ConstructorException if the request is invalid
+     */
+    public String deleteFacetOptionsConfiguration(String facetName, String facetOptionValue)
+            throws ConstructorException {
+        return deleteFacetOptionsConfiguration(facetName, facetOptionValue, "Products");
+    }
+
+    /**
+     * Deletes a facet option configuration
+     *
+     * @param request The facet option configuration request containing the configuration to delete
+     * @return returns the deleted facet option configuration
+     * @throws ConstructorException if the request is invalid
+     */
+    public String deleteFacetOptionsConfiguration(FacetOptionConfigurationRequest facetOptionConfigurationRequest)
+            throws ConstructorException {
+        return deleteFacetOptionsConfiguration(
+                facetOptionConfigurationRequest.getFacetName(),
+                facetOptionConfigurationRequest.getFacetOptionConfiguration().getValue(),
+                facetOptionConfigurationRequest.getSection());
+    }
 }

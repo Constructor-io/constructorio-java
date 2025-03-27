@@ -2029,7 +2029,7 @@ public class ConstructorIO {
      * @return version number
      */
     protected String getVersion() {
-        return "ciojava-6.3.3";
+        return "ciojava-6.3.4";
     }
 
     /**
@@ -2958,7 +2958,7 @@ public class ConstructorIO {
     /**
      * Creates a facet option configuration
      *
-     * @param request The facet option configuration request containing the configuration to create
+     * @param facetOptionConfigurationRequest The facet option configuration request containing the configuration to create
      * @return returns the created facet option configuration
      * @throws ConstructorException if the request is invalid
      */
@@ -3044,7 +3044,7 @@ public class ConstructorIO {
     /**
      * Deletes a facet option configuration
      *
-     * @param request The facet option configuration request containing the configuration to delete
+     * @param facetOptionConfigurationRequest The facet option configuration request containing the configuration to delete
      * @return returns the deleted facet option configuration
      * @throws ConstructorException if the request is invalid
      */

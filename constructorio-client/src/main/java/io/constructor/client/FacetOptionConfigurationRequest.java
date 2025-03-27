@@ -32,7 +32,7 @@ public class FacetOptionConfigurationRequest {
     /**
      * Creates a facet option configuration request with default section "Products"
      *
-     * @param option the facet option configuration to be created
+     * @param facetOptionConfiguration the facet option configuration to be created
      * @param facetName the name of the facet
      */
     public FacetOptionConfigurationRequest(
@@ -48,7 +48,7 @@ public class FacetOptionConfigurationRequest {
     }
 
     /**
-     * @param option the facet option configuration to set
+     * @param facetOptionConfiguration the facet option configuration to set
      */
     public void setFacetOptionConfiguration(FacetOptionConfiguration facetOptionConfiguration) {
         this.facetOptionConfiguration = facetOptionConfiguration;

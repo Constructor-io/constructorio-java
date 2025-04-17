@@ -5,9 +5,7 @@ import static org.junit.Assert.*;
 import com.google.gson.Gson;
 import io.constructor.client.models.FacetConfiguration;
 import io.constructor.client.models.FacetOptionConfiguration;
-
 import java.util.*;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.AfterClass;
@@ -154,7 +152,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
                         PRODUCTS_SECTION));
         addFacetToCleanupArray(facetName);
 
-        // Create facet option configuration
+        // Create facet option configurations
         FacetOptionConfiguration option =
                 createFacetOptionConfigurationObject("test-option", "Test Option", 1);
         FacetOptionConfiguration option2 =
@@ -167,10 +165,11 @@ public class ConstructorIOFacetOptionConfigurationTest {
         option.setHidden(false);
         List<FacetOptionConfiguration> configurations = Arrays.asList(option, option2);
 
-        // Create and verify configuration
+        // Create and verify configurations
         String response =
                 constructor.createOrUpdateFacetOptionConfigurations(
-                        new FacetOptionConfigurationsRequest(configurations, "testFacet", PRODUCTS_SECTION));
+                        new FacetOptionConfigurationsRequest(
+                                configurations, "testFacet", PRODUCTS_SECTION));
         JSONArray jsonArr = new JSONArray(response);
         JSONObject jsonOption1 = (JSONObject) jsonArr.get(0);
         JSONObject jsonOption2 = (JSONObject) jsonArr.get(1);

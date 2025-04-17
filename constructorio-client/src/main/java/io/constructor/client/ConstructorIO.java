@@ -2958,7 +2958,8 @@ public class ConstructorIO {
     /**
      * Creates or Updates facet option configurations
      *
-     * @param facetOptionConfigurationsRequest The facet option configurations request containing the configurations to create or update
+     * @param facetOptionConfigurationsRequest The facet option configurations request containing
+     *     the configurations to create or update
      * @return returns the created facet option configurations
      * @throws ConstructorException if the request is invalid
      */
@@ -2981,7 +2982,9 @@ public class ConstructorIO {
 
             String params =
                     new Gson()
-                            .toJson(facetOptionConfigurationsRequest.getFacetOptionConfigurations());
+                            .toJson(
+                                    facetOptionConfigurationsRequest
+                                            .getFacetOptionConfigurations());
             RequestBody body =
                     RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
             Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();
@@ -2997,7 +3000,8 @@ public class ConstructorIO {
     /**
      * Creates a facet option configuration
      *
-     * @param facetOptionConfigurationRequest The facet option configuration request containing the configuration to create
+     * @param facetOptionConfigurationRequest The facet option configuration request containing the
+     *     configuration to create
      * @return returns the created facet option configuration
      * @throws ConstructorException if the request is invalid
      */
@@ -3083,7 +3087,8 @@ public class ConstructorIO {
     /**
      * Deletes a facet option configuration
      *
-     * @param facetOptionConfigurationRequest The facet option configuration request containing the configuration to delete
+     * @param facetOptionConfigurationRequest The facet option configuration request containing the
+     *     configuration to delete
      * @return returns the deleted facet option configuration
      * @throws ConstructorException if the request is invalid
      */

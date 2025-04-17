@@ -1,4 +1,3 @@
-
 package io.constructor.client;
 
 import io.constructor.client.models.FacetOptionConfiguration;
@@ -13,12 +12,15 @@ public class FacetOptionConfigurationsRequest {
     /**
      * Creates a facet option configurations request (create or update)
      *
-     * @param facetOptionConfigurations the facet option configurations to be created or updated
+     * @param facetOptionConfigurations the list of facet option configurations to be created or
+     *     updated
      * @param facetName the name of the facet
      * @param section the section to which the facet belongs
      */
     public FacetOptionConfigurationsRequest(
-            List<FacetOptionConfiguration> facetOptionConfigurations, String facetName, String section) {
+            List<FacetOptionConfiguration> facetOptionConfigurations,
+            String facetName,
+            String section) {
         if (facetOptionConfigurations.isEmpty()) {
             throw new IllegalArgumentException("facetOptionConfigurations is required");
         }
@@ -32,9 +34,11 @@ public class FacetOptionConfigurationsRequest {
     }
 
     /**
-     * Creates a facet option configurations request (Create or Update) with default section "Products"
+     * Creates a facet option configurations request (Create or Update) with default section
+     * "Products"
      *
-     * @param facetOptionConfigurations the facet option configuration to be created or updated
+     * @param facetOptionConfigurations the list of facet option configuration to be created or
+     *     updated
      * @param facetName the name of the facet
      */
     public FacetOptionConfigurationsRequest(
@@ -43,16 +47,17 @@ public class FacetOptionConfigurationsRequest {
     }
 
     /**
-     * @return the facet option configuration
+     * @return the list of facet option configurations
      */
     public List<FacetOptionConfiguration> getFacetOptionConfigurations() {
         return facetOptionConfigurations;
     }
 
     /**
-     * @param facetOptionConfigurations the facet option configurations to set
+     * @param facetOptionConfigurations the list of facet option configurations to set
      */
-    public void setFacetOptionConfigurations(List<FacetOptionConfiguration> facetOptionConfigurations) {
+    public void setFacetOptionConfigurations(
+            List<FacetOptionConfiguration> facetOptionConfigurations) {
         this.facetOptionConfigurations = facetOptionConfigurations;
     }
 

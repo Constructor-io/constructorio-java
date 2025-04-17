@@ -145,7 +145,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
 
     @Test
     public void testCreateFacetOptionConfigurations() throws Exception {
-        String facetName = "testFacet";
+        String facetName = "testFacet2";
         constructor.createFacetConfiguration(
                 new FacetConfigurationRequest(
                         createFacetConfigurationObject(facetName, PRODUCTS_SECTION),
@@ -169,7 +169,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
         String response =
                 constructor.createOrUpdateFacetOptionConfigurations(
                         new FacetOptionConfigurationsRequest(
-                                configurations, "testFacet", PRODUCTS_SECTION));
+                                configurations, facetName, PRODUCTS_SECTION));
         JSONArray jsonArr = new JSONArray(response);
         JSONObject jsonOption1 = (JSONObject) jsonArr.get(0);
         JSONObject jsonOption2 = (JSONObject) jsonArr.get(1);

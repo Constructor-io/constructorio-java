@@ -5,9 +5,8 @@ import static org.junit.Assert.*;
 import com.google.gson.Gson;
 import io.constructor.client.models.FacetConfiguration;
 import io.constructor.client.models.FacetOptionConfiguration;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -142,6 +141,52 @@ public class ConstructorIOFacetOptionConfigurationTest {
         assertEquals("bar", jsonObj.getJSONObject("data").get("foo"));
 
         addFacetOptionToCleanupArray(facetName, "test-option");
+    }
+
+    @Test
+    public void testCreateFacetOptionConfigurations() throws Exception {
+        String facetName = "testFacet2";
+        constructor.createFacetConfiguration(
+                new FacetConfigurationRequest(
+                        createFacetConfigurationObject(facetName, PRODUCTS_SECTION),
+                        PRODUCTS_SECTION));
+        addFacetToCleanupArray(facetName);
+
+        // Create facet option configurations
+        FacetOptionConfiguration option =
+                createFacetOptionConfigurationObject("test-option", "Test Option", 1);
+        FacetOptionConfiguration option2 =
+                createFacetOptionConfigurationObject("test-option-2", "Test Option 2", 2);
+        option.setValueAlias("test-alias");
+        option2.setHidden(true);
+        Map<String, Object> data = new HashMap<>();
+        data.put("foo", "bar");
+        option.setData(data);
+        option.setHidden(false);
+        List<FacetOptionConfiguration> configurations = Arrays.asList(option, option2);
+
+        // Create and verify configurations
+        String response =
+                constructor.createOrUpdateFacetOptionConfigurations(
+                        new FacetOptionConfigurationsRequest(
+                                configurations, facetName, PRODUCTS_SECTION));
+        JSONArray jsonArr = new JSONArray(response);
+        JSONObject jsonOption1 = (JSONObject) jsonArr.get(0);
+        JSONObject jsonOption2 = (JSONObject) jsonArr.get(1);
+
+        assertEquals("test-option", jsonOption1.get("value"));
+        assertEquals("test-alias", jsonOption1.get("value_alias"));
+        assertEquals("Test Option", jsonOption1.get("display_name"));
+        assertEquals(1, jsonOption1.get("position"));
+        assertEquals(false, jsonOption1.get("hidden"));
+        assertEquals("bar", jsonOption1.getJSONObject("data").get("foo"));
+        assertEquals("test-option-2", jsonOption2.get("value"));
+        assertEquals("Test Option 2", jsonOption2.get("display_name"));
+        assertEquals(2, jsonOption2.get("position"));
+        assertEquals(true, jsonOption2.get("hidden"));
+
+        addFacetOptionToCleanupArray(facetName, "test-option");
+        addFacetOptionToCleanupArray(facetName, "test-option-2");
     }
 
     @Test(expected = ConstructorException.class)

@@ -2956,9 +2956,52 @@ public class ConstructorIO {
     }
 
     /**
+     * Creates or Updates facet option configurations
+     *
+     * @param facetOptionConfigurationsRequest The facet option configurations request containing
+     *     the configurations to create or update
+     * @return returns the created facet option configurations
+     * @throws ConstructorException if the request is invalid
+     */
+    public String createOrUpdateFacetOptionConfigurations(
+            FacetOptionConfigurationsRequest facetOptionConfigurationsRequest)
+            throws ConstructorException {
+        try {
+            HttpUrl url =
+                    this.makeUrl(
+                            Arrays.asList(
+                                    "v1",
+                                    "facets",
+                                    facetOptionConfigurationsRequest.getFacetName(),
+                                    "options"));
+            url =
+                    url.newBuilder()
+                            .addQueryParameter(
+                                    "section", facetOptionConfigurationsRequest.getSection())
+                            .build();
+
+            String params =
+                    new Gson()
+                            .toJson(
+                                    facetOptionConfigurationsRequest
+                                            .getFacetOptionConfigurations());
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
      * Creates a facet option configuration
      *
-     * @param facetOptionConfigurationRequest The facet option configuration request containing the configuration to create
+     * @param facetOptionConfigurationRequest The facet option configuration request containing the
+     *     configuration to create
      * @return returns the created facet option configuration
      * @throws ConstructorException if the request is invalid
      */
@@ -3044,7 +3087,8 @@ public class ConstructorIO {
     /**
      * Deletes a facet option configuration
      *
-     * @param facetOptionConfigurationRequest The facet option configuration request containing the configuration to delete
+     * @param facetOptionConfigurationRequest The facet option configuration request containing the
+     *     configuration to delete
      * @return returns the deleted facet option configuration
      * @throws ConstructorException if the request is invalid
      */

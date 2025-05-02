@@ -58,6 +58,20 @@ public class FiltersTest {
     }
 
     @Test
+    public void hierarchicalFacet() throws Exception {
+        String string = Utils.getTestResource("facet.hierarchical.json");
+        FilterFacet facet = new Gson().fromJson(string, FilterFacet.class);
+        assertEquals(facet.getDisplayName(), "Size");
+        assertEquals(facet.getName(), "Size");
+        assertEquals(facet.getType(), "hierarchical");
+        assertEquals(facet.getOptions().get(0).getValue(), "Mens");
+        assertEquals(facet.getOptions().get(0).getOptions().get(0), "Mens/Small");
+        assertNull(facet.getMax());
+        assertNull(facet.getMin());
+        assertNull(facet.getStatus());
+    }
+
+    @Test
     public void rangeFacetSelected() throws Exception {
         String string = Utils.getTestResource("facet.range.selected.json");
         FilterFacet facet = new Gson().fromJson(string, FilterFacet.class);

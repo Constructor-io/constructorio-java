@@ -1,6 +1,8 @@
 package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 import java.util.Map;
 
 /** Constructor.io Filter Facet Option ... uses Gson/Reflection to load data in */
@@ -23,6 +25,9 @@ public class FilterFacetOption {
 
     @SerializedName("range")
     private Object[] range; // Array to hold two values of either Number or "inf", "-inf"
+
+    @SerializedName("options")
+    private List<FilterFacetOption> options;
 
     /**
      * @return the counts
@@ -66,6 +71,13 @@ public class FilterFacetOption {
         return range;
     }
 
+    /**
+     * @return the options
+     */
+    public List<FilterFacetOption> getOptions() {
+        return options;
+    }
+
     public void setCount(Integer count) {
         this.count = count;
     }
@@ -88,5 +100,9 @@ public class FilterFacetOption {
 
     public void setRange(Object[] range) {
         this.range = range;
+    }
+
+    public void setOptions(List<FilterFacetOption> options) {
+        this.options = options;
     }
 }

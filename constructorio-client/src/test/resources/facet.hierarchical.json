@@ -1,0 +1,39 @@
+{
+  "display_name": "Size",
+  "name": "Size",
+  "options": [
+    {
+      "count": 5,
+      "data": {},
+      "display_name": "Mens",
+      "status": "",
+      "value": "Mens",
+      "options": [
+        {
+          "count": 5,
+          "data": {},
+          "display_name": "Small",
+          "status": "",
+          "value": "Mens/Small"
+        }
+      ]
+    },
+    {
+      "count": 4,
+      "data": {},
+      "display_name": "Womens",
+      "status": "",
+      "value": "Womens",
+      "options": [
+        {
+          "count": 4,
+          "data": {},
+          "display_name": "Medium",
+          "status": "",
+          "value": "Womens/Medium"
+        }
+      ]
+    }
+  ],
+  "type": "hierarchical"
+}

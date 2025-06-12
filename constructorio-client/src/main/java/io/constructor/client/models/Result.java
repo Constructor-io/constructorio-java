@@ -22,6 +22,9 @@ public class Result {
     @SerializedName("variations_map")
     private Object variationsMap;
 
+    @SerializedName("is_slotted")
+    private boolean isSlotted;
+
     @SerializedName("labels")
     private Map<String, Object> labels;
 
@@ -77,6 +80,13 @@ public class Result {
         return strategy;
     }
 
+    /**
+     * @return isSlotted boolean
+     */
+    public boolean getIsSlotted() {
+        return isSlotted;
+    }
+
     public void setValue(String value) {
         this.value = value;
     }
@@ -103,5 +113,9 @@ public class Result {
 
     public void setStrategy(Map<String, String> strategy) {
         this.strategy = strategy;
+    }
+
+    public void setIsBoolean(boolean isSlotted) {
+        this.isSlotted = isSlotted;
     }
 }

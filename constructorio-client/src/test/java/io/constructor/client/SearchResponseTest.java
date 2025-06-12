@@ -262,4 +262,18 @@ public class SearchResponseTest {
                         .get("display_name"),
                 "New Arrival");
     }
+
+    @Test
+    public void createSearchResponseShouldReturnAResultWithIsSlotted() throws Exception {
+        String string = Utils.getTestResource("response.search.item.json");
+        SearchResponse response = ConstructorIO.createSearchResponse(string);
+        assertEquals(
+                "search result [isSlotted] exists",
+                response.getResponse().getResults().get(0).getIsSlotted(),
+                true);
+        assertEquals(
+                "search result [isSlotted] exists",
+                response.getResponse().getResults().get(1).getIsSlotted(),
+                false);
+    }
 }

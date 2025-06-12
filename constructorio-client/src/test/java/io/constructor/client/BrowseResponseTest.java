@@ -286,4 +286,18 @@ public class BrowseResponseTest {
                         .get("display_name"),
                 "New Arrival");
     }
+
+    @Test
+    public void createBrowseResponseShouldReturnAResultWithIsSlotted() throws Exception {
+        String string = Utils.getTestResource("response.browse.color.blue.json");
+        BrowseResponse response = ConstructorIO.createBrowseResponse(string);
+        assertEquals(
+                "search result [labels] exists",
+                response.getResponse().getResults().get(0).getIsSlotted(),
+                true);
+        assertEquals(
+                "search result [labels] exists",
+                response.getResponse().getResults().get(1).getIsSlotted(),
+                false);
+    }
 }

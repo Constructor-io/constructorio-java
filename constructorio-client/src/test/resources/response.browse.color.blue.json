@@ -1051,7 +1051,7 @@
         "url": "https://demo.commercetools.com/en/aspesi-coat-I502997385098-blue.html",
         "variation_id": "M0E20000000ECTT"
       },
-      "is_slotted": false,
+      "is_slotted": true,
       "matched_terms": [],
       "value": "Coat Aspesi blue",
       "variations": [{

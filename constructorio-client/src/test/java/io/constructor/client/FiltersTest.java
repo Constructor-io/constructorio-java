@@ -65,7 +65,7 @@ public class FiltersTest {
         assertEquals(facet.getName(), "Size");
         assertEquals(facet.getType(), "hierarchical");
         assertEquals(facet.getOptions().get(0).getValue(), "Mens");
-        assertEquals(facet.getOptions().get(0).getOptions().get(0), "Mens/Small");
+        assertEquals(facet.getOptions().get(0).getOptions().get(0).getValue(), "Mens/Small");
         assertNull(facet.getMax());
         assertNull(facet.getMin());
         assertNull(facet.getStatus());

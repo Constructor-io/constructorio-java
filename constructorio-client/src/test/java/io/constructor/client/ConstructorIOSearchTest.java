@@ -100,8 +100,8 @@ public class ConstructorIOSearchTest {
     public void SearchShouldReturnAResultWithColorFacets() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        SearchRequest request = new SearchRequest("item1");
-        request.getFacets().put("Color", Arrays.asList("Blue"));
+        SearchRequest request = new SearchRequest("item2");
+        request.getFacets().put("Color", Arrays.asList("yellow"));
         SearchResponse response = constructor.search(request, userInfo);
         assertEquals("search results exist", response.getResponse().getResults().size(), 1);
         assertEquals(
@@ -359,7 +359,8 @@ public class ConstructorIOSearchTest {
         variationsMap.addValueRule(
                 "size", VariationsMap.AggregationTypes.first, "data.facets.size");
         variationsMap.setFilterBy(
-                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}");
+                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"type\":\"single\",\"value\":\"Best"
+                        + " Brand\"},\"type\":\"not\"}],\"type\":\"and\"}");
         System.out.println(variationsMap.getFilterBy());
         request.setVariationsMap(variationsMap);
         SearchResponse response = constructor.search(request, userInfo);

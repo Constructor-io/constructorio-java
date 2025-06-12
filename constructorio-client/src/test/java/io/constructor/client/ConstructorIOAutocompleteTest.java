@@ -171,7 +171,7 @@ public class ConstructorIOAutocompleteTest {
     public void autocompleteShouldReturnAResultWithMultipleFilters() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
-        AutocompleteRequest request = new AutocompleteRequest("item1");
+        AutocompleteRequest request = new AutocompleteRequest("item2");
         request.getFilters().put("group_id", Arrays.asList("All"));
         request.getFilters().put("Brand", Arrays.asList("XYZ"));
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
@@ -224,7 +224,8 @@ public class ConstructorIOAutocompleteTest {
         variationsMap.addValueRule(
                 "size", VariationsMap.AggregationTypes.first, "data.facets.size");
         variationsMap.setFilterBy(
-                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}");
+                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"type\":\"single\",\"value\":\"Best"
+                        + " Brand\"},\"type\":\"not\"}],\"type\":\"and\"}");
         request.setVariationsMap(variationsMap);
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
 

@@ -224,7 +224,8 @@ public class ConstructorIOAutocompleteTest {
         variationsMap.addValueRule(
                 "size", VariationsMap.AggregationTypes.first, "data.facets.size");
         variationsMap.setFilterBy(
-                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"type\":\"single\",\"value\":\"Best Brand\"},\"type\":\"not\"}],\"type\":\"and\"}");
+                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"type\":\"single\",\"value\":\"Best"
+                        + " Brand\"},\"type\":\"not\"}],\"type\":\"and\"}");
         request.setVariationsMap(variationsMap);
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
 

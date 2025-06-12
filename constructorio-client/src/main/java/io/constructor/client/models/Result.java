@@ -115,7 +115,7 @@ public class Result {
         this.strategy = strategy;
     }
 
-    public void setIsBoolean(boolean isSlotted) {
+    public void setIsSlotted(boolean isSlotted) {
         this.isSlotted = isSlotted;
     }
 }

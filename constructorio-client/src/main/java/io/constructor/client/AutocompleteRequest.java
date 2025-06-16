@@ -120,8 +120,8 @@ public class AutocompleteRequest {
     }
 
     /**
-     * @param preFilterExpression the faceting expression to scope autocomplete results (JSON-encoded
-     *     query string). Please refer to
+     * @param preFilterExpression the faceting expression to scope autocomplete results
+     *     (JSON-encoded query string). Please refer to
      *     https://docs.constructor.com/reference/shared-filter-expressions
      */
     public void setPreFilterExpression(String preFilterExpression) {

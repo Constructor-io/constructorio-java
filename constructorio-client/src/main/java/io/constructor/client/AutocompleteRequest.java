@@ -14,6 +14,7 @@ public class AutocompleteRequest {
     private Map<String, List<String>> filters;
     private VariationsMap variationsMap;
     private Map<String, Map<String, List<String>>> filtersPerSection;
+    private String preFilterExpression;
 
     /**
      * Creates an autocomplete request
@@ -31,6 +32,7 @@ public class AutocompleteRequest {
         this.filters = new HashMap<String, List<String>>();
         this.filtersPerSection = new HashMap<String, Map<String, List<String>>>();
         this.variationsMap = null;
+        this.preFilterExpression = null;
     }
 
     /**
@@ -115,5 +117,21 @@ public class AutocompleteRequest {
      */
     public VariationsMap getVariationsMap() {
         return variationsMap;
+    }
+
+    /**
+     * @param preFilterExpression the faceting expression to scope autocomplete results (JSON-encoded
+     *     query string). Please refer to
+     *     https://docs.constructor.com/reference/shared-filter-expressions
+     */
+    public void setPreFilterExpression(String preFilterExpression) {
+        this.preFilterExpression = preFilterExpression;
+    }
+
+    /**
+     * @return the prefilter expression
+     */
+    public String getPreFilterExpression() {
+        return preFilterExpression;
     }
 }

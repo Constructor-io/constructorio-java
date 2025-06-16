@@ -905,6 +905,14 @@ public class ConstructorIO {
                                 .build();
             }
 
+            if (req.getPreFilterExpression() != null) {
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "pre_filter_expression", req.getPreFilterExpression())
+                                .build();
+            }
+
             Request request = this.makeUserRequestBuilder(userInfo).url(url).get().build();
 
             Response response = clientWithRetry.newCall(request).execute();
@@ -2725,7 +2733,6 @@ public class ConstructorIO {
 
             List<String> paths = Arrays.asList("v1", "quizzes", req.getQuizId(), type);
             HttpUrl url = this.makeUrl(paths);
-
             if (req.getSection() != null) {
                 url = url.newBuilder().addQueryParameter("section", req.getSection()).build();
             }

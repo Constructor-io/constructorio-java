@@ -289,4 +289,23 @@ public class ConstructorIOAutocompleteTest {
                 variationsMap.getGroupBy().get(0).field,
                 variationsMapFromResponse.getGroupBy().get(0).field);
     }
+
+    @Test
+    public void autocompleteShouldReturnAResultWithPreFilterExpression() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        AutocompleteRequest request = new AutocompleteRequest("jacket");
+        String preFilterExpression =
+                "{\"or\":[{\"and\":[{\"name\":\"group_id\",\"value\":\"electronics-group-id\"},{\"name\":\"Price\",\"range\":[\"-inf\",200.0]}]},{\"and\":[{\"name\":\"Type\",\"value\":\"Laptop\"},{\"not\":{\"name\":\"Price\",\"range\":[800.0,\"inf\"]}}]}]}";
+        request.setPreFilterExpression(preFilterExpression);
+
+        AutocompleteResponse response = constructor.autocomplete(request, userInfo);
+        String preFilterExpressionFromRequestJsonString =
+                new Gson().toJson(response.getRequest().get("pre_filter_expression"));
+
+        assertTrue("autocomplete results exist", response.getSections().size() >= 0);
+        assertNotNull(
+                "pre_filter_expression exists", response.getRequest().get("pre_filter_expression"));
+        assertEquals(preFilterExpression, preFilterExpressionFromRequestJsonString);
+    }
 }

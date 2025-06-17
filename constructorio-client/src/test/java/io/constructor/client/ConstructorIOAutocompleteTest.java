@@ -291,7 +291,7 @@ public class ConstructorIOAutocompleteTest {
     }
 
     @Test
-    public void autocompleteShouldReturnAResultWithPreFilterExpression() throws Exception {
+    public void AutocompleteShouldReturnAResultWithPreFilterExpression() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         AutocompleteRequest request = new AutocompleteRequest("jacket");

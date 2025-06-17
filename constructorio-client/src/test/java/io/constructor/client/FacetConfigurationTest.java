@@ -23,11 +23,11 @@ public class FacetConfigurationTest {
         assertEquals(config.getSortOrder(), "relevance");
         assertEquals(config.getSortDescending(), true);
         assertEquals(config.getMatchType(), MatchType.any);
-        assertEquals(config.getPosition(), 2);
+        assertEquals(config.getPosition(), Integer.valueOf(2));
         assertEquals(config.getHidden(), false);
         assertEquals(config.getIsProtected(), false);
         assertEquals(config.getCountable(), true);
-        assertEquals(config.getOptionsLimit(), 300);
+        assertEquals(config.getOptionsLimit(), Integer.valueOf(300));
         assertEquals(config.getData().size(), 1);
         assertEquals(config.getData().get("foo"), "bar");
     }

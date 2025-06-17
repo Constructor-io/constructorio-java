@@ -136,7 +136,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
         assertEquals("test-option", jsonObj.get("value"));
         assertEquals("test-alias", jsonObj.get("value_alias"));
         assertEquals("Test Option", jsonObj.get("display_name"));
-        assertEquals(1, jsonObj.getInt("position"));
+        assertEquals((Integer) 1, jsonObj.get("position")); 
         assertEquals(false, jsonObj.get("hidden"));
         assertEquals("bar", jsonObj.getJSONObject("data").get("foo"));
 
@@ -177,12 +177,12 @@ public class ConstructorIOFacetOptionConfigurationTest {
         assertEquals("test-option", jsonOption1.get("value"));
         assertEquals("test-alias", jsonOption1.get("value_alias"));
         assertEquals("Test Option", jsonOption1.get("display_name"));
-        assertEquals(1, jsonOption1.get("position"));
+        assertEquals(Integer.valueOf(1), jsonOption1.get("position"));
         assertEquals(false, jsonOption1.get("hidden"));
         assertEquals("bar", jsonOption1.getJSONObject("data").get("foo"));
         assertEquals("test-option-2", jsonOption2.get("value"));
         assertEquals("Test Option 2", jsonOption2.get("display_name"));
-        assertEquals(2, jsonOption2.get("position"));
+        assertEquals(Integer.valueOf(2), jsonOption2.get("position"));
         assertEquals(true, jsonOption2.get("hidden"));
 
         addFacetOptionToCleanupArray(facetName, "test-option");

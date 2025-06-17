@@ -136,7 +136,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
         assertEquals("test-option", jsonObj.get("value"));
         assertEquals("test-alias", jsonObj.get("value_alias"));
         assertEquals("Test Option", jsonObj.get("display_name"));
-        assertEquals((Integer) 1, jsonObj.get("position")); 
+        assertEquals(Integer.valueOf(1), jsonObj.get("position"));
         assertEquals(false, jsonObj.get("hidden"));
         assertEquals("bar", jsonObj.getJSONObject("data").get("foo"));
 

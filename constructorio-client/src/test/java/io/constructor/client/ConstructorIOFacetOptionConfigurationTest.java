@@ -72,7 +72,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
     }
 
     private FacetOptionConfiguration createFacetOptionConfigurationObject(
-            String value, String displayName, int position) {
+            String value, String displayName, Integer position) {
         FacetOptionConfiguration config = new FacetOptionConfiguration();
         config.setValue(value);
         config.setDisplayName(displayName);
@@ -136,7 +136,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
         assertEquals("test-option", jsonObj.get("value"));
         assertEquals("test-alias", jsonObj.get("value_alias"));
         assertEquals("Test Option", jsonObj.get("display_name"));
-        assertEquals(1, jsonObj.get("position"));
+        assertEquals(1, jsonObj.getInt("position"));
         assertEquals(false, jsonObj.get("hidden"));
         assertEquals("bar", jsonObj.getJSONObject("data").get("foo"));
 
@@ -269,5 +269,11 @@ public class ConstructorIOFacetOptionConfigurationTest {
     public void testDeleteNonExistentFacetOptionShouldThrowException() throws Exception {
         constructor.deleteFacetOptionConfiguration(
                 "nonExistentFacet", "nonExistentOption", PRODUCTS_SECTION);
+    }
+
+    @Test
+    public void testFacetOptionConfigurationDefaultValues() {
+        FacetOptionConfiguration config = new FacetOptionConfiguration();
+        assertNull("Position should default to null", config.getPosition());
     }
 }

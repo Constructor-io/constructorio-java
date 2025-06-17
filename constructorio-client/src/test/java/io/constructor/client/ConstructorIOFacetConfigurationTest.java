@@ -186,4 +186,11 @@ public class ConstructorIOFacetConfigurationTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         constructor.deleteFacetConfiguration("nonExistentFacet", "Products");
     }
+
+    @Test
+    public void testFacetConfigurationDefaultValues() {
+        FacetConfiguration config = new FacetConfiguration();
+        assertNull("Position should default to null", config.getPosition());
+        assertNull("Options limit should default to null", config.getOptionsLimit());
+    }
 }

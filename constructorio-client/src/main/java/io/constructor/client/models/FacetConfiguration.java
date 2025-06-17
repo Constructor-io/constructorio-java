@@ -46,7 +46,7 @@ public class FacetConfiguration {
     private MatchType matchType;
 
     @SerializedName("position")
-    private int position;
+    private Integer position;
 
     @SerializedName("hidden")
     private Boolean hidden;
@@ -58,7 +58,7 @@ public class FacetConfiguration {
     private Boolean countable;
 
     @SerializedName("options_limit")
-    private int optionsLimit;
+    private Integer optionsLimit;
 
     @SerializedName("data")
     private Map<String, Object> data;
@@ -143,7 +143,7 @@ public class FacetConfiguration {
     /**
      * @return the position
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -171,7 +171,7 @@ public class FacetConfiguration {
     /**
      * @return the optionsLimit
      */
-    public int getOptionsLimit() {
+    public Integer getOptionsLimit() {
         return optionsLimit;
     }
 
@@ -226,7 +226,7 @@ public class FacetConfiguration {
         this.matchType = matchType;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 
@@ -242,7 +242,7 @@ public class FacetConfiguration {
         this.countable = countable;
     }
 
-    public void setOptionsLimit(int optionsLimit) {
+    public void setOptionsLimit(Integer optionsLimit) {
         this.optionsLimit = optionsLimit;
     }
 

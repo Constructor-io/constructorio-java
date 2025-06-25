@@ -218,12 +218,11 @@ public class ConstructorIOFacetOptionConfigurationTest {
         JSONObject jsonOption = (JSONObject) jsonArr.get(0);
 
         assertEquals("test-option-null", jsonOption.get("value"));
-        assertFalse("display_name should not be present", jsonOption.has("display_name"));
-        assertFalse("position should not be present", jsonOption.has("position"));
-        assertFalse("value_alias should not be present", jsonOption.has("value_alias"));
-        assertFalse("hidden should not be present", jsonOption.has("hidden"));
-        assertFalse("data should not be present", jsonOption.has("data"));
-
+        assertTrue("display_name should be null", jsonOption.isNull("display_name"));
+        assertTrue("position should be null", jsonOption.isNull("position"));
+        assertTrue("value_alias should be null", jsonOption.isNull("value_alias"));
+        assertTrue("hidden should be null", jsonOption.isNull("hidden"));
+        assertTrue("data should be null", jsonOption.isNull("data"));
         addFacetOptionToCleanupArray(facetName, "test-option-null");
     }
 

@@ -189,6 +189,44 @@ public class ConstructorIOFacetOptionConfigurationTest {
         addFacetOptionToCleanupArray(facetName, "test-option-2");
     }
 
+    @Test
+    public void testCreateFacetOptionConfigurationsWithNullValues() throws Exception {
+        String facetName = "testFacetNullValues";
+        constructor.createFacetConfiguration(
+                new FacetConfigurationRequest(
+                        createFacetConfigurationObject(facetName, PRODUCTS_SECTION),
+                        PRODUCTS_SECTION));
+        addFacetToCleanupArray(facetName);
+
+        // Create facet option configuration with null values
+        FacetOptionConfiguration option = new FacetOptionConfiguration();
+        option.setValue("test-option-null");
+        option.setDisplayName(null);
+        option.setPosition(null);
+        option.setValueAlias(null);
+        option.setHidden(null);
+        option.setData(null);
+
+        List<FacetOptionConfiguration> configurations = Arrays.asList(option);
+
+        // Create and verify configuration
+        String response =
+                constructor.createOrUpdateFacetOptionConfigurations(
+                        new FacetOptionConfigurationsRequest(
+                                configurations, facetName, PRODUCTS_SECTION));
+        JSONArray jsonArr = new JSONArray(response);
+        JSONObject jsonOption = (JSONObject) jsonArr.get(0);
+
+        assertEquals("test-option-null", jsonOption.get("value"));
+        assertFalse("display_name should not be present", jsonOption.has("display_name"));
+        assertFalse("position should not be present", jsonOption.has("position"));
+        assertFalse("value_alias should not be present", jsonOption.has("value_alias"));
+        assertFalse("hidden should not be present", jsonOption.has("hidden"));
+        assertFalse("data should not be present", jsonOption.has("data"));
+
+        addFacetOptionToCleanupArray(facetName, "test-option-null");
+    }
+
     @Test(expected = ConstructorException.class)
     public void testCreateFacetOptionConfigurationWithNullRequest() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);

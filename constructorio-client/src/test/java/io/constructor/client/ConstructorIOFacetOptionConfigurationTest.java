@@ -204,7 +204,6 @@ public class ConstructorIOFacetOptionConfigurationTest {
         option.setDisplayName(null);
         option.setPosition(null);
         option.setValueAlias(null);
-        option.setHidden(null);
         option.setData(null);
 
         List<FacetOptionConfiguration> configurations = Arrays.asList(option);
@@ -221,7 +220,6 @@ public class ConstructorIOFacetOptionConfigurationTest {
         assertTrue("display_name should be null", jsonOption.isNull("display_name"));
         assertTrue("position should be null", jsonOption.isNull("position"));
         assertTrue("value_alias should be null", jsonOption.isNull("value_alias"));
-        assertTrue("hidden should be null", jsonOption.isNull("hidden"));
         assertTrue("data should be null", jsonOption.isNull("data"));
         addFacetOptionToCleanupArray(facetName, "test-option-null");
     }

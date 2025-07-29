@@ -2024,7 +2024,7 @@ public class ConstructorIO {
                 errorCode = response.code();
             }
         } catch (Exception e) {
-            errorMessage = "[HTTP " + response.code() + "]";
+            errorMessage = "[HTTP " + response.code() + "] Exception: " + e.getMessage();
         } finally {
             response.close();
         }

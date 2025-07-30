@@ -19,7 +19,7 @@ public class FacetOptionConfiguration {
     private String displayName;
 
     @SerializedName("position")
-    private int position;
+    private Integer position;
 
     @SerializedName("data")
     private Map<String, Object> data;
@@ -58,7 +58,7 @@ public class FacetOptionConfiguration {
     /**
      * @return the position
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -92,7 +92,7 @@ public class FacetOptionConfiguration {
         this.displayName = displayName;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 

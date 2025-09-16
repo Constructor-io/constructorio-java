@@ -19,7 +19,7 @@ public class FacetOptionConfigurationTest {
         assertEquals(config.getDisplayName(), "Jif");
         assertEquals(config.getValue(), "jif");
         assertEquals(config.getReplaceValueAlias(), true);
-        assertEquals(config.getPosition(), 1);
+        assertEquals(config.getPosition(), Integer.valueOf(1));
         assertEquals(config.getData().size(), 1);
         assertEquals(config.getData().get("foo"), "bar");
     }

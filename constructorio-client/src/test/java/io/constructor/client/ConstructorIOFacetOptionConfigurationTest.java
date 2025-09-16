@@ -72,7 +72,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
     }
 
     private FacetOptionConfiguration createFacetOptionConfigurationObject(
-            String value, String displayName, int position) {
+            String value, String displayName, Integer position) {
         FacetOptionConfiguration config = new FacetOptionConfiguration();
         config.setValue(value);
         config.setDisplayName(displayName);
@@ -136,7 +136,7 @@ public class ConstructorIOFacetOptionConfigurationTest {
         assertEquals("test-option", jsonObj.get("value"));
         assertEquals("test-alias", jsonObj.get("value_alias"));
         assertEquals("Test Option", jsonObj.get("display_name"));
-        assertEquals(1, jsonObj.get("position"));
+        assertEquals(Integer.valueOf(1), jsonObj.get("position"));
         assertEquals(false, jsonObj.get("hidden"));
         assertEquals("bar", jsonObj.getJSONObject("data").get("foo"));
 
@@ -177,16 +177,51 @@ public class ConstructorIOFacetOptionConfigurationTest {
         assertEquals("test-option", jsonOption1.get("value"));
         assertEquals("test-alias", jsonOption1.get("value_alias"));
         assertEquals("Test Option", jsonOption1.get("display_name"));
-        assertEquals(1, jsonOption1.get("position"));
+        assertEquals(Integer.valueOf(1), jsonOption1.get("position"));
         assertEquals(false, jsonOption1.get("hidden"));
         assertEquals("bar", jsonOption1.getJSONObject("data").get("foo"));
         assertEquals("test-option-2", jsonOption2.get("value"));
         assertEquals("Test Option 2", jsonOption2.get("display_name"));
-        assertEquals(2, jsonOption2.get("position"));
+        assertEquals(Integer.valueOf(2), jsonOption2.get("position"));
         assertEquals(true, jsonOption2.get("hidden"));
 
         addFacetOptionToCleanupArray(facetName, "test-option");
         addFacetOptionToCleanupArray(facetName, "test-option-2");
+    }
+
+    @Test
+    public void testCreateFacetOptionConfigurationsWithNullValues() throws Exception {
+        String facetName = "testFacetNullValues";
+        constructor.createFacetConfiguration(
+                new FacetConfigurationRequest(
+                        createFacetConfigurationObject(facetName, PRODUCTS_SECTION),
+                        PRODUCTS_SECTION));
+        addFacetToCleanupArray(facetName);
+
+        // Create facet option configuration with null values
+        FacetOptionConfiguration option = new FacetOptionConfiguration();
+        option.setValue("test-option-null");
+        option.setDisplayName(null);
+        option.setPosition(null);
+        option.setValueAlias(null);
+        option.setData(null);
+
+        List<FacetOptionConfiguration> configurations = Arrays.asList(option);
+
+        // Create and verify configuration
+        String response =
+                constructor.createOrUpdateFacetOptionConfigurations(
+                        new FacetOptionConfigurationsRequest(
+                                configurations, facetName, PRODUCTS_SECTION));
+        JSONArray jsonArr = new JSONArray(response);
+        JSONObject jsonOption = (JSONObject) jsonArr.get(0);
+
+        assertEquals("test-option-null", jsonOption.get("value"));
+        assertTrue("display_name should be null", jsonOption.isNull("display_name"));
+        assertTrue("position should be null", jsonOption.isNull("position"));
+        assertTrue("value_alias should be null", jsonOption.isNull("value_alias"));
+        assertTrue("data should be null", jsonOption.isNull("data"));
+        addFacetOptionToCleanupArray(facetName, "test-option-null");
     }
 
     @Test(expected = ConstructorException.class)
@@ -269,5 +304,11 @@ public class ConstructorIOFacetOptionConfigurationTest {
     public void testDeleteNonExistentFacetOptionShouldThrowException() throws Exception {
         constructor.deleteFacetOptionConfiguration(
                 "nonExistentFacet", "nonExistentOption", PRODUCTS_SECTION);
+    }
+
+    @Test
+    public void testFacetOptionConfigurationDefaultValues() {
+        FacetOptionConfiguration config = new FacetOptionConfiguration();
+        assertNull("Position should default to null", config.getPosition());
     }
 }

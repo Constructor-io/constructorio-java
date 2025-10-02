@@ -12,6 +12,9 @@ public class BrowseResponseInner extends BaseResultsResponse {
     @SerializedName("refined_content")
     private List<RefinedContent> refinedContent;
 
+    @SerializedName("features")
+    private List<Feature> features;
+
     /**
      * @return the item collection data
      */
@@ -26,11 +29,22 @@ public class BrowseResponseInner extends BaseResultsResponse {
         return refinedContent;
     }
 
+    /**
+     * @return features list
+     */
+    public List<Feature> getFeatures() {
+        return features;
+    }
+
     public void setCollection(ItemCollection collection) {
         this.collection = collection;
     }
 
     public void setRefinedContent(List<RefinedContent> refinedContent) {
         this.refinedContent = refinedContent;
+    }
+
+    public void setFeatures(List<Feature> features) {
+        this.features = features;
     }
 }

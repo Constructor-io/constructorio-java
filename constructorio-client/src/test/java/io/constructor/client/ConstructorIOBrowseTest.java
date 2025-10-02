@@ -606,6 +606,8 @@ public class ConstructorIOBrowseTest {
         BrowseRequest request = new BrowseRequest("group_id", "BrandA");
         BrowseResponse response = constructor.browse(request, userInfo);
 
+        System.out.println(response.getRequest().get("features"));
+
         List<Result> resultsList = response.getResponse().getResults();
         assertTrue("search results exist", resultsList.size() > 0);
 

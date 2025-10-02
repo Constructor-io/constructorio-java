@@ -17,6 +17,8 @@ public class BrowseResponseTest {
     public void createBrowseResponseShouldReturnAResult() throws Exception {
         String string = Utils.getTestResource("response.browse.color.blue.json");
         BrowseResponse response = ConstructorIO.createBrowseResponse(string);
+        Map<String, Object> features = (Map<String, Object>) response.getRequest().get("features");
+        System.out.println(features.get("personalization"));
         assertEquals("browse facets exist", response.getResponse().getFacets().size(), 7);
         assertEquals(
                 "browse facet [Brand] exists",
@@ -299,5 +301,35 @@ public class BrowseResponseTest {
                 "search result [labels] exists",
                 response.getResponse().getResults().get(1).getIsSlotted(),
                 false);
+    }
+
+    @Test
+    public void createBrowseResponseShouldReturnAResultWithFeatures() throws Exception {
+        String string = Utils.getTestResource("response.browse.color.blue.json");
+        BrowseResponse response = ConstructorIO.createBrowseResponse(string);
+        assertEquals(
+                "browse result [features] exists",
+                response.getResponse().getFeatures().size(),
+                5);
+        assertEquals(
+                "browse result feature [feature name] exists",
+                response.getResponse().getFeatures().get(0).getFeatureName(),
+                "auto_generated_refined_query_rules");
+        assertEquals(
+                "browse result feature [display name] exists",
+                response.getResponse().getFeatures().get(0).getDisplayName(),
+                "Affinity Engine");
+        assertEquals(
+                "browse result feature [enabled] exists",
+                response.getResponse().getFeatures().get(0).getEnabled(),
+                true);
+        assertEquals(
+                "browse result feature variant [display name] exists",
+                response.getResponse().getFeatures().get(0).getVariant().getDisplayName(),
+                "Default weights");
+        assertEquals(
+                "browse result feature variant [name] exists",
+                response.getResponse().getFeatures().get(0).getVariant().getName(),
+                "default_rules");
     }
 }

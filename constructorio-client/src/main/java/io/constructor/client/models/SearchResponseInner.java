@@ -12,6 +12,9 @@ public class SearchResponseInner extends BaseResultsResponse {
     @SerializedName("refined_content")
     private List<RefinedContent> refinedContent;
 
+    @SerializedName("features")
+    private List<Feature> features;
+
     /**
      * @return redirect data
      */
@@ -26,11 +29,22 @@ public class SearchResponseInner extends BaseResultsResponse {
         return refinedContent;
     }
 
+    /**
+     * @return features list
+     */
+    public List<Feature> getFeatures() {
+        return features;
+    }
+
     public void setRedirect(Redirect redirect) {
         this.redirect = redirect;
     }
 
     public void setRefinedContent(List<RefinedContent> refinedContent) {
         this.refinedContent = refinedContent;
+    }
+
+    public void setFeatures(List<Feature> features) {
+        this.features = features;
     }
 }

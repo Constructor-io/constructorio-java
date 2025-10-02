@@ -276,4 +276,34 @@ public class SearchResponseTest {
                 response.getResponse().getResults().get(1).getIsSlotted(),
                 false);
     }
+
+    @Test
+    public void createSearchResponseShouldReturnAResultWithFeatures() throws Exception {
+        String string = Utils.getTestResource("response.search.item.json");
+        SearchResponse response = ConstructorIO.createSearchResponse(string);
+        assertEquals(
+                "search result [features] exists",
+                response.getResponse().getFeatures().size(),
+                5);
+        assertEquals(
+                "search result feature [feature name] exists",
+                response.getResponse().getFeatures().get(0).getFeatureName(),
+                "auto_generated_refined_query_rules");
+        assertEquals(
+                "search result feature [display name] exists",
+                response.getResponse().getFeatures().get(0).getDisplayName(),
+                "Affinity Engine");
+        assertEquals(
+                "search result feature [enabled] exists",
+                response.getResponse().getFeatures().get(0).getEnabled(),
+                true);
+        assertEquals(
+                "search result feature variant [name] exists",
+                response.getResponse().getFeatures().get(0).getVariant().getName(),
+                "default_rules");
+        assertEquals(
+                "search result feature variant [display name] exists",
+                response.getResponse().getFeatures().get(0).getVariant().getDisplayName(),
+                "Default weights");
+    }
 }

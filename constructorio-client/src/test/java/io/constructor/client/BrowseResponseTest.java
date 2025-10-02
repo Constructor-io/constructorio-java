@@ -17,8 +17,6 @@ public class BrowseResponseTest {
     public void createBrowseResponseShouldReturnAResult() throws Exception {
         String string = Utils.getTestResource("response.browse.color.blue.json");
         BrowseResponse response = ConstructorIO.createBrowseResponse(string);
-        Map<String, Object> features = (Map<String, Object>) response.getRequest().get("features");
-        System.out.println(features.get("personalization"));
         assertEquals("browse facets exist", response.getResponse().getFacets().size(), 7);
         assertEquals(
                 "browse facet [Brand] exists",

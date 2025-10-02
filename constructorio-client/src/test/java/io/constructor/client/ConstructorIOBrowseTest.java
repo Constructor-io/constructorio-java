@@ -479,6 +479,8 @@ public class ConstructorIOBrowseTest {
 
         assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
         assertNotNull("now exists", response.getRequest().get("now"));
+        System.out.println("HELLO");
+        System.out.println(response.getRequest().get("now"));
         assertEquals(now, new DecimalFormat("#").format(response.getRequest().get("now")));
     }
 

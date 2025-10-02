@@ -327,5 +327,9 @@ public class BrowseResponseTest {
                 "browse result feature variant [name] exists",
                 response.getResponse().getFeatures().get(0).getVariant().getName(),
                 "default_rules");
+        assertEquals(
+                "browse result feature variant returns null if empty",
+                response.getResponse().getFeatures().get(1).getVariant(),
+                null);
     }
 }

@@ -303,5 +303,9 @@ public class SearchResponseTest {
                 "search result feature variant [display name] exists",
                 response.getResponse().getFeatures().get(0).getVariant().getDisplayName(),
                 "Default weights");
+        assertEquals(
+                "search result feature variant returns null if empty",
+                response.getResponse().getFeatures().get(2).getVariant(),
+                null);
     }
 }

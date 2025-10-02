@@ -6,7 +6,7 @@ public class Feature {
 
     @SerializedName("display_name")
     private String displayName;
-    
+
     @SerializedName("feature_name")
     private String featureName;
 

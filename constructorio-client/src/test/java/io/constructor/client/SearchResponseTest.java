@@ -282,9 +282,7 @@ public class SearchResponseTest {
         String string = Utils.getTestResource("response.search.item.json");
         SearchResponse response = ConstructorIO.createSearchResponse(string);
         assertEquals(
-                "search result [features] exists",
-                response.getResponse().getFeatures().size(),
-                5);
+                "search result [features] exists", response.getResponse().getFeatures().size(), 5);
         assertEquals(
                 "search result feature [feature name] exists",
                 response.getResponse().getFeatures().get(0).getFeatureName(),

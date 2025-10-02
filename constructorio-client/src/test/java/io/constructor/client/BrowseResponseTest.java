@@ -306,9 +306,7 @@ public class BrowseResponseTest {
         String string = Utils.getTestResource("response.browse.color.blue.json");
         BrowseResponse response = ConstructorIO.createBrowseResponse(string);
         assertEquals(
-                "browse result [features] exists",
-                response.getResponse().getFeatures().size(),
-                5);
+                "browse result [features] exists", response.getResponse().getFeatures().size(), 5);
         assertEquals(
                 "browse result feature [feature name] exists",
                 response.getResponse().getFeatures().get(0).getFeatureName(),

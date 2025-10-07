@@ -465,6 +465,7 @@ public class ConstructorIOSearchTest {
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         SearchRequest request = new SearchRequest("Jacket");
         String now = "1659053211";
+        String returnedNow = "2022-07-29T00:06:51+00:00";
         request.setNow(now);
 
         SearchResponse response = constructor.search(request, userInfo);

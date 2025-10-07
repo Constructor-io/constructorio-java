@@ -471,7 +471,7 @@ public class ConstructorIOSearchTest {
 
         assertTrue("search results exist", response.getResponse().getResults().size() >= 0);
         assertNotNull("now exists", response.getRequest().get("now"));
-        assertEquals(now, new DecimalFormat("#").format(response.getRequest().get("now")));
+        assertEquals(returnedNow, response.getRequest().get("now"));
     }
 
     @Test

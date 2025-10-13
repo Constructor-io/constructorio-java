@@ -473,13 +473,14 @@ public class ConstructorIOBrowseTest {
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
         BrowseRequest request = new BrowseRequest("Brand", "XYZ");
         String now = "1659053211";
+        String returnedNow = "2022-07-29T00:06:51+00:00";
         request.setNow(now);
 
         BrowseResponse response = constructor.browse(request, userInfo);
 
         assertTrue("browse results exist", response.getResponse().getResults().size() >= 0);
         assertNotNull("now exists", response.getRequest().get("now"));
-        assertEquals(now, new DecimalFormat("#").format(response.getRequest().get("now")));
+        assertEquals(returnedNow, response.getRequest().get("now"));
     }
 
     @Test

@@ -209,7 +209,7 @@ public class ConstructorVariation {
     }
 
     /**
-     * @return the active
+     * @return the active status of the variation
      */
     public Boolean getActive() {
         return active;

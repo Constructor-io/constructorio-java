@@ -183,7 +183,7 @@ public class ConstructorItem {
     }
 
     /**
-     * @param active the active to set
+     * @param active the active status to set for the item
      */
     public void setActive(Boolean active) {
         this.active = active;

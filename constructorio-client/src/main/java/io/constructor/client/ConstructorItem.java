@@ -176,7 +176,7 @@ public class ConstructorItem {
     }
 
     /**
-     * @return the active
+     * @return the active status of the item
      */
     public Boolean getActive() {
         return active;

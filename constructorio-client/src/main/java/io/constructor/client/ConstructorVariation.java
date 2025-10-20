@@ -216,7 +216,7 @@ public class ConstructorVariation {
     }
 
     /**
-     * @param active the active to set
+     * @param active the active status to set for the variation
      */
     public void setActive(Boolean active) {
         this.active = active;

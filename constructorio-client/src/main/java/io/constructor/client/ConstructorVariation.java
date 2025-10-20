@@ -15,6 +15,7 @@ public class ConstructorVariation {
     private String id;
     private String itemId;
     private String description;
+    private Boolean active;
     private Map<String, List<Object>> facets;
     private Map<String, Object> metadata;
     private List<String> groupIds;
@@ -45,6 +46,7 @@ public class ConstructorVariation {
         this.url = null;
         this.imageUrl = null;
         this.description = null;
+        this.active = null;
         this.facets = null;
         this.metadata = null;
         this.groupIds = null;
@@ -67,6 +69,7 @@ public class ConstructorVariation {
         this.url = null;
         this.imageUrl = null;
         this.description = null;
+        this.active = null;
         this.facets = null;
         this.metadata = null;
         this.groupIds = null;
@@ -85,6 +88,7 @@ public class ConstructorVariation {
         this.url = null;
         this.imageUrl = null;
         this.description = null;
+        this.active = null;
         this.facets = null;
         this.metadata = null;
         this.groupIds = null;
@@ -114,6 +118,7 @@ public class ConstructorVariation {
         dataMap.put("facets", this.facets);
         dataMap.put("group_ids", this.groupIds);
         dataMap.put("description", this.description);
+        dataMap.put("active", this.active);
         params.put("data", dataMap);
 
         return params;
@@ -201,6 +206,20 @@ public class ConstructorVariation {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @return the active
+     */
+    public Boolean getActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     /**

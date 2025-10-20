@@ -47,6 +47,7 @@ public class ConstructorVariationTest {
         assertEquals(variation.getUrl(), null);
         assertEquals(variation.getImageUrl(), null);
         assertEquals(variation.getDescription(), null);
+        assertEquals(variation.getActive(), null);
         assertEquals(variation.getId(), variationName);
         assertEquals(variation.getItemId(), itemId);
         assertEquals(variation.getFacets(), null);
@@ -67,6 +68,7 @@ public class ConstructorVariationTest {
         variation.setUrl("https://constructor.io/test");
         variation.setImageUrl("https://constructor.io/test.png");
         variation.setDescription("See the world!");
+        variation.setActive(false);
         variation.setId("TICK-007");
         variation.setItemId("TICK");
         variation.setGroupIds(Arrays.asList("Lucky Tickets", "Special Tickets", "Fancy Tickets"));
@@ -77,6 +79,7 @@ public class ConstructorVariationTest {
         assertEquals(variation.getUrl(), "https://constructor.io/test");
         assertEquals(variation.getImageUrl(), "https://constructor.io/test.png");
         assertEquals(variation.getDescription(), "See the world!");
+        assertEquals(variation.getActive(), false);
         assertEquals(variation.getId(), "TICK-007");
         assertEquals(variation.getItemId(), "TICK");
         assertEquals(variation.getFacets(), null);
@@ -107,5 +110,28 @@ public class ConstructorVariationTest {
         assertEquals(metadataFields.get("url"), "https://constructor.io/test");
         assertEquals(metadataFields.get("image_url"), "https://constructor.io/test.png");
         assertEquals(metadataFields.get("test_field"), "test");
+    }
+
+    @Test
+    public void toMapShouldIncludeActiveWhenSet() throws Exception {
+        String variationName = this.getRandomProductName();
+        String itemId = this.getRandomProductName();
+        ConstructorVariation variation =
+                new ConstructorVariation(variationName, itemId, variationName);
+        variation.setActive(false);
+
+        Map<String, Object> dataFields = (Map<String, Object>) variation.toMap().get("data");
+        assertEquals(dataFields.get("active"), false);
+    }
+
+    @Test
+    public void toMapShouldIncludeActiveAsNullWhenNotSet() throws Exception {
+        String variationName = this.getRandomProductName();
+        String itemId = this.getRandomProductName();
+        ConstructorVariation variation =
+                new ConstructorVariation(variationName, itemId, variationName);
+
+        Map<String, Object> dataFields = (Map<String, Object>) variation.toMap().get("data");
+        assertEquals(dataFields.get("active"), null);
     }
 }

@@ -65,6 +65,28 @@ public class ConstructorIOItemsTest {
     }
 
     @Test
+    public void createOrReplaceItemsShouldRespectActiveFlag() throws Exception
+    {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+
+        ConstructorItem item = Utils.createProductItem();
+        item.setActive(true);
+
+        constructor.createOrReplaceItems(new ConstructorItem[]{item}, "Products");
+
+        Thread.sleep(2000);
+
+        ItemsRequest request = new ItemsRequest();
+        request.setIds(Arrays.asList(item.getId()));
+        ItemsResponse response = constructor.retrieveItems(request);
+
+        assertTrue("Item should exist", response.getTotalCount() >= 1);
+        assertTrue("Item should be active", response.getItems().get(0).getActive());
+
+        addItemsToCleanUpArray(new ConstructorItem[]{item});
+    }
+
+    @Test
     public void updateItemsShouldReturnAResponse() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         ConstructorItem[] itemsOld = {Utils.createProductItem()};

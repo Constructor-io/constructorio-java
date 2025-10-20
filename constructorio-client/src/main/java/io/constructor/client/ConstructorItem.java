@@ -14,9 +14,28 @@ public class ConstructorItem {
     private String imageUrl;
     private String id;
     private String description;
+    private Boolean active = true;
     private Map<String, List<Object>> facets;
     private Map<String, Object> metadata;
     private List<String> groupIds;
+
+    public ConstructorItem(String id, String name, Boolean active) throws IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException("id is required");
+        }
+
+        this.id = id;
+        this.name = name;
+        this.active = active;
+        this.suggestedScore = null;
+        this.keywords = null;
+        this.url = null;
+        this.imageUrl = null;
+        this.description = null;
+        this.facets = null;
+        this.metadata = null;
+        this.groupIds = null;
+    }
 
     /**
      * Creates an item. Optional public fields are in the <a
@@ -170,6 +189,16 @@ public class ConstructorItem {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    /**
+     * @return the active
+     */
+    public Boolean getActive() { return active; }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(Boolean active) { this.active = active; }
 
     /**
      * @return the id

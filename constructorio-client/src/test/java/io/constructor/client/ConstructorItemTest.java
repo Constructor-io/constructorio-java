@@ -43,6 +43,7 @@ public class ConstructorItemTest {
         assertEquals(item.getUrl(), null);
         assertEquals(item.getImageUrl(), null);
         assertEquals(item.getDescription(), null);
+        assertEquals(item.getActive(), null);
         assertEquals(item.getId(), itemName);
         assertEquals(item.getFacets(), null);
         assertEquals(item.getGroupIds(), null);
@@ -60,6 +61,7 @@ public class ConstructorItemTest {
         item.setUrl("https://constructor.io/test");
         item.setImageUrl("https://constructor.io/test.png");
         item.setDescription("See the world!");
+        item.setActive(true);
         item.setId("TICK-007");
         item.setGroupIds(Arrays.asList("Lucky Tickets", "Special Tickets", "Fancy Tickets"));
 
@@ -69,6 +71,7 @@ public class ConstructorItemTest {
         assertEquals(item.getUrl(), "https://constructor.io/test");
         assertEquals(item.getImageUrl(), "https://constructor.io/test.png");
         assertEquals(item.getDescription(), "See the world!");
+        assertEquals(item.getActive(), true);
         assertEquals(item.getId(), "TICK-007");
         assertEquals(item.getFacets(), null);
         assertEquals(item.getMetadata(), null);
@@ -96,5 +99,26 @@ public class ConstructorItemTest {
         assertEquals(metadataFields.get("url"), "https://constructor.io/test");
         assertEquals(metadataFields.get("image_url"), "https://constructor.io/test.png");
         assertEquals(metadataFields.get("test_field"), "test");
+    }
+
+    @Test
+    public void toMapShouldIncludeActiveWhenSet() throws Exception {
+        String itemName = this.getRandomProductName();
+        String itemId = itemName;
+        ConstructorItem item = new ConstructorItem(itemId, itemName);
+        item.setActive(true);
+
+        Map<String, Object> dataFields = (Map<String, Object>) item.toMap().get("data");
+        assertEquals(dataFields.get("active"), true);
+    }
+
+    @Test
+    public void toMapShouldIncludeActiveAsNullWhenNotSet() throws Exception {
+        String itemName = this.getRandomProductName();
+        String itemId = itemName;
+        ConstructorItem item = new ConstructorItem(itemId, itemName);
+
+        Map<String, Object> dataFields = (Map<String, Object>) item.toMap().get("data");
+        assertEquals(dataFields.get("active"), null);
     }
 }

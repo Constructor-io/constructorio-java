@@ -15,13 +15,15 @@ public class ConstructorVariation {
     private String id;
     private String itemId;
     private String description;
+    private Boolean active;
     private Map<String, List<Object>> facets;
     private Map<String, Object> metadata;
     private List<String> groupIds;
 
     /**
      * Creates a variation. Optional public fields are in the <a
-     * href="https://docs.constructor.com/docs/integrating-with-constructor-product-catalog-items-variations">API documentation</a>
+     * href="https://docs.constructor.com/docs/integrating-with-constructor-product-catalog-items-variations">API
+     * documentation</a>
      *
      * @param id the id of the variation that you are adding.
      * @param itemId the id of the item this variation is attached to.
@@ -45,6 +47,7 @@ public class ConstructorVariation {
         this.url = null;
         this.imageUrl = null;
         this.description = null;
+        this.active = null;
         this.facets = null;
         this.metadata = null;
         this.groupIds = null;
@@ -67,6 +70,7 @@ public class ConstructorVariation {
         this.url = null;
         this.imageUrl = null;
         this.description = null;
+        this.active = null;
         this.facets = null;
         this.metadata = null;
         this.groupIds = null;
@@ -85,6 +89,7 @@ public class ConstructorVariation {
         this.url = null;
         this.imageUrl = null;
         this.description = null;
+        this.active = null;
         this.facets = null;
         this.metadata = null;
         this.groupIds = null;
@@ -114,6 +119,7 @@ public class ConstructorVariation {
         dataMap.put("facets", this.facets);
         dataMap.put("group_ids", this.groupIds);
         dataMap.put("description", this.description);
+        dataMap.put("active", this.active);
         params.put("data", dataMap);
 
         return params;
@@ -201,6 +207,20 @@ public class ConstructorVariation {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @return the active status of the variation
+     */
+    public Boolean getActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active status to set for the variation
+     */
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     /**

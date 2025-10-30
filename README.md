@@ -35,7 +35,7 @@ items[1] = new ConstructorItem("10002");
 items[19] = new ConstructorItem("10003");
 
 // Add or replace items in the Products section
-constructor.createOrReplaceItems(items, "Products"); // (limit of 1,000 items)
+constructor.createOrReplaceItems(items, "Products"); // (limit of 10,000 items)
 ```
 
 To update existing item(s), you will need to provide an array of `ConstructorItem`(s) and their relevant `Autocomplete Section`.

@@ -226,7 +226,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Adds multiple items to your index whilst replacing existing ones (limit of 1,000 items)
+     * Adds multiple items to your index whilst replacing existing ones (limit of 10,000 items)
      *
      * @param items the items you want to add or replace.
      * @param section the section of the index that you're adding the items to.

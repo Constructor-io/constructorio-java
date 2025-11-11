@@ -1,0 +1,49 @@
+{
+  "response": {
+    "facets": [],
+    "groups": [],
+    "results": [{
+      "matched_terms": ["item"],
+      "data": {
+        "id": "10001",
+        "url": "https://test.com/p/10001",
+        "facets": [{
+          "name": "Price",
+          "values": [30]
+        }],
+        "image_url": "https://test.com/p/10001",
+        "description": "item with variation_slice",
+        "deactivated": false
+      },
+      "value": "Item1",
+      "is_slotted": false,
+      "labels": {},
+      "variation_slice": {
+        "variation_id": ["801764002"]
+      }
+    }, {
+      "matched_terms": ["item"],
+      "data": {
+        "id": "10002",
+        "url": "https://test.com/p/10002",
+        "facets": [{
+          "name": "Price",
+          "values": [20]
+        }],
+        "image_url": "https://test.com/p/10002",
+        "description": "item with variation_slice",
+        "deactivated": false
+      },
+      "value": "Item2",
+      "is_slotted": false,
+      "labels": {},
+      "variation_slice": {
+        "variation_id": ["804422022"]
+      }
+    }],
+    "total_num_results": 2,
+    "result_id": "test-result-id"
+  },
+  "result_id": "test-result-id",
+  "request": {}
+}

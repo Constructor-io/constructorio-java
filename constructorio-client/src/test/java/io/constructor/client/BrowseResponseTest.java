@@ -1,6 +1,8 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import io.constructor.client.models.BrowseResponse;
@@ -48,6 +50,9 @@ public class BrowseResponseTest {
                 "total number of results",
                 (int) response.getResponse().getTotalNumberOfResults(),
                 562);
+        assertNull(
+                "variation_slice should be null when not present",
+                response.getResponse().getResults().get(0).getVariationSlice());
         assertTrue(
                 "browse result labels exists",
                 (Boolean)
@@ -331,5 +336,28 @@ public class BrowseResponseTest {
                 "browse result feature variant returns null if empty",
                 response.getResponse().getFeatures().get(1).getVariant(),
                 null);
+    }
+
+    @Test
+    public void createBrowseResponseShouldReturnAResultWithVariationSlice() throws Exception {
+        String string = Utils.getTestResource("response.browse.variation_slice.json");
+        BrowseResponse response = ConstructorIO.createBrowseResponse(string);
+
+        // Results should have variation_slice with one variation_id
+        assertNotNull(
+                "variation_slice should exist",
+                response.getResponse().getResults().get(0).getVariationSlice());
+        assertNotNull(
+                "variation_id key should exist",
+                response.getResponse().getResults().get(0).getVariationSlice().get("variation_id"));
+        assertEquals(
+                "variation_id should match",
+                response.getResponse()
+                        .getResults()
+                        .get(0)
+                        .getVariationSlice()
+                        .get("variation_id")
+                        .get(0),
+                "901764002");
     }
 }

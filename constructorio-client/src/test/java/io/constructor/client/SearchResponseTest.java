@@ -1,6 +1,8 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import io.constructor.client.models.SearchResponse;
@@ -40,6 +42,9 @@ public class SearchResponseTest {
                 "total number of results",
                 (int) response.getResponse().getTotalNumberOfResults(),
                 301);
+        assertNull(
+                "variation_slice should be null when not present",
+                response.getResponse().getResults().get(0).getVariationSlice());
         assertTrue("search result id exists", response.getResultId() != null);
         assertTrue("request exists", response.getRequest() != null);
         assertEquals("request query exists", response.getRequest().get("term"), "peanut");
@@ -307,5 +312,28 @@ public class SearchResponseTest {
                 "search result feature variant returns null if empty",
                 response.getResponse().getFeatures().get(2).getVariant(),
                 null);
+    }
+
+    @Test
+    public void createSearchResponseShouldReturnAResultWithVariationSlice() throws Exception {
+        String string = Utils.getTestResource("response.search.variation_slice.json");
+        SearchResponse response = ConstructorIO.createSearchResponse(string);
+
+        // Results should have variation_slice with one variation_id
+        assertNotNull(
+                "variation_slice should exist",
+                response.getResponse().getResults().get(0).getVariationSlice());
+        assertNotNull(
+                "variation_id key should exist",
+                response.getResponse().getResults().get(0).getVariationSlice().get("variation_id"));
+        assertEquals(
+                "variation_id should match",
+                response.getResponse()
+                        .getResults()
+                        .get(0)
+                        .getVariationSlice()
+                        .get("variation_id")
+                        .get(0),
+                "801764002");
     }
 }

@@ -1,0 +1,52 @@
+{
+  "response": {
+    "facets": [],
+    "groups": [],
+    "results": [{
+      "matched_terms": [],
+      "data": {
+        "id": "20001",
+        "url": "https://test.com/p/20001",
+        "facets": [{
+          "name": "Color",
+          "values": ["blue"]
+        }],
+        "image_url": "https://test.com/p/20001",
+        "description": "browse item with variation_slice",
+        "deactivated": false
+      },
+      "value": "BrowseItem1",
+      "is_slotted": false,
+      "labels": {},
+      "variation_slice": {
+        "variation_id": ["901764002"]
+      }
+    }, {
+      "matched_terms": [],
+      "data": {
+        "id": "20002",
+        "url": "https://test.com/p/20002",
+        "facets": [{
+          "name": "Color",
+          "values": ["blue"]
+        }],
+        "image_url": "https://test.com/p/20002",
+        "description": "browse item with variation_slice",
+        "deactivated": false
+      },
+      "value": "BrowseItem2",
+      "is_slotted": false,
+      "labels": {},
+      "variation_slice": {
+        "variation_id": ["904422022"]
+      }
+    }],
+    "total_num_results": 2,
+    "result_id": "test-browse-result-id"
+  },
+  "result_id": "test-browse-result-id",
+  "request": {
+    "browse_filter_name": "Color",
+    "browse_filter_value": "Blue"
+  }
+}

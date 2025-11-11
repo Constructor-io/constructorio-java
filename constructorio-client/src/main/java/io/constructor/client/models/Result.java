@@ -22,6 +22,7 @@ public class Result {
     @SerializedName("variations_map")
     private Object variationsMap;
 
+    // The value is returned in a list, but practically it would only be a single value list
     @SerializedName("variation_slice")
     private Map<String, List<String>> variationSlice;
 

@@ -53,6 +53,12 @@ public class VariationsMap {
         max,
         @SerializedName("all")
         all,
+        @SerializedName("count")
+        count,
+        @SerializedName("field_count")
+        field_count,
+        @SerializedName("value_count")
+        value_count,
     }
 
     @SerializedName("dtype")

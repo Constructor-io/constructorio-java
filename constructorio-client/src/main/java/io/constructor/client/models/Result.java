@@ -22,6 +22,10 @@ public class Result {
     @SerializedName("variations_map")
     private Object variationsMap;
 
+    // The value is returned in a list, but practically it would only be a single value list
+    @SerializedName("variation_slice")
+    private Map<String, List<String>> variationSlice;
+
     @SerializedName("is_slotted")
     private boolean isSlotted;
 
@@ -81,6 +85,13 @@ public class Result {
     }
 
     /**
+     * @return the variationSlice
+     */
+    public Map<String, List<String>> getVariationSlice() {
+        return variationSlice;
+    }
+
+    /**
      * @return isSlotted boolean
      */
     public boolean getIsSlotted() {
@@ -113,6 +124,10 @@ public class Result {
 
     public void setStrategy(Map<String, String> strategy) {
         this.strategy = strategy;
+    }
+
+    public void setVariationSlice(Map<String, List<String>> variationSlice) {
+        this.variationSlice = variationSlice;
     }
 
     public void setIsSlotted(boolean isSlotted) {

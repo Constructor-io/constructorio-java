@@ -186,10 +186,13 @@ public class ConstructorIOSortOptionsTest {
         constructor.createSortOption(new SortOptionRequest(sortOption, "Products"));
 
         // Delete the sort option
+        // DELETE endpoint returns 204 with no body
         String deleteResponse = constructor.deleteSortOptions("delete_test", "ascending", "Products");
-        JSONObject jsonObj = new JSONObject(deleteResponse);
 
-        assertTrue("Response indicates success", jsonObj.has("message") || jsonObj.has("sort_by"));
+        // Verify that the response is empty (204 No Content)
+        assertTrue(
+                "DELETE should return empty response",
+                deleteResponse == null || deleteResponse.trim().isEmpty());
     }
 
     @Test
@@ -206,10 +209,13 @@ public class ConstructorIOSortOptionsTest {
         constructor.createSortOption(new SortOptionRequest(sortOption, "Products"));
 
         // Delete the sort option using default section
+        // DELETE endpoint returns 204 with no body
         String deleteResponse = constructor.deleteSortOptions("delete_default", "descending");
-        JSONObject jsonObj = new JSONObject(deleteResponse);
 
-        assertTrue("Response indicates success", jsonObj.has("message") || jsonObj.has("sort_by"));
+        // Verify that the response is empty (204 No Content)
+        assertTrue(
+                "DELETE should return empty response",
+                deleteResponse == null || deleteResponse.trim().isEmpty());
     }
 
     @Test(expected = IllegalArgumentException.class)

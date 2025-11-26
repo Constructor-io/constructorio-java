@@ -3107,4 +3107,202 @@ public class ConstructorIO {
                 facetOptionConfigurationRequest.getFacetOptionConfiguration().getValue(),
                 facetOptionConfigurationRequest.getSection());
     }
+
+    /**
+     * Creates a sort option
+     *
+     * @param sortOptionRequest the sort option request
+     * @return returns the created sort option as JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String createSortOption(SortOptionRequest sortOptionRequest)
+            throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "sort_option"));
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("section", sortOptionRequest.getSection())
+                            .build();
+
+            String params = new Gson().toJson(sortOptionRequest.getSortOption());
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).post(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Updates a sort option (creates or replaces)
+     *
+     * @param sortOptionRequest the sort option request
+     * @return returns the updated sort option as JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String updateSortOption(SortOptionRequest sortOptionRequest)
+            throws ConstructorException {
+        if (sortOptionRequest.getSortOption().getSortBy() == null
+                || sortOptionRequest.getSortOption().getSortBy().trim().isEmpty()) {
+            throw new IllegalArgumentException("sortBy is required for update");
+        }
+        if (sortOptionRequest.getSortOption().getSortOrder() == null
+                || sortOptionRequest.getSortOption().getSortOrder().trim().isEmpty()) {
+            throw new IllegalArgumentException("sortOrder is required for update");
+        }
+
+        try {
+            HttpUrl url =
+                    this.makeUrl(
+                            Arrays.asList(
+                                    "v1",
+                                    "sort_option",
+                                    sortOptionRequest.getSortOption().getSortBy(),
+                                    sortOptionRequest.getSortOption().getSortOrder()));
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("section", sortOptionRequest.getSection())
+                            .build();
+
+            Map<String, Object> bodyParams = new HashMap<String, Object>();
+            if (sortOptionRequest.getSortOption().getDisplayName() != null) {
+                bodyParams.put("display_name", sortOptionRequest.getSortOption().getDisplayName());
+            }
+            if (sortOptionRequest.getSortOption().getPathInMetadata() != null) {
+                bodyParams.put(
+                        "path_in_metadata", sortOptionRequest.getSortOption().getPathInMetadata());
+            }
+            if (sortOptionRequest.getSortOption().getPosition() != null) {
+                bodyParams.put("position", sortOptionRequest.getSortOption().getPosition());
+            }
+            if (sortOptionRequest.getSortOption().getHidden() != null) {
+                bodyParams.put("hidden", sortOptionRequest.getSortOption().getHidden());
+            }
+
+            String params = new Gson().toJson(bodyParams);
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).put(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Deletes sort options
+     *
+     * @param sortBy the sort by field
+     * @param sortOrder the sort order (ascending or descending)
+     * @param section the section to which the sort option belongs
+     * @return returns the deleted sort options as JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String deleteSortOptions(String sortBy, String sortOrder, String section)
+            throws ConstructorException {
+        if (sortBy == null || sortBy.trim().isEmpty()) {
+            throw new IllegalArgumentException("sortBy is required");
+        }
+        if (sortOrder == null || sortOrder.trim().isEmpty()) {
+            throw new IllegalArgumentException("sortOrder is required");
+        }
+
+        try {
+            HttpUrl url =
+                    this.makeUrl(Arrays.asList("v1", "sort_options"))
+                            .newBuilder()
+                            .addQueryParameter("section", section)
+                            .build();
+
+            Map<String, Object> sortOptionParams = new HashMap<String, Object>();
+            sortOptionParams.put("sort_by", sortBy);
+            sortOptionParams.put("sort_order", sortOrder);
+
+            Map<String, Object> bodyParams = new HashMap<String, Object>();
+            bodyParams.put("sort_options", Arrays.asList(sortOptionParams));
+
+            String jsonParams = new Gson().toJson(bodyParams);
+            RequestBody body =
+                    RequestBody.create(
+                            jsonParams, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).delete(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Deletes sort options with default section "Products"
+     *
+     * @param sortBy the sort by field
+     * @param sortOrder the sort order (ascending or descending)
+     * @return returns the deleted sort options as JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String deleteSortOptions(String sortBy, String sortOrder) throws ConstructorException {
+        return deleteSortOptions(sortBy, sortOrder, "Products");
+    }
+
+    /**
+     * Retrieves all sort options
+     *
+     * @param section the section to retrieve sort options for
+     * @param sortBy optional filter by sort by field (can be null)
+     * @return returns the sort options response
+     * @throws ConstructorException if the request is invalid
+     */
+    public SortOptionsResponse retrieveSortOptions(String section, String sortBy)
+            throws ConstructorException {
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v1", "sort_options"));
+            HttpUrl.Builder urlBuilder = url.newBuilder().addQueryParameter("section", section);
+
+            if (sortBy != null && !sortBy.trim().isEmpty()) {
+                urlBuilder.addQueryParameter("sort_by", sortBy);
+            }
+
+            url = urlBuilder.build();
+
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
+
+            Response response = clientWithRetry.newCall(request).execute();
+            String body = getResponseBody(response);
+
+            return new Gson().fromJson(body, SortOptionsResponse.class);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Retrieves all sort options with default section "Products"
+     *
+     * @param sortBy optional filter by sort by field (can be null)
+     * @return returns the sort options response
+     * @throws ConstructorException if the request is invalid
+     */
+    public SortOptionsResponse retrieveSortOptions(String sortBy) throws ConstructorException {
+        return retrieveSortOptions("Products", sortBy);
+    }
+
+    /**
+     * Retrieves all sort options with default section "Products" and no filter
+     *
+     * @return returns the sort options response
+     * @throws ConstructorException if the request is invalid
+     */
+    public SortOptionsResponse retrieveSortOptions() throws ConstructorException {
+        return retrieveSortOptions("Products", null);
+    }
 }

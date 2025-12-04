@@ -2,9 +2,13 @@ package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import com.google.gson.Gson;
 import io.constructor.client.models.SortOption;
+import io.constructor.client.models.SortOption.SortOrder;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -30,18 +34,16 @@ public class SortOptionTest {
         assertNull(sortOption.getPosition());
         assertEquals(sortOption.getHidden(), Boolean.TRUE);
         assertEquals(sortOption.getSortBy(), "price");
-        assertEquals(sortOption.getSortOrder(), "ascending");
+        assertEquals(sortOption.getSortOrder(), SortOrder.ascending);
     }
 
     @Test
     public void sortOptionSerialization() throws Exception {
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("price", SortOrder.descending);
         sortOption.setDisplayName("Preis");
         sortOption.setPathInMetadata("price_min");
         sortOption.setPosition(1);
         sortOption.setHidden(true);
-        sortOption.setSortBy("price");
-        sortOption.setSortOrder("descending");
 
         String json = new Gson().toJson(sortOption);
 
@@ -52,18 +54,18 @@ public class SortOptionTest {
         assertEquals(deserialized.getPosition(), Integer.valueOf(1));
         assertEquals(deserialized.getHidden(), Boolean.TRUE);
         assertEquals(deserialized.getSortBy(), "price");
-        assertEquals(deserialized.getSortOrder(), "descending");
+        assertEquals(deserialized.getSortOrder(), SortOrder.descending);
     }
 
     @Test
     public void sortOptionDefaultValues() {
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("price", SortOrder.ascending);
         assertNull("Display name should default to null", sortOption.getDisplayName());
         assertNull("Path in metadata should default to null", sortOption.getPathInMetadata());
         assertNull("Position should default to null", sortOption.getPosition());
         assertNull("Hidden should default to null", sortOption.getHidden());
-        assertNull("Sort by should default to null", sortOption.getSortBy());
-        assertNull("Sort order should default to null", sortOption.getSortOrder());
+        assertEquals("Sort by should be set", "price", sortOption.getSortBy());
+        assertEquals("Sort order should be set", SortOrder.ascending, sortOption.getSortOrder());
     }
 
     @Test

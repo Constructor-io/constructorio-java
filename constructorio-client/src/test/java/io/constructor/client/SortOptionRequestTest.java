@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import io.constructor.client.models.SortOption;
+import io.constructor.client.models.SortOption.SortOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -13,10 +14,8 @@ public class SortOptionRequestTest {
 
     @Test
     public void newSortOptionRequestShouldReturnWithDefaultSection() {
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("price", SortOrder.ascending);
         sortOption.setDisplayName("Price");
-        sortOption.setSortBy("price");
-        sortOption.setSortOrder("ascending");
 
         SortOptionRequest request = new SortOptionRequest(sortOption);
         assertNotNull(request);
@@ -26,10 +25,8 @@ public class SortOptionRequestTest {
 
     @Test
     public void newSortOptionRequestShouldReturnWithCustomSection() {
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("price", SortOrder.ascending);
         sortOption.setDisplayName("Price");
-        sortOption.setSortBy("price");
-        sortOption.setSortOrder("ascending");
 
         SortOptionRequest request = new SortOptionRequest(sortOption, "Search Suggestions");
         assertNotNull(request);
@@ -39,13 +36,11 @@ public class SortOptionRequestTest {
 
     @Test
     public void sortOptionRequestSettersWork() {
-        SortOption sortOption1 = new SortOption();
+        SortOption sortOption1 = new SortOption("price", SortOrder.ascending);
         sortOption1.setDisplayName("Price");
-        sortOption1.setSortBy("price");
 
-        SortOption sortOption2 = new SortOption();
+        SortOption sortOption2 = new SortOption("name", SortOrder.descending);
         sortOption2.setDisplayName("Name");
-        sortOption2.setSortBy("name");
 
         SortOptionRequest request = new SortOptionRequest(sortOption1);
         request.setSortOption(sortOption2);
@@ -64,7 +59,7 @@ public class SortOptionRequestTest {
 
     @Test
     public void newSortOptionRequestShouldThrowExceptionWithNullSection() {
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("price", SortOrder.ascending);
         sortOption.setDisplayName("Price");
 
         thrown.expect(IllegalArgumentException.class);

@@ -52,7 +52,7 @@ public class SortOptionsResponseTest {
         assertNull(first.getPosition());
         assertEquals(first.getHidden(), Boolean.TRUE);
         assertEquals(first.getSortBy(), "price");
-        assertEquals(first.getSortOrder(), "ascending");
+        assertEquals(first.getSortOrder(), SortOption.SortOrder.ascending);
 
         // Check second sort option
         SortOption second = response.getSortOptions().get(1);
@@ -61,7 +61,7 @@ public class SortOptionsResponseTest {
         assertEquals(second.getPosition(), Integer.valueOf(1));
         assertEquals(second.getHidden(), Boolean.FALSE);
         assertEquals(second.getSortBy(), "price");
-        assertEquals(second.getSortOrder(), "descending");
+        assertEquals(second.getSortOrder(), SortOption.SortOrder.descending);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class SortOptionsResponseTest {
         response.setTotalCount(5);
 
         java.util.ArrayList<SortOption> sortOptions = new java.util.ArrayList<SortOption>();
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("price", SortOption.SortOrder.ascending);
         sortOption.setDisplayName("Test");
         sortOptions.add(sortOption);
 

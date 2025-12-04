@@ -2,6 +2,7 @@ package io.constructor.client;
 
 import com.google.gson.Gson;
 import io.constructor.client.models.*;
+import io.constructor.client.models.SortOption.SortOrder;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -114,8 +115,8 @@ public class ConstructorIO {
     /**
      * Creates a constructor.io Client.
      *
-     * @param apiToken API Token, gotten from your <a
-     *     href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiToken API Token, gotten from your <a href=
+     *     "https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
      * @param apiKey API Key, used publicly in your in-site javascript client.
      * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use
      *     HTTPS.
@@ -147,8 +148,8 @@ public class ConstructorIO {
     /**
      * Creates a constructor.io Client.
      *
-     * @param apiToken API Token, gotten from your <a
-     *     href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiToken API Token, gotten from your <a href=
+     *     "https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
      * @param apiKey API Key, used publicly in your in-site javascript client.
      * @param constructorToken The token provided by Constructor to identify your company's traffic
      *     if proxying requests for results
@@ -190,10 +191,19 @@ public class ConstructorIO {
     /*
      * Creates a constructor.io Client.
      *
-     * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiToken API Token, gotten from your <a
+     * href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and
+     * kept secret.
+     *
      * @param apiKey API Key, used publicly in your in-site javascript client.
-     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete service at ac.cnstrc.com.
+     *
+     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended
+     * that you use HTTPS.
+     *
+     * @param host The host of the autocomplete service that you are using. It is
+     * recommended that you let this value be null, in which case the host defaults
+     * to the Constructor.io autocomplete service at ac.cnstrc.com.
+     *
      * @param port The port to connect to
      */
     public ConstructorIO(String apiToken, String apiKey, boolean isHTTPS, String host, int port) {
@@ -2234,7 +2244,8 @@ public class ConstructorIO {
             JSONObject resultData = result.getJSONObject("data");
             JSONObject metadata = new JSONObject();
 
-            // Recursive call to move unspecified properties in result variations to its metadata
+            // Recursive call to move unspecified properties in result variations to its
+            // metadata
             // object
             if (!result.isNull("variations")) {
                 JSONArray variations = result.getJSONArray("variations");
@@ -2295,7 +2306,8 @@ public class ConstructorIO {
             // Add metadata to result data object
             result.put("metadata", metadata);
 
-            // Suggested score is already at the top level but its name needs to be converted to
+            // Suggested score is already at the top level but its name needs to be
+            // converted to
             // camelcase
             if (result.has("suggested_score")) {
                 result.put("suggestedScore", result.get("suggested_score"));
@@ -3146,15 +3158,6 @@ public class ConstructorIO {
      */
     public String updateSortOption(SortOptionRequest sortOptionRequest)
             throws ConstructorException {
-        if (sortOptionRequest.getSortOption().getSortBy() == null
-                || sortOptionRequest.getSortOption().getSortBy().trim().isEmpty()) {
-            throw new IllegalArgumentException("sortBy is required for update");
-        }
-        if (sortOptionRequest.getSortOption().getSortOrder() == null
-                || sortOptionRequest.getSortOption().getSortOrder().trim().isEmpty()) {
-            throw new IllegalArgumentException("sortOrder is required for update");
-        }
-
         try {
             HttpUrl url =
                     this.makeUrl(
@@ -3162,7 +3165,7 @@ public class ConstructorIO {
                                     "v1",
                                     "sort_option",
                                     sortOptionRequest.getSortOption().getSortBy(),
-                                    sortOptionRequest.getSortOption().getSortOrder()));
+                                    sortOptionRequest.getSortOption().getSortOrder().toString()));
             url =
                     url.newBuilder()
                             .addQueryParameter("section", sortOptionRequest.getSection())
@@ -3199,19 +3202,15 @@ public class ConstructorIO {
     /**
      * Deletes sort options
      *
-     * @param sortBy the sort by field
-     * @param sortOrder the sort order (ascending or descending)
-     * @param section the section to which the sort option belongs
+     * @param sortOptions array of sortOptions to delete. Only the sortBy and sortOrder fields are required
+     * @param section the index section to delete the sort option from
      * @return returns the deleted sort options as JSON string
      * @throws ConstructorException if the request is invalid
      */
-    public String deleteSortOptions(String sortBy, String sortOrder, String section)
+    public String deleteSortOptions(SortOption[] sortOptions, String section)
             throws ConstructorException {
-        if (sortBy == null || sortBy.trim().isEmpty()) {
-            throw new IllegalArgumentException("sortBy is required");
-        }
-        if (sortOrder == null || sortOrder.trim().isEmpty()) {
-            throw new IllegalArgumentException("sortOrder is required");
+        if (sortOptions == null || sortOptions.length < 1) {
+            throw new IllegalArgumentException("must specify sort options to detele");
         }
 
         try {
@@ -3221,12 +3220,8 @@ public class ConstructorIO {
                             .addQueryParameter("section", section)
                             .build();
 
-            Map<String, Object> sortOptionParams = new HashMap<String, Object>();
-            sortOptionParams.put("sort_by", sortBy);
-            sortOptionParams.put("sort_order", sortOrder);
-
             Map<String, Object> bodyParams = new HashMap<String, Object>();
-            bodyParams.put("sort_options", Arrays.asList(sortOptionParams));
+            bodyParams.put("sort_options", Arrays.asList(sortOptions));
 
             String jsonParams = new Gson().toJson(bodyParams);
             RequestBody body =
@@ -3245,31 +3240,84 @@ public class ConstructorIO {
     /**
      * Deletes sort options with default section "Products"
      *
+     * @param sortOptions array of sortOptions to delete. Only the sortBy and sortOrder fields are required
+     * @return returns the deleted sort options as JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String deleteSortOptions(SortOption[] sortOptions) throws ConstructorException {
+        return deleteSortOptions(sortOptions, "Products");
+    }
+
+    /**
+     * Deletes a single sort option
+     *
+     * @param sortBy the sort by field
+     * @param sortOrder the sort order (ascending or descending)
+     * @param section the index section to delete the sort option from
+     * @return returns the deleted sort options as JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String deleteSortOption(String sortBy, SortOrder sortOrder, String section)
+            throws ConstructorException {
+        if (sortBy == null || sortBy.trim().isEmpty()) {
+            throw new IllegalArgumentException("sortBy is required");
+        }
+        if (sortOrder == null) {
+            throw new IllegalArgumentException("sortOrder is required");
+        }
+
+        return deleteSortOptions(new SortOption[] {new SortOption(sortBy, sortOrder)}, section);
+    }
+
+    /**
+     * Deletes a single sort option with default section "Products"
+     *
      * @param sortBy the sort by field
      * @param sortOrder the sort order (ascending or descending)
      * @return returns the deleted sort options as JSON string
      * @throws ConstructorException if the request is invalid
      */
-    public String deleteSortOptions(String sortBy, String sortOrder) throws ConstructorException {
-        return deleteSortOptions(sortBy, sortOrder, "Products");
+    public String deleteSortOption(String sortBy, SortOrder sortOrder) throws ConstructorException {
+        return deleteSortOption(sortBy, sortOrder, "Products");
     }
 
     /**
      * Retrieves all sort options
      *
-     * @param section the section to retrieve sort options for
-     * @param sortBy optional filter by sort by field (can be null)
+     * @param sortOptionGetRequest the sort options get request
      * @return returns the sort options response
      * @throws ConstructorException if the request is invalid
      */
-    public SortOptionsResponse retrieveSortOptions(String section, String sortBy)
+    public SortOptionsResponse retrieveSortOptions(SortOptionGetRequest sortOptionGetRequest)
             throws ConstructorException {
+
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v1", "sort_options"));
-            HttpUrl.Builder urlBuilder = url.newBuilder().addQueryParameter("section", section);
+            HttpUrl.Builder urlBuilder = url.newBuilder();
 
+            String sortBy = sortOptionGetRequest.getSortBy();
             if (sortBy != null && !sortBy.trim().isEmpty()) {
                 urlBuilder.addQueryParameter("sort_by", sortBy);
+            }
+
+            String section = sortOptionGetRequest.getSection();
+            if (section != null && !section.trim().isEmpty()) {
+                urlBuilder.addQueryParameter("section", section);
+            }
+
+            Integer page = sortOptionGetRequest.getPage();
+            if (page != null && page > 0) {
+                urlBuilder.addQueryParameter("page", page.toString());
+            }
+
+            Integer resultsPerPage = sortOptionGetRequest.getResultsPerPage();
+            if (resultsPerPage != null && resultsPerPage > 0) {
+                urlBuilder.addQueryParameter("num_results_per_page", resultsPerPage.toString());
+            }
+
+            Integer offset = sortOptionGetRequest.getOffset();
+            if (offset != null && offset > 0 && page == null) {
+                urlBuilder.addQueryParameter("offset", offset.toString());
             }
 
             url = urlBuilder.build();
@@ -3293,7 +3341,10 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid
      */
     public SortOptionsResponse retrieveSortOptions(String sortBy) throws ConstructorException {
-        return retrieveSortOptions("Products", sortBy);
+        SortOptionGetRequest getRequestParams = new SortOptionGetRequest();
+        getRequestParams.setSortBy(sortBy);
+
+        return retrieveSortOptions(getRequestParams);
     }
 
     /**
@@ -3303,6 +3354,6 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid
      */
     public SortOptionsResponse retrieveSortOptions() throws ConstructorException {
-        return retrieveSortOptions("Products", null);
+        return retrieveSortOptions(new SortOptionGetRequest());
     }
 }

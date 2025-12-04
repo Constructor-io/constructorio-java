@@ -3,6 +3,7 @@ package io.constructor.client;
 import static org.junit.Assert.*;
 
 import io.constructor.client.models.SortOption;
+import io.constructor.client.models.SortOption.SortOrder;
 import io.constructor.client.models.SortOptionsResponse;
 import java.util.ArrayList;
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ public class ConstructorIOSortOptionsTest {
             String section = parts[2];
 
             try {
-                constructor.deleteSortOptions(sortBy, sortOrder, section);
+                constructor.deleteSortOption(sortBy, SortOrder.valueOf(sortOrder), section);
             } catch (ConstructorException e) {
                 System.err.println(
                         "Warning: Failed to clean up sort option: " + sortBy + " " + sortOrder);
@@ -53,12 +54,10 @@ public class ConstructorIOSortOptionsTest {
     public void createSortOptionShouldReturn() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("test_price", SortOrder.ascending);
         sortOption.setDisplayName("Test Price Sort");
         sortOption.setPathInMetadata("test_price");
         sortOption.setHidden(false);
-        sortOption.setSortBy("test_price");
-        sortOption.setSortOrder("ascending");
 
         SortOptionRequest request = new SortOptionRequest(sortOption, "Products");
 
@@ -91,11 +90,9 @@ public class ConstructorIOSortOptionsTest {
     public void testCreateSortOptionWithDifferentSection() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("custom_field", SortOrder.descending);
         sortOption.setDisplayName("Custom Section Sort");
         sortOption.setPathInMetadata("custom_field");
-        sortOption.setSortBy("custom_field");
-        sortOption.setSortOrder("descending");
         sortOption.setHidden(true);
 
         SortOptionRequest request = new SortOptionRequest(sortOption, "Search Suggestions");
@@ -114,21 +111,17 @@ public class ConstructorIOSortOptionsTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
         // Create a sort option first
-        SortOption createOption = new SortOption();
+        SortOption createOption = new SortOption("update_test", SortOrder.ascending);
         createOption.setDisplayName("Original Name");
         createOption.setPathInMetadata("update_test");
-        createOption.setSortBy("update_test");
-        createOption.setSortOrder("ascending");
         createOption.setHidden(false);
 
         constructor.createSortOption(new SortOptionRequest(createOption, "Products"));
 
         // Update the sort option
-        SortOption updateOption = new SortOption();
+        SortOption updateOption = new SortOption("update_test", SortOrder.ascending);
         updateOption.setDisplayName("Updated Name");
         updateOption.setPathInMetadata("update_test_v2");
-        updateOption.setSortBy("update_test");
-        updateOption.setSortOrder("ascending");
         updateOption.setHidden(true);
         updateOption.setPosition(5);
 
@@ -144,47 +137,21 @@ public class ConstructorIOSortOptionsTest {
         addSortOptionToCleanupArray("update_test", "ascending");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testUpdateSortOptionWithoutSortBy() throws Exception {
-        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-
-        SortOption sortOption = new SortOption();
-        sortOption.setDisplayName("Test");
-        sortOption.setSortOrder("ascending");
-
-        SortOptionRequest request = new SortOptionRequest(sortOption, "Products");
-        constructor.updateSortOption(request);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testUpdateSortOptionWithoutSortOrder() throws Exception {
-        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-
-        SortOption sortOption = new SortOption();
-        sortOption.setDisplayName("Test");
-        sortOption.setSortBy("test_field");
-
-        SortOptionRequest request = new SortOptionRequest(sortOption, "Products");
-        constructor.updateSortOption(request);
-    }
-
     @Test
     public void testDeleteSortOptionWithSortByAndSortOrder() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
         // Create a sort option first
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("delete_test", SortOrder.ascending);
         sortOption.setDisplayName("Delete Test");
         sortOption.setPathInMetadata("delete_test");
-        sortOption.setSortBy("delete_test");
-        sortOption.setSortOrder("ascending");
 
         constructor.createSortOption(new SortOptionRequest(sortOption, "Products"));
 
         // Delete the sort option
         // DELETE endpoint returns 204 with no body
         String deleteResponse =
-                constructor.deleteSortOptions("delete_test", "ascending", "Products");
+                constructor.deleteSortOption("delete_test", SortOrder.ascending, "Products");
 
         // Verify that the response is empty (204 No Content)
         assertTrue(
@@ -197,17 +164,15 @@ public class ConstructorIOSortOptionsTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
         // Create a sort option first
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("delete_default", SortOrder.descending);
         sortOption.setDisplayName("Delete Default Section");
         sortOption.setPathInMetadata("delete_default");
-        sortOption.setSortBy("delete_default");
-        sortOption.setSortOrder("descending");
 
         constructor.createSortOption(new SortOptionRequest(sortOption, "Products"));
 
         // Delete the sort option using default section
         // DELETE endpoint returns 204 with no body
-        String deleteResponse = constructor.deleteSortOptions("delete_default", "descending");
+        String deleteResponse = constructor.deleteSortOption("delete_default", SortOrder.descending);
 
         // Verify that the response is empty (204 No Content)
         assertTrue(
@@ -218,13 +183,13 @@ public class ConstructorIOSortOptionsTest {
     @Test(expected = IllegalArgumentException.class)
     public void testDeleteSortOptionWithEmptySortBy() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-        constructor.deleteSortOptions("", "ascending", "Products");
+        constructor.deleteSortOption("", SortOrder.ascending, "Products");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testDeleteSortOptionWithEmptySortOrder() throws Exception {
+    public void testDeleteSortOptionWithNullSortOrder() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-        constructor.deleteSortOptions("test", "", "Products");
+        constructor.deleteSortOption("test", null, "Products");
     }
 
     @Test
@@ -242,7 +207,10 @@ public class ConstructorIOSortOptionsTest {
     public void testRetrieveSortOptionsWithSection() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
-        SortOptionsResponse response = constructor.retrieveSortOptions("Products", null);
+        SortOptionGetRequest request = new SortOptionGetRequest();
+        request.setSection("Products");
+
+        SortOptionsResponse response = constructor.retrieveSortOptions(request);
 
         assertNotNull(response);
         assertNotNull(response.getSortOptions());
@@ -254,18 +222,15 @@ public class ConstructorIOSortOptionsTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
         // Create a sort option to ensure there's something to retrieve
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("retrieve_filter_test", SortOrder.ascending);
         sortOption.setDisplayName("Retrieve Filter Test");
         sortOption.setPathInMetadata("retrieve_filter_test");
-        sortOption.setSortBy("retrieve_filter_test");
-        sortOption.setSortOrder("ascending");
 
         constructor.createSortOption(new SortOptionRequest(sortOption, "Products"));
         addSortOptionToCleanupArray("retrieve_filter_test", "ascending");
 
         // Retrieve with filter
-        SortOptionsResponse response =
-                constructor.retrieveSortOptions("Products", "retrieve_filter_test");
+        SortOptionsResponse response = constructor.retrieveSortOptions("retrieve_filter_test");
 
         assertNotNull(response);
         assertNotNull(response.getSortOptions());
@@ -280,9 +245,11 @@ public class ConstructorIOSortOptionsTest {
 
     @Test
     public void testSortOptionDefaultValues() {
-        SortOption sortOption = new SortOption();
+        SortOption sortOption = new SortOption("price", SortOrder.ascending);
         assertNull("Position should default to null", sortOption.getPosition());
         assertNull("Hidden should default to null", sortOption.getHidden());
         assertNull("Display name should default to null", sortOption.getDisplayName());
+        assertEquals("Sort by should be set", "price", sortOption.getSortBy());
+        assertEquals("Sort order should be set", SortOrder.ascending, sortOption.getSortOrder());
     }
 }

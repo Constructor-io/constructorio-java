@@ -411,11 +411,9 @@ To create a new sort option, you will need to create a `SortOption` object with 
 
 ```java
 // Create a SortOption with the required fields
-SortOption sortOption = new SortOption();
+SortOption sortOption = new SortOption("price", SortOption.SortOrder.ascending);
 sortOption.setDisplayName("Price");
 sortOption.setPathInMetadata("price_min");
-sortOption.setSortBy("price");
-sortOption.setSortOrder("ascending");
 sortOption.setHidden(false);
 
 // Create a SortOptionRequest with the sort option and section
@@ -431,11 +429,9 @@ To update an existing sort option (or create it if it doesn't exist), use the `u
 
 ```java
 // Create a SortOption with updated fields
-SortOption sortOption = new SortOption();
+SortOption sortOption = new SortOption("price", SortOption.SortOrder.ascending);
 sortOption.setDisplayName("Price (Low to High)");
 sortOption.setPathInMetadata("price_min");
-sortOption.setSortBy("price");
-sortOption.setSortOrder("ascending");
 sortOption.setHidden(false);
 sortOption.setPosition(1);
 
@@ -451,26 +447,39 @@ String response = constructor.updateSortOption(request);
 To delete a sort option, you need to specify the `sortBy` and `sortOrder` fields that identify it.
 
 ```java
-// Delete a sort option by sortBy and sortOrder
-String response = constructor.deleteSortOptions("price", "ascending", "Products");
+// Delete a single sort option by sortBy and sortOrder
+String response = constructor.deleteSortOption("price", SortOption.SortOrder.ascending, "Products");
 
 // Or use the default section "Products"
-String response = constructor.deleteSortOptions("price", "ascending");
+String response = constructor.deleteSortOption("price", SortOption.SortOrder.ascending);
+
+// To delete multiple sort options at once
+SortOption[] sortOptions = new SortOption[] {
+    new SortOption("price", SortOption.SortOrder.ascending),
+    new SortOption("relevance", SortOption.SortOrder.descending)
+};
+String response = constructor.deleteSortOptions(sortOptions, "Products");
 ```
 
 ## Retrieving Sort Options
 
-To retrieve all sort options for a section, you can use the `retrieveSortOptions` method. You can optionally filter by a specific `sortBy` field.
+To retrieve all sort options for a section, you can use the `retrieveSortOptions` method. You can optionally filter by a specific `sortBy` field and control pagination.
 
 ```java
 // Retrieve all sort options for the default "Products" section
 SortOptionsResponse response = constructor.retrieveSortOptions();
 
-// Retrieve sort options for a specific section
-SortOptionsResponse response = constructor.retrieveSortOptions("Products", null);
-
 // Retrieve sort options filtered by sortBy field
-SortOptionsResponse response = constructor.retrieveSortOptions("Products", "price");
+SortOptionsResponse response = constructor.retrieveSortOptions("price");
+
+// Advanced retrieval with pagination and filters
+SortOptionGetRequest request = new SortOptionGetRequest();
+request.setSection("Products");
+request.setSortBy("price");
+request.setPage(1);
+request.setResultsPerPage(20);
+
+SortOptionsResponse response = constructor.retrieveSortOptions(request);
 
 // Access the results
 int totalCount = response.getTotalCount();

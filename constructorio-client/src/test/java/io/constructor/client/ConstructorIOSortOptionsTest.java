@@ -172,7 +172,8 @@ public class ConstructorIOSortOptionsTest {
 
         // Delete the sort option using default section
         // DELETE endpoint returns 204 with no body
-        String deleteResponse = constructor.deleteSortOption("delete_default", SortOrder.descending);
+        String deleteResponse =
+                constructor.deleteSortOption("delete_default", SortOrder.descending);
 
         // Verify that the response is empty (204 No Content)
         assertTrue(

@@ -2,13 +2,10 @@ package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import com.google.gson.Gson;
 import io.constructor.client.models.SortOption;
 import io.constructor.client.models.SortOption.SortOrder;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Modifier;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

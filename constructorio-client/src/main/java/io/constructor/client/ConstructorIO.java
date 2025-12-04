@@ -3202,7 +3202,8 @@ public class ConstructorIO {
     /**
      * Deletes sort options
      *
-     * @param sortOptions array of sortOptions to delete. Only the sortBy and sortOrder fields are required
+     * @param sortOptions array of sortOptions to delete. Only the sortBy and sortOrder fields are
+     *     required
      * @param section the index section to delete the sort option from
      * @return returns the deleted sort options as JSON string
      * @throws ConstructorException if the request is invalid
@@ -3240,7 +3241,8 @@ public class ConstructorIO {
     /**
      * Deletes sort options with default section "Products"
      *
-     * @param sortOptions array of sortOptions to delete. Only the sortBy and sortOrder fields are required
+     * @param sortOptions array of sortOptions to delete. Only the sortBy and sortOrder fields are
+     *     required
      * @return returns the deleted sort options as JSON string
      * @throws ConstructorException if the request is invalid
      */

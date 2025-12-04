@@ -42,16 +42,12 @@ public class ConstructorIOSortOptionsTest {
                 constructor.deleteSortOptions(sortBy, sortOrder, section);
             } catch (ConstructorException e) {
                 System.err.println(
-                        "Warning: Failed to clean up sort option: "
-                                + sortBy
-                                + " "
-                                + sortOrder);
+                        "Warning: Failed to clean up sort option: " + sortBy + " " + sortOrder);
             }
         }
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void createSortOptionShouldReturn() throws Exception {
@@ -187,7 +183,8 @@ public class ConstructorIOSortOptionsTest {
 
         // Delete the sort option
         // DELETE endpoint returns 204 with no body
-        String deleteResponse = constructor.deleteSortOptions("delete_test", "ascending", "Products");
+        String deleteResponse =
+                constructor.deleteSortOptions("delete_test", "ascending", "Products");
 
         // Verify that the response is empty (204 No Content)
         assertTrue(
@@ -267,7 +264,8 @@ public class ConstructorIOSortOptionsTest {
         addSortOptionToCleanupArray("retrieve_filter_test", "ascending");
 
         // Retrieve with filter
-        SortOptionsResponse response = constructor.retrieveSortOptions("Products", "retrieve_filter_test");
+        SortOptionsResponse response =
+                constructor.retrieveSortOptions("Products", "retrieve_filter_test");
 
         assertNotNull(response);
         assertNotNull(response.getSortOptions());

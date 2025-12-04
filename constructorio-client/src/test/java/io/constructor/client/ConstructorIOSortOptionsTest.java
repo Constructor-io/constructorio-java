@@ -2,7 +2,6 @@ package io.constructor.client;
 
 import static org.junit.Assert.*;
 
-import com.google.gson.Gson;
 import io.constructor.client.models.SortOption;
 import io.constructor.client.models.SortOptionsResponse;
 import java.util.ArrayList;
@@ -51,7 +50,8 @@ public class ConstructorIOSortOptionsTest {
         }
     }
 
-    @Rule public ExpectedException thrown = ExpectedException.none();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void createSortOptionShouldReturn() throws Exception {
@@ -267,8 +267,7 @@ public class ConstructorIOSortOptionsTest {
         addSortOptionToCleanupArray("retrieve_filter_test", "ascending");
 
         // Retrieve with filter
-        SortOptionsResponse response =
-                constructor.retrieveSortOptions("Products", "retrieve_filter_test");
+        SortOptionsResponse response = constructor.retrieveSortOptions("Products", "retrieve_filter_test");
 
         assertNotNull(response);
         assertNotNull(response.getSortOptions());

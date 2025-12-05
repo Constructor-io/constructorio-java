@@ -21,7 +21,7 @@ public class SortOptionsResponseTest {
                         + "\"total_count\": 2,"
                         + "\"sort_options\": ["
                         + "  {"
-                        + "    \"display_name\": \"Preis\","
+                        + "    \"display_name\": \"Price\","
                         + "    \"path_in_metadata\": \"price_min\","
                         + "    \"position\": null,"
                         + "    \"hidden\": true,"
@@ -29,7 +29,7 @@ public class SortOptionsResponseTest {
                         + "    \"sort_order\": \"ascending\""
                         + "  },"
                         + "  {"
-                        + "    \"display_name\": \"Preis\","
+                        + "    \"display_name\": \"Price\","
                         + "    \"path_in_metadata\": \"price_min\","
                         + "    \"position\": 1,"
                         + "    \"hidden\": false,"
@@ -47,7 +47,7 @@ public class SortOptionsResponseTest {
 
         // Check first sort option
         SortOption first = response.getSortOptions().get(0);
-        assertEquals(first.getDisplayName(), "Preis");
+        assertEquals(first.getDisplayName(), "Price");
         assertEquals(first.getPathInMetadata(), "price_min");
         assertNull(first.getPosition());
         assertEquals(first.getHidden(), Boolean.TRUE);
@@ -56,7 +56,7 @@ public class SortOptionsResponseTest {
 
         // Check second sort option
         SortOption second = response.getSortOptions().get(1);
-        assertEquals(second.getDisplayName(), "Preis");
+        assertEquals(second.getDisplayName(), "Price");
         assertEquals(second.getPathInMetadata(), "price_min");
         assertEquals(second.getPosition(), Integer.valueOf(1));
         assertEquals(second.getHidden(), Boolean.FALSE);

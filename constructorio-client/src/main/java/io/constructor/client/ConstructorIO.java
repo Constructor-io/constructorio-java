@@ -3336,7 +3336,7 @@ public class ConstructorIO {
     }
 
     /**
-     * Retrieves all sort options with default section "Products"
+     * Retrieves all sort options for a specific sortBy with default section "Products"
      *
      * @param sortBy optional filter by sort by field (can be null)
      * @return returns the sort options response

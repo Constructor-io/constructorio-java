@@ -17,7 +17,7 @@ public class SortOptionTest {
     public void sortOptionDeserialization() throws Exception {
         String json =
                 "{"
-                        + "\"display_name\": \"Preis\","
+                        + "\"display_name\": \"Price\","
                         + "\"path_in_metadata\": \"price_min\","
                         + "\"position\": null,"
                         + "\"hidden\": true,"
@@ -26,7 +26,7 @@ public class SortOptionTest {
                         + "}";
 
         SortOption sortOption = new Gson().fromJson(json, SortOption.class);
-        assertEquals(sortOption.getDisplayName(), "Preis");
+        assertEquals(sortOption.getDisplayName(), "Price");
         assertEquals(sortOption.getPathInMetadata(), "price_min");
         assertNull(sortOption.getPosition());
         assertEquals(sortOption.getHidden(), Boolean.TRUE);
@@ -37,7 +37,7 @@ public class SortOptionTest {
     @Test
     public void sortOptionSerialization() throws Exception {
         SortOption sortOption = new SortOption("price", SortOrder.descending);
-        sortOption.setDisplayName("Preis");
+        sortOption.setDisplayName("Price");
         sortOption.setPathInMetadata("price_min");
         sortOption.setPosition(1);
         sortOption.setHidden(true);
@@ -46,7 +46,7 @@ public class SortOptionTest {
 
         // Verify the JSON contains the expected fields
         SortOption deserialized = new Gson().fromJson(json, SortOption.class);
-        assertEquals(deserialized.getDisplayName(), "Preis");
+        assertEquals(deserialized.getDisplayName(), "Price");
         assertEquals(deserialized.getPathInMetadata(), "price_min");
         assertEquals(deserialized.getPosition(), Integer.valueOf(1));
         assertEquals(deserialized.getHidden(), Boolean.TRUE);

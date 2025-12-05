@@ -401,6 +401,95 @@ Task response = constructor.task(request);
 String response = constructor.taskAsJSON(request);
 ```
 
+# Managing Sort Options
+
+Sort options allow you to define custom sorting strategies for search and browse results. You can create, update, delete, and retrieve sort options for your catalog.
+
+## Creating a Sort Option
+
+To create a new sort option, you will need to create a `SortOption` object with the required fields and wrap it in a `SortOptionRequest`.
+
+```java
+// Create a SortOption with the required fields
+SortOption sortOption = new SortOption("price", SortOption.SortOrder.ascending);
+sortOption.setDisplayName("Price");
+sortOption.setPathInMetadata("price_min");
+sortOption.setHidden(false);
+
+// Create a SortOptionRequest with the sort option and section
+SortOptionRequest request = new SortOptionRequest(sortOption, "Products");
+
+// Create the sort option
+String response = constructor.createSortOption(request);
+```
+
+## Updating a Sort Option
+
+To update an existing sort option (or create it if it doesn't exist), use the `updateSortOption` method. The sort option is identified by the combination of `sortBy` and `sortOrder`.
+
+```java
+// Create a SortOption with updated fields
+SortOption sortOption = new SortOption("price", SortOption.SortOrder.ascending);
+sortOption.setDisplayName("Price (Low to High)");
+sortOption.setPathInMetadata("price_min");
+sortOption.setHidden(false);
+sortOption.setPosition(1);
+
+// Create a SortOptionRequest
+SortOptionRequest request = new SortOptionRequest(sortOption, "Products");
+
+// Update the sort option
+String response = constructor.updateSortOption(request);
+```
+
+## Deleting Sort Options
+
+To delete a sort option, you need to specify the `sortBy` and `sortOrder` fields that identify it.
+
+```java
+// Delete a single sort option by sortBy and sortOrder
+String response = constructor.deleteSortOption("price", SortOption.SortOrder.ascending, "Products");
+
+// Or use the default section "Products"
+String response = constructor.deleteSortOption("price", SortOption.SortOrder.ascending);
+
+// To delete multiple sort options at once
+SortOption[] sortOptions = new SortOption[] {
+    new SortOption("price", SortOption.SortOrder.ascending),
+    new SortOption("relevance", SortOption.SortOrder.descending)
+};
+String response = constructor.deleteSortOptions(sortOptions, "Products");
+```
+
+## Retrieving Sort Options
+
+To retrieve all sort options for a section, you can use the `retrieveSortOptions` method. You can optionally filter by a specific `sortBy` field and control pagination.
+
+```java
+// Retrieve all sort options for the default "Products" section
+SortOptionsResponse response = constructor.retrieveSortOptions();
+
+// Retrieve sort options filtered by sortBy field
+SortOptionsResponse response = constructor.retrieveSortOptions("price");
+
+// Advanced retrieval with pagination and filters
+SortOptionGetRequest request = new SortOptionGetRequest();
+request.setSection("Products");
+request.setSortBy("price");
+request.setPage(1);
+request.setResultsPerPage(20);
+
+SortOptionsResponse response = constructor.retrieveSortOptions(request);
+
+// Access the results
+int totalCount = response.getTotalCount();
+List<SortOption> sortOptions = response.getSortOptions();
+
+for (SortOption option : sortOptions) {
+    System.out.println(option.getDisplayName() + " - " + option.getSortBy() + " " + option.getSortOrder());
+}
+```
+
 # Testing
 
 Download the repository and run the following commands from `./constructorio-client`

@@ -405,4 +405,213 @@ public class ConstructorIOCatalogTest {
         assertTrue("task_id exists", jsonObj.has("task_id") == true);
         assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
     }
+
+    // JSONL Format Tests
+
+    @Test
+    public void ReplaceCatalogWithJsonlItemsFileShouldReturnTaskInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/jsonl/items.jsonl"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+        String response = constructor.replaceCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
+
+    @Test
+    public void UpdateCatalogWithJsonlItemsFileShouldReturnTaskInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/jsonl/items.jsonl"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+        String response = constructor.updateCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
+
+    @Test
+    public void PatchCatalogWithJsonlItemsFileShouldReturnTaskInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/jsonl/items.jsonl"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+        String response = constructor.patchCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
+
+    // Invalid Extension Tests
+
+    @Test
+    public void ReplaceCatalogWithInvalidExtensionShouldError() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/invalid/items.txt"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("Invalid file type for 'items'");
+        thrown.expectMessage("must have .csv or .jsonl extension");
+        constructor.replaceCatalog(req);
+    }
+
+    @Test
+    public void UpdateCatalogWithNoExtensionShouldError() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/invalid/items"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("Invalid file for 'items'");
+        thrown.expectMessage("must have .csv or .jsonl extension");
+        constructor.updateCatalog(req);
+    }
+
+    @Test
+    public void PatchCatalogWithInvalidExtensionShouldError() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/invalid/items.txt"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("Invalid file type for 'items'");
+        thrown.expectMessage("must have .csv or .jsonl extension");
+        constructor.patchCatalog(req);
+    }
+
+    // Edge Case Tests
+
+    @Test
+    public void ReplaceCatalogWithMixedFileTypesShouldSucceed() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/csv/items.csv"));
+        files.put("variations", new File("src/test/resources/jsonl/variations.jsonl"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+        String response = constructor.replaceCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
+
+    @Test
+    public void UpdateCatalogWithJsonlVariationsAndItemGroupsShouldSucceed() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("variations", new File("src/test/resources/jsonl/variations.jsonl"));
+        files.put("item_groups", new File("src/test/resources/jsonl/item_groups.jsonl"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+        String response = constructor.updateCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
+
+    @Test
+    public void PatchCatalogWithAllJsonlFilesShouldSucceed() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/jsonl/items.jsonl"));
+        files.put("variations", new File("src/test/resources/jsonl/variations.jsonl"));
+        files.put("item_groups", new File("src/test/resources/jsonl/item_groups.jsonl"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+        String response = constructor.patchCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
+
+    // JSON Format Tests
+
+    @Test
+    public void ReplaceCatalogWithJsonItemsFileShouldReturnTaskInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/json/items.json"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+        String response = constructor.replaceCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
+
+    @Test
+    public void UpdateCatalogWithJsonItemsFileShouldReturnTaskInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/json/items.json"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+        String response = constructor.updateCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
+
+    @Test
+    public void PatchCatalogWithJsonItemsFileShouldReturnTaskInfo() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/json/items.json"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+        String response = constructor.patchCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
+
+    @Test
+    public void ReplaceCatalogWithMixedCsvJsonJsonlShouldSucceed() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", new File("src/test/resources/csv/items.csv"));
+        files.put("variations", new File("src/test/resources/json/variations.json"));
+        files.put("item_groups", new File("src/test/resources/jsonl/item_groups.jsonl"));
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+        String response = constructor.replaceCatalog(req);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("task_id exists", jsonObj.has("task_id") == true);
+        assertTrue("task_status_path exists", jsonObj.has("task_status_path") == true);
+    }
 }

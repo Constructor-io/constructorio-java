@@ -1,0 +1,18 @@
+[
+  {
+    "id": "var1",
+    "item_id": "item1",
+    "value": "Product 1 Variation A",
+    "data": {
+      "color": "red"
+    }
+  },
+  {
+    "id": "var2",
+    "item_id": "item1",
+    "value": "Product 1 Variation B",
+    "data": {
+      "color": "blue"
+    }
+  }
+]

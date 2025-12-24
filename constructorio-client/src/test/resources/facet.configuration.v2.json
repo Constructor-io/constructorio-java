@@ -1,0 +1,17 @@
+{
+    "name": "brand",
+    "path_in_metadata": "brand",
+    "type": "multiple",
+    "display_name": "Brand",
+    "sort_order": "relevance",
+    "sort_descending": true,
+    "match_type": "any",
+    "position": 2,
+    "hidden": false,
+    "protected": false,
+    "countable": true,
+    "options_limit": 300,
+    "data": {
+        "foo": "bar"
+    }
+}

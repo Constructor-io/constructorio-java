@@ -1,14 +1,17 @@
 package io.constructor.client;
 
+import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -116,46 +119,26 @@ public class Utils {
         ConstructorIO.setHttpClient(newClient);
     }
 
-    /**
-     * Creates a JSON string for an item.
-     *
-     * @param id    the item ID
-     * @param value the item display value
-     * @param url   the item URL
-     * @return JSON string representation
-     */
-    private static String itemToJson(String id, String value, String url) {
-        return String.format(
-                "{\"id\":\"%s\",\"value\":\"%s\",\"data\":{\"url\":\"%s\"}}", id, value, url);
-    }
-
-    /**
-     * Creates a JSON string for a variation.
-     *
-     * @param id     the variation ID
-     * @param itemId the parent item ID
-     * @param value  the variation display value
-     * @param url    the variation URL
-     * @return JSON string representation
-     */
-    private static String variationToJson(String id, String itemId, String value, String url) {
-        return String.format(
-                "{\"id\":\"%s\",\"item_id\":\"%s\",\"value\":\"%s\",\"data\":{\"url\":\"%s\"}}",
-                id, itemId, value, url);
-    }
+    private static final Gson gson = new Gson();
 
     /**
      * Creates a JSON string for an item group.
      *
      * @param id       the group ID
-     * @param value    the group display value
+     * @param name     the group display name
      * @param parentId the parent group ID
      * @return JSON string representation
      */
-    private static String itemGroupToJson(String id, String value, String parentId) {
-        return String.format(
-                "{\"id\":\"%s\",\"value\":\"%s\",\"data\":{\"parent_id\":\"%s\"}}",
-                id, value, parentId);
+    private static String itemGroupToJson(String id, String name, String parentId) {
+        Map<String, Object> dataMap = new HashMap<String, Object>();
+        dataMap.put("parent_id", parentId);
+
+        Map<String, Object> group = new HashMap<String, Object>();
+        group.put("id", id);
+        group.put("name", name);
+        group.put("data", dataMap);
+
+        return gson.toJson(group);
     }
 
     /**
@@ -170,6 +153,7 @@ public class Utils {
 
     /**
      * Creates a temporary JSON file containing an array of items.
+     * Uses createProductItem() to generate realistic test data.
      *
      * @param count the number of items to generate
      * @return a temporary File with .json extension
@@ -179,28 +163,21 @@ public class Utils {
         File file = File.createTempFile("items", ".json");
         file.deleteOnExit();
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("[\n");
+        List<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < count; i++) {
-            String id = generateId("item");
-            String value = "Product " + (i + 1);
-            String url = "https://example.com/" + id;
-            sb.append("  ").append(itemToJson(id, value, url));
-            if (i < count - 1) {
-                sb.append(",");
-            }
-            sb.append("\n");
+            ConstructorItem item = createProductItem();
+            items.add(item.toMap());
         }
-        sb.append("]");
 
         try (FileWriter writer = new FileWriter(file)) {
-            writer.write(sb.toString());
+            writer.write(gson.toJson(items));
         }
         return file;
     }
 
     /**
      * Creates a temporary JSONL file containing items (one per line).
+     * Uses createProductItem() to generate realistic test data.
      *
      * @param count the number of items to generate
      * @return a temporary File with .jsonl extension
@@ -212,10 +189,8 @@ public class Utils {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            String id = generateId("item");
-            String value = "Product " + (i + 1);
-            String url = "https://example.com/" + id;
-            sb.append(itemToJson(id, value, url)).append("\n");
+            ConstructorItem item = createProductItem();
+            sb.append(gson.toJson(item.toMap())).append("\n");
         }
 
         try (FileWriter writer = new FileWriter(file)) {
@@ -226,6 +201,7 @@ public class Utils {
 
     /**
      * Creates a temporary JSON file containing an array of variations.
+     * Uses createProductVariation() to generate realistic test data.
      *
      * @param count the number of variations to generate
      * @return a temporary File with .json extension
@@ -235,29 +211,22 @@ public class Utils {
         File file = File.createTempFile("variations", ".json");
         file.deleteOnExit();
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("[\n");
+        List<Map<String, Object>> variations = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < count; i++) {
-            String id = generateId("var");
-            String itemId = "item" + ((i % 3) + 1); // Rotate through item1, item2, item3
-            String value = "Variation " + (i + 1);
-            String url = "https://example.com/" + id;
-            sb.append("  ").append(variationToJson(id, itemId, value, url));
-            if (i < count - 1) {
-                sb.append(",");
-            }
-            sb.append("\n");
+            String itemId = "item" + ((i % 3) + 1);
+            ConstructorVariation variation = createProductVariation(itemId);
+            variations.add(variation.toMap());
         }
-        sb.append("]");
 
         try (FileWriter writer = new FileWriter(file)) {
-            writer.write(sb.toString());
+            writer.write(gson.toJson(variations));
         }
         return file;
     }
 
     /**
      * Creates a temporary JSONL file containing variations (one per line).
+     * Uses createProductVariation() to generate realistic test data.
      *
      * @param count the number of variations to generate
      * @return a temporary File with .jsonl extension
@@ -269,11 +238,9 @@ public class Utils {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            String id = generateId("var");
-            String itemId = "item" + ((i % 3) + 1); // Rotate through item1, item2, item3
-            String value = "Variation " + (i + 1);
-            String url = "https://example.com/" + id;
-            sb.append(variationToJson(id, itemId, value, url)).append("\n");
+            String itemId = "item" + ((i % 3) + 1);
+            ConstructorVariation variation = createProductVariation(itemId);
+            sb.append(gson.toJson(variation.toMap())).append("\n");
         }
 
         try (FileWriter writer = new FileWriter(file)) {
@@ -296,9 +263,9 @@ public class Utils {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++) {
             String id = generateId("group");
-            String value = "Group " + (i + 1);
+            String name = "Group " + (i + 1);
             String parentId = "root";
-            sb.append(itemGroupToJson(id, value, parentId)).append("\n");
+            sb.append(itemGroupToJson(id, name, parentId)).append("\n");
         }
 
         try (FileWriter writer = new FileWriter(file)) {

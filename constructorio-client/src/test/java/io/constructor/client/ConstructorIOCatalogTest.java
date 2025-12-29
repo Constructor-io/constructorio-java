@@ -466,7 +466,7 @@ public class ConstructorIOCatalogTest {
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("Invalid file type for 'items'");
-        thrown.expectMessage("must have .csv or .jsonl extension");
+        thrown.expectMessage("must have .csv, .json, or .jsonl extension");
         constructor.replaceCatalog(req);
     }
 
@@ -481,7 +481,7 @@ public class ConstructorIOCatalogTest {
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("Invalid file for 'items'");
-        thrown.expectMessage("must have .csv or .jsonl extension");
+        thrown.expectMessage("must have .csv, .json, or .jsonl extension");
         constructor.updateCatalog(req);
     }
 
@@ -496,7 +496,7 @@ public class ConstructorIOCatalogTest {
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("Invalid file type for 'items'");
-        thrown.expectMessage("must have .csv or .jsonl extension");
+        thrown.expectMessage("must have .csv, .json, or .jsonl extension");
         constructor.patchCatalog(req);
     }
 

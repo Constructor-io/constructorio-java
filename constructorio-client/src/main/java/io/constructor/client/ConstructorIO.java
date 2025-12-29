@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,7 +36,7 @@ public class ConstructorIO {
 
     /** Valid file extensions for catalog uploads */
     private static final Set<String> VALID_CATALOG_EXTENSIONS =
-            new HashSet<>(Arrays.asList(".csv", ".json", ".jsonl"));
+            new LinkedHashSet<>(Arrays.asList(".csv", ".json", ".jsonl"));
 
     /** the HTTP client used by all instances */
     private static OkHttpClient client =
@@ -2039,12 +2039,11 @@ public class ConstructorIO {
 
     /**
      * Validates and extracts the file extension from a File object for catalog uploads.
-     * Only .csv, .json, and .jsonl extensions are supported.
      *
      * @param file the File object containing the actual file
      * @param fileName the logical file name (items, variations, item_groups)
-     * @return the validated file extension (including the dot, e.g., ".csv", ".json", or ".jsonl")
-     * @throws ConstructorException if the file extension is invalid or missing
+     * @return the validated file extension (including the dot)
+     * @throws ConstructorException if the file extension is not in VALID_CATALOG_EXTENSIONS
      */
     private static String getValidatedFileExtension(File file, String fileName)
             throws ConstructorException {

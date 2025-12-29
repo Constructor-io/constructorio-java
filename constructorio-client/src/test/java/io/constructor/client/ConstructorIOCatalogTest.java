@@ -58,7 +58,6 @@ public class ConstructorIOCatalogTest {
 
     @After
     public void teardown() throws Exception {
-        // Clean up CSV files
         itemsFile.delete();
         variationsFile.delete();
         itemGroupsFile.delete();

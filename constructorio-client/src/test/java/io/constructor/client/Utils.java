@@ -79,20 +79,19 @@ public class Utils {
 
     /**
      * @param statusCode the http status code
-     * @param bodyText the body
+     * @param bodyText   the body
      * @return an HTTP response
      */
     public static Response createResponse(int statusCode, String bodyText) {
         Request request = new Request.Builder().url("https://example.com").build();
         ResponseBody body = ResponseBody.create(bodyType, bodyText);
-        Response response =
-                new Response.Builder()
-                        .request(request)
-                        .protocol(Protocol.HTTP_1_1)
-                        .code(statusCode)
-                        .body(body)
-                        .message("")
-                        .build();
+        Response response = new Response.Builder()
+                .request(request)
+                .protocol(Protocol.HTTP_1_1)
+                .code(statusCode)
+                .body(body)
+                .message("")
+                .build();
 
         return response;
     }
@@ -117,14 +116,12 @@ public class Utils {
         ConstructorIO.setHttpClient(newClient);
     }
 
-    // ==================== File Generation Utilities ====================
-
     /**
      * Creates a JSON string for an item.
      *
-     * @param id the item ID
+     * @param id    the item ID
      * @param value the item display value
-     * @param url the item URL
+     * @param url   the item URL
      * @return JSON string representation
      */
     private static String itemToJson(String id, String value, String url) {
@@ -135,10 +132,10 @@ public class Utils {
     /**
      * Creates a JSON string for a variation.
      *
-     * @param id the variation ID
+     * @param id     the variation ID
      * @param itemId the parent item ID
-     * @param value the variation display value
-     * @param url the variation URL
+     * @param value  the variation display value
+     * @param url    the variation URL
      * @return JSON string representation
      */
     private static String variationToJson(String id, String itemId, String value, String url) {
@@ -150,8 +147,8 @@ public class Utils {
     /**
      * Creates a JSON string for an item group.
      *
-     * @param id the group ID
-     * @param value the group display value
+     * @param id       the group ID
+     * @param value    the group display value
      * @param parentId the parent group ID
      * @return JSON string representation
      */
@@ -311,7 +308,8 @@ public class Utils {
     }
 
     /**
-     * Creates a temporary file with an invalid .txt extension for testing validation.
+     * Creates a temporary file with an invalid .txt extension for testing
+     * validation.
      *
      * @return a temporary File with .txt extension
      * @throws IOException if file creation fails

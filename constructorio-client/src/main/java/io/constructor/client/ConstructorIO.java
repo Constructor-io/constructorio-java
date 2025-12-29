@@ -2042,7 +2042,7 @@ public class ConstructorIO {
      *
      * @param file the File object containing the actual file
      * @param fileName the logical file name (items, variations, item_groups)
-     * @return the validated file extension (including the dot)
+     * @return the validated file extension (including the dot, e.g., ".csv", ".json", or ".jsonl")
      * @throws ConstructorException if the file extension is not in VALID_CATALOG_EXTENSIONS
      */
     private static String getValidatedFileExtension(File file, String fileName)

@@ -466,7 +466,9 @@ public class ConstructorIOCatalogTest {
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("Invalid file type for 'items'");
-        thrown.expectMessage("must have .csv, .json, or .jsonl extension");
+        thrown.expectMessage(".csv");
+        thrown.expectMessage(".json");
+        thrown.expectMessage(".jsonl");
         constructor.replaceCatalog(req);
     }
 
@@ -481,7 +483,9 @@ public class ConstructorIOCatalogTest {
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("Invalid file for 'items'");
-        thrown.expectMessage("must have .csv, .json, or .jsonl extension");
+        thrown.expectMessage(".csv");
+        thrown.expectMessage(".json");
+        thrown.expectMessage(".jsonl");
         constructor.updateCatalog(req);
     }
 
@@ -496,11 +500,28 @@ public class ConstructorIOCatalogTest {
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage("Invalid file type for 'items'");
-        thrown.expectMessage("must have .csv, .json, or .jsonl extension");
+        thrown.expectMessage(".csv");
+        thrown.expectMessage(".json");
+        thrown.expectMessage(".jsonl");
         constructor.patchCatalog(req);
     }
 
     // Edge Case Tests
+
+    @Test
+    public void ReplaceCatalogWithNullFileShouldError() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", null);
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("Invalid file for 'items'");
+        thrown.expectMessage("file cannot be null");
+        constructor.replaceCatalog(req);
+    }
 
     @Test
     public void ReplaceCatalogWithMixedFileTypesShouldSucceed() throws Exception {

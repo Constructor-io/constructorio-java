@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -31,6 +33,10 @@ import org.json.JSONObject;
 
 /** Constructor.io Client */
 public class ConstructorIO {
+
+    /** Valid file extensions for catalog uploads */
+    private static final Set<String> VALID_CATALOG_EXTENSIONS =
+            new HashSet<>(Arrays.asList(".csv", ".json", ".jsonl"));
 
     /** the HTTP client used by all instances */
     private static OkHttpClient client =
@@ -2058,17 +2064,21 @@ public class ConstructorIO {
             throw new ConstructorException(
                     "Invalid file for '"
                             + fileName
-                            + "': file must have .csv, .json, or .jsonl extension. Found: "
+                            + "': file must have "
+                            + VALID_CATALOG_EXTENSIONS
+                            + " extension. Found: "
                             + actualFileName);
         }
 
         String extension = actualFileName.substring(lastDotIndex).toLowerCase();
 
-        if (!extension.equals(".csv") && !extension.equals(".json") && !extension.equals(".jsonl")) {
+        if (!VALID_CATALOG_EXTENSIONS.contains(extension)) {
             throw new ConstructorException(
                     "Invalid file type for '"
                             + fileName
-                            + "': file must have .csv, .json, or .jsonl extension. Found: "
+                            + "': file must have "
+                            + VALID_CATALOG_EXTENSIONS
+                            + " extension. Found: "
                             + actualFileName);
         }
 

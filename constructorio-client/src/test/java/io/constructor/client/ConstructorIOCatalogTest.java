@@ -22,10 +22,18 @@ public class ConstructorIOCatalogTest {
     private File itemsFile = new File("src/test/resources/csv/items.csv");
     private File variationsFile = new File("src/test/resources/csv/variations.csv");
     private File itemGroupsFile = new File("src/test/resources/csv/item_groups.csv");
-    private String baseUrl =
-            "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
+    private String baseUrl = "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
 
-    @Rule public ExpectedException thrown = ExpectedException.none();
+    private File jsonItemsFile;
+    private File jsonVariationsFile;
+    private File jsonlItemsFile;
+    private File jsonlVariationsFile;
+    private File jsonlItemGroupsFile;
+    private File invalidExtensionFile;
+    private File noExtensionFile;
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void init() throws Exception {
@@ -37,14 +45,40 @@ public class ConstructorIOCatalogTest {
 
         URL itemGroupsUrl = new URL(baseUrl + "item_groups.csv");
         FileUtils.copyURLToFile(itemGroupsUrl, itemGroupsFile);
+
+        // Generate JSON/JSONL/invalid files
+        jsonItemsFile = Utils.createItemsJsonFile(3);
+        jsonVariationsFile = Utils.createVariationsJsonFile(2);
+        jsonlItemsFile = Utils.createItemsJsonlFile(3);
+        jsonlVariationsFile = Utils.createVariationsJsonlFile(3);
+        jsonlItemGroupsFile = Utils.createItemGroupsJsonlFile(2);
+        invalidExtensionFile = Utils.createInvalidExtensionFile();
+        noExtensionFile = Utils.createNoExtensionFile();
     }
 
     @After
     public void teardown() throws Exception {
+        // Clean up CSV files
         itemsFile.delete();
         variationsFile.delete();
         itemGroupsFile.delete();
         csvFolder.delete();
+
+        // Clean up generated files
+        if (jsonItemsFile != null)
+            jsonItemsFile.delete();
+        if (jsonVariationsFile != null)
+            jsonVariationsFile.delete();
+        if (jsonlItemsFile != null)
+            jsonlItemsFile.delete();
+        if (jsonlVariationsFile != null)
+            jsonlVariationsFile.delete();
+        if (jsonlItemGroupsFile != null)
+            jsonlItemGroupsFile.delete();
+        if (invalidExtensionFile != null)
+            invalidExtensionFile.delete();
+        if (noExtensionFile != null)
+            noExtensionFile.delete();
     }
 
     @Test
@@ -413,7 +447,7 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("items", new File("src/test/resources/jsonl/items.jsonl"));
+        files.put("items", jsonlItemsFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
         String response = constructor.replaceCatalog(req);
@@ -428,7 +462,7 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("items", new File("src/test/resources/jsonl/items.jsonl"));
+        files.put("items", jsonlItemsFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
         String response = constructor.updateCatalog(req);
@@ -443,7 +477,7 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("items", new File("src/test/resources/jsonl/items.jsonl"));
+        files.put("items", jsonlItemsFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
         String response = constructor.patchCatalog(req);
@@ -460,7 +494,7 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("items", new File("src/test/resources/invalid/items.txt"));
+        files.put("items", invalidExtensionFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
 
@@ -477,7 +511,7 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("items", new File("src/test/resources/invalid/items"));
+        files.put("items", noExtensionFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
 
@@ -494,7 +528,7 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("items", new File("src/test/resources/invalid/items.txt"));
+        files.put("items", invalidExtensionFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
 
@@ -529,7 +563,7 @@ public class ConstructorIOCatalogTest {
         Map<String, File> files = new HashMap<String, File>();
 
         files.put("items", new File("src/test/resources/csv/items.csv"));
-        files.put("variations", new File("src/test/resources/jsonl/variations.jsonl"));
+        files.put("variations", jsonlVariationsFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
         String response = constructor.replaceCatalog(req);
@@ -544,8 +578,8 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("variations", new File("src/test/resources/jsonl/variations.jsonl"));
-        files.put("item_groups", new File("src/test/resources/jsonl/item_groups.jsonl"));
+        files.put("variations", jsonlVariationsFile);
+        files.put("item_groups", jsonlItemGroupsFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
         String response = constructor.updateCatalog(req);
@@ -560,9 +594,9 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("items", new File("src/test/resources/jsonl/items.jsonl"));
-        files.put("variations", new File("src/test/resources/jsonl/variations.jsonl"));
-        files.put("item_groups", new File("src/test/resources/jsonl/item_groups.jsonl"));
+        files.put("items", jsonlItemsFile);
+        files.put("variations", jsonlVariationsFile);
+        files.put("item_groups", jsonlItemGroupsFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
         String response = constructor.patchCatalog(req);
@@ -579,7 +613,7 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("items", new File("src/test/resources/json/items.json"));
+        files.put("items", jsonItemsFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
         String response = constructor.replaceCatalog(req);
@@ -594,7 +628,7 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("items", new File("src/test/resources/json/items.json"));
+        files.put("items", jsonItemsFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
         String response = constructor.updateCatalog(req);
@@ -609,7 +643,7 @@ public class ConstructorIOCatalogTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         Map<String, File> files = new HashMap<String, File>();
 
-        files.put("items", new File("src/test/resources/json/items.json"));
+        files.put("items", jsonItemsFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
         String response = constructor.patchCatalog(req);
@@ -625,8 +659,8 @@ public class ConstructorIOCatalogTest {
         Map<String, File> files = new HashMap<String, File>();
 
         files.put("items", new File("src/test/resources/csv/items.csv"));
-        files.put("variations", new File("src/test/resources/json/variations.json"));
-        files.put("item_groups", new File("src/test/resources/jsonl/item_groups.jsonl"));
+        files.put("variations", jsonVariationsFile);
+        files.put("item_groups", jsonlItemGroupsFile);
 
         CatalogRequest req = new CatalogRequest(files, "Products");
         String response = constructor.replaceCatalog(req);

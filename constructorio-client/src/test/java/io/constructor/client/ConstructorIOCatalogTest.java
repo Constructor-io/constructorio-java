@@ -539,6 +539,23 @@ public class ConstructorIOCatalogTest {
         constructor.patchCatalog(req);
     }
 
+    @Test
+    public void UpdateCatalogWithInvalidExtensionShouldError() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", invalidExtensionFile);
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("Invalid file type for 'items'");
+        thrown.expectMessage(".csv");
+        thrown.expectMessage(".json");
+        thrown.expectMessage(".jsonl");
+        constructor.updateCatalog(req);
+    }
+
     // Edge Case Tests
 
     @Test
@@ -554,6 +571,36 @@ public class ConstructorIOCatalogTest {
         thrown.expectMessage("Invalid file for 'items'");
         thrown.expectMessage("file cannot be null");
         constructor.replaceCatalog(req);
+    }
+
+    @Test
+    public void UpdateCatalogWithNullFileShouldError() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", null);
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("Invalid file for 'items'");
+        thrown.expectMessage("file cannot be null");
+        constructor.updateCatalog(req);
+    }
+
+    @Test
+    public void PatchCatalogWithNullFileShouldError() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        Map<String, File> files = new HashMap<String, File>();
+
+        files.put("items", null);
+
+        CatalogRequest req = new CatalogRequest(files, "Products");
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("Invalid file for 'items'");
+        thrown.expectMessage("file cannot be null");
+        constructor.patchCatalog(req);
     }
 
     @Test

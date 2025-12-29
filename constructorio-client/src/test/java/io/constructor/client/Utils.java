@@ -122,36 +122,6 @@ public class Utils {
     private static final Gson gson = new Gson();
 
     /**
-     * Creates a JSON string for an item group.
-     *
-     * @param id       the group ID
-     * @param name     the group display name
-     * @param parentId the parent group ID
-     * @return JSON string representation
-     */
-    private static String itemGroupToJson(String id, String name, String parentId) {
-        Map<String, Object> dataMap = new HashMap<String, Object>();
-        dataMap.put("parent_id", parentId);
-
-        Map<String, Object> group = new HashMap<String, Object>();
-        group.put("id", id);
-        group.put("name", name);
-        group.put("data", dataMap);
-
-        return gson.toJson(group);
-    }
-
-    /**
-     * Generates a unique ID for test data.
-     *
-     * @param prefix the prefix for the ID
-     * @return a unique ID string
-     */
-    private static String generateId(String prefix) {
-        return prefix + UUID.randomUUID().toString().substring(0, 8);
-    }
-
-    /**
      * Creates a temporary JSON file containing an array of items.
      * Uses createProductItem() to generate realistic test data.
      *
@@ -262,10 +232,15 @@ public class Utils {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            String id = generateId("group");
-            String name = "Group " + (i + 1);
-            String parentId = "root";
-            sb.append(itemGroupToJson(id, name, parentId)).append("\n");
+            Map<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("parent_id", "root");
+
+            Map<String, Object> group = new HashMap<String, Object>();
+            group.put("id", "group" + UUID.randomUUID().toString().substring(0, 8));
+            group.put("name", "Group " + (i + 1));
+            group.put("data", dataMap);
+
+            sb.append(gson.toJson(group)).append("\n");
         }
 
         try (FileWriter writer = new FileWriter(file)) {
@@ -298,14 +273,13 @@ public class Utils {
      * @throws IOException if file creation fails
      */
     public static File createNoExtensionFile() throws IOException {
-        File tempFile = File.createTempFile("items", ".tmp");
-        File noExtFile = new File(tempFile.getParent(), "items_" + UUID.randomUUID().toString().substring(0, 8));
-        tempFile.renameTo(noExtFile);
-        noExtFile.deleteOnExit();
+        String tmpDir = System.getProperty("java.io.tmpdir");
+        File file = new File(tmpDir, "items_" + UUID.randomUUID().toString().substring(0, 8));
+        file.deleteOnExit();
 
-        try (FileWriter writer = new FileWriter(noExtFile)) {
+        try (FileWriter writer = new FileWriter(file)) {
             writer.write("This file has no extension for testing validation.");
         }
-        return noExtFile;
+        return file;
     }
 }

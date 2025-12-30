@@ -77,7 +77,7 @@ public class FacetConfigurationV2Test {
         facetConfiguration.setType("range");
         facetConfiguration.setRangeType("static");
         facetConfiguration.setRangeFormat("boundaries");
-        facetConfiguration.setRangeLimits(Arrays.asList(10, 25, 50, 100));
+        facetConfiguration.setRangeLimits(Arrays.<Number>asList(10, 25, 50, 100));
 
         assertEquals("range", facetConfiguration.getType());
         assertEquals("static", facetConfiguration.getRangeType());
@@ -171,7 +171,7 @@ public class FacetConfigurationV2Test {
 
     @Test(expected = IllegalArgumentException.class)
     public void testFacetConfigurationsV2RequestWithEmptyList() {
-        new FacetConfigurationsV2Request(Arrays.asList(), "Products");
+        new FacetConfigurationsV2Request(Arrays.<FacetConfigurationV2>asList(), "Products");
     }
 
     @Test(expected = IllegalArgumentException.class)

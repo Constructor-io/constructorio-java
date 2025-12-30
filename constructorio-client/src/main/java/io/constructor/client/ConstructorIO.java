@@ -3381,7 +3381,8 @@ public class ConstructorIO {
             HttpUrl.Builder urlBuilder = this.makeUrl(Arrays.asList("v2", "facets")).newBuilder();
 
             urlBuilder.addQueryParameter(
-                    "section", (section != null && !section.trim().isEmpty()) ? section : DEFAULT_SECTION);
+                    "section",
+                    (section != null && !section.trim().isEmpty()) ? section : DEFAULT_SECTION);
 
             if (page != null && page > 0) {
                 urlBuilder.addQueryParameter("page", page.toString());
@@ -3413,8 +3414,8 @@ public class ConstructorIO {
      * @return returns the facet configurations as JSON string
      * @throws ConstructorException if the request is invalid
      */
-    public String retrieveFacetConfigurationsV2(String section, Integer page, Integer numResultsPerPage)
-            throws ConstructorException {
+    public String retrieveFacetConfigurationsV2(
+            String section, Integer page, Integer numResultsPerPage) throws ConstructorException {
         return retrieveFacetConfigurationsV2(section, page, numResultsPerPage, null);
     }
 
@@ -3447,7 +3448,8 @@ public class ConstructorIO {
             HttpUrl url =
                     this.makeUrl(Arrays.asList("v2", "facets", facetName))
                             .newBuilder()
-                            .addQueryParameter("section", section != null ? section : DEFAULT_SECTION)
+                            .addQueryParameter(
+                                    "section", section != null ? section : DEFAULT_SECTION)
                             .build();
 
             Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
@@ -3480,8 +3482,8 @@ public class ConstructorIO {
      * @throws IllegalArgumentException if request is null
      * @throws ConstructorException if the request fails
      */
-    public String createFacetConfigurationV2(FacetConfigurationV2Request facetConfigurationV2Request)
-            throws ConstructorException {
+    public String createFacetConfigurationV2(
+            FacetConfigurationV2Request facetConfigurationV2Request) throws ConstructorException {
         if (facetConfigurationV2Request == null) {
             throw new IllegalArgumentException("facetConfigurationV2Request is required");
         }
@@ -3514,8 +3516,8 @@ public class ConstructorIO {
      * @throws IllegalArgumentException if request is null or facetName is missing
      * @throws ConstructorException if the request fails
      */
-    public String replaceFacetConfigurationV2(FacetConfigurationV2Request facetConfigurationV2Request)
-            throws ConstructorException {
+    public String replaceFacetConfigurationV2(
+            FacetConfigurationV2Request facetConfigurationV2Request) throws ConstructorException {
         if (facetConfigurationV2Request == null) {
             throw new IllegalArgumentException("facetConfigurationV2Request is required");
         }
@@ -3553,8 +3555,8 @@ public class ConstructorIO {
      * @throws IllegalArgumentException if request is null or facetName is missing
      * @throws ConstructorException if the request fails
      */
-    public String updateFacetConfigurationV2(FacetConfigurationV2Request facetConfigurationV2Request)
-            throws ConstructorException {
+    public String updateFacetConfigurationV2(
+            FacetConfigurationV2Request facetConfigurationV2Request) throws ConstructorException {
         if (facetConfigurationV2Request == null) {
             throw new IllegalArgumentException("facetConfigurationV2Request is required");
         }
@@ -3592,8 +3594,8 @@ public class ConstructorIO {
      * @throws IllegalArgumentException if request is null
      * @throws ConstructorException if the request fails
      */
-    public String updateFacetConfigurationsV2(FacetConfigurationsV2Request facetConfigurationsV2Request)
-            throws ConstructorException {
+    public String updateFacetConfigurationsV2(
+            FacetConfigurationsV2Request facetConfigurationsV2Request) throws ConstructorException {
         if (facetConfigurationsV2Request == null) {
             throw new IllegalArgumentException("facetConfigurationsV2Request is required");
         }
@@ -3628,8 +3630,8 @@ public class ConstructorIO {
      * @throws IllegalArgumentException if request is null
      * @throws ConstructorException if the request fails
      */
-    public String replaceFacetConfigurationsV2(FacetConfigurationsV2Request facetConfigurationsV2Request)
-            throws ConstructorException {
+    public String replaceFacetConfigurationsV2(
+            FacetConfigurationsV2Request facetConfigurationsV2Request) throws ConstructorException {
         if (facetConfigurationsV2Request == null) {
             throw new IllegalArgumentException("facetConfigurationsV2Request is required");
         }
@@ -3675,7 +3677,8 @@ public class ConstructorIO {
             HttpUrl url =
                     this.makeUrl(Arrays.asList("v2", "facets", facetName))
                             .newBuilder()
-                            .addQueryParameter("section", section != null ? section : DEFAULT_SECTION)
+                            .addQueryParameter(
+                                    "section", section != null ? section : DEFAULT_SECTION)
                             .build();
 
             Request request = this.makeAuthorizedRequestBuilder().url(url).delete().build();
@@ -3708,8 +3711,8 @@ public class ConstructorIO {
      * @throws IllegalArgumentException if request is null
      * @throws ConstructorException if the request fails
      */
-    public String deleteFacetConfigurationV2(FacetConfigurationV2Request facetConfigurationV2Request)
-            throws ConstructorException {
+    public String deleteFacetConfigurationV2(
+            FacetConfigurationV2Request facetConfigurationV2Request) throws ConstructorException {
         if (facetConfigurationV2Request == null) {
             throw new IllegalArgumentException("facetConfigurationV2Request is required");
         }
@@ -3736,7 +3739,8 @@ public class ConstructorIO {
         }
 
         try {
-            HttpUrl.Builder urlBuilder = this.makeUrl(Arrays.asList("v2", "searchabilities")).newBuilder();
+            HttpUrl.Builder urlBuilder =
+                    this.makeUrl(Arrays.asList("v2", "searchabilities")).newBuilder();
 
             urlBuilder.addQueryParameter("section", request.getSection());
 
@@ -3747,17 +3751,21 @@ public class ConstructorIO {
                 urlBuilder.addQueryParameter(
                         "num_results_per_page", request.getNumResultsPerPage().toString());
             }
-            if (request.getOffset() != null && request.getOffset() > 0 && request.getPage() == null) {
+            if (request.getOffset() != null
+                    && request.getOffset() > 0
+                    && request.getPage() == null) {
                 urlBuilder.addQueryParameter("offset", request.getOffset().toString());
             }
             if (request.getName() != null && !request.getName().trim().isEmpty()) {
                 urlBuilder.addQueryParameter("name", request.getName());
             }
             if (request.getFuzzySearchable() != null) {
-                urlBuilder.addQueryParameter("fuzzy_searchable", request.getFuzzySearchable().toString());
+                urlBuilder.addQueryParameter(
+                        "fuzzy_searchable", request.getFuzzySearchable().toString());
             }
             if (request.getExactSearchable() != null) {
-                urlBuilder.addQueryParameter("exact_searchable", request.getExactSearchable().toString());
+                urlBuilder.addQueryParameter(
+                        "exact_searchable", request.getExactSearchable().toString());
             }
             if (request.getDisplayable() != null) {
                 urlBuilder.addQueryParameter("displayable", request.getDisplayable().toString());
@@ -3810,7 +3818,10 @@ public class ConstructorIO {
         try {
             HttpUrl url =
                     this.makeUrl(
-                                    Arrays.asList("v2", "searchabilities", searchabilityV2Request.getName()))
+                                    Arrays.asList(
+                                            "v2",
+                                            "searchabilities",
+                                            searchabilityV2Request.getName()))
                             .newBuilder()
                             .addQueryParameter("section", searchabilityV2Request.getSection())
                             .build();
@@ -3867,7 +3878,10 @@ public class ConstructorIO {
         try {
             HttpUrl.Builder urlBuilder =
                     this.makeUrl(
-                                    Arrays.asList("v2", "searchabilities", searchabilityV2Request.getName()))
+                                    Arrays.asList(
+                                            "v2",
+                                            "searchabilities",
+                                            searchabilityV2Request.getName()))
                             .newBuilder()
                             .addQueryParameter("section", searchabilityV2Request.getSection());
 
@@ -3950,7 +3964,10 @@ public class ConstructorIO {
         try {
             HttpUrl.Builder urlBuilder =
                     this.makeUrl(
-                                    Arrays.asList("v2", "searchabilities", searchabilityV2Request.getName()))
+                                    Arrays.asList(
+                                            "v2",
+                                            "searchabilities",
+                                            searchabilityV2Request.getName()))
                             .newBuilder()
                             .addQueryParameter("section", searchabilityV2Request.getSection());
 
@@ -4033,7 +4050,8 @@ public class ConstructorIO {
             String params = new Gson().toJson(bodyMap);
             RequestBody httpBody =
                     RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
-            Request httpRequest = this.makeAuthorizedRequestBuilder().url(url).delete(httpBody).build();
+            Request httpRequest =
+                    this.makeAuthorizedRequestBuilder().url(url).delete(httpBody).build();
 
             Response response = client.newCall(httpRequest).execute();
 

@@ -31,37 +31,51 @@ public class SearchabilityV2 {
     @SerializedName("updated_at")
     private String updatedAt;
 
-    /** @return the name */
+    /**
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
-    /** @return whether terms can be fuzzy searchable */
+    /**
+     * @return whether terms can be fuzzy searchable
+     */
     public Boolean getFuzzySearchable() {
         return fuzzySearchable;
     }
 
-    /** @return whether terms can be exact searchable */
+    /**
+     * @return whether terms can be exact searchable
+     */
     public Boolean getExactSearchable() {
         return exactSearchable;
     }
 
-    /** @return whether the field is displayable in the response */
+    /**
+     * @return whether the field is displayable in the response
+     */
     public Boolean getDisplayable() {
         return displayable;
     }
 
-    /** @return whether the field is hidden by default */
+    /**
+     * @return whether the field is hidden by default
+     */
     public Boolean getHidden() {
         return hidden;
     }
 
-    /** @return the creation timestamp */
+    /**
+     * @return the creation timestamp
+     */
     public String getCreatedAt() {
         return createdAt;
     }
 
-    /** @return the last update timestamp */
+    /**
+     * @return the last update timestamp
+     */
     public String getUpdatedAt() {
         return updatedAt;
     }

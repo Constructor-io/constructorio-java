@@ -5,8 +5,8 @@ import java.util.List;
 /**
  * Constructor.io Searchabilities V2 DELETE Request.
  *
- * <p>This request class is used for bulk deletion of v2 searchability configurations
- * (DELETE /v2/searchabilities).
+ * <p>This request class is used for bulk deletion of v2 searchability configurations (DELETE
+ * /v2/searchabilities).
  */
 public class SearchabilitiesV2DeleteRequest {
     private List<String> searchabilityNames;
@@ -40,32 +40,44 @@ public class SearchabilitiesV2DeleteRequest {
         this(searchabilityNames, ConstructorIO.DEFAULT_SECTION);
     }
 
-    /** @return the list of searchability names to delete */
+    /**
+     * @return the list of searchability names to delete
+     */
     public List<String> getSearchabilityNames() {
         return searchabilityNames;
     }
 
-    /** @param searchabilityNames the searchability names to set */
+    /**
+     * @param searchabilityNames the searchability names to set
+     */
     public void setSearchabilityNames(List<String> searchabilityNames) {
         this.searchabilityNames = searchabilityNames;
     }
 
-    /** @return the section */
+    /**
+     * @return the section
+     */
     public String getSection() {
         return section;
     }
 
-    /** @param section the section to set */
+    /**
+     * @param section the section to set
+     */
     public void setSection(String section) {
         this.section = section;
     }
 
-    /** @return whether to skip index rebuild */
+    /**
+     * @return whether to skip index rebuild
+     */
     public Boolean getSkipRebuild() {
         return skipRebuild;
     }
 
-    /** @param skipRebuild whether to skip index rebuild */
+    /**
+     * @param skipRebuild whether to skip index rebuild
+     */
     public void setSkipRebuild(Boolean skipRebuild) {
         this.skipRebuild = skipRebuild;
     }

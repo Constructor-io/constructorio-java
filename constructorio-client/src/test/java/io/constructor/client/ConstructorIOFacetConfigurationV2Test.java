@@ -75,20 +75,15 @@ public class ConstructorIOFacetConfigurationV2Test {
         addFacetToCleanupArray("testFacetV2");
     }
 
-    @Test
-    public void testCreateFacetConfigurationV2WithNullRequestThrowsException() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateFacetConfigurationV2WithNullRequestThrowsException() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            constructor.createFacetConfigurationV2(null);
-        });
+        constructor.createFacetConfigurationV2(null);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testCreateFacetConfigurationV2WithNullConfigurationThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new FacetConfigurationV2Request(null, ConstructorIO.DEFAULT_SECTION);
-        });
+        new FacetConfigurationV2Request(null, ConstructorIO.DEFAULT_SECTION);
     }
 
     @Test
@@ -126,7 +121,8 @@ public class ConstructorIOFacetConfigurationV2Test {
 
         // Retrieve the facet
         String retrieveResponse =
-                constructor.retrieveFacetConfigurationV2("testRetrieveFacetV2", ConstructorIO.DEFAULT_SECTION);
+                constructor.retrieveFacetConfigurationV2(
+                        "testRetrieveFacetV2", ConstructorIO.DEFAULT_SECTION);
         JSONObject jsonObj = new JSONObject(retrieveResponse);
 
         assertEquals("testRetrieveFacetV2", jsonObj.get("name"));
@@ -140,7 +136,8 @@ public class ConstructorIOFacetConfigurationV2Test {
 
         // Retrieve all facets
         String retrieveResponse =
-                constructor.retrieveFacetConfigurationsV2(ConstructorIO.DEFAULT_SECTION, null, null);
+                constructor.retrieveFacetConfigurationsV2(
+                        ConstructorIO.DEFAULT_SECTION, null, null);
         JSONObject jsonObj = new JSONObject(retrieveResponse);
 
         assertTrue("Response should have facets array", jsonObj.has("facets"));
@@ -161,8 +158,10 @@ public class ConstructorIOFacetConfigurationV2Test {
 
         // Update the facet
         facetConfig.setDisplayName("Updated Brand Name");
-        String updateResponse = constructor.updateFacetConfigurationV2(
-                new FacetConfigurationV2Request(facetConfig, ConstructorIO.DEFAULT_SECTION));
+        String updateResponse =
+                constructor.updateFacetConfigurationV2(
+                        new FacetConfigurationV2Request(
+                                facetConfig, ConstructorIO.DEFAULT_SECTION));
         JSONObject jsonObj = new JSONObject(updateResponse);
 
         assertEquals("Updated Brand Name", jsonObj.get("display_name"));
@@ -184,7 +183,8 @@ public class ConstructorIOFacetConfigurationV2Test {
 
         // Delete the facet
         String deleteResponse =
-                constructor.deleteFacetConfigurationV2("testDeleteFacetV2", ConstructorIO.DEFAULT_SECTION);
+                constructor.deleteFacetConfigurationV2(
+                        "testDeleteFacetV2", ConstructorIO.DEFAULT_SECTION);
         JSONObject jsonObj = new JSONObject(deleteResponse);
 
         assertEquals("testDeleteFacetV2", jsonObj.get("name"));
@@ -231,13 +231,10 @@ public class ConstructorIOFacetConfigurationV2Test {
         assertEquals("testDeleteWithFacetConfigurationV2", jsonObj.get("name"));
     }
 
-    @Test
-    public void testDeleteNonExistentFacetV2ThrowsException() {
+    @Test(expected = ConstructorException.class)
+    public void testDeleteNonExistentFacetV2ThrowsException() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-
-        assertThrows(ConstructorException.class, () -> {
-            constructor.deleteFacetConfigurationV2("nonExistentFacetV2", ConstructorIO.DEFAULT_SECTION);
-        });
+        constructor.deleteFacetConfigurationV2("nonExistentFacetV2", ConstructorIO.DEFAULT_SECTION);
     }
 
     @Test
@@ -263,8 +260,9 @@ public class ConstructorIOFacetConfigurationV2Test {
         facetConfig1.setDisplayName("Bulk Updated 1");
         facetConfig2.setDisplayName("Bulk Updated 2");
 
-        FacetConfigurationsV2Request bulkRequest = new FacetConfigurationsV2Request(
-                Arrays.asList(facetConfig1, facetConfig2), ConstructorIO.DEFAULT_SECTION);
+        FacetConfigurationsV2Request bulkRequest =
+                new FacetConfigurationsV2Request(
+                        Arrays.asList(facetConfig1, facetConfig2), ConstructorIO.DEFAULT_SECTION);
 
         String updateResponse = constructor.updateFacetConfigurationsV2(bulkRequest);
         JSONObject jsonObj = new JSONObject(updateResponse);

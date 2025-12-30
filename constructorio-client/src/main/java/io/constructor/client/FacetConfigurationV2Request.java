@@ -39,22 +39,30 @@ public class FacetConfigurationV2Request {
         this(facetConfiguration, ConstructorIO.DEFAULT_SECTION);
     }
 
-    /** @param facetConfiguration the facet configuration to be created/updated */
+    /**
+     * @param facetConfiguration the facet configuration to be created/updated
+     */
     public void setFacetConfiguration(FacetConfigurationV2 facetConfiguration) {
         this.facetConfiguration = facetConfiguration;
     }
 
-    /** @return the facet configuration to be created/updated */
+    /**
+     * @return the facet configuration to be created/updated
+     */
     public FacetConfigurationV2 getFacetConfiguration() {
         return facetConfiguration;
     }
 
-    /** @param section the section to set */
+    /**
+     * @param section the section to set
+     */
     public void setSection(String section) {
         this.section = section;
     }
 
-    /** @return the section */
+    /**
+     * @return the section
+     */
     public String getSection() {
         return section;
     }

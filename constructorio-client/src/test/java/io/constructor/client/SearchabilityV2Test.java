@@ -102,28 +102,21 @@ public class SearchabilityV2Test {
         assertEquals(true, request.getSkipRebuild());
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSearchabilityV2RequestWithNullNameThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SearchabilityV2Request(null, ConstructorIO.DEFAULT_SECTION);
-        });
+        new SearchabilityV2Request((String) null, ConstructorIO.DEFAULT_SECTION);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSearchabilityV2RequestWithEmptyNameThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SearchabilityV2Request("   ", ConstructorIO.DEFAULT_SECTION);
-        });
+        new SearchabilityV2Request("   ", ConstructorIO.DEFAULT_SECTION);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSearchabilityV2RequestWithNullSectionThrowsException() {
         SearchabilityV2 config = new SearchabilityV2();
         config.setName("title");
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SearchabilityV2Request(config, "title", null);
-        });
+        new SearchabilityV2Request(config, "title", null);
     }
 
     @Test
@@ -137,7 +130,8 @@ public class SearchabilityV2Test {
         config2.setExactSearchable(true);
 
         SearchabilitiesV2Request request =
-                new SearchabilitiesV2Request(Arrays.asList(config1, config2), ConstructorIO.DEFAULT_SECTION);
+                new SearchabilitiesV2Request(
+                        Arrays.asList(config1, config2), ConstructorIO.DEFAULT_SECTION);
 
         assertEquals(2, request.getSearchabilities().size());
         assertEquals(ConstructorIO.DEFAULT_SECTION, request.getSection());
@@ -165,18 +159,15 @@ public class SearchabilityV2Test {
         assertEquals(true, request.getSkipRebuild());
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSearchabilitiesV2RequestWithNullListThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SearchabilitiesV2Request(null, ConstructorIO.DEFAULT_SECTION);
-        });
+        new SearchabilitiesV2Request(null, ConstructorIO.DEFAULT_SECTION);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSearchabilitiesV2RequestWithEmptyListThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SearchabilitiesV2Request(Arrays.asList(), ConstructorIO.DEFAULT_SECTION);
-        });
+        new SearchabilitiesV2Request(
+                Arrays.<SearchabilityV2>asList(), ConstructorIO.DEFAULT_SECTION);
     }
 
     @Test
@@ -226,17 +217,16 @@ public class SearchabilityV2Test {
         assertEquals("ascending", request.getSortOrder());
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSearchabilitiesV2GetRequestWithNullSectionThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SearchabilitiesV2GetRequest(null);
-        });
+        new SearchabilitiesV2GetRequest(null);
     }
 
     @Test
     public void testSearchabilitiesV2DeleteRequest() {
-        SearchabilitiesV2DeleteRequest request = new SearchabilitiesV2DeleteRequest(
-                Arrays.asList("title", "description"), ConstructorIO.DEFAULT_SECTION);
+        SearchabilitiesV2DeleteRequest request =
+                new SearchabilitiesV2DeleteRequest(
+                        Arrays.asList("title", "description"), ConstructorIO.DEFAULT_SECTION);
 
         assertEquals(2, request.getSearchabilityNames().size());
         assertTrue(request.getSearchabilityNames().contains("title"));
@@ -262,17 +252,13 @@ public class SearchabilityV2Test {
         assertEquals(true, request.getSkipRebuild());
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSearchabilitiesV2DeleteRequestWithNullNamesThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SearchabilitiesV2DeleteRequest(null, ConstructorIO.DEFAULT_SECTION);
-        });
+        new SearchabilitiesV2DeleteRequest(null, ConstructorIO.DEFAULT_SECTION);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSearchabilitiesV2DeleteRequestWithEmptyNamesThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SearchabilitiesV2DeleteRequest(Arrays.asList(), ConstructorIO.DEFAULT_SECTION);
-        });
+        new SearchabilitiesV2DeleteRequest(Arrays.<String>asList(), ConstructorIO.DEFAULT_SECTION);
     }
 }

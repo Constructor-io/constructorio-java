@@ -40,22 +40,30 @@ public class FacetConfigurationsV2Request {
         this(facetConfigurations, ConstructorIO.DEFAULT_SECTION);
     }
 
-    /** @return the list of facet configurations */
+    /**
+     * @return the list of facet configurations
+     */
     public List<FacetConfigurationV2> getFacetConfigurations() {
         return facetConfigurations;
     }
 
-    /** @param facetConfigurations the facet configurations to set */
+    /**
+     * @param facetConfigurations the facet configurations to set
+     */
     public void setFacetConfigurations(List<FacetConfigurationV2> facetConfigurations) {
         this.facetConfigurations = facetConfigurations;
     }
 
-    /** @return the section */
+    /**
+     * @return the section
+     */
     public String getSection() {
         return section;
     }
 
-    /** @param section the section to set */
+    /**
+     * @param section the section to set
+     */
     public void setSection(String section) {
         this.section = section;
     }

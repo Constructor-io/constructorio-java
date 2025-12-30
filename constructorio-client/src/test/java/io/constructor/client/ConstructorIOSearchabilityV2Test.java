@@ -60,7 +60,8 @@ public class ConstructorIOSearchabilityV2Test {
     public void testRetrieveSearchabilitiesV2WithFilters() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
-        SearchabilitiesV2GetRequest request = new SearchabilitiesV2GetRequest(ConstructorIO.DEFAULT_SECTION);
+        SearchabilitiesV2GetRequest request =
+                new SearchabilitiesV2GetRequest(ConstructorIO.DEFAULT_SECTION);
         request.setPage(1);
         request.setNumResultsPerPage(10);
 
@@ -79,7 +80,8 @@ public class ConstructorIOSearchabilityV2Test {
         searchability.setName("testSearchabilityV2");
 
         SearchabilityV2Request request =
-                new SearchabilityV2Request(searchability, "testSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
+                new SearchabilityV2Request(
+                        searchability, "testSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
 
         String response = constructor.createOrUpdateSearchabilityV2(request);
         JSONObject jsonObj = new JSONObject(response);
@@ -99,8 +101,11 @@ public class ConstructorIOSearchabilityV2Test {
         SearchabilityV2 searchability = new Gson().fromJson(string, SearchabilityV2.class);
         searchability.setName("testSearchabilityV2SkipRebuild");
 
-        SearchabilityV2Request request = new SearchabilityV2Request(
-                searchability, "testSearchabilityV2SkipRebuild", ConstructorIO.DEFAULT_SECTION);
+        SearchabilityV2Request request =
+                new SearchabilityV2Request(
+                        searchability,
+                        "testSearchabilityV2SkipRebuild",
+                        ConstructorIO.DEFAULT_SECTION);
         request.setSkipRebuild(true);
 
         String response = constructor.createOrUpdateSearchabilityV2(request);
@@ -119,13 +124,17 @@ public class ConstructorIOSearchabilityV2Test {
         SearchabilityV2 searchability = new Gson().fromJson(string, SearchabilityV2.class);
         searchability.setName("testRetrieveSearchabilityV2");
 
-        SearchabilityV2Request createRequest = new SearchabilityV2Request(
-                searchability, "testRetrieveSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
+        SearchabilityV2Request createRequest =
+                new SearchabilityV2Request(
+                        searchability,
+                        "testRetrieveSearchabilityV2",
+                        ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilityV2(createRequest);
 
         // Retrieve the searchability
         String retrieveResponse =
-                constructor.retrieveSearchabilityV2("testRetrieveSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
+                constructor.retrieveSearchabilityV2(
+                        "testRetrieveSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
         JSONObject jsonObj = new JSONObject(retrieveResponse);
 
         assertEquals("testRetrieveSearchabilityV2", jsonObj.get("name"));
@@ -141,12 +150,16 @@ public class ConstructorIOSearchabilityV2Test {
         SearchabilityV2 searchability = new Gson().fromJson(string, SearchabilityV2.class);
         searchability.setName("testRetrieveSearchabilityV2Default");
 
-        SearchabilityV2Request createRequest = new SearchabilityV2Request(
-                searchability, "testRetrieveSearchabilityV2Default", ConstructorIO.DEFAULT_SECTION);
+        SearchabilityV2Request createRequest =
+                new SearchabilityV2Request(
+                        searchability,
+                        "testRetrieveSearchabilityV2Default",
+                        ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilityV2(createRequest);
 
         // Retrieve the searchability with default section
-        String retrieveResponse = constructor.retrieveSearchabilityV2("testRetrieveSearchabilityV2Default");
+        String retrieveResponse =
+                constructor.retrieveSearchabilityV2("testRetrieveSearchabilityV2Default");
         JSONObject jsonObj = new JSONObject(retrieveResponse);
 
         assertEquals("testRetrieveSearchabilityV2Default", jsonObj.get("name"));
@@ -162,13 +175,15 @@ public class ConstructorIOSearchabilityV2Test {
         SearchabilityV2 searchability = new Gson().fromJson(string, SearchabilityV2.class);
         searchability.setName("testDeleteSearchabilityV2");
 
-        SearchabilityV2Request createRequest = new SearchabilityV2Request(
-                searchability, "testDeleteSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
+        SearchabilityV2Request createRequest =
+                new SearchabilityV2Request(
+                        searchability, "testDeleteSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilityV2(createRequest);
 
         // Delete the searchability
         String deleteResponse =
-                constructor.deleteSearchabilityV2("testDeleteSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
+                constructor.deleteSearchabilityV2(
+                        "testDeleteSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
         JSONObject jsonObj = new JSONObject(deleteResponse);
 
         assertEquals("testDeleteSearchabilityV2", jsonObj.get("name"));
@@ -183,12 +198,16 @@ public class ConstructorIOSearchabilityV2Test {
         SearchabilityV2 searchability = new Gson().fromJson(string, SearchabilityV2.class);
         searchability.setName("testDeleteSearchabilityV2Default");
 
-        SearchabilityV2Request createRequest = new SearchabilityV2Request(
-                searchability, "testDeleteSearchabilityV2Default", ConstructorIO.DEFAULT_SECTION);
+        SearchabilityV2Request createRequest =
+                new SearchabilityV2Request(
+                        searchability,
+                        "testDeleteSearchabilityV2Default",
+                        ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilityV2(createRequest);
 
         // Delete the searchability with default section
-        String deleteResponse = constructor.deleteSearchabilityV2("testDeleteSearchabilityV2Default");
+        String deleteResponse =
+                constructor.deleteSearchabilityV2("testDeleteSearchabilityV2Default");
         JSONObject jsonObj = new JSONObject(deleteResponse);
 
         assertEquals("testDeleteSearchabilityV2Default", jsonObj.get("name"));
@@ -203,13 +222,17 @@ public class ConstructorIOSearchabilityV2Test {
         SearchabilityV2 searchability = new Gson().fromJson(string, SearchabilityV2.class);
         searchability.setName("testDeleteSearchabilityV2Request");
 
-        SearchabilityV2Request createRequest = new SearchabilityV2Request(
-                searchability, "testDeleteSearchabilityV2Request", ConstructorIO.DEFAULT_SECTION);
+        SearchabilityV2Request createRequest =
+                new SearchabilityV2Request(
+                        searchability,
+                        "testDeleteSearchabilityV2Request",
+                        ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilityV2(createRequest);
 
         // Delete the searchability using request object
         SearchabilityV2Request deleteRequest =
-                new SearchabilityV2Request("testDeleteSearchabilityV2Request", ConstructorIO.DEFAULT_SECTION);
+                new SearchabilityV2Request(
+                        "testDeleteSearchabilityV2Request", ConstructorIO.DEFAULT_SECTION);
         String deleteResponse = constructor.deleteSearchabilityV2(deleteRequest);
         JSONObject jsonObj = new JSONObject(deleteResponse);
 
@@ -229,8 +252,10 @@ public class ConstructorIOSearchabilityV2Test {
         searchability2.setFuzzySearchable(false);
         searchability2.setExactSearchable(true);
 
-        SearchabilitiesV2Request bulkRequest = new SearchabilitiesV2Request(
-                Arrays.asList(searchability1, searchability2), ConstructorIO.DEFAULT_SECTION);
+        SearchabilitiesV2Request bulkRequest =
+                new SearchabilitiesV2Request(
+                        Arrays.asList(searchability1, searchability2),
+                        ConstructorIO.DEFAULT_SECTION);
 
         String response = constructor.createOrUpdateSearchabilitiesV2(bulkRequest);
         JSONObject jsonObj = new JSONObject(response);
@@ -252,14 +277,19 @@ public class ConstructorIOSearchabilityV2Test {
         SearchabilityV2 searchability2 = new Gson().fromJson(string, SearchabilityV2.class);
         searchability2.setName("testBulkDeleteSearchabilityV2_2");
 
-        SearchabilitiesV2Request createRequest = new SearchabilitiesV2Request(
-                Arrays.asList(searchability1, searchability2), ConstructorIO.DEFAULT_SECTION);
+        SearchabilitiesV2Request createRequest =
+                new SearchabilitiesV2Request(
+                        Arrays.asList(searchability1, searchability2),
+                        ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilitiesV2(createRequest);
 
         // Delete searchabilities
-        SearchabilitiesV2DeleteRequest deleteRequest = new SearchabilitiesV2DeleteRequest(
-                Arrays.asList("testBulkDeleteSearchabilityV2_1", "testBulkDeleteSearchabilityV2_2"),
-                ConstructorIO.DEFAULT_SECTION);
+        SearchabilitiesV2DeleteRequest deleteRequest =
+                new SearchabilitiesV2DeleteRequest(
+                        Arrays.asList(
+                                "testBulkDeleteSearchabilityV2_1",
+                                "testBulkDeleteSearchabilityV2_2"),
+                        ConstructorIO.DEFAULT_SECTION);
 
         String response = constructor.deleteSearchabilitiesV2(deleteRequest);
         JSONObject jsonObj = new JSONObject(response);
@@ -267,27 +297,21 @@ public class ConstructorIOSearchabilityV2Test {
         assertTrue("Response should have searchabilities array", jsonObj.has("searchabilities"));
     }
 
-    @Test
-    public void testDeleteNonExistentSearchabilityV2ThrowsException() {
+    @Test(expected = ConstructorException.class)
+    public void testDeleteNonExistentSearchabilityV2ThrowsException() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
-
-        assertThrows(ConstructorException.class, () -> {
-            constructor.deleteSearchabilityV2("nonExistentSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
-        });
+        constructor.deleteSearchabilityV2(
+                "nonExistentSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSearchabilityV2RequestWithNullNameThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SearchabilityV2Request(null, ConstructorIO.DEFAULT_SECTION);
-        });
+        new SearchabilityV2Request((String) null, ConstructorIO.DEFAULT_SECTION);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSearchabilityV2RequestWithEmptyNameThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new SearchabilityV2Request("   ", ConstructorIO.DEFAULT_SECTION);
-        });
+        new SearchabilityV2Request("   ", ConstructorIO.DEFAULT_SECTION);
     }
 
     @Test

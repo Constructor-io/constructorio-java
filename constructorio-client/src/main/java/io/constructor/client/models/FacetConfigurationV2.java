@@ -69,97 +69,135 @@ public class FacetConfigurationV2 {
     @SerializedName("updated_at")
     private String updatedAt;
 
-    /** @return the name */
+    /**
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
-    /** @return the path in metadata */
+    /**
+     * @return the path in metadata
+     */
     public String getPathInMetadata() {
         return pathInMetadata;
     }
 
-    /** @return the type */
+    /**
+     * @return the type
+     */
     public String getType() {
         return type;
     }
 
-    /** @return the displayName */
+    /**
+     * @return the displayName
+     */
     public String getDisplayName() {
         return displayName;
     }
 
-    /** @return the sortOrder */
+    /**
+     * @return the sortOrder
+     */
     public String getSortOrder() {
         return sortOrder;
     }
 
-    /** @return the sortDescending */
+    /**
+     * @return the sortDescending
+     */
     public Boolean getSortDescending() {
         return sortDescending;
     }
 
-    /** @return the rangeType */
+    /**
+     * @return the rangeType
+     */
     public String getRangeType() {
         return rangeType;
     }
 
-    /** @return the rangeFormat */
+    /**
+     * @return the rangeFormat
+     */
     public String getRangeFormat() {
         return rangeFormat;
     }
 
-    /** @return the rangeInclusive */
+    /**
+     * @return the rangeInclusive
+     */
     public String getRangeInclusive() {
         return rangeInclusive;
     }
 
-    /** @return the rangeLimits */
+    /**
+     * @return the rangeLimits
+     */
     public List<Number> getRangeLimits() {
         return rangeLimits;
     }
 
-    /** @return the matchType */
+    /**
+     * @return the matchType
+     */
     public String getMatchType() {
         return matchType;
     }
 
-    /** @return the position */
+    /**
+     * @return the position
+     */
     public Integer getPosition() {
         return position;
     }
 
-    /** @return the hidden */
+    /**
+     * @return the hidden
+     */
     public Boolean getHidden() {
         return hidden;
     }
 
-    /** @return the isProtected */
+    /**
+     * @return the isProtected
+     */
     public Boolean getIsProtected() {
         return isProtected;
     }
 
-    /** @return the countable */
+    /**
+     * @return the countable
+     */
     public Boolean getCountable() {
         return countable;
     }
 
-    /** @return the optionsLimit */
+    /**
+     * @return the optionsLimit
+     */
     public Integer getOptionsLimit() {
         return optionsLimit;
     }
 
-    /** @return the data */
+    /**
+     * @return the data
+     */
     public Map<String, Object> getData() {
         return data;
     }
 
-    /** @return the creation timestamp */
+    /**
+     * @return the creation timestamp
+     */
     public String getCreatedAt() {
         return createdAt;
     }
 
-    /** @return the last update timestamp */
+    /**
+     * @return the last update timestamp
+     */
     public String getUpdatedAt() {
         return updatedAt;
     }

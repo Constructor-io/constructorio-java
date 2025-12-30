@@ -5,8 +5,8 @@ import io.constructor.client.models.SearchabilityV2;
 /**
  * Constructor.io Searchability V2 Request.
  *
- * <p>This request class is used for single v2 searchability configuration operations (GET/PATCH/DELETE
- * /v2/searchabilities/{name}).
+ * <p>This request class is used for single v2 searchability configuration operations
+ * (GET/PATCH/DELETE /v2/searchabilities/{name}).
  */
 public class SearchabilityV2Request {
     private SearchabilityV2 searchability;
@@ -63,42 +63,58 @@ public class SearchabilityV2Request {
         this(null, name, ConstructorIO.DEFAULT_SECTION);
     }
 
-    /** @return the searchability configuration */
+    /**
+     * @return the searchability configuration
+     */
     public SearchabilityV2 getSearchability() {
         return searchability;
     }
 
-    /** @param searchability the searchability configuration to set */
+    /**
+     * @param searchability the searchability configuration to set
+     */
     public void setSearchability(SearchabilityV2 searchability) {
         this.searchability = searchability;
     }
 
-    /** @return the name of the searchability field */
+    /**
+     * @return the name of the searchability field
+     */
     public String getName() {
         return name;
     }
 
-    /** @param name the name to set */
+    /**
+     * @param name the name to set
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /** @return the section */
+    /**
+     * @return the section
+     */
     public String getSection() {
         return section;
     }
 
-    /** @param section the section to set */
+    /**
+     * @param section the section to set
+     */
     public void setSection(String section) {
         this.section = section;
     }
 
-    /** @return whether to skip index rebuild */
+    /**
+     * @return whether to skip index rebuild
+     */
     public Boolean getSkipRebuild() {
         return skipRebuild;
     }
 
-    /** @param skipRebuild whether to skip index rebuild */
+    /**
+     * @param skipRebuild whether to skip index rebuild
+     */
     public void setSkipRebuild(Boolean skipRebuild) {
         this.skipRebuild = skipRebuild;
     }

@@ -22,7 +22,8 @@ public class ConstructorIOCatalogTest {
     private File itemsFile = new File("src/test/resources/csv/items.csv");
     private File variationsFile = new File("src/test/resources/csv/variations.csv");
     private File itemGroupsFile = new File("src/test/resources/csv/item_groups.csv");
-    private String baseUrl = "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
+    private String baseUrl =
+            "https://raw.githubusercontent.com/Constructor-io/integration-examples/main/catalog/";
 
     private File jsonItemsFile;
     private File jsonVariationsFile;
@@ -32,8 +33,7 @@ public class ConstructorIOCatalogTest {
     private File invalidExtensionFile;
     private File noExtensionFile;
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void init() throws Exception {
@@ -64,20 +64,13 @@ public class ConstructorIOCatalogTest {
         csvFolder.delete();
 
         // Clean up generated files
-        if (jsonItemsFile != null)
-            jsonItemsFile.delete();
-        if (jsonVariationsFile != null)
-            jsonVariationsFile.delete();
-        if (jsonlItemsFile != null)
-            jsonlItemsFile.delete();
-        if (jsonlVariationsFile != null)
-            jsonlVariationsFile.delete();
-        if (jsonlItemGroupsFile != null)
-            jsonlItemGroupsFile.delete();
-        if (invalidExtensionFile != null)
-            invalidExtensionFile.delete();
-        if (noExtensionFile != null)
-            noExtensionFile.delete();
+        if (jsonItemsFile != null) jsonItemsFile.delete();
+        if (jsonVariationsFile != null) jsonVariationsFile.delete();
+        if (jsonlItemsFile != null) jsonlItemsFile.delete();
+        if (jsonlVariationsFile != null) jsonlVariationsFile.delete();
+        if (jsonlItemGroupsFile != null) jsonlItemGroupsFile.delete();
+        if (invalidExtensionFile != null) invalidExtensionFile.delete();
+        if (noExtensionFile != null) noExtensionFile.delete();
     }
 
     @Test

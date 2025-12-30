@@ -82,19 +82,20 @@ public class Utils {
 
     /**
      * @param statusCode the http status code
-     * @param bodyText   the body
+     * @param bodyText the body
      * @return an HTTP response
      */
     public static Response createResponse(int statusCode, String bodyText) {
         Request request = new Request.Builder().url("https://example.com").build();
         ResponseBody body = ResponseBody.create(bodyType, bodyText);
-        Response response = new Response.Builder()
-                .request(request)
-                .protocol(Protocol.HTTP_1_1)
-                .code(statusCode)
-                .body(body)
-                .message("")
-                .build();
+        Response response =
+                new Response.Builder()
+                        .request(request)
+                        .protocol(Protocol.HTTP_1_1)
+                        .code(statusCode)
+                        .body(body)
+                        .message("")
+                        .build();
 
         return response;
     }
@@ -122,8 +123,8 @@ public class Utils {
     private static final Gson gson = new Gson();
 
     /**
-     * Creates a temporary JSON file containing an array of items.
-     * Uses createProductItem() to generate realistic test data.
+     * Creates a temporary JSON file containing an array of items. Uses createProductItem() to
+     * generate realistic test data.
      *
      * @param count the number of items to generate
      * @return a temporary File with .json extension
@@ -146,8 +147,8 @@ public class Utils {
     }
 
     /**
-     * Creates a temporary JSONL file containing items (one per line).
-     * Uses createProductItem() to generate realistic test data.
+     * Creates a temporary JSONL file containing items (one per line). Uses createProductItem() to
+     * generate realistic test data.
      *
      * @param count the number of items to generate
      * @return a temporary File with .jsonl extension
@@ -170,8 +171,8 @@ public class Utils {
     }
 
     /**
-     * Creates a temporary JSON file containing an array of variations.
-     * Uses createProductVariation() to generate realistic test data.
+     * Creates a temporary JSON file containing an array of variations. Uses
+     * createProductVariation() to generate realistic test data.
      *
      * @param count the number of variations to generate
      * @return a temporary File with .json extension
@@ -195,8 +196,8 @@ public class Utils {
     }
 
     /**
-     * Creates a temporary JSONL file containing variations (one per line).
-     * Uses createProductVariation() to generate realistic test data.
+     * Creates a temporary JSONL file containing variations (one per line). Uses
+     * createProductVariation() to generate realistic test data.
      *
      * @param count the number of variations to generate
      * @return a temporary File with .jsonl extension
@@ -250,8 +251,7 @@ public class Utils {
     }
 
     /**
-     * Creates a temporary file with an invalid .txt extension for testing
-     * validation.
+     * Creates a temporary file with an invalid .txt extension for testing validation.
      *
      * @return a temporary File with .txt extension
      * @throws IOException if file creation fails

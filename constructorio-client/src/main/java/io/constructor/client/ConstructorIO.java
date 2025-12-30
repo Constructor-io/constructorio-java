@@ -2361,8 +2361,8 @@ public class ConstructorIO {
     /**
      * Send a full catalog to replace the current one (sync)
      *
-     * Supports CSV, JSON, and JSONL file formats. The file type is automatically
-     * detected from the file extension (.csv, .json, or .jsonl).
+     * <p>Supports CSV, JSON, and JSONL file formats. The file type is automatically detected from
+     * the file extension (.csv, .json, or .jsonl).
      *
      * @param req the catalog request containing files with .csv, .json, or .jsonl extensions
      * @return a string of JSON containing task information
@@ -2422,8 +2422,8 @@ public class ConstructorIO {
     /**
      * Send a partial catalog to update specific items (delta)
      *
-     * Supports CSV, JSON, and JSONL file formats. The file type is automatically
-     * detected from the file extension (.csv, .json, or .jsonl).
+     * <p>Supports CSV, JSON, and JSONL file formats. The file type is automatically detected from
+     * the file extension (.csv, .json, or .jsonl).
      *
      * @param req the catalog request containing files with .csv, .json, or .jsonl extensions
      * @return a string of JSON containing task information
@@ -2484,8 +2484,8 @@ public class ConstructorIO {
     /**
      * Send a patch delta catalog to update specific items (delta)
      *
-     * Supports CSV, JSON, and JSONL file formats. The file type is automatically
-     * detected from the file extension (.csv, .json, or .jsonl).
+     * <p>Supports CSV, JSON, and JSONL file formats. The file type is automatically detected from
+     * the file extension (.csv, .json, or .jsonl).
      *
      * @param req the catalog request containing files with .csv, .json, or .jsonl extensions
      * @return a string of JSON containing task information

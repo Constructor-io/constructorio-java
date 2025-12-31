@@ -1,11 +1,17 @@
 package io.constructor.client;
 
+import com.google.gson.Gson;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -112,5 +118,198 @@ public class Utils {
         OkHttpClient client = ConstructorIO.getHttpClient();
         OkHttpClient newClient = client.newBuilder().addInterceptor(logger).build();
         ConstructorIO.setHttpClient(newClient);
+    }
+
+    private static final Gson gson = new Gson();
+
+    /**
+     * Creates a temporary JSON file containing an array of items. Uses createProductItem() to
+     * generate realistic test data.
+     *
+     * @param count the number of items to generate
+     * @return a temporary File with .json extension
+     * @throws IOException if file creation fails
+     */
+    public static File createItemsJsonFile(int count) throws IOException {
+        File file = File.createTempFile("items", ".json");
+        file.deleteOnExit();
+
+        List<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < count; i++) {
+            ConstructorItem item = createProductItem();
+            items.add(item.toMap());
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(gson.toJson(items));
+        }
+        return file;
+    }
+
+    /**
+     * Creates a temporary JSONL file containing items (one per line). Uses createProductItem() to
+     * generate realistic test data.
+     *
+     * @param count the number of items to generate
+     * @return a temporary File with .jsonl extension
+     * @throws IOException if file creation fails
+     */
+    public static File createItemsJsonlFile(int count) throws IOException {
+        File file = File.createTempFile("items", ".jsonl");
+        file.deleteOnExit();
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            ConstructorItem item = createProductItem();
+            sb.append(gson.toJson(item.toMap())).append("\n");
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(sb.toString());
+        }
+        return file;
+    }
+
+    /**
+     * Creates a temporary JSON file containing an array of variations. Uses
+     * createProductVariation() to generate realistic test data.
+     *
+     * @param count the number of variations to generate
+     * @return a temporary File with .json extension
+     * @throws IOException if file creation fails
+     */
+    public static File createVariationsJsonFile(int count) throws IOException {
+        File file = File.createTempFile("variations", ".json");
+        file.deleteOnExit();
+
+        List<Map<String, Object>> variations = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < count; i++) {
+            String itemId = "item" + ((i % 3) + 1);
+            ConstructorVariation variation = createProductVariation(itemId);
+            variations.add(variation.toMap());
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(gson.toJson(variations));
+        }
+        return file;
+    }
+
+    /**
+     * Creates a temporary JSONL file containing variations (one per line). Uses
+     * createProductVariation() to generate realistic test data.
+     *
+     * @param count the number of variations to generate
+     * @return a temporary File with .jsonl extension
+     * @throws IOException if file creation fails
+     */
+    public static File createVariationsJsonlFile(int count) throws IOException {
+        File file = File.createTempFile("variations", ".jsonl");
+        file.deleteOnExit();
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            String itemId = "item" + ((i % 3) + 1);
+            ConstructorVariation variation = createProductVariation(itemId);
+            sb.append(gson.toJson(variation.toMap())).append("\n");
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(sb.toString());
+        }
+        return file;
+    }
+
+    /**
+     * Creates a temporary JSON file containing an array of item groups.
+     *
+     * @param count the number of item groups to generate
+     * @return a temporary File with .json extension
+     * @throws IOException if file creation fails
+     */
+    public static File createItemGroupsJsonFile(int count) throws IOException {
+        File file = File.createTempFile("item_groups", ".json");
+        file.deleteOnExit();
+
+        List<Map<String, Object>> groups = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < count; i++) {
+            Map<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("parent_id", "root");
+
+            Map<String, Object> group = new HashMap<String, Object>();
+            group.put("id", "group" + UUID.randomUUID().toString().substring(0, 8));
+            group.put("name", "Group " + (i + 1));
+            group.put("data", dataMap);
+
+            groups.add(group);
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(gson.toJson(groups));
+        }
+        return file;
+    }
+
+    /**
+     * Creates a temporary JSONL file containing item groups (one per line).
+     *
+     * @param count the number of item groups to generate
+     * @return a temporary File with .jsonl extension
+     * @throws IOException if file creation fails
+     */
+    public static File createItemGroupsJsonlFile(int count) throws IOException {
+        File file = File.createTempFile("item_groups", ".jsonl");
+        file.deleteOnExit();
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            Map<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("parent_id", "root");
+
+            Map<String, Object> group = new HashMap<String, Object>();
+            group.put("id", "group" + UUID.randomUUID().toString().substring(0, 8));
+            group.put("name", "Group " + (i + 1));
+            group.put("data", dataMap);
+
+            sb.append(gson.toJson(group)).append("\n");
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(sb.toString());
+        }
+        return file;
+    }
+
+    /**
+     * Creates a temporary file with an invalid .txt extension for testing validation.
+     *
+     * @return a temporary File with .txt extension
+     * @throws IOException if file creation fails
+     */
+    public static File createInvalidExtensionFile() throws IOException {
+        File file = File.createTempFile("items", ".txt");
+        file.deleteOnExit();
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write("This is a text file with invalid extension for catalog upload testing.");
+        }
+        return file;
+    }
+
+    /**
+     * Creates a temporary file with no extension for testing validation.
+     *
+     * @return a temporary File with no extension
+     * @throws IOException if file creation fails
+     */
+    public static File createNoExtensionFile() throws IOException {
+        String tmpDir = System.getProperty("java.io.tmpdir");
+        File file = new File(tmpDir, "items_" + UUID.randomUUID().toString().substring(0, 8));
+        file.deleteOnExit();
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write("This file has no extension for testing validation.");
+        }
+        return file;
     }
 }

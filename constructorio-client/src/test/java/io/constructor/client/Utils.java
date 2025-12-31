@@ -221,6 +221,36 @@ public class Utils {
     }
 
     /**
+     * Creates a temporary JSON file containing an array of item groups.
+     *
+     * @param count the number of item groups to generate
+     * @return a temporary File with .json extension
+     * @throws IOException if file creation fails
+     */
+    public static File createItemGroupsJsonFile(int count) throws IOException {
+        File file = File.createTempFile("item_groups", ".json");
+        file.deleteOnExit();
+
+        List<Map<String, Object>> groups = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < count; i++) {
+            Map<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("parent_id", "root");
+
+            Map<String, Object> group = new HashMap<String, Object>();
+            group.put("id", "group" + UUID.randomUUID().toString().substring(0, 8));
+            group.put("name", "Group " + (i + 1));
+            group.put("data", dataMap);
+
+            groups.add(group);
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(gson.toJson(groups));
+        }
+        return file;
+    }
+
+    /**
      * Creates a temporary JSONL file containing item groups (one per line).
      *
      * @param count the number of item groups to generate

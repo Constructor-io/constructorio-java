@@ -13,7 +13,7 @@ import org.junit.Test;
 public class ConstructorIOSearchabilityV2Test {
 
     private static String token = System.getenv("TEST_API_TOKEN");
-    private static String apiKey = System.getenv("TEST_CATALOG_API_KEY");
+    private static String apiKey = System.getenv("TEST_CATALOG_FACETS_V2_API_KEY");
     private static ArrayList<String> searchabilitiesToCleanup = new ArrayList<>();
 
     private void addSearchabilityToCleanupArray(String name, String section) {

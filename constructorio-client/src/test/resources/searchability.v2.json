@@ -1,4 +1,5 @@
 {
+    "name": "title",
     "fuzzy_searchable": true,
     "exact_searchable": false,
     "displayable": true,

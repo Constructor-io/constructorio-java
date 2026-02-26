@@ -222,6 +222,11 @@ public class SearchabilityV2Test {
         new SearchabilitiesV2GetRequest(null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchabilitiesV2GetRequestWithEmptySectionThrowsException() {
+        new SearchabilitiesV2GetRequest("   ");
+    }
+
     @Test
     public void testSearchabilitiesV2DeleteRequest() {
         SearchabilitiesV2DeleteRequest request =

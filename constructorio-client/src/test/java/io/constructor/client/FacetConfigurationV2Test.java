@@ -26,7 +26,7 @@ public class FacetConfigurationV2Test {
         assertEquals("any", facetConfiguration.getMatchType());
         assertEquals(Integer.valueOf(2), facetConfiguration.getPosition());
         assertEquals(false, facetConfiguration.getHidden());
-        assertEquals(false, facetConfiguration.getIsProtected());
+        assertEquals(false, facetConfiguration.getProtected());
         assertEquals(true, facetConfiguration.getCountable());
         assertEquals(Integer.valueOf(300), facetConfiguration.getOptionsLimit());
         assertNotNull(facetConfiguration.getData());
@@ -45,7 +45,7 @@ public class FacetConfigurationV2Test {
         facetConfiguration.setMatchType("any");
         facetConfiguration.setPosition(1);
         facetConfiguration.setHidden(false);
-        facetConfiguration.setIsProtected(false);
+        facetConfiguration.setProtected(false);
         facetConfiguration.setCountable(true);
         facetConfiguration.setOptionsLimit(500);
 
@@ -177,5 +177,42 @@ public class FacetConfigurationV2Test {
     @Test(expected = IllegalArgumentException.class)
     public void testFacetConfigurationsV2RequestWithNullList() {
         new FacetConfigurationsV2Request(null, "Products");
+    }
+
+    @Test
+    public void testFacetConfigurationsV2GetRequest() {
+        FacetConfigurationsV2GetRequest request =
+                new FacetConfigurationsV2GetRequest(ConstructorIO.DEFAULT_SECTION);
+
+        assertEquals(ConstructorIO.DEFAULT_SECTION, request.getSection());
+    }
+
+    @Test
+    public void testFacetConfigurationsV2GetRequestWithDefaultSection() {
+        FacetConfigurationsV2GetRequest request = new FacetConfigurationsV2GetRequest();
+
+        assertEquals(ConstructorIO.DEFAULT_SECTION, request.getSection());
+    }
+
+    @Test
+    public void testFacetConfigurationsV2GetRequestWithPagination() {
+        FacetConfigurationsV2GetRequest request = new FacetConfigurationsV2GetRequest();
+        request.setPage(2);
+        request.setNumResultsPerPage(50);
+        request.setOffset(100);
+
+        assertEquals(Integer.valueOf(2), request.getPage());
+        assertEquals(Integer.valueOf(50), request.getNumResultsPerPage());
+        assertEquals(Integer.valueOf(100), request.getOffset());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFacetConfigurationsV2GetRequestWithNullSectionThrowsException() {
+        new FacetConfigurationsV2GetRequest(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFacetConfigurationsV2GetRequestWithEmptySectionThrowsException() {
+        new FacetConfigurationsV2GetRequest("   ");
     }
 }

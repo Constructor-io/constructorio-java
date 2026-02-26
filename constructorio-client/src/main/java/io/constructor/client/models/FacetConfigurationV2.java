@@ -161,9 +161,9 @@ public class FacetConfigurationV2 {
     }
 
     /**
-     * @return the isProtected
+     * @return the protected
      */
-    public Boolean getIsProtected() {
+    public Boolean getProtected() {
         return isProtected;
     }
 
@@ -254,7 +254,7 @@ public class FacetConfigurationV2 {
         this.hidden = hidden;
     }
 
-    public void setIsProtected(Boolean isProtected) {
+    public void setProtected(Boolean isProtected) {
         this.isProtected = isProtected;
     }
 

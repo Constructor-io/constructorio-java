@@ -30,42 +30,58 @@ public class FacetConfigurationsV2GetRequest {
         this.section = ConstructorIO.DEFAULT_SECTION;
     }
 
-    /** @return the section */
+    /**
+     * @return the section
+     */
     public String getSection() {
         return section;
     }
 
-    /** @param section the section to set */
+    /**
+     * @param section the section to set
+     */
     public void setSection(String section) {
         this.section = section;
     }
 
-    /** @return the page number */
+    /**
+     * @return the page number
+     */
     public Integer getPage() {
         return page;
     }
 
-    /** @param page the page number to set */
+    /**
+     * @param page the page number to set
+     */
     public void setPage(Integer page) {
         this.page = page;
     }
 
-    /** @return the number of results per page */
+    /**
+     * @return the number of results per page
+     */
     public Integer getNumResultsPerPage() {
         return numResultsPerPage;
     }
 
-    /** @param numResultsPerPage the number of results per page to set */
+    /**
+     * @param numResultsPerPage the number of results per page to set
+     */
     public void setNumResultsPerPage(Integer numResultsPerPage) {
         this.numResultsPerPage = numResultsPerPage;
     }
 
-    /** @return the offset */
+    /**
+     * @return the offset
+     */
     public Integer getOffset() {
         return offset;
     }
 
-    /** @param offset the offset to set */
+    /**
+     * @param offset the offset to set
+     */
     public void setOffset(Integer offset) {
         this.offset = offset;
     }

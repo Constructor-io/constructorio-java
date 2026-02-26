@@ -3921,8 +3921,7 @@ public class ConstructorIO {
                                     new ExclusionStrategy() {
                                         @Override
                                         public boolean shouldSkipField(FieldAttributes f) {
-                                            return f.getDeclaringClass()
-                                                            == SearchabilityV2.class
+                                            return f.getDeclaringClass() == SearchabilityV2.class
                                                     && f.getName().equals("name");
                                         }
 

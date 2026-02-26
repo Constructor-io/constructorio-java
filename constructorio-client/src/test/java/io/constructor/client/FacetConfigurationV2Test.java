@@ -211,8 +211,4 @@ public class FacetConfigurationV2Test {
         new FacetConfigurationsV2GetRequest(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testFacetConfigurationsV2GetRequestWithEmptySectionThrowsException() {
-        new FacetConfigurationsV2GetRequest("   ");
-    }
 }

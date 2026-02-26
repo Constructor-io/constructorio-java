@@ -3892,7 +3892,11 @@ public class ConstructorIO {
 
             HttpUrl url = urlBuilder.build();
 
-            String params = new Gson().toJson(searchabilityV2Request.getSearchability());
+            SearchabilityV2 searchabilityBody = searchabilityV2Request.getSearchability();
+            String savedName = searchabilityBody.getName();
+            searchabilityBody.setName(null);
+            String params = new Gson().toJson(searchabilityBody);
+            searchabilityBody.setName(savedName);
             RequestBody body =
                     RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
             Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();

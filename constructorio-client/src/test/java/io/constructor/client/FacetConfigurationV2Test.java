@@ -210,5 +210,4 @@ public class FacetConfigurationV2Test {
     public void testFacetConfigurationsV2GetRequestWithNullSectionThrowsException() {
         new FacetConfigurationsV2GetRequest(null);
     }
-
 }

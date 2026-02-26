@@ -53,6 +53,28 @@ public class ConstructorIO {
     public static final String DEFAULT_SECTION = "Products";
 
     /**
+     * Gson instance that excludes the 'name' field from SearchabilityV2 during serialization. The
+     * searchability PATCH endpoint does not accept 'name' in the request body; it is conveyed via
+     * the URL path segment instead.
+     */
+    private static final Gson GSON_WITHOUT_SEARCHABILITY_NAME =
+            new GsonBuilder()
+                    .addSerializationExclusionStrategy(
+                            new ExclusionStrategy() {
+                                @Override
+                                public boolean shouldSkipField(FieldAttributes f) {
+                                    return f.getDeclaringClass() == SearchabilityV2.class
+                                            && f.getName().equals("name");
+                                }
+
+                                @Override
+                                public boolean shouldSkipClass(Class<?> clazz) {
+                                    return false;
+                                }
+                            })
+                    .create();
+
+    /**
      * @param newClient the OkHttpClient to use by all instances
      */
     public static void setHttpClient(OkHttpClient newClient) {
@@ -3393,7 +3415,7 @@ public class ConstructorIO {
             if (numResultsPerPage != null && numResultsPerPage > 0) {
                 urlBuilder.addQueryParameter("num_results_per_page", numResultsPerPage.toString());
             }
-            if (offset != null && offset >= 0 && page == null) {
+            if (offset != null && offset > 0 && page == null) {
                 urlBuilder.addQueryParameter("offset", offset.toString());
             }
 
@@ -3775,7 +3797,7 @@ public class ConstructorIO {
                         "num_results_per_page", request.getNumResultsPerPage().toString());
             }
             if (request.getOffset() != null
-                    && request.getOffset() >= 0
+                    && request.getOffset() > 0
                     && request.getPage() == null) {
                 urlBuilder.addQueryParameter("offset", request.getOffset().toString());
             }
@@ -3915,23 +3937,9 @@ public class ConstructorIO {
 
             HttpUrl url = urlBuilder.build();
 
-            Gson gsonWithoutName =
-                    new GsonBuilder()
-                            .addSerializationExclusionStrategy(
-                                    new ExclusionStrategy() {
-                                        @Override
-                                        public boolean shouldSkipField(FieldAttributes f) {
-                                            return f.getDeclaringClass() == SearchabilityV2.class
-                                                    && f.getName().equals("name");
-                                        }
-
-                                        @Override
-                                        public boolean shouldSkipClass(Class<?> clazz) {
-                                            return false;
-                                        }
-                                    })
-                            .create();
-            String params = gsonWithoutName.toJson(searchabilityV2Request.getSearchability());
+            String params =
+                    GSON_WITHOUT_SEARCHABILITY_NAME.toJson(
+                            searchabilityV2Request.getSearchability());
             RequestBody body =
                     RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
             Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();

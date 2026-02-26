@@ -6,7 +6,8 @@ import java.util.List;
 /**
  * Constructor.io FacetConfigurations V2 Request.
  *
- * <p>This request class is used for bulk v2 facet configuration operations (PATCH /v2/facets).
+ * <p>This request class is used for bulk v2 facet configuration operations (PATCH /v2/facets and
+ * PUT /v2/facets).
  */
 public class FacetConfigurationsV2Request {
     private List<FacetConfigurationV2> facetConfigurations;

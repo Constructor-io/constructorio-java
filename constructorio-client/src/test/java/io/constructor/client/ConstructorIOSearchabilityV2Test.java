@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.json.JSONObject;
 import org.junit.AfterClass;
+import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ConstructorIOSearchabilityV2Test {
@@ -15,6 +17,11 @@ public class ConstructorIOSearchabilityV2Test {
     private static String token = System.getenv("TEST_API_TOKEN");
     private static String apiKey = System.getenv("TEST_CATALOG_FACETS_V2_API_KEY");
     private static ArrayList<String> searchabilitiesToCleanup = new ArrayList<>();
+
+    @BeforeClass
+    public static void checkCredentials() {
+        Assume.assumeNotNull(token, apiKey);
+    }
 
     private void addSearchabilityToCleanupArray(String name, String section) {
         if (section == null) {

@@ -1,6 +1,9 @@
 package io.constructor.client;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.constructor.client.models.*;
 import io.constructor.client.models.SortOption.SortOrder;
 import java.io.File;
@@ -45,6 +48,9 @@ public class ConstructorIO {
     /** the HTTP client used by all instances (with retry, only for idempotent requests like GET) */
     private static OkHttpClient clientWithRetry =
             client.newBuilder().retryOnConnectionFailure(true).build();
+
+    /** Default section used when no section is specified */
+    public static final String DEFAULT_SECTION = "Products";
 
     /**
      * @param newClient the OkHttpClient to use by all instances
@@ -3361,9 +3367,6 @@ public class ConstructorIO {
 
     // ==================== Facet Configuration V2 API ====================
 
-    /** Default section used when no section is specified */
-    public static final String DEFAULT_SECTION = "Products";
-
     /**
      * Retrieves all facet configurations (v2)
      *
@@ -3390,7 +3393,7 @@ public class ConstructorIO {
             if (numResultsPerPage != null && numResultsPerPage > 0) {
                 urlBuilder.addQueryParameter("num_results_per_page", numResultsPerPage.toString());
             }
-            if (offset != null && offset > 0 && page == null) {
+            if (offset != null && offset >= 0 && page == null) {
                 urlBuilder.addQueryParameter("offset", offset.toString());
             }
 
@@ -3427,6 +3430,26 @@ public class ConstructorIO {
      */
     public String retrieveFacetConfigurationsV2() throws ConstructorException {
         return retrieveFacetConfigurationsV2(DEFAULT_SECTION, null, null, null);
+    }
+
+    /**
+     * Retrieves all facet configurations (v2) using a request object
+     *
+     * @param request the facet configurations v2 GET request with pagination
+     * @return returns the facet configurations as JSON string
+     * @throws IllegalArgumentException if request is null
+     * @throws ConstructorException if the request is invalid
+     */
+    public String retrieveFacetConfigurationsV2(FacetConfigurationsV2GetRequest request)
+            throws ConstructorException {
+        if (request == null) {
+            throw new IllegalArgumentException("request is required");
+        }
+        return retrieveFacetConfigurationsV2(
+                request.getSection(),
+                request.getPage(),
+                request.getNumResultsPerPage(),
+                request.getOffset());
     }
 
     /**
@@ -3752,7 +3775,7 @@ public class ConstructorIO {
                         "num_results_per_page", request.getNumResultsPerPage().toString());
             }
             if (request.getOffset() != null
-                    && request.getOffset() > 0
+                    && request.getOffset() >= 0
                     && request.getPage() == null) {
                 urlBuilder.addQueryParameter("offset", request.getOffset().toString());
             }
@@ -3892,11 +3915,24 @@ public class ConstructorIO {
 
             HttpUrl url = urlBuilder.build();
 
-            SearchabilityV2 searchabilityBody = searchabilityV2Request.getSearchability();
-            String savedName = searchabilityBody.getName();
-            searchabilityBody.setName(null);
-            String params = new Gson().toJson(searchabilityBody);
-            searchabilityBody.setName(savedName);
+            Gson gsonWithoutName =
+                    new GsonBuilder()
+                            .addSerializationExclusionStrategy(
+                                    new ExclusionStrategy() {
+                                        @Override
+                                        public boolean shouldSkipField(FieldAttributes f) {
+                                            return f.getDeclaringClass()
+                                                            == SearchabilityV2.class
+                                                    && f.getName().equals("name");
+                                        }
+
+                                        @Override
+                                        public boolean shouldSkipClass(Class<?> clazz) {
+                                            return false;
+                                        }
+                                    })
+                            .create();
+            String params = gsonWithoutName.toJson(searchabilityV2Request.getSearchability());
             RequestBody body =
                     RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
             Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();

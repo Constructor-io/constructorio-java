@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.json.JSONObject;
 import org.junit.AfterClass;
+import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ConstructorIOFacetConfigurationV2Test {
@@ -15,6 +17,11 @@ public class ConstructorIOFacetConfigurationV2Test {
     private static String token = System.getenv("TEST_API_TOKEN");
     private static String apiKey = System.getenv("TEST_CATALOG_FACETS_V2_API_KEY");
     private static ArrayList<String> facetsToCleanup = new ArrayList<>();
+
+    @BeforeClass
+    public static void checkCredentials() {
+        Assume.assumeNotNull(token, apiKey);
+    }
 
     private void addFacetToCleanupArray(String facetName, String section) {
         if (section == null) {
@@ -270,6 +277,31 @@ public class ConstructorIOFacetConfigurationV2Test {
         assertTrue("Response should have facets array", jsonObj.has("facets"));
         addFacetToCleanupArray("testBulkFacetV2_1");
         addFacetToCleanupArray("testBulkFacetV2_2");
+    }
+
+    @Test
+    public void testReplaceFacetConfigurationsV2Bulk() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+
+        String string = Utils.getTestResource("facet.configuration.v2.json");
+        FacetConfigurationV2 facetConfig1 = new Gson().fromJson(string, FacetConfigurationV2.class);
+        facetConfig1.setName("testReplaceBulkFacetV2_1");
+        facetConfig1.setPathInMetadata("testReplaceBulkFacetV2_1");
+
+        FacetConfigurationV2 facetConfig2 = new Gson().fromJson(string, FacetConfigurationV2.class);
+        facetConfig2.setName("testReplaceBulkFacetV2_2");
+        facetConfig2.setPathInMetadata("testReplaceBulkFacetV2_2");
+
+        FacetConfigurationsV2Request bulkRequest =
+                new FacetConfigurationsV2Request(
+                        Arrays.asList(facetConfig1, facetConfig2), ConstructorIO.DEFAULT_SECTION);
+
+        String response = constructor.replaceFacetConfigurationsV2(bulkRequest);
+        JSONObject jsonObj = new JSONObject(response);
+
+        assertTrue("Response should have facets array", jsonObj.has("facets"));
+        addFacetToCleanupArray("testReplaceBulkFacetV2_1");
+        addFacetToCleanupArray("testReplaceBulkFacetV2_2");
     }
 
     @Test

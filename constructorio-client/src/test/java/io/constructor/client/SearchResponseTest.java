@@ -379,5 +379,21 @@ public class SearchResponseTest {
                 "search result related browse page [image url] exists",
                 response.getResponse().getRelatedBrowsePages().get(0).getImageUrl(),
                 "https://example.com/electronics.jpg");
+        assertEquals(
+                "search result related browse page [filter name] exists",
+                response.getResponse().getRelatedBrowsePages().get(1).getFilterName(),
+                "Brand");
+        assertEquals(
+                "search result related browse page [filter value] exists",
+                response.getResponse().getRelatedBrowsePages().get(1).getFilterValue(),
+                "sample_brand");
+        assertEquals(
+                "search result related browse page [display name] exists",
+                response.getResponse().getRelatedBrowsePages().get(1).getDisplayName(),
+                "Sample Brand Products");
+        assertEquals(
+                "search result related browse page [image url] exists",
+                response.getResponse().getRelatedBrowsePages().get(1).getImageUrl(),
+                "https://example.com/sample_brand.jpg");
     }
 }

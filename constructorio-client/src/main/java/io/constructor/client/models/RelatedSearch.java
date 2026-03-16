@@ -2,9 +2,7 @@ package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Constructor.io Related Search - uses Gson/Reflection to load data in
- */
+/** Constructor.io Related Search - uses Gson/Reflection to load data in */
 public class RelatedSearch {
 
     @SerializedName("query")

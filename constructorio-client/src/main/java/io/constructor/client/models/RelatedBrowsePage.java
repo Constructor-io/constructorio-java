@@ -2,9 +2,7 @@ package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Constructor.io Related Browse Page - uses Gson/Reflection to load data in
- */
+/** Constructor.io Related Browse Page - uses Gson/Reflection to load data in */
 public class RelatedBrowsePage {
 
     @SerializedName("filter_name")
@@ -32,7 +30,7 @@ public class RelatedBrowsePage {
     public String getFilterValue() {
         return filterValue;
     }
-    
+
     /**
      * @return the display name
      */

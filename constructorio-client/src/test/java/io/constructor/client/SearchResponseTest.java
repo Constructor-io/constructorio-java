@@ -336,4 +336,48 @@ public class SearchResponseTest {
                         .get(0),
                 "801764002");
     }
+
+    @Test
+    public void createSearchResponseShouldReturnAResultWithRelatedSearches() throws Exception {
+        String string = Utils.getTestResource("response.search.item.json");
+        SearchResponse response = ConstructorIO.createSearchResponse(string);
+        assertEquals(
+                "search result [related searches] exists",
+                response.getResponse().getRelatedSearches().size(),
+                2);
+        assertEquals(
+                "search result related search [query] exists",
+                response.getResponse().getRelatedSearches().get(0).getQuery(),
+                "related item search");
+        assertEquals(
+                "search result related search [query] second item exists",
+                response.getResponse().getRelatedSearches().get(1).getQuery(),
+                "similar products");
+    }
+
+    @Test
+    public void createSearchResponseShouldReturnAResultWithRelatedBrowsePages() throws Exception {
+        String string = Utils.getTestResource("response.search.item.json");
+        SearchResponse response = ConstructorIO.createSearchResponse(string);
+        assertEquals(
+                "search result [related browse pages] exists",
+                response.getResponse().getRelatedBrowsePages().size(),
+                2);
+        assertEquals(
+                "search result related browse page [filter name] exists",
+                response.getResponse().getRelatedBrowsePages().get(0).getFilterName(),
+                "group_id");
+        assertEquals(
+                "search result related browse page [filter value] exists",
+                response.getResponse().getRelatedBrowsePages().get(0).getFilterValue(),
+                "electronics");
+        assertEquals(
+                "search result related browse page [display name] exists",
+                response.getResponse().getRelatedBrowsePages().get(0).getDisplayName(),
+                "Electronics");
+        assertEquals(
+                "search result related browse page [image url] exists",
+                response.getResponse().getRelatedBrowsePages().get(0).getImageUrl(),
+                "https://example.com/electronics.jpg");
+    }
 }

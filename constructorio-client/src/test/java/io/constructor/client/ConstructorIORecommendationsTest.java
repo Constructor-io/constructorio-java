@@ -37,8 +37,33 @@ public class ConstructorIORecommendationsTest {
         request.setItemIds(Arrays.asList("power_drill"));
         request.setVariationId("power_drill_variation");
         RecommendationsResponse response = constructor.recommendations(request, userInfo);
-        assertTrue("recommendation results exist", response.getResponse().getResults().size() >= 0);
+        assertTrue("recommendation results exist", response.getResponse().getResults().size() > 0);
         assertTrue("recommendation result id exists", response.getResultId() != null);
+    }
+
+    @Test
+    public void getRecommendationsShouldErrorWithVariationIdAndNoItemIds() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        RecommendationsRequest request = new RecommendationsRequest("item_page_1");
+        request.setVariationId("power_drill_variation");
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("variationId requires exactly one itemId to be specified");
+        constructor.recommendations(request, userInfo);
+    }
+
+    @Test
+    public void getRecommendationsShouldErrorWithVariationIdAndMultipleItemIds() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        RecommendationsRequest request = new RecommendationsRequest("item_page_1");
+        request.setItemIds(Arrays.asList("power_drill", "drill"));
+        request.setVariationId("power_drill_variation");
+
+        thrown.expect(ConstructorException.class);
+        thrown.expectMessage("variationId requires exactly one itemId to be specified");
+        constructor.recommendations(request, userInfo);
     }
 
     @Test

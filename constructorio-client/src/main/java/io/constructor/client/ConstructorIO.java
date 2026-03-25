@@ -1795,6 +1795,13 @@ public class ConstructorIO {
      */
     public String recommendationsAsJSON(RecommendationsRequest req, UserInfo userInfo)
             throws ConstructorException {
+        if (StringUtils.isNotBlank(req.getVariationId())) {
+            if (req.getItemIds() == null || req.getItemIds().size() != 1) {
+                throw new ConstructorException(
+                        "variationId requires exactly one itemId to be specified");
+            }
+        }
+
         try {
             List<String> paths = Arrays.asList("recommendations", "v1", "pods", req.getPodId());
             HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
@@ -1812,10 +1819,6 @@ public class ConstructorIO {
             }
 
             if (StringUtils.isNotBlank(req.getVariationId())) {
-                if (req.getItemIds() == null || req.getItemIds().size() != 1) {
-                    throw new IllegalArgumentException(
-                            "variationId requires exactly one itemId to be specified");
-                }
                 url =
                         url.newBuilder()
                                 .addQueryParameter("variation_id", req.getVariationId())

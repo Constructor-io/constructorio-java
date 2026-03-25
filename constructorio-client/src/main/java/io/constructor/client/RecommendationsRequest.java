@@ -101,7 +101,8 @@ public class RecommendationsRequest {
 
     /**
      * @param variationId the variation id to set. Can be used with exactly one item_id specified in
-     *     the request. Applicable for alternative_items, complementary_items, and bundles pod types.
+     *     the request. Applicable for alternative_items, complementary_items, and bundles pod
+     *     types.
      */
     public void setVariationId(String variationId) {
         this.variationId = variationId;

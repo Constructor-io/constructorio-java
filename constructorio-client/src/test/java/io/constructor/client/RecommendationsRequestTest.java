@@ -35,6 +35,7 @@ public class RecommendationsRequestTest {
         assertEquals(request.getPodId(), podId);
         assertEquals(request.getNumResults(), 10);
         assertNull(request.getItemIds());
+        assertNull(request.getVariationId());
         assertNull(request.getTerm());
         assertEquals(request.getSection(), "Products");
         assertEquals(request.getFacets().size(), 0);
@@ -54,6 +55,7 @@ public class RecommendationsRequestTest {
         request.setPodId("zero_results_1");
         request.setNumResults(3);
         request.setItemIds(Arrays.asList("1", "2", "3"));
+        request.setVariationId("variation-1");
         request.setSection("Search Suggestions");
         request.setFacets(facets);
         request.setTerm(term);
@@ -62,6 +64,7 @@ public class RecommendationsRequestTest {
 
         assertEquals(request.getPodId(), "zero_results_1");
         assertEquals(request.getNumResults(), 3);
+        assertEquals(request.getVariationId(), "variation-1");
         assertEquals(request.getSection(), "Search Suggestions");
         assertEquals(request.getFacets(), facets);
         assertEquals(request.getTerm(), term);

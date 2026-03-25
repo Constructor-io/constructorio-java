@@ -1811,6 +1811,13 @@ public class ConstructorIO {
                 }
             }
 
+            if (StringUtils.isNotBlank(req.getVariationId())) {
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("variation_id", req.getVariationId())
+                                .build();
+            }
+
             if (StringUtils.isNotBlank(req.getTerm())) {
                 url = url.newBuilder().addQueryParameter("term", req.getTerm()).build();
             }

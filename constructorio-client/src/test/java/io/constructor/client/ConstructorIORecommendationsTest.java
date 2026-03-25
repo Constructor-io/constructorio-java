@@ -30,6 +30,18 @@ public class ConstructorIORecommendationsTest {
     }
 
     @Test
+    public void getRecommendationsShouldReturnAResultWithItemIdAndVariationId() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        RecommendationsRequest request = new RecommendationsRequest("item_page_1");
+        request.setItemIds(Arrays.asList("power_drill"));
+        request.setVariationId("power_drill_variation");
+        RecommendationsResponse response = constructor.recommendations(request, userInfo);
+        assertTrue("recommendation results exist", response.getResponse().getResults().size() >= 0);
+        assertTrue("recommendation result id exists", response.getResultId() != null);
+    }
+
+    @Test
     public void getRecommendationsShouldReturnAResultWithMultipleItemIds() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
         UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");

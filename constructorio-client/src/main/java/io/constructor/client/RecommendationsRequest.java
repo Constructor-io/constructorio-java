@@ -12,6 +12,7 @@ public class RecommendationsRequest {
     private String term;
     private int numResults;
     private List<String> itemIds;
+    private String variationId;
     private Map<String, List<String>> facets;
     private String section;
     private String preFilterExpression;
@@ -32,6 +33,7 @@ public class RecommendationsRequest {
         this.podId = podId;
         this.numResults = 10;
         this.itemIds = null;
+        this.variationId = null;
         this.term = null;
         this.section = "Products";
         this.variationsMap = null;
@@ -95,6 +97,21 @@ public class RecommendationsRequest {
      */
     public List<String> getItemIds() {
         return itemIds;
+    }
+
+    /**
+     * @param variationId the variation id to set. Can be used with exactly one item_id specified in
+     *     the request. Applicable for alternative_items, complementary_items, and bundles pod types.
+     */
+    public void setVariationId(String variationId) {
+        this.variationId = variationId;
+    }
+
+    /**
+     * @return the variation id
+     */
+    public String getVariationId() {
+        return variationId;
     }
 
     /**

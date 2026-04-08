@@ -37,6 +37,10 @@ public class ConstructorIORecommendationsTest {
         request.setItemIds(Arrays.asList("power_drill"));
         request.setVariationId("power_drill_variation");
         RecommendationsResponse response = constructor.recommendations(request, userInfo);
+        assertEquals(
+                "variation_id in request should match the variationId set",
+                "power_drill_variation",
+                response.getRequest().get("variation_id"));
         assertTrue("recommendation results exist", response.getResponse().getResults().size() >= 0);
         assertTrue("recommendation result id exists", response.getResultId() != null);
     }

@@ -1811,6 +1811,17 @@ public class ConstructorIO {
                 }
             }
 
+            if (StringUtils.isNotBlank(req.getVariationId())) {
+                if (req.getItemIds() == null || req.getItemIds().size() != 1) {
+                    throw new IllegalArgumentException(
+                            "variationId requires exactly one itemId to be specified");
+                }
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("variation_id", req.getVariationId())
+                                .build();
+            }
+
             if (StringUtils.isNotBlank(req.getTerm())) {
                 url = url.newBuilder().addQueryParameter("term", req.getTerm()).build();
             }

@@ -99,7 +99,9 @@ public class ConstructorIOTaskTest {
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(
                 StringContains.containsString(
-                        "[HTTP 400] You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration."));
+                        "[HTTP 400] You have supplied an invalid `key` or `autocomplete_key`. You"
+                                + " can find your key at"
+                                + " app.constructor.io/dashboard/accounts/api_integration."));
         Task response = constructor.task(request);
     }
 
@@ -111,7 +113,9 @@ public class ConstructorIOTaskTest {
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(
                 StringContains.containsString(
-                        "[HTTP 400] You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration."));
+                        "[HTTP 400] You have supplied an invalid `key` or `autocomplete_key`. You"
+                                + " can find your key at"
+                                + " app.constructor.io/dashboard/accounts/api_integration."));
         String response = constructor.taskAsJson(request);
     }
 }

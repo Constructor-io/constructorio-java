@@ -1,9 +1,12 @@
 package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.junit.Rule;
 import org.junit.Test;
@@ -46,6 +49,16 @@ public class CatalogRequestTest {
     }
 
     @Test
+    public void getNotificationEmailShouldReturnNullByDefault() throws Exception {
+        Map<String, File> files = new HashMap<String, File>();
+        files.put("items", new File("src/test/resources/csv/items.csv"));
+        CatalogRequest request = new CatalogRequest(files, "Products");
+
+        assertNull(request.getNotificationEmail());
+        assertNull(request.getNotificationEmails());
+    }
+
+    @Test
     public void settersShouldSet() throws Exception {
         Map<String, File> files = new HashMap<String, File>();
         files.put("items", new File("src/test/resources/csv/items.csv"));
@@ -64,5 +77,43 @@ public class CatalogRequestTest {
         assertEquals(request.getSection(), "Content");
         assertEquals(request.getNotificationEmail(), "test@constructor.io");
         assertEquals(request.getForce(), true);
+    }
+
+    @Test
+    public void setNotificationEmailShouldSet() throws Exception {
+        Map<String, File> files = new HashMap<String, File>();
+        files.put("items", new File("src/test/resources/csv/items.csv"));
+        CatalogRequest request = new CatalogRequest(files, "Products");
+
+        List<String> emails = Arrays.asList("a@constructor.io", "b@constructor.io");
+        request.setNotificationEmail(emails);
+
+        assertEquals(request.getNotificationEmails(), emails);
+        assertEquals(request.getNotificationEmail(), "a@constructor.io");
+    }
+
+    @Test
+    public void setNotificationEmailShouldSetListWithOneElement() throws Exception {
+        Map<String, File> files = new HashMap<String, File>();
+        files.put("items", new File("src/test/resources/csv/items.csv"));
+        CatalogRequest request = new CatalogRequest(files, "Products");
+
+        request.setNotificationEmail("test@constructor.io");
+
+        assertEquals(request.getNotificationEmails(), Arrays.asList("test@constructor.io"));
+        assertEquals(request.getNotificationEmail(), "test@constructor.io");
+    }
+
+    @Test
+    public void setNotificationEmailNullShouldClearList() throws Exception {
+        Map<String, File> files = new HashMap<String, File>();
+        files.put("items", new File("src/test/resources/csv/items.csv"));
+        CatalogRequest request = new CatalogRequest(files, "Products");
+
+        request.setNotificationEmail("test@constructor.io");
+        request.setNotificationEmail((String) null);
+
+        assertNull(request.getNotificationEmails());
+        assertNull(request.getNotificationEmail());
     }
 }

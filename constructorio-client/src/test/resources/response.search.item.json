@@ -193,7 +193,29 @@
         "name": "query_items_ctr_and_l2r",
         "display_name": "CTR & LTR"
       }
-    }]
+    }],
+    "related_searches": [
+      {
+        "query": "related item search"
+      },
+      {
+        "query": "similar products"
+      }
+    ],
+    "related_browse_pages": [
+      {
+        "filter_name": "group_id",
+        "filter_value": "electronics",
+        "display_name": "Electronics",
+        "image_url": "https://example.com/electronics.jpg"
+      },
+      {
+        "filter_name": "Brand",
+        "filter_value": "sample_brand",
+        "display_name": "Sample Brand Products",
+        "image_url": "https://example.com/sample_brand.jpg"
+      }
+    ]
   },
   "result_id": "7938b9e8-369b-4f0c-ae74-69b85dcb5b12",
   "request": {

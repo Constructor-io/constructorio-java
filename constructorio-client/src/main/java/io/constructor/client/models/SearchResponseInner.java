@@ -15,6 +15,12 @@ public class SearchResponseInner extends BaseResultsResponse {
     @SerializedName("features")
     private List<Feature> features;
 
+    @SerializedName("related_searches")
+    private List<RelatedSearch> relatedSearches;
+
+    @SerializedName("related_browse_pages")
+    private List<RelatedBrowsePage> relatedBrowsePages;
+
     /**
      * @return redirect data
      */
@@ -46,5 +52,33 @@ public class SearchResponseInner extends BaseResultsResponse {
 
     public void setFeatures(List<Feature> features) {
         this.features = features;
+    }
+
+    /**
+     * @return list of related searches
+     */
+    public List<RelatedSearch> getRelatedSearches() {
+        return relatedSearches;
+    }
+
+    /**
+     * @return list of related browse pages
+     */
+    public List<RelatedBrowsePage> getRelatedBrowsePages() {
+        return relatedBrowsePages;
+    }
+
+    /**
+     * @param relatedSearches list of related searches to set
+     */
+    public void setRelatedSearches(List<RelatedSearch> relatedSearches) {
+        this.relatedSearches = relatedSearches;
+    }
+
+    /**
+     * @param relatedBrowsePages list of related browse pages to set
+     */
+    public void setRelatedBrowsePages(List<RelatedBrowsePage> relatedBrowsePages) {
+        this.relatedBrowsePages = relatedBrowsePages;
     }
 }

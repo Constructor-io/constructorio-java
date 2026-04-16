@@ -77,8 +77,7 @@ public class ConstructorIOTaskTest {
         TaskRequest request = new TaskRequest(String.valueOf(task_id));
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage(
-                "[HTTP 401] Unauthorized");
+        thrown.expectMessage(StringContains.containsString("[HTTP 401] Unauthorized"));
         Task response = constructor.task(request);
     }
 
@@ -88,8 +87,7 @@ public class ConstructorIOTaskTest {
         TaskRequest request = new TaskRequest(String.valueOf(task_id));
 
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage(
-                "[HTTP 401] Unauthorized");
+        thrown.expectMessage(StringContains.containsString("[HTTP 401] Unauthorized"));
         String response = constructor.taskAsJson(request);
     }
 

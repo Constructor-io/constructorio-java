@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -32,6 +34,10 @@ import org.json.JSONObject;
 
 /** Constructor.io Client */
 public class ConstructorIO {
+
+    /** Valid file extensions for catalog uploads */
+    private static final Set<String> VALID_CATALOG_EXTENSIONS =
+            new LinkedHashSet<>(Arrays.asList(".csv", ".json", ".jsonl"));
 
     /** the HTTP client used by all instances */
     private static OkHttpClient client =
@@ -1854,6 +1860,17 @@ public class ConstructorIO {
                 }
             }
 
+            if (StringUtils.isNotBlank(req.getVariationId())) {
+                if (req.getItemIds() == null || req.getItemIds().size() != 1) {
+                    throw new IllegalArgumentException(
+                            "variationId requires exactly one itemId to be specified");
+                }
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("variation_id", req.getVariationId())
+                                .build();
+            }
+
             if (StringUtils.isNotBlank(req.getTerm())) {
                 url = url.newBuilder().addQueryParameter("term", req.getTerm()).build();
             }
@@ -2091,12 +2108,59 @@ public class ConstructorIO {
     }
 
     /**
+     * Validates and extracts the file extension from a File object for catalog uploads.
+     *
+     * @param file the File object containing the actual file
+     * @param fileName the logical file name (items, variations, item_groups)
+     * @return the validated file extension (including the dot, e.g., ".csv", ".json", or ".jsonl")
+     * @throws ConstructorException if the file extension is not in VALID_CATALOG_EXTENSIONS
+     */
+    private static String getValidatedFileExtension(File file, String fileName)
+            throws ConstructorException {
+        if (file == null) {
+            throw new ConstructorException(
+                    "Invalid file for '" + fileName + "': file cannot be null.");
+        }
+
+        String actualFileName = file.getName();
+        if (actualFileName == null || actualFileName.isEmpty()) {
+            throw new ConstructorException(
+                    "Invalid file for '" + fileName + "': file name cannot be empty.");
+        }
+
+        int lastDotIndex = actualFileName.lastIndexOf('.');
+        if (lastDotIndex == -1 || lastDotIndex == actualFileName.length() - 1) {
+            throw new ConstructorException(
+                    "Invalid file for '"
+                            + fileName
+                            + "': file must have "
+                            + VALID_CATALOG_EXTENSIONS
+                            + " extension. Found: "
+                            + actualFileName);
+        }
+
+        String extension = actualFileName.substring(lastDotIndex).toLowerCase();
+
+        if (!VALID_CATALOG_EXTENSIONS.contains(extension)) {
+            throw new ConstructorException(
+                    "Invalid file type for '"
+                            + fileName
+                            + "': file must have "
+                            + VALID_CATALOG_EXTENSIONS
+                            + " extension. Found: "
+                            + actualFileName);
+        }
+
+        return extension;
+    }
+
+    /**
      * Grabs the version number (hard coded ATM)
      *
      * @return version number
      */
     protected String getVersion() {
-        return "ciojava-7.2.0";
+        return "ciojava-7.4.1";
     }
 
     /**
@@ -2369,9 +2433,12 @@ public class ConstructorIO {
     /**
      * Send a full catalog to replace the current one (sync)
      *
-     * @param req the catalog request
-     * @return a string of JSON
-     * @throws ConstructorException if the request is invalid.
+     * <p>Supports CSV, JSON, and JSONL file formats. The file type is automatically detected from
+     * the file extension (.csv, .json, or .jsonl).
+     *
+     * @param req the catalog request containing files with .csv, .json, or .jsonl extensions
+     * @return a string of JSON containing task information
+     * @throws ConstructorException if the request is invalid or file extensions are not supported
      */
     public String replaceCatalog(CatalogRequest req) throws ConstructorException {
         try {
@@ -2399,10 +2466,11 @@ public class ConstructorIO {
                 for (Map.Entry<String, File> entry : files.entrySet()) {
                     String fileName = entry.getKey();
                     File file = entry.getValue();
+                    String fileExtension = getValidatedFileExtension(file, fileName);
 
                     multipartBuilder.addFormDataPart(
                             fileName,
-                            fileName + ".csv",
+                            fileName + fileExtension,
                             RequestBody.create(MediaType.parse("application/octet-stream"), file));
                 }
             }
@@ -2428,9 +2496,12 @@ public class ConstructorIO {
     /**
      * Send a partial catalog to update specific items (delta)
      *
-     * @param req the catalog request
-     * @return a string of JSON
-     * @throws ConstructorException if the request is invalid.
+     * <p>Supports CSV, JSON, and JSONL file formats. The file type is automatically detected from
+     * the file extension (.csv, .json, or .jsonl).
+     *
+     * @param req the catalog request containing files with .csv, .json, or .jsonl extensions
+     * @return a string of JSON containing task information
+     * @throws ConstructorException if the request is invalid or file extensions are not supported
      */
     public String updateCatalog(CatalogRequest req) throws ConstructorException {
         try {
@@ -2458,10 +2529,11 @@ public class ConstructorIO {
                 for (Map.Entry<String, File> entry : files.entrySet()) {
                     String fileName = entry.getKey();
                     File file = entry.getValue();
+                    String fileExtension = getValidatedFileExtension(file, fileName);
 
                     multipartBuilder.addFormDataPart(
                             fileName,
-                            fileName + ".csv",
+                            fileName + fileExtension,
                             RequestBody.create(MediaType.parse("application/octet-stream"), file));
                 }
             }
@@ -2488,9 +2560,12 @@ public class ConstructorIO {
     /**
      * Send a patch delta catalog to update specific items (delta)
      *
-     * @param req the catalog request
-     * @return a string of JSON
-     * @throws ConstructorException if the request is invalid.
+     * <p>Supports CSV, JSON, and JSONL file formats. The file type is automatically detected from
+     * the file extension (.csv, .json, or .jsonl).
+     *
+     * @param req the catalog request containing files with .csv, .json, or .jsonl extensions
+     * @return a string of JSON containing task information
+     * @throws ConstructorException if the request is invalid or file extensions are not supported
      */
     public String patchCatalog(CatalogRequest req) throws ConstructorException {
         try {
@@ -2523,10 +2598,11 @@ public class ConstructorIO {
                 for (Map.Entry<String, File> entry : files.entrySet()) {
                     String fileName = entry.getKey();
                     File file = entry.getValue();
+                    String fileExtension = getValidatedFileExtension(file, fileName);
 
                     multipartBuilder.addFormDataPart(
                             fileName,
-                            fileName + ".csv",
+                            fileName + fileExtension,
                             RequestBody.create(MediaType.parse("application/octet-stream"), file));
                 }
             }

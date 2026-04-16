@@ -78,8 +78,7 @@ public class ConstructorIOTaskTest {
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(
-                "[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a"
-                        + " new one at app.constructor.io/dashboard");
+                "[HTTP 401] Unauthorized");
         Task response = constructor.task(request);
     }
 
@@ -90,8 +89,7 @@ public class ConstructorIOTaskTest {
 
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(
-                "[HTTP 401] Invalid auth_token. If you've forgotten your token, you can generate a"
-                        + " new one at app.constructor.io/dashboard");
+                "[HTTP 401] Unauthorized");
         String response = constructor.taskAsJson(request);
     }
 
@@ -103,7 +101,7 @@ public class ConstructorIOTaskTest {
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(
                 StringContains.containsString(
-                        "[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
+                        "[HTTP 400] You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration."));
         Task response = constructor.task(request);
     }
 
@@ -115,7 +113,7 @@ public class ConstructorIOTaskTest {
         thrown.expect(ConstructorException.class);
         thrown.expectMessage(
                 StringContains.containsString(
-                        "[HTTP 401] You have supplied an invalid `key` or `autocomplete_key`."));
+                        "[HTTP 400] You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration."));
         String response = constructor.taskAsJson(request);
     }
 }

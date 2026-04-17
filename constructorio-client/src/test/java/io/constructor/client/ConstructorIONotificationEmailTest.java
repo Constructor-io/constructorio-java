@@ -3,7 +3,6 @@ package io.constructor.client;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +15,6 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.rules.TemporaryFolder;
 
 public class ConstructorIONotificationEmailTest {
 
@@ -26,7 +24,6 @@ public class ConstructorIONotificationEmailTest {
             "{\"task_id\": 1, \"task_status_path\": \"/task/1\"}";
 
     @Rule public ExpectedException thrown = ExpectedException.none();
-    @Rule public TemporaryFolder tempFolder = new TemporaryFolder();
 
     @BeforeClass
     public static void setup() throws Exception {
@@ -296,13 +293,8 @@ public class ConstructorIONotificationEmailTest {
         mockServer.enqueue(new MockResponse().setResponseCode(200).setBody(MOCK_RESPONSE_BODY));
         ConstructorIO constructor = createConstructorIO();
 
-        File csvFile = tempFolder.newFile("items.csv");
-        FileWriter writer = new FileWriter(csvFile);
-        writer.write("id,name\n1,test\n");
-        writer.close();
-
         Map<String, File> files = new HashMap<String, File>();
-        files.put("items", csvFile);
+        files.put("items", new File("src/test/resources/items.csv"));
         CatalogRequest req = new CatalogRequest(files, "Products");
         req.setNotificationEmail(Arrays.asList("a@constructor.io", "b@constructor.io"));
 
@@ -326,13 +318,8 @@ public class ConstructorIONotificationEmailTest {
         mockServer.enqueue(new MockResponse().setResponseCode(200).setBody(MOCK_RESPONSE_BODY));
         ConstructorIO constructor = createConstructorIO();
 
-        File csvFile = tempFolder.newFile("items.csv");
-        FileWriter writer = new FileWriter(csvFile);
-        writer.write("id,name\n1,test\n");
-        writer.close();
-
         Map<String, File> files = new HashMap<String, File>();
-        files.put("items", csvFile);
+        files.put("items", new File("src/test/resources/items.csv"));
         CatalogRequest req = new CatalogRequest(files, "Products");
         req.setNotificationEmail("test@constructor.io");
 
@@ -352,13 +339,8 @@ public class ConstructorIONotificationEmailTest {
         mockServer.enqueue(new MockResponse().setResponseCode(200).setBody(MOCK_RESPONSE_BODY));
         ConstructorIO constructor = createConstructorIO();
 
-        File csvFile = tempFolder.newFile("items.csv");
-        FileWriter writer = new FileWriter(csvFile);
-        writer.write("id,name\n1,test\n");
-        writer.close();
-
         Map<String, File> files = new HashMap<String, File>();
-        files.put("items", csvFile);
+        files.put("items", new File("src/test/resources/items.csv"));
         CatalogRequest req = new CatalogRequest(files, "Products");
         req.setNotificationEmail(Arrays.asList("a@constructor.io", "b@constructor.io"));
 
@@ -384,13 +366,8 @@ public class ConstructorIONotificationEmailTest {
         mockServer.enqueue(new MockResponse().setResponseCode(200).setBody(MOCK_RESPONSE_BODY));
         ConstructorIO constructor = createConstructorIO();
 
-        File csvFile = tempFolder.newFile("items.csv");
-        FileWriter writer = new FileWriter(csvFile);
-        writer.write("id,name\n1,test\n");
-        writer.close();
-
         Map<String, File> files = new HashMap<String, File>();
-        files.put("items", csvFile);
+        files.put("items", new File("src/test/resources/items.csv"));
         CatalogRequest req = new CatalogRequest(files, "Products");
         req.setNotificationEmail(Arrays.asList("a@constructor.io", "b@constructor.io"));
 

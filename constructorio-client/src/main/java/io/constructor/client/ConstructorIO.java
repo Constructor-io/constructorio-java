@@ -737,7 +737,7 @@ public class ConstructorIO {
      * @param force whether or not the system should process the request even if it will invalidate
      *     a large number of existing variations.
      * @param notificationEmails A list of email addresses to receive an email notification if the
-     *     notification in case the task fails.
+     *     task fails.
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */

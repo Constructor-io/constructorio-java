@@ -86,7 +86,9 @@ public class CatalogRequest {
 
     /**
      * @param email the email address to receive a notification in case the task fails
+     * @deprecated Use {@link #setNotificationEmails(List)} instead to support multiple emails.
      */
+    @Deprecated
     public void setNotificationEmail(String email) {
         this.notificationEmails.clear();
         if (email != null) {
@@ -98,7 +100,7 @@ public class CatalogRequest {
      * @param emails list of email addresses where you'd like to receive notifications in case the
      *     task fails
      */
-    public void setNotificationEmail(List<String> emails) {
+    public void setNotificationEmails(List<String> emails) {
         this.notificationEmails.clear();
         if (emails != null) {
             this.notificationEmails.addAll(emails);

@@ -296,7 +296,7 @@ public class ConstructorIONotificationEmailTest {
         Map<String, File> files = new HashMap<String, File>();
         files.put("items", new File("src/test/resources/items.csv"));
         CatalogRequest req = new CatalogRequest(files, "Products");
-        req.setNotificationEmail(Arrays.asList("a@constructor.io", "b@constructor.io"));
+        req.setNotificationEmails(Arrays.asList("a@constructor.io", "b@constructor.io"));
 
         constructor.replaceCatalog(req);
 
@@ -342,7 +342,7 @@ public class ConstructorIONotificationEmailTest {
         Map<String, File> files = new HashMap<String, File>();
         files.put("items", new File("src/test/resources/items.csv"));
         CatalogRequest req = new CatalogRequest(files, "Products");
-        req.setNotificationEmail(Arrays.asList("a@constructor.io", "b@constructor.io"));
+        req.setNotificationEmails(Arrays.asList("a@constructor.io", "b@constructor.io"));
 
         constructor.updateCatalog(req);
 
@@ -369,7 +369,7 @@ public class ConstructorIONotificationEmailTest {
         Map<String, File> files = new HashMap<String, File>();
         files.put("items", new File("src/test/resources/items.csv"));
         CatalogRequest req = new CatalogRequest(files, "Products");
-        req.setNotificationEmail(Arrays.asList("a@constructor.io", "b@constructor.io"));
+        req.setNotificationEmails(Arrays.asList("a@constructor.io", "b@constructor.io"));
 
         constructor.patchCatalog(req);
 

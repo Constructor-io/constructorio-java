@@ -86,7 +86,7 @@ public class CatalogRequestTest {
         CatalogRequest request = new CatalogRequest(files, "Products");
 
         List<String> emails = Arrays.asList("a@constructor.io", "b@constructor.io");
-        request.setNotificationEmail(emails);
+        request.setNotificationEmails(emails);
 
         assertEquals(request.getNotificationEmails(), emails);
         assertEquals(request.getNotificationEmail(), "a@constructor.io");

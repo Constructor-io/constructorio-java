@@ -1,6 +1,8 @@
 package io.constructor.client;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /** Constructor.io Catalog Request */
@@ -13,7 +15,7 @@ public class CatalogRequest {
 
     private Map<String, File> files;
     private String section;
-    private String notificationEmail;
+    private List<String> notificationEmails;
     private OnMissing onMissing;
     private Boolean force;
 
@@ -34,6 +36,7 @@ public class CatalogRequest {
         this.files = files;
         this.section = section;
         this.onMissing = OnMissing.FAIL;
+        this.notificationEmails = new ArrayList<String>();
     }
 
     /**
@@ -82,18 +85,48 @@ public class CatalogRequest {
     }
 
     /**
-     * @param email the email address where you'd like to receive a notifcation in case the task
-     *     fails
+     * @param email the email address to receive a notification in case the task fails
+     * @deprecated Use {@link #setNotificationEmails(List)} instead to support multiple emails.
      */
+    @Deprecated
     public void setNotificationEmail(String email) {
-        this.notificationEmail = email;
+        this.notificationEmails.clear();
+        if (email != null) {
+            this.notificationEmails.add(email);
+        }
     }
 
     /**
-     * @return the notification email
+     * @param emails list of email addresses where you'd like to receive notifications in case the
+     *     task fails
      */
+    public void setNotificationEmails(List<String> emails) {
+        this.notificationEmails.clear();
+        if (emails != null) {
+            this.notificationEmails.addAll(emails);
+        }
+    }
+
+    /**
+     * @return the first notification email, or null if none set
+     * @deprecated Use {@link #getNotificationEmails()} instead to support multiple emails.
+     */
+    @Deprecated
     public String getNotificationEmail() {
-        return notificationEmail;
+        if (notificationEmails != null && !notificationEmails.isEmpty()) {
+            return notificationEmails.get(0);
+        }
+        return null;
+    }
+
+    /**
+     * @return the list of notification emails, or null if none set
+     */
+    public List<String> getNotificationEmails() {
+        if (notificationEmails.isEmpty()) {
+            return null;
+        }
+        return notificationEmails;
     }
 
     /**

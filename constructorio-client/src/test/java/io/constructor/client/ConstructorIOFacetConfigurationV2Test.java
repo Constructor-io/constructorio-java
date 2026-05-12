@@ -109,8 +109,7 @@ public class ConstructorIOFacetConfigurationV2Test {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testReplaceFacetConfigurationV2WithNullFacetNameThrowsException()
-            throws Exception {
+    public void testReplaceFacetConfigurationV2WithNullFacetNameThrowsException() throws Exception {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
         FacetConfigurationV2 config = new FacetConfigurationV2();
         constructor.replaceFacetConfigurationV2(

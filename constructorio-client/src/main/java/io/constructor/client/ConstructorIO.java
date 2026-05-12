@@ -3709,8 +3709,8 @@ public class ConstructorIO {
      *
      * @param facetConfigurationV2Request the facet configuration v2 request
      * @return returns the replaced facet as JSON string
-     * @throws IllegalArgumentException if request is null, facetName is missing, or type is not
-     *     one of {@code multiple}, {@code hierarchical}, {@code range}
+     * @throws IllegalArgumentException if request is null, facetName is missing, or type is not one
+     *     of {@code multiple}, {@code hierarchical}, {@code range}
      * @throws ConstructorException if the request fails
      */
     public String replaceFacetConfigurationV2(
@@ -4095,8 +4095,7 @@ public class ConstructorIO {
             throw new IllegalArgumentException("name is required");
         }
         if (searchabilityV2Request.getSearchability() == null) {
-            throw new IllegalArgumentException(
-                    "searchability body is required for create/update");
+            throw new IllegalArgumentException("searchability body is required for create/update");
         }
 
         try {

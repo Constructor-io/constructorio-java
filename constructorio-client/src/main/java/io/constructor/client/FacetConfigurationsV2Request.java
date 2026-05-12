@@ -24,7 +24,7 @@ public class FacetConfigurationsV2Request {
         if (facetConfigurations == null || facetConfigurations.isEmpty()) {
             throw new IllegalArgumentException("facetConfigurations is required");
         }
-        if (section == null) {
+        if (section == null || section.trim().isEmpty()) {
             throw new IllegalArgumentException("section is required");
         }
 

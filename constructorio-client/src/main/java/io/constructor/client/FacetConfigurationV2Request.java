@@ -5,8 +5,8 @@ import io.constructor.client.models.FacetConfigurationV2;
 /**
  * Constructor.io FacetConfiguration V2 Request.
  *
- * <p>This request class is used for v2 facet configuration operations which require
- * path_in_metadata to be specified.
+ * <p>This request class is used for single v2 facet configuration operations (POST/PUT/PATCH/DELETE
+ * /v2/facets[/{name}]).
  */
 public class FacetConfigurationV2Request {
     private FacetConfigurationV2 facetConfiguration;
@@ -22,7 +22,7 @@ public class FacetConfigurationV2Request {
         if (facetConfiguration == null) {
             throw new IllegalArgumentException("facetConfiguration is required");
         }
-        if (section == null) {
+        if (section == null || section.trim().isEmpty()) {
             throw new IllegalArgumentException("section is required");
         }
 

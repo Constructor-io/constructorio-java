@@ -19,7 +19,7 @@ public class FacetConfigurationsV2GetRequest {
      * @param section the section to which the facet configurations belong
      */
     public FacetConfigurationsV2GetRequest(String section) {
-        if (section == null) {
+        if (section == null || section.trim().isEmpty()) {
             throw new IllegalArgumentException("section is required");
         }
         this.section = section;

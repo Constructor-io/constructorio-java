@@ -23,7 +23,7 @@ public class SearchabilitiesV2DeleteRequest {
         if (searchabilityNames == null || searchabilityNames.isEmpty()) {
             throw new IllegalArgumentException("searchabilityNames is required");
         }
-        if (section == null) {
+        if (section == null || section.trim().isEmpty()) {
             throw new IllegalArgumentException("section is required");
         }
 

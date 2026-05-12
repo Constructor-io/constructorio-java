@@ -25,7 +25,7 @@ public class SearchabilityV2Request {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("name is required");
         }
-        if (section == null) {
+        if (section == null || section.trim().isEmpty()) {
             throw new IllegalArgumentException("section is required");
         }
 

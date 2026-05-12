@@ -29,7 +29,7 @@ public class SearchabilitiesV2GetRequest {
      * @param section the section to which the searchabilities belong
      */
     public SearchabilitiesV2GetRequest(String section) {
-        if (section == null) {
+        if (section == null || section.trim().isEmpty()) {
             throw new IllegalArgumentException("section is required");
         }
         this.section = section;

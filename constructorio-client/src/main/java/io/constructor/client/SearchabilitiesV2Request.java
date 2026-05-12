@@ -27,7 +27,7 @@ public class SearchabilitiesV2Request {
         if (searchabilities == null || searchabilities.isEmpty()) {
             throw new IllegalArgumentException("searchabilities is required");
         }
-        if (section == null) {
+        if (section == null || section.trim().isEmpty()) {
             throw new IllegalArgumentException("section is required");
         }
 

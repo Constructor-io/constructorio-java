@@ -80,6 +80,9 @@ public class ConstructorIO {
                             })
                     .create();
 
+    private static final Set<String> VALID_FACET_V2_TYPES =
+            new LinkedHashSet<>(Arrays.asList("multiple", "hierarchical", "range"));
+
     /**
      * @param newClient the OkHttpClient to use by all instances
      */
@@ -3520,6 +3523,14 @@ public class ConstructorIO {
 
     // ==================== Facet Configuration V2 API ====================
 
+    private static void validateFacetConfigurationV2Type(String type) {
+        if (type == null || !VALID_FACET_V2_TYPES.contains(type)) {
+            throw new IllegalArgumentException(
+                    "type is a required parameter and must be one of: multiple, hierarchical, or"
+                            + " range");
+        }
+    }
+
     /**
      * Retrieves all facet configurations (v2)
      *
@@ -3658,7 +3669,8 @@ public class ConstructorIO {
      *
      * @param facetConfigurationV2Request the facet configuration v2 request
      * @return returns the created facet as JSON string
-     * @throws IllegalArgumentException if request is null
+     * @throws IllegalArgumentException if request is null, facet configuration is null, or type is
+     *     not one of {@code multiple}, {@code hierarchical}, {@code range}
      * @throws ConstructorException if the request fails
      */
     public String createFacetConfigurationV2(
@@ -3666,6 +3678,11 @@ public class ConstructorIO {
         if (facetConfigurationV2Request == null) {
             throw new IllegalArgumentException("facetConfigurationV2Request is required");
         }
+        if (facetConfigurationV2Request.getFacetConfiguration() == null) {
+            throw new IllegalArgumentException("facetConfiguration is required");
+        }
+        validateFacetConfigurationV2Type(
+                facetConfigurationV2Request.getFacetConfiguration().getType());
 
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "facets"));
@@ -3692,7 +3709,8 @@ public class ConstructorIO {
      *
      * @param facetConfigurationV2Request the facet configuration v2 request
      * @return returns the replaced facet as JSON string
-     * @throws IllegalArgumentException if request is null or facetName is missing
+     * @throws IllegalArgumentException if request is null, facetName is missing, or type is not
+     *     one of {@code multiple}, {@code hierarchical}, {@code range}
      * @throws ConstructorException if the request fails
      */
     public String replaceFacetConfigurationV2(
@@ -3708,6 +3726,8 @@ public class ConstructorIO {
         if (facetName == null || facetName.trim().isEmpty()) {
             throw new IllegalArgumentException("facetName is required");
         }
+        validateFacetConfigurationV2Type(
+                facetConfigurationV2Request.getFacetConfiguration().getType());
 
         try {
             HttpUrl url =

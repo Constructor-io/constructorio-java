@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -35,6 +37,10 @@ import org.json.JSONObject;
 
 /** Constructor.io Client */
 public class ConstructorIO {
+
+    /** Valid file extensions for catalog uploads */
+    private static final Set<String> VALID_CATALOG_EXTENSIONS =
+            new LinkedHashSet<>(Arrays.asList(".csv", ".json", ".jsonl"));
 
     /** the HTTP client used by all instances */
     private static OkHttpClient client =
@@ -270,13 +276,13 @@ public class ConstructorIO {
      * @param section the section of the index that you're adding the items to.
      * @param force whether or not the system should process the request even if it will invalidate
      *     a large number of existing items.
-     * @param notificationEmail An email address where you'd like to receive an email notification
-     *     in case the task fails.
+     * @param notificationEmails A list of email addresses to receive an email notification if the
+     *     task fails.
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
     public String createOrReplaceItems(
-            ConstructorItem[] items, String section, Boolean force, String notificationEmail)
+            ConstructorItem[] items, String section, Boolean force, List<String> notificationEmails)
             throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
@@ -286,11 +292,12 @@ public class ConstructorIO {
                             .addQueryParameter("section", section)
                             .build();
 
-            if (notificationEmail != null) {
-                url =
-                        url.newBuilder()
-                                .addQueryParameter("notification_email", notificationEmail)
-                                .build();
+            if (notificationEmails != null) {
+                HttpUrl.Builder emailBuilder = url.newBuilder();
+                for (String email : notificationEmails) {
+                    emailBuilder.addQueryParameter("notification_email", email);
+                }
+                url = emailBuilder.build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
@@ -312,33 +319,40 @@ public class ConstructorIO {
     }
 
     public String createOrReplaceItems(ConstructorItem[] items) throws ConstructorException {
-        return createOrReplaceItems(items, "Products", false, null);
+        return createOrReplaceItems(items, "Products", false, (List<String>) null);
     }
 
     public String createOrReplaceItems(ConstructorItem[] items, String section)
             throws ConstructorException {
-        return createOrReplaceItems(items, section, false, null);
+        return createOrReplaceItems(items, section, false, (List<String>) null);
     }
 
     public String createOrReplaceItems(ConstructorItem[] items, String section, Boolean force)
             throws ConstructorException {
-        return createOrReplaceItems(items, section, force, null);
+        return createOrReplaceItems(items, section, force, (List<String>) null);
+    }
+
+    public String createOrReplaceItems(
+            ConstructorItem[] items, String section, Boolean force, String notificationEmail)
+            throws ConstructorException {
+        List<String> emails = notificationEmail != null ? Arrays.asList(notificationEmail) : null;
+        return createOrReplaceItems(items, section, force, emails);
     }
 
     /**
-     * Deleted multiple items from your index (limit of 1,000 items)
+     * Deletes multiple items from your index (limit of 1,000 items)
      *
      * @param items the items that you are deleting
      * @param section the section of the index that you're removing the items from.
      * @param force whether or not the system should process the request even if it will invalidate
      *     a large number of existing items.
-     * @param notificationEmail An email address where you'd like to receive an email notification
-     *     in case the task fails.
+     * @param notificationEmails A list of email addresses to receive an email notification if the
+     *     task fails.
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid
      */
     public String deleteItems(
-            ConstructorItem[] items, String section, Boolean force, String notificationEmail)
+            ConstructorItem[] items, String section, Boolean force, List<String> notificationEmails)
             throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "items"));
@@ -348,11 +362,12 @@ public class ConstructorIO {
                             .addQueryParameter("section", section)
                             .build();
 
-            if (notificationEmail != null) {
-                url =
-                        url.newBuilder()
-                                .addQueryParameter("notification_email", notificationEmail)
-                                .build();
+            if (notificationEmails != null) {
+                HttpUrl.Builder emailBuilder = url.newBuilder();
+                for (String email : notificationEmails) {
+                    emailBuilder.addQueryParameter("notification_email", email);
+                }
+                url = emailBuilder.build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
@@ -378,16 +393,23 @@ public class ConstructorIO {
     }
 
     public String deleteItems(ConstructorItem[] items) throws ConstructorException {
-        return deleteItems(items, "Products", false, null);
+        return deleteItems(items, "Products", false, (List<String>) null);
     }
 
     public String deleteItems(ConstructorItem[] items, String section) throws ConstructorException {
-        return deleteItems(items, section, false, null);
+        return deleteItems(items, section, false, (List<String>) null);
     }
 
     public String deleteItems(ConstructorItem[] items, String section, Boolean force)
             throws ConstructorException {
-        return deleteItems(items, section, force, null);
+        return deleteItems(items, section, force, (List<String>) null);
+    }
+
+    public String deleteItems(
+            ConstructorItem[] items, String section, Boolean force, String notificationEmail)
+            throws ConstructorException {
+        List<String> emails = notificationEmail != null ? Arrays.asList(notificationEmail) : null;
+        return deleteItems(items, section, force, emails);
     }
 
     /**
@@ -463,8 +485,8 @@ public class ConstructorIO {
      * @param section the section of the autocomplete that you're removing the items from.
      * @param force whether or not the system should process the request even if it will invalidate
      *     a large number of existing variations.
-     * @param notificationEmail An email address where you'd like to receive an email notification
-     *     in case the task fails.
+     * @param notificationEmails A list of email addresses to receive an email notification if the
+     *     task fails.
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid
      */
@@ -472,7 +494,7 @@ public class ConstructorIO {
             ConstructorVariation[] variations,
             String section,
             Boolean force,
-            String notificationEmail)
+            List<String> notificationEmails)
             throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
@@ -482,11 +504,12 @@ public class ConstructorIO {
                             .addQueryParameter("section", section)
                             .build();
 
-            if (notificationEmail != null) {
-                url =
-                        url.newBuilder()
-                                .addQueryParameter("notification_email", notificationEmail)
-                                .build();
+            if (notificationEmails != null) {
+                HttpUrl.Builder emailBuilder = url.newBuilder();
+                for (String email : notificationEmails) {
+                    emailBuilder.addQueryParameter("notification_email", email);
+                }
+                url = emailBuilder.build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
@@ -511,17 +534,27 @@ public class ConstructorIO {
     }
 
     public String deleteVariations(ConstructorVariation[] variations) throws ConstructorException {
-        return deleteVariations(variations, "Products", false, null);
+        return deleteVariations(variations, "Products", false, (List<String>) null);
     }
 
     public String deleteVariations(ConstructorVariation[] variations, String section)
             throws ConstructorException {
-        return deleteVariations(variations, section, false, null);
+        return deleteVariations(variations, section, false, (List<String>) null);
     }
 
     public String deleteVariations(ConstructorVariation[] variations, String section, Boolean force)
             throws ConstructorException {
-        return deleteVariations(variations, section, force, null);
+        return deleteVariations(variations, section, force, (List<String>) null);
+    }
+
+    public String deleteVariations(
+            ConstructorVariation[] variations,
+            String section,
+            Boolean force,
+            String notificationEmail)
+            throws ConstructorException {
+        List<String> emails = notificationEmail != null ? Arrays.asList(notificationEmail) : null;
+        return deleteVariations(variations, section, force, emails);
     }
 
     /**
@@ -531,12 +564,12 @@ public class ConstructorIO {
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate
      *     a large number of existing items.
+     * @param notificationEmails A list of email addresses to receive an email notification if the
+     *     task fails.
      * @param onMissing Either "FAIL", "IGNORE", "CREATE", indicating how the system will handle
      *     updating items that don't exist. "FAIL" fails the ingestion if there are items that don't
      *     exist. "IGNORE" ignores items that don't exist. "CREATE" creates items that don't exist.
      *     Defaults to "FAIL".
-     * @param notificationEmail An email address where you'd like to receive an email notification
-     *     in case the task fails.
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
@@ -544,7 +577,7 @@ public class ConstructorIO {
             ConstructorItem[] items,
             String section,
             Boolean force,
-            String notificationEmail,
+            List<String> notificationEmails,
             CatalogRequest.OnMissing onMissing)
             throws ConstructorException {
         try {
@@ -555,11 +588,12 @@ public class ConstructorIO {
                             .addQueryParameter("section", section)
                             .build();
 
-            if (notificationEmail != null) {
-                url =
-                        url.newBuilder()
-                                .addQueryParameter("notification_email", notificationEmail)
-                                .build();
+            if (notificationEmails != null) {
+                HttpUrl.Builder emailBuilder = url.newBuilder();
+                for (String email : notificationEmails) {
+                    emailBuilder.addQueryParameter("notification_email", email);
+                }
+                url = emailBuilder.build();
             }
 
             if (onMissing != null && onMissing != CatalogRequest.OnMissing.FAIL) {
@@ -584,35 +618,40 @@ public class ConstructorIO {
         }
     }
 
-    /**
-     * Updates items from your index.
-     *
-     * @param items the items that you're updating
-     * @param section the section of the autocomplete that you're modifying the item for.
-     * @param force whether or not the system should process the request even if it will invalidate
-     *     a large number of existing items.
-     * @param notificationEmail An email address where you'd like to receive an email notification
-     *     in case the task fails.
-     * @return a string of JSON
-     * @throws ConstructorException if the request is invalid.
-     */
+    public String updateItems(ConstructorItem[] items) throws ConstructorException {
+        return updateItems(items, "Products", false, (List<String>) null, null);
+    }
+
+    public String updateItems(ConstructorItem[] items, String section) throws ConstructorException {
+        return updateItems(items, section, false, (List<String>) null, null);
+    }
+
+    public String updateItems(ConstructorItem[] items, String section, Boolean force)
+            throws ConstructorException {
+        return updateItems(items, section, force, (List<String>) null, null);
+    }
+
     public String updateItems(
             ConstructorItem[] items, String section, Boolean force, String notificationEmail)
             throws ConstructorException {
         return updateItems(items, section, force, notificationEmail, null);
     }
 
-    public String updateItems(ConstructorItem[] items) throws ConstructorException {
-        return updateItems(items, "Products", false, null, null);
-    }
-
-    public String updateItems(ConstructorItem[] items, String section) throws ConstructorException {
-        return updateItems(items, section, false, null, null);
-    }
-
-    public String updateItems(ConstructorItem[] items, String section, Boolean force)
+    public String updateItems(
+            ConstructorItem[] items, String section, Boolean force, List<String> notificationEmails)
             throws ConstructorException {
-        return updateItems(items, section, force, null, null);
+        return updateItems(items, section, force, notificationEmails, null);
+    }
+
+    public String updateItems(
+            ConstructorItem[] items,
+            String section,
+            Boolean force,
+            String notificationEmail,
+            CatalogRequest.OnMissing onMissing)
+            throws ConstructorException {
+        List<String> emails = notificationEmail != null ? Arrays.asList(notificationEmail) : null;
+        return updateItems(items, section, force, emails, onMissing);
     }
 
     /**
@@ -622,8 +661,8 @@ public class ConstructorIO {
      * @param section the section of the autocomplete that you're modifying the item for.
      * @param force whether or not the system should process the request even if it will invalidate
      *     a large number of existing variations.
-     * @param notificationEmail An email address where you'd like to receive an email notification
-     *     in case the task fails.
+     * @param notificationEmails A list of email addresses to receive an email notification if the
+     *     task fails.
      * @param onMissing Either "FAIL", "IGNORE", "CREATE", indicating how the system will handle
      *     updating variations that don't exist. "FAIL" fails the ingestion if there are items that
      *     don't exist. "IGNORE" ignores variations that don't exist. "CREATE" creates items that
@@ -635,7 +674,7 @@ public class ConstructorIO {
             ConstructorVariation[] variations,
             String section,
             Boolean force,
-            String notificationEmail,
+            List<String> notificationEmails,
             CatalogRequest.OnMissing onMissing)
             throws ConstructorException {
         try {
@@ -646,11 +685,12 @@ public class ConstructorIO {
                             .addQueryParameter("section", section)
                             .build();
 
-            if (notificationEmail != null) {
-                url =
-                        url.newBuilder()
-                                .addQueryParameter("notification_email", notificationEmail)
-                                .build();
+            if (notificationEmails != null) {
+                HttpUrl.Builder emailBuilder = url.newBuilder();
+                for (String email : notificationEmails) {
+                    emailBuilder.addQueryParameter("notification_email", email);
+                }
+                url = emailBuilder.build();
             }
             if (onMissing != null && onMissing != CatalogRequest.OnMissing.FAIL) {
                 url = url.newBuilder().addQueryParameter("on_missing", onMissing.name()).build();
@@ -674,43 +714,47 @@ public class ConstructorIO {
         }
     }
 
-    /**
-     * Update variations from your index.
-     *
-     * @param variations the variations that you're updating.
-     * @param section the section of the autocomplete that you're modifying the item for.
-     * @param force whether or not the system should process the request even if it will invalidate
-     *     a large number of existing variations.
-     * @param notificationEmail An email address where you'd like to receive an email notification
-     *     in case the task fails.
-     * @return a string of JSON
-     * @throws ConstructorException if the request is invalid.
-     */
+    public String updateVariations(ConstructorVariation[] variations) throws ConstructorException {
+        return updateVariations(variations, "Products", false, (List<String>) null, null);
+    }
+
+    public String updateVariations(ConstructorVariation[] variations, String section)
+            throws ConstructorException {
+        return updateVariations(variations, section, false, (List<String>) null, null);
+    }
+
+    public String updateVariations(ConstructorVariation[] variations, String section, Boolean force)
+            throws ConstructorException {
+        return updateVariations(variations, section, force, (List<String>) null, null);
+    }
+
     public String updateVariations(
             ConstructorVariation[] variations,
             String section,
             Boolean force,
             String notificationEmail)
             throws ConstructorException {
-        try {
-            return updateVariations(variations, section, force, notificationEmail, null);
-        } catch (Exception exception) {
-            throw new ConstructorException(exception);
-        }
+        return updateVariations(variations, section, force, notificationEmail, null);
     }
 
-    public String updateVariations(ConstructorVariation[] variations) throws ConstructorException {
-        return updateVariations(variations, "Products", false, null, null);
-    }
-
-    public String updateVariations(ConstructorVariation[] variations, String section)
+    public String updateVariations(
+            ConstructorVariation[] variations,
+            String section,
+            Boolean force,
+            List<String> notificationEmails)
             throws ConstructorException {
-        return updateVariations(variations, section, false, null, null);
+        return updateVariations(variations, section, force, notificationEmails, null);
     }
 
-    public String updateVariations(ConstructorVariation[] variations, String section, Boolean force)
+    public String updateVariations(
+            ConstructorVariation[] variations,
+            String section,
+            Boolean force,
+            String notificationEmail,
+            CatalogRequest.OnMissing onMissing)
             throws ConstructorException {
-        return updateVariations(variations, section, force, null, null);
+        List<String> emails = notificationEmail != null ? Arrays.asList(notificationEmail) : null;
+        return updateVariations(variations, section, force, emails, onMissing);
     }
 
     /**
@@ -720,8 +764,8 @@ public class ConstructorIO {
      * @param section the section of the autocomplete that you're adding the items to.
      * @param force whether or not the system should process the request even if it will invalidate
      *     a large number of existing variations.
-     * @param notificationEmail An email address where you'd like to receive an email notification
-     *     in case the task fails.
+     * @param notificationEmails A list of email addresses to receive an email notification if the
+     *     task fails.
      * @return a string of JSON
      * @throws ConstructorException if the request is invalid.
      */
@@ -729,7 +773,7 @@ public class ConstructorIO {
             ConstructorVariation[] variations,
             String section,
             Boolean force,
-            String notificationEmail)
+            List<String> notificationEmails)
             throws ConstructorException {
         try {
             HttpUrl url = this.makeUrl(Arrays.asList("v2", "variations"));
@@ -739,11 +783,12 @@ public class ConstructorIO {
                             .addQueryParameter("section", section)
                             .build();
 
-            if (notificationEmail != null) {
-                url =
-                        url.newBuilder()
-                                .addQueryParameter("notification_email", notificationEmail)
-                                .build();
+            if (notificationEmails != null) {
+                HttpUrl.Builder emailBuilder = url.newBuilder();
+                for (String email : notificationEmails) {
+                    emailBuilder.addQueryParameter("notification_email", email);
+                }
+                url = emailBuilder.build();
             }
 
             Map<String, Object> data = new HashMap<String, Object>();
@@ -766,18 +811,28 @@ public class ConstructorIO {
 
     public String createOrReplaceVariations(ConstructorVariation[] variations)
             throws ConstructorException {
-        return createOrReplaceVariations(variations, "Products", false, null);
+        return createOrReplaceVariations(variations, "Products", false, (List<String>) null);
     }
 
     public String createOrReplaceVariations(ConstructorVariation[] variations, String section)
             throws ConstructorException {
-        return createOrReplaceVariations(variations, section, false, null);
+        return createOrReplaceVariations(variations, section, false, (List<String>) null);
     }
 
     public String createOrReplaceVariations(
             ConstructorVariation[] variations, String section, Boolean force)
             throws ConstructorException {
-        return createOrReplaceVariations(variations, section, force, null);
+        return createOrReplaceVariations(variations, section, force, (List<String>) null);
+    }
+
+    public String createOrReplaceVariations(
+            ConstructorVariation[] variations,
+            String section,
+            Boolean force,
+            String notificationEmail)
+            throws ConstructorException {
+        List<String> emails = notificationEmail != null ? Arrays.asList(notificationEmail) : null;
+        return createOrReplaceVariations(variations, section, force, emails);
     }
 
     /**
@@ -1833,6 +1888,17 @@ public class ConstructorIO {
                 }
             }
 
+            if (StringUtils.isNotBlank(req.getVariationId())) {
+                if (req.getItemIds() == null || req.getItemIds().size() != 1) {
+                    throw new IllegalArgumentException(
+                            "variationId requires exactly one itemId to be specified");
+                }
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("variation_id", req.getVariationId())
+                                .build();
+            }
+
             if (StringUtils.isNotBlank(req.getTerm())) {
                 url = url.newBuilder().addQueryParameter("term", req.getTerm()).build();
             }
@@ -2070,12 +2136,59 @@ public class ConstructorIO {
     }
 
     /**
+     * Validates and extracts the file extension from a File object for catalog uploads.
+     *
+     * @param file the File object containing the actual file
+     * @param fileName the logical file name (items, variations, item_groups)
+     * @return the validated file extension (including the dot, e.g., ".csv", ".json", or ".jsonl")
+     * @throws ConstructorException if the file extension is not in VALID_CATALOG_EXTENSIONS
+     */
+    private static String getValidatedFileExtension(File file, String fileName)
+            throws ConstructorException {
+        if (file == null) {
+            throw new ConstructorException(
+                    "Invalid file for '" + fileName + "': file cannot be null.");
+        }
+
+        String actualFileName = file.getName();
+        if (actualFileName == null || actualFileName.isEmpty()) {
+            throw new ConstructorException(
+                    "Invalid file for '" + fileName + "': file name cannot be empty.");
+        }
+
+        int lastDotIndex = actualFileName.lastIndexOf('.');
+        if (lastDotIndex == -1 || lastDotIndex == actualFileName.length() - 1) {
+            throw new ConstructorException(
+                    "Invalid file for '"
+                            + fileName
+                            + "': file must have "
+                            + VALID_CATALOG_EXTENSIONS
+                            + " extension. Found: "
+                            + actualFileName);
+        }
+
+        String extension = actualFileName.substring(lastDotIndex).toLowerCase();
+
+        if (!VALID_CATALOG_EXTENSIONS.contains(extension)) {
+            throw new ConstructorException(
+                    "Invalid file type for '"
+                            + fileName
+                            + "': file must have "
+                            + VALID_CATALOG_EXTENSIONS
+                            + " extension. Found: "
+                            + actualFileName);
+        }
+
+        return extension;
+    }
+
+    /**
      * Grabs the version number (hard coded ATM)
      *
      * @return version number
      */
     protected String getVersion() {
-        return "ciojava-7.2.0";
+        return "ciojava-7.4.2";
     }
 
     /**
@@ -2348,9 +2461,12 @@ public class ConstructorIO {
     /**
      * Send a full catalog to replace the current one (sync)
      *
-     * @param req the catalog request
-     * @return a string of JSON
-     * @throws ConstructorException if the request is invalid.
+     * <p>Supports CSV, JSON, and JSONL file formats. The file type is automatically detected from
+     * the file extension (.csv, .json, or .jsonl).
+     *
+     * @param req the catalog request containing files with .csv, .json, or .jsonl extensions
+     * @return a string of JSON containing task information
+     * @throws ConstructorException if the request is invalid or file extensions are not supported
      */
     public String replaceCatalog(CatalogRequest req) throws ConstructorException {
         try {
@@ -2359,12 +2475,14 @@ public class ConstructorIO {
                     url.newBuilder().addQueryParameter("section", req.getSection());
             MultipartBody.Builder multipartBuilder =
                     new MultipartBody.Builder().setType(MultipartBody.FORM);
-            String notificationEmail = req.getNotificationEmail();
+            List<String> notificationEmails = req.getNotificationEmails();
             Boolean force = req.getForce();
             Map<String, File> files = req.getFiles();
 
-            if (notificationEmail != null) {
-                urlBuilder.addQueryParameter("notification_email", notificationEmail);
+            if (notificationEmails != null) {
+                for (String email : notificationEmails) {
+                    urlBuilder.addQueryParameter("notification_email", email);
+                }
             }
             if (force != null) {
                 urlBuilder.addQueryParameter("force", Boolean.toString(force));
@@ -2376,10 +2494,11 @@ public class ConstructorIO {
                 for (Map.Entry<String, File> entry : files.entrySet()) {
                     String fileName = entry.getKey();
                     File file = entry.getValue();
+                    String fileExtension = getValidatedFileExtension(file, fileName);
 
                     multipartBuilder.addFormDataPart(
                             fileName,
-                            fileName + ".csv",
+                            fileName + fileExtension,
                             RequestBody.create(MediaType.parse("application/octet-stream"), file));
                 }
             }
@@ -2405,9 +2524,12 @@ public class ConstructorIO {
     /**
      * Send a partial catalog to update specific items (delta)
      *
-     * @param req the catalog request
-     * @return a string of JSON
-     * @throws ConstructorException if the request is invalid.
+     * <p>Supports CSV, JSON, and JSONL file formats. The file type is automatically detected from
+     * the file extension (.csv, .json, or .jsonl).
+     *
+     * @param req the catalog request containing files with .csv, .json, or .jsonl extensions
+     * @return a string of JSON containing task information
+     * @throws ConstructorException if the request is invalid or file extensions are not supported
      */
     public String updateCatalog(CatalogRequest req) throws ConstructorException {
         try {
@@ -2416,12 +2538,14 @@ public class ConstructorIO {
                     url.newBuilder().addQueryParameter("section", req.getSection());
             MultipartBody.Builder multipartBuilder =
                     new MultipartBody.Builder().setType(MultipartBody.FORM);
-            String notificationEmail = req.getNotificationEmail();
+            List<String> notificationEmails = req.getNotificationEmails();
             Boolean force = req.getForce();
             Map<String, File> files = req.getFiles();
 
-            if (notificationEmail != null) {
-                urlBuilder.addQueryParameter("notification_email", notificationEmail);
+            if (notificationEmails != null) {
+                for (String email : notificationEmails) {
+                    urlBuilder.addQueryParameter("notification_email", email);
+                }
             }
             if (force != null) {
                 urlBuilder.addQueryParameter("force", Boolean.toString(force));
@@ -2433,10 +2557,11 @@ public class ConstructorIO {
                 for (Map.Entry<String, File> entry : files.entrySet()) {
                     String fileName = entry.getKey();
                     File file = entry.getValue();
+                    String fileExtension = getValidatedFileExtension(file, fileName);
 
                     multipartBuilder.addFormDataPart(
                             fileName,
-                            fileName + ".csv",
+                            fileName + fileExtension,
                             RequestBody.create(MediaType.parse("application/octet-stream"), file));
                 }
             }
@@ -2463,9 +2588,12 @@ public class ConstructorIO {
     /**
      * Send a patch delta catalog to update specific items (delta)
      *
-     * @param req the catalog request
-     * @return a string of JSON
-     * @throws ConstructorException if the request is invalid.
+     * <p>Supports CSV, JSON, and JSONL file formats. The file type is automatically detected from
+     * the file extension (.csv, .json, or .jsonl).
+     *
+     * @param req the catalog request containing files with .csv, .json, or .jsonl extensions
+     * @return a string of JSON containing task information
+     * @throws ConstructorException if the request is invalid or file extensions are not supported
      */
     public String patchCatalog(CatalogRequest req) throws ConstructorException {
         try {
@@ -2474,12 +2602,14 @@ public class ConstructorIO {
                     url.newBuilder().addQueryParameter("section", req.getSection());
             MultipartBody.Builder multipartBuilder =
                     new MultipartBody.Builder().setType(MultipartBody.FORM);
-            String notificationEmail = req.getNotificationEmail();
+            List<String> notificationEmails = req.getNotificationEmails();
             Boolean force = req.getForce();
             Map<String, File> files = req.getFiles();
 
-            if (notificationEmail != null) {
-                urlBuilder.addQueryParameter("notification_email", notificationEmail);
+            if (notificationEmails != null) {
+                for (String email : notificationEmails) {
+                    urlBuilder.addQueryParameter("notification_email", email);
+                }
             }
             if (force != null) {
                 urlBuilder.addQueryParameter("force", Boolean.toString(force));
@@ -2496,10 +2626,11 @@ public class ConstructorIO {
                 for (Map.Entry<String, File> entry : files.entrySet()) {
                     String fileName = entry.getKey();
                     File file = entry.getValue();
+                    String fileExtension = getValidatedFileExtension(file, fileName);
 
                     multipartBuilder.addFormDataPart(
                             fileName,
-                            fileName + ".csv",
+                            fileName + fileExtension,
                             RequestBody.create(MediaType.parse("application/octet-stream"), file));
                 }
             }

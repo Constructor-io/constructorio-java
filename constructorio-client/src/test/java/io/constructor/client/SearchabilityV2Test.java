@@ -119,6 +119,13 @@ public class SearchabilityV2Test {
         new SearchabilityV2Request(config, "title", null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchabilityV2RequestWithBlankSectionThrowsException() {
+        SearchabilityV2 config = new SearchabilityV2();
+        config.setName("title");
+        new SearchabilityV2Request(config, "title", "   ");
+    }
+
     @Test
     public void testSearchabilitiesV2Request() {
         SearchabilityV2 config1 = new SearchabilityV2();
@@ -168,6 +175,13 @@ public class SearchabilityV2Test {
     public void testSearchabilitiesV2RequestWithEmptyListThrowsException() {
         new SearchabilitiesV2Request(
                 Arrays.<SearchabilityV2>asList(), ConstructorIO.DEFAULT_SECTION);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchabilitiesV2RequestWithBlankSectionThrowsException() {
+        SearchabilityV2 config = new SearchabilityV2();
+        config.setName("title");
+        new SearchabilitiesV2Request(Arrays.asList(config), "   ");
     }
 
     @Test
@@ -222,6 +236,11 @@ public class SearchabilityV2Test {
         new SearchabilitiesV2GetRequest(null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchabilitiesV2GetRequestWithBlankSectionThrowsException() {
+        new SearchabilitiesV2GetRequest("   ");
+    }
+
     @Test
     public void testSearchabilitiesV2DeleteRequest() {
         SearchabilitiesV2DeleteRequest request =
@@ -260,5 +279,10 @@ public class SearchabilityV2Test {
     @Test(expected = IllegalArgumentException.class)
     public void testSearchabilitiesV2DeleteRequestWithEmptyNamesThrowsException() {
         new SearchabilitiesV2DeleteRequest(Arrays.<String>asList(), ConstructorIO.DEFAULT_SECTION);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchabilitiesV2DeleteRequestWithBlankSectionThrowsException() {
+        new SearchabilitiesV2DeleteRequest(Arrays.asList("title"), "   ");
     }
 }

@@ -139,6 +139,13 @@ public class FacetConfigurationV2Test {
         new FacetConfigurationV2Request(config, null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testFacetConfigurationV2RequestWithBlankSection() {
+        FacetConfigurationV2 config = new FacetConfigurationV2();
+        config.setName("testFacet");
+        new FacetConfigurationV2Request(config, "   ");
+    }
+
     @Test
     public void testFacetConfigurationsV2Request() {
         FacetConfigurationV2 config1 = new FacetConfigurationV2();
@@ -179,6 +186,13 @@ public class FacetConfigurationV2Test {
         new FacetConfigurationsV2Request(null, "Products");
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testFacetConfigurationsV2RequestWithBlankSection() {
+        FacetConfigurationV2 config = new FacetConfigurationV2();
+        config.setName("facet1");
+        new FacetConfigurationsV2Request(Arrays.asList(config), "   ");
+    }
+
     @Test
     public void testFacetConfigurationsV2GetRequest() {
         FacetConfigurationsV2GetRequest request =
@@ -209,5 +223,10 @@ public class FacetConfigurationV2Test {
     @Test(expected = IllegalArgumentException.class)
     public void testFacetConfigurationsV2GetRequestWithNullSectionThrowsException() {
         new FacetConfigurationsV2GetRequest(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFacetConfigurationsV2GetRequestWithBlankSectionThrowsException() {
+        new FacetConfigurationsV2GetRequest("   ");
     }
 }

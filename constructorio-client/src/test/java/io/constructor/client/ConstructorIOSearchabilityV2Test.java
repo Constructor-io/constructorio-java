@@ -46,7 +46,11 @@ public class ConstructorIOSearchabilityV2Test {
             try {
                 constructor.deleteSearchabilityV2(name, section);
             } catch (ConstructorException e) {
-                System.err.println("Warning: Failed to clean up searchability: " + name);
+                System.err.println(
+                        "Warning: Failed to clean up searchability: "
+                                + name
+                                + ": "
+                                + e.getMessage());
             }
         }
     }
@@ -91,13 +95,13 @@ public class ConstructorIOSearchabilityV2Test {
                         searchability, "testSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
 
         String response = constructor.createOrUpdateSearchabilityV2(request);
+        addSearchabilityToCleanupArray("testSearchabilityV2");
         JSONObject jsonObj = new JSONObject(response);
 
         assertEquals("testSearchabilityV2", jsonObj.get("name"));
         assertEquals(true, jsonObj.get("fuzzy_searchable"));
         assertEquals(false, jsonObj.get("exact_searchable"));
         assertEquals(true, jsonObj.get("displayable"));
-        addSearchabilityToCleanupArray("testSearchabilityV2");
     }
 
     @Test
@@ -116,10 +120,10 @@ public class ConstructorIOSearchabilityV2Test {
         request.setSkipRebuild(true);
 
         String response = constructor.createOrUpdateSearchabilityV2(request);
+        addSearchabilityToCleanupArray("testSearchabilityV2SkipRebuild");
         JSONObject jsonObj = new JSONObject(response);
 
         assertEquals("testSearchabilityV2SkipRebuild", jsonObj.get("name"));
-        addSearchabilityToCleanupArray("testSearchabilityV2SkipRebuild");
     }
 
     @Test
@@ -137,6 +141,7 @@ public class ConstructorIOSearchabilityV2Test {
                         "testRetrieveSearchabilityV2",
                         ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilityV2(createRequest);
+        addSearchabilityToCleanupArray("testRetrieveSearchabilityV2");
 
         // Retrieve the searchability
         String retrieveResponse =
@@ -145,7 +150,6 @@ public class ConstructorIOSearchabilityV2Test {
         JSONObject jsonObj = new JSONObject(retrieveResponse);
 
         assertEquals("testRetrieveSearchabilityV2", jsonObj.get("name"));
-        addSearchabilityToCleanupArray("testRetrieveSearchabilityV2");
     }
 
     @Test
@@ -163,6 +167,7 @@ public class ConstructorIOSearchabilityV2Test {
                         "testRetrieveSearchabilityV2Default",
                         ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilityV2(createRequest);
+        addSearchabilityToCleanupArray("testRetrieveSearchabilityV2Default");
 
         // Retrieve the searchability with default section
         String retrieveResponse =
@@ -170,7 +175,6 @@ public class ConstructorIOSearchabilityV2Test {
         JSONObject jsonObj = new JSONObject(retrieveResponse);
 
         assertEquals("testRetrieveSearchabilityV2Default", jsonObj.get("name"));
-        addSearchabilityToCleanupArray("testRetrieveSearchabilityV2Default");
     }
 
     @Test
@@ -186,6 +190,7 @@ public class ConstructorIOSearchabilityV2Test {
                 new SearchabilityV2Request(
                         searchability, "testDeleteSearchabilityV2", ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilityV2(createRequest);
+        addSearchabilityToCleanupArray("testDeleteSearchabilityV2");
 
         // Delete the searchability
         String deleteResponse =
@@ -211,6 +216,7 @@ public class ConstructorIOSearchabilityV2Test {
                         "testDeleteSearchabilityV2Default",
                         ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilityV2(createRequest);
+        addSearchabilityToCleanupArray("testDeleteSearchabilityV2Default");
 
         // Delete the searchability with default section
         String deleteResponse =
@@ -235,6 +241,7 @@ public class ConstructorIOSearchabilityV2Test {
                         "testDeleteSearchabilityV2Request",
                         ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilityV2(createRequest);
+        addSearchabilityToCleanupArray("testDeleteSearchabilityV2Request");
 
         // Delete the searchability using request object
         SearchabilityV2Request deleteRequest =
@@ -265,11 +272,15 @@ public class ConstructorIOSearchabilityV2Test {
                         ConstructorIO.DEFAULT_SECTION);
 
         String response = constructor.createOrUpdateSearchabilitiesV2(bulkRequest);
+        addSearchabilityToCleanupArray("testBulkSearchabilityV2_1");
+        addSearchabilityToCleanupArray("testBulkSearchabilityV2_2");
         JSONObject jsonObj = new JSONObject(response);
 
         assertTrue("Response should have searchabilities array", jsonObj.has("searchabilities"));
-        addSearchabilityToCleanupArray("testBulkSearchabilityV2_1");
-        addSearchabilityToCleanupArray("testBulkSearchabilityV2_2");
+        assertEquals(
+                "Should return both upserted searchabilities",
+                2,
+                jsonObj.getJSONArray("searchabilities").length());
     }
 
     @Test
@@ -289,6 +300,8 @@ public class ConstructorIOSearchabilityV2Test {
                         Arrays.asList(searchability1, searchability2),
                         ConstructorIO.DEFAULT_SECTION);
         constructor.createOrUpdateSearchabilitiesV2(createRequest);
+        addSearchabilityToCleanupArray("testBulkDeleteSearchabilityV2_1");
+        addSearchabilityToCleanupArray("testBulkDeleteSearchabilityV2_2");
 
         // Delete searchabilities
         SearchabilitiesV2DeleteRequest deleteRequest =
@@ -302,6 +315,10 @@ public class ConstructorIOSearchabilityV2Test {
         JSONObject jsonObj = new JSONObject(response);
 
         assertTrue("Response should have searchabilities array", jsonObj.has("searchabilities"));
+        assertEquals(
+                "Should return both deleted searchabilities",
+                2,
+                jsonObj.getJSONArray("searchabilities").length());
     }
 
     @Test(expected = ConstructorException.class)
@@ -319,6 +336,26 @@ public class ConstructorIOSearchabilityV2Test {
     @Test(expected = IllegalArgumentException.class)
     public void testSearchabilityV2RequestWithEmptyNameThrowsException() {
         new SearchabilityV2Request("   ", ConstructorIO.DEFAULT_SECTION);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateOrUpdateSearchabilityV2WithNullBodyThrowsException() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        SearchabilityV2Request request =
+                new SearchabilityV2Request("someField", ConstructorIO.DEFAULT_SECTION);
+        constructor.createOrUpdateSearchabilityV2(request);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRetrieveSearchabilitiesV2WithNullRequestThrowsException() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        constructor.retrieveSearchabilitiesV2((SearchabilitiesV2GetRequest) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRetrieveSearchabilityV2WithNullRequestThrowsException() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+        constructor.retrieveSearchabilityV2((SearchabilityV2Request) null);
     }
 
     @Test

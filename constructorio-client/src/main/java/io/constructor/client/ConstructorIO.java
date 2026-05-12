@@ -3415,7 +3415,7 @@ public class ConstructorIO {
             if (numResultsPerPage != null && numResultsPerPage > 0) {
                 urlBuilder.addQueryParameter("num_results_per_page", numResultsPerPage.toString());
             }
-            if (offset != null && offset > 0 && page == null) {
+            if (offset != null && offset >= 0 && page == null) {
                 urlBuilder.addQueryParameter("offset", offset.toString());
             }
 
@@ -3494,7 +3494,10 @@ public class ConstructorIO {
                     this.makeUrl(Arrays.asList("v2", "facets", facetName))
                             .newBuilder()
                             .addQueryParameter(
-                                    "section", section != null ? section : DEFAULT_SECTION)
+                                    "section",
+                                    (section != null && !section.trim().isEmpty())
+                                            ? section
+                                            : DEFAULT_SECTION)
                             .build();
 
             Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
@@ -3566,6 +3569,9 @@ public class ConstructorIO {
         if (facetConfigurationV2Request == null) {
             throw new IllegalArgumentException("facetConfigurationV2Request is required");
         }
+        if (facetConfigurationV2Request.getFacetConfiguration() == null) {
+            throw new IllegalArgumentException("facetConfiguration is required");
+        }
 
         String facetName = facetConfigurationV2Request.getFacetConfiguration().getName();
         if (facetName == null || facetName.trim().isEmpty()) {
@@ -3604,6 +3610,9 @@ public class ConstructorIO {
             FacetConfigurationV2Request facetConfigurationV2Request) throws ConstructorException {
         if (facetConfigurationV2Request == null) {
             throw new IllegalArgumentException("facetConfigurationV2Request is required");
+        }
+        if (facetConfigurationV2Request.getFacetConfiguration() == null) {
+            throw new IllegalArgumentException("facetConfiguration is required");
         }
 
         String facetName = facetConfigurationV2Request.getFacetConfiguration().getName();
@@ -3723,7 +3732,10 @@ public class ConstructorIO {
                     this.makeUrl(Arrays.asList("v2", "facets", facetName))
                             .newBuilder()
                             .addQueryParameter(
-                                    "section", section != null ? section : DEFAULT_SECTION)
+                                    "section",
+                                    (section != null && !section.trim().isEmpty())
+                                            ? section
+                                            : DEFAULT_SECTION)
                             .build();
 
             Request request = this.makeAuthorizedRequestBuilder().url(url).delete().build();
@@ -3761,6 +3773,9 @@ public class ConstructorIO {
         if (facetConfigurationV2Request == null) {
             throw new IllegalArgumentException("facetConfigurationV2Request is required");
         }
+        if (facetConfigurationV2Request.getFacetConfiguration() == null) {
+            throw new IllegalArgumentException("facetConfiguration is required");
+        }
 
         return deleteFacetConfigurationV2(
                 facetConfigurationV2Request.getFacetConfiguration().getName(),
@@ -3797,7 +3812,7 @@ public class ConstructorIO {
                         "num_results_per_page", request.getNumResultsPerPage().toString());
             }
             if (request.getOffset() != null
-                    && request.getOffset() > 0
+                    && request.getOffset() >= 0
                     && request.getPage() == null) {
                 urlBuilder.addQueryParameter("offset", request.getOffset().toString());
             }
@@ -3851,13 +3866,17 @@ public class ConstructorIO {
      *
      * @param searchabilityV2Request the searchability v2 request
      * @return returns the searchability as JSON string
-     * @throws IllegalArgumentException if request is null
+     * @throws IllegalArgumentException if request is null or name is missing
      * @throws ConstructorException if the request fails
      */
     public String retrieveSearchabilityV2(SearchabilityV2Request searchabilityV2Request)
             throws ConstructorException {
         if (searchabilityV2Request == null) {
             throw new IllegalArgumentException("searchabilityV2Request is required");
+        }
+        if (searchabilityV2Request.getName() == null
+                || searchabilityV2Request.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("name is required");
         }
 
         try {
@@ -3911,13 +3930,22 @@ public class ConstructorIO {
      *
      * @param searchabilityV2Request the searchability v2 request
      * @return returns the created/updated searchability as JSON string
-     * @throws IllegalArgumentException if request is null
+     * @throws IllegalArgumentException if request is null, name is missing, or searchability body
+     *     is null
      * @throws ConstructorException if the request fails
      */
     public String createOrUpdateSearchabilityV2(SearchabilityV2Request searchabilityV2Request)
             throws ConstructorException {
         if (searchabilityV2Request == null) {
             throw new IllegalArgumentException("searchabilityV2Request is required");
+        }
+        if (searchabilityV2Request.getName() == null
+                || searchabilityV2Request.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("name is required");
+        }
+        if (searchabilityV2Request.getSearchability() == null) {
+            throw new IllegalArgumentException(
+                    "searchability body is required for create/update");
         }
 
         try {
@@ -3999,13 +4027,17 @@ public class ConstructorIO {
      *
      * @param searchabilityV2Request the searchability v2 request
      * @return returns the deleted searchability as JSON string
-     * @throws IllegalArgumentException if request is null
+     * @throws IllegalArgumentException if request is null or name is missing
      * @throws ConstructorException if the request fails
      */
     public String deleteSearchabilityV2(SearchabilityV2Request searchabilityV2Request)
             throws ConstructorException {
         if (searchabilityV2Request == null) {
             throw new IllegalArgumentException("searchabilityV2Request is required");
+        }
+        if (searchabilityV2Request.getName() == null
+                || searchabilityV2Request.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("name is required");
         }
 
         try {

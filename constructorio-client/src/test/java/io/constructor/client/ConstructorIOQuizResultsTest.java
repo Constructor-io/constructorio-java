@@ -57,6 +57,7 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsShouldReturnResultWithAnswersParameter() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
 
@@ -71,6 +72,7 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsAsJsonShouldReturnResultWithAnswersParameter() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
         String response = constructor.quizResultsAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
@@ -86,6 +88,7 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsShouldReturnResultWithVersionIdAndSessionId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest initialRequest = new QuizRequest(quizId);
+        initialRequest.setQuizSessionId(quizSessionId);
         initialRequest.setAnswers(validAnswers);
         QuizResultsResponse initialResponse = constructor.quizResults(initialRequest, null);
 
@@ -126,6 +129,7 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsAsJsonShouldReturnResultWithVersionIdAndSessionid() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest initialRequest = new QuizRequest(quizId);
+        initialRequest.setQuizSessionId(quizSessionId);
         initialRequest.setAnswers(validAnswers);
         QuizResultsResponse initialResponse = constructor.quizResults(initialRequest, null);
 
@@ -149,6 +153,7 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsShouldReturnResultWithAllAnswerTypes() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(finalAnswers);
         QuizResultsResponse response = constructor.quizResults(request, null);
 
@@ -163,6 +168,7 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsAsJsonShouldReturnResultWithAllAnswerTypes() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(finalAnswers);
         String response = constructor.quizResultsAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
@@ -178,6 +184,7 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsShouldReturnErrorWithInvalidQuizId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest("invalidQuiz");
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
@@ -191,6 +198,7 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsAsJsonShouldReturnErrorWithInvalidQuizId() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest("invalidQuiz");
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
@@ -204,6 +212,7 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsShouldReturnErrorWithInvalidIndexKey() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);
@@ -218,6 +227,7 @@ public class ConstructorIOQuizResultsTest {
     public void QuizResultsAsJsonShouldReturnErrorWithInvalidIndexKey() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", "invalidKey", true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
 
         thrown.expect(ConstructorException.class);

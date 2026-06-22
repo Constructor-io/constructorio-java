@@ -386,6 +386,19 @@ public class ConstructorIOFacetConfigurationV2Test {
                 "Should return both replaced facets", 2, jsonObj.getJSONArray("facets").length());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testReplaceFacetConfigurationsV2WithInvalidTypeThrowsException() throws Exception {
+        ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
+
+        FacetConfigurationV2 config = new FacetConfigurationV2();
+        config.setName("testReplaceBulkInvalidTypeV2");
+        config.setType("invalid");
+
+        constructor.replaceFacetConfigurationsV2(
+                new FacetConfigurationsV2Request(
+                        Arrays.asList(config), ConstructorIO.DEFAULT_SECTION));
+    }
+
     @Test
     public void testFacetConfigurationV2DefaultValues() {
         FacetConfigurationV2 config = new FacetConfigurationV2();

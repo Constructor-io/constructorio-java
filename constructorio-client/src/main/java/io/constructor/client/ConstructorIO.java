@@ -3841,6 +3841,14 @@ public class ConstructorIO {
             throw new IllegalArgumentException("facetConfigurationsV2Request is required");
         }
 
+        List<FacetConfigurationV2> facetConfigurations =
+                facetConfigurationsV2Request.getFacetConfigurations();
+        if (facetConfigurations != null) {
+            for (FacetConfigurationV2 facetConfiguration : facetConfigurations) {
+                validateFacetConfigurationV2Type(facetConfiguration.getType());
+            }
+        }
+
         try {
             HttpUrl url =
                     this.makeUrl(Arrays.asList("v2", "facets"))

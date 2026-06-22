@@ -153,6 +153,7 @@ public class ConstructorIOQuizNextQuestionTest {
     public void QuizQuestionShouldReturnResultWithAnswersParameter() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
         QuizQuestionResponse response = constructor.quizNextQuestion(request, null);
 
@@ -164,6 +165,7 @@ public class ConstructorIOQuizNextQuestionTest {
     public void QuizQuestionAsJsonShouldReturnResultWithAnswersParameter() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(validAnswers);
         String response = constructor.quizNextQuestionAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);
@@ -179,6 +181,7 @@ public class ConstructorIOQuizNextQuestionTest {
     public void QuizQuestionShouldReturnResultWithAllAnswerTypes() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(finalAnswers);
         QuizQuestionResponse response = constructor.quizNextQuestion(request, null);
 
@@ -190,6 +193,7 @@ public class ConstructorIOQuizNextQuestionTest {
     public void QuizQuestionAsJsonShouldReturnResultWithAllAnswerTypes() throws Exception {
         ConstructorIO constructor = new ConstructorIO("", quizKey, true, "quizzes.cnstrc.com");
         QuizRequest request = new QuizRequest(quizId);
+        request.setQuizSessionId(quizSessionId);
         request.setAnswers(finalAnswers);
         String response = constructor.quizNextQuestionAsJson(request, null);
         JSONObject jsonObject = new JSONObject(response);

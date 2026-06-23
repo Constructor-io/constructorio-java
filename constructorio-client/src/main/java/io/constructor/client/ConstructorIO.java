@@ -1,6 +1,9 @@
 package io.constructor.client;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.constructor.client.models.*;
 import io.constructor.client.models.SortOption.SortOrder;
 import java.io.File;
@@ -51,6 +54,34 @@ public class ConstructorIO {
     /** the HTTP client used by all instances (with retry, only for idempotent requests like GET) */
     private static OkHttpClient clientWithRetry =
             client.newBuilder().retryOnConnectionFailure(true).build();
+
+    /** Default section used when no section is specified */
+    public static final String DEFAULT_SECTION = "Products";
+
+    /**
+     * Gson instance that excludes the 'name' field from SearchabilityV2 during serialization. The
+     * searchability PATCH endpoint does not accept 'name' in the request body; it is conveyed via
+     * the URL path segment instead.
+     */
+    private static final Gson GSON_WITHOUT_SEARCHABILITY_NAME =
+            new GsonBuilder()
+                    .addSerializationExclusionStrategy(
+                            new ExclusionStrategy() {
+                                @Override
+                                public boolean shouldSkipField(FieldAttributes f) {
+                                    return f.getDeclaringClass() == SearchabilityV2.class
+                                            && f.getName().equals("name");
+                                }
+
+                                @Override
+                                public boolean shouldSkipClass(Class<?> clazz) {
+                                    return false;
+                                }
+                            })
+                    .create();
+
+    private static final Set<String> VALID_FACET_V2_TYPES =
+            new LinkedHashSet<>(Arrays.asList("multiple", "hierarchical", "range"));
 
     /**
      * @param newClient the OkHttpClient to use by all instances
@@ -3488,5 +3519,782 @@ public class ConstructorIO {
      */
     public SortOptionsResponse retrieveSortOptions() throws ConstructorException {
         return retrieveSortOptions(new SortOptionGetRequest());
+    }
+
+    // ==================== Facet Configuration V2 API ====================
+
+    private static void validateFacetConfigurationV2Type(String type) {
+        if (type == null || !VALID_FACET_V2_TYPES.contains(type)) {
+            throw new IllegalArgumentException(
+                    "type is a required parameter and must be one of: multiple, hierarchical, or"
+                            + " range");
+        }
+    }
+
+    /**
+     * Retrieves all facet configurations (v2)
+     *
+     * @param section the section to retrieve facets from
+     * @param page the page number (optional)
+     * @param numResultsPerPage the number of results per page (optional)
+     * @param offset the offset for pagination (optional, ignored if page is set)
+     * @return returns the facet configurations as JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String retrieveFacetConfigurationsV2(
+            String section, Integer page, Integer numResultsPerPage, Integer offset)
+            throws ConstructorException {
+        try {
+            HttpUrl.Builder urlBuilder = this.makeUrl(Arrays.asList("v2", "facets")).newBuilder();
+
+            urlBuilder.addQueryParameter(
+                    "section",
+                    (section != null && !section.trim().isEmpty()) ? section : DEFAULT_SECTION);
+
+            if (page != null && page > 0) {
+                urlBuilder.addQueryParameter("page", page.toString());
+            }
+            if (numResultsPerPage != null && numResultsPerPage > 0) {
+                urlBuilder.addQueryParameter("num_results_per_page", numResultsPerPage.toString());
+            }
+            if (offset != null && offset >= 0 && page == null) {
+                urlBuilder.addQueryParameter("offset", offset.toString());
+            }
+
+            HttpUrl url = urlBuilder.build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
+
+            Response response = clientWithRetry.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Retrieves all facet configurations (v2)
+     *
+     * @param section the section to retrieve facets from
+     * @param page the page number (optional)
+     * @param numResultsPerPage the number of results per page (optional)
+     * @return returns the facet configurations as JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String retrieveFacetConfigurationsV2(
+            String section, Integer page, Integer numResultsPerPage) throws ConstructorException {
+        return retrieveFacetConfigurationsV2(section, page, numResultsPerPage, null);
+    }
+
+    /**
+     * Retrieves all facet configurations (v2) with default section "Products"
+     *
+     * @return returns the facet configurations as JSON string
+     * @throws ConstructorException if the request is invalid
+     */
+    public String retrieveFacetConfigurationsV2() throws ConstructorException {
+        return retrieveFacetConfigurationsV2(DEFAULT_SECTION, null, null, null);
+    }
+
+    /**
+     * Retrieves all facet configurations (v2) using a request object
+     *
+     * @param request the facet configurations v2 GET request with pagination
+     * @return returns the facet configurations as JSON string
+     * @throws IllegalArgumentException if request is null
+     * @throws ConstructorException if the request is invalid
+     */
+    public String retrieveFacetConfigurationsV2(FacetConfigurationsV2GetRequest request)
+            throws ConstructorException {
+        if (request == null) {
+            throw new IllegalArgumentException("request is required");
+        }
+        return retrieveFacetConfigurationsV2(
+                request.getSection(),
+                request.getPage(),
+                request.getNumResultsPerPage(),
+                request.getOffset());
+    }
+
+    /**
+     * Retrieves a single facet configuration by name (v2)
+     *
+     * @param facetName the name of the facet to retrieve
+     * @param section the section to which the facet belongs
+     * @return returns the facet configuration as JSON string
+     * @throws IllegalArgumentException if facetName is null or empty
+     * @throws ConstructorException if the request fails
+     */
+    public String retrieveFacetConfigurationV2(String facetName, String section)
+            throws ConstructorException {
+        if (facetName == null || facetName.trim().isEmpty()) {
+            throw new IllegalArgumentException("facetName is required");
+        }
+
+        try {
+            HttpUrl url =
+                    this.makeUrl(Arrays.asList("v2", "facets", facetName))
+                            .newBuilder()
+                            .addQueryParameter(
+                                    "section",
+                                    (section != null && !section.trim().isEmpty())
+                                            ? section
+                                            : DEFAULT_SECTION)
+                            .build();
+
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
+
+            Response response = clientWithRetry.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Retrieves a single facet configuration by name (v2) with default section "Products"
+     *
+     * @param facetName the name of the facet to retrieve
+     * @return returns the facet configuration as JSON string
+     * @throws IllegalArgumentException if facetName is null or empty
+     * @throws ConstructorException if the request fails
+     */
+    public String retrieveFacetConfigurationV2(String facetName) throws ConstructorException {
+        return retrieveFacetConfigurationV2(facetName, DEFAULT_SECTION);
+    }
+
+    /**
+     * Creates a facet configuration (v2)
+     *
+     * @param facetConfigurationV2Request the facet configuration v2 request
+     * @return returns the created facet as JSON string
+     * @throws IllegalArgumentException if request is null, facet configuration is null, or type is
+     *     not one of {@code multiple}, {@code hierarchical}, {@code range}
+     * @throws ConstructorException if the request fails
+     */
+    public String createFacetConfigurationV2(
+            FacetConfigurationV2Request facetConfigurationV2Request) throws ConstructorException {
+        if (facetConfigurationV2Request == null) {
+            throw new IllegalArgumentException("facetConfigurationV2Request is required");
+        }
+        if (facetConfigurationV2Request.getFacetConfiguration() == null) {
+            throw new IllegalArgumentException("facetConfiguration is required");
+        }
+        validateFacetConfigurationV2Type(
+                facetConfigurationV2Request.getFacetConfiguration().getType());
+
+        try {
+            HttpUrl url = this.makeUrl(Arrays.asList("v2", "facets"));
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("section", facetConfigurationV2Request.getSection())
+                            .build();
+
+            String params = new Gson().toJson(facetConfigurationV2Request.getFacetConfiguration());
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).post(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Replaces a facet configuration (v2)
+     *
+     * @param facetConfigurationV2Request the facet configuration v2 request
+     * @return returns the replaced facet as JSON string
+     * @throws IllegalArgumentException if request is null, facetName is missing, or type is not one
+     *     of {@code multiple}, {@code hierarchical}, {@code range}
+     * @throws ConstructorException if the request fails
+     */
+    public String replaceFacetConfigurationV2(
+            FacetConfigurationV2Request facetConfigurationV2Request) throws ConstructorException {
+        if (facetConfigurationV2Request == null) {
+            throw new IllegalArgumentException("facetConfigurationV2Request is required");
+        }
+        if (facetConfigurationV2Request.getFacetConfiguration() == null) {
+            throw new IllegalArgumentException("facetConfiguration is required");
+        }
+
+        String facetName = facetConfigurationV2Request.getFacetConfiguration().getName();
+        if (facetName == null || facetName.trim().isEmpty()) {
+            throw new IllegalArgumentException("facetName is required");
+        }
+        validateFacetConfigurationV2Type(
+                facetConfigurationV2Request.getFacetConfiguration().getType());
+
+        try {
+            HttpUrl url =
+                    this.makeUrl(Arrays.asList("v2", "facets", facetName))
+                            .newBuilder()
+                            .addQueryParameter("section", facetConfigurationV2Request.getSection())
+                            .build();
+
+            String params = new Gson().toJson(facetConfigurationV2Request.getFacetConfiguration());
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).put(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Updates a facet configuration (v2) - partial update
+     *
+     * @param facetConfigurationV2Request the facet configuration v2 request
+     * @return returns the updated facet as JSON string
+     * @throws IllegalArgumentException if request is null or facetName is missing
+     * @throws ConstructorException if the request fails
+     */
+    public String updateFacetConfigurationV2(
+            FacetConfigurationV2Request facetConfigurationV2Request) throws ConstructorException {
+        if (facetConfigurationV2Request == null) {
+            throw new IllegalArgumentException("facetConfigurationV2Request is required");
+        }
+        if (facetConfigurationV2Request.getFacetConfiguration() == null) {
+            throw new IllegalArgumentException("facetConfiguration is required");
+        }
+
+        String facetName = facetConfigurationV2Request.getFacetConfiguration().getName();
+        if (facetName == null || facetName.trim().isEmpty()) {
+            throw new IllegalArgumentException("facetName is required");
+        }
+
+        try {
+            HttpUrl url =
+                    this.makeUrl(Arrays.asList("v2", "facets", facetName))
+                            .newBuilder()
+                            .addQueryParameter("section", facetConfigurationV2Request.getSection())
+                            .build();
+
+            String params = new Gson().toJson(facetConfigurationV2Request.getFacetConfiguration());
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Updates multiple facet configurations (v2) - bulk partial update
+     *
+     * @param facetConfigurationsV2Request the facet configurations v2 request
+     * @return returns the updated facets as JSON string
+     * @throws IllegalArgumentException if request is null
+     * @throws ConstructorException if the request fails
+     */
+    public String updateFacetConfigurationsV2(
+            FacetConfigurationsV2Request facetConfigurationsV2Request) throws ConstructorException {
+        if (facetConfigurationsV2Request == null) {
+            throw new IllegalArgumentException("facetConfigurationsV2Request is required");
+        }
+
+        try {
+            HttpUrl url =
+                    this.makeUrl(Arrays.asList("v2", "facets"))
+                            .newBuilder()
+                            .addQueryParameter("section", facetConfigurationsV2Request.getSection())
+                            .build();
+
+            Map<String, Object> bodyMap = new HashMap<>();
+            bodyMap.put("facets", facetConfigurationsV2Request.getFacetConfigurations());
+            String params = new Gson().toJson(bodyMap);
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Replaces multiple facet configurations (v2) - bulk replace
+     *
+     * @param facetConfigurationsV2Request the facet configurations v2 request
+     * @return returns the replaced facets as JSON string
+     * @throws IllegalArgumentException if request is null
+     * @throws ConstructorException if the request fails
+     */
+    public String replaceFacetConfigurationsV2(
+            FacetConfigurationsV2Request facetConfigurationsV2Request) throws ConstructorException {
+        if (facetConfigurationsV2Request == null) {
+            throw new IllegalArgumentException("facetConfigurationsV2Request is required");
+        }
+
+        List<FacetConfigurationV2> facetConfigurations =
+                facetConfigurationsV2Request.getFacetConfigurations();
+        if (facetConfigurations != null) {
+            for (FacetConfigurationV2 facetConfiguration : facetConfigurations) {
+                validateFacetConfigurationV2Type(facetConfiguration.getType());
+            }
+        }
+
+        try {
+            HttpUrl url =
+                    this.makeUrl(Arrays.asList("v2", "facets"))
+                            .newBuilder()
+                            .addQueryParameter("section", facetConfigurationsV2Request.getSection())
+                            .build();
+
+            Map<String, Object> bodyMap = new HashMap<>();
+            bodyMap.put("facets", facetConfigurationsV2Request.getFacetConfigurations());
+            String params = new Gson().toJson(bodyMap);
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).put(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Deletes a facet configuration (v2)
+     *
+     * @param facetName the facet name
+     * @param section the section to which the facet belongs
+     * @return returns the deleted facet as JSON string
+     * @throws IllegalArgumentException if facetName is null or empty
+     * @throws ConstructorException if the request fails
+     */
+    public String deleteFacetConfigurationV2(String facetName, String section)
+            throws ConstructorException {
+        if (facetName == null || facetName.trim().isEmpty()) {
+            throw new IllegalArgumentException("facetName is required");
+        }
+
+        try {
+            HttpUrl url =
+                    this.makeUrl(Arrays.asList("v2", "facets", facetName))
+                            .newBuilder()
+                            .addQueryParameter(
+                                    "section",
+                                    (section != null && !section.trim().isEmpty())
+                                            ? section
+                                            : DEFAULT_SECTION)
+                            .build();
+
+            Request request = this.makeAuthorizedRequestBuilder().url(url).delete().build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Deletes a facet configuration (v2) with default section "Products"
+     *
+     * @param facetName the facet name
+     * @return returns the deleted facet as JSON string
+     * @throws IllegalArgumentException if facetName is null or empty
+     * @throws ConstructorException if the request fails
+     */
+    public String deleteFacetConfigurationV2(String facetName) throws ConstructorException {
+        return deleteFacetConfigurationV2(facetName, DEFAULT_SECTION);
+    }
+
+    /**
+     * Deletes a facet configuration (v2) using a request object
+     *
+     * @param facetConfigurationV2Request the facetConfiguration v2 request
+     * @return returns the deleted facet as JSON string
+     * @throws IllegalArgumentException if request is null
+     * @throws ConstructorException if the request fails
+     */
+    public String deleteFacetConfigurationV2(
+            FacetConfigurationV2Request facetConfigurationV2Request) throws ConstructorException {
+        if (facetConfigurationV2Request == null) {
+            throw new IllegalArgumentException("facetConfigurationV2Request is required");
+        }
+        if (facetConfigurationV2Request.getFacetConfiguration() == null) {
+            throw new IllegalArgumentException("facetConfiguration is required");
+        }
+
+        return deleteFacetConfigurationV2(
+                facetConfigurationV2Request.getFacetConfiguration().getName(),
+                facetConfigurationV2Request.getSection());
+    }
+
+    // ==================== Searchability V2 API ====================
+
+    /**
+     * Retrieves all searchabilities (v2)
+     *
+     * @param request the searchabilities v2 GET request with filters and pagination
+     * @return returns the searchabilities as JSON string
+     * @throws IllegalArgumentException if request is null
+     * @throws ConstructorException if the request fails
+     */
+    public String retrieveSearchabilitiesV2(SearchabilitiesV2GetRequest request)
+            throws ConstructorException {
+        if (request == null) {
+            throw new IllegalArgumentException("request is required");
+        }
+
+        try {
+            HttpUrl.Builder urlBuilder =
+                    this.makeUrl(Arrays.asList("v2", "searchabilities")).newBuilder();
+
+            urlBuilder.addQueryParameter("section", request.getSection());
+
+            if (request.getPage() != null && request.getPage() > 0) {
+                urlBuilder.addQueryParameter("page", request.getPage().toString());
+            }
+            if (request.getNumResultsPerPage() != null && request.getNumResultsPerPage() > 0) {
+                urlBuilder.addQueryParameter(
+                        "num_results_per_page", request.getNumResultsPerPage().toString());
+            }
+            if (request.getOffset() != null
+                    && request.getOffset() >= 0
+                    && request.getPage() == null) {
+                urlBuilder.addQueryParameter("offset", request.getOffset().toString());
+            }
+            if (request.getName() != null && !request.getName().trim().isEmpty()) {
+                urlBuilder.addQueryParameter("name", request.getName());
+            }
+            if (request.getFuzzySearchable() != null) {
+                urlBuilder.addQueryParameter(
+                        "fuzzy_searchable", request.getFuzzySearchable().toString());
+            }
+            if (request.getExactSearchable() != null) {
+                urlBuilder.addQueryParameter(
+                        "exact_searchable", request.getExactSearchable().toString());
+            }
+            if (request.getDisplayable() != null) {
+                urlBuilder.addQueryParameter("displayable", request.getDisplayable().toString());
+            }
+            if (request.getMatchType() != null && !request.getMatchType().trim().isEmpty()) {
+                urlBuilder.addQueryParameter("match_type", request.getMatchType());
+            }
+            if (request.getSortBy() != null && !request.getSortBy().trim().isEmpty()) {
+                urlBuilder.addQueryParameter("sort_by", request.getSortBy());
+            }
+            if (request.getSortOrder() != null && !request.getSortOrder().trim().isEmpty()) {
+                urlBuilder.addQueryParameter("sort_order", request.getSortOrder());
+            }
+
+            HttpUrl url = urlBuilder.build();
+            Request httpRequest = this.makeAuthorizedRequestBuilder().url(url).get().build();
+
+            Response response = clientWithRetry.newCall(httpRequest).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Retrieves all searchabilities (v2) with default section "Products"
+     *
+     * @return returns the searchabilities as JSON string
+     * @throws ConstructorException if the request fails
+     */
+    public String retrieveSearchabilitiesV2() throws ConstructorException {
+        return retrieveSearchabilitiesV2(new SearchabilitiesV2GetRequest());
+    }
+
+    /**
+     * Retrieves a single searchability by name (v2)
+     *
+     * @param searchabilityV2Request the searchability v2 request
+     * @return returns the searchability as JSON string
+     * @throws IllegalArgumentException if request is null or name is missing
+     * @throws ConstructorException if the request fails
+     */
+    public String retrieveSearchabilityV2(SearchabilityV2Request searchabilityV2Request)
+            throws ConstructorException {
+        if (searchabilityV2Request == null) {
+            throw new IllegalArgumentException("searchabilityV2Request is required");
+        }
+        if (searchabilityV2Request.getName() == null
+                || searchabilityV2Request.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("name is required");
+        }
+
+        try {
+            HttpUrl url =
+                    this.makeUrl(
+                                    Arrays.asList(
+                                            "v2",
+                                            "searchabilities",
+                                            searchabilityV2Request.getName()))
+                            .newBuilder()
+                            .addQueryParameter("section", searchabilityV2Request.getSection())
+                            .build();
+
+            Request request = this.makeAuthorizedRequestBuilder().url(url).get().build();
+
+            Response response = clientWithRetry.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Retrieves a single searchability by name (v2)
+     *
+     * @param name the name of the searchability field
+     * @param section the section to which the searchability belongs
+     * @return returns the searchability as JSON string
+     * @throws IllegalArgumentException if name is null or empty
+     * @throws ConstructorException if the request fails
+     */
+    public String retrieveSearchabilityV2(String name, String section) throws ConstructorException {
+        return retrieveSearchabilityV2(new SearchabilityV2Request(name, section));
+    }
+
+    /**
+     * Retrieves a single searchability by name (v2) with default section "Products"
+     *
+     * @param name the name of the searchability field
+     * @return returns the searchability as JSON string
+     * @throws IllegalArgumentException if name is null or empty
+     * @throws ConstructorException if the request fails
+     */
+    public String retrieveSearchabilityV2(String name) throws ConstructorException {
+        return retrieveSearchabilityV2(name, DEFAULT_SECTION);
+    }
+
+    /**
+     * Creates or updates a single searchability (v2)
+     *
+     * @param searchabilityV2Request the searchability v2 request
+     * @return returns the created/updated searchability as JSON string
+     * @throws IllegalArgumentException if request is null, name is missing, or searchability body
+     *     is null
+     * @throws ConstructorException if the request fails
+     */
+    public String createOrUpdateSearchabilityV2(SearchabilityV2Request searchabilityV2Request)
+            throws ConstructorException {
+        if (searchabilityV2Request == null) {
+            throw new IllegalArgumentException("searchabilityV2Request is required");
+        }
+        if (searchabilityV2Request.getName() == null
+                || searchabilityV2Request.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("name is required");
+        }
+        if (searchabilityV2Request.getSearchability() == null) {
+            throw new IllegalArgumentException("searchability body is required for create/update");
+        }
+
+        try {
+            HttpUrl.Builder urlBuilder =
+                    this.makeUrl(
+                                    Arrays.asList(
+                                            "v2",
+                                            "searchabilities",
+                                            searchabilityV2Request.getName()))
+                            .newBuilder()
+                            .addQueryParameter("section", searchabilityV2Request.getSection());
+
+            if (searchabilityV2Request.getSkipRebuild() != null) {
+                urlBuilder.addQueryParameter(
+                        "skip_rebuild", searchabilityV2Request.getSkipRebuild().toString());
+            }
+
+            HttpUrl url = urlBuilder.build();
+
+            String params =
+                    GSON_WITHOUT_SEARCHABILITY_NAME.toJson(
+                            searchabilityV2Request.getSearchability());
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Creates or updates multiple searchabilities (v2) - bulk operation
+     *
+     * @param searchabilitiesV2Request the searchabilities v2 request
+     * @return returns the created/updated searchabilities as JSON string
+     * @throws IllegalArgumentException if request is null
+     * @throws ConstructorException if the request fails
+     */
+    public String createOrUpdateSearchabilitiesV2(SearchabilitiesV2Request searchabilitiesV2Request)
+            throws ConstructorException {
+        if (searchabilitiesV2Request == null) {
+            throw new IllegalArgumentException("searchabilitiesV2Request is required");
+        }
+
+        try {
+            HttpUrl.Builder urlBuilder =
+                    this.makeUrl(Arrays.asList("v2", "searchabilities"))
+                            .newBuilder()
+                            .addQueryParameter("section", searchabilitiesV2Request.getSection());
+
+            if (searchabilitiesV2Request.getSkipRebuild() != null) {
+                urlBuilder.addQueryParameter(
+                        "skip_rebuild", searchabilitiesV2Request.getSkipRebuild().toString());
+            }
+
+            HttpUrl url = urlBuilder.build();
+
+            Map<String, Object> bodyMap = new HashMap<>();
+            bodyMap.put("searchabilities", searchabilitiesV2Request.getSearchabilities());
+            String params = new Gson().toJson(bodyMap);
+            RequestBody body =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request request = this.makeAuthorizedRequestBuilder().url(url).patch(body).build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Deletes a single searchability (v2)
+     *
+     * @param searchabilityV2Request the searchability v2 request
+     * @return returns the deleted searchability as JSON string
+     * @throws IllegalArgumentException if request is null or name is missing
+     * @throws ConstructorException if the request fails
+     */
+    public String deleteSearchabilityV2(SearchabilityV2Request searchabilityV2Request)
+            throws ConstructorException {
+        if (searchabilityV2Request == null) {
+            throw new IllegalArgumentException("searchabilityV2Request is required");
+        }
+        if (searchabilityV2Request.getName() == null
+                || searchabilityV2Request.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("name is required");
+        }
+
+        try {
+            HttpUrl.Builder urlBuilder =
+                    this.makeUrl(
+                                    Arrays.asList(
+                                            "v2",
+                                            "searchabilities",
+                                            searchabilityV2Request.getName()))
+                            .newBuilder()
+                            .addQueryParameter("section", searchabilityV2Request.getSection());
+
+            if (searchabilityV2Request.getSkipRebuild() != null) {
+                urlBuilder.addQueryParameter(
+                        "skip_rebuild", searchabilityV2Request.getSkipRebuild().toString());
+            }
+
+            HttpUrl url = urlBuilder.build();
+            Request request = this.makeAuthorizedRequestBuilder().url(url).delete().build();
+
+            Response response = client.newCall(request).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Deletes a single searchability (v2)
+     *
+     * @param name the name of the searchability field
+     * @param section the section to which the searchability belongs
+     * @return returns the deleted searchability as JSON string
+     * @throws IllegalArgumentException if name is null or empty
+     * @throws ConstructorException if the request fails
+     */
+    public String deleteSearchabilityV2(String name, String section) throws ConstructorException {
+        return deleteSearchabilityV2(new SearchabilityV2Request(name, section));
+    }
+
+    /**
+     * Deletes a single searchability (v2) with default section "Products"
+     *
+     * @param name the name of the searchability field
+     * @return returns the deleted searchability as JSON string
+     * @throws IllegalArgumentException if name is null or empty
+     * @throws ConstructorException if the request fails
+     */
+    public String deleteSearchabilityV2(String name) throws ConstructorException {
+        return deleteSearchabilityV2(name, DEFAULT_SECTION);
+    }
+
+    /**
+     * Deletes multiple searchabilities (v2) - bulk operation
+     *
+     * @param request the searchabilities v2 delete request with names to delete
+     * @return returns the deleted searchabilities as JSON string
+     * @throws IllegalArgumentException if request is null
+     * @throws ConstructorException if the request fails
+     */
+    public String deleteSearchabilitiesV2(SearchabilitiesV2DeleteRequest request)
+            throws ConstructorException {
+        if (request == null) {
+            throw new IllegalArgumentException("request is required");
+        }
+
+        try {
+            HttpUrl.Builder urlBuilder =
+                    this.makeUrl(Arrays.asList("v2", "searchabilities"))
+                            .newBuilder()
+                            .addQueryParameter("section", request.getSection());
+
+            if (request.getSkipRebuild() != null) {
+                urlBuilder.addQueryParameter("skip_rebuild", request.getSkipRebuild().toString());
+            }
+
+            HttpUrl url = urlBuilder.build();
+
+            List<Map<String, String>> searchabilitiesBody = new ArrayList<>();
+            for (String name : request.getSearchabilityNames()) {
+                Map<String, String> item = new HashMap<>();
+                item.put("name", name);
+                searchabilitiesBody.add(item);
+            }
+
+            Map<String, Object> bodyMap = new HashMap<>();
+            bodyMap.put("searchabilities", searchabilitiesBody);
+            String params = new Gson().toJson(bodyMap);
+            RequestBody httpBody =
+                    RequestBody.create(params, MediaType.parse("application/json; charset=utf-8"));
+            Request httpRequest =
+                    this.makeAuthorizedRequestBuilder().url(url).delete(httpBody).build();
+
+            Response response = client.newCall(httpRequest).execute();
+
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
     }
 }

@@ -17,7 +17,8 @@ public class SearchResponse {
     @SerializedName("request")
     private Map<String, Object> request;
 
-    private transient Map<String, List<String>> headers = Collections.emptyMap();
+    private transient Map<String, List<String>> headers =
+            Collections.<String, List<String>>emptyMap();
 
     /**
      * @return the resultId
@@ -60,6 +61,6 @@ public class SearchResponse {
     }
 
     public void setHeaders(Map<String, List<String>> headers) {
-        this.headers = (headers != null) ? headers : Collections.emptyMap();
+        this.headers = (headers != null) ? headers : Collections.<String, List<String>>emptyMap();
     }
 }

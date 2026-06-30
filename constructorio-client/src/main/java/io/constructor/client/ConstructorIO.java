@@ -968,66 +968,73 @@ public class ConstructorIO {
      * @throws ConstructorException
      */
     protected Request createAutocompleteRequest(AutocompleteRequest req, UserInfo userInfo)
-            throws ConstructorException, UnsupportedEncodingException {
-        List<String> paths = Arrays.asList("autocomplete", req.getQuery());
-        HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
+            throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList("autocomplete", req.getQuery());
+            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
 
-        for (Map.Entry<String, Integer> entry : req.getResultsPerSection().entrySet()) {
-            String section = entry.getKey();
-            String count = String.valueOf(entry.getValue());
-            url = url.newBuilder().addQueryParameter("num_results_" + section, count).build();
-        }
+            for (Map.Entry<String, Integer> entry : req.getResultsPerSection().entrySet()) {
+                String section = entry.getKey();
+                String count = String.valueOf(entry.getValue());
+                url = url.newBuilder().addQueryParameter("num_results_" + section, count).build();
+            }
 
-        for (String hiddenField : req.getHiddenFields()) {
-            url =
-                    url.newBuilder()
-                            .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
-                            .build();
-        }
-
-        for (String filterName : req.getFilters().keySet()) {
-            for (String facetValue : req.getFilters().get(filterName)) {
+            for (String hiddenField : req.getHiddenFields()) {
                 url =
                         url.newBuilder()
-                                .addQueryParameter("filters[" + filterName + "]", facetValue)
+                                .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
                                 .build();
             }
-        }
 
-        for (String sectionName : req.getFiltersPerSection().keySet()) {
-            for (String filterName : req.getFiltersPerSection().get(sectionName).keySet()) {
-                for (String facetValue :
-                        req.getFiltersPerSection().get(sectionName).get(filterName)) {
+            for (String filterName : req.getFilters().keySet()) {
+                for (String facetValue : req.getFilters().get(filterName)) {
                     url =
                             url.newBuilder()
-                                    .addQueryParameter(
-                                            "filters"
-                                                    + "["
-                                                    + sectionName
-                                                    + "]"
-                                                    + "["
-                                                    + filterName
-                                                    + "]",
-                                            facetValue)
+                                    .addQueryParameter("filters[" + filterName + "]", facetValue)
                                     .build();
                 }
             }
-        }
 
-        if (req.getVariationsMap() != null) {
-            String variationsMapJson = new Gson().toJson(req.getVariationsMap());
-            url = url.newBuilder().addQueryParameter("variations_map", variationsMapJson).build();
-        }
+            for (String sectionName : req.getFiltersPerSection().keySet()) {
+                for (String filterName : req.getFiltersPerSection().get(sectionName).keySet()) {
+                    for (String facetValue :
+                            req.getFiltersPerSection().get(sectionName).get(filterName)) {
+                        url =
+                                url.newBuilder()
+                                        .addQueryParameter(
+                                                "filters"
+                                                        + "["
+                                                        + sectionName
+                                                        + "]"
+                                                        + "["
+                                                        + filterName
+                                                        + "]",
+                                                facetValue)
+                                        .build();
+                    }
+                }
+            }
 
-        if (req.getPreFilterExpression() != null) {
-            url =
-                    url.newBuilder()
-                            .addQueryParameter(
-                                    "pre_filter_expression", req.getPreFilterExpression())
-                            .build();
-        }
+            if (req.getVariationsMap() != null) {
+                String variationsMapJson = new Gson().toJson(req.getVariationsMap());
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("variations_map", variationsMapJson)
+                                .build();
+            }
 
-        return this.makeUserRequestBuilder(userInfo).url(url).get().build();
+            if (req.getPreFilterExpression() != null) {
+                url =
+                        url.newBuilder()
+                                .addQueryParameter(
+                                        "pre_filter_expression", req.getPreFilterExpression())
+                                .build();
+            }
+
+            return this.makeUserRequestBuilder(userInfo).url(url).get().build();
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
     }
 
     /**

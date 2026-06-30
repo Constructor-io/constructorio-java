@@ -1,6 +1,7 @@
 package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ public class AutocompleteResponse {
 
     @SerializedName("request")
     private Map<String, Object> request;
+
+    private transient Map<String, List<String>> headers = Collections.emptyMap();
 
     /**
      * @return the resultId
@@ -37,6 +40,13 @@ public class AutocompleteResponse {
         return request;
     }
 
+    /**
+     * @return the HTTP response headers
+     */
+    public Map<String, List<String>> getHeaders() {
+        return headers;
+    }
+
     public void setSections(Map<String, List<Result>> sections) {
         this.sections = sections;
     }
@@ -49,16 +59,7 @@ public class AutocompleteResponse {
         this.request = request;
     }
 
-    private transient Map<String, List<String>> headers;
-
-    /**
-     * @return the HTTP response headers, or null if not available
-     */
-    public Map<String, List<String>> getHeaders() {
-        return headers;
-    }
-
     public void setHeaders(Map<String, List<String>> headers) {
-        this.headers = headers;
+        this.headers = (headers != null) ? headers : Collections.emptyMap();
     }
 }

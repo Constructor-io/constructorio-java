@@ -1,6 +1,7 @@
 package io.constructor.client.models;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 import java.util.Map;
 
 /** Constructor.io Search Response ... uses Gson/Reflection to load data in */
@@ -46,5 +47,18 @@ public class SearchResponse {
 
     public void setRequest(Map<String, Object> request) {
         this.request = request;
+    }
+
+    private transient Map<String, List<String>> headers;
+
+    /**
+     * @return the HTTP response headers, or null if not available
+     */
+    public Map<String, List<String>> getHeaders() {
+        return headers;
+    }
+
+    public void setHeaders(Map<String, List<String>> headers) {
+        this.headers = headers;
     }
 }

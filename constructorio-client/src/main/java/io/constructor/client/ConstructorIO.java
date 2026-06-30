@@ -926,8 +926,11 @@ public class ConstructorIO {
     public AutocompleteResponse autocomplete(AutocompleteRequest req, UserInfo userInfo)
             throws ConstructorException {
         try {
-            String json = autocompleteAsJSON(req, userInfo);
-            return createAutocompleteResponse(json);
+            Request request = createAutocompleteRequest(req, userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            Map<String, List<String>> headers = response.headers().toMultimap();
+            String json = getResponseBody(response);
+            return createAutocompleteResponse(json, headers);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -948,74 +951,83 @@ public class ConstructorIO {
     public String autocompleteAsJSON(AutocompleteRequest req, UserInfo userInfo)
             throws ConstructorException {
         try {
-            List<String> paths = Arrays.asList("autocomplete", req.getQuery());
-            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
-
-            for (Map.Entry<String, Integer> entry : req.getResultsPerSection().entrySet()) {
-                String section = entry.getKey();
-                String count = String.valueOf(entry.getValue());
-                url = url.newBuilder().addQueryParameter("num_results_" + section, count).build();
-            }
-
-            for (String hiddenField : req.getHiddenFields()) {
-                url =
-                        url.newBuilder()
-                                .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
-                                .build();
-            }
-
-            for (String filterName : req.getFilters().keySet()) {
-                for (String facetValue : req.getFilters().get(filterName)) {
-                    url =
-                            url.newBuilder()
-                                    .addQueryParameter("filters[" + filterName + "]", facetValue)
-                                    .build();
-                }
-            }
-
-            for (String sectionName : req.getFiltersPerSection().keySet()) {
-                for (String filterName : req.getFiltersPerSection().get(sectionName).keySet()) {
-                    for (String facetValue :
-                            req.getFiltersPerSection().get(sectionName).get(filterName)) {
-                        url =
-                                url.newBuilder()
-                                        .addQueryParameter(
-                                                "filters"
-                                                        + "["
-                                                        + sectionName
-                                                        + "]"
-                                                        + "["
-                                                        + filterName
-                                                        + "]",
-                                                facetValue)
-                                        .build();
-                    }
-                }
-            }
-
-            if (req.getVariationsMap() != null) {
-                String variationsMapJson = new Gson().toJson(req.getVariationsMap());
-                url =
-                        url.newBuilder()
-                                .addQueryParameter("variations_map", variationsMapJson)
-                                .build();
-            }
-
-            if (req.getPreFilterExpression() != null) {
-                url =
-                        url.newBuilder()
-                                .addQueryParameter(
-                                        "pre_filter_expression", req.getPreFilterExpression())
-                                .build();
-            }
-
-            Request request = this.makeUserRequestBuilder(userInfo).url(url).get().build();
-
+            Request request = createAutocompleteRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
             return getResponseBody(response);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
+    }
+
+    /**
+     * Creates an autocomplete OkHttp request
+     *
+     * @param req the autocomplete request
+     * @param userInfo optional information about the user
+     * @return an autocomplete OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createAutocompleteRequest(AutocompleteRequest req, UserInfo userInfo)
+            throws ConstructorException, UnsupportedEncodingException {
+        List<String> paths = Arrays.asList("autocomplete", req.getQuery());
+        HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
+
+        for (Map.Entry<String, Integer> entry : req.getResultsPerSection().entrySet()) {
+            String section = entry.getKey();
+            String count = String.valueOf(entry.getValue());
+            url = url.newBuilder().addQueryParameter("num_results_" + section, count).build();
+        }
+
+        for (String hiddenField : req.getHiddenFields()) {
+            url =
+                    url.newBuilder()
+                            .addQueryParameter("fmt_options[hidden_fields]", hiddenField)
+                            .build();
+        }
+
+        for (String filterName : req.getFilters().keySet()) {
+            for (String facetValue : req.getFilters().get(filterName)) {
+                url =
+                        url.newBuilder()
+                                .addQueryParameter("filters[" + filterName + "]", facetValue)
+                                .build();
+            }
+        }
+
+        for (String sectionName : req.getFiltersPerSection().keySet()) {
+            for (String filterName : req.getFiltersPerSection().get(sectionName).keySet()) {
+                for (String facetValue :
+                        req.getFiltersPerSection().get(sectionName).get(filterName)) {
+                    url =
+                            url.newBuilder()
+                                    .addQueryParameter(
+                                            "filters"
+                                                    + "["
+                                                    + sectionName
+                                                    + "]"
+                                                    + "["
+                                                    + filterName
+                                                    + "]",
+                                            facetValue)
+                                    .build();
+                }
+            }
+        }
+
+        if (req.getVariationsMap() != null) {
+            String variationsMapJson = new Gson().toJson(req.getVariationsMap());
+            url = url.newBuilder().addQueryParameter("variations_map", variationsMapJson).build();
+        }
+
+        if (req.getPreFilterExpression() != null) {
+            url =
+                    url.newBuilder()
+                            .addQueryParameter(
+                                    "pre_filter_expression", req.getPreFilterExpression())
+                            .build();
+        }
+
+        return this.makeUserRequestBuilder(userInfo).url(url).get().build();
     }
 
     /**
@@ -1171,8 +1183,9 @@ public class ConstructorIO {
         try {
             Request request = createSearchRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
+            Map<String, List<String>> headers = response.headers().toMultimap();
             String json = getResponseBody(response);
-            return createSearchResponse(json);
+            return createSearchResponse(json, headers);
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -2200,6 +2213,11 @@ public class ConstructorIO {
      * to do it in a Gson Type Adapter.
      */
     protected static AutocompleteResponse createAutocompleteResponse(String string) {
+        return createAutocompleteResponse(string, null);
+    }
+
+    protected static AutocompleteResponse createAutocompleteResponse(
+            String string, Map<String, List<String>> headers) {
         JSONObject json = new JSONObject(string);
         JSONObject sections = json.getJSONObject("sections");
         for (Object sectionKey : sections.keySet()) {
@@ -2208,7 +2226,11 @@ public class ConstructorIO {
             moveMetadataOutOfResultData(results);
         }
         String transformed = json.toString();
-        return new Gson().fromJson(transformed, AutocompleteResponse.class);
+        AutocompleteResponse autocompleteResponse =
+                new Gson().fromJson(transformed, AutocompleteResponse.class);
+        autocompleteResponse.setHeaders(headers);
+
+        return autocompleteResponse;
     }
 
     /**
@@ -2217,6 +2239,11 @@ public class ConstructorIO {
      * in a Gson Type Adapter.
      */
     protected static SearchResponse createSearchResponse(String string) {
+        return createSearchResponse(string, null);
+    }
+
+    protected static SearchResponse createSearchResponse(
+            String string, Map<String, List<String>> headers) {
         JSONObject json = new JSONObject(string);
         JSONObject response = json.getJSONObject("response");
         JSONArray results;
@@ -2227,7 +2254,9 @@ public class ConstructorIO {
         }
 
         String transformed = json.toString();
-        return new Gson().fromJson(transformed, SearchResponse.class);
+        SearchResponse searchResponse = new Gson().fromJson(transformed, SearchResponse.class);
+        searchResponse.setHeaders(headers);
+        return searchResponse;
     }
 
     /**

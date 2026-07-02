@@ -1227,8 +1227,10 @@ public class ConstructorIO {
                                 public void onResponse(Call call, final Response response)
                                         throws IOException {
                                     try {
+                                        Map<String, List<String>> headers =
+                                                response.headers().toMultimap();
                                         String json = getResponseBody(response);
-                                        SearchResponse res = createSearchResponse(json);
+                                        SearchResponse res = createSearchResponse(json, headers);
                                         c.onResponse(res);
                                     } catch (Exception e) {
                                         c.onFailure(new ConstructorException(e));

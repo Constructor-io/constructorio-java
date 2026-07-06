@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
 /** Constructor.io Search Response ... uses Gson/Reflection to load data in */
-public class SearchResponse {
+public class SearchResponse extends ResponseHeaders {
 
     @SerializedName("result_id")
     private String resultId;

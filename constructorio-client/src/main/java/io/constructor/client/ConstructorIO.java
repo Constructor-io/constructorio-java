@@ -12,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -925,11 +926,17 @@ public class ConstructorIO {
      */
     public AutocompleteResponse autocomplete(AutocompleteRequest req, UserInfo userInfo)
             throws ConstructorException {
+        Map<String, List<String>> headers = Collections.<String, List<String>>emptyMap();
         try {
-            String json = autocompleteAsJSON(req, userInfo);
-            return createAutocompleteResponse(json);
+            Request request = createAutocompleteRequest(req, userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            headers = response.headers().toMultimap();
+            String json = getResponseBody(response);
+            return createAutocompleteResponse(json, headers);
         } catch (Exception exception) {
-            throw new ConstructorException(exception);
+            ConstructorException ce = new ConstructorException(exception);
+            ce.setHeaders(headers);
+            throw ce;
         }
     }
 
@@ -946,6 +953,25 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public String autocompleteAsJSON(AutocompleteRequest req, UserInfo userInfo)
+            throws ConstructorException {
+        try {
+            Request request = createAutocompleteRequest(req, userInfo);
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Creates an autocomplete OkHttp request
+     *
+     * @param req the autocomplete request
+     * @param userInfo optional information about the user
+     * @return an autocomplete OkHttp request
+     * @throws ConstructorException
+     */
+    protected Request createAutocompleteRequest(AutocompleteRequest req, UserInfo userInfo)
             throws ConstructorException {
         try {
             List<String> paths = Arrays.asList("autocomplete", req.getQuery());
@@ -1009,10 +1035,7 @@ public class ConstructorIO {
                                 .build();
             }
 
-            Request request = this.makeUserRequestBuilder(userInfo).url(url).get().build();
-
-            Response response = clientWithRetry.newCall(request).execute();
-            return getResponseBody(response);
+            return this.makeUserRequestBuilder(userInfo).url(url).get().build();
         } catch (Exception exception) {
             throw new ConstructorException(exception);
         }
@@ -1168,13 +1191,17 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
+        Map<String, List<String>> headers = Collections.<String, List<String>>emptyMap();
         try {
             Request request = createSearchRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
+            headers = response.headers().toMultimap();
             String json = getResponseBody(response);
-            return createSearchResponse(json);
+            return createSearchResponse(json, headers);
         } catch (Exception exception) {
-            throw new ConstructorException(exception);
+            ConstructorException ce = new ConstructorException(exception);
+            ce.setHeaders(headers);
+            throw ce;
         }
     }
 
@@ -1206,12 +1233,17 @@ public class ConstructorIO {
                                 @Override
                                 public void onResponse(Call call, final Response response)
                                         throws IOException {
+                                    Map<String, List<String>> headers =
+                                            Collections.<String, List<String>>emptyMap();
                                     try {
+                                        headers = response.headers().toMultimap();
                                         String json = getResponseBody(response);
-                                        SearchResponse res = createSearchResponse(json);
+                                        SearchResponse res = createSearchResponse(json, headers);
                                         c.onResponse(res);
                                     } catch (Exception e) {
-                                        c.onFailure(new ConstructorException(e));
+                                        ConstructorException ce = new ConstructorException(e);
+                                        ce.setHeaders(headers);
+                                        c.onFailure(ce);
                                     }
                                 }
                             });
@@ -2200,6 +2232,18 @@ public class ConstructorIO {
      * to do it in a Gson Type Adapter.
      */
     protected static AutocompleteResponse createAutocompleteResponse(String string) {
+        return createAutocompleteResponse(string, null);
+    }
+
+    /**
+     * Transforms a JSON string to an AutocompleteResponse, setting the provided HTTP headers.
+     *
+     * @param string the JSON response string
+     * @param headers the HTTP response headers, or null for an empty map
+     * @return the parsed AutocompleteResponse
+     */
+    protected static AutocompleteResponse createAutocompleteResponse(
+            String string, Map<String, List<String>> headers) {
         JSONObject json = new JSONObject(string);
         JSONObject sections = json.getJSONObject("sections");
         for (Object sectionKey : sections.keySet()) {
@@ -2208,7 +2252,11 @@ public class ConstructorIO {
             moveMetadataOutOfResultData(results);
         }
         String transformed = json.toString();
-        return new Gson().fromJson(transformed, AutocompleteResponse.class);
+        AutocompleteResponse autocompleteResponse =
+                new Gson().fromJson(transformed, AutocompleteResponse.class);
+        autocompleteResponse.setHeaders(headers);
+
+        return autocompleteResponse;
     }
 
     /**
@@ -2217,6 +2265,18 @@ public class ConstructorIO {
      * in a Gson Type Adapter.
      */
     protected static SearchResponse createSearchResponse(String string) {
+        return createSearchResponse(string, null);
+    }
+
+    /**
+     * Transforms a JSON string to a SearchResponse, setting the provided HTTP headers.
+     *
+     * @param string the JSON response string
+     * @param headers the HTTP response headers, or null for an empty map
+     * @return the parsed SearchResponse
+     */
+    protected static SearchResponse createSearchResponse(
+            String string, Map<String, List<String>> headers) {
         JSONObject json = new JSONObject(string);
         JSONObject response = json.getJSONObject("response");
         JSONArray results;
@@ -2227,7 +2287,9 @@ public class ConstructorIO {
         }
 
         String transformed = json.toString();
-        return new Gson().fromJson(transformed, SearchResponse.class);
+        SearchResponse searchResponse = new Gson().fromJson(transformed, SearchResponse.class);
+        searchResponse.setHeaders(headers);
+        return searchResponse;
     }
 
     /**

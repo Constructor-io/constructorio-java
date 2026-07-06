@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /** Constructor.io Autocomplete Response ... uses Gson/Reflection to load data in */
-public class AutocompleteResponse {
+public class AutocompleteResponse extends ResponseHeaders {
 
     @SerializedName("sections")
     private Map<String, List<Result>> sections;

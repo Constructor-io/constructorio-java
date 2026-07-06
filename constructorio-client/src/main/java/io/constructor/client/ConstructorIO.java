@@ -925,14 +925,17 @@ public class ConstructorIO {
      */
     public AutocompleteResponse autocomplete(AutocompleteRequest req, UserInfo userInfo)
             throws ConstructorException {
+        Map<String, List<String>> headers = null;
         try {
             Request request = createAutocompleteRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
-            Map<String, List<String>> headers = response.headers().toMultimap();
+            headers = response.headers().toMultimap();
             String json = getResponseBody(response);
             return createAutocompleteResponse(json, headers);
         } catch (Exception exception) {
-            throw new ConstructorException(exception);
+            ConstructorException ce = new ConstructorException(exception);
+            ce.setHeaders(headers);
+            throw ce;
         }
     }
 
@@ -1187,14 +1190,17 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
+        Map<String, List<String>> headers = null;
         try {
             Request request = createSearchRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
-            Map<String, List<String>> headers = response.headers().toMultimap();
+            headers = response.headers().toMultimap();
             String json = getResponseBody(response);
             return createSearchResponse(json, headers);
         } catch (Exception exception) {
-            throw new ConstructorException(exception);
+            ConstructorException ce = new ConstructorException(exception);
+            ce.setHeaders(headers);
+            throw ce;
         }
     }
 
@@ -1226,14 +1232,16 @@ public class ConstructorIO {
                                 @Override
                                 public void onResponse(Call call, final Response response)
                                         throws IOException {
+                                    Map<String, List<String>> headers = null;
                                     try {
-                                        Map<String, List<String>> headers =
-                                                response.headers().toMultimap();
+                                        headers = response.headers().toMultimap();
                                         String json = getResponseBody(response);
                                         SearchResponse res = createSearchResponse(json, headers);
                                         c.onResponse(res);
                                     } catch (Exception e) {
-                                        c.onFailure(new ConstructorException(e));
+                                        ConstructorException ce = new ConstructorException(e);
+                                        ce.setHeaders(headers);
+                                        c.onFailure(ce);
                                     }
                                 }
                             });

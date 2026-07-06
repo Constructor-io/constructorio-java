@@ -2,6 +2,7 @@ package io.constructor.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import io.constructor.client.models.SearchResponse;
 import java.util.List;
@@ -139,5 +140,40 @@ public class ConstructorIOSearchUrlEncodingTest {
                 "rate limit remaining header", "99", headers.get("x-ratelimit-remaining").get(0));
         assertEquals(
                 "rate limit reset header", "1620000000", headers.get("x-ratelimit-reset").get(0));
+    }
+
+    @Test
+    public void SearchShouldReturnRateLimitHeadersOnError() throws Exception {
+        MockResponse mockResponse =
+                new MockResponse()
+                        .setResponseCode(429)
+                        .setBody("{\"message\":\"Too Many Requests\"}")
+                        .addHeader("X-RateLimit-Limit", "100")
+                        .addHeader("X-RateLimit-Remaining", "0")
+                        .addHeader("X-RateLimit-Reset", "1620000060");
+        mockServer.enqueue(mockResponse);
+
+        ConstructorIO constructor =
+                new ConstructorIO("", apiKey, false, "127.0.0.1", mockServer.getPort());
+        SearchRequest request = new SearchRequest("peanut");
+
+        try {
+            constructor.search(request, null);
+            fail("Expected ConstructorException to be thrown");
+        } catch (ConstructorException e) {
+            mockServer.takeRequest();
+
+            Map<String, List<String>> headers = e.getHeaders();
+            assertNotNull("headers should not be null", headers);
+            assertEquals("rate limit header", "100", headers.get("x-ratelimit-limit").get(0));
+            assertEquals(
+                    "rate limit remaining header",
+                    "0",
+                    headers.get("x-ratelimit-remaining").get(0));
+            assertEquals(
+                    "rate limit reset header",
+                    "1620000060",
+                    headers.get("x-ratelimit-reset").get(0));
+        }
     }
 }

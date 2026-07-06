@@ -32,7 +32,8 @@ public class ConstructorIOVariationsTest {
 
         constructor.deleteVariations(
                 variationsToCleanup.toArray(new ConstructorVariation[variationsToCleanup.size()]),
-                "Products");
+                "Products",
+                true);
     }
 
     @Rule public ExpectedException thrown = ExpectedException.none();

@@ -30,7 +30,7 @@ public class ConstructorIOItemsTest {
         ConstructorIO constructor = new ConstructorIO(token, apiKey, true, null);
 
         constructor.deleteItems(
-                itemsToCleanup.toArray(new ConstructorItem[itemsToCleanup.size()]), "Products");
+                itemsToCleanup.toArray(new ConstructorItem[itemsToCleanup.size()]), "Products", true);
     }
 
     @Rule public ExpectedException thrown = ExpectedException.none();

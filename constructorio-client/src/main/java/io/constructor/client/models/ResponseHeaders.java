@@ -4,7 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/** Base class that provides access to HTTP response headers. */
+/**
+ * Base class that provides access to HTTP response headers. Abstract rather than an interface
+ * because Java 7 does not support default methods, and we want to avoid duplicating the field and
+ * method bodies in every response class.
+ */
 public abstract class ResponseHeaders {
 
     private transient Map<String, List<String>> headers =

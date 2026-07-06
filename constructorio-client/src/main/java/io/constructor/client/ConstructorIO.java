@@ -12,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -925,7 +926,7 @@ public class ConstructorIO {
      */
     public AutocompleteResponse autocomplete(AutocompleteRequest req, UserInfo userInfo)
             throws ConstructorException {
-        Map<String, List<String>> headers = null;
+        Map<String, List<String>> headers = Collections.<String, List<String>>emptyMap();
         try {
             Request request = createAutocompleteRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
@@ -1190,7 +1191,7 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public SearchResponse search(SearchRequest req, UserInfo userInfo) throws ConstructorException {
-        Map<String, List<String>> headers = null;
+        Map<String, List<String>> headers = Collections.<String, List<String>>emptyMap();
         try {
             Request request = createSearchRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
@@ -1232,7 +1233,8 @@ public class ConstructorIO {
                                 @Override
                                 public void onResponse(Call call, final Response response)
                                         throws IOException {
-                                    Map<String, List<String>> headers = null;
+                                    Map<String, List<String>> headers =
+                                            Collections.<String, List<String>>emptyMap();
                                     try {
                                         headers = response.headers().toMultimap();
                                         String json = getResponseBody(response);
@@ -2233,6 +2235,13 @@ public class ConstructorIO {
         return createAutocompleteResponse(string, null);
     }
 
+    /**
+     * Transforms a JSON string to an AutocompleteResponse, setting the provided HTTP headers.
+     *
+     * @param string the JSON response string
+     * @param headers the HTTP response headers, or null for an empty map
+     * @return the parsed AutocompleteResponse
+     */
     protected static AutocompleteResponse createAutocompleteResponse(
             String string, Map<String, List<String>> headers) {
         JSONObject json = new JSONObject(string);
@@ -2259,6 +2268,13 @@ public class ConstructorIO {
         return createSearchResponse(string, null);
     }
 
+    /**
+     * Transforms a JSON string to a SearchResponse, setting the provided HTTP headers.
+     *
+     * @param string the JSON response string
+     * @param headers the HTTP response headers, or null for an empty map
+     * @return the parsed SearchResponse
+     */
     protected static SearchResponse createSearchResponse(
             String string, Map<String, List<String>> headers) {
         JSONObject json = new JSONObject(string);

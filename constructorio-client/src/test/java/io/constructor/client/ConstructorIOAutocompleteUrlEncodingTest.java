@@ -103,6 +103,28 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
     }
 
     @Test
+    public void AutocompleteWithQsParamShouldBeEncodedInUrl() throws Exception {
+        String string = Utils.getTestResource("response.autocomplete.peanut.json");
+        MockResponse mockResponse = new MockResponse().setResponseCode(200).setBody(string);
+        mockServer.enqueue(mockResponse);
+
+        ConstructorIO constructor =
+                new ConstructorIO("", apiKey, false, "127.0.0.1", mockServer.getPort());
+        AutocompleteRequest request = new AutocompleteRequest("peanut");
+        request.setQsParam("{\"filters\":{\"Color\":[\"green\"]}}");
+        constructor.autocomplete(request, null);
+
+        RecordedRequest recordedRequest = mockServer.takeRequest();
+        String expectedPath =
+                String.format(
+                        "/autocomplete/peanut?key=%s&c=ciojava-7.6.0"
+                            + "&qs=%%7B%%22filters%%22%%3A%%7B%%22Color%%22%%3A%%5B%%22green%%22%%5D%%7D%%7D",
+                        apiKey);
+        String actualPath = recordedRequest.getPath();
+        assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
+    }
+
+    @Test
     public void AutocompleteShouldReturnRateLimitHeaders() throws Exception {
         String string = Utils.getTestResource("response.autocomplete.peanut.json");
         MockResponse mockResponse =

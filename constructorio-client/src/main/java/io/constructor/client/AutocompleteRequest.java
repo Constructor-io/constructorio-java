@@ -15,6 +15,7 @@ public class AutocompleteRequest {
     private VariationsMap variationsMap;
     private Map<String, Map<String, List<String>>> filtersPerSection;
     private String preFilterExpression;
+    private String qsParam;
 
     /**
      * Creates an autocomplete request
@@ -33,6 +34,7 @@ public class AutocompleteRequest {
         this.filtersPerSection = new HashMap<String, Map<String, List<String>>>();
         this.variationsMap = null;
         this.preFilterExpression = null;
+        this.qsParam = null;
     }
 
     /**
@@ -133,5 +135,21 @@ public class AutocompleteRequest {
      */
     public String getPreFilterExpression() {
         return preFilterExpression;
+    }
+
+    /**
+     * @param qsParam any parameters listed in the API documentation can be serialized into a JSON
+     *     object and parsed through this parameter. Please refer to
+     *     https://docs.constructor.com/reference/v1-autocomplete-get-autocomplete-results/
+     */
+    public void setQsParam(String qsParam) {
+        this.qsParam = qsParam;
+    }
+
+    /**
+     * @return the qs parameter
+     */
+    public String getQsParam() {
+        return qsParam;
     }
 }

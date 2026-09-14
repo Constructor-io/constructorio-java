@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
 /** Constructor.io Browse Facet Response ... uses Gson/Reflection to load data in */
-public class BrowseFacetsResponse {
+public class BrowseFacetsResponse extends ResponseHeaders {
 
     @SerializedName("result_id")
     private String resultId;

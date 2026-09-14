@@ -19,7 +19,7 @@ import org.junit.Test;
 public class ConstructorIOBrowseResponseHeadersTest {
 
     private static MockWebServer mockServer;
-    private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
+    private String apiKey = "Mock API Key";
 
     @BeforeClass
     public static void setup() throws Exception {
@@ -94,8 +94,9 @@ public class ConstructorIOBrowseResponseHeadersTest {
             constructor.browse(request, null);
             fail("Expected ConstructorException to be thrown");
         } catch (ConstructorException e) {
-            mockServer.takeRequest();
             assertRateLimitHeadersOnError(e.getHeaders());
+        } finally {
+            mockServer.takeRequest();
         }
     }
 
@@ -125,8 +126,9 @@ public class ConstructorIOBrowseResponseHeadersTest {
             constructor.browseItems(request, null);
             fail("Expected ConstructorException to be thrown");
         } catch (ConstructorException e) {
-            mockServer.takeRequest();
             assertRateLimitHeadersOnError(e.getHeaders());
+        } finally {
+            mockServer.takeRequest();
         }
     }
 
@@ -156,8 +158,9 @@ public class ConstructorIOBrowseResponseHeadersTest {
             constructor.browseFacets(request);
             fail("Expected ConstructorException to be thrown");
         } catch (ConstructorException e) {
-            mockServer.takeRequest();
             assertRateLimitHeadersOnError(e.getHeaders());
+        } finally {
+            mockServer.takeRequest();
         }
     }
 
@@ -187,8 +190,9 @@ public class ConstructorIOBrowseResponseHeadersTest {
             constructor.browseFacetOptions(request);
             fail("Expected ConstructorException to be thrown");
         } catch (ConstructorException e) {
-            mockServer.takeRequest();
             assertRateLimitHeadersOnError(e.getHeaders());
+        } finally {
+            mockServer.takeRequest();
         }
     }
 }

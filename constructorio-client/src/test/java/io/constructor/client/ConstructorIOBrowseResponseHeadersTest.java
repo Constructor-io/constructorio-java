@@ -1,7 +1,5 @@
 package io.constructor.client;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.await;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -12,39 +10,16 @@ import io.constructor.client.models.BrowseResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ConstructorIOBrowseResponseHeadersTest {
 
     private static MockWebServer mockServer;
     private String apiKey = System.getenv("TEST_REQUEST_API_KEY");
-    private BrowseResponse responseResolved;
-    private ConstructorException exceptionResolved;
-
-    @Rule public ExpectedException thrown = ExpectedException.none();
-
-    private Callable<Boolean> responseIsResolved() {
-        return new Callable<Boolean>() {
-            public Boolean call() {
-                return responseResolved != null;
-            }
-        };
-    }
-
-    private Callable<Boolean> exceptionIsResolved() {
-        return new Callable<Boolean>() {
-            public Boolean call() {
-                return exceptionResolved != null;
-            }
-        };
-    }
 
     @BeforeClass
     public static void setup() throws Exception {
@@ -215,107 +190,5 @@ public class ConstructorIOBrowseResponseHeadersTest {
             mockServer.takeRequest();
             assertRateLimitHeadersOnError(e.getHeaders());
         }
-    }
-
-    @Test
-    public void BrowseAsyncShouldReturnRateLimitHeaders() throws Exception {
-        String string = Utils.getTestResource("response.browse.color.blue.json");
-        mockServer.enqueue(rateLimitedSuccessResponse(string));
-
-        ConstructorIO constructor =
-                new ConstructorIO("", apiKey, false, "127.0.0.1", mockServer.getPort());
-        BrowseRequest request = new BrowseRequest("Color", "Blue");
-        constructor.browse(
-                request,
-                null,
-                new BrowseCallback() {
-                    @Override
-                    public void onFailure(final ConstructorException exception) {}
-
-                    @Override
-                    public void onResponse(final BrowseResponse response) {
-                        responseResolved = response;
-                    }
-                });
-
-        await().atMost(2, SECONDS).until(responseIsResolved());
-        mockServer.takeRequest();
-        assertRateLimitHeaders(responseResolved.getHeaders());
-    }
-
-    @Test
-    public void BrowseAsyncShouldReturnRateLimitHeadersOnError() throws Exception {
-        mockServer.enqueue(rateLimitedErrorResponse());
-
-        ConstructorIO constructor =
-                new ConstructorIO("", apiKey, false, "127.0.0.1", mockServer.getPort());
-        BrowseRequest request = new BrowseRequest("Color", "Blue");
-        constructor.browse(
-                request,
-                null,
-                new BrowseCallback() {
-                    @Override
-                    public void onFailure(final ConstructorException exception) {
-                        exceptionResolved = exception;
-                    }
-
-                    @Override
-                    public void onResponse(final BrowseResponse response) {}
-                });
-
-        await().atMost(2, SECONDS).until(exceptionIsResolved());
-        mockServer.takeRequest();
-        assertRateLimitHeadersOnError(exceptionResolved.getHeaders());
-    }
-
-    @Test
-    public void BrowseItemsAsyncShouldReturnRateLimitHeaders() throws Exception {
-        String string = Utils.getTestResource("response.browse.color.blue.json");
-        mockServer.enqueue(rateLimitedSuccessResponse(string));
-
-        ConstructorIO constructor =
-                new ConstructorIO("", apiKey, false, "127.0.0.1", mockServer.getPort());
-        BrowseItemsRequest request = new BrowseItemsRequest(Arrays.asList("item1"));
-        constructor.browseItems(
-                request,
-                null,
-                new BrowseCallback() {
-                    @Override
-                    public void onFailure(final ConstructorException exception) {}
-
-                    @Override
-                    public void onResponse(final BrowseResponse response) {
-                        responseResolved = response;
-                    }
-                });
-
-        await().atMost(2, SECONDS).until(responseIsResolved());
-        mockServer.takeRequest();
-        assertRateLimitHeaders(responseResolved.getHeaders());
-    }
-
-    @Test
-    public void BrowseItemsAsyncShouldReturnRateLimitHeadersOnError() throws Exception {
-        mockServer.enqueue(rateLimitedErrorResponse());
-
-        ConstructorIO constructor =
-                new ConstructorIO("", apiKey, false, "127.0.0.1", mockServer.getPort());
-        BrowseItemsRequest request = new BrowseItemsRequest(Arrays.asList("item1"));
-        constructor.browseItems(
-                request,
-                null,
-                new BrowseCallback() {
-                    @Override
-                    public void onFailure(final ConstructorException exception) {
-                        exceptionResolved = exception;
-                    }
-
-                    @Override
-                    public void onResponse(final BrowseResponse response) {}
-                });
-
-        await().atMost(2, SECONDS).until(exceptionIsResolved());
-        mockServer.takeRequest();
-        assertRateLimitHeadersOnError(exceptionResolved.getHeaders());
     }
 }

@@ -1035,6 +1035,10 @@ public class ConstructorIO {
                                 .build();
             }
 
+            if (req.getQsParam() != null) {
+                url = url.newBuilder().addQueryParameter("qs", req.getQsParam()).build();
+            }
+
             return this.makeUserRequestBuilder(userInfo).url(url).get().build();
         } catch (Exception exception) {
             throw new ConstructorException(exception);
@@ -2249,7 +2253,7 @@ public class ConstructorIO {
      * @return version number
      */
     protected String getVersion() {
-        return "ciojava-7.6.0";
+        return "ciojava-7.7.0";
     }
 
     /**

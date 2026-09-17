@@ -1421,13 +1421,17 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public BrowseResponse browse(BrowseRequest req, UserInfo userInfo) throws ConstructorException {
+        Map<String, List<String>> headers = Collections.<String, List<String>>emptyMap();
         try {
             Request request = createBrowseRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
+            headers = response.headers().toMultimap();
             String json = getResponseBody(response);
-            return createBrowseResponse(json);
+            return createBrowseResponse(json, headers);
         } catch (Exception exception) {
-            throw new ConstructorException(exception);
+            ConstructorException ce = new ConstructorException(exception);
+            ce.setHeaders(headers);
+            throw ce;
         }
     }
 
@@ -1459,12 +1463,17 @@ public class ConstructorIO {
                                 @Override
                                 public void onResponse(Call call, final Response response)
                                         throws IOException {
+                                    Map<String, List<String>> headers =
+                                            Collections.<String, List<String>>emptyMap();
                                     try {
+                                        headers = response.headers().toMultimap();
                                         String json = getResponseBody(response);
-                                        BrowseResponse res = createBrowseResponse(json);
+                                        BrowseResponse res = createBrowseResponse(json, headers);
                                         c.onResponse(res);
                                     } catch (Exception e) {
-                                        c.onFailure(new ConstructorException(e));
+                                        ConstructorException ce = new ConstructorException(e);
+                                        ce.setHeaders(headers);
+                                        c.onFailure(ce);
                                     }
                                 }
                             });
@@ -1601,13 +1610,17 @@ public class ConstructorIO {
      */
     public BrowseResponse browseItems(BrowseItemsRequest req, UserInfo userInfo)
             throws ConstructorException {
+        Map<String, List<String>> headers = Collections.<String, List<String>>emptyMap();
         try {
             Request request = createBrowseItemsRequest(req, userInfo);
             Response response = clientWithRetry.newCall(request).execute();
+            headers = response.headers().toMultimap();
             String json = getResponseBody(response);
-            return createBrowseResponse(json);
+            return createBrowseResponse(json, headers);
         } catch (Exception exception) {
-            throw new ConstructorException(exception);
+            ConstructorException ce = new ConstructorException(exception);
+            ce.setHeaders(headers);
+            throw ce;
         }
     }
 
@@ -1639,12 +1652,17 @@ public class ConstructorIO {
                                 @Override
                                 public void onResponse(Call call, final Response response)
                                         throws IOException {
+                                    Map<String, List<String>> headers =
+                                            Collections.<String, List<String>>emptyMap();
                                     try {
+                                        headers = response.headers().toMultimap();
                                         String json = getResponseBody(response);
-                                        BrowseResponse res = createBrowseResponse(json);
+                                        BrowseResponse res = createBrowseResponse(json, headers);
                                         c.onResponse(res);
                                     } catch (Exception e) {
-                                        c.onFailure(new ConstructorException(e));
+                                        ConstructorException ce = new ConstructorException(e);
+                                        ce.setHeaders(headers);
+                                        c.onFailure(ce);
                                     }
                                 }
                             });
@@ -1720,13 +1738,17 @@ public class ConstructorIO {
      * @throws ConstructorException if the request is invalid.
      */
     public BrowseFacetsResponse browseFacets(BrowseFacetsRequest req) throws ConstructorException {
+        Map<String, List<String>> headers = Collections.<String, List<String>>emptyMap();
         try {
             Request request = createBrowseFacetsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();
+            headers = response.headers().toMultimap();
             String json = getResponseBody(response);
-            return createBrowseFacetsResponse(json);
+            return createBrowseFacetsResponse(json, headers);
         } catch (Exception exception) {
-            throw new ConstructorException(exception);
+            ConstructorException ce = new ConstructorException(exception);
+            ce.setHeaders(headers);
+            throw ce;
         }
     }
 
@@ -1790,13 +1812,17 @@ public class ConstructorIO {
      */
     public BrowseFacetOptionsResponse browseFacetOptions(BrowseFacetOptionsRequest req)
             throws ConstructorException {
+        Map<String, List<String>> headers = Collections.<String, List<String>>emptyMap();
         try {
             Request request = createBrowseFacetOptionsRequest(req);
             Response response = clientWithRetry.newCall(request).execute();
+            headers = response.headers().toMultimap();
             String json = getResponseBody(response);
-            return createBrowseFacetOptionsResponse(json);
+            return createBrowseFacetOptionsResponse(json, headers);
         } catch (Exception exception) {
-            throw new ConstructorException(exception);
+            ConstructorException ce = new ConstructorException(exception);
+            ce.setHeaders(headers);
+            throw ce;
         }
     }
 
@@ -2302,12 +2328,26 @@ public class ConstructorIO {
      * in a Gson Type Adapter.
      */
     protected static BrowseResponse createBrowseResponse(String string) {
+        return createBrowseResponse(string, null);
+    }
+
+    /**
+     * Transforms a JSON string to a BrowseResponse, setting the provided HTTP headers.
+     *
+     * @param string the JSON response string
+     * @param headers the HTTP response headers, or null for an empty map
+     * @return the parsed BrowseResponse
+     */
+    protected static BrowseResponse createBrowseResponse(
+            String string, Map<String, List<String>> headers) {
         JSONObject json = new JSONObject(string);
         JSONObject response = json.getJSONObject("response");
         JSONArray results = response.getJSONArray("results");
         moveMetadataOutOfResultData(results);
         String transformed = json.toString();
-        return new Gson().fromJson(transformed, BrowseResponse.class);
+        BrowseResponse browseResponse = new Gson().fromJson(transformed, BrowseResponse.class);
+        browseResponse.setHeaders(headers);
+        return browseResponse;
     }
 
     /**
@@ -2316,9 +2356,24 @@ public class ConstructorIO {
      * to do it in a Gson Type Adapter.
      */
     protected static BrowseFacetsResponse createBrowseFacetsResponse(String string) {
+        return createBrowseFacetsResponse(string, null);
+    }
+
+    /**
+     * Transforms a JSON string to a BrowseFacetsResponse, setting the provided HTTP headers.
+     *
+     * @param string the JSON response string
+     * @param headers the HTTP response headers, or null for an empty map
+     * @return the parsed BrowseFacetsResponse
+     */
+    protected static BrowseFacetsResponse createBrowseFacetsResponse(
+            String string, Map<String, List<String>> headers) {
         JSONObject json = new JSONObject(string);
         String transformed = json.toString();
-        return new Gson().fromJson(transformed, BrowseFacetsResponse.class);
+        BrowseFacetsResponse browseFacetsResponse =
+                new Gson().fromJson(transformed, BrowseFacetsResponse.class);
+        browseFacetsResponse.setHeaders(headers);
+        return browseFacetsResponse;
     }
 
     /**
@@ -2327,9 +2382,24 @@ public class ConstructorIO {
      * to do it in a Gson Type Adapter.
      */
     protected static BrowseFacetOptionsResponse createBrowseFacetOptionsResponse(String string) {
+        return createBrowseFacetOptionsResponse(string, null);
+    }
+
+    /**
+     * Transforms a JSON string to a BrowseFacetOptionsResponse, setting the provided HTTP headers.
+     *
+     * @param string the JSON response string
+     * @param headers the HTTP response headers, or null for an empty map
+     * @return the parsed BrowseFacetOptionsResponse
+     */
+    protected static BrowseFacetOptionsResponse createBrowseFacetOptionsResponse(
+            String string, Map<String, List<String>> headers) {
         JSONObject json = new JSONObject(string);
         String transformed = json.toString();
-        return new Gson().fromJson(transformed, BrowseFacetOptionsResponse.class);
+        BrowseFacetOptionsResponse browseFacetOptionsResponse =
+                new Gson().fromJson(transformed, BrowseFacetOptionsResponse.class);
+        browseFacetOptionsResponse.setHeaders(headers);
+        return browseFacetOptionsResponse;
     }
 
     /**

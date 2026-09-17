@@ -34,7 +34,7 @@ public class ConstructorIOAutocompleteTest {
         assertEquals(
                 "autocomplete search suggestions exist",
                 response.getSections().get("Search Suggestions").size(),
-                4);
+                5);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
 
@@ -50,7 +50,7 @@ public class ConstructorIOAutocompleteTest {
         assertEquals(
                 "autocomplete search suggestions exist",
                 response.getSections().get("Search Suggestions").size(),
-                4);
+                5);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
 
@@ -84,7 +84,7 @@ public class ConstructorIOAutocompleteTest {
         assertEquals(
                 "autocomplete search suggestions exist",
                 response.getSections().get("Search Suggestions").size(),
-                4);
+                9);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
 
@@ -102,7 +102,7 @@ public class ConstructorIOAutocompleteTest {
         assertEquals(
                 "autocomplete search suggestions exist",
                 response.getSections().get("Search Suggestions").size(),
-                4);
+                9);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
 
@@ -303,7 +303,7 @@ public class ConstructorIOAutocompleteTest {
         String preFilterExpressionFromRequestJsonString =
                 new Gson().toJson(response.getRequest().get("pre_filter_expression"));
 
-        assertTrue("autocomplete results exist", response.getSections().size() >= 0);
+        assertTrue("autocomplete results exist", response.getSections().size() > 0);
         assertNotNull(
                 "pre_filter_expression exists", response.getRequest().get("pre_filter_expression"));
         assertEquals(preFilterExpression, preFilterExpressionFromRequestJsonString);
@@ -320,7 +320,7 @@ public class ConstructorIOAutocompleteTest {
         AutocompleteResponse response = constructor.autocomplete(request, userInfo);
         Map<String, List<String>> filtersFromRequest = (Map) response.getRequest().get("filters");
 
-        assertTrue("autocomplete results exist", response.getSections().size() >= 0);
+        assertTrue("autocomplete results exist", response.getSections().size() > 0);
         assertEquals(Arrays.asList("green"), filtersFromRequest.get("Color"));
     }
 }

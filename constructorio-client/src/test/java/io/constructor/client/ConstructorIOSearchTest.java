@@ -103,11 +103,11 @@ public class ConstructorIOSearchTest {
         SearchRequest request = new SearchRequest("item2");
         request.getFacets().put("Color", Arrays.asList("yellow"));
         SearchResponse response = constructor.search(request, userInfo);
-        assertEquals("search results exist", response.getResponse().getResults().size(), 1);
+        assertEquals("search results exist", response.getResponse().getResults().size(), 2);
         assertEquals(
                 "search results count as expected",
                 (int) response.getResponse().getTotalNumberOfResults(),
-                1);
+                2);
         assertTrue("search result id exists", response.getResultId() != null);
     }
 

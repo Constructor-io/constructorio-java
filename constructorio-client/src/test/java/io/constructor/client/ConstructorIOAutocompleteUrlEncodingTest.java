@@ -46,7 +46,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = String.format("/autocomplete/r%%2Bco?key=%s&c=ciojava-7.6.0", apiKey);
+        String expectedPath = String.format("/autocomplete/r%%2Bco?key=%s&c=ciojava-7.7.0", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -63,7 +63,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = String.format("/autocomplete/r%%20co?key=%s&c=ciojava-7.6.0", apiKey);
+        String expectedPath = String.format("/autocomplete/r%%20co?key=%s&c=ciojava-7.7.0", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -80,7 +80,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = String.format("/autocomplete/r%%2Fco?key=%s&c=ciojava-7.6.0", apiKey);
+        String expectedPath = String.format("/autocomplete/r%%2Fco?key=%s&c=ciojava-7.7.0", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -97,7 +97,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         constructor.autocomplete(request, null);
 
         RecordedRequest recordedRequest = mockServer.takeRequest();
-        String expectedPath = String.format("/autocomplete/r'co?key=%s&c=ciojava-7.6.0", apiKey);
+        String expectedPath = String.format("/autocomplete/r'co?key=%s&c=ciojava-7.7.0", apiKey);
         String actualPath = recordedRequest.getPath();
         assertEquals("recorded request is encoded correctly", actualPath, expectedPath);
     }
@@ -117,7 +117,7 @@ public class ConstructorIOAutocompleteUrlEncodingTest {
         RecordedRequest recordedRequest = mockServer.takeRequest();
         String expectedPath =
                 String.format(
-                        "/autocomplete/peanut?key=%s&c=ciojava-7.6.0"
+                        "/autocomplete/peanut?key=%s&c=ciojava-7.7.0"
                             + "&qs=%%7B%%22filters%%22%%3A%%7B%%22Color%%22%%3A%%5B%%22green%%22%%5D%%7D%%7D",
                         apiKey);
         String actualPath = recordedRequest.getPath();

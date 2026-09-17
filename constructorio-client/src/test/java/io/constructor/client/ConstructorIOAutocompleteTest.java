@@ -34,7 +34,7 @@ public class ConstructorIOAutocompleteTest {
         assertEquals(
                 "autocomplete search suggestions exist",
                 response.getSections().get("Search Suggestions").size(),
-                4);
+                5);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
 
@@ -50,7 +50,7 @@ public class ConstructorIOAutocompleteTest {
         assertEquals(
                 "autocomplete search suggestions exist",
                 response.getSections().get("Search Suggestions").size(),
-                4);
+                5);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
 
@@ -84,7 +84,7 @@ public class ConstructorIOAutocompleteTest {
         assertEquals(
                 "autocomplete search suggestions exist",
                 response.getSections().get("Search Suggestions").size(),
-                4);
+                9);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
 
@@ -102,7 +102,7 @@ public class ConstructorIOAutocompleteTest {
         assertEquals(
                 "autocomplete search suggestions exist",
                 response.getSections().get("Search Suggestions").size(),
-                4);
+                9);
         assertTrue("autocomplete result id exists", response.getResultId() != null);
     }
 
@@ -303,9 +303,24 @@ public class ConstructorIOAutocompleteTest {
         String preFilterExpressionFromRequestJsonString =
                 new Gson().toJson(response.getRequest().get("pre_filter_expression"));
 
-        assertTrue("autocomplete results exist", response.getSections().size() >= 0);
+        assertTrue("autocomplete results exist", response.getSections().size() > 0);
         assertNotNull(
                 "pre_filter_expression exists", response.getRequest().get("pre_filter_expression"));
         assertEquals(preFilterExpression, preFilterExpressionFromRequestJsonString);
+    }
+
+    @Test
+    public void AutocompleteShouldReturnAResultWithQsParam() throws Exception {
+        ConstructorIO constructor = new ConstructorIO("", apiKey, true, null);
+        UserInfo userInfo = new UserInfo(3, "c62a-2a09-faie");
+        AutocompleteRequest request = new AutocompleteRequest("item");
+        String qsParam = "{\"filters\":{\"Color\":[\"green\"]}}";
+        request.setQsParam(qsParam);
+
+        AutocompleteResponse response = constructor.autocomplete(request, userInfo);
+        Map<String, List<String>> filtersFromRequest = (Map) response.getRequest().get("filters");
+
+        assertTrue("autocomplete results exist", response.getSections().size() > 0);
+        assertEquals(Arrays.asList("green"), filtersFromRequest.get("Color"));
     }
 }

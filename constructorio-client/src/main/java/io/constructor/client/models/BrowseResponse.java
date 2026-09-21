@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
 /** Constructor.io Browse Response ... uses Gson/Reflection to load data in */
-public class BrowseResponse {
+public class BrowseResponse extends ResponseHeaders {
 
     @SerializedName("result_id")
     private String resultId;

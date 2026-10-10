@@ -2021,6 +2021,149 @@ public class ConstructorIO {
     }
 
     /**
+     * Queries the recommendations service to retrieve results for every pod on a page.
+     *
+     * <p>The top-level result id of the response identifies the page request and is not a tracking
+     * id: send each pod's own result id with that pod's tracking events.
+     *
+     * @param req the recommendation page request
+     * @param userInfo optional information about the user
+     * @return a recommendation page response
+     * @throws ConstructorException if the request is invalid.
+     */
+    public RecommendationPageResponse recommendationPage(
+            RecommendationPageRequest req, UserInfo userInfo) throws ConstructorException {
+        try {
+            String json = recommendationPageAsJSON(req, userInfo);
+            return createRecommendationPageResponse(json);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Queries the recommendations service to retrieve results for every pod on a page.
+     *
+     * @param req the recommendation page request
+     * @param userInfo optional information about the user
+     * @return a string of JSON
+     * @throws ConstructorException if the request is invalid.
+     */
+    public String recommendationPageAsJSON(RecommendationPageRequest req, UserInfo userInfo)
+            throws ConstructorException {
+        try {
+            List<String> paths = Arrays.asList("recommendations", "v1", "pages", req.getPageId());
+            HttpUrl url = (userInfo == null) ? this.makeUrl(paths) : this.makeUrl(paths, userInfo);
+            HttpUrl.Builder builder = url.newBuilder();
+
+            if (StringUtils.isNotBlank(req.getSection())) {
+                builder.addQueryParameter("section", req.getSection());
+            }
+
+            if (req.getItemIds() != null) {
+                for (String itemId : req.getItemIds()) {
+                    builder.addQueryParameter("item_id", itemId);
+                }
+            }
+
+            if (StringUtils.isNotBlank(req.getVariationId())) {
+                if (req.getItemIds() == null || req.getItemIds().size() != 1) {
+                    throw new IllegalArgumentException(
+                            "variationId requires exactly one itemId to be specified");
+                }
+                builder.addQueryParameter("variation_id", req.getVariationId());
+            }
+
+            if (StringUtils.isNotBlank(req.getTerm())) {
+                builder.addQueryParameter("term", req.getTerm());
+            }
+
+            addRecommendationPageOverridableParameters(builder, "", req);
+
+            if (req.getPodOverrides() != null) {
+                for (Map.Entry<String, RecommendationPagePodOverride> override :
+                        req.getPodOverrides().entrySet()) {
+                    if (override.getValue() != null) {
+                        addRecommendationPageOverridableParameters(
+                                builder,
+                                "pod_overrides[" + override.getKey() + "]",
+                                override.getValue());
+                    }
+                }
+            }
+
+            Request request =
+                    this.makeUserRequestBuilder(userInfo).url(builder.build()).get().build();
+
+            Response response = clientWithRetry.newCall(request).execute();
+            return getResponseBody(response);
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
+     * Adds the parameters that can be set per pod on a page request, in the same wire format as
+     * {@link #recommendationsAsJSON(RecommendationsRequest, UserInfo)}, nested under a bracket
+     * prefix (empty for page-wide values).
+     */
+    private static void addRecommendationPageOverridableParameters(
+            HttpUrl.Builder builder, String prefix, RecommendationPagePodOverride params) {
+        if (params.getNumResults() != null) {
+            builder.addQueryParameter(
+                    bracketName(prefix, "num_results"), String.valueOf(params.getNumResults()));
+        }
+
+        if (params.getFacets() != null) {
+            for (Map.Entry<String, List<String>> facet : params.getFacets().entrySet()) {
+                for (String facetValue : facet.getValue()) {
+                    builder.addQueryParameter(
+                            bracketName(prefix, "filters") + "[" + facet.getKey() + "]",
+                            facetValue);
+                }
+            }
+        }
+
+        if (params.getFilterMatchTypes() != null) {
+            for (Map.Entry<String, String> matchType : params.getFilterMatchTypes().entrySet()) {
+                builder.addQueryParameter(
+                        bracketName(prefix, "filter_match_types") + "[" + matchType.getKey() + "]",
+                        matchType.getValue());
+            }
+        }
+
+        if (params.getVariationsMap() != null) {
+            builder.addQueryParameter(
+                    bracketName(prefix, "variations_map"),
+                    new Gson().toJson(params.getVariationsMap()));
+        }
+
+        if (params.getPreFilterExpression() != null) {
+            builder.addQueryParameter(
+                    bracketName(prefix, "pre_filter_expression"), params.getPreFilterExpression());
+        }
+
+        if (params.getFormatOptions() != null) {
+            for (Map.Entry<String, String> formatOption : params.getFormatOptions().entrySet()) {
+                builder.addQueryParameter(
+                        bracketName(prefix, "fmt_options") + "[" + formatOption.getKey() + "]",
+                        formatOption.getValue());
+            }
+        }
+
+        if (params.getHiddenFields() != null) {
+            for (String hiddenField : params.getHiddenFields()) {
+                builder.addQueryParameter(
+                        bracketName(prefix, "fmt_options") + "[hidden_fields]", hiddenField);
+            }
+        }
+    }
+
+    private static String bracketName(String prefix, String name) {
+        return prefix.isEmpty() ? name : prefix + "[" + name + "]";
+    }
+
+    /**
      * Makes a URL to issue the requests to. Note that the URL will automagically have the apiKey
      * embedded.
      *
@@ -2414,6 +2557,23 @@ public class ConstructorIO {
         moveMetadataOutOfResultData(results);
         String transformed = json.toString();
         return new Gson().fromJson(transformed, RecommendationsResponse.class);
+    }
+
+    /**
+     * Transforms a JSON string to a new JSON string for easy Gson parsing into a recommendation
+     * page response.
+     */
+    protected static RecommendationPageResponse createRecommendationPageResponse(String string) {
+        JSONObject json = new JSONObject(string);
+        JSONArray pods = json.getJSONObject("response").getJSONArray("pods");
+        for (int i = 0; i < pods.length(); i++) {
+            JSONObject podResponse = pods.getJSONObject(i).optJSONObject("response");
+            if (podResponse != null && podResponse.optJSONArray("results") != null) {
+                moveMetadataOutOfResultData(podResponse.getJSONArray("results"));
+            }
+        }
+        String transformed = json.toString();
+        return new Gson().fromJson(transformed, RecommendationPageResponse.class);
     }
 
     /**

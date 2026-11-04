@@ -1,7 +1,7 @@
 package io.constructor.client;
 
 /** Constructor.io Browse Request */
-public class BrowseRequest extends BrowseSearchBaseRequest {
+public class BrowseRequest extends SortablePlpRequestBase {
 
     private String filterName;
     private String filterValue;

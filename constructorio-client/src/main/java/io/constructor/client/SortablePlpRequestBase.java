@@ -5,16 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Constructor.io base Search/Browse Request */
-public abstract class BrowseSearchBaseRequest {
+/** Constructor.io Base Request for sortable product listing pages (search and browse). */
+public abstract class SortablePlpRequestBase {
 
     private String section;
     private int page;
     private int resultsPerPage;
     private Map<String, List<String>> facets;
     private String groupId;
-    private String sortBy;
-    private boolean sortAscending;
+    private SortParams sortParams;
     private Map<String, String> formatOptions;
     private List<String> hiddenFields;
     private List<String> hiddenFacets;
@@ -26,12 +25,12 @@ public abstract class BrowseSearchBaseRequest {
     private Map<String, String> filterMatchTypes;
 
     /** Object with common request fields of search and browse */
-    protected BrowseSearchBaseRequest() {
+    protected SortablePlpRequestBase() {
         this.section = "Products";
         this.page = 1;
         this.resultsPerPage = 30;
         this.facets = new HashMap<String, List<String>>();
-        this.sortAscending = true;
+        this.sortParams = new SortParams();
         this.formatOptions = new HashMap<String, String>();
         this.hiddenFields = new ArrayList<String>();
         this.hiddenFacets = new ArrayList<String>();
@@ -117,28 +116,28 @@ public abstract class BrowseSearchBaseRequest {
      * @param sortBy the sortBy to set
      */
     public void setSortBy(String sortBy) {
-        this.sortBy = sortBy;
+        this.sortParams.setSortBy(sortBy);
     }
 
     /**
      * @return the sortBy
      */
     public String getSortBy() {
-        return sortBy;
+        return sortParams.getSortBy();
     }
 
     /**
      * @param sortAscending the sortAscending to set
      */
     public void setSortAscending(boolean sortAscending) {
-        this.sortAscending = sortAscending;
+        this.sortParams.setSortAscending(sortAscending);
     }
 
     /**
      * @return the sortAscending
      */
     public boolean getSortAscending() {
-        return sortAscending;
+        return sortParams.getSortAscending();
     }
 
     /**
@@ -260,7 +259,6 @@ public abstract class BrowseSearchBaseRequest {
         return offset;
     }
 
-    /**
     /**
      * @param filterMatchTypes the filterMatchTypes to set. Please refer to
      *     https://docs.constructor.com/reference/v1-search-get-search-results or

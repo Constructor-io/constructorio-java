@@ -1,7 +1,7 @@
 package io.constructor.client;
 
 /** Constructor.io Search Request */
-public class SearchRequest extends BrowseSearchBaseRequest {
+public class SearchRequest extends SortablePlpRequestBase {
 
     private String query;
     private String collectionId;

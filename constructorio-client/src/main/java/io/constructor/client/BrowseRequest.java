@@ -13,7 +13,6 @@ public class BrowseRequest extends SortablePlpRequestBase {
      * @param filterValue filter value to display results from
      */
     public BrowseRequest(String filterName, String filterValue) throws IllegalArgumentException {
-        super();
         if (filterName == null) {
             throw new IllegalArgumentException("filterName is required");
         }

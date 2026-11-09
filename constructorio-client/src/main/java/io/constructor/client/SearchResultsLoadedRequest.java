@@ -2,6 +2,7 @@ package io.constructor.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 /** Constructor.io Search Results Loaded (search_result_load) Tracking Request */
 public class SearchResultsLoadedRequest {
@@ -56,17 +57,13 @@ public class SearchResultsLoadedRequest {
     /**
      * Creates a search results loaded tracking request
      *
-     * @param term the search term the results were loaded for
-     * @param resultCount the total number of results
+     * @param term the search term the results were loaded for (required, not blank)
+     * @param resultCount the total number of results (must be &gt;= 0)
      */
     public SearchResultsLoadedRequest(String term, int resultCount)
             throws IllegalArgumentException {
-        if (term == null) {
-            throw new IllegalArgumentException("term is required");
-        }
-
-        this.term = term;
-        this.resultCount = resultCount;
+        setTerm(term);
+        setResultCount(resultCount);
         this.items = new ArrayList<Item>();
         this.url = "N/A";
     }
@@ -79,9 +76,12 @@ public class SearchResultsLoadedRequest {
     }
 
     /**
-     * @param term the term to set
+     * @param term the term to set (required, not blank)
      */
-    public void setTerm(String term) {
+    public void setTerm(String term) throws IllegalArgumentException {
+        if (StringUtils.isBlank(term)) {
+            throw new IllegalArgumentException("term is required");
+        }
         this.term = term;
     }
 
@@ -93,9 +93,12 @@ public class SearchResultsLoadedRequest {
     }
 
     /**
-     * @param resultCount the result count to set
+     * @param resultCount the result count to set (must be &gt;= 0)
      */
-    public void setResultCount(int resultCount) {
+    public void setResultCount(int resultCount) throws IllegalArgumentException {
+        if (resultCount < 0) {
+            throw new IllegalArgumentException("resultCount must be >= 0");
+        }
         this.resultCount = resultCount;
     }
 
@@ -115,17 +118,17 @@ public class SearchResultsLoadedRequest {
     }
 
     /**
-     * @return the items
+     * @return the items (never null)
      */
     public List<Item> getItems() {
         return items;
     }
 
     /**
-     * @param items the items shown on the page (only the first 100 are sent)
+     * @param items the items shown on the page (only the first 100 are sent); null means no items
      */
     public void setItems(List<Item> items) {
-        this.items = items;
+        this.items = items == null ? new ArrayList<Item>() : items;
     }
 
     /**

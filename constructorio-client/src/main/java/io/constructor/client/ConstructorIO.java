@@ -1293,56 +1293,54 @@ public class ConstructorIO {
                     || StringUtils.isBlank(userInfo.getClientId())
                     || userInfo.getSessionId() <= 0) {
                 throw new IllegalArgumentException(
-                        "userInfo with a clientId and sessionId is required");
+                        "userInfo with a clientId and a sessionId greater than 0 is required");
             }
 
-            long dt = System.currentTimeMillis();
             HttpUrl url =
                     this.makeUrl(
                                     Arrays.asList("v2", "behavioral_action", "search_result_load"),
                                     userInfo)
                             .newBuilder()
-                            .addQueryParameter("_dt", String.valueOf(dt))
+                            .addQueryParameter("_dt", String.valueOf(System.currentTimeMillis()))
                             .addQueryParameter("beacon", "true")
                             .build();
 
             List<Map<String, String>> items = new ArrayList<Map<String, String>>();
-            if (req.getItems() != null) {
-                for (SearchResultsLoadedRequest.Item item : req.getItems()) {
-                    if (items.size() == 100) break;
-                    Map<String, String> itemMap = new HashMap<String, String>();
-                    itemMap.put("item_id", item.getItemId());
-                    if (item.getVariationId() != null) {
-                        itemMap.put("variation_id", item.getVariationId());
-                    }
-                    items.add(itemMap);
+            for (SearchResultsLoadedRequest.Item item : req.getItems()) {
+                if (items.size() == 100) break;
+                Map<String, String> itemMap = new HashMap<String, String>();
+                itemMap.put("item_id", item.getItemId());
+                if (item.getVariationId() != null) {
+                    itemMap.put("variation_id", item.getVariationId());
                 }
+                items.add(itemMap);
             }
 
-            // Same body as the JavaScript and Node clients: event fields plus user params
+            // The body holds only the event fields. User params (key, c, i, s, ui, us, _dt,
+            // beacon) travel in the query string. url always has a value ("N/A" by default).
             Map<String, Object> data = new HashMap<String, Object>();
             data.put("search_term", req.getTerm());
             data.put("result_count", req.getResultCount());
-            data.put("result_id", req.getResultId());
-            data.put("items", items.isEmpty() ? null : items);
-            data.put("result_page", req.getResultPage());
-            data.put("section", req.getSection());
             data.put("url", req.getUrl());
-            data.put("key", this.apiKey);
-            data.put("c", this.version);
-            data.put("i", userInfo.getClientId());
-            data.put("s", userInfo.getSessionId());
-            data.put("ui", userInfo.getUserId());
-            data.put("us", userInfo.getUserSegments());
-            data.put("_dt", dt);
-            data.put("beacon", true);
+            if (req.getResultId() != null) {
+                data.put("result_id", req.getResultId());
+            }
+            if (!items.isEmpty()) {
+                data.put("items", items);
+            }
+            if (req.getResultPage() != null) {
+                data.put("result_page", req.getResultPage());
+            }
+            if (req.getSection() != null) {
+                data.put("section", req.getSection());
+            }
 
-            // Gson drops null values, so optional fields are only sent when set
             String params = new Gson().toJson(data);
             RequestBody body =
                     RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
             Request request = this.makeUserRequestBuilder(userInfo).url(url).post(body).build();
 
+            // Plain client on purpose: retrying a POST could send the same tracking event twice
             Response response = client.newCall(request).execute();
             getResponseBody(response);
             return true;

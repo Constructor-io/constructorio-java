@@ -67,7 +67,7 @@ public class ConstructorIOTrackSearchResultsLoadedTest {
         HttpUrl url = request.getRequestUrl();
         assertEquals("/v2/behavioral_action/search_result_load", url.encodedPath());
         assertEquals(apiKey, url.queryParameter("key"));
-        assertEquals("ciojava-7.8.0", url.queryParameter("c"));
+        assertEquals(constructor.version, url.queryParameter("c"));
         assertEquals("c62a-2a09-faie", url.queryParameter("i"));
         assertEquals("3", url.queryParameter("s"));
         assertEquals("user-1", url.queryParameter("ui"));
@@ -85,11 +85,10 @@ public class ConstructorIOTrackSearchResultsLoadedTest {
         assertEquals(2, body.getInt("result_page"));
         assertEquals("Products", body.getString("section"));
         assertEquals("https://example.com/search?q=peanut", body.getString("url"));
-        assertEquals("c62a-2a09-faie", body.getString("i"));
-        assertEquals(3, body.getInt("s"));
-        assertEquals(apiKey, body.getString("key"));
-        assertTrue(body.getBoolean("beacon"));
-        assertEquals(url.queryParameter("_dt"), String.valueOf(body.getLong("_dt")));
+        // User params go in the query string only, never in the body
+        for (String key : Arrays.asList("key", "c", "i", "s", "ui", "us", "_dt", "beacon")) {
+            assertFalse("body should not have " + key, body.has(key));
+        }
 
         JSONArray items = body.getJSONArray("items");
         assertEquals(2, items.length());
@@ -114,8 +113,6 @@ public class ConstructorIOTrackSearchResultsLoadedTest {
         assertFalse(body.has("items"));
         assertFalse(body.has("result_page"));
         assertFalse(body.has("section"));
-        assertFalse(body.has("ui"));
-        assertFalse(body.has("us"));
     }
 
     @Test
@@ -139,7 +136,7 @@ public class ConstructorIOTrackSearchResultsLoadedTest {
     @Test
     public void trackSearchResultsLoadedShouldThrowWithoutUserInfo() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("userInfo with a clientId and sessionId is required");
+        thrown.expectMessage("userInfo with a clientId and a sessionId greater than 0 is required");
         createConstructorIO()
                 .trackSearchResultsLoaded(new SearchResultsLoadedRequest("peanut", 1), null);
     }
@@ -147,7 +144,7 @@ public class ConstructorIOTrackSearchResultsLoadedTest {
     @Test
     public void trackSearchResultsLoadedShouldThrowWithoutClientIdOrSessionId() throws Exception {
         thrown.expect(ConstructorException.class);
-        thrown.expectMessage("userInfo with a clientId and sessionId is required");
+        thrown.expectMessage("userInfo with a clientId and a sessionId greater than 0 is required");
         createConstructorIO()
                 .trackSearchResultsLoaded(
                         new SearchResultsLoadedRequest("peanut", 1), new UserInfo());
@@ -167,5 +164,38 @@ public class ConstructorIOTrackSearchResultsLoadedTest {
     @Test(expected = IllegalArgumentException.class)
     public void newSearchResultsLoadedRequestShouldThrowWithoutTerm() {
         new SearchResultsLoadedRequest(null, 1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void newSearchResultsLoadedRequestShouldThrowWithBlankTerm() {
+        new SearchResultsLoadedRequest("  ", 1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setTermShouldThrowWithNull() {
+        new SearchResultsLoadedRequest("peanut", 1).setTerm(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void newSearchResultsLoadedRequestShouldThrowWithNegativeResultCount() {
+        new SearchResultsLoadedRequest("peanut", -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setResultCountShouldThrowWithNegative() {
+        new SearchResultsLoadedRequest("peanut", 1).setResultCount(-1);
+    }
+
+    @Test
+    public void trackSearchResultsLoadedShouldTreatNullItemsAsNoItems() throws Exception {
+        mockServer.enqueue(new MockResponse().setResponseCode(204));
+        SearchResultsLoadedRequest req = new SearchResultsLoadedRequest("peanut", 1);
+        req.setItems(null);
+        assertTrue(req.getItems().isEmpty());
+
+        createConstructorIO().trackSearchResultsLoaded(req, new UserInfo(1, "client"));
+
+        JSONObject body = new JSONObject(mockServer.takeRequest().getBody().readUtf8());
+        assertFalse(body.has("items"));
     }
 }

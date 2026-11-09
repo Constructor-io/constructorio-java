@@ -213,6 +213,29 @@ Integer resultsFromTokenMatching = response.getResponse().getResultSources().get
 Integer resultsFromCognitiveEmbeddings = response.getResponse().getResultSources().getEmbeddingsMatch().getCount();
 ```
 
+## Tracking Search Results Loaded
+
+After showing search results to a user, you can send a `search_result_load` event. Pass the `result_id` from the search response so the event is tied to that response. The `UserInfo` object must have a client ID and a session ID.
+
+```java
+SearchResponse response = constructor.search(request, userInfo);
+
+// Create a SearchResultsLoadedRequest with the term and the total number of results
+SearchResultsLoadedRequest event = new SearchResultsLoadedRequest("peanut butter", response.getResponse().getTotalNumberOfResults());
+
+// Add in additional parameters (optional)
+event.setResultId(response.getResultId());
+event.setItems(Arrays.asList(
+	new SearchResultsLoadedRequest.Item("10001"),
+	new SearchResultsLoadedRequest.Item("10002", "10002-red"))); // only the first 100 items are sent
+event.setResultPage(1);
+event.setSection("Products");
+event.setUrl("https://www.example.com/search?q=peanut+butter");
+
+// Send the event
+constructor.trackSearchResultsLoaded(event, userInfo);
+```
+
 # Retrieving Search Results for Speech
 
 To retrieve search results for text that originated from speech transcription rather than typing, you will need to create a `NaturalLanguageSearchRequest`. In this request you can specify the number of results you want per page and the page you want.  All other information is inferred from the text itself.  If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.  The response returned contains all of the same data points as a standard search response.

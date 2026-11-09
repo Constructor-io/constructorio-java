@@ -1279,6 +1279,79 @@ public class ConstructorIO {
     }
 
     /**
+     * Sends a search results loaded (search_result_load) tracking event.
+     *
+     * @param req the search results loaded request
+     * @param userInfo information about the user; client id and session id are required
+     * @return true if the event was accepted
+     * @throws ConstructorException if the request is invalid.
+     */
+    public boolean trackSearchResultsLoaded(SearchResultsLoadedRequest req, UserInfo userInfo)
+            throws ConstructorException {
+        try {
+            if (userInfo == null
+                    || StringUtils.isBlank(userInfo.getClientId())
+                    || userInfo.getSessionId() <= 0) {
+                throw new IllegalArgumentException(
+                        "userInfo with a clientId and sessionId is required");
+            }
+
+            long dt = System.currentTimeMillis();
+            HttpUrl url =
+                    this.makeUrl(
+                                    Arrays.asList("v2", "behavioral_action", "search_result_load"),
+                                    userInfo)
+                            .newBuilder()
+                            .addQueryParameter("_dt", String.valueOf(dt))
+                            .addQueryParameter("beacon", "true")
+                            .build();
+
+            List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+            if (req.getItems() != null) {
+                for (SearchResultsLoadedRequest.Item item : req.getItems()) {
+                    if (items.size() == 100) break;
+                    Map<String, String> itemMap = new HashMap<String, String>();
+                    itemMap.put("item_id", item.getItemId());
+                    if (item.getVariationId() != null) {
+                        itemMap.put("variation_id", item.getVariationId());
+                    }
+                    items.add(itemMap);
+                }
+            }
+
+            // Same body as the JavaScript and Node clients: event fields plus user params
+            Map<String, Object> data = new HashMap<String, Object>();
+            data.put("search_term", req.getTerm());
+            data.put("result_count", req.getResultCount());
+            data.put("result_id", req.getResultId());
+            data.put("items", items.isEmpty() ? null : items);
+            data.put("result_page", req.getResultPage());
+            data.put("section", req.getSection());
+            data.put("url", req.getUrl());
+            data.put("key", this.apiKey);
+            data.put("c", this.version);
+            data.put("i", userInfo.getClientId());
+            data.put("s", userInfo.getSessionId());
+            data.put("ui", userInfo.getUserId());
+            data.put("us", userInfo.getUserSegments());
+            data.put("_dt", dt);
+            data.put("beacon", true);
+
+            // Gson drops null values, so optional fields are only sent when set
+            String params = new Gson().toJson(data);
+            RequestBody body =
+                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"), params);
+            Request request = this.makeUserRequestBuilder(userInfo).url(url).post(body).build();
+
+            Response response = client.newCall(request).execute();
+            getResponseBody(response);
+            return true;
+        } catch (Exception exception) {
+            throw new ConstructorException(exception);
+        }
+    }
+
+    /**
      * Creates a browse OkHttp request
      *
      * @param req the browse request

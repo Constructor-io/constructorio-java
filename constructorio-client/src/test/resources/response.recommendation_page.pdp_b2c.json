@@ -1,0 +1,39 @@
+{
+  "request": { "page_id": "pdp_b2c", "item_id": "product-123", "num_results": 10, "section": "Products" },
+  "response": {
+    "page_id": "pdp_b2c",
+    "display_name": "PDP - B2C",
+    "page_type": "pdp",
+    "pods": [
+      {
+        "pod_id": "similar_items",
+        "request": { "item_id": "product-123", "num_results": 12, "section": "Products", "pod_id": "similar_items" },
+        "response": {
+          "results": [
+            {
+              "data": { "id": "product-987", "variation_id": "product-987-red", "url": "https://example.com/987", "price": 49.99 },
+              "value": "Red Running Shoe",
+              "is_slotted": false,
+              "labels": {},
+              "strategy": { "id": "alternative_items" }
+            }
+          ],
+          "total_num_results": 1,
+          "pod": { "id": "similar_items", "display_name": "Similar Items" }
+        },
+        "result_id": "a1b2c3d4-0000-0000-0000-000000000001"
+      },
+      {
+        "pod_id": "complete_the_look",
+        "request": { "item_id": "product-123", "num_results": 8, "section": "Products", "pod_id": "complete_the_look" },
+        "response": {
+          "results": [],
+          "total_num_results": 0,
+          "pod": { "id": "complete_the_look", "display_name": "Complete the Look" }
+        },
+        "result_id": "a1b2c3d4-0000-0000-0000-000000000002"
+      }
+    ]
+  },
+  "result_id": "a1b2c3d4-0000-0000-0000-0000000000ff"
+}
